@@ -15,10 +15,15 @@ import tornado.ioloop
 import tornado.options
 import tornado.web
 
+#Mongo
+from mongoengine import *
+
 # import and define tornado-y things
 from tornado.options import define
 define("port", default=5000, help="run on the given port", type=int)
 
+#Connect to mongo
+connect('db', host=os.environ.get('MONGOLAB_URI'))
 
 # application settings and handle mapping info
 class Application(tornado.web.Application):

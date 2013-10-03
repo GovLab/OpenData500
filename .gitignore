@@ -15,3 +15,6 @@ venv
 
 # silly stuff
 .svn
+
+# top secret stuff
+.env
