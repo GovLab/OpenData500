@@ -32,7 +32,8 @@ connect('db', host=os.environ.get('MONGOLAB_URI'))
 class Application(tornado.web.Application):
     def __init__(self):
         handlers = [
-            (r"/", MainHandler)
+            (r"/", MainHandler),
+            (r"/submitCompany", SubmitCompanyHandler)
         ]
         settings = dict(
             template_path=os.path.join(os.path.dirname(__file__), "templates"),
@@ -44,17 +45,19 @@ class Application(tornado.web.Application):
 
 # the main page
 class MainHandler(tornado.web.RequestHandler):
-    def get(self, q):
-        if 'GOOGLEANALYTICSID' in os.environ:
-            google_analytics_id = os.environ['GOOGLEANALYTICSID']
-        else:
-            google_analytics_id = False
-
+    def get(self):
         self.render(
             "main.html",
             page_title='Heroku Funtimes',
             page_heading='Hi!',
-            google_analytics_id=google_analytics_id,
+        )
+
+class SubmitCompanyHandler(tornado.web.RequestHandler):
+    def get(self):
+        self.render(
+            "submitCompany.html",
+            page_title = "Submit a Company",
+            page_heading = "Submit a Company"
         )
 
 

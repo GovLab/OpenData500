@@ -40,15 +40,5 @@
     <!-- main script -->
     <script src="{{ static_url("js/script.js") }}"></script>
 
-    {% if (google_analytics_id != False) %}
-    <!-- analytic party -->
-    <script type="text/javascript">
-        var _gaq=[['_setAccount','{{ google_analytics_id }}'],['_trackPageview']];
-        (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-        g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-        s.parentNode.insertBefore(g,s)}(document,'script'));
-    </script>
-    {% end %}
-
     </body>
 </html>
