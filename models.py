@@ -22,13 +22,11 @@ class DataSet(EmbeddedDocument):
 	reason = StringField()
 	dataType = StringField()
 
-
-
-
 class Company(Document):
 	companyName = StringField()
 	url = StringField()
 	ceo = EmbeddedDocumentField(Person)
+	submitter = EmbeddedDocumentField(Person)
 	yearFounded = IntField()
 	previousName = StringField()
 	FTE = IntField()
