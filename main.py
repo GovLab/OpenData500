@@ -17,6 +17,9 @@ import tornado.web
 
 #Mongo
 from mongoengine import *
+import models
+import bson
+from bson import json_util
 
 # import and define tornado-y things
 from tornado.options import define
@@ -29,7 +32,7 @@ connect('db', host=os.environ.get('MONGOLAB_URI'))
 class Application(tornado.web.Application):
     def __init__(self):
         handlers = [
-            (r"/([^/]+)?", MainHandler)
+            (r"/", MainHandler)
         ]
         settings = dict(
             template_path=os.path.join(os.path.dirname(__file__), "templates"),
