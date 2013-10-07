@@ -18,3 +18,4 @@ venv
 
 # top secret stuff
 .env
+ninja*
