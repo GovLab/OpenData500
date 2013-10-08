@@ -51,9 +51,9 @@ class MainHandler(tornado.web.RequestHandler):
     def get(self):
         companies = models.Company.objects()
         self.render(
-            "main.html",
-            page_title='Heroku Funtimes',
-            page_heading='Hi!',
+            "index.html",
+            page_title='OpenData500',
+            page_heading='Welcome to the OpenData 500',
             companies = companies
         )
 
