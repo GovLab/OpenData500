@@ -14,13 +14,16 @@ class Person(EmbeddedDocument):
 	org = StringField()
 	contacted = StringField()
 	otherInfo = StringField()
+	datasetWishList = StringField()
+	companyRec = StringField()
+	conferenceRec = StringField()
 
-class DataSet(EmbeddedDocument):
-	name = StringField()
-	url = StringField()
+class Dataset(EmbeddedDocument):
+	datasetName = StringField()
+	datasetURL = StringField()
 	rating = IntField()
 	reason = StringField()
-	dataType = StringField()
+	dataType = ListField(StringField())
 
 class Company(Document):
 	companyName = StringField()
@@ -29,13 +32,13 @@ class Company(Document):
 	submitter = EmbeddedDocumentField(Person)
 	yearFounded = IntField()
 	previousName = StringField()
-	FTE = IntField()
+	fte = IntField()
 	companyType = StringField()
 	companyFunction = StringField()
 	criticalDataTypes = ListField(StringField())
-	dataSets = ListField(EmbeddedDocumentField(DataSet))
+	datasets = ListField(EmbeddedDocumentField(Dataset))
 	revenueSource = ListField(StringField())
-	sector = StringField()
+	sector = ListField(StringField())
 	descriptionLong = StringField()
 	descriptionShort = StringField()
 	socialImpact = StringField()

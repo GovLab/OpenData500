@@ -33,7 +33,9 @@ class Application(tornado.web.Application):
     def __init__(self):
         handlers = [
             (r"/", MainHandler),
-            (r"/submitCompany", SubmitCompanyHandler)
+            (r"/submitCompany", SubmitCompanyHandler),
+            (r"/editCompany/([a-zA-Z0-9]{24})", EditCompanyHandler),
+            (r"/submitData/([a-zA-Z0-9]{24})", SubmitDataHandler)
         ]
         settings = dict(
             template_path=os.path.join(os.path.dirname(__file__), "templates"),
@@ -47,10 +49,12 @@ class Application(tornado.web.Application):
 # the main page
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
+        companies = models.Company.objects()
         self.render(
             "main.html",
             page_title='Heroku Funtimes',
             page_heading='Hi!',
+            companies = companies
         )
 
 class SubmitCompanyHandler(tornado.web.RequestHandler):
@@ -80,7 +84,7 @@ class SubmitCompanyHandler(tornado.web.RequestHandler):
             companyFunction = self.get_argument('otherCompanyFunction', None)
         criticalDataTypes = self.request.arguments['criticalDataTypes']
         criticalDataTypes.append(self.get_argument('otherCriticalDataTypes', None))
-        revenueSource = self.request.arguments['revenueSource', None]
+        revenueSource = self.request.arguments['revenueSource']
         revenueSource.append(self.get_argument('otherRevenueSource', None))
         sector = self.request.arguments['sector']
         sector.append(self.get_argument('otherSector', None))
@@ -88,12 +92,18 @@ class SubmitCompanyHandler(tornado.web.RequestHandler):
         descriptionShort = self.get_argument('descriptionShort', None)
         socialImpact = self.get_argument('socialImpact', None)
         financialInfo = self.get_argument('financialInfo')
+        datasetWishList = self.get_argument('datasetWishList', None)
+        companyRec = self.get_argument('companyRec', None)
+        conferenceRec = self.get_argument('conferenceRec', None)
         submitter = models.Person(
             firstName = firstName,
             lastName = lastName,
             email = email,
             phone = phone,
-            personType = "Submitter"
+            personType = "Submitter",
+            datasetWishList = datasetWishList,
+            companyRec = companyRec,
+            conferenceRec = conferenceRec
         )
         ceo = models.Person(
             firstName = ceoFirstName,
@@ -106,15 +116,67 @@ class SubmitCompanyHandler(tornado.web.RequestHandler):
             url = url,
             ceo = ceo,
             submitter = submitter,
-            yearFounded = yearFounded
-
+            yearFounded = yearFounded,
+            fte = fte,
+            companyType = companyType,
+            companyFunction = companyFunction,
+            criticalDataTypes = criticalDataTypes,
+            revenueSource = revenueSource,
+            sector = sector,
+            descriptionLong = descriptionLong,
+            descriptionShort = descriptionShort,
+            socialImpact = socialImpact,
+            financialInfo = financialInfo,
+            vetted = False
         )
+        company.save()
+        id = str(company.id)
+        self.redirect("/submitData/" + id)
 
+class SubmitDataHandler(tornado.web.RequestHandler):
+    def get(self, id):
+        company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
+        page_heading = "Enter Data Sets for " + company.companyName
+        self.render("submitData.html",
+            page_title = "Submit Data Sets For Company",
+            page_heading = page_heading,
+            id = id
+        )
+    def post(self, id):
+        datasetName = self.get_argument('datasetName', None)
+        datasetURL = self.get_argument('datasetURL', None)
+        dataType = self.request.arguments['dataType']
+        dataType.append(self.get_argument('dataType', None))
+        rating = self.get_argument('rating', None)
+        reason = self.get_argument('reason', None)
+        dataset = models.Dataset(
+            datasetName = datasetName,
+            datasetURL = datasetURL,
+            dataType = dataType,
+            rating = rating, 
+            reason = reason,
+        )
+        id = self.get_argument('id', None)
+        company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
+        company.datasets.append(dataset)
+        company.save()
+        self.redirect("/")
+
+class EditCompanyHandler(tornado.web.RequestHandler):
+    def get(self, id):
+        company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
+        if report is None:
+            self.render("404.html", message=id)
+        self.render("editCompany.html",
+            page_title = "Edit a Company",
+            page_heading = "Submit Company",
+            company = company
+        )
 
 class CompanyModule(tornado.web.UIModule):
     def render(self, company):
         return self.render_string(
-            "modules/comapny.html",
+            "modules/company.html",
             company=company
         )
     def css_files(self):
