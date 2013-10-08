@@ -1,0 +1,88 @@
+{% extends "main.html" %}
+{% autoescape None %}
+
+{% block body %}
+{{ page_heading }}
+
+
+<form method="post" id="submitCompany">
+	Name of company: <input type="text" name="companyName" id="companyName" value="{{ company.companyName }}"><br>
+	Email: <input type="text" name="email" id="email"><br>
+	Phone: <input type="text" name="phone" id="phone"><br>
+	Company URL: <input type='text' name="url" id='url'><br>
+	First Name of CEO: <input type="text" name="ceoFirstName" id="ceoFirstName"><br>
+	Last Name of CEO: <input type="text" name="ceoLastName" id="ceoLastName"><br>
+	CEO Email: <input type="text" name="ceoEmail" id="ceoEmail"><br>
+	Type of Company:<br>
+	<input type="radio" name="companyType" value="Public">Public<br>
+	<input type="radio" name="companyType" value="Private">Private<br>
+	<input type="radio" name="companyType" value="Nonprofit">Nonprofit<br>
+	<input type="radio" name="companyType" value="other">Other<br>
+	<input type="text" name="otherCompanyType" id="otherCompanyType"><br>
+	Founding Year: <input type="text" name="yearFounded" id="yearFounded"><br>
+	Number of FTE's: <input type="text" name="fte" id="fte"><br>
+	Which best describes the function of your company?
+	<input type="radio" name="companyFunction" value="Consumer Research and/or Marketing">Consumer Research and/or Marketing<br>
+	<input type="radio" name="companyFunction" value="Consumer Services">Consumer Services<br>
+	<input type="radio" name="companyFunction" value="Data Management and Analysis">Data Management and Analysis<br>
+	<input type="radio" name="companyFunction" value="Financial/Investment Services">Financial/Investment Services<br>
+	<input type="radio" name="companyFunction" value="Information for Consumers">Information for Consumers<br>
+	<input type="radio" name="companyFunction" value="other">Other<br>
+	<input type="text" name="otherCompanyFunction" id="otherCompanyFunction"><br>
+	<p>Which of the following are critical sources of data for your company? By “critical,” we mean that your company would have to shut down a line of business, shut down completely, or replace the data in some way if the data were no longer available. (check all that apply) *</p>
+	<input type="checkbox" name="criticalDataTypes" value="Federal Open Data">Federal Open Data<br>
+	<input type="checkbox" name="criticalDataTypes" value="State Open Data">State Open Data<br>
+	<input type="checkbox" name="criticalDataTypes" value="City/Local Open Data">City/Local Open Data<br>
+	<input type="checkbox" name="criticalDataTypes" value="Private/Proprietary Data Sources">Private/Proprietary Data Sources<br>
+	<input type="checkbox" name="criticalDataTypes" value="other">Other<br>
+	<input type="text" name="otherCriticalDataTypes" id="otherCriticalDataTypes"><br>
+	<p>Which of the following are significant sources of revenue for your company? (check all that apply) *</p>
+	<input type="checkbox" name="revenueSource" value="Advertising">Advertising<br>
+	<input type="checkbox" name="revenueSource" value="Data Management and Analytic Services">Data Management and Analytic Services<br>
+	<input type="checkbox" name="revenueSource" value="Database Licensing">Database Licensing<br>
+	<input type="checkbox" name="revenueSource" value="Lead Generation To Other Businesses">Lead Generation To Other Businesses<br>
+	<input type="checkbox" name="revenueSource" value="Philanthropy">Philanthropy<br>
+	<input type="checkbox" name="revenueSource" value="Software Licensing">Software Licensing<br>
+	<input type="checkbox" name="revenueSource" value="Subscriptions">Subscriptions<br>
+	<input type="checkbox" name="revenueSource" value="User Fees for Web or Mobile Access">User Fees for Web or Mobile Access<br>
+	<input type="checkbox" name="revenueSource" value="other">Other<br>
+	<input type="text" name="otherRevenueSource" id="otherRevenueSource"><br>
+	<p>What sector(s) does your company's work involve? (check all that apply): *</p>
+	<input type="checkbox" name="sector" value="Agriculture">Agriculture<br>
+	<input type="checkbox" name="sector" value="Arts, Entertainment and Recreation">Arts, Entertainment and Recreation<br>
+	<input type="checkbox" name="sector" value="Crime">Crime<br>
+	<input type="checkbox" name="sector" value="Education">Education<br>
+	<input type="checkbox" name="sector" value="Energy">Energy<br>
+	<input type="checkbox" name="sector" value="Environmental">Environmental<br>
+	<input type="checkbox" name="sector" value="Finance">Finance<br>
+	<input type="checkbox" name="sector" value="Geospatial data/mapping">Geospatial data/mapping<br>
+	<input type="checkbox" name="sector" value="Health and Healthcare">Health and Healthcare<br>
+	<input type="checkbox" name="sector" value="Housing/Real Estate">Housing/Real Estate<br>
+	<input type="checkbox" name="sector" value="Manufacturing">Manufacturing<br>
+	<input type="checkbox" name="sector" value="Nutrition">Nutrition<br>
+	<input type="checkbox" name="sector" value="Scientific Research">Scientific Research<br>
+	<input type="checkbox" name="sector" value="Social Assistance">Social Assistance<br>
+	<input type="checkbox" name="sector" value="Trade">Trade<br>
+	<input type="checkbox" name="sector" value="Transportation">Transportation<br>
+	<input type="checkbox" name="sector" value="Telecom">Telecom<br>
+	<input type="checkbox" name="sector" value="Weather">Weather<br>
+	<input type="text" name="otherSector" id="otherSector"><br>
+	<p>Please give us a short public statement describing your company’s mission and work. You can take this material from your website or other publications if you choose to. [200 words or less] *</p>
+	<textarea rows="6" cols="70" name="descriptionLong" id="descriptionLong"></textarea><br>
+	<p>As a summary, please provide a one sentence description of your company. [25 words or less] *</p>
+	<textarea rows="6" cols="70" name="descriptionShort" id="descriptionShort"></textarea><br>
+	<p>Besides revenue generation, how do you measure the impact your company has for society and the public good? [50 words or less]</p>
+	<textarea rows="6" cols="70" name="socialImpact" id="socialImpact"></textarea><br>
+	<p>Please include any financial or operational information that will help us understand your company. We are interested in specific information like past and projected annual revenues, total outside investment dollars to date, and significant investors or partners. [100 words or less]</p>
+	<textarea rows="6" cols="70" name="financialInfo" id="financialInfo"></textarea><br>
+	<p>What datasets (if any) are not currently available that would be useful for your company to have as government open data? [50 words or less]</p>
+	<textarea rows="6" cols="70" name="datasetWishList" id="datasetWishList"></textarea><br>
+	<p>What other companies, either in your sector or other sectors, would you recommend we contact regarding their use of government open data? [50 words or less]</p>
+	<textarea rows="6" cols="70" name="companyRec" id="companyRec"></textarea><br>
+	<p>What conferences or events do you think would be helpful to us in surveying the field of open data companies? [50 words or less]</p>
+	<textarea rows="6" cols="70" name="conferenceRec" id="conferenceRec"></textarea><br>
+	<input type="submit" id="submit">
+</form>
+
+
+{% end %}

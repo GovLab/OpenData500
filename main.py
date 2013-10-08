@@ -34,8 +34,8 @@ class Application(tornado.web.Application):
         handlers = [
             (r"/", MainHandler),
             (r"/submitCompany", SubmitCompanyHandler),
-            (r"/editCompany/([a-zA-Z0-9]{24})", EditCompanyHandler),
-            (r"/submitData/([a-zA-Z0-9]{24})", SubmitDataHandler)
+            (r"/edit/([a-zA-Z0-9]{24})", EditCompanyHandler),
+            (r"/addData/([a-zA-Z0-9]{24})", SubmitDataHandler)
         ]
         settings = dict(
             template_path=os.path.join(os.path.dirname(__file__), "templates"),
@@ -131,7 +131,7 @@ class SubmitCompanyHandler(tornado.web.RequestHandler):
         )
         company.save()
         id = str(company.id)
-        self.redirect("/submitData/" + id)
+        self.redirect("/addData/" + id)
 
 class SubmitDataHandler(tornado.web.RequestHandler):
     def get(self, id):
@@ -165,11 +165,13 @@ class SubmitDataHandler(tornado.web.RequestHandler):
 class EditCompanyHandler(tornado.web.RequestHandler):
     def get(self, id):
         company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
-        if report is None:
+        page_heading = "Editing " + company.companyName
+        page_title = "Editing " + company.companyName
+        if company is None:
             self.render("404.html", message=id)
         self.render("editCompany.html",
-            page_title = "Edit a Company",
-            page_heading = "Submit Company",
+            page_title = page_title,
+            page_heading = page_heading,
             company = company
         )
 

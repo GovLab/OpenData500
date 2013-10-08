@@ -2,6 +2,7 @@
 # -*- coding: utf8 -*- 
 import os, sys
 from mongoengine import *
+from datetime import datetime
 
 class Person(EmbeddedDocument):
 	firstName = StringField()
@@ -26,6 +27,7 @@ class Dataset(EmbeddedDocument):
 	dataType = ListField(StringField())
 
 class Company(Document):
+	ts = ComplexDateTimeField(default=datetime.now())
 	companyName = StringField()
 	url = StringField()
 	ceo = EmbeddedDocumentField(Person)
