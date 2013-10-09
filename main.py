@@ -170,6 +170,8 @@ class EditCompanyHandler(tornado.web.RequestHandler):
         companyType = ['Public', 'Private', 'Nonprofit']
         companyFunction = ['Consumer Research and/or Marketing', 'Consumer Services', 'Data Management and Analysis', 'Financial/Investment Services', 'Information for Consumers']
         criticalDataTypes = ['Federal Open Data', 'State Open Data', 'City/Local Open Data', 'Private/Proprietary Data Sources']
+        revenueSource = ['Advertising', 'Data Management and Analytic Services', 'Database Licensing', 'Lead Generation To Other Businesses', 'Philanthropy', 'Software Licensing', 'Subscriptions', 'User Fees for Web or Mobile Access']
+        sectors = ['Agriculture', 'Arts, Entertainment and Recreation' 'Crime', 'Education', 'Energy', 'Environmental', 'Finance', 'Geospatial data/mapping', 'Health and Healthcare', 'Housing/Real Estate', 'Manufacturing', 'Nutrition', 'Scientific Research', 'Social Assistance', 'Trade', 'Transportation', 'Telecom', 'Weather']
         if company is None:
             self.render("404.html", message=id)
         self.render("editCompany.html",
@@ -178,7 +180,9 @@ class EditCompanyHandler(tornado.web.RequestHandler):
             company = company,
             companyType = companyType,
             companyFunction = companyFunction,
-            criticalDataTypes = criticalDataTypes
+            criticalDataTypes = criticalDataTypes,
+            revenueSource = revenueSource,
+            sectors = sectors
         )
 
 class CompanyModule(tornado.web.UIModule):
