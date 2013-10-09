@@ -81,6 +81,10 @@
 	<textarea rows="6" cols="70" name="socialImpact" id="socialImpact">{{ company.socialImpact }}</textarea><br>
 	<p>Please include any financial or operational information that will help us understand your company. We are interested in specific information like past and projected annual revenues, total outside investment dollars to date, and significant investors or partners. [100 words or less]</p>
 	<textarea rows="6" cols="70" name="financialInfo" id="financialInfo">{{ company.financialInfo }}</textarea><br>
+	<p>Vetted?</p>
+	<input type="radio" name="vetted" id="vetted" value="True" {% if company.vetted %} checked {% end %}>True<br>
+	<input type="radio" name="vetted" id="vetted" value="False" {% if not company.vetted %} checked {% end %}>False<br>
+	<input type="hidden" class="id" name="id" value="{{ id }}">
 	<input type="submit" id="submit">
 </form>
 

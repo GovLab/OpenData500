@@ -35,7 +35,8 @@ class Application(tornado.web.Application):
             (r"/", MainHandler),
             (r"/submitCompany", SubmitCompanyHandler),
             (r"/edit/([a-zA-Z0-9]{24})", EditCompanyHandler),
-            (r"/addData/([a-zA-Z0-9]{24})", SubmitDataHandler)
+            (r"/addData/([a-zA-Z0-9]{24})", SubmitDataHandler),
+            (r"/delete/([a-zA-Z0-9]{24})", DeleteCompanyHandler)
         ]
         settings = dict(
             template_path=os.path.join(os.path.dirname(__file__), "templates"),
@@ -184,6 +185,45 @@ class EditCompanyHandler(tornado.web.RequestHandler):
             revenueSource = revenueSource,
             sectors = sectors
         )
+
+    def post(self, id):
+        company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
+        url = self.get_argument('url', None)
+        company.companyName = self.get_argument("companyName", None)
+        company.ceo.firstName = self.get_argument("ceoFirstName", None)
+        company.ceo.lastName = self.get_argument("ceoLastName", None)
+        company.ceo.email = self.get_argument("ceoEmail", None)
+        company.companyType = self.get_argument("companyType", None)
+        if company.companyType == 'other':
+            company.companyType = self.get_argument('otherCompanyType', None)
+        company.yearFounded = self.get_argument("yearFounded", None)
+        company.fte = self.get_argument("fte", None)
+        company.companyFunction = self.get_argument("companyFunction", None)
+        if company.companyFunction == 'other':
+            company.companyFunction = self.get_argument('otherCompanyFunction', None)
+        company.criticalDataTypes = self.request.arguments['criticalDataTypes']
+        company.criticalDataTypes.append(self.get_argument('otherCriticalDataTypes', None))
+        company.revenueSource = self.request.arguments['revenueSource']
+        company.revenueSource.append(self.get_argument('otherRevenueSource', None))
+        company.sector = self.request.arguments['sector']
+        company.sector.append(self.get_argument('otherSector', None))
+        company.descriptionLong = self.get_argument('descriptionLong', None)
+        company.descriptionShort = self.get_argument('descriptionShort', None)
+        company.socialImpact = self.get_argument('socialImpact', None)
+        company.financialInfo = self.get_argument('financialInfo', None)
+        if self.get_argument('vetted') == 'True':
+            company.vetted = True
+        elif self.get_argument('vetted') == 'False':
+            company.vetted = False
+        company.save()
+        self.redirect('/')
+
+class DeleteCompanyHandler(tornado.web.RequestHandler):
+    def get(self, id):
+        company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
+        company.delete()
+        self.redirect('/')
+
 
 class CompanyModule(tornado.web.UIModule):
     def render(self, company):
