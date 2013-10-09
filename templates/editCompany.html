@@ -7,35 +7,39 @@
 
 <form method="post" id="submitCompany">
 	Name of company: <input type="text" name="companyName" id="companyName" value="{{ company.companyName }}"><br>
-	Email: <input type="text" name="email" id="email"><br>
-	Phone: <input type="text" name="phone" id="phone"><br>
-	Company URL: <input type='text' name="url" id='url'><br>
-	First Name of CEO: <input type="text" name="ceoFirstName" id="ceoFirstName"><br>
-	Last Name of CEO: <input type="text" name="ceoLastName" id="ceoLastName"><br>
-	CEO Email: <input type="text" name="ceoEmail" id="ceoEmail"><br>
+	Company URL: <input type='text' name="url" id='url' value="{{ company.url }}"><br>
+	First Name of CEO: <input type="text" name="ceoFirstName" id="ceoFirstName" value="{{ company.ceo.firstName}}"><br>
+	Last Name of CEO: <input type="text" name="ceoLastName" id="ceoLastName" value="{{ company.ceo.lastName }}"><br>
+	CEO Email: <input type="text" name="ceoEmail" id="ceoEmail" value="{{ company.ceo.email }}"><br>
 	Type of Company:<br>
-	<input type="radio" name="companyType" value="Public">Public<br>
-	<input type="radio" name="companyType" value="Private">Private<br>
-	<input type="radio" name="companyType" value="Nonprofit">Nonprofit<br>
-	<input type="radio" name="companyType" value="other">Other<br>
-	<input type="text" name="otherCompanyType" id="otherCompanyType"><br>
-	Founding Year: <input type="text" name="yearFounded" id="yearFounded"><br>
-	Number of FTE's: <input type="text" name="fte" id="fte"><br>
-	Which best describes the function of your company?
-	<input type="radio" name="companyFunction" value="Consumer Research and/or Marketing">Consumer Research and/or Marketing<br>
-	<input type="radio" name="companyFunction" value="Consumer Services">Consumer Services<br>
-	<input type="radio" name="companyFunction" value="Data Management and Analysis">Data Management and Analysis<br>
-	<input type="radio" name="companyFunction" value="Financial/Investment Services">Financial/Investment Services<br>
-	<input type="radio" name="companyFunction" value="Information for Consumers">Information for Consumers<br>
-	<input type="radio" name="companyFunction" value="other">Other<br>
-	<input type="text" name="otherCompanyFunction" id="otherCompanyFunction"><br>
+	{% for type in companyType %}
+		<input type="radio" name="companyType" value="{{ type }}" {% if company.companyType == type %} checked {% end %}>{{ type }}<br>
+	{% end %}
+	{%if company.companyType not in companyType %}
+		<input type="radio" name="companyType" value="other" checked>Other<br>
+		<input type="text" name="otherCompanyType" id="otherCompanyType" value ="{{ company.companyType }}"><br>
+	{% end %}
+	Founding Year: <input type="text" name="yearFounded" id="yearFounded" value="{{ company.yearFounded }}"><br>
+	Number of FTE's: <input type="text" name="fte" id="fte" value="{{ company.fte }}"><br>
+	
+	<p>Which best describes the function of your company?</p>
+	{% for function in companyFunction %}
+		<input type="radio" name="companyFunction" value="{{ function }}" {% if company.companyFunction == function %} checked {% end %}>{{ function }}<br>
+	{% end %}
+	{%if company.companyFunction not in companyFunction %}
+		<input type="radio" name="companyFunction" value="other" checked>Other<br>
+		<input type="text" name="otherCompanyFunction" id="otherCompanyFunction" value="{{ company.companyFunction }}"><br>
+	{% end %}
+	
 	<p>Which of the following are critical sources of data for your company? By “critical,” we mean that your company would have to shut down a line of business, shut down completely, or replace the data in some way if the data were no longer available. (check all that apply) *</p>
-	<input type="checkbox" name="criticalDataTypes" value="Federal Open Data">Federal Open Data<br>
-	<input type="checkbox" name="criticalDataTypes" value="State Open Data">State Open Data<br>
-	<input type="checkbox" name="criticalDataTypes" value="City/Local Open Data">City/Local Open Data<br>
-	<input type="checkbox" name="criticalDataTypes" value="Private/Proprietary Data Sources">Private/Proprietary Data Sources<br>
-	<input type="checkbox" name="criticalDataTypes" value="other">Other<br>
-	<input type="text" name="otherCriticalDataTypes" id="otherCriticalDataTypes"><br>
+	{% for dataType in criticalDataTypes %}
+		<input type="checkbox" name="criticalDataTypes" value="{{ dataType }}" {% if dataType in company.criticalDataTypes %} checked {% end %}>{{ dataType }}<br>
+	{% end %}
+	{% if 'other' in company.criticalDataTypes %}
+		<input type="checkbox" name="criticalDataTypes" value="other" checked>Other<br>
+		<input type="text" name="otherCriticalDataTypes" id="otherCriticalDataTypes" value="{{ company.criticalDataTypes[len(company.criticalDataTypes)-1] }}"><br>
+	{% end %}
+
 	<p>Which of the following are significant sources of revenue for your company? (check all that apply) *</p>
 	<input type="checkbox" name="revenueSource" value="Advertising">Advertising<br>
 	<input type="checkbox" name="revenueSource" value="Data Management and Analytic Services">Data Management and Analytic Services<br>

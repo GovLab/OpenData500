@@ -167,12 +167,18 @@ class EditCompanyHandler(tornado.web.RequestHandler):
         company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
         page_heading = "Editing " + company.companyName
         page_title = "Editing " + company.companyName
+        companyType = ['Public', 'Private', 'Nonprofit']
+        companyFunction = ['Consumer Research and/or Marketing', 'Consumer Services', 'Data Management and Analysis', 'Financial/Investment Services', 'Information for Consumers']
+        criticalDataTypes = ['Federal Open Data', 'State Open Data', 'City/Local Open Data', 'Private/Proprietary Data Sources']
         if company is None:
             self.render("404.html", message=id)
         self.render("editCompany.html",
             page_title = page_title,
             page_heading = page_heading,
-            company = company
+            company = company,
+            companyType = companyType,
+            companyFunction = companyFunction,
+            criticalDataTypes = criticalDataTypes
         )
 
 class CompanyModule(tornado.web.UIModule):
