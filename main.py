@@ -36,6 +36,7 @@ class Application(tornado.web.Application):
             (r"/submitCompany", SubmitCompanyHandler),
             (r"/edit/([a-zA-Z0-9]{24})", EditCompanyHandler),
             (r"/addData/([a-zA-Z0-9]{24})", SubmitDataHandler),
+            (r"/editData/([a-zA-Z0-9]{24})", EditDataHandler),
             (r"/delete/([a-zA-Z0-9]{24})", DeleteCompanyHandler)
         ]
         settings = dict(
@@ -106,17 +107,18 @@ class SubmitCompanyHandler(tornado.web.RequestHandler):
             companyRec = companyRec,
             conferenceRec = conferenceRec
         )
+        submitter.save()
         ceo = models.Person(
             firstName = ceoFirstName,
             lastName = ceoLastName,
             email = ceoEmail,
             personType = "CEO"
         )
+        ceo.save()
         company = models.Company(
             companyName = companyName,
             url = url,
             ceo = ceo,
-            submitter = submitter,
             yearFounded = yearFounded,
             fte = fte,
             companyType = companyType,
@@ -131,6 +133,8 @@ class SubmitCompanyHandler(tornado.web.RequestHandler):
             vetted = False
         )
         company.save()
+        submitter.submittedCompany = company
+        submitter.save()
         id = str(company.id)
         self.redirect("/addData/" + id)
 
@@ -144,21 +148,30 @@ class SubmitDataHandler(tornado.web.RequestHandler):
             id = id
         )
     def post(self, id):
+        id = self.get_argument('id', None)
+        company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
         datasetName = self.get_argument('datasetName', None)
         datasetURL = self.get_argument('datasetURL', None)
         dataType = self.request.arguments['dataType']
-        dataType.append(self.get_argument('dataType', None))
-        rating = self.get_argument('rating', None)
+        if 'Other' in dataType:
+            del dataType[dataType.index('Other')]
+            dataType.append(self.get_argument('otherDataType', None))
+        ratingSubmitted = self.get_argument('rating', None)
         reason = self.get_argument('reason', None)
+        author = company.submitter
+        rating = models.Rating(
+            author = author,
+            rating =ratingSubmitted,
+            reason = reason
+        )
         dataset = models.Dataset(
             datasetName = datasetName,
             datasetURL = datasetURL,
             dataType = dataType,
-            rating = rating, 
-            reason = reason,
+            rating = rating
         )
-        id = self.get_argument('id', None)
-        company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
+        dataset.usedBy.append(company)
+        dataset.save()
         company.datasets.append(dataset)
         company.save()
         self.redirect("/")
@@ -217,6 +230,39 @@ class EditCompanyHandler(tornado.web.RequestHandler):
             company.vetted = False
         company.save()
         self.redirect('/')
+
+class EditDataHandler(tornado.web.RequestHandler):
+    def get(self, id):
+        dataset = models.Dataset.objects.get(id=bson.objectid.ObjectId(id))
+        datatypes = ['Federal Open Data', 'State Open Data', 'City/Local Open Data']
+        self.render("editData.html",
+            page_title = "Editing Dataset",
+            page_heading = "Edit Datasets",
+            datatypes = datatypes,
+            dataset = datasets
+        )
+    def post(self, id):
+        datasetName = self.get_argument('datasetName', None)
+        datasetURL = self.get_argument('datasetURL', None)
+        dataType = self.request.arguments['dataType']
+        dataType.append(self.get_argument('dataType', None))
+        rating = self.get_argument('rating', None)
+        reason = self.get_argument('reason', None)
+        dataset = models.Dataset(
+            datasetName = datasetName,
+            datasetURL = datasetURL,
+            dataType = dataType,
+            rating = rating, 
+            reason = reason,
+        )
+        id = self.get_argument('id', None)
+        company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
+        dataset.usedBy.append(company)
+        dataset.save()
+        company.datasets.append(dataset)
+        company.save()
+        self.redirect("/")
+
 
 class DeleteCompanyHandler(tornado.web.RequestHandler):
     def get(self, id):

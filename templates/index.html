@@ -7,13 +7,15 @@
 <h1>{{ page_heading }}</h1>
 
 <h2>Submitted Companies</h2>
+<a href="/submitCompany">Submit a Company</a><br>
+<p>=================================</p>
 {% for company in companies %}
 	<p><strong>{{ company.companyName }}</strong> is currently using the following datasets:</p>
 	{% for dataset in company.datasets %}
-		<p><strong>{{ dataset.datasetName }}</strong> - <a href="/editData/{{ company.id }}">Edit</a></p>
+		<p><strong>{{ dataset.datasetName }}</strong> - <a href="/editData/{{ dataset.id }}">Edit</a></p>
 	{% end %}
 	<p><a href="/edit/{{ company.id }}">Edit</a> <a href="/view/{{ company.id }}">View</a> <a href="/delete/{{ company.id }}">Delete</a> <a href="/addData/{{ company.id }}">Add Dataset</a></p>
-	<p>=================================</p>
+	
 {% end %}
 
 

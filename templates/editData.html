@@ -11,16 +11,19 @@
 <p>Please fill out the following information for the datasets that you consider to be the most important to your core business.</p>
 
 <form method="post" id="submitDataset">
-	Name of Dataset: <input type="text" name="datasetName" id="datasetName"><br>
-	URL of Dataset: <input type="text" name="datasetURL" id="datasetURL"><br>
+	Name of Dataset: <input type="text" name="datasetName" id="datasetName" value ="{{ dataset.datasetName }}"><br>
+	URL of Dataset: <input type="text" name="datasetURL" id="datasetURL" value ="{{ dataset.datasetURL }}"><br>
 	<p>Type of Dataset:</p>
-	<input type="checkbox" name="dataType" value="Federal Open Data">Federal Open Data<br>
-	<input type="checkbox" name="dataType" value="State Open Data">State Open Data<br>
-	<input type="checkbox" name="dataType" value="City/Local Open Data">City/Local Open Data<br>
-	<input type="checkbox" name="dataType" value="Other">Other<br>
-	<input type="text" name="otherDataType" id="otherDataType"><br>
+
+	{% for type in datatypes %}
+		<input type="checkbox" name="datatypes" value="{{ type }}">{{ type }}<br>
+	{% end %}
+	{%if dataset.dataType not in datatypes %}
+		<input type="checkbox" name="datatypes" value="Other" checked>Other<br>
+		<input type="text" name="otherDataType" id="otherDataType" value="{{ list(set(dataset.dataType) - set(datatypes))[0] }}"><br>
+	{% end %}
 	<p>How would you rate the usefulness of this dataset? Your answer can reflect your experience with data quality, format of the data, or other factors.</p>
-	<input type="text" name="rating" id="rating"><br>
+	<input type="text" name="rating" id="rating" value="{{ dataset.rating }}"><br>
 	<p>Why did you give it this rating? [50 words or less]</p>
 	<textarea rows="6" cols="70" name="reason" id="reason"></textarea><br>
 	<input type="hidden" class="id" name="id" value="{{ id }}">
