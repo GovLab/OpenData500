@@ -39,7 +39,7 @@ class Company(Document):
 	companyName = StringField()
 	url = StringField()
 	ceo = ReferenceField(Person)
-	submitter = RefernceField(Person)
+	submitter = ReferenceField(Person)
 	yearFounded = IntField()
 	previousName = StringField()
 	fte = IntField()
