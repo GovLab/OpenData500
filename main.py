@@ -14,6 +14,7 @@ import tornado.httpserver
 import tornado.ioloop
 import tornado.options
 import tornado.web
+from tornado.escape import json_encode 
 
 #Mongo
 from mongoengine import *
@@ -37,6 +38,7 @@ class Application(tornado.web.Application):
             (r"/edit/([a-zA-Z0-9]{24})", EditCompanyHandler),
             (r"/addData/([a-zA-Z0-9]{24})", SubmitDataHandler),
             (r"/editData/([a-zA-Z0-9]{24})", EditDataHandler),
+            (r"/view/([a-zA-Z0-9]{24})", ViewHandler),
             (r"/delete/([a-zA-Z0-9]{24})", DeleteCompanyHandler)
         ]
         settings = dict(
@@ -84,12 +86,27 @@ class SubmitCompanyHandler(tornado.web.RequestHandler):
         companyFunction = self.get_argument("companyFunction", None)
         if companyFunction == 'other':
             companyFunction = self.get_argument('otherCompanyFunction', None)
-        criticalDataTypes = self.request.arguments['criticalDataTypes']
-        criticalDataTypes.append(self.get_argument('otherCriticalDataTypes', None))
-        revenueSource = self.request.arguments['revenueSource']
-        revenueSource.append(self.get_argument('otherRevenueSource', None))
-        sector = self.request.arguments['sector']
-        sector.append(self.get_argument('otherSector', None))
+        try:
+            criticalDataTypes = self.request.arguments['criticalDataTypes']
+        except:
+            criticalDataTypes = []
+        if 'Other' in criticalDataTypes:
+            del criticalDataTypes[criticalDataTypes.index('Other')]
+            criticalDataTypes.append(self.get_argument('otherCriticalDataTypes', None))
+        try:
+            revenueSource = self.request.arguments['revenueSource']
+        except:
+            revenueSource = []
+        if 'Other' in revenueSource:
+            del revenueSource[revenueSource.index('Other')]
+            revenueSource.append(self.get_argument('otherRevenueSource', None))
+        try:
+            sector = self.request.arguments['sector']
+        except:
+            sector = []
+        if 'Other' in sector:
+            del sector[sector.index('Other')]
+            sector.append(self.get_argument('otherSector', None))
         descriptionLong = self.get_argument('descriptionLong', None)
         descriptionShort = self.get_argument('descriptionShort', None)
         socialImpact = self.get_argument('socialImpact', None)
@@ -130,6 +147,7 @@ class SubmitCompanyHandler(tornado.web.RequestHandler):
             descriptionShort = descriptionShort,
             socialImpact = socialImpact,
             financialInfo = financialInfo,
+            submitter = submitter,
             vetted = False
         )
         company.save()
@@ -159,19 +177,23 @@ class SubmitDataHandler(tornado.web.RequestHandler):
         ratingSubmitted = self.get_argument('rating', None)
         reason = self.get_argument('reason', None)
         author = company.submitter
+        dataset = models.Dataset(
+            datasetName = datasetName,
+            datasetURL = datasetURL,
+            dataType = dataType,
+        )
         rating = models.Rating(
             author = author,
             rating =ratingSubmitted,
             reason = reason
         )
-        dataset = models.Dataset(
-            datasetName = datasetName,
-            datasetURL = datasetURL,
-            dataType = dataType,
-            rating = rating
-        )
+        author.ratings.append(rating)
+        author.save()
+        dataset.ratings.append(rating)
         dataset.usedBy.append(company)
         dataset.save()
+        author.submittedDatasets.append(dataset)
+        author.save()
         company.datasets.append(dataset)
         company.save()
         self.redirect("/")
@@ -263,12 +285,16 @@ class EditDataHandler(tornado.web.RequestHandler):
         company.save()
         self.redirect("/")
 
-
 class DeleteCompanyHandler(tornado.web.RequestHandler):
     def get(self, id):
         company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
         company.delete()
         self.redirect('/')
+
+class ViewHandler(tornado.web.RequestHandler):
+    def get(self, id):
+        company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
+        self.write(json_encode(company))
 
 
 class CompanyModule(tornado.web.UIModule):
