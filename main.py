@@ -71,6 +71,7 @@ class SubmitCompanyHandler(tornado.web.RequestHandler):
     def post(self):
         firstName = self.get_argument("firstName", None)
         lastName = self.get_argument("lastName", None)
+        org = self.get_argument("org", None)
         url = self.get_argument('url', None)
         companyName = self.get_argument("companyName", None)
         email = self.get_argument("email", None)
@@ -82,7 +83,11 @@ class SubmitCompanyHandler(tornado.web.RequestHandler):
         if companyType == 'other':
             companyType = self.get_argument('otherCompanyType', None)
         yearFounded = self.get_argument("yearFounded", None)
+        if not yearFounded:
+            yearFounded = 9999
         fte = self.get_argument("fte", None)
+        if not fte:
+            fte = 0
         companyFunction = self.get_argument("companyFunction", None)
         if companyFunction == 'other':
             companyFunction = self.get_argument('otherCompanyFunction', None)
@@ -117,6 +122,7 @@ class SubmitCompanyHandler(tornado.web.RequestHandler):
         submitter = models.Person(
             firstName = firstName,
             lastName = lastName,
+            org = org,
             email = email,
             phone = phone,
             personType = "Submitter",
@@ -124,14 +130,20 @@ class SubmitCompanyHandler(tornado.web.RequestHandler):
             companyRec = companyRec,
             conferenceRec = conferenceRec
         )
-        submitter.save()
-        ceo = models.Person(
-            firstName = ceoFirstName,
-            lastName = ceoLastName,
-            email = ceoEmail,
-            personType = "CEO"
-        )
-        ceo.save()
+        if email == ceoEmail:
+            ceo = submitter
+            ceo.personType = "CEO"
+            ceo.save()
+            submitter.save()
+        else:
+            ceo = models.Person(
+                firstName = ceoFirstName,
+                lastName = ceoLastName,
+                email = ceoEmail,
+                personType = "CEO"
+            )
+            submitter.save()
+            ceo.save()
         company = models.Company(
             companyName = companyName,
             url = url,
@@ -170,11 +182,16 @@ class SubmitDataHandler(tornado.web.RequestHandler):
         company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
         datasetName = self.get_argument('datasetName', None)
         datasetURL = self.get_argument('datasetURL', None)
-        dataType = self.request.arguments['dataType']
+        try:
+            dataType = self.request.arguments['dataType']
+        except:
+            dataType = []
         if 'Other' in dataType:
             del dataType[dataType.index('Other')]
             dataType.append(self.get_argument('otherDataType', None))
         ratingSubmitted = self.get_argument('rating', None)
+        if not ratingSubmitted:
+            ratingSubmitted = 9999
         reason = self.get_argument('reason', None)
         author = company.submitter
         dataset = models.Dataset(
@@ -187,8 +204,6 @@ class SubmitDataHandler(tornado.web.RequestHandler):
             rating =ratingSubmitted,
             reason = reason
         )
-        author.ratings.append(rating)
-        author.save()
         dataset.ratings.append(rating)
         dataset.usedBy.append(company)
         dataset.save()
@@ -231,8 +246,8 @@ class EditCompanyHandler(tornado.web.RequestHandler):
         company.companyType = self.get_argument("companyType", None)
         if company.companyType == 'other':
             company.companyType = self.get_argument('otherCompanyType', None)
-        company.yearFounded = self.get_argument("yearFounded", None)
-        company.fte = self.get_argument("fte", None)
+        company.yearFounded = self.get_argument("yearFounded", 9999)
+        company.fte = self.get_argument("fte", 0)
         company.companyFunction = self.get_argument("companyFunction", None)
         if company.companyFunction == 'other':
             company.companyFunction = self.get_argument('otherCompanyFunction', None)
@@ -287,14 +302,79 @@ class EditDataHandler(tornado.web.RequestHandler):
 
 class DeleteCompanyHandler(tornado.web.RequestHandler):
     def get(self, id):
-        company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
-        company.delete()
+        try:
+            company = models.Company.objects.get(id=bson.objectid.ObjectId(id)) 
+            #we're deleting a company. Need to delete CEO, delete 
+            ceo = company.ceo
+            ceo.delete()
+            company.delete()
+        except:
+            dataset = models.Dataset.objects.get(id=bson.objectid.ObjectId(id))
+            dataset.delete()
         self.redirect('/')
 
 class ViewHandler(tornado.web.RequestHandler):
     def get(self, id):
-        company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
-        self.write(json_encode(company))
+        c = models.Company.objects.get(id=bson.objectid.ObjectId(id))
+        d = []
+        for s in c.datasets:
+            ratings = []
+            for r in s.ratings:
+                ratings.append({
+                    "author": str(r.author.id),
+                    "rating": r.rating,
+                    "reason": r.reason
+                })
+            companies = []
+            for comps in s.usedBy:
+                companies.append({
+                    "companyID": str(comps.id)
+                })
+            d.append({
+                "ts": str(s.ts),
+                "datasetName": s.datasetName,
+                "datasetURL": s.datasetURL,
+                "ratings": ratings,
+                "dataType": s.dataType,
+                "usedBy": companies
+            })
+        obj = {
+            "_id": {
+                "$oid": str(c.id)
+            },
+            "ceo": {
+                "firstName": c.ceo.firstName,
+                "lastName": c.ceo.lastName,
+                "personType": c.ceo.personType,
+                "email": c.ceo.email,
+                "ratings": [],
+                "submittedDatasets": []
+            },
+            "companyFunction": c.companyFunction,
+            "companyName": c.companyName,
+            "companyType": c.companyType,
+            "criticalDataTypes": c.criticalDataTypes,
+            "datasets": d,
+            "descriptionLong": c.descriptionLong,
+            "descriptionShort": c.descriptionShort,
+            "financialInfo": c.financialInfo,
+            "fte": c.fte,
+            "revenueSource": c.revenueSource,
+            "sector": c.sector,
+            "socialImpact": c.socialImpact,
+            "submitter": {
+                "firstName": c.submitter.firstName,
+                "lastName": c.submitter.lastName,
+                "personType": c.submitter.personType,
+                "email": c.submitter.email,
+                "submittedDatasets": str(c.submitter.submittedDatasets)
+            },
+            "ts": str(c.ts),
+            "url": c.url,
+            "vetted": c.vetted,
+            "yearFounded": c.yearFounded
+        }
+        self.write(json_encode(obj))
 
 
 class CompanyModule(tornado.web.UIModule):

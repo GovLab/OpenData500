@@ -18,8 +18,12 @@ class Person(Document):
 	companyRec = StringField()
 	conferenceRec = StringField()
 	submittedCompany = ReferenceField('Company')
-	ratings = ListField(EmbeddedDocumentField('Rating'))
 	submittedDatasets = ListField(ReferenceField('Dataset'))
+
+class Rating(EmbeddedDocument):
+	author = ReferenceField(Person)
+	rating = IntField()
+	reason = StringField()
 
 class Dataset(Document):
 	ts = ComplexDateTimeField(default=datetime.now())
@@ -28,11 +32,6 @@ class Dataset(Document):
 	ratings = ListField(EmbeddedDocumentField('Rating'))
 	dataType = ListField(StringField())
 	usedBy = ListField(ReferenceField('Company'))
-
-class Rating(EmbeddedDocument):
-	author = ReferenceField(Person)
-	rating = IntField()
-	reason = StringField()
 
 class Company(Document):
 	ts = ComplexDateTimeField(default=datetime.now())
@@ -54,3 +53,9 @@ class Company(Document):
 	socialImpact = StringField()
 	financialInfo = StringField()
 	vetted = BooleanField()
+
+
+Dataset.register_delete_rule(Company, "datasets", PULL)
+Dataset.register_delete_rule(Person, "submittedDatasets", PULL)
+Company.register_delete_rule(Dataset, "usedBy", PULL)
+Company.register_delete_rule(Person, "submittedCompany", NULLIFY)
