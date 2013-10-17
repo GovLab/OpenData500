@@ -211,7 +211,10 @@ class SubmitDataHandler(tornado.web.RequestHandler):
         author.save()
         company.datasets.append(dataset)
         company.save()
-        self.redirect("/")
+        if self.get_argument('submit', None) == 'Add Another':
+            self.redirect("/addData/" + id)
+        else: 
+            self.redirect("/")
 
 class EditCompanyHandler(tornado.web.RequestHandler):
     def get(self, id):
@@ -402,7 +405,7 @@ def main():
 if __name__ == "__main__":
     main()
 
-
+#comment
 
 
 

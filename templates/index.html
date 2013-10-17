@@ -11,9 +11,11 @@
 <p>=================================</p>
 {% for company in companies %}
 	<p><strong>{{ company.companyName }}</strong> is currently using the following datasets:</p>
+	<ul>
 	{% for dataset in company.datasets %}
-		<p><strong>{{ dataset.datasetName }}</strong> - <a href="/editData/{{ dataset.id }}">Edit</a> <a href="/delete/{{ dataset.id }}">Delete</a></p>
+		<li><p><strong>{{ dataset.datasetName }}</strong> - <a href="/editData/{{ dataset.id }}">Edit</a> <a href="/delete/{{ dataset.id }}">Delete</a></p></li>
 	{% end %}
+	</ul>
 	<p><a href="/edit/{{ company.id }}">Edit</a> <a href="/view/{{ company.id }}">View</a> <a href="/delete/{{ company.id }}">Delete</a> <a href="/addData/{{ company.id }}">Add Dataset</a></p>
 	
 {% end %}
