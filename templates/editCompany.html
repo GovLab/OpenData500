@@ -41,11 +41,11 @@
 	{% for dataType in criticalDataTypes %}
 		<input type="checkbox" name="criticalDataTypes" value="{{ dataType }}" {% if dataType in company.criticalDataTypes %} checked {% end %}>{{ dataType }}<br>
 	{% end %}
-	{% if 'other' in company.criticalDataTypes %}
-		<input type="checkbox" name="criticalDataTypes" value="other" checked>Other<br>
-		<input type="text" name="otherCriticalDataTypes" id="otherCriticalDataTypes" value="{{ company.criticalDataTypes[len(company.criticalDataTypes)-1] }}"><br>
+	{% if list(set(company.criticalDataTypes) - set(criticalDataTypes)) %}
+		<input type="checkbox" name="criticalDataTypes" value="Other" checked>Other<br>
+		<input type="text" name="otherCriticalDataTypes" id="otherCriticalDataTypes" value="{{ list(set(company.criticalDataTypes) - set(criticalDataTypes))[0] }}"><br>
 	{% else %}
-		<input type="checkbox" name="criticalDataTypes" value="other">Other<br>
+		<input type="checkbox" name="criticalDataTypes" value="Other">Other<br>
 		<input type="text" name="otherCriticalDataTypes" id="otherCriticalDataTypes"><br>
 	{% end %}
 
@@ -53,11 +53,11 @@
 	{% for source in revenueSource %}
 		<input type="checkbox" name="revenueSource" value="{{ source }}" {% if source in company.revenueSource %} checked {% end %}>{{ source }}<br>
 	{% end %}
-	{% if 'other' in company.criticalDataTypes %}
-		<input type="checkbox" name="revenueSource" value="other" checked>Other<br>
-		<input type="text" name="otherRevenueSource" id="otherRevenueSource" value="{{ company.revenueSource[len(company.revenueSource)-1] }}"><br>
+	{% if list(set(company.revenueSource) - set(revenueSource)) %}
+		<input type="checkbox" name="revenueSource" value="Other" checked>Other<br>
+		<input type="text" name="otherRevenueSource" id="otherRevenueSource" value="{{ list(set(company.revenueSource) - set(revenueSource))[0] }}"><br>
 	{% else %}
-		<input type="checkbox" name="revenueSource" value="other">Other<br>
+		<input type="checkbox" name="revenueSource" value="Other">Other<br>
 		<input type="text" name="otherRevenueSource" id="otherRevenueSource"><br>
 	{% end %}
 
@@ -65,9 +65,9 @@
 	{% for sector in sectors %}
 		<input type="checkbox" name="sector" value="{{ sector }}" {% if sector in company.sector %} checked {% end %}>{{ sector }}<br>
 	{% end %}
-	{% if 'other' in company.sector %}
+	{% if list(set(company.sector) - set(sectors)) %}
 		<input type="checkbox" name="sector" value="other" checked>Other<br>
-		<input type="text" name="otherSector" id="otherSector" value="{{ company.sector[len(company.sector)-1] }}"><br>
+		<input type="text" name="otherSector" id="otherSector" value="{{ list(set(company.sector) - set(sectors))[0] }}"><br>
 	{% else %}
 		<input type="checkbox" name="sector" value="other">Other<br>
 		<input type="text" name="otherSector" id="otherSector"><br>

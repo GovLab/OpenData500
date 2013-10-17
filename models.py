@@ -5,54 +5,54 @@ from mongoengine import *
 from datetime import datetime
 
 class Person(Document):
-	firstName = StringField()
-	lastName = StringField()
-	title = StringField()
-	personType = StringField() #submitter, company contact, company CEO?
-	email = StringField()
-	phone = StringField()
-	org = StringField()
+	firstName = StringField()					#String limit to 35 characters	#Required
+	lastName = StringField()					#String limit to 35 characters	#Required
+	title = StringField()						#String limit to 35 characters	#NOT Required
+	personType = StringField() 					#Assigned automatically
+	email = StringField()						#Valid email					#Required
+	phone = StringField()						#Valid Phone Num				#NOT Required
+	org = StringField()							#Character limit to 100 char 	#NOT Required
 	contacted = StringField()
 	otherInfo = StringField()
-	datasetWishList = StringField()
-	companyRec = StringField()
-	conferenceRec = StringField()
-	submittedCompany = ReferenceField('Company')
-	submittedDatasets = ListField(ReferenceField('Dataset'))
+	datasetWishList = StringField()												#NOT Required
+	companyRec = StringField()													#NOT Required
+	conferenceRec = StringField()												#NOT Required
+	submittedCompany = ReferenceField('Company')								#Required (Entered below)
+	submittedDatasets = ListField(ReferenceField('Dataset'))					#Required (Entered below)
 
 class Rating(EmbeddedDocument):
-	author = ReferenceField(Person)
-	rating = IntField()
-	reason = StringField()
+	author = ReferenceField(Person)				
+	rating = IntField()							#Integer, from 1 to 5			#Required
+	reason = StringField()						#Max 300 characters				#NOT Required
 
 class Dataset(Document):
 	ts = ComplexDateTimeField(default=datetime.now())
-	datasetName = StringField()
-	datasetURL = StringField()
+	datasetName = StringField()					#String limit to 100 characters	#Required
+	datasetURL = StringField()					#Valid URL 						#Required
 	ratings = ListField(EmbeddedDocumentField('Rating'))
-	dataType = ListField(StringField())
+	dataType = ListField(StringField())											#Required
 	usedBy = ListField(ReferenceField('Company'))
 
 class Company(Document):
 	ts = ComplexDateTimeField(default=datetime.now())
-	companyName = StringField()
-	url = StringField()
-	ceo = ReferenceField(Person)
-	submitter = ReferenceField(Person)
-	yearFounded = IntField()
-	previousName = StringField()
-	fte = IntField()
-	companyType = StringField()
-	companyFunction = StringField()
-	criticalDataTypes = ListField(StringField())
-	datasets = ListField(ReferenceField(Dataset))
-	revenueSource = ListField(StringField())
-	sector = ListField(StringField())
-	descriptionLong = StringField()
-	descriptionShort = StringField()
-	socialImpact = StringField()
-	financialInfo = StringField()
-	vetted = BooleanField()
+	companyName = StringField()					#String limit 70				#Required
+	url = StringField()							#Valid URL 						#Required
+	ceo = ReferenceField(Person)				#Person, see above				#NOT Required
+	submitter = ReferenceField(Person)			#Person, see above				#Required
+	yearFounded = IntField()					#Valid year Integer				#NOT Required
+	previousName = StringField()				#String limit 70				#NOT Required
+	fte = IntField()							#Integer, 0-1,000,000			#NOT Required
+	companyType = StringField()													#Required
+	companyFunction = StringField()												#NOT Required
+	criticalDataTypes = ListField(StringField())								#NOT Required
+	datasets = ListField(ReferenceField(Dataset))								#Required, see above
+	revenueSource = ListField(StringField())									#NOT Required
+	sector = ListField(StringField())											#Required
+	descriptionLong = StringField()				#70 words						#NOT Required
+	descriptionShort = StringField()			#25 words						#Required
+	socialImpact = StringField()				#70 words						#NOT Required
+	financialInfo = StringField()				#70 words						#NOT Required
+	vetted = BooleanField()						#Automatic set to False
 
 
 Dataset.register_delete_rule(Company, "datasets", PULL)

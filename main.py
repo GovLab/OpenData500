@@ -254,10 +254,22 @@ class EditCompanyHandler(tornado.web.RequestHandler):
         company.companyFunction = self.get_argument("companyFunction", None)
         if company.companyFunction == 'other':
             company.companyFunction = self.get_argument('otherCompanyFunction', None)
-        company.criticalDataTypes = self.request.arguments['criticalDataTypes']
-        company.criticalDataTypes.append(self.get_argument('otherCriticalDataTypes', None))
-        company.revenueSource = self.request.arguments['revenueSource']
-        company.revenueSource.append(self.get_argument('otherRevenueSource', None))
+        try:
+            company.criticalDataTypes = self.request.arguments['criticalDataTypes']
+        except:
+            company.criticalDataTypes = []
+        if 'Other' in company.criticalDataTypes:
+            del company.criticalDataTypes[company.criticalDataTypes.index('Other')]
+            if self.get_argument('otherCriticalDataTypes', None):
+                company.criticalDataTypes.append(self.get_argument('otherCriticalDataTypes', None))
+        try:
+            company.revenueSource = self.request.arguments['revenueSource']
+        except:
+            company.revenueSource = []
+        if 'Other' in company.revenueSource:
+            del company.revenueSource[company.revenueSource.index('Other')]
+            if self.get_argument('otherRevenueSource', None):
+                company.revenueSource.append(self.get_argument('otherRevenueSource', None))
         company.sector = self.request.arguments['sector']
         company.sector.append(self.get_argument('otherSector', None))
         company.descriptionLong = self.get_argument('descriptionLong', None)
@@ -405,7 +417,7 @@ def main():
 if __name__ == "__main__":
     main()
 
-#comment
+
 
 
 
