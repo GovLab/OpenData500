@@ -2,7 +2,7 @@
 {% autoescape None %}
 
 {% block body %}
-{{ page_heading }}
+
 <div class="submitDescription">
 	<p>Thank you for helping us create the Open Data 500!</p>
 	<p>The Open Data 500 will be the first comprehensive census of U.S.-based companies using government data to develop new products and services. The goal of the Open Data 500 is to understand how companies use open government data in their business, how it can be made more useful, and how it can help promote innovation. <b>To qualify for the Open Data 500, a company must:</b></p>
@@ -16,18 +16,18 @@
 </div>
 
 <form method="post" id="submitCompany">
-	First Name: <input type="text" name="firstName" id="firstName"><br>
-	Last Name: <input type="text" name="lastName" id="lastName"><br>
-	Title: <input type="text" name="title" id="title"><br>
+	First Name:* <input type="text" name="firstName" id="firstName"><br>
+	Last Name:* <input type="text" name="lastName" id="lastName"><br>
+	Title: *<input type="text" name="title" id="title"><br>
 	Your Organization: <input type="text" name="org" id="org"><br>
-	Email: <input type="text" name="email" id="email"><br>
+	Email:* <input type="text" name="email" id="email"><br>
 	Phone: <input type="text" name="phone" id="phone"><br>
-	Company Name: <input type="text" name="companyName" id="companyName"><br>
-	Company URL: <input type='text' name="url" id='url'><br>
+	Company Name:* <input type="text" name="companyName" id="companyName"><br>
+	Company URL:* <input type='text' name="url" id='url'><br>
 	First Name of CEO: <input type="text" name="ceoFirstName" id="ceoFirstName"><br>
 	Last Name of CEO: <input type="text" name="ceoLastName" id="ceoLastName"><br>
 	CEO Email: <input type="text" name="ceoEmail" id="ceoEmail"><br>
-	Type of Company:<br>
+	Type of Company:*<br>
 	<input type="radio" name="companyType" value="Public">Public<br>
 	<input type="radio" name="companyType" value="Private">Private<br>
 	<input type="radio" name="companyType" value="Nonprofit">Nonprofit<br>
@@ -35,7 +35,7 @@
 	<input type="text" name="otherCompanyType" id="otherCompanyType"><br>
 	Founding Year: <input type="text" name="yearFounded" id="yearFounded"><br>
 	Number of FTE's: <input type="text" name="fte" id="fte"><br>
-	<p>Which best describes the function of your company?</p>
+	<p>Which best describes the function of your company?*</p>
 	<input type="radio" name="companyFunction" value="Consumer Research and/or Marketing">Consumer Research and/or Marketing<br>
 	<input type="radio" name="companyFunction" value="Consumer Services">Consumer Services<br>
 	<input type="radio" name="companyFunction" value="Data Management and Analysis">Data Management and Analysis<br>
@@ -96,7 +96,7 @@
 	<textarea rows="6" cols="70" name="companyRec" id="companyRec"></textarea><br>
 	<p>What conferences or events do you think would be helpful to us in surveying the field of open data companies? [50 words or less]</p>
 	<textarea rows="6" cols="70" name="conferenceRec" id="conferenceRec"></textarea><br>
-	<input type="submit" id="submit">
+	<input type="submit" id="submit" value="Add Datasets">
 </form>
 
 

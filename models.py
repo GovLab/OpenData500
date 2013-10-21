@@ -7,8 +7,8 @@ from datetime import datetime
 class Person(Document):
 	firstName = StringField()					#String limit to 35 characters	#Required
 	lastName = StringField()					#String limit to 35 characters	#Required
-	title = StringField()						#String limit to 35 characters	#NOT Required
-	personType = StringField() 					#Assigned automatically
+	title = StringField()						#String limit to 35 characters	#Required
+	personType = StringField() 					#Assigned automatically: Submitter, Recommender, CEO, Contact
 	email = StringField()						#Valid email					#Required
 	phone = StringField()						#Valid Phone Num				#NOT Required
 	org = StringField()							#Character limit to 100 char 	#NOT Required
@@ -17,7 +17,7 @@ class Person(Document):
 	datasetWishList = StringField()												#NOT Required
 	companyRec = StringField()													#NOT Required
 	conferenceRec = StringField()												#NOT Required
-	submittedCompany = ReferenceField('Company')								#Required (Entered below)
+	submittedCompany = ListField(ReferenceField('Company'))							#Required (Entered below)
 	submittedDatasets = ListField(ReferenceField('Dataset'))					#Required (Entered below)
 
 class Rating(EmbeddedDocument):
@@ -53,9 +53,20 @@ class Company(Document):
 	socialImpact = StringField()				#70 words						#NOT Required
 	financialInfo = StringField()				#70 words						#NOT Required
 	vetted = BooleanField()						#Automatic set to False
+	submitType = StringField()
+	contact = ReferenceField(Person)
+	reasonForRecommending = StringField()
 
 
 Dataset.register_delete_rule(Company, "datasets", PULL)
 Dataset.register_delete_rule(Person, "submittedDatasets", PULL)
 Company.register_delete_rule(Dataset, "usedBy", PULL)
-Company.register_delete_rule(Person, "submittedCompany", NULLIFY)
+Company.register_delete_rule(Person, "submittedCompany", PULL)
+
+
+
+
+
+
+
+

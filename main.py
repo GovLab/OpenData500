@@ -39,7 +39,8 @@ class Application(tornado.web.Application):
             (r"/addData/([a-zA-Z0-9]{24})", SubmitDataHandler),
             (r"/editData/([a-zA-Z0-9]{24})", EditDataHandler),
             (r"/view/([a-zA-Z0-9]{24})", ViewHandler),
-            (r"/delete/([a-zA-Z0-9]{24})", DeleteCompanyHandler)
+            (r"/delete/([a-zA-Z0-9]{24})", DeleteCompanyHandler),
+            (r"/recommendCompany", RecommendCompanyHandler)
         ]
         settings = dict(
             template_path=os.path.join(os.path.dirname(__file__), "templates"),
@@ -54,11 +55,20 @@ class Application(tornado.web.Application):
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
         companies = models.Company.objects()
+        recommendedCompanies = []
+        recommenders = models.Person.objects(personType = "Recommender")
+        for r in recommenders:
+            recommendedCompanies = recommendedCompanies + r.submittedCompany
+        submittedCompanies = []
+        submitters = models.Person.objects(personType = "Submitter")
+        for s in submitters:
+            submittedCompanies = submittedCompanies + s.submittedCompany
         self.render(
             "index.html",
             page_title='OpenData500',
             page_heading='Welcome to the OpenData 500',
-            companies = companies
+            submittedCompanies = submittedCompanies,
+            recommendedCompanies = recommendedCompanies
         )
 
 class SubmitCompanyHandler(tornado.web.RequestHandler):
@@ -163,10 +173,78 @@ class SubmitCompanyHandler(tornado.web.RequestHandler):
             vetted = False
         )
         company.save()
-        submitter.submittedCompany = company
+        submitter.submittedCompany.append(company)
         submitter.save()
         id = str(company.id)
         self.redirect("/addData/" + id)
+
+class RecommendCompanyHandler(tornado.web.RequestHandler):
+    def get(self, id=None):
+        try:
+            submitterId = models.Person.objects.get(id=bson.objectid.ObjectId(id))
+        except:
+            submitterId = None
+        self.render(
+            "recommendCompany.html",
+            page_title = "Recommend a Company",
+            page_heading = "Recommend a Company",
+            submitterId = submitterId
+        )
+
+    def post(self):
+        firstName = self.get_argument("firstName", None)                                #Person.Submitter
+        lastName = self.get_argument("lastName", None)                                  #Person.Submitter
+        title = self.get_argument("title", None)                                        #Person.submitter
+        org = self.get_argument("org", None)                                            #Person.Submitter
+        email = self.get_argument("email", None)                                        #Person.Submitter
+        phone = self.get_argument("phone", None)                                        #Person.Submitter
+        companyName = self.get_argument("companyName", None)                            #Company
+        url = self.get_argument('url', None)                                            #Company
+        firstNameContact = self.get_argument("firstNameContact", None)                  #Company.Contact
+        lastNameContact = self.get_argument("lastNameContact", None)                    #Company.Contact
+        emailContact = self.get_argument("emailContact", None)                          #Company.Contact
+        reasonForRecommending = self.get_argument("reasonForRecommending", None)        #Company
+        otherInfo = self.get_argument("otherInfo", None)                                #Person.Submitter
+        try: 
+            submitter = models.Person.objects.get(id=bson.objectid.ObjectId(id))
+        except: 
+            submitter = models.Person(
+                firstName = firstName, 
+                lastName = lastName,
+                title = title, 
+                org = org,
+                email = email,
+                phone = phone,
+                personType = "Recommender",
+                otherInfo = otherInfo
+            )
+            submitter.save()
+        contact = models.Person(
+            firstName = firstNameContact,
+            lastName = lastNameContact,
+            email =emailContact,
+            personType = "Contact"
+        )
+        contact.save()
+        company = models.Company(
+            companyName = companyName,
+            url = url,
+            contact = contact,
+            reasonForRecommending = reasonForRecommending
+        )
+        company.save()
+        submitter.submittedCompany.append(company)
+        submitter.save()
+        if self.get_argument('submit', None) == 'Recommend Another Company':
+            self.render(
+                "recommendCompany.html", 
+                page_title = "Recommend a Company",
+                page_heading = "Recommend a Company",
+                submitterId = str(submitter.id)
+            )
+        else: 
+            self.redirect("/")
+
 
 class SubmitDataHandler(tornado.web.RequestHandler):
     def get(self, id):
@@ -291,7 +369,7 @@ class EditDataHandler(tornado.web.RequestHandler):
             page_title = "Editing Dataset",
             page_heading = "Edit Datasets",
             datatypes = datatypes,
-            dataset = datasets
+            dataset = dataset
         )
     def post(self, id):
         datasetName = self.get_argument('datasetName', None)

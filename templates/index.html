@@ -9,7 +9,7 @@
 <h2>Submitted Companies</h2>
 <a href="/submitCompany">Submit a Company</a><br>
 <p>=================================</p>
-{% for company in companies %}
+{% for company in submittedCompanies %}
 	<p><strong>{{ company.companyName }}</strong> is currently using the following datasets:</p>
 	<ul>
 	{% for dataset in company.datasets %}
@@ -20,6 +20,11 @@
 	
 {% end %}
 
+<h2>Recommended Companies</h2>
+<a href="/recommendCompany">Recommend a Company</a><br>
+{% for company in recommendedCompanies %}
+	<p><strong>{{ company.companyName }}</strong></p>
+{% end %}
 
 
 
