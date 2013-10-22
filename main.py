@@ -372,25 +372,17 @@ class EditDataHandler(tornado.web.RequestHandler):
             dataset = dataset
         )
     def post(self, id):
-        datasetName = self.get_argument('datasetName', None)
-        datasetURL = self.get_argument('datasetURL', None)
-        dataType = self.request.arguments['dataType']
-        dataType.append(self.get_argument('dataType', None))
-        rating = self.get_argument('rating', None)
-        reason = self.get_argument('reason', None)
-        dataset = models.Dataset(
-            datasetName = datasetName,
-            datasetURL = datasetURL,
-            dataType = dataType,
-            rating = rating, 
-            reason = reason,
-        )
-        id = self.get_argument('id', None)
-        company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
-        dataset.usedBy.append(company)
+        dataset = models.Dataset.objects.get(id=bson.objectid.ObjectId(id))
+        dataset.datasetName = self.get_argument('datasetName', None)
+        dataset.datasetURL = self.get_argument('datasetURL', None)
+        try:
+            dataset.dataType = self.request.arguments['dataType']
+        except:
+            dataset.dataType = []
+        if 'Other' in dataset.dataType:
+            del dataset.dataType[dataset.dataType.index('Other')]
+            dataset.dataType.append(self.get_argument('otherDataType', None))
         dataset.save()
-        company.datasets.append(dataset)
-        company.save()
         self.redirect("/")
 
 class DeleteCompanyHandler(tornado.web.RequestHandler):

@@ -16,16 +16,15 @@
 	<p>Type of Dataset:</p>
 
 	{% for type in datatypes %}
-		<input type="checkbox" name="datatypes" value="{{ type }}">{{ type }}<br>
+		<input type="checkbox" name="dataType" value="{{ type }}" {% if type in dataset.dataType %} checked {% end %}>{{ type }}<br>
 	{% end %}
-	{%if dataset.dataType not in datatypes %}
-		<input type="checkbox" name="datatypes" value="Other" checked>Other<br>
+	{%if list(set(dataset.dataType) - set(datatypes)) %}
+		<input type="checkbox" name="dataType" value="Other" checked>Other<br>
 		<input type="text" name="otherDataType" id="otherDataType" value="{{ list(set(dataset.dataType) - set(datatypes))[0] }}"><br>
+	{% else %}
+		<input type="checkbox" name="dataType" value="Other">Other<br>
+		<input type="text" name="otherDataType" id="otherDataType"><br>
 	{% end %}
-	<p>How would you rate the usefulness of this dataset? Your answer can reflect your experience with data quality, format of the data, or other factors.</p>
-	<input type="text" name="rating" id="rating" value="{{ dataset.rating }}"><br>
-	<p>Why did you give it this rating? [50 words or less]</p>
-	<textarea rows="6" cols="70" name="reason" id="reason"></textarea><br>
 	<input type="hidden" class="id" name="id" value="{{ id }}">
 	<input type="submit" id="submit">
 </form>
