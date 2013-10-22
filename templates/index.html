@@ -16,14 +16,14 @@
 		<li><p><strong>{{ dataset.datasetName }}</strong> - <a href="/editData/{{ dataset.id }}">Edit</a> <a href="/delete/{{ dataset.id }}">Delete</a></p></li>
 	{% end %}
 	</ul>
-	<p><a href="/edit/{{ company.id }}">Edit</a> <a href="/view/{{ company.id }}">View</a> <a href="/delete/{{ company.id }}">Delete</a> <a href="/addData/{{ company.id }}">Add Dataset</a></p>
+	<p><a href="/edit/{{ company.id }}">Edit</a> <a href="/delete/{{ company.id }}">Delete</a> <a href="/addData/{{ company.id }}">Add Dataset</a></p>
 	
 {% end %}
 
 <h2>Recommended Companies</h2>
 <a href="/recommendCompany">Recommend a Company</a><br>
 {% for company in recommendedCompanies %}
-	<p><strong>{{ company.companyName }}</strong> <a href="/delete/{{ company.id }}">Delete</a></p>
+	<p><strong>{{ company.companyName }}</strong> <a href="/view/{{ company.id }}">View</a> <a href="/delete/{{ company.id }}">Delete</a></p>
 {% end %}
 
 

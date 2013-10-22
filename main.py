@@ -235,6 +235,8 @@ class RecommendCompanyHandler(tornado.web.RequestHandler):
         company.save()
         submitter.submittedCompany.append(company)
         submitter.save()
+        company.submitter = submitter
+        company.save()
         if self.get_argument('submit', None) == 'Recommend Another Company':
             self.render(
                 "recommendCompany.html", 
@@ -401,64 +403,89 @@ class DeleteCompanyHandler(tornado.web.RequestHandler):
 
 class ViewHandler(tornado.web.RequestHandler):
     def get(self, id):
+        # c = models.Company.objects.get(id=bson.objectid.ObjectId(id))
+        # d = []
+        # for s in c.datasets:
+        #     ratings = []
+        #     for r in s.ratings:
+        #         ratings.append({
+        #             "author": str(r.author.id),
+        #             "rating": r.rating,
+        #             "reason": r.reason
+        #         })
+        #     companies = []
+        #     for comps in s.usedBy:
+        #         companies.append({
+        #             "companyID": str(comps.id)
+        #         })
+        #     d.append({
+        #         "ts": str(s.ts),
+        #         "datasetName": s.datasetName,
+        #         "datasetURL": s.datasetURL,
+        #         "ratings": ratings,
+        #         "dataType": s.dataType,
+        #         "usedBy": companies
+        #     })
+        # obj = {
+        #     "_id": {
+        #         "$oid": str(c.id)
+        #     },
+        #     "ceo": {
+        #         "firstName": c.ceo.firstName,
+        #         "lastName": c.ceo.lastName,
+        #         "personType": c.ceo.personType,
+        #         "email": c.ceo.email,
+        #         "ratings": [],
+        #         "submittedDatasets": []
+        #     },
+        #     "companyFunction": c.companyFunction,
+        #     "companyName": c.companyName,
+        #     "companyType": c.companyType,
+        #     "criticalDataTypes": c.criticalDataTypes,
+        #     "datasets": d,
+        #     "descriptionLong": c.descriptionLong,
+        #     "descriptionShort": c.descriptionShort,
+        #     "financialInfo": c.financialInfo,
+        #     "fte": c.fte,
+        #     "revenueSource": c.revenueSource,
+        #     "sector": c.sector,
+        #     "socialImpact": c.socialImpact,
+        #     "submitter": {
+        #         "firstName": c.submitter.firstName,
+        #         "lastName": c.submitter.lastName,
+        #         "personType": c.submitter.personType,
+        #         "email": c.submitter.email,
+        #         "submittedDatasets": str(c.submitter.submittedDatasets)
+        #     },
+        #     "ts": str(c.ts),
+        #     "url": c.url,
+        #     "vetted": c.vetted,
+        #     "yearFounded": c.yearFounded
+        # }
         c = models.Company.objects.get(id=bson.objectid.ObjectId(id))
-        d = []
-        for s in c.datasets:
-            ratings = []
-            for r in s.ratings:
-                ratings.append({
-                    "author": str(r.author.id),
-                    "rating": r.rating,
-                    "reason": r.reason
-                })
-            companies = []
-            for comps in s.usedBy:
-                companies.append({
-                    "companyID": str(comps.id)
-                })
-            d.append({
-                "ts": str(s.ts),
-                "datasetName": s.datasetName,
-                "datasetURL": s.datasetURL,
-                "ratings": ratings,
-                "dataType": s.dataType,
-                "usedBy": companies
-            })
         obj = {
             "_id": {
                 "$oid": str(c.id)
             },
-            "ceo": {
-                "firstName": c.ceo.firstName,
-                "lastName": c.ceo.lastName,
-                "personType": c.ceo.personType,
-                "email": c.ceo.email,
-                "ratings": [],
-                "submittedDatasets": []
-            },
-            "companyFunction": c.companyFunction,
             "companyName": c.companyName,
-            "companyType": c.companyType,
-            "criticalDataTypes": c.criticalDataTypes,
-            "datasets": d,
-            "descriptionLong": c.descriptionLong,
-            "descriptionShort": c.descriptionShort,
-            "financialInfo": c.financialInfo,
-            "fte": c.fte,
-            "revenueSource": c.revenueSource,
-            "sector": c.sector,
-            "socialImpact": c.socialImpact,
+            "url": c.url,
             "submitter": {
                 "firstName": c.submitter.firstName,
                 "lastName": c.submitter.lastName,
                 "personType": c.submitter.personType,
                 "email": c.submitter.email,
-                "submittedDatasets": str(c.submitter.submittedDatasets)
+                "title": c.submitter.title,
+                "phone": c.submitter.phone,
+                "org": c.submitter.org,
+                "otherInfo": c.submitter.otherInfo
             },
+            "contact": {
+                "firstName": c.contact.firstName,
+                "lastName": c.contact.lastName,
+                "email": c.contact.email
+            },
+            "reasonForRecommending": c.reasonForRecommending,
             "ts": str(c.ts),
-            "url": c.url,
-            "vetted": c.vetted,
-            "yearFounded": c.yearFounded
         }
         self.write(json_encode(obj))
 
