@@ -390,8 +390,9 @@ class DeleteCompanyHandler(tornado.web.RequestHandler):
         try:
             company = models.Company.objects.get(id=bson.objectid.ObjectId(id)) 
             #we're deleting a company. Need to delete CEO, delete 
-            ceo = company.ceo
-            ceo.delete()
+            if company.ceo:
+                ceo = company.ceo
+                ceo.delete()
             company.delete()
         except:
             dataset = models.Dataset.objects.get(id=bson.objectid.ObjectId(id))

@@ -23,7 +23,7 @@
 <h2>Recommended Companies</h2>
 <a href="/recommendCompany">Recommend a Company</a><br>
 {% for company in recommendedCompanies %}
-	<p><strong>{{ company.companyName }}</strong></p>
+	<p><strong>{{ company.companyName }}</strong> <a href="/delete/{{ company.id }}">Delete</a></p>
 {% end %}
 
 
