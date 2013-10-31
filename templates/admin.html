@@ -7,10 +7,6 @@
 <h1>{{ page_heading }}</h1>
 
 <h2>Unvetted Submitted Companies</h2>
-<a href="/">Home</a><br>
-<a href="/submitCompany">Submit a Company</a><br>
-<a href="/recommendCompany">Recommend a Company</a><br>
-<p>=================================</p>
 {% for company in unvettedCompanies %}
 	<p><strong>{{ company.companyName }}</strong> is currently using the following datasets:</p>
 	<ul>

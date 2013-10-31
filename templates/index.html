@@ -5,12 +5,8 @@
 {% block body %}
 
 <h1>{{ page_heading }}</h1>
-<a href="/admin">Admin (hide this link later)</a><br>
-<a href="/submitCompany">Submit a Company</a><br>
-<a href="/recommendCompany">Recommend a Company</a><br>
-<p>=================================</p>
 
-<h2>Submitted Companies</h2>
+<h2>Submitted (and vetted) Companies</h2>
 {% for company in submittedCompanies %}
 	<p><strong>{{ company.companyName }}</strong> is currently using the following datasets:</p>
 	<ul>
