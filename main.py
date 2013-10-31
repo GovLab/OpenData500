@@ -40,7 +40,8 @@ class Application(tornado.web.Application):
             (r"/editData/([a-zA-Z0-9]{24})", EditDataHandler),
             (r"/view/([a-zA-Z0-9]{24})", ViewHandler),
             (r"/delete/([a-zA-Z0-9]{24})", DeleteCompanyHandler),
-            (r"/recommendCompany", RecommendCompanyHandler)
+            (r"/recommendCompany", RecommendCompanyHandler),
+            (r"/admin", AdminHandler)
         ]
         settings = dict(
             template_path=os.path.join(os.path.dirname(__file__), "templates"),
@@ -55,20 +56,29 @@ class Application(tornado.web.Application):
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
         companies = models.Company.objects()
-        recommendedCompanies = []
-        recommenders = models.Person.objects(personType = "Recommender")
-        for r in recommenders:
-            recommendedCompanies = recommendedCompanies + r.submittedCompany
-        submittedCompanies = []
-        submitters = models.Person.objects(personType = "Submitter")
-        for s in submitters:
-            submittedCompanies = submittedCompanies + s.submittedCompany
+        submittedCompanies = models.Company.objects(vetted=True)
         self.render(
             "index.html",
             page_title='OpenData500',
             page_heading='Welcome to the OpenData 500',
-            submittedCompanies = submittedCompanies,
-            recommendedCompanies = recommendedCompanies
+            submittedCompanies = submittedCompanies
+        )
+
+class AdminHandler(tornado.web.RequestHandler):
+    def get(self):
+        unvettedCompanies = models.Company.objects(vetted = False)
+        submittedCompanies = models.Company.objects(vetted=True)
+        recommendedCompanies = []
+        recommenders = models.Person.objects(personType = "Recommender")
+        for r in recommenders:
+            recommendedCompanies = recommendedCompanies + r.submittedCompany
+        self.render(
+            "admin.html",
+            page_title='OpenData500',
+            page_heading='Welcome to the OpenData 500',
+            unvettedCompanies = unvettedCompanies,
+            recommendedCompanies = recommendedCompanies,
+            submittedCompanies = submittedCompanies
         )
 
 class SubmitCompanyHandler(tornado.web.RequestHandler):
@@ -81,15 +91,25 @@ class SubmitCompanyHandler(tornado.web.RequestHandler):
     def post(self):
         firstName = self.get_argument("firstName", None)
         lastName = self.get_argument("lastName", None)
-        org = self.get_argument("org", None)
+        title = self.get_argument("title", None)
+        #org = self.get_argument("org", None)
         url = self.get_argument('url', None)
         companyName = self.get_argument("companyName", None)
         email = self.get_argument("email", None)
         phone = self.get_argument("phone", None)
+        city = self.get_argument("city", None)
+        zipCode = self.get_argument("zipCode", None)
+        if not zipCode:
+            zipCode = 0
         ceoFirstName = self.get_argument("ceoFirstName", None)
         ceoLastName = self.get_argument("ceoLastName", None)
         ceoEmail = self.get_argument("ceoEmail", None)
         companyType = self.get_argument("companyType", None)
+        try:
+            if self.request.arguments['contacted']:
+                contacted = True
+        except:
+            contacted = False
         if companyType == 'other':
             companyType = self.get_argument('otherCompanyType', None)
         yearFounded = self.get_argument("yearFounded", None)
@@ -132,9 +152,11 @@ class SubmitCompanyHandler(tornado.web.RequestHandler):
         submitter = models.Person(
             firstName = firstName,
             lastName = lastName,
-            org = org,
+            title = title,
+            #org = org,
             email = email,
             phone = phone,
+            contacted = contacted,
             personType = "Submitter",
             datasetWishList = datasetWishList,
             companyRec = companyRec,
@@ -158,6 +180,8 @@ class SubmitCompanyHandler(tornado.web.RequestHandler):
             companyName = companyName,
             url = url,
             ceo = ceo,
+            city = city,
+            zipCode = zipCode,
             yearFounded = yearFounded,
             fte = fte,
             companyType = companyType,
@@ -194,10 +218,10 @@ class RecommendCompanyHandler(tornado.web.RequestHandler):
     def post(self):
         firstName = self.get_argument("firstName", None)                                #Person.Submitter
         lastName = self.get_argument("lastName", None)                                  #Person.Submitter
-        title = self.get_argument("title", None)                                        #Person.submitter
+        #title = self.get_argument("title", None)                                        #Person.submitter
         org = self.get_argument("org", None)                                            #Person.Submitter
         email = self.get_argument("email", None)                                        #Person.Submitter
-        phone = self.get_argument("phone", None)                                        #Person.Submitter
+        #phone = self.get_argument("phone", None)                                        #Person.Submitter
         companyName = self.get_argument("companyName", None)                            #Company
         url = self.get_argument('url', None)                                            #Company
         firstNameContact = self.get_argument("firstNameContact", None)                  #Company.Contact
@@ -211,10 +235,10 @@ class RecommendCompanyHandler(tornado.web.RequestHandler):
             submitter = models.Person(
                 firstName = firstName, 
                 lastName = lastName,
-                title = title, 
+                #title = title, 
                 org = org,
                 email = email,
-                phone = phone,
+                #phone = phone,
                 personType = "Recommender",
                 otherInfo = otherInfo
             )
@@ -230,7 +254,7 @@ class RecommendCompanyHandler(tornado.web.RequestHandler):
             companyName = companyName,
             url = url,
             contact = contact,
-            reasonForRecommending = reasonForRecommending
+            reasonForRecommending = reasonForRecommending,
         )
         company.save()
         submitter.submittedCompany.append(company)
@@ -321,6 +345,17 @@ class EditCompanyHandler(tornado.web.RequestHandler):
 
     def post(self, id):
         company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
+        company.submitter.firstName = self.get_argument("firstName", None)
+        company.submitter.lastName = self.get_argument("lastName", None)
+        company.submitter.title = self.get_argument("title", None)
+        company.submitter.org = self.get_argument("org", None)
+        company.submitter.email = self.get_argument("email", None)
+        company.submitter.phone = self.get_argument("phone", None)
+        try: 
+            if self.request.arguments['contacted']:
+                company.submitter.contacted = True
+        except:
+            company.submitter.contacted = False
         url = self.get_argument('url', None)
         company.companyName = self.get_argument("companyName", None)
         company.ceo.firstName = self.get_argument("ceoFirstName", None)
@@ -485,6 +520,7 @@ class ViewHandler(tornado.web.RequestHandler):
                 "email": c.contact.email
             },
             "reasonForRecommending": c.reasonForRecommending,
+            "vetted": c.vetted,
             "ts": str(c.ts),
         }
         self.write(json_encode(obj))

@@ -6,11 +6,19 @@
 
 
 <form method="post" id="submitCompany">
+	First Name: * <input type="text" name="firstName" id="firstName" value="{{ company.submitter.firstName }}"><br>
+	Last Name: * <input type="text" name="lastName" id="lastName" value="{{ company.submitter.lastName }}"><br>
+	Title: * <input type="text" name="title" id="title" value="{{ company.submitter.title }}"><br>
+	Email: * <input type="text" name="email" id="email" value="{{ company.submitter.email }}"><br>
+	Phone: <input type="text" name="phone" id="phone" value="{{ company.submitter.phone }}"><br>
+	<input type="checkbox" name="contacted" id="contacted" value="contacted" {% if company.submitter.contacted %} checked {% end %}>Please check here if you would be willing to be contacted for further information about your company.<br>
 	Name of company: <input type="text" name="companyName" id="companyName" value="{{ company.companyName }}"><br>
 	Company URL: <input type='text' name="url" id='url' value="{{ company.url }}"><br>
 	First Name of CEO: <input type="text" name="ceoFirstName" id="ceoFirstName" value="{{ company.ceo.firstName}}"><br>
 	Last Name of CEO: <input type="text" name="ceoLastName" id="ceoLastName" value="{{ company.ceo.lastName }}"><br>
 	CEO Email: <input type="text" name="ceoEmail" id="ceoEmail" value="{{ company.ceo.email }}"><br>
+	In which city is this company located? <input type="text" name="city" id="city" {% if company.city %} value="{{ company.city }}" {% end %}><br>
+	Zip Code: <input type="text" name="zipCode" id="zipCode" {% if company.zipCode %} value="{{ company.zipCode }}" {% end %}><br>
 	Type of Company:<br>
 	{% for type in companyType %}
 		<input type="radio" name="companyType" value="{{ type }}" {% if company.companyType == type %} checked {% end %}>{{ type }}<br>

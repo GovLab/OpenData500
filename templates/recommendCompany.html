@@ -17,20 +17,18 @@
 
 <form method="post" id="submitCompany">
 	{% if not submitterId %}
-		First Name:* <input type="text" name="firstName" id="firstName"><br>
-		Last Name:* <input type="text" name="lastName" id="lastName"><br>
-		Title: *<input type="text" name="title" id="title"><br>
-		Your Organization: <input type="text" name="org" id="org"><br>
-		Email:* <input type="text" name="email" id="email"><br>
-		Phone: <input type="text" name="phone" id="phone"><br>
+		Your First Name:* <input type="text" name="firstName" id="firstName"><br>
+		Your Last Name:* <input type="text" name="lastName" id="lastName"><br>
+		Your Organization:* <input type="text" name="org" id="org"><br>
+		Your Email:* <input type="text" name="email" id="email"><br>
 		<br>
 	{% end %}
-	Company Name:* <input type="text" name="companyName" id="companyName"><br>
+	Name of Company You are Recommending:* <input type="text" name="companyName" id="companyName"><br>
 	Company URL:* <input type='text' name="url" id='url'><br>
 	First Name of Contact Person (if known) <input type="text" name="firstNameContact" id="firstNameContact"><br>
 	Last Name of Contact Person (if known) <input type="text" name="lastNameContact" id="lastNameContact"><br>
 	Email of Contact Person (if known) <input type="text" name="emailContact" id="emailContact"><br>
-	Why should we consider this company/organization?<br>
+	Why should we consider this company/organization? (100 word limit)<br>
 	<textarea rows="6" cols="70" name="reasonForRecommending" id="reasonForRecommending"></textarea><br>
 	<div class="submitButtons">
 		{% if submitterId %}
