@@ -5,20 +5,20 @@
 {{ page_heading }}
 
 
-<form method="post" id="submitCompany">
-	First Name: * <input type="text" name="firstName" id="firstName" value="{{ company.submitter.firstName }}"><br>
-	Last Name: * <input type="text" name="lastName" id="lastName" value="{{ company.submitter.lastName }}"><br>
-	Title: * <input type="text" name="title" id="title" value="{{ company.submitter.title }}"><br>
-	Email: * <input type="text" name="email" id="email" value="{{ company.submitter.email }}"><br>
-	Phone: <input type="text" name="phone" id="phone" value="{{ company.submitter.phone }}"><br>
+<form method="post" id="submitCompany" data-validate="parsley">
+	First Name: * <input type="text" name="firstName" id="firstName" value="{{ company.submitter.firstName }}" data-required="true"><br>
+	Last Name: * <input type="text" name="lastName" id="lastName" value="{{ company.submitter.lastName }}" data-required="true"><br>
+	Title: * <input type="text" name="title" id="title" value="{{ company.submitter.title }}" data-required="true"><br>
+	Email: * <input type="text" name="email" id="email" value="{{ company.submitter.email }}" data-trigger="change" data-type="email" data-required="true"><br>
+	Phone: <input type="text" name="phone" id="phone" value="{{ company.submitter.phone }}" data-trigger="change" data-type="phone" data-required="true"><br>
 	<input type="checkbox" name="contacted" id="contacted" value="contacted" {% if company.submitter.contacted %} checked {% end %}>Please check here if you would be willing to be contacted for further information about your company.<br>
 	Name of company: <input type="text" name="companyName" id="companyName" value="{{ company.companyName }}"><br>
 	Company URL: <input type='text' name="url" id='url' value="{{ company.url }}"><br>
 	First Name of CEO: <input type="text" name="ceoFirstName" id="ceoFirstName" value="{{ company.ceo.firstName}}"><br>
 	Last Name of CEO: <input type="text" name="ceoLastName" id="ceoLastName" value="{{ company.ceo.lastName }}"><br>
-	CEO Email: <input type="text" name="ceoEmail" id="ceoEmail" value="{{ company.ceo.email }}"><br>
+	CEO Email: <input type="text" name="ceoEmail" id="ceoEmail" value="{{ company.ceo.email }}" data-trigger="change" data-type="url"><br>
 	In which city is this company located? <input type="text" name="city" id="city" {% if company.city %} value="{{ company.city }}" {% end %}><br>
-	Zip Code: <input type="text" name="zipCode" id="zipCode" {% if company.zipCode %} value="{{ company.zipCode }}" {% end %}><br>
+	Zip Code: <input type="text" name="zipCode" id="zipCode" {% if company.zipCode %} value="{{ company.zipCode }}" data-minlength="5" data-maxlength="5" data-type="number" {% end %}><br>
 	Type of Company:<br>
 	{% for type in companyType %}
 		<input type="radio" name="companyType" value="{{ type }}" {% if company.companyType == type %} checked {% end %}>{{ type }}<br>
@@ -30,7 +30,7 @@
 		<input type="radio" name="companyType" value="other">Other<br>
 		<input type="text" name="otherCompanyType" id="otherCompanyType"><br>
 	{% end %}
-	Founding Year: <input type="text" name="yearFounded" id="yearFounded" value="{{ company.yearFounded }}"><br>
+	Founding Year: <input type="text" name="yearFounded" id="yearFounded" value="{{ company.yearFounded }}" data-minlength="4" data-maxlength="4" data-type="number"><br>
 	Number of FTE's: <input type="text" name="fte" id="fte" value="{{ company.fte }}"><br>
 	
 	<p>Which best describes the function of your company?</p>
@@ -47,48 +47,48 @@
 	
 	<p>Which of the following are critical sources of data for your company? By “critical,” we mean that your company would have to shut down a line of business, shut down completely, or replace the data in some way if the data were no longer available. (check all that apply) *</p>
 	{% for dataType in criticalDataTypes %}
-		<input type="checkbox" name="criticalDataTypes" value="{{ dataType }}" {% if dataType in company.criticalDataTypes %} checked {% end %}>{{ dataType }}<br>
+		<input type="checkbox" name="criticalDataTypes" value="{{ dataType }}" data-trigger="change" data-group="criticalDataTypes" data-mincheck="1" {% if dataType in company.criticalDataTypes %} checked {% end %}>{{ dataType }}<br>
 	{% end %}
 	{% if list(set(company.criticalDataTypes) - set(criticalDataTypes)) %}
-		<input type="checkbox" name="criticalDataTypes" value="Other" checked>Other<br>
-		<input type="text" name="otherCriticalDataTypes" id="otherCriticalDataTypes" value="{{ list(set(company.criticalDataTypes) - set(criticalDataTypes))[0] }}"><br>
+		<input type="checkbox" name="criticalDataTypes" value="Other" data-trigger="change" data-group="criticalDataTypes" data-mincheck="1" checked>Other<br>
+		<input type="text" name="otherCriticalDataTypes" id="otherCriticalDataTypes" data-trigger="change" data-group="criticalDataTypes" data-mincheck="1" value="{{ list(set(company.criticalDataTypes) - set(criticalDataTypes))[0] }}"><br>
 	{% else %}
-		<input type="checkbox" name="criticalDataTypes" value="Other">Other<br>
-		<input type="text" name="otherCriticalDataTypes" id="otherCriticalDataTypes"><br>
+		<input type="checkbox" name="criticalDataTypes" value="Other" data-trigger="change" data-group="criticalDataTypes" data-mincheck="1">Other<br>
+		<input type="text" name="otherCriticalDataTypes" id="otherCriticalDataTypes" data-trigger="change" data-group="criticalDataTypes" data-mincheck="1"><br>
 	{% end %}
 
 	<p>Which of the following are significant sources of revenue for your company? (check all that apply) *</p>
 	{% for source in revenueSource %}
-		<input type="checkbox" name="revenueSource" value="{{ source }}" {% if source in company.revenueSource %} checked {% end %}>{{ source }}<br>
+		<input type="checkbox" name="revenueSource" data-group="revenueSource" data-mincheck="1" value="{{ source }}" {% if source in company.revenueSource %} checked {% end %}>{{ source }}<br>
 	{% end %}
 	{% if list(set(company.revenueSource) - set(revenueSource)) %}
-		<input type="checkbox" name="revenueSource" value="Other" checked>Other<br>
-		<input type="text" name="otherRevenueSource" id="otherRevenueSource" value="{{ list(set(company.revenueSource) - set(revenueSource))[0] }}"><br>
+		<input type="checkbox" name="revenueSource" value="Other" data-group="revenueSource" data-mincheck="1" checked>Other<br>
+		<input type="text" name="otherRevenueSource" id="otherRevenueSource" data-group="revenueSource" data-mincheck="1" value="{{ list(set(company.revenueSource) - set(revenueSource))[0] }}"><br>
 	{% else %}
-		<input type="checkbox" name="revenueSource" value="Other">Other<br>
-		<input type="text" name="otherRevenueSource" id="otherRevenueSource"><br>
+		<input type="checkbox" name="revenueSource" data-group="revenueSource" data-mincheck="1" value="Other">Other<br>
+		<input type="text" name="otherRevenueSource" id="otherRevenueSource" data-group="revenueSource" data-mincheck="1"><br>
 	{% end %}
 
 	<p>What sector(s) does your company's work involve? (check all that apply): *</p>
 	{% for sector in sectors %}
-		<input type="checkbox" name="sector" value="{{ sector }}" {% if sector in company.sector %} checked {% end %}>{{ sector }}<br>
+		<input type="checkbox" name="sector" data-trigger="change" data-group="sector" data-mincheck="1" value="{{ sector }}" {% if sector in company.sector %} checked {% end %}>{{ sector }}<br>
 	{% end %}
 	{% if list(set(company.sector) - set(sectors)) %}
-		<input type="checkbox" name="sector" value="Other" checked>Other<br>
-		<input type="text" name="otherSector" id="otherSector" value="{{ list(set(company.sector) - set(sectors))[0] }}"><br>
+		<input type="checkbox" name="sector" data-trigger="change" data-group="sector" data-mincheck="1" value="Other" checked>Other<br>
+		<input type="text" name="otherSector" id="otherSector" data-trigger="change" data-group="sector" data-mincheck="1" value="{{ list(set(company.sector) - set(sectors))[0] }}"><br>
 	{% else %}
-		<input type="checkbox" name="sector" value="other">Other<br>
-		<input type="text" name="otherSector" id="otherSector"><br>
+		<input type="checkbox" name="sector" data-trigger="change" data-group="sector" data-mincheck="1" value="other">Other<br>
+		<input type="text" name="otherSector" id="otherSector" data-trigger="change" data-group="sector" data-mincheck="1"><br>
 	{% end %}
 
 	<p>Please give us a short public statement describing your company’s mission and work. You can take this material from your website or other publications if you choose to. [200 words or less] *</p>
-	<textarea rows="6" cols="70" name="descriptionLong" id="descriptionLong">{{ company.descriptionLong }}</textarea><br>
+	<textarea rows="6" cols="70" name="descriptionLong" id="descriptionLong" data-trigger="keyup" data-maxwords="200" data-required="true">{{ company.descriptionLong }}</textarea><br>
 	<p>As a summary, please provide a one sentence description of your company. [25 words or less] *</p>
-	<textarea rows="6" cols="70" name="descriptionShort" id="descriptionShort">{{ company.descriptionShort }}</textarea><br>
+	<textarea rows="6" cols="70" name="descriptionShort" id="descriptionShort" data-trigger="keyup" data-maxwords="25" data-required="true">{{ company.descriptionShort }}</textarea><br>
 	<p>Besides revenue generation, how do you measure the impact your company has for society and the public good? [50 words or less]</p>
-	<textarea rows="6" cols="70" name="socialImpact" id="socialImpact">{{ company.socialImpact }}</textarea><br>
+	<textarea rows="6" cols="70" name="socialImpact" id="socialImpact" data-trigger="keyup" data-maxwords="50">{{ company.socialImpact }}</textarea><br>
 	<p>Please include any financial or operational information that will help us understand your company. We are interested in specific information like past and projected annual revenues, total outside investment dollars to date, and significant investors or partners. [100 words or less]</p>
-	<textarea rows="6" cols="70" name="financialInfo" id="financialInfo">{{ company.financialInfo }}</textarea><br>
+	<textarea rows="6" cols="70" name="financialInfo" id="financialInfo" data-trigger="keyup" data-maxwords="100">{{ company.financialInfo }}</textarea><br>
 	<p>Vetted?</p>
 	<input type="radio" name="vetted" id="vetted" value="True" {% if company.vetted %} checked {% end %}>True<br>
 	<input type="radio" name="vetted" id="vetted" value="False" {% if not company.vetted %} checked {% end %}>False<br>
