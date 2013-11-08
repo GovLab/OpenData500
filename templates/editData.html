@@ -3,16 +3,19 @@
 
 {% block body %}
 
-<h1>{{ page_heading }}</h1>
+<h2>{{ page_heading }}</h2>
 
-<p>The object ID is: </p> {{ id }}
-
+<p>The object ID is: {{ id }}</p> 
 
 <p>Please fill out the following information for the datasets that you consider to be the most important to your core business.</p>
 
-<form method="post" id="submitDataset">
-	Name of Dataset: <input type="text" name="datasetName" id="datasetName" value ="{{ dataset.datasetName }}"><br>
-	URL of Dataset: <input type="text" name="datasetURL" id="datasetURL" value ="{{ dataset.datasetURL }}"><br>
+<form method="post" id="submitDataset" class="m-form">
+	<fieldset class="m-form-half">
+		<div class="m-form-line"><label for="datasetName">Name of Dataset:</label><input type="text" name="datasetName" id="datasetName" value ="{{ dataset.datasetName }}"></div>
+		<div class="m-form-line"><label for="datasetURL">URL of Dataset:</label><input type="text" name="datasetURL" id="datasetURL" value ="{{ dataset.datasetURL }}"></div>
+	</fieldset>
+
+	<fieldset class="m-form-half right">
 	<p>Type of Dataset:</p>
 
 	{% for type in datatypes %}
@@ -25,6 +28,7 @@
 		<input type="checkbox" name="dataType" value="Other">Other<br>
 		<input type="text" name="otherDataType" id="otherDataType"><br>
 	{% end %}
+	</fieldset>
 	<input type="hidden" class="id" name="id" value="{{ id }}">
 	<input type="submit" id="submit">
 </form>

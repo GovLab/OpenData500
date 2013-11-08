@@ -10,17 +10,20 @@
 
 <p>Please fill out the following information for the datasets that you consider to be the most important to your core business.</p>
 
-<form method="post" id="submitDataset">
-	Name of Dataset: * <input type="text" name="datasetName" id="datasetName"><br>
-	URL of Dataset: * <input type="text" name="datasetURL" id="datasetURL"><br>
-	<p>Type of Dataset: *</p>
-	<input type="checkbox" name="dataType" value="Federal Open Data">Federal Open Data<br>
-	<input type="checkbox" name="dataType" value="State Open Data">State Open Data<br>
-	<input type="checkbox" name="dataType" value="City/Local Open Data">City/Local Open Data<br>
-	<input type="checkbox" name="dataType" value="Other">Other<br>
-	<input type="text" name="otherDataType" id="otherDataType"><br>
+<form method="post" id="submitDataset" class="m-form">
+	<div class="m-form-line"><label for="datasetName">Name of Dataset: *</label><input type="text" name="datasetName" id="datasetName"></div>
+	<div class="m-form-line"><label for="datasetURL">URL of Dataset: *</label><input type="text" name="datasetURL" id="datasetURL"></div>
+	
+	<div class="m-form-box">Type of Dataset: *<br>
+		<label for=""><input type="checkbox" name="dataType" value="Federal Open Data">Federal Open Data</label>
+		<label for=""><input type="checkbox" name="dataType" value="State Open Data">State Open Data</label>
+		<label for=""><input type="checkbox" name="dataType" value="City/Local Open Data">City/Local Open Data</label>
+		<label for=""><input type="checkbox" name="dataType" value="Other">Other</label>
+		<label for=""><input type="text" name="otherDataType" id="otherDataType"></label>
+	</div>
+
 	<p>How would you rate the usefulness of this dataset? Your answer can reflect your experience with data quality, format of the data, or other factors.</p>
-	<input type="text" name="rating" id="rating"><br>
+	<input type="text" name="rating" id="rating">
 	<p>Why did you give it this rating? [50 words or less]</p>
 	<textarea rows="6" cols="70" name="reason" id="reason"></textarea><br>
 	<input type="hidden" class="id" name="id" value="{{ id }}">

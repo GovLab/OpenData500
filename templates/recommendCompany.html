@@ -2,9 +2,8 @@
 {% autoescape None %}
 
 {% block body %}
-{{ page_heading }}
 <div class="submitDescription">
-	<p>Thank you for helping us create the Open Data 500!</p>
+	<h2>Thank you for helping us create the Open Data 500!</h2>
 	<p>The Open Data 500 will be the first comprehensive census of U.S.-based companies using government data to develop new products and services. The goal of the Open Data 500 is to understand how companies use open government data in their business, how it can be made more useful, and how it can help promote innovation. <b>To qualify for the Open Data 500, a company must:</b></p>
 	<ul>
 		<li>Be U.S.-based,</li>
@@ -15,35 +14,41 @@
 	<p><em>The fields marked with * are required</em></p>
 </div>
 
-<form method="post" id="submitCompany">
-	{% if not submitterId %}
-		Your First Name:* <input type="text" name="firstName" id="firstName"><br>
-		Your Last Name:* <input type="text" name="lastName" id="lastName"><br>
-		Your Organization:* <input type="text" name="org" id="org"><br>
-		Your Email:* <input type="text" name="email" id="email"><br>
-		<br>
-	{% end %}
-	Name of Company You are Recommending:* <input type="text" name="companyName" id="companyName"><br>
-	Company URL:* <input type='text' name="url" id='url'><br>
-	First Name of Contact Person (if known) <input type="text" name="firstNameContact" id="firstNameContact"><br>
-	Last Name of Contact Person (if known) <input type="text" name="lastNameContact" id="lastNameContact"><br>
-	Email of Contact Person (if known) <input type="text" name="emailContact" id="emailContact"><br>
-	Why should we consider this company/organization? (100 word limit)<br>
-	<textarea rows="6" cols="70" name="reasonForRecommending" id="reasonForRecommending"></textarea><br>
-	<div class="submitButtons">
+<form method="post" id="submitCompany" class="m-form">
+	<h2>{{ page_heading }}</h2>
+	<fieldset class="m-form-half">	
+		{% if not submitterId %}
+			<h3>Basic Information</h3>
+			<div class="m-form-line"><label for="firstName">Your First Name:*</label><input type="text" name="firstName" id="firstName"></div>
+			<div class="m-form-line"><label for="lastName">Your Last Name:*</label><input type="text" name="lastName" id="lastName"></div>
+			<div class="m-form-line"><label for="org">Your Organization:*</label><input type="text" name="org" id="org"></div>
+			<div class="m-form-line"><label for="email">Your Email:*</label><input type="text" name="email" id="email"></div>
+		{% end %}
+
+		<div class="m-form-line"><label for="companyName">Name of Company You are Recommending:*</label><input type="text" name="companyName" id="companyName"></div>
+		<div class="m-form-line"><label for="url">Company URL:*</label><input type='text' name="url" id='url'></div>
+		<div class="m-form-line"><label for="firstNameContact">First Name of Contact Person (if known)</label><input type="text" name="firstNameContact" id="firstNameContact"></div>
+		<div class="m-form-line"><label for="lastNameContact">Last Name of Contact Person (if known)</label><input type="text" name="lastNameContact" id="lastNameContact"></div>
+		<div class="m-form-line"><label for="emailContact">Email of Contact Person (if known)</label><input type="text" name="emailContact" id="emailContact"></div>
+	</fieldset>
+	
+	<fieldset class="m-form-half right">	
+		<label for="reasonForRecommending"><h3>Why should we consider this company/organization?<br><em>100 word limit</em></h3></label>
+		<textarea rows="10" cols="59" name="reasonForRecommending" id="reasonForRecommending"></textarea><br>
+		
+	<!-- <div class="submitButtons"> -->
 		{% if submitterId %}
 			<input type="hidden" class="submitterId" name="submitterId" value="submitterId">
 		{% else %}
-			Do you have other types of information you would like to share about open data organizations, projects or initiatives? (100 word limit)<br>
-			<textarea rows="6" cols="70" name="otherInfo" id="otherInfo"></textarea><br>
+			<label for="otherInfo"><h3>Do you have other types of information you would like to share about open data organizations, projects or initiatives?<br><em>100 word limit</em></h3></label>
+			<textarea rows="10" cols="59" name="otherInfo" id="otherInfo"></textarea><br>
 		{% end %}
-		<input type="submit" id="submit" name="submit" value="Submit">
-		<input type="submit" id="submit" name="submit" value="Recommend Another Company">
-	</div>
+	</fieldset>
+
+		<footer class="m-form-footer">
+			<input type="submit" id="submit" name="submit" value="Submit" class="m-button">
+			<input type="submit" id="submit" name="submit" value="Recommend Another Company" class="m-button">
+		</footer>			
+	<!-- </div> -->
 </form>
-
-
-
-
-
 {% end %}
