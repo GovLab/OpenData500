@@ -4,7 +4,7 @@
 {% block body %}
 
 <div class="submitDescription">
-	<p>Thank you for helping us create the Open Data 500!</p>
+	<h2>Thank you for helping us create the Open Data 500!</h2>
 	<p>The Open Data 500 will be the first comprehensive census of U.S.-based companies using government data to develop new products and services. The goal of the Open Data 500 is to understand how companies use open government data in their business, how it can be made more useful, and how it can help promote innovation. <b>To qualify for the Open Data 500, a company must:</b></p>
 	<ul>
 		<li>Be U.S.-based,</li>
@@ -15,91 +15,138 @@
 	<p><em>The fields marked with * are required</em></p>
 </div>
 
-<form method="post" id="submitCompany" data-validate="parsley">
-	First Name: * <input type="text" name="firstName" id="firstName" data-required="true"><br>
-	Last Name: * <input type="text" name="lastName" id="lastName" data-required="true"><br>
-	Title: * <input type="text" name="title" id="title"><br>
-	Name of your company:* <input type="text" name="companyName" id="companyName" data-required="true"><br>
-	Email: * <input type="text" name="email" id="email" data-trigger="change" data-type="email"><br>
-	Phone: <input type="text" name="phone" id="phone" data-trigger="change" data-type="phone"><br>
-	<input type="checkbox" name="contacted" id="contacted" value="contacted">Please check here if you would be willing to be contacted for further information about your company.<br>
-	Company URL: * <input type='text' name="url" id='url' data-trigger="change" data-type="url" data-required="true"><br>
-	In which city is this company located? <input type="text" name="city" id="city"><br>
-	Zip Code: <input type="text" name="zipCode" id="zipCode" data-trigger="change" data-type="number"><br>
-	First Name of CEO: <input type="text" name="ceoFirstName" id="ceoFirstName"><br>
-	Last Name of CEO: <input type="text" name="ceoLastName" id="ceoLastName"><br>
-	CEO Email: <input type="text" name="ceoEmail" id="ceoEmail" data-trigger="change" data-type="email"><br>
-	Type of Company: *<br>
-	<input type="radio" name="companyType" data-trigger="change" data-group="companyType" data-mincheck="1" value="Public">Public<br>
-	<input type="radio" name="companyType" data-trigger="change" data-group="companyType" data-mincheck="1" value="Private">Private<br>
-	<input type="radio" name="companyType" data-trigger="change" data-group="companyType" data-mincheck="1" value="Nonprofit">Nonprofit<br>
-	<input type="radio" name="companyType" data-trigger="change" data-group="companyType" data-mincheck="1" value="other">Other<br>
-	<input type="text" name="otherCompanyType" data-trigger="change" data-group="companyType" data-mincheck="1" id="otherCompanyType"><br>
-	Founding Year: <input type="text" name="yearFounded" id="yearFounded" data-trigger="change" data-trigger="change" data-type="number"><br>
-	Number of FTE's: <input type="text" name="fte" id="fte" data-trigger="change" data-type="number"><br>
-	<p>Which best describes the function of your company? *</p>
-	<input type="radio" name="companyFunction" data-trigger="change" data-group="companyFunction" data-mincheck="1" value="Consumer Research and/or Marketing">Consumer Research and/or Marketing<br>
-	<input type="radio" name="companyFunction" data-trigger="change" data-group="companyFunction" data-mincheck="1" value="Consumer Services">Consumer Services<br>
-	<input type="radio" name="companyFunction" data-trigger="change" data-group="companyFunction" data-mincheck="1" value="Data Management and Analysis">Data Management and Analysis<br>
-	<input type="radio" name="companyFunction" data-trigger="change" data-group="companyFunction" data-mincheck="1" value="Financial/Investment Services">Financial/Investment Services<br>
-	<input type="radio" name="companyFunction" data-trigger="change" data-group="companyFunction" data-mincheck="1" value="Information for Consumers">Information for Consumers<br>
-	<input type="radio" name="companyFunction" data-trigger="change" data-group="companyFunction" data-mincheck="1" value="other">Other<br>
-	<input type="text" name="otherCompanyFunction" data-trigger="change" data-group="companyFunction" data-mincheck="1" id="otherCompanyFunction"><br>
-	<p>Which of the following are critical sources of data for your company? By “critical,” we mean that your company would have to shut down a line of business, shut down completely, or replace the data in some way if the data were no longer available. (check all that apply) *</p>
-	<input type="checkbox" name="criticalDataTypes" data-trigger="change" data-group="criticalDataTypes" data-mincheck="1" value="Federal Open Data">Federal Open Data<br>
-	<input type="checkbox" name="criticalDataTypes" data-trigger="change" data-group="criticalDataTypes" data-mincheck="1" value="State Open Data">State Open Data<br>
-	<input type="checkbox" name="criticalDataTypes" data-trigger="change" data-group="criticalDataTypes" data-mincheck="1" value="City/Local Open Data">City/Local Open Data<br>
-	<input type="checkbox" name="criticalDataTypes" data-trigger="change" data-group="criticalDataTypes" data-mincheck="1" value="Private/Proprietary Data Sources">Private/Proprietary Data Sources<br>
-	<input type="checkbox" name="criticalDataTypes" data-trigger="change" data-group="criticalDataTypes" data-mincheck="1" value="Other">Other<br>
-	<input type="text" name="otherCriticalDataTypes" data-trigger="change" data-group="criticalDataTypes" data-mincheck="1" id="otherCriticalDataTypes"><br>
-	<p>Which of the following are significant sources of revenue for your company? (check all that apply) *</p>
-	<input type="checkbox" name="revenueSource" data-trigger="change" data-group="revenueSource" data-mincheck="1" value="Advertising">Advertising<br>
-	<input type="checkbox" name="revenueSource" data-trigger="change" data-group="revenueSource" data-mincheck="1" value="Data Management and Analytic Services">Data Management and Analytic Services<br>
-	<input type="checkbox" name="revenueSource" data-trigger="change" data-group="revenueSource" data-mincheck="1" value="Database Licensing">Database Licensing<br>
-	<input type="checkbox" name="revenueSource" data-trigger="change" data-group="revenueSource" data-mincheck="1" value="Lead Generation To Other Businesses">Lead Generation To Other Businesses<br>
-	<input type="checkbox" name="revenueSource" data-trigger="change" data-group="revenueSource" data-mincheck="1" value="Philanthropy">Philanthropy<br>
-	<input type="checkbox" name="revenueSource" data-trigger="change" data-group="revenueSource" data-mincheck="1" value="Software Licensing">Software Licensing<br>
-	<input type="checkbox" name="revenueSource" data-trigger="change" data-group="revenueSource" data-mincheck="1" value="Subscriptions">Subscriptions<br>
-	<input type="checkbox" name="revenueSource" data-trigger="change" data-group="revenueSource" data-mincheck="1" value="User Fees for Web or Mobile Access">User Fees for Web or Mobile Access<br>
-	<input type="checkbox" name="revenueSource" data-trigger="change" data-group="revenueSource" data-mincheck="1" value="Other">Other<br>
-	<input type="text" name="otherRevenueSource" data-trigger="change" data-group="revenueSource" data-mincheck="1" id="otherRevenueSource"><br>
-	<p>What sector(s) does your company's work involve? (check all that apply): *</p>
-	<input type="checkbox" name="sector" data-trigger="change" data-group="sector" data-mincheck="1" value="Agriculture">Agriculture<br>
-	<input type="checkbox" name="sector" data-trigger="change" data-group="sector" data-mincheck="1" value="Arts, Entertainment and Recreation">Arts, Entertainment and Recreation<br>
-	<input type="checkbox" name="sector" data-trigger="change" data-group="sector" data-mincheck="1" value="Crime">Crime<br>
-	<input type="checkbox" name="sector" data-trigger="change" data-group="sector" data-mincheck="1" value="Education">Education<br>
-	<input type="checkbox" name="sector" data-trigger="change" data-group="sector" data-mincheck="1" value="Energy">Energy<br>
-	<input type="checkbox" name="sector" data-trigger="change" data-group="sector" data-mincheck="1" value="Environmental">Environmental<br>
-	<input type="checkbox" name="sector" data-trigger="change" data-group="sector" data-mincheck="1" value="Finance">Finance<br>
-	<input type="checkbox" name="sector" data-trigger="change" data-group="sector" data-mincheck="1" value="Geospatial data/mapping">Geospatial data/mapping<br>
-	<input type="checkbox" name="sector" data-trigger="change" data-group="sector" data-mincheck="1" value="Health and Healthcare">Health and Healthcare<br>
-	<input type="checkbox" name="sector" data-trigger="change" data-group="sector" data-mincheck="1" value="Housing/Real Estate">Housing/Real Estate<br>
-	<input type="checkbox" name="sector" data-trigger="change" data-group="sector" data-mincheck="1" value="Manufacturing">Manufacturing<br>
-	<input type="checkbox" name="sector" data-trigger="change" data-group="sector" data-mincheck="1" value="Nutrition">Nutrition<br>
-	<input type="checkbox" name="sector" data-trigger="change" data-group="sector" data-mincheck="1" value="Scientific Research">Scientific Research<br>
-	<input type="checkbox" name="sector" data-trigger="change" data-group="sector" data-mincheck="1" value="Social Assistance">Social Assistance<br>
-	<input type="checkbox" name="sector" data-trigger="change" data-group="sector" data-mincheck="1" value="Trade">Trade<br>
-	<input type="checkbox" name="sector" data-trigger="change" data-group="sector" data-mincheck="1" value="Transportation">Transportation<br>
-	<input type="checkbox" name="sector" data-trigger="change" data-group="sector" data-mincheck="1" value="Telecom">Telecom<br>
-	<input type="checkbox" name="sector" data-trigger="change" data-group="sector" data-mincheck="1" value="Weather">Weather<br>
-	<input type="checkbox" name="sector" data-trigger="change" data-group="sector" data-mincheck="1" value="Other">Other<br>
-	<input type="text" name="otherSector" data-trigger="change" data-group="sector" data-mincheck="1" id="otherSector"><br>
-	<p>Please give us a short public statement describing your company’s mission and work. You can take this material from your website or other publications if you choose to. [200 words or less] *</p>
-	<textarea rows="6" cols="70" name="descriptionLong" id="descriptionLong" data-trigger="keyup" data-maxwords="200" data-required="true"></textarea><br>
-	<p>As a summary, please provide a one sentence description of your company. [25 words or less] *</p>
-	<textarea rows="6" cols="70" name="descriptionShort" id="descriptionShort" data-trigger="keyup" data-maxwords="25" data-required="true"></textarea><br>
-	<p>Besides revenue generation, how do you measure the impact your company has for society and the public good? [50 words or less]</p>
-	<textarea rows="6" cols="70" name="socialImpact" id="socialImpact" data-trigger="keyup" data-maxwords="50"></textarea><br>
-	<p>Please include any financial or operational information that will help us understand your company. We are interested in specific information like past and projected annual revenues, total outside investment dollars to date, and significant investors or partners. [100 words or less]</p>
-	<textarea rows="6" cols="70" name="financialInfo" id="financialInfo" data-trigger="keyup" data-maxwords="100"></textarea><br>
-	<p>What datasets (if any) are not currently available that would be useful for your company to have as government open data? [50 words or less]</p>
-	<textarea rows="6" cols="70" name="datasetWishList" id="datasetWishList" data-trigger="keyup" data-maxwords="50"></textarea><br>
-	<p>What other companies, either in your sector or other sectors, would you recommend we contact regarding their use of government open data? [50 words or less]</p>
-	<textarea rows="6" cols="70" name="companyRec" id="companyRec" data-trigger="keyup" data-maxwords="50"></textarea><br>
-	<p>What conferences or events do you think would be helpful to us in surveying the field of open data companies? [50 words or less]</p>
 
-	<textarea rows="6" cols="70" name="conferenceRec" id="conferenceRec" data-trigger="keyup" data-maxwords="50"></textarea><br>
-	<input type="submit" id="submit">
+<form method="post" id="submitCompany" data-validate="parsley" class="m-form">
+	<h2>{{ page_heading }}</h2>
+	<fieldset class="m-form-half">
+		<h3>Personal Information</h3>
+		<div class="m-form-line"><label for="firstName">First Name: *</label><input type="text" name="firstName" id="firstName" data-required="true"></div>
+		<div class="m-form-line"><label for="lastName">Last Name: *</label><input type="text" name="lastName" id="lastName" data-required="true"></div>
+		<div class="m-form-line"><label for="title">Title: *</label><input type="text" name="title" id="title"></div>
+		<div class="m-form-line"><label for="companyName">Name of your company:*</label><input type="text" name="companyName" id="companyName" data-required="true"></div>
+		<div class="m-form-line"><label for="email">Email: *</label><input type="text" name="email" id="email" data-trigger="change" data-type="email" data-required="true"></div>
+		<div class="m-form-line"><label for="phone">Phone:</label><input type="text" name="phone" id="phone" data-trigger="change" data-type="phone"></div>
+		<div class="m-form-box contacted-box"><label for="contacted"><input type="checkbox" name="contacted" id="contacted" value="contacted">Please check here if you would be willing to be contacted for further information about your company.</label></div>
+	</fieldset>
+
+	<fieldset class="m-form-half right">
+		<h3>Company Information</h3>
+		<div class="m-form-line">
+			<label for="url">Company URL: *</label>
+			<input type='text' name="url" id='url' data-trigger="change" data-type="url" data-required="true">
+		</div>
+		<div class="m-form-line">
+			<label for="city">In which city is this company located?</label>
+			<input type="text" name="city" id="city">
+		</div>
+		<div class="m-form-line">
+			<label for="zipCode">Zip Code:</label>
+			<input type="text" name="zipCode" id="zipCode" data-trigger="change" data-type="number">
+		</div>
+		<div class="m-form-line">
+			<label for="ceoFirstName">First Name of CEO:</label>
+			<input type="text" name="ceoFirstName" id="ceoFirstName">
+		</div>
+		<div class="m-form-line">
+			<label for="ceoLastName">Last Name of CEO:</label>
+			<input type="text" name="ceoLastName" id="ceoLastName">
+		</div>
+		<div class="m-form-line">
+			<label for="ceoEmail">CEO Email:</label>
+			<input type="text" name="ceoEmail" id="ceoEmail" data-trigger="change" data-type="email">
+		</div>
+		<div class="m-form-box type-of-company-box">Type of Company: *<br>
+			<label for=""><input type="radio" name="companyType" data-trigger="change" data-group="companyType" data-mincheck="1" value="Public">Public</label>
+			<label for=""><input type="radio" name="companyType" data-trigger="change" data-group="companyType" data-mincheck="1" value="Private">Private</label>
+			<label for=""><input type="radio" name="companyType" data-trigger="change" data-group="companyType" data-mincheck="1" value="Nonprofit">Nonprofit</label>
+			<label for=""><input type="radio" name="companyType" data-trigger="change" data-group="companyType" data-mincheck="1" value="other">Other
+			<input type="text" name="otherCompanyType" data-trigger="change" data-group="companyType" data-mincheck="1" id="otherCompanyType"></label>
+		</div>
+		<div class="m-form-line"><label for="yearFounded">Founding Year:</label><input type="text" name="yearFounded" id="yearFounded" data-trigger="change" data-trigger="change" data-type="number"></div>
+		<div class="m-form-line"><label for="fte">Number of FTE's:</label><input type="text" name="fte" id="fte" data-trigger="change" data-type="number"></div>
+	</fieldset>
+	
+	<fieldset class="m-form-half">
+		<h3>Which best describes the function of your company? *</h3>
+		<label for=""><input type="radio" name="companyFunction" data-trigger="change" data-group="companyFunction" data-mincheck="1" value="Consumer Research and/or Marketing">Consumer Research and/or Marketing<br></label>
+		<label for=""><input type="radio" name="companyFunction" data-trigger="change" data-group="companyFunction" data-mincheck="1" value="Consumer Services">Consumer Services<br></label>
+		<label for=""><input type="radio" name="companyFunction" data-trigger="change" data-group="companyFunction" data-mincheck="1" value="Data Management and Analysis">Data Management and Analysis<br></label>
+		<label for=""><input type="radio" name="companyFunction" data-trigger="change" data-group="companyFunction" data-mincheck="1" value="Financial/Investment Services">Financial/Investment Services<br></label>
+		<label for=""><input type="radio" name="companyFunction" data-trigger="change" data-group="companyFunction" data-mincheck="1" value="Information for Consumers">Information for Consumers<br></label>
+		<label for=""><input type="radio" name="companyFunction" data-trigger="change" data-group="companyFunction" data-mincheck="1" value="other">Other</label>
+		<input type="text" name="otherCompanyFunction" data-trigger="change" data-group="companyFunction" data-mincheck="1" id="otherCompanyFunction">
+	</fieldset>
+
+	<fieldset class="m-form-half right">
+		<h3>Which of the following are critical sources of data for your company? By “critical,” we mean that your company would have to shut down a line of business, shut down completely, or replace the data in some way if the data were no longer available. (check all that apply) *</h3>
+		<label for=""><input type="checkbox" name="criticalDataTypes" data-trigger="change" data-group="criticalDataTypes" data-mincheck="1" value="Federal Open Data">Federal Open Data<br></label>
+		<label for=""><input type="checkbox" name="criticalDataTypes" data-trigger="change" data-group="criticalDataTypes" data-mincheck="1" value="State Open Data">State Open Data<br></label>
+		<label for=""><input type="checkbox" name="criticalDataTypes" data-trigger="change" data-group="criticalDataTypes" data-mincheck="1" value="City/Local Open Data">City/Local Open Data<br></label>
+		<label for=""><input type="checkbox" name="criticalDataTypes" data-trigger="change" data-group="criticalDataTypes" data-mincheck="1" value="Private/Proprietary Data Sources">Private/Proprietary Data Sources<br></label>
+		<label for=""><input type="checkbox" name="criticalDataTypes" data-trigger="change" data-group="criticalDataTypes" data-mincheck="1" value="Other">Other</label>
+		<input type="text" name="otherCriticalDataTypes" data-trigger="change" data-group="criticalDataTypes" data-mincheck="1" id="otherCriticalDataTypes">
+	</fieldset>
+	
+	<fieldset class="m-form-half">
+		<h3>Which of the following are significant sources of revenue for your company? (check all that apply) *</h3>
+		<label for=""><input type="checkbox" name="revenueSource" data-trigger="change" data-group="revenueSource" data-mincheck="1" value="Advertising">Advertising<br></label>
+		<label for=""><input type="checkbox" name="revenueSource" data-trigger="change" data-group="revenueSource" data-mincheck="1" value="Data Management and Analytic Services">Data Management and Analytic Services<br></label>
+		<label for=""><input type="checkbox" name="revenueSource" data-trigger="change" data-group="revenueSource" data-mincheck="1" value="Database Licensing">Database Licensing<br></label>
+		<label for=""><input type="checkbox" name="revenueSource" data-trigger="change" data-group="revenueSource" data-mincheck="1" value="Lead Generation To Other Businesses">Lead Generation To Other Businesses<br></label>
+		<label for=""><input type="checkbox" name="revenueSource" data-trigger="change" data-group="revenueSource" data-mincheck="1" value="Philanthropy">Philanthropy<br></label>
+		<label for=""><input type="checkbox" name="revenueSource" data-trigger="change" data-group="revenueSource" data-mincheck="1" value="Software Licensing">Software Licensing<br></label>
+		<label for=""><input type="checkbox" name="revenueSource" data-trigger="change" data-group="revenueSource" data-mincheck="1" value="Subscriptions">Subscriptions<br></label>
+		<label for=""><input type="checkbox" name="revenueSource" data-trigger="change" data-group="revenueSource" data-mincheck="1" value="User Fees for Web or Mobile Access">User Fees for Web or Mobile Access<br></label>
+		<label for=""><input type="checkbox" name="revenueSource" data-trigger="change" data-group="revenueSource" data-mincheck="1" value="Other">Other</label>
+		<input type="text" name="otherRevenueSource" data-trigger="change" data-group="revenueSource" data-mincheck="1" id="otherRevenueSource">
+	</fieldset>
+	
+	<fieldset class="m-form-half right">
+		<h3>What sector(s) does your company's work involve? (check all that apply): *</h3>
+		<label for=""><input type="checkbox" name="sector" data-trigger="change" data-group="sector" data-mincheck="1" value="Agriculture">Agriculture<br></label>
+		<label for=""><input type="checkbox" name="sector" data-trigger="change" data-group="sector" data-mincheck="1" value="Arts, Entertainment and Recreation">Arts, Entertainment and Recreation<br></label>
+		<label for=""><input type="checkbox" name="sector" data-trigger="change" data-group="sector" data-mincheck="1" value="Crime">Crime<br></label>
+		<label for=""><input type="checkbox" name="sector" data-trigger="change" data-group="sector" data-mincheck="1" value="Education">Education<br></label>
+		<label for=""><input type="checkbox" name="sector" data-trigger="change" data-group="sector" data-mincheck="1" value="Energy">Energy<br></label>
+		<label for=""><input type="checkbox" name="sector" data-trigger="change" data-group="sector" data-mincheck="1" value="Environmental">Environmental<br></label>
+		<label for=""><input type="checkbox" name="sector" data-trigger="change" data-group="sector" data-mincheck="1" value="Finance">Finance<br></label>
+		<label for=""><input type="checkbox" name="sector" data-trigger="change" data-group="sector" data-mincheck="1" value="Geospatial data/mapping">Geospatial data/mapping<br></label>
+		<label for=""><input type="checkbox" name="sector" data-trigger="change" data-group="sector" data-mincheck="1" value="Health and Healthcare">Health and Healthcare<br></label>
+		<label for=""><input type="checkbox" name="sector" data-trigger="change" data-group="sector" data-mincheck="1" value="Housing/Real Estate">Housing/Real Estate<br></label>
+		<label for=""><input type="checkbox" name="sector" data-trigger="change" data-group="sector" data-mincheck="1" value="Manufacturing">Manufacturing<br></label>
+		<label for=""><input type="checkbox" name="sector" data-trigger="change" data-group="sector" data-mincheck="1" value="Nutrition">Nutrition<br></label>
+		<label for=""><input type="checkbox" name="sector" data-trigger="change" data-group="sector" data-mincheck="1" value="Scientific Research">Scientific Research<br></label>
+		<label for=""><input type="checkbox" name="sector" data-trigger="change" data-group="sector" data-mincheck="1" value="Social Assistance">Social Assistance<br></label>
+		<label for=""><input type="checkbox" name="sector" data-trigger="change" data-group="sector" data-mincheck="1" value="Trade">Trade<br></label>
+		<label for=""><input type="checkbox" name="sector" data-trigger="change" data-group="sector" data-mincheck="1" value="Transportation">Transportation<br></label>
+		<label for=""><input type="checkbox" name="sector" data-trigger="change" data-group="sector" data-mincheck="1" value="Telecom">Telecom<br></label>
+		<label for=""><input type="checkbox" name="sector" data-trigger="change" data-group="sector" data-mincheck="1" value="Weather">Weather<br></label>
+		<label for=""><input type="checkbox" name="sector" data-trigger="change" data-group="sector" data-mincheck="1" value="Other">Other</label>
+		<input type="text" name="otherSector" data-trigger="change" data-group="sector" data-mincheck="1" id="otherSector">
+	</fieldset>
+
+	<fieldset class="m-form-half">
+		<h3>Please give us a short public statement describing your company’s mission and work. You can take this material from your website or other publications if you choose to. [200 words or less] *</h3>
+		<textarea rows="10" cols="59" name="descriptionLong" id="descriptionLong" data-trigger="keyup" data-maxwords="200" data-required="true"></textarea>
+		<h3>As a summary, please provide a one sentence description of your company. [25 words or less] *</h3>
+		<textarea rows="10" cols="59" name="descriptionShort" id="descriptionShort" data-trigger="keyup" data-maxwords="25" data-required="true"></textarea>
+		<h3>Besides revenue generation, how do you measure the impact your company has for society and the public good? [50 words or less]</h3>
+		<textarea rows="10" cols="59" name="socialImpact" id="socialImpact" data-trigger="keyup" data-maxwords="50"></textarea>
+	</fieldset>
+	
+	<fieldset class="m-form-half right">
+		<h3>Please include any financial or operational information that will help us understand your company. We are interested in specific information like past and projected annual revenues, total outside investment dollars to date, and significant investors or partners. [100 words or less]</h3>
+		<textarea rows="10" cols="59" name="financialInfo" id="financialInfo" data-trigger="keyup" data-maxwords="100"></textarea>
+		<h3>What datasets (if any) are not currently available that would be useful for your company to have as government open data? [50 words or less]</h3>
+		<textarea rows="10" cols="59" name="datasetWishList" id="datasetWishList" data-trigger="keyup" data-maxwords="50"></textarea>
+		<h3>What other companies, either in your sector or other sectors, would you recommend we contact regarding their use of government open data? [50 words or less]</h3>
+		<textarea rows="10" cols="59" name="companyRec" id="companyRec" data-trigger="keyup" data-maxwords="50"></textarea>
+		<h3>What conferences or events do you think would be helpful to us in surveying the field of open data companies? [50 words or less]</h3>
+		<textarea rows="10" cols="59" name="conferenceRec" id="conferenceRec" data-trigger="keyup" data-maxwords="50"></textarea>
+	</fieldset>
+	<footer class="m-form-footer">
+		<input type="submit" id="submit" class="m-button">
+	</footer>
 </form>
 
 

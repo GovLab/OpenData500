@@ -230,7 +230,8 @@ class RecommendCompanyHandler(tornado.web.RequestHandler):
         reasonForRecommending = self.get_argument("reasonForRecommending", None)        #Company
         otherInfo = self.get_argument("otherInfo", None)                                #Person.Submitter
         try: 
-            submitter = models.Person.objects.get(id=bson.objectid.ObjectId(id))
+            submitterId = self.get_argument('submitterId', None)
+            submitter = models.Person.objects.get(id=bson.objectid.ObjectId(submitterId))
         except: 
             submitter = models.Person(
                 firstName = firstName, 
@@ -434,7 +435,7 @@ class DeleteCompanyHandler(tornado.web.RequestHandler):
         except:
             dataset = models.Dataset.objects.get(id=bson.objectid.ObjectId(id))
             dataset.delete()
-        self.redirect('/')
+        self.redirect('/admin')
 
 class ViewHandler(tornado.web.RequestHandler):
     def get(self, id):
@@ -512,12 +513,15 @@ class ViewHandler(tornado.web.RequestHandler):
                 "title": c.submitter.title,
                 "phone": c.submitter.phone,
                 "org": c.submitter.org,
-                "otherInfo": c.submitter.otherInfo
+                "otherInfo": c.submitter.otherInfo,
+                "contacted": c.submitter.contacted,
+                "conferenceRec": c.submitter.conferenceRec
             },
             "contact": {
                 "firstName": c.contact.firstName,
                 "lastName": c.contact.lastName,
-                "email": c.contact.email
+                "email": c.contact.email,
+                "type": c.contact.personType
             },
             "reasonForRecommending": c.reasonForRecommending,
             "vetted": c.vetted,

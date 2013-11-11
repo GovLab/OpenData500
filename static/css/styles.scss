@@ -1,0 +1,245 @@
+$purple: #472b74;
+$light_purple: #8977a7;
+$black: #444;
+
+@mixin rounded {
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+
+body {
+	margin: 0;
+	color: $black;
+	font-family: Helvetica,Arial,sans-serif;
+	font-size: 12px;
+	line-height: 16px;
+}
+
+header {
+	padding: 10px 0;
+	margin-bottom: 30px;
+}
+
+//  Typography
+
+h1 {
+	font-family: 'Exo', sans-serif;
+	font-weight: 100;
+	font-style: italic;
+	font-size: 5.7em;
+}
+
+h2 {
+	font-family: 'Exo', sans-serif;
+	font-weight: 500;
+	font-size: 3em;
+}
+
+h3 {
+	color: $purple;
+}
+
+a {
+	font-family: Helvetica,Arial,sans-serif;
+	text-decoration: none;
+	color: $light_purple;
+}
+
+a:hover {
+	color: $purple;
+}
+
+input[type="text"] {
+	padding: 5px 10px;
+	@include rounded;
+	border: 1px solid #ccc;
+}
+
+textarea {
+	padding: 5px 10px;
+	@include rounded;
+	border: 1px solid #ccc;	
+}
+
+// === Layout classes
+
+.l-centered {
+	width: 960px;
+	margin: 0 auto;
+}
+
+// === Module Classes
+
+// Header Module
+
+header {
+	background-color: $purple;
+	border-bottom: 5px solid $light_purple;
+}
+
+// Main Menu Module
+
+.m-main-menu a {
+	padding: 5px 20px;
+	color: #fff;
+	text-transform: uppercase;
+	display: inline-block;
+	border-right: 2px solid $light_purple;
+}
+
+.m-main-menu a:hover {
+	background-color: $light_purple;
+	color: #fff;
+}
+
+.m-main-menu a:last-child {
+	border-right: 0;
+}
+
+// Button Module
+
+.m-button {
+	padding: 5px 14px 4px 14px;
+	background-color: $purple;
+	border: 1px solid #fff;	
+	@include rounded;
+	color: #fff;
+	font-family: 'Exo', sans-serif;
+	text-transform: uppercase;
+	font-size: 14px;
+	font-weight: 14px;
+	letter-spacing: .6px;
+	cursor: pointer;
+}
+
+// Form Module
+
+.m-form-group {
+	padding: 20px 0;
+	border: 0;
+}
+
+
+.m-form h2 {
+	margin-bottom: 0;
+	margin-top: 70px;
+}
+
+.m-form h3 {
+	border-bottom: 1px solid $light_purple;
+	padding-bottom: 5px;
+	margin-bottom: 10px;
+}
+
+.m-form-half {
+	@extend .m-form-group;
+	display: inline-block;
+	width: 456px / 960px * 100%;
+	vertical-align: top;
+	margin-right: 40px;
+}
+.m-form-half.right {
+	margin-right: 0;
+}
+
+
+.m-form-full {
+	@extend .m-form-group;
+}
+	
+.m-form-line {
+	margin-bottom: 5px;
+	text-align: right;
+}
+
+.m-form-line label {
+	width: 46%;
+	display: inline-block;
+	text-align: left;
+}
+.m-form-half input[type='text'] {
+	width: 48%;
+}
+
+.m-form-half textarea {
+	width: 430px;
+	height: 150px;
+	min-width:430px;
+	max-width:430px;
+}
+
+.m-form-box {
+	padding: 5px 10px;
+	margin: 10px 0;
+	border: 1px solid #ccc;
+	overflow: hidden;
+}
+
+.m-form-footer {
+	background-color: $light_purple;
+	padding: 5px;
+
+	margin: 5px 5px 20px;
+	overflow:hidden;
+}
+
+.m-form-footer input[type="submit"] {
+	float: right;
+}
+
+
+// Special Cases
+
+// Contacted Box
+
+.contacted-box {
+	padding-left: 30px;
+	position: relative;
+	background-color: #fafafa;
+}
+#contacted {
+	position: absolute;
+	left: 5px;
+}
+// Type of Company
+
+.type-of-company-box {
+	line-height: 23px;
+}
+
+#otherCompanyType {
+	width: 37%;
+	margin-left: 5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
