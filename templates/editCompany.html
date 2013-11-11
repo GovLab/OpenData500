@@ -93,15 +93,15 @@
 	</fieldset>
 	<fieldset class="m-form-half">
 		<h3>Please give us a short public statement describing your company’s mission and work. You can take this material from your website or other publications if you choose to. [200 words or less] *</h3>
-		<textarea rows="6" cols="70" name="descriptionLong" id="descriptionLong">{{ company.descriptionLong }}</textarea><br>
+		<textarea rows="10" cols="59" name="descriptionLong" id="descriptionLong">{{ company.descriptionLong }}</textarea><br>
 		<h3>As a summary, please provide a one sentence description of your company. [25 words or less] *</h3>
-		<textarea rows="6" cols="70" name="descriptionShort" id="descriptionShort">{{ company.descriptionShort }}</textarea><br>
+		<textarea rows="10" cols="59" name="descriptionShort" id="descriptionShort">{{ company.descriptionShort }}</textarea><br>
 		<h3>Besides revenue generation, how do you measure the impact your company has for society and the public good? [50 words or less]</h3>
-		<textarea rows="6" cols="70" name="socialImpact" id="socialImpact">{{ company.socialImpact }}</textarea><br>
+		<textarea rows="10" cols="59" name="socialImpact" id="socialImpact">{{ company.socialImpact }}</textarea><br>
 	</fieldset>
 	<fieldset class="m-form-half right">
 		<h3>Please include any financial or operational information that will help us understand your company. We are interested in specific information like past and projected annual revenues, total outside investment dollars to date, and significant investors or partners. [100 words or less]</h3>
-		<textarea rows="6" cols="70" name="financialInfo" id="financialInfo">{{ company.financialInfo }}</textarea><br>
+		<textarea rows="10" cols="59" name="financialInfo" id="financialInfo">{{ company.financialInfo }}</textarea><br>
 		<h3>Vetted?</h3>
 		<input type="radio" name="vetted" id="vetted" value="True" {% if company.vetted %} checked {% end %}>True<br>
 		<input type="radio" name="vetted" id="vetted" value="False" {% if not company.vetted %} checked {% end %}>False<br>
