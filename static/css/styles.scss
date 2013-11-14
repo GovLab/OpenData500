@@ -1,11 +1,17 @@
 $purple: #472b74;
 $light_purple: #8977a7;
 $black: #444;
+$light_red: rgba(214, 17, 17, .1);
+$red: rgba(214, 17, 17, 1);
 
 @mixin rounded {
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
+}
+
+@mixin drop_shadow {
+	box-shadow: 0 0 6px rgba(0,0,0,0.2);
 }
 
 body {
@@ -101,7 +107,7 @@ header {
 
 .m-button {
 	padding: 5px 14px 4px 14px;
-	background-color: $purple;
+	background-color: transparent;
 	border: 1px solid #fff;	
 	@include rounded;
 	color: #fff;
@@ -111,6 +117,12 @@ header {
 	font-weight: 14px;
 	letter-spacing: .6px;
 	cursor: pointer;
+}
+
+.m-button:hover {
+	background-color: $purple;
+	border: 1px solid #fff;
+	color: #fff;
 }
 
 // Form Module
@@ -213,8 +225,58 @@ header {
 	margin-left: 5px;
 }
 
+//  Error Messages
+
+.parsley-error-list {
+	list-style: none;
+	background-color: $light_red;
+	padding: 5px 10px;
+	@include rounded;
+	border: 1px solid $red;
+	color: $red;
+	font-weight: bold;
+	text-align: center;
+	position: relative;
+	@include drop_shadow;
+}
 
 
+.parsley-error-list:after {
+	content: "";
+	width: 0;
+	height: 0;
+	border-bottom: 8px solid $red;
+	border-right: 10px solid transparent;
+	border-left: 10px solid transparent;
+	position: absolute;
+	top: -8px;
+	left: 30px;
+}
+
+// .m-form-line {
+// 	margin-bottom: 5px;
+// 	text-align: right;
+// 	position: relative;
+// }
+
+// .parsley-error-list {
+// 	list-style: none;
+// 	background-color: $light_red;
+// 	padding: 6px 3px;
+// 	@include rounded;
+// 	border: 1px solid $red;
+// 	color: $red;
+// 	font-weight: bold;
+// 	text-align: left;
+// 	position: absolute;
+// 	@include drop_shadow;
+// 	width: 100%;
+// 	left: -5px;
+// 	top: -12px;
+// 	z-index: 0;
+// 	cursor-events: none;
+
+// }
 
 
 
