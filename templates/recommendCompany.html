@@ -14,10 +14,12 @@
 	<p><em>The fields marked with * are required</em></p>
 </div>
 
+The recommender is: {{ recommenderId }}
+
 <form method="post" id="submitCompany" class="m-form" data-validate="parsley">
 	<h2>{{ page_heading }}</h2>
 	<fieldset class="m-form-half">	
-		{% if not submitterId %}
+		{% if not recommenderId %}
 			<h3>Basic Information</h3>
 			<div class="m-form-line"><label for="firstName">Your First Name:*</label><input type="text" name="firstName" id="firstName" data-required="true"></div>
 			<div class="m-form-line"><label for="lastName">Your Last Name:*</label><input type="text" name="lastName" id="lastName" data-required="true"></div>
@@ -37,8 +39,8 @@
 		<textarea rows="10" cols="59" name="reasonForRecommending" id="reasonForRecommending"></textarea><br>
 		
 	<!-- <div class="submitButtons"> -->
-		{% if submitterId %}
-			<input type="hidden" class="submitterId" name="submitterId" value="{{ submitterId }}">
+		{% if recommenderId %}
+			<input type="hidden" class="recommenderId" name="recommenderId" value="{{ recommenderId }}">
 		{% else %}
 			<label for="otherInfo"><h3>Do you have other types of information you would like to share about open data organizations, projects or initiatives?<br><em>100 word limit</em></h3></label>
 			<textarea rows="10" cols="59" name="otherInfo" id="otherInfo"></textarea><br>

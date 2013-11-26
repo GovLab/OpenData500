@@ -41,7 +41,8 @@ class Application(tornado.web.Application):
             (r"/view/([a-zA-Z0-9]{24})", ViewHandler),
             (r"/delete/([a-zA-Z0-9]{24})", DeleteCompanyHandler),
             (r"/recommendCompany", RecommendCompanyHandler),
-            (r"/admin", AdminHandler)
+            (r"/admin", AdminHandler),
+            (r"/admin/edit/([a-zA-Z0-9]{24})", AdminEditCompanyHandler)
         ]
         settings = dict(
             template_path=os.path.join(os.path.dirname(__file__), "templates"),
@@ -66,19 +67,16 @@ class MainHandler(tornado.web.RequestHandler):
 
 class AdminHandler(tornado.web.RequestHandler):
     def get(self):
-        unvettedCompanies = models.Company.objects(vetted = False)
-        submittedCompanies = models.Company.objects(vetted=True)
-        recommendedCompanies = []
-        recommenders = models.Person.objects(personType = "Recommender")
-        for r in recommenders:
-            recommendedCompanies = recommendedCompanies + r.submittedCompany
+        unvettedCompanies = models.Company.objects(Q(vetted=False) & Q(recommended=False))
+        vettedCompanies = models.Company.objects(Q(vetted=True) & Q(recommended=False))
+        recommendedCompanies = models.Company.objects(Q(vetted=False) & Q(recommended=True))
         self.render(
             "admin.html",
             page_title='OpenData500',
             page_heading='Welcome to the OpenData 500',
             unvettedCompanies = unvettedCompanies,
             recommendedCompanies = recommendedCompanies,
-            submittedCompanies = submittedCompanies
+            vettedCompanies = vettedCompanies
         )
 
 class SubmitCompanyHandler(tornado.web.RequestHandler):
@@ -194,7 +192,9 @@ class SubmitCompanyHandler(tornado.web.RequestHandler):
             socialImpact = socialImpact,
             financialInfo = financialInfo,
             submitter = submitter,
-            vetted = False
+            vetted = False,
+            vettedByCompany = True,
+            recommended = False #this was submitted not recommended. 
         )
         company.save()
         submitter.submittedCompany.append(company)
@@ -205,70 +205,92 @@ class SubmitCompanyHandler(tornado.web.RequestHandler):
 class RecommendCompanyHandler(tornado.web.RequestHandler):
     def get(self, id=None):
         try:
-            submitterId = models.Person.objects.get(id=bson.objectid.ObjectId(id))
+            recommenderId = models.Person.objects.get(id=bson.objectid.ObjectId(id))
         except:
-            submitterId = None
+            recommenderId = None
         self.render(
             "recommendCompany.html",
             page_title = "Recommend a Company",
             page_heading = "Recommend a Company",
-            submitterId = submitterId
+            recommenderId = recommenderId
         )
 
-    def post(self):
-        firstName = self.get_argument("firstName", None)                                #Person.Submitter
-        lastName = self.get_argument("lastName", None)                                  #Person.Submitter
-        #title = self.get_argument("title", None)                                        #Person.submitter
-        org = self.get_argument("org", None)                                            #Person.Submitter
-        email = self.get_argument("email", None)                                        #Person.Submitter
-        #phone = self.get_argument("phone", None)                                        #Person.Submitter
-        companyName = self.get_argument("companyName", None)                            #Company
-        url = self.get_argument('url', None)                                            #Company
-        firstNameContact = self.get_argument("firstNameContact", None)                  #Company.Contact
-        lastNameContact = self.get_argument("lastNameContact", None)                    #Company.Contact
-        emailContact = self.get_argument("emailContact", None)                          #Company.Contact
-        reasonForRecommending = self.get_argument("reasonForRecommending", None)        #Company
-        otherInfo = self.get_argument("otherInfo", None)                                #Person.Submitter
+    def post(self): #A person has just recommended a company
+        #Recommenders info:
+        firstName = self.get_argument("firstName", None)
+        lastName = self.get_argument("lastName", None)
+        org = self.get_argument("org", None)
+        email = self.get_argument("email", None)
+        otherInfo = self.get_argument("otherInfo", None) #What else you got to say?
+        #Check to see if Recommender exists already (via email or ID)
         try: 
-            submitterId = self.get_argument('submitterId', None)
-            submitter = models.Person.objects.get(id=bson.objectid.ObjectId(submitterId))
-        except: 
-            submitter = models.Person(
+            recommender = models.Person.objects.get(email=email) #if Recommender exists, update the info:
+            recommender.firstName = firstName
+            recommender.lastName = lastName
+            recommender.org = org
+            recommender.otherInfo.append(otherInfo)
+            recommender.save()
+        except:
+            try:
+                recommenderId = self.get_argument('recommenderId', None)
+                recommender = models.Person.objects.get(id=bson.objectid.ObjectId(recommenderId))
+            except:
+                recommender = None
+        if not recommender: #If we don't have a recommender already, save a new one.
+            recommender = models.Person(
                 firstName = firstName, 
                 lastName = lastName,
-                #title = title, 
                 org = org,
                 email = email,
-                #phone = phone,
-                personType = "Recommender",
-                otherInfo = otherInfo
+                personType = "Recommender"
             )
-            submitter.save()
-        contact = models.Person(
-            firstName = firstNameContact,
-            lastName = lastNameContact,
-            email =emailContact,
-            personType = "Contact"
-        )
-        contact.save()
+            recommender.otherInfo.append(otherInfo)
+            recommender.save()
+        #Company Info:
+        companyName = self.get_argument("companyName", None)
+        url = self.get_argument('url', None)
+        reasonForRecommending = self.get_argument("reasonForRecommending", None)
+        #Contact Info
+        firstNameContact = self.get_argument("firstNameContact", None)
+        lastNameContact = self.get_argument("lastNameContact", None)
+        emailContact = self.get_argument("emailContact", None)
+        #Save the contact
+        if emailContact:
+            contact = models.Person(
+                firstName = firstNameContact,
+                lastName = lastNameContact,
+                email =emailContact,
+                personType = "Contact",
+                org = companyName
+            )
+            contact.save()
+        else: 
+            contact = None
+        #Create new company and save the company Info
         company = models.Company(
             companyName = companyName,
             url = url,
-            contact = contact,
             reasonForRecommending = reasonForRecommending,
+            vetted = False,
+            vettedByCompany = False,
+            recommended = True
         )
         company.save()
-        submitter.submittedCompany.append(company)
-        submitter.save()
-        company.submitter = submitter
+        if contact:
+            company.contact = contact
+        recommender.submittedCompany.append(company)
+        recommender.save()
+        company.recommendedBy = recommender
         company.save()
+        #Add Another? Redirect to form
         if self.get_argument('submit', None) == 'Recommend Another Company':
             self.render(
                 "recommendCompany.html", 
                 page_title = "Recommend a Company",
                 page_heading = "Recommend a Company",
-                submitterId = str(submitter.id)
+                recommenderId = str(recommender.id)
             )
+        #Done recommending? Redirect back home
         else: 
             self.redirect("/")
 
@@ -398,6 +420,84 @@ class EditCompanyHandler(tornado.web.RequestHandler):
             company.vetted = False
         company.save()
         self.redirect('/')
+
+class AdminEditCompanyHandler(tornado.web.RequestHandler):
+    def get(self, id):
+        company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
+        page_heading = "Editing " + company.companyName
+        page_title = "Editing " + company.companyName
+        companyType = ['Public', 'Private', 'Nonprofit']
+        companyFunction = ['Consumer Research and/or Marketing', 'Consumer Services', 'Data Management and Analysis', 'Financial/Investment Services', 'Information for Consumers']
+        criticalDataTypes = ['Federal Open Data', 'State Open Data', 'City/Local Open Data', 'Private/Proprietary Data Sources']
+        revenueSource = ['Advertising', 'Data Management and Analytic Services', 'Database Licensing', 'Lead Generation To Other Businesses', 'Philanthropy', 'Software Licensing', 'Subscriptions', 'User Fees for Web or Mobile Access']
+        sectors = ['Agriculture', 'Arts, Entertainment and Recreation' 'Crime', 'Education', 'Energy', 'Environmental', 'Finance', 'Geospatial data/mapping', 'Health and Healthcare', 'Housing/Real Estate', 'Manufacturing', 'Nutrition', 'Scientific Research', 'Social Assistance', 'Trade', 'Transportation', 'Telecom', 'Weather']
+        if company is None:
+            self.render("404.html", message=id)
+        self.render("adminEditCompany.html",
+            page_title = page_title,
+            page_heading = page_heading,
+            company = company,
+            companyType = companyType,
+            companyFunction = companyFunction,
+            criticalDataTypes = criticalDataTypes,
+            revenueSource = revenueSource,
+            sectors = sectors
+        )
+
+    def post(self, id):
+        company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
+        company.submitter.firstName = self.get_argument("firstName", None)
+        company.submitter.lastName = self.get_argument("lastName", None)
+        company.submitter.title = self.get_argument("title", None)
+        company.submitter.org = self.get_argument("org", None)
+        company.submitter.email = self.get_argument("email", None)
+        company.submitter.phone = self.get_argument("phone", None)
+        try: 
+            if self.request.arguments['contacted']:
+                company.submitter.contacted = True
+        except:
+            company.submitter.contacted = False
+        url = self.get_argument('url', None)
+        company.companyName = self.get_argument("companyName", None)
+        company.ceo.firstName = self.get_argument("ceoFirstName", None)
+        company.ceo.lastName = self.get_argument("ceoLastName", None)
+        company.ceo.email = self.get_argument("ceoEmail", None)
+        company.companyType = self.get_argument("companyType", None)
+        if company.companyType == 'other':
+            company.companyType = self.get_argument('otherCompanyType', None)
+        company.yearFounded = self.get_argument("yearFounded", 9999)
+        company.fte = self.get_argument("fte", 0)
+        company.companyFunction = self.get_argument("companyFunction", None)
+        if company.companyFunction == 'other':
+            company.companyFunction = self.get_argument('otherCompanyFunction', None)
+        try:
+            company.criticalDataTypes = self.request.arguments['criticalDataTypes']
+        except:
+            company.criticalDataTypes = []
+        if 'Other' in company.criticalDataTypes:
+            del company.criticalDataTypes[company.criticalDataTypes.index('Other')]
+            if self.get_argument('otherCriticalDataTypes', None):
+                company.criticalDataTypes.append(self.get_argument('otherCriticalDataTypes', None))
+        try:
+            company.revenueSource = self.request.arguments['revenueSource']
+        except:
+            company.revenueSource = []
+        if 'Other' in company.revenueSource:
+            del company.revenueSource[company.revenueSource.index('Other')]
+            if self.get_argument('otherRevenueSource', None):
+                company.revenueSource.append(self.get_argument('otherRevenueSource', None))
+        company.sector = self.request.arguments['sector']
+        company.sector.append(self.get_argument('otherSector', None))
+        company.descriptionLong = self.get_argument('descriptionLong', None)
+        company.descriptionShort = self.get_argument('descriptionShort', None)
+        company.socialImpact = self.get_argument('socialImpact', None)
+        company.financialInfo = self.get_argument('financialInfo', None)
+        if self.get_argument('vetted') == 'True':
+            company.vetted = True
+        elif self.get_argument('vetted') == 'False':
+            company.vetted = False
+        company.save()
+        self.redirect('/admin')
 
 class EditDataHandler(tornado.web.RequestHandler):
     def get(self, id):

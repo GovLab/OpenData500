@@ -6,16 +6,21 @@
 
 <h1>{{ page_heading }}</h1>
 
-<h2>Submitted (and vetted) Companies</h2>
+<h2>Submitted Companies</h2>
 {% for company in submittedCompanies %}
-	<p><strong>{{ company.companyName }}</strong> is currently using the following datasets:</p>
+	<p><strong>{{ company.companyName }}</strong></p>
+	<p><strong>Location:</strong> {{ company.city }}, USA</p>
+	<p><strong>Number of employees:</strong> {{company.fte }}</p>
+	<p>{{ company.descriptionShort }}</p>
+	<p>{{ company.descriptionLong }}</p>
+	<p><strong>Datasets:</strong></p>
 	<ul>
 	{% for dataset in company.datasets %}
 		<li><p><strong>{{ dataset.datasetName }}</strong></li>
 	{% end %}
 	</ul>
 	<p><a href="/view/{{ company.id }}">View</a></p>
-	
+	<p>----------------------------------------------</p>
 {% end %}
 
 

@@ -19,3 +19,4 @@ venv
 # top secret stuff
 .env
 ninja*
+notes.txt

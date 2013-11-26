@@ -19,7 +19,7 @@
 {% end %}
 
 <h2>Vetted Submitted Companies</h2>
-{% for company in submittedCompanies %}
+{% for company in vettedCompanies %}
 	<p><strong>{{ company.companyName }}</strong> is currently using the following datasets:</p>
 	<ul>
 	{% for dataset in company.datasets %}
@@ -32,7 +32,7 @@
 
 <h2>Recommended Companies</h2>
 {% for company in recommendedCompanies %}
-	<p><strong>{{ company.companyName }}</strong> <a href="/view/{{ company.id }}">View</a> <a href="/delete/{{ company.id }}">Delete</a></p>
+	<p><strong>{{ company.companyName }}</strong> <a href="/view/{{ company.id }}">View</a> <a href="/edit/{{ company.id }}">Edit</a> <a href="/delete/{{ company.id }}">Delete</a></p>
 {% end %}
 
 

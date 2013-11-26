@@ -13,7 +13,7 @@ class Person(Document):
 	phone = StringField()						#Valid Phone Num				#NOT Required
 	org = StringField()							#Character limit to 100 char 	#NOT Required
 	contacted = BooleanField()					#BooleanField 					#NOT Required
-	otherInfo = StringField()
+	otherInfo = ListField(StringField())
 	datasetWishList = StringField()												#NOT Required
 	companyRec = StringField()													#NOT Required
 	conferenceRec = StringField()												#NOT Required
@@ -39,6 +39,8 @@ class Company(Document):
 	url = StringField()							#Valid URL 						#Required
 	ceo = ReferenceField(Person)				#Person, see above				#NOT Required
 	submitter = ReferenceField(Person)			#Person, see above				#Required
+	recommendedBy = ReferenceField(Person)
+	recommended = BooleanField()				#Recommended or Submitted?
 	yearFounded = IntField()					#Valid year Integer				#NOT Required
 	previousName = StringField()				#String limit 70				#NOT Required
 	city = StringField()						#String, limit 80 chars?		#NOT Required
@@ -55,6 +57,7 @@ class Company(Document):
 	socialImpact = StringField()				#70 words						#NOT Required
 	financialInfo = StringField()				#70 words						#NOT Required
 	vetted = BooleanField()						#Automatic set to False
+	vettedByCompany = BooleanField()
 	submitType = StringField()
 	contact = ReferenceField(Person)
 	reasonForRecommending = StringField()
