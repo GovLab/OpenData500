@@ -6,16 +6,28 @@
 
 <form method="post" id="submitCompany" class="m-form" data-validate="parsley">
 	<fieldset class="m-form-half">
-		<div class="m-form-line"><label for="">First Name: *</label><input type="text" name="firstName" id="firstName" data-required="true" value="{{ company.submitter.firstName }}"></div>
-		<div class="m-form-line"><label for="">Last Name: *</label><input type="text" name="lastName" id="lastName" data-required="true" value="{{ company.submitter.lastName }}"></div>
-		<div class="m-form-line"><label for="">Title: *</label><input type="text" name="title" id="title" data-required="true" value="{{ company.submitter.title }}"></div>
-		<div class="m-form-line"><label for="">Email: *</label><input type="text" name="email" id="email" data-trigger="change" data-type="email" data-required="true" value="{{ company.submitter.email }}"></div>
-		<div class="m-form-line"><label for="">Phone:</label><input type="text" name="phone" id="phone" data-type="phone" value="{{ company.submitter.phone }}"></div>
-		<div class="m-form-box contacted-box"><label for="contacted"><input type="checkbox" name="contacted" id="contacted" value="contacted" {% if company.submitter.contacted %} checked {% end %}>Please check here if you would be willing to be contacted for further information about your company.</label></div>
+		<h3>Contact Info</h3>
+		{% if (company.contact) %}
+			<div class="m-form-line"><label for="">First Name: *</label><input type="text" name="firstName" id="firstName" data-required="true" {% if (company.contact.firstName) %} value="{{ company.contact.firstName }}" {% end %}></div>
+			<div class="m-form-line"><label for="">Last Name: *</label><input type="text" name="lastName" id="lastName" data-required="true" {% if (company.contact.firstName) %} value="{{ company.contact.lastName }}" {% end %}></div>
+			<div class="m-form-line"><label for="">Title: *</label><input type="text" name="title" id="title" data-required="true" {% if (company.contact.title) %} value="{{ company.contact.title }}" {% end %}></div>
+			<div class="m-form-line"><label for="">Email: *</label><input type="text" name="email" id="email" data-required="true" data-trigger="change" data-type="email" {% if (company.contact.email) %} value="{{ company.contact.email }}" {% end %}></div>
+			<div class="m-form-line"><label for="">Phone:</label><input type="text" name="phone" id="phone" data-trigger="change" data-type="phone" {% if (company.contact.phone) %} value="{{ company.contact.phone }}" {% end %}></div>
+			<div class="m-form-box contacted-box"><label for="contacted"><input type="checkbox" name="contacted" id="contacted" value="contacted" {% if company.contact.contacted %} checked {% end %}>Please check here if you would be willing to be contacted for further information about your company.</label></div>
+		{% else %}
+			<p>There is no contact information for this company. Add one:</p>
+			<div class="m-form-line"><label for="">First Name: *</label><input type="text" name="firstName" id="firstName" value=""></div>
+			<div class="m-form-line"><label for="">Last Name: *</label><input type="text" name="lastName" id="lastName" value=""></div>
+			<div class="m-form-line"><label for="">Title: *</label><input type="text" name="title" id="title" value=""></div>
+			<div class="m-form-line"><label for="">Email: *</label><input type="text" name="email" id="email" data-trigger="change" data-type="email" value=""></div>
+			<div class="m-form-line"><label for="">Phone:</label><input type="text" name="phone" id="phone" data-type="phone" value=""></div>
+			<div class="m-form-box contacted-box"><label for="contacted"><input type="checkbox" name="contacted" id="contacted" value="contacted" checked>Please check here if you would be willing to be contacted for further information about your company.</label></div>
+		{% end %}
 	</fieldset>
-	<fieldset class="m-form-half right">		
-		<div class="m-form-line"><label for="companyName">Name of company:</label><input type="text" name="companyName" id="companyName" data-required="true" value="{{ company.companyName }}" ></div>
-		<div class="m-form-line"><label for="url">Company URL:</label><input type='text' name="url" id='url' data-trigger="change" data-type="url" data-required="true" value="{{ company.url }}"></div>
+	<fieldset class="m-form-half right">	
+		<h3>Company Info</h3>	
+		<div class="m-form-line"><label for="companyName">Name of company: *</label><input type="text" name="companyName" id="companyName" data-required="true" value="{{ company.companyName }}" ></div>
+		<div class="m-form-line"><label for="url">Company URL: *</label><input type='text' name="url" id='url' data-trigger="change" data-type="url" data-required="true" value="{{ company.url }}"></div>
 		<div class="m-form-line"><label for="ceoFirstName">First Name of CEO:</label><input type="text" name="ceoFirstName" id="ceoFirstName" value="{{ company.ceo.firstName}}"></div>
 		<div class="m-form-line"><label for="ceoLastName">Last Name of CEO:</label><input type="text" name="ceoLastName" id="ceoLastName" value="{{ company.ceo.lastName }}"></div>
 		<div class="m-form-line"><label for="ceoEmail">CEO Email:</label><input type="text" name="ceoEmail" id="ceoEmail" data-trigger="change" data-type="email" value="{{ company.ceo.email }}"></div>
@@ -101,9 +113,9 @@
 	<fieldset class="m-form-half right">
 		<h3>Please include any financial or operational information that will help us understand your company. We are interested in specific information like past and projected annual revenues, total outside investment dollars to date, and significant investors or partners. [100 words or less]</h3>
 		<textarea rows="10" cols="59" name="financialInfo" id="financialInfo" data-trigger="keyup" data-maxwords="100">{{ company.financialInfo }}</textarea><br>
-		<h3>Vetted?</h3>
-		<input type="radio" name="vetted" id="vetted" value="True" {% if company.vetted %} checked {% end %}>True<br>
-		<input type="radio" name="vetted" id="vetted" value="False" {% if not company.vetted %} checked {% end %}>False<br>
+		<h3>Are you ready to submit this information? You can save and come back to this page later. Otherwise you will have to contact us to make more changes.</h3>
+		<input type="radio" name="vettedByCompany" id="vettedByCompany" value="True" {% if company.vettedByCompany %} checked {% end %}>Yes<br>
+		<input type="radio" name="vettedByCompany" id="vettedByCompany" value="False" {% if not company.vettedByCompany %} checked {% end %}>No<br>
 	</fieldset>
 	<div class="m-form-footer">	
 		<input type="hidden" class="id" name="id" value="{{ id }}">

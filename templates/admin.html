@@ -14,7 +14,7 @@
 		<li><p><strong>{{ dataset.datasetName }}</strong> - <a href="/editData/{{ dataset.id }}">Edit</a> <a href="/delete/{{ dataset.id }}">Delete</a></p></li>
 	{% end %}
 	</ul>
-	<p><a href="/edit/{{ company.id }}">Edit</a> <a href="/delete/{{ company.id }}">Delete</a> <a href="/addData/{{ company.id }}">Add Dataset</a></p>
+	<p><a href="/admin/edit/{{ company.id }}">Edit</a> <a href="/delete/{{ company.id }}">Delete</a> <a href="/addData/{{ company.id }}">Add Dataset</a></p>
 	
 {% end %}
 
@@ -26,17 +26,32 @@
 		<li><p><strong>{{ dataset.datasetName }}</strong> - <a href="/editData/{{ dataset.id }}">Edit</a> <a href="/delete/{{ dataset.id }}">Delete</a></p></li>
 	{% end %}
 	</ul>
-	<p><a href="/edit/{{ company.id }}">Edit</a> <a href="/delete/{{ company.id }}">Delete</a> <a href="/addData/{{ company.id }}">Add Dataset</a></p>
+	<p><a href="/admin/edit/{{ company.id }}">Edit</a> <a href="/delete/{{ company.id }}">Delete</a> <a href="/addData/{{ company.id }}">Add Dataset</a></p>
 	
 {% end %}
 
 <h2>Recommended Companies</h2>
 {% for company in recommendedCompanies %}
-	<p><strong>{{ company.companyName }}</strong> <a href="/view/{{ company.id }}">View</a> <a href="/edit/{{ company.id }}">Edit</a> <a href="/delete/{{ company.id }}">Delete</a></p>
+	<p><strong>{{ company.companyName }}</strong> <a href="/view/{{ company.id }}">View</a> <a href="/admin/edit/{{ company.id }}">Edit</a> <a href="/delete/{{ company.id }}">Delete</a></p>
 {% end %}
 
-
-
+<h2>Links To Be Sent Out for Editing</h2>
+<table style="width:100%; text-align:left;">
+	<tr>
+		<th>Company Name</th>
+		<th>Edit URL</th>
+		<th>Contact Email</th>
+		<th>Danger Zone</th>
+	</tr>
+	{% for company in unvettedByCompanies %}
+		<tr>
+			<td><strong>{{ company.companyName }}</strong></a></td>
+			<td><a href="/edit/{{ company.id }}">www.opendata500.com/edit/{{company.id}}</a></td>
+			<td>{% if (company.contact) %} {{ company.contact.email }} {% end %}</td>
+			<td><a href="/delete/{{ company.id }}">Delete</a></td>
+		</tr>
+	{% end %}
+</table>
 
 
 {% end %}

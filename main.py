@@ -29,19 +29,26 @@ define("port", default=5000, help="run on the given port", type=int)
 #Connect to mongo
 connect('db', host=os.environ.get('MONGOLAB_URI'))
 
+#Just some global varbs. 
+companyType = ['Public', 'Private', 'Nonprofit']
+companyFunction = ['Consumer Research and/or Marketing', 'Consumer Services', 'Data Management and Analysis', 'Financial/Investment Services', 'Information for Consumers']
+criticalDataTypes = ['Federal Open Data', 'State Open Data', 'City/Local Open Data', 'Private/Proprietary Data Sources']
+revenueSource = ['Advertising', 'Data Management and Analytic Services', 'Database Licensing', 'Lead Generation To Other Businesses', 'Philanthropy', 'Software Licensing', 'Subscriptions', 'User Fees for Web or Mobile Access']
+sectors = ['Agriculture', 'Arts, Entertainment and Recreation' 'Crime', 'Education', 'Energy', 'Environmental', 'Finance', 'Geospatial data/mapping', 'Health and Healthcare', 'Housing/Real Estate', 'Manufacturing', 'Nutrition', 'Scientific Research', 'Social Assistance', 'Trade', 'Transportation', 'Telecom', 'Weather']
+
 # application settings and handle mapping info
 class Application(tornado.web.Application):
     def __init__(self):
         handlers = [
             (r"/", MainHandler),
-            (r"/submitCompany", SubmitCompanyHandler),
+            (r"/submitCompany/", SubmitCompanyHandler),
             (r"/edit/([a-zA-Z0-9]{24})", EditCompanyHandler),
             (r"/addData/([a-zA-Z0-9]{24})", SubmitDataHandler),
             (r"/editData/([a-zA-Z0-9]{24})", EditDataHandler),
             (r"/view/([a-zA-Z0-9]{24})", ViewHandler),
             (r"/delete/([a-zA-Z0-9]{24})", DeleteCompanyHandler),
-            (r"/recommendCompany", RecommendCompanyHandler),
-            (r"/admin", AdminHandler),
+            (r"/recommendCompany/", RecommendCompanyHandler),
+            (r"/admin/", AdminHandler),
             (r"/admin/edit/([a-zA-Z0-9]{24})", AdminEditCompanyHandler)
         ]
         settings = dict(
@@ -56,8 +63,8 @@ class Application(tornado.web.Application):
 # the main page
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
-        companies = models.Company.objects()
-        submittedCompanies = models.Company.objects(vetted=True)
+        #companies = models.Company.objects()
+        submittedCompanies = models.Company.objects(Q(vetted=True) & Q(vettedByCompany=True))
         self.render(
             "index.html",
             page_title='OpenData500',
@@ -68,15 +75,17 @@ class MainHandler(tornado.web.RequestHandler):
 class AdminHandler(tornado.web.RequestHandler):
     def get(self):
         unvettedCompanies = models.Company.objects(Q(vetted=False) & Q(recommended=False))
-        vettedCompanies = models.Company.objects(Q(vetted=True) & Q(recommended=False))
+        vettedCompanies = models.Company.objects(Q(vetted=True) & Q(vettedByCompany=True))
         recommendedCompanies = models.Company.objects(Q(vetted=False) & Q(recommended=True))
+        unvettedByCompanies = models.Company.objects(Q(vetted=True) & Q(vettedByCompany=False))
         self.render(
             "admin.html",
             page_title='OpenData500',
             page_heading='Welcome to the OpenData 500',
             unvettedCompanies = unvettedCompanies,
             recommendedCompanies = recommendedCompanies,
-            vettedCompanies = vettedCompanies
+            vettedCompanies = vettedCompanies,
+            unvettedByCompanies = unvettedByCompanies
         )
 
 class SubmitCompanyHandler(tornado.web.RequestHandler):
@@ -230,7 +239,7 @@ class RecommendCompanyHandler(tornado.web.RequestHandler):
             recommender.org = org
             recommender.otherInfo.append(otherInfo)
             recommender.save()
-        except:
+        except: #not found by email, try by ID (If the user clicks on "Recommend another Company")
             try:
                 recommenderId = self.get_argument('recommenderId', None)
                 recommender = models.Person.objects.get(id=bson.objectid.ObjectId(recommenderId))
@@ -345,16 +354,15 @@ class SubmitDataHandler(tornado.web.RequestHandler):
 
 class EditCompanyHandler(tornado.web.RequestHandler):
     def get(self, id):
-        company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
-        page_heading = "Editing " + company.companyName
-        page_title = "Editing " + company.companyName
-        companyType = ['Public', 'Private', 'Nonprofit']
-        companyFunction = ['Consumer Research and/or Marketing', 'Consumer Services', 'Data Management and Analysis', 'Financial/Investment Services', 'Information for Consumers']
-        criticalDataTypes = ['Federal Open Data', 'State Open Data', 'City/Local Open Data', 'Private/Proprietary Data Sources']
-        revenueSource = ['Advertising', 'Data Management and Analytic Services', 'Database Licensing', 'Lead Generation To Other Businesses', 'Philanthropy', 'Software Licensing', 'Subscriptions', 'User Fees for Web or Mobile Access']
-        sectors = ['Agriculture', 'Arts, Entertainment and Recreation' 'Crime', 'Education', 'Energy', 'Environmental', 'Finance', 'Geospatial data/mapping', 'Health and Healthcare', 'Housing/Real Estate', 'Manufacturing', 'Nutrition', 'Scientific Research', 'Social Assistance', 'Trade', 'Transportation', 'Telecom', 'Weather']
-        if company is None:
-            self.render("404.html", message=id)
+        try: 
+            company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
+            page_heading = "Editing " + company.companyName
+            page_title = "Editing " + company.companyName
+        except:
+            self.render("404.html", 
+                page_title = "That ain't even a thing.",
+                page_heading = "Check yo'self",
+                message=id)
         self.render("editCompany.html",
             page_title = page_title,
             page_heading = page_heading,
@@ -367,70 +375,80 @@ class EditCompanyHandler(tornado.web.RequestHandler):
         )
 
     def post(self, id):
+        #get the company you will be editing
         company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
-        company.submitter.firstName = self.get_argument("firstName", None)
-        company.submitter.lastName = self.get_argument("lastName", None)
-        company.submitter.title = self.get_argument("title", None)
-        company.submitter.org = self.get_argument("org", None)
-        company.submitter.email = self.get_argument("email", None)
-        company.submitter.phone = self.get_argument("phone", None)
+        #Submitter info
+        company.contact.firstName = self.get_argument("firstName", None)
+        company.contact.lastName = self.get_argument("lastName", None)
+        company.contact.title = self.get_argument("title", None)
+        company.contact.org = self.get_argument("org", None)
+        company.contact.email = self.get_argument("email", None)
+        company.contact.phone = self.get_argument("phone", None)
         try: 
             if self.request.arguments['contacted']:
-                company.submitter.contacted = True
+                company.contact.contacted = True
         except:
-            company.submitter.contacted = False
-        url = self.get_argument('url', None)
-        company.companyName = self.get_argument("companyName", None)
+            company.contact.contacted = False
+        company.contact.save()
+        #CEO Info
         company.ceo.firstName = self.get_argument("ceoFirstName", None)
         company.ceo.lastName = self.get_argument("ceoLastName", None)
         company.ceo.email = self.get_argument("ceoEmail", None)
+        company.ceo.save()
+        #Company Info
+        company.companyName = self.get_argument("companyName", None)
+        url = self.get_argument('url', None)
+        company.city = self.get_argument('city', None)
+        company.zipCode = self.get_argument('zipCode', None)
         company.companyType = self.get_argument("companyType", None)
-        if company.companyType == 'other':
+        if company.companyType == 'other': #if user entered custom option for Type
             company.companyType = self.get_argument('otherCompanyType', None)
         company.yearFounded = self.get_argument("yearFounded", 9999)
         company.fte = self.get_argument("fte", 0)
         company.companyFunction = self.get_argument("companyFunction", None)
-        if company.companyFunction == 'other':
+        if company.companyFunction == 'other': #if user entered custom option for Function
             company.companyFunction = self.get_argument('otherCompanyFunction', None)
-        try:
+        try: #try and get all checked items. 
             company.criticalDataTypes = self.request.arguments['criticalDataTypes']
-        except:
+        except: #if no checked items, then make it into an empty array (form validation should prevent this always)
             company.criticalDataTypes = []
-        if 'Other' in company.criticalDataTypes:
-            del company.criticalDataTypes[company.criticalDataTypes.index('Other')]
+        if 'Other' in company.criticalDataTypes: #if user entered a custom option for Data Type
+            del company.criticalDataTypes[company.criticalDataTypes.index('Other')] #delete 'Other' from list
             if self.get_argument('otherCriticalDataTypes', None):
-                company.criticalDataTypes.append(self.get_argument('otherCriticalDataTypes', None))
-        try:
+                company.criticalDataTypes.append(self.get_argument('otherCriticalDataTypes', None)) #add custom option to list.
+        try: #try and get all checked items. 
             company.revenueSource = self.request.arguments['revenueSource']
-        except:
+        except: #if no checked items, then make it into an empty array (form validation should prevent this always)
             company.revenueSource = []
-        if 'Other' in company.revenueSource:
-            del company.revenueSource[company.revenueSource.index('Other')]
+        if 'Other' in company.revenueSource: #if user entered a custom option for Revenue Source
+            del company.revenueSource[company.revenueSource.index('Other')] #delete 'Other' from list
             if self.get_argument('otherRevenueSource', None):
-                company.revenueSource.append(self.get_argument('otherRevenueSource', None))
-        company.sector = self.request.arguments['sector']
-        company.sector.append(self.get_argument('otherSector', None))
+                company.revenueSource.append(self.get_argument('otherRevenueSource', None)) #add custom option to list.
+        try: #try and get all checked items. 
+            company.sector = self.request.arguments['sector']
+        except: #if no checked items, then make it into an empty array (form validation should prevent this always)
+            company.sector = []
+        if 'Other' in company.sector: #if user entered a custom option for Sector
+            del company.sector[company.sector.index('Other')] #delete 'Other' from list
+            if self.get_argument('otherSector', None):
+                company.sector.append(self.get_argument('otherSector', None)) #add custom option to list.
         company.descriptionLong = self.get_argument('descriptionLong', None)
         company.descriptionShort = self.get_argument('descriptionShort', None)
         company.socialImpact = self.get_argument('socialImpact', None)
         company.financialInfo = self.get_argument('financialInfo', None)
-        if self.get_argument('vetted') == 'True':
-            company.vetted = True
-        elif self.get_argument('vetted') == 'False':
-            company.vetted = False
+        if self.get_argument('vettedByCompany') == 'True':
+            company.vettedByCompany = True
+        elif self.get_argument('vettedByCompany') == 'False':
+            company.vettedByCompany = False
         company.save()
         self.redirect('/')
 
+#Editing section for Admins
 class AdminEditCompanyHandler(tornado.web.RequestHandler):
     def get(self, id):
         company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
         page_heading = "Editing " + company.companyName
         page_title = "Editing " + company.companyName
-        companyType = ['Public', 'Private', 'Nonprofit']
-        companyFunction = ['Consumer Research and/or Marketing', 'Consumer Services', 'Data Management and Analysis', 'Financial/Investment Services', 'Information for Consumers']
-        criticalDataTypes = ['Federal Open Data', 'State Open Data', 'City/Local Open Data', 'Private/Proprietary Data Sources']
-        revenueSource = ['Advertising', 'Data Management and Analytic Services', 'Database Licensing', 'Lead Generation To Other Businesses', 'Philanthropy', 'Software Licensing', 'Subscriptions', 'User Fees for Web or Mobile Access']
-        sectors = ['Agriculture', 'Arts, Entertainment and Recreation' 'Crime', 'Education', 'Energy', 'Environmental', 'Finance', 'Geospatial data/mapping', 'Health and Healthcare', 'Housing/Real Estate', 'Manufacturing', 'Nutrition', 'Scientific Research', 'Social Assistance', 'Trade', 'Transportation', 'Telecom', 'Weather']
         if company is None:
             self.render("404.html", message=id)
         self.render("adminEditCompany.html",
@@ -445,49 +463,81 @@ class AdminEditCompanyHandler(tornado.web.RequestHandler):
         )
 
     def post(self, id):
+        #get the company you will be editing
         company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
-        company.submitter.firstName = self.get_argument("firstName", None)
-        company.submitter.lastName = self.get_argument("lastName", None)
-        company.submitter.title = self.get_argument("title", None)
-        company.submitter.org = self.get_argument("org", None)
-        company.submitter.email = self.get_argument("email", None)
-        company.submitter.phone = self.get_argument("phone", None)
+        #Contact info
+        company.contact.firstName = self.get_argument("firstName", None)
+        company.contact.lastName = self.get_argument("lastName", None)
+        company.contact.title = self.get_argument("title", None)
+        company.contact.org = self.get_argument("org", None)
+        company.contact.email = self.get_argument("email", None)
+        company.contact.phone = self.get_argument("phone", None)
         try: 
             if self.request.arguments['contacted']:
-                company.submitter.contacted = True
+                company.contact.contacted = True
         except:
-            company.submitter.contacted = False
-        url = self.get_argument('url', None)
+            company.contact.contacted = False
+        company.contact.save()
+        if company.ceo: #Is there a CEO?
+            #CEO Info
+            company.ceo.firstName = self.get_argument("ceoFirstName", None)
+            company.ceo.lastName = self.get_argument("ceoLastName", None)
+            company.ceo.email = self.get_argument("ceoEmail", None)
+            company.ceo.save()
+        else: #No previously recorded CEO, make a new one.
+            ceo = models.Person(
+                firstName = self.get_argument("ceoFirstName", None),
+                lastName = self.get_argument("ceoLastName", None),
+                email = self.get_argument("ceoEmail", None),
+                org = self.get_argument("companyName", None),
+                personType = "CEO"
+            )
+            ceo.save()
+            company.ceo = ceo
+            company.save()
+        #Company Info
         company.companyName = self.get_argument("companyName", None)
-        company.ceo.firstName = self.get_argument("ceoFirstName", None)
-        company.ceo.lastName = self.get_argument("ceoLastName", None)
-        company.ceo.email = self.get_argument("ceoEmail", None)
+        url = self.get_argument('url', None)
+        company.city = self.get_argument('city', None)
+        company.zipCode = self.get_argument('zipCode', None)
+        if not company.zipCode:
+            company.zipCode = 0
         company.companyType = self.get_argument("companyType", None)
-        if company.companyType == 'other':
+        if company.companyType == 'Other': #if user entered custom option for Type
             company.companyType = self.get_argument('otherCompanyType', None)
-        company.yearFounded = self.get_argument("yearFounded", 9999)
+        company.yearFounded = self.get_argument("yearFounded", None)
+        if not company.yearFounded: #Did not enter year?
+            company.yearFounded = 0
         company.fte = self.get_argument("fte", 0)
+        if not company.fte: #did not enter fte?
+            company.fte = 0
         company.companyFunction = self.get_argument("companyFunction", None)
-        if company.companyFunction == 'other':
+        if company.companyFunction == 'Other': #if user entered custom option for Function
             company.companyFunction = self.get_argument('otherCompanyFunction', None)
-        try:
+        try: #try and get all checked items. 
             company.criticalDataTypes = self.request.arguments['criticalDataTypes']
-        except:
+        except: #if no checked items, then make it into an empty array (form validation should prevent this always)
             company.criticalDataTypes = []
-        if 'Other' in company.criticalDataTypes:
-            del company.criticalDataTypes[company.criticalDataTypes.index('Other')]
+        if 'Other' in company.criticalDataTypes: #if user entered a custom option for Data Type
+            del company.criticalDataTypes[company.criticalDataTypes.index('Other')] #delete 'Other' from list
             if self.get_argument('otherCriticalDataTypes', None):
-                company.criticalDataTypes.append(self.get_argument('otherCriticalDataTypes', None))
-        try:
+                company.criticalDataTypes.append(self.get_argument('otherCriticalDataTypes', None)) #add custom option to list.
+        try: #try and get all checked items. 
             company.revenueSource = self.request.arguments['revenueSource']
-        except:
+        except: #if no checked items, then make it into an empty array (form validation should prevent this always)
             company.revenueSource = []
-        if 'Other' in company.revenueSource:
-            del company.revenueSource[company.revenueSource.index('Other')]
+        if 'Other' in company.revenueSource: #if user entered a custom option for Revenue Source
+            del company.revenueSource[company.revenueSource.index('Other')] #delete 'Other' from list
             if self.get_argument('otherRevenueSource', None):
-                company.revenueSource.append(self.get_argument('otherRevenueSource', None))
-        company.sector = self.request.arguments['sector']
-        company.sector.append(self.get_argument('otherSector', None))
+                company.revenueSource.append(self.get_argument('otherRevenueSource', None)) #add custom option to list.
+        try: #try and get all checked items. 
+            company.sector = self.request.arguments['sector']
+        except: #if no checked items, then make it into an empty array (form validation should prevent this always)
+            company.sector = []
+        if 'Other' in company.sector: #if user entered a custom option for Sector
+            del company.sector[company.sector.index('Other')] #delete 'Other' from list
+            if self.get_argument('otherSector', None):
+                company.sector.append(self.get_argument('otherSector', None)) #add custom option to list.
         company.descriptionLong = self.get_argument('descriptionLong', None)
         company.descriptionShort = self.get_argument('descriptionShort', None)
         company.socialImpact = self.get_argument('socialImpact', None)
@@ -496,8 +546,12 @@ class AdminEditCompanyHandler(tornado.web.RequestHandler):
             company.vetted = True
         elif self.get_argument('vetted') == 'False':
             company.vetted = False
+        if self.get_argument('vettedByCompany') == 'True':
+            company.vettedByCompany = True
+        elif self.get_argument('vettedByCompany') == 'False':
+            company.vettedByCompany = False
         company.save()
-        self.redirect('/admin')
+        self.redirect('/admin/')
 
 class EditDataHandler(tornado.web.RequestHandler):
     def get(self, id):
@@ -535,7 +589,7 @@ class DeleteCompanyHandler(tornado.web.RequestHandler):
         except:
             dataset = models.Dataset.objects.get(id=bson.objectid.ObjectId(id))
             dataset.delete()
-        self.redirect('/admin')
+        self.redirect('/admin/')
 
 class ViewHandler(tornado.web.RequestHandler):
     def get(self, id):

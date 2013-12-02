@@ -6,104 +6,142 @@
 
 <form method="post" id="submitCompany" class="m-form" data-validate="parsley">
 	<fieldset class="m-form-half">
-		<div class="m-form-line"><label for="">First Name: *</label><input type="text" name="firstName" id="firstName" data-required="true" value="{{ company.submitter.firstName }}"></div>
-		<div class="m-form-line"><label for="">Last Name: *</label><input type="text" name="lastName" id="lastName" data-required="true" value="{{ company.submitter.lastName }}"></div>
-		<div class="m-form-line"><label for="">Title: *</label><input type="text" name="title" id="title" data-required="true" value="{{ company.submitter.title }}"></div>
-		<div class="m-form-line"><label for="">Email: *</label><input type="text" name="email" id="email" data-trigger="change" data-type="email" data-required="true" value="{{ company.submitter.email }}"></div>
-		<div class="m-form-line"><label for="">Phone:</label><input type="text" name="phone" id="phone" data-type="phone" value="{{ company.submitter.phone }}"></div>
-		<div class="m-form-box contacted-box"><label for="contacted"><input type="checkbox" name="contacted" id="contacted" value="contacted" {% if company.submitter.contacted %} checked {% end %}>Please check here if you would be willing to be contacted for further information about your company.</label></div>
+		<h3>Contact Info</h3>
+		{% if (company.contact) %}
+			<div class="m-form-line"><label for="">First Name: *</label><input type="text" name="firstName" id="firstName" {% if (company.contact.firstName) %} value="{{ company.contact.firstName }}" {% end %}></div>
+			<div class="m-form-line"><label for="">Last Name: *</label><input type="text" name="lastName" id="lastName" {% if (company.contact.firstName) %} value="{{ company.contact.lastName }}" {% end %}></div>
+			<div class="m-form-line"><label for="">Title: *</label><input type="text" name="title" id="title" {% if (company.contact.title) %} value="{{ company.contact.title }}" {% end %}></div>
+			<div class="m-form-line"><label for="">Email: *</label><input type="text" name="email" id="email" data-trigger="change" data-type="email" {% if (company.contact.email) %} value="{{ company.contact.email }}" {% end %}></div>
+			<div class="m-form-line"><label for="">Phone:</label><input type="text" name="phone" id="phone" data-trigger="change" data-type="phone" {% if (company.contact.phone) %} value="{{ company.contact.phone }}" {% end %}></div>
+			<div class="m-form-box contacted-box"><label for="contacted"><input type="checkbox" name="contacted" id="contacted" value="contacted" {% if company.contact.contacted %} checked {% end %}>Please check here if you would be willing to be contacted for further information about your company.</label></div>
+		{% else %}
+			<p>There is no contact information for this company. Add one:</p>
+			<div class="m-form-line"><label for="">First Name: *</label><input type="text" name="firstName" id="firstName" value=""></div>
+			<div class="m-form-line"><label for="">Last Name: *</label><input type="text" name="lastName" id="lastName" value=""></div>
+			<div class="m-form-line"><label for="">Title: *</label><input type="text" name="title" id="title" value=""></div>
+			<div class="m-form-line"><label for="">Email: *</label><input type="text" name="email" id="email" data-trigger="change" data-type="email" value=""></div>
+			<div class="m-form-line"><label for="">Phone:</label><input type="text" name="phone" id="phone" data-type="phone" value=""></div>
+			<div class="m-form-box contacted-box"><label for="contacted"><input type="checkbox" name="contacted" id="contacted" value="contacted" checked>Please check here if you would be willing to be contacted for further information about your company.</label></div>
+		{% end %}
+		{% try %}
+			<h3>Recommended by:</h3>
+			<div class="m-form-line"><p>First Name: {{ company.recommendedBy.firstName }}</p></div>
+			<div class="m-form-line"><p>Last Name: {{ company.recommendedBy.lastName }}</p></div>
+			<div class="m-form-line"><p>Title: {{ company.recommendedBy.title }}</p></div>
+			<div class="m-form-line"><p>Email: {{ company.recommendedBy.email }}</p></div>
+			<div class="m-form-line"><p>Phone: {{ company.recommendedBy.phone }}</p></div>
+		{% except %}
+		{% end %}
+		{% if (company.submitter) %}
+			<h3>Submitted by:</h3>
+			<div class="m-form-line"><p>First Name: {{ company.submitter.firstName }}</p></div>
+			<div class="m-form-line"><p>Last Name: {{ company.submitter.lastName }}</p></div>
+			<div class="m-form-line"><p>Title: {{ company.submitter.title }}</p></div>
+			<div class="m-form-line"><p>Email: {{ company.submitter.email }}</p></div>
+			<div class="m-form-line"><p>Phone: {{ company.submitter.phone }}</p></div>
+		{% end %}
 	</fieldset>
-	<fieldset class="m-form-half right">		
-		<div class="m-form-line"><label for="companyName">Name of company:</label><input type="text" name="companyName" id="companyName" data-required="true" value="{{ company.companyName }}" ></div>
-		<div class="m-form-line"><label for="url">Company URL:</label><input type='text' name="url" id='url' data-trigger="change" data-type="url" data-required="true" value="{{ company.url }}"></div>
-		<div class="m-form-line"><label for="ceoFirstName">First Name of CEO:</label><input type="text" name="ceoFirstName" id="ceoFirstName" value="{{ company.ceo.firstName}}"></div>
-		<div class="m-form-line"><label for="ceoLastName">Last Name of CEO:</label><input type="text" name="ceoLastName" id="ceoLastName" value="{{ company.ceo.lastName }}"></div>
-		<div class="m-form-line"><label for="ceoEmail">CEO Email:</label><input type="text" name="ceoEmail" id="ceoEmail" data-trigger="change" data-type="email" value="{{ company.ceo.email }}"></div>
+	<fieldset class="m-form-half right">	
+		<h3>Company Info</h3>	
+		<div class="m-form-line"><label for="companyName">Name of company:</label><input type="text" name="companyName" id="companyName" {% if (company.companyName) %} value="{{ company.companyName }}"{%end%} ></div>
+		<div class="m-form-line"><label for="url">Company URL:</label><input type='text' name="url" id='url' data-trigger="change" data-type="url" {% if (company.url) %} value="{{ company.url }}"{%end%}></div>
+		{% if (company.ceo) %}
+			<div class="m-form-line"><label for="ceoFirstName">First Name of CEO:</label><input type="text" name="ceoFirstName" id="ceoFirstName" value="{{ company.ceo.firstName}}"></div>
+			<div class="m-form-line"><label for="ceoLastName">Last Name of CEO:</label><input type="text" name="ceoLastName" id="ceoLastName" value="{{ company.ceo.lastName }}"></div>
+			<div class="m-form-line"><label for="ceoEmail">CEO Email:</label><input type="text" name="ceoEmail" id="ceoEmail" data-trigger="change" data-type="email"  value="{{ company.ceo.email }}"></div>
+		{% else %}
+			<div class="m-form-line"><label for="ceoFirstName">First Name of CEO:</label><input type="text" name="ceoFirstName" id="ceoFirstName" value=""></div>
+			<div class="m-form-line"><label for="ceoLastName">Last Name of CEO:</label><input type="text" name="ceoLastName" id="ceoLastName" value=""></div>
+			<div class="m-form-line"><label for="ceoEmail">CEO Email:</label><input type="text" name="ceoEmail" id="ceoEmail" data-trigger="change" data-type="email"  value=""></div>
+		{% end %}
 		<div class="m-form-line"><label for="city">In which city is this company located?</label><input type="text" name="city" id="city" {% if company.city %} value="{{ company.city }}" {% end %}></div>
 		<div class="m-form-line"><label for="zipCode">Zip Code:</label><input type="text" name="zipCode" id="zipCode" {% if company.zipCode %} value="{{ company.zipCode }}" {% end %}></div>
 		<div class="m-form-box">Type of Company:<br>
 		{% for type in companyType %}
-			<label for=""><input type="radio" name="companyType" data-trigger="change" data-group="companyType" data-mincheck="1" value="{{ type }}" {% if company.companyType == type %} checked {% end %}>{{ type }}</label>
+			<label for=""><input type="radio" name="companyType" data-trigger="change" data-group="companyType" value="{{ type }}" {% if company.companyType == type %} checked {% end %}>{{ type }}</label>
 		{% end %}
 		{%if company.companyType not in companyType %}
-			<label for=""><input type="radio" name="companyType" data-trigger="change" data-group="companyType" data-mincheck="1" value="other" checked>Other
-			<input type="text" name="otherCompanyType" id="otherCompanyType" data-trigger="change" data-group="companyType" data-mincheck="1" value ="{{ company.companyType }}"></label>
+			<label for=""><input type="radio" name="companyType" data-trigger="change" data-group="companyType" value="Other" checked>Other
+			<input type="text" name="otherCompanyType" id="otherCompanyType" data-trigger="change" data-group="companyType" {% if company.companyType %} value ="{{ company.companyType }}" {% end %}></label>
 		{% else %}
-			<label for=""><input type="radio" name="companyType" data-trigger="change" data-group="companyType" data-mincheck="1" value="other">Other
-			<input type="text" name="otherCompanyType" id="otherCompanyType" data-trigger="change" data-group="companyType" data-mincheck="1"></label>
+			<label for=""><input type="radio" name="companyType" data-trigger="change" data-group="companyType" value="Other">Other
+			<input type="text" name="otherCompanyType" id="otherCompanyType" data-trigger="change" data-group="companyType"></label>
 		{% end %}
 		</div>
-		<div class="m-form-line"><label for="">Founding Year:</label><input type="text" name="yearFounded" id="yearFounded" data-trigger="change" data-trigger="change" data-type="number" value="{{ company.yearFounded }}"></div>
-		<div class="m-form-line"><label for="">Number of FTE's:</label><input type="text" name="fte" id="fte" data-trigger="change" data-type="number" value="{{ company.fte }}"></div>
+		<div class="m-form-line"><label for="">Founding Year:</label><input type="text" name="yearFounded" id="yearFounded" data-trigger="change" data-trigger="change" data-type="number" {% if company.yearFounded %} value="{{ company.yearFounded }}"{%end%}></div>
+		<div class="m-form-line"><label for="">Number of FTE's:</label><input type="text" name="fte" id="fte" data-trigger="change" data-type="number" {% if company.fte %} value="{{ company.fte }}" {%end%}></div>
 	</fieldset>
 
 	<fieldset class="m-form-half">
 		<h3>Which best describes the function of your company?</h3>
 		{% for function in companyFunction %}
-			<label for=""><input type="radio" name="companyFunction" data-trigger="change" data-group="companyFunction" data-mincheck="1" value="{{ function }}" {% if company.companyFunction == function %} checked {% end %}>{{ function }}</label><br>
+			<label for=""><input type="radio" name="companyFunction" data-trigger="change" data-group="companyFunction" value="{{ function }}" {% if company.companyFunction == function %} checked {% end %}>{{ function }}</label><br>
 		{% end %}
 		{%if company.companyFunction not in companyFunction %}
-			<label for=""><input type="radio" name="companyFunction" data-trigger="change" data-group="companyFunction" data-mincheck="1" value="other" checked>Other</label><br>
-			<label for=""><input type="text" name="otherCompanyFunction" id="otherCompanyFunction" data-trigger="change" data-group="companyFunction" data-mincheck="1" value="{{ company.companyFunction }}"></label><br>
+			<label for=""><input type="radio" name="companyFunction" id="otherCompanyFunction" data-trigger="change" data-group="companyFunction" value="Other" checked>Other</label><br>
+			<label for=""><input type="text" name="otherCompanyFunction" id="otherCompanyFunction" data-trigger="change" data-group="companyFunction" {% if company.companyFunction %}value="{{ company.companyFunction }}"{%end%}></label><br>
 		{% else %}
-			<label for=""><input type="radio" name="companyFunction" data-trigger="change" data-group="companyFunction" data-mincheck="1" value="other">Other</label>
-			<label for=""><input type="text" name="otherCompanyFunction" id="otherCompanyFunction" data-trigger="change" data-group="companyFunction" data-mincheck="1"></label>
+			<label for=""><input type="radio" name="companyFunction" data-trigger="change" data-group="companyFunction" value="Other">Other</label>
+			<label for=""><input type="text" name="otherCompanyFunction" id="otherCompanyFunction" data-trigger="change" data-group="companyFunction"></label>
 		{% end %}
 	</fieldset>
 	
 	<fieldset class="m-form-half right">
 		<h3>Which of the following are critical sources of data for your company? By “critical,” we mean that your company would have to shut down a line of business, shut down completely, or replace the data in some way if the data were no longer available. (check all that apply) *</h3>
 		{% for dataType in criticalDataTypes %}
-			<label for=""><input type="checkbox" name="criticalDataTypes" data-trigger="change" data-group="criticalDataTypes" data-mincheck="1" value="{{ dataType }}" {% if dataType in company.criticalDataTypes %} checked {% end %}>{{ dataType }}</label><br>
+			<label for=""><input type="checkbox" name="criticalDataTypes" data-trigger="change" data-group="criticalDataTypes" value="{{ dataType }}" {% if dataType in company.criticalDataTypes %} checked {% end %}>{{ dataType }}</label><br>
 		{% end %}
 		{% if list(set(company.criticalDataTypes) - set(criticalDataTypes)) %}
-			<label for=""><input type="checkbox" name="criticalDataTypes" data-trigger="change" data-group="criticalDataTypes" data-mincheck="1" value="Other" checked>Other</label>
-			<label for=""><input type="text" name="otherCriticalDataTypes" id="otherCriticalDataTypes" data-trigger="change" data-group="criticalDataTypes" data-mincheck="1" value="{{ list(set(company.criticalDataTypes) - set(criticalDataTypes))[0] }}"></label><br>
+			<label for=""><input type="checkbox" name="criticalDataTypes" data-trigger="change" class="otherCriticalDataTypes" data-group="criticalDataTypes" value="Other" checked>Other</label>
+			<label for=""><input type="text" name="otherCriticalDataTypes" id="otherCriticalDataTypes" class="otherCriticalDataTypes" data-trigger="change" data-group="criticalDataTypes" value="{{ list(set(company.criticalDataTypes) - set(criticalDataTypes))[0] }}"></label><br>
 		{% else %}
-			<label for=""><input type="checkbox" name="criticalDataTypes" data-trigger="change" data-group="criticalDataTypes" data-mincheck="1" value="Other">Other</label>
-			<label for=""><input type="text" name="otherCriticalDataTypes" id="otherCriticalDataTypes" data-trigger="change" data-group="criticalDataTypes" data-mincheck="1"></label>
+			<label for=""><input type="checkbox" name="criticalDataTypes" data-trigger="change" class="otherCriticalDataTypes" data-group="criticalDataTypes" value="Other">Other</label>
+			<label for=""><input type="text" name="otherCriticalDataTypes" id="otherCriticalDataTypes" class="otherCriticalDataTypes" data-trigger="change" data-group="criticalDataTypes"></label>
 		{% end %}
 	</fieldset>
 	<fieldset class="m-form-half">
 		<h3>Which of the following are significant sources of revenue for your company? (check all that apply) *</h3>
 		{% for source in revenueSource %}
-			<label for=""><input type="checkbox" name="revenueSource" data-trigger="change" data-group="revenueSource" data-mincheck="1" value="{{ source }}" {% if source in company.revenueSource %} checked {% end %}>{{ source }}<br>
+			<label for=""><input type="checkbox" name="revenueSource" data-trigger="change" data-group="revenueSource" value="{{ source }}" {% if source in company.revenueSource %} checked {% end %}>{{ source }}<br>
 		{% end %}
 		{% if list(set(company.revenueSource) - set(revenueSource)) %}
-			<label for=""><input type="checkbox" name="revenueSource" data-trigger="change" data-group="revenueSource" data-mincheck="1" value="Other" checked>Other
-			<input type="text" name="otherRevenueSource" id="otherRevenueSource" data-trigger="change" data-group="revenueSource" data-mincheck="1" value="{{ list(set(company.revenueSource) - set(revenueSource))[0] }}"></label>
+			<label for=""><input type="checkbox" name="revenueSource" class="otherRevenueSource" data-trigger="change" data-group="revenueSource" value="Other" checked>Other
+			<input type="text" name="otherRevenueSource" id="otherRevenueSource" class="otherRevenueSource" data-trigger="change" data-group="revenueSource" value="{{ list(set(company.revenueSource) - set(revenueSource))[0] }}"></label>
 		{% else %}
-			<label for=""><input type="checkbox" name="revenueSource" data-trigger="change" data-group="revenueSource" data-mincheck="1" value="Other">Other
-			<input type="text" name="otherRevenueSource" id="otherRevenueSource" data-trigger="change" data-group="revenueSource" data-mincheck="1"></label>
+			<label for=""><input type="checkbox" name="revenueSource" class="otherRevenueSource" data-trigger="change" data-group="revenueSource" value="Other">Other
+			<input type="text" name="otherRevenueSource" id="otherRevenueSource" class="otherRevenueSource" data-trigger="change" data-group="revenueSource"></label>
 		{% end %}
 	</fieldset>
 	<fieldset class="m-form-half right">
 		<h3>What sector(s) does your company's work involve? (check all that apply): *</h3>
 		{% for sector in sectors %}
-			<label for=""><input type="checkbox" name="sector" data-trigger="change" data-group="sector" data-mincheck="1" value="{{ sector }}" {% if sector in company.sector %} checked {% end %}>{{ sector }}<br>
+			<label for=""><input type="checkbox" name="sector" data-trigger="change" data-group="sector" value="{{ sector }}" {% if sector in company.sector %} checked {% end %}>{{ sector }}<br>
 		{% end %}
 		{% if list(set(company.sector) - set(sectors)) %}
-			<label for=""><input type="checkbox" name="sector" data-trigger="change" data-group="sector" data-mincheck="1" value="Other" checked>Other
-			<input type="text" name="otherSector" id="otherSector" data-trigger="change" data-group="sector" data-mincheck="1" value="{{ list(set(company.sector) - set(sectors))[0] }}"></label>
+			<label for=""><input type="checkbox" name="sector" class="otherSector" data-trigger="change" data-group="sector" value="Other" checked>Other
+			<input type="text" name="otherSector" id="otherSector" class="otherSector" data-trigger="change" data-group="sector" value="{{ list(set(company.sector) - set(sectors))[0] }}"></label>
 		{% else %}
-			<label for=""><input type="checkbox" name="sector" data-trigger="change" data-group="sector" data-mincheck="1" value="other">Other
-			<input type="text" name="otherSector" id="otherSector" data-trigger="change" data-group="sector" data-mincheck="1"></label>
+			<label for=""><input type="checkbox" name="sector" class="otherSector" data-trigger="change" data-group="sector" value="Other">Other
+			<input type="text" name="otherSector" id="otherSector" class="otherSector" data-trigger="change" data-group="sector"></label>
 		{% end %}
 	</fieldset>
 	<fieldset class="m-form-half">
 		<h3>Please give us a short public statement describing your company’s mission and work. You can take this material from your website or other publications if you choose to. [200 words or less] *</h3>
-		<textarea rows="10" cols="59" name="descriptionLong" id="descriptionLong" data-trigger="keyup" data-maxwords="200" data-required="true">{{ company.descriptionLong }}</textarea><br>
+		<textarea rows="10" cols="59" name="descriptionLong" id="descriptionLong" data-trigger="keyup" data-maxwords="200">{% if company.descriptionLong %} {{ company.descriptionLong }} {% end %}</textarea><br>
 		<h3>As a summary, please provide a one sentence description of your company. [25 words or less] *</h3>
-		<textarea rows="10" cols="59" name="descriptionShort" id="descriptionShort" data-trigger="keyup" data-maxwords="25" data-required="true">{{ company.descriptionShort }}</textarea><br>
+		<textarea rows="10" cols="59" name="descriptionShort" id="descriptionShort" data-trigger="keyup" data-maxwords="25">{% if company.descriptionShort %}{{ company.descriptionShort }}{% end %}</textarea><br>
 		<h3>Besides revenue generation, how do you measure the impact your company has for society and the public good? [50 words or less]</h3>
-		<textarea rows="10" cols="59" name="socialImpact" id="socialImpact" data-trigger="keyup" data-maxwords="50">{{ company.socialImpact }}</textarea><br>
+		<textarea rows="10" cols="59" name="socialImpact" id="socialImpact" data-trigger="keyup" data-maxwords="50">{% if company.descriptionShort %}{{ company.socialImpact }}{% end %}</textarea><br>
 	</fieldset>
 	<fieldset class="m-form-half right">
 		<h3>Please include any financial or operational information that will help us understand your company. We are interested in specific information like past and projected annual revenues, total outside investment dollars to date, and significant investors or partners. [100 words or less]</h3>
-		<textarea rows="10" cols="59" name="financialInfo" id="financialInfo" data-trigger="keyup" data-maxwords="100">{{ company.financialInfo }}</textarea><br>
+		<textarea rows="10" cols="59" name="financialInfo" id="financialInfo" data-trigger="keyup" data-maxwords="100">{% if company.descriptionShort %}{{ company.financialInfo }}{% end %}</textarea><br>
 		<h3>Vetted?</h3>
 		<input type="radio" name="vetted" id="vetted" value="True" {% if company.vetted %} checked {% end %}>True<br>
 		<input type="radio" name="vetted" id="vetted" value="False" {% if not company.vetted %} checked {% end %}>False<br>
+		<h3>Vetted By Company?</h3>
+		<input type="radio" name="vettedByCompany" id="vettedByCompany" value="True" {% if company.vettedByCompany %} checked {% end %}>True<br>
+		<input type="radio" name="vettedByCompany" id="vettedByCompany" value="False" {% if not company.vettedByCompany %} checked {% end %}>False<br>
 	</fieldset>
 	<div class="m-form-footer">	
 		<input type="hidden" class="id" name="id" value="{{ id }}">
