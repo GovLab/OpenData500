@@ -67,7 +67,7 @@ header {
 .m-main-menu a:last-child {
   border-right: 0; }
 
-.m-button {
+.m-button { 
   padding: 5px 14px 4px 14px;
   background-color: transparent;
   border: 1px solid #fff;
@@ -81,6 +81,26 @@ header {
   font-weight: 14px;
   letter-spacing: .6px;
   cursor: pointer; }
+
+  .l-button {
+  padding: 5px 14px 4px 14px;
+  background-color: transparent;
+  border: 1px solid #472b74;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  color: #472b74;
+  font-family: 'Exo', sans-serif;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 14px;
+  letter-spacing: .6px;
+  cursor: pointer; }
+
+.l-button:hover {
+  background-color: #472b74;
+  border: 1px solid #fff;
+  color: #fff; }
 
 .m-button:hover {
   background-color: #472b74;

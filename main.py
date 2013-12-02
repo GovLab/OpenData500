@@ -35,6 +35,7 @@ companyFunction = ['Consumer Research and/or Marketing', 'Consumer Services', 'D
 criticalDataTypes = ['Federal Open Data', 'State Open Data', 'City/Local Open Data', 'Private/Proprietary Data Sources']
 revenueSource = ['Advertising', 'Data Management and Analytic Services', 'Database Licensing', 'Lead Generation To Other Businesses', 'Philanthropy', 'Software Licensing', 'Subscriptions', 'User Fees for Web or Mobile Access']
 sectors = ['Agriculture', 'Arts, Entertainment and Recreation' 'Crime', 'Education', 'Energy', 'Environmental', 'Finance', 'Geospatial data/mapping', 'Health and Healthcare', 'Housing/Real Estate', 'Manufacturing', 'Nutrition', 'Scientific Research', 'Social Assistance', 'Trade', 'Transportation', 'Telecom', 'Weather']
+datatypes = ['Federal Open Data', 'State Open Data', 'City/Local Open Data']
 
 # application settings and handle mapping info
 class Application(tornado.web.Application):
@@ -92,8 +93,8 @@ class SubmitCompanyHandler(tornado.web.RequestHandler):
     def get(self):
         self.render(
             "submitCompany.html",
-            page_title = "Submit a Company",
-            page_heading = "Submit a Company"
+            page_title = "Submit Your Company",
+            page_heading = "Submit Your Company"
         )
     def post(self):
         firstName = self.get_argument("firstName", None)
@@ -306,40 +307,53 @@ class RecommendCompanyHandler(tornado.web.RequestHandler):
 
 class SubmitDataHandler(tornado.web.RequestHandler):
     def get(self, id):
+        #Make not whether we are submitting a Co. and adding a dataset or editing a Co. and adding a dataset
+        action = self.get_argument('action', None)
+        #get company
         company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
         page_heading = "Enter Data Sets for " + company.companyName
         self.render("submitData.html",
             page_title = "Submit Data Sets For Company",
             page_heading = page_heading,
-            id = id
+            action = action,
+            id = id #Company id.
         )
+
     def post(self, id):
+        #get the company we are dealing with:
         id = self.get_argument('id', None)
         company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
+        #get dataset fields from form:
         datasetName = self.get_argument('datasetName', None)
         datasetURL = self.get_argument('datasetURL', None)
-        try:
+        try: #get all entered dataTypes
             dataType = self.request.arguments['dataType']
-        except:
+        except: #if none, then make empty attay
             dataType = []
-        if 'Other' in dataType:
+        if 'Other' in dataType: #if Other, add the other.
             del dataType[dataType.index('Other')]
             dataType.append(self.get_argument('otherDataType', None))
         ratingSubmitted = self.get_argument('rating', None)
         if not ratingSubmitted:
             ratingSubmitted = 9999
         reason = self.get_argument('reason', None)
-        author = company.submitter
+        #The author of this dataset review is always the contact.
+        author = company.contact
+        #Can't check if dataset exists. If check by URL, if someone enters data.gov instead of specific URL, 
+        #datasets might be different but same URL.
+        #Just save them all.
         dataset = models.Dataset(
             datasetName = datasetName,
             datasetURL = datasetURL,
             dataType = dataType,
         )
+        #save the rating
         rating = models.Rating(
             author = author,
             rating =ratingSubmitted,
             reason = reason
         )
+        #Save ratings, datasets, author, and company
         dataset.ratings.append(rating)
         dataset.usedBy.append(company)
         dataset.save()
@@ -347,9 +361,12 @@ class SubmitDataHandler(tornado.web.RequestHandler):
         author.save()
         company.datasets.append(dataset)
         company.save()
+        #If want to add another, redirect to form again. 
         if self.get_argument('submit', None) == 'Add Another':
             self.redirect("/addData/" + id)
-        else: 
+        if action == 'editing': #we were editing a Co., return to edit page.
+            self.redirect("/edit/" + id)
+        elif action == 'submitting': #else, you're done, go home.
             self.redirect("/")
 
 class EditCompanyHandler(tornado.web.RequestHandler):
@@ -371,7 +388,10 @@ class EditCompanyHandler(tornado.web.RequestHandler):
             companyFunction = companyFunction,
             criticalDataTypes = criticalDataTypes,
             revenueSource = revenueSource,
-            sectors = sectors
+            sectors = sectors,
+            datatypes = datatypes,
+            action = 'editing',
+            id = str(company.id)
         )
 
     def post(self, id):
@@ -555,8 +575,8 @@ class AdminEditCompanyHandler(tornado.web.RequestHandler):
 
 class EditDataHandler(tornado.web.RequestHandler):
     def get(self, id):
+        #Are we adding a new dataset? or are we editing an existing dataset?
         dataset = models.Dataset.objects.get(id=bson.objectid.ObjectId(id))
-        datatypes = ['Federal Open Data', 'State Open Data', 'City/Local Open Data']
         self.render("editData.html",
             page_title = "Editing Dataset",
             page_heading = "Edit Datasets",
@@ -575,7 +595,7 @@ class EditDataHandler(tornado.web.RequestHandler):
             del dataset.dataType[dataset.dataType.index('Other')]
             dataset.dataType.append(self.get_argument('otherDataType', None))
         dataset.save()
-        self.redirect("/")
+        #self.redirect("/")
 
 class DeleteCompanyHandler(tornado.web.RequestHandler):
     def get(self, id):
