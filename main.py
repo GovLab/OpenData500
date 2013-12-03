@@ -584,16 +584,15 @@ class EditDataHandler(tornado.web.RequestHandler):
             dataset = dataset
         )
     def post(self, id):
+        #find existing dataset
         dataset = models.Dataset.objects.get(id=bson.objectid.ObjectId(id))
         dataset.datasetName = self.get_argument('datasetName', None)
         dataset.datasetURL = self.get_argument('datasetURL', None)
-        try:
-            dataset.dataType = self.request.arguments['dataType']
-        except:
-            dataset.dataType = []
-        if 'Other' in dataset.dataType:
-            del dataset.dataType[dataset.dataType.index('Other')]
-            dataset.dataType.append(self.get_argument('otherDataType', None))
+        dataset.dataType = self.get_argument('dataTypes', None)
+        #author of the review
+        authorID = self.get_argument('authorID', None)
+        dataset.rating = self.get_argument('rating', None)
+        dataset.reason = self.get_argument('reason', None)
         dataset.save()
         #self.redirect("/")
 

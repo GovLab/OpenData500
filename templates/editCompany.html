@@ -132,9 +132,10 @@
 					<input type="text" name="otherDataType" id="otherDataType_{{dataset.id}}"><br>
 				{% end %}
 				<p>How would you rate the usefulness of this dataset? Your answer can reflect your experience with data quality, format of the data, or other factors.</p>
-				<input type="text" name="rating" id="rating_{{dataset.id}}">
+				<input type="text" name="rating" id="rating_{{dataset.id}}" value="{{dataset.ratings[0].rating}}">
 				<p>Why did you give it this rating? [50 words or less]</p>
-				<textarea rows="6" cols="70" name="reason" id="reason_{{dataset.id}}" data-trigger="keyup" data-maxwords="50"></textarea><br>
+				<textarea rows="6" cols="70" name="reason" id="reason_{{dataset.id}}" data-trigger="keyup" data-maxwords="50" >{{dataset.ratings[0].reason}}</textarea><br>
+				<input type="hidden" name="author" id="author_{{dataset.id}}" value="{{ company.contact.id }}">
 				<button class="l-button" type="button" id="saveDataset" value="{{dataset.id}}">Save</button><span class="saving" style="display:none">Saving {{dataset.datasetName}}...</span><span class="saved" style="display:none">Saved!</span>
 			</div>
 		{% end %}

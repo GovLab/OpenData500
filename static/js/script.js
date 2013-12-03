@@ -48,8 +48,8 @@ $("input#otherCompanyType:text").focus(function() {
 $('button#saveDataset').click(function() {
 	console.log($(this).val());
 	datasetID = $(this).val();
-	var name = $('#datasetName_'+datasetID).val();
-	var url = $('#datasetURL_'+datasetID).val();
+	var datasetName = $('#datasetName_'+datasetID).val();
+	var datasetURL = $('#datasetURL_'+datasetID).val();
 	var dataTypes = [];
     $('#dataType_'+datasetID).each(function() {
     	dataTypes.push($(this).val());
@@ -60,18 +60,19 @@ $('button#saveDataset').click(function() {
     }
     var rating = $('#rating_'+datasetID).val();
     var reason = $('#reason_'+datasetID).val();
-    if (name != '' && url != '', dataTypes.length == 0) {
+    var authorID = $('#author_'+datasetID).val();
+    if (datasetName != '' && datasetURL != '', dataTypes.length == 0) {
     	$('.saving').fadeIn(200);
-		data 
 		$.ajax({
 			type: 'POST',
 			url: '/editData/' + datasetID,
 			data: {
-					'datasetName': name,
-					'datasetURL': url,
+					'datasetName': datasetName,
+					'datasetURL': datasetURL,
 					'dataType': dataTypes,
 					'rating': rating,
-					'reason': reason
+					'reason': reason,
+					'authorID': authorID
 				},
 			dataType: 'json',
 			success: function() {
