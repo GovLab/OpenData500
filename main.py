@@ -15,6 +15,7 @@ import tornado.ioloop
 import tornado.options
 import tornado.web
 from tornado.escape import json_encode 
+import logging
 
 #Mongo
 from mongoengine import *
@@ -157,7 +158,7 @@ class SubmitCompanyHandler(tornado.web.RequestHandler):
         datasetWishList = self.get_argument('datasetWishList', None)
         companyRec = self.get_argument('companyRec', None)
         conferenceRec = self.get_argument('conferenceRec', None)
-        submitter = models.Person(
+        contact = models.Person(
             firstName = firstName,
             lastName = lastName,
             title = title,
@@ -170,11 +171,12 @@ class SubmitCompanyHandler(tornado.web.RequestHandler):
             companyRec = companyRec,
             conferenceRec = conferenceRec
         )
+        #if the ceo email and the contact email are the same, then we only save one person.
         if email == ceoEmail:
-            ceo = submitter
+            ceo = contact
             ceo.personType = "CEO"
             ceo.save()
-            submitter.save()
+            contact.save()
         else:
             ceo = models.Person(
                 firstName = ceoFirstName,
@@ -182,7 +184,7 @@ class SubmitCompanyHandler(tornado.web.RequestHandler):
                 email = ceoEmail,
                 personType = "CEO"
             )
-            submitter.save()
+            contact.save()
             ceo.save()
         company = models.Company(
             companyName = companyName,
@@ -201,14 +203,14 @@ class SubmitCompanyHandler(tornado.web.RequestHandler):
             descriptionShort = descriptionShort,
             socialImpact = socialImpact,
             financialInfo = financialInfo,
-            submitter = submitter,
+            contact = contact,
             vetted = False,
             vettedByCompany = True,
             recommended = False #this was submitted not recommended. 
         )
         company.save()
-        submitter.submittedCompany.append(company)
-        submitter.save()
+        contact.submittedCompany.append(company)
+        contact.save()
         id = str(company.id)
         self.redirect("/addData/" + id)
 
@@ -315,7 +317,6 @@ class SubmitDataHandler(tornado.web.RequestHandler):
         self.render("submitData.html",
             page_title = "Submit Data Sets For Company",
             page_heading = page_heading,
-            action = action,
             id = id #Company id.
         )
 
@@ -342,6 +343,7 @@ class SubmitDataHandler(tornado.web.RequestHandler):
         #Can't check if dataset exists. If check by URL, if someone enters data.gov instead of specific URL, 
         #datasets might be different but same URL.
         #Just save them all.
+        #Are we making a new one, or editing?
         dataset = models.Dataset(
             datasetName = datasetName,
             datasetURL = datasetURL,
@@ -584,16 +586,38 @@ class EditDataHandler(tornado.web.RequestHandler):
             dataset = dataset
         )
     def post(self, id):
-        #find existing dataset
-        dataset = models.Dataset.objects.get(id=bson.objectid.ObjectId(id))
-        dataset.datasetName = self.get_argument('datasetName', None)
-        dataset.datasetURL = self.get_argument('datasetURL', None)
-        dataset.dataType = self.get_argument('dataTypes', None)
-        #author of the review
-        authorID = self.get_argument('authorID', None)
-        dataset.rating = self.get_argument('rating', None)
-        dataset.reason = self.get_argument('reason', None)
-        dataset.save()
+        #get values
+        datasetName = self.get_argument('datasetName', None)
+        datasetURL = self.get_argument('datasetURL', None)
+        dataType = self.get_argument('dataTypes', None).split(',')
+        rating = self.get_argument('rating', None)
+        reason = self.get_argument('reason', None)
+        try: #to find existing dataset
+            dataset = models.Dataset.objects.get(id=bson.objectid.ObjectId(id))
+            dataset.datasetName = datasetName
+            dataset.datasetURL = datasetURL
+            dataset.dataType = dataType 
+            for r in dataset.ratings: #get review that corresponds with this author and save the info.
+                if str(r.author.id) == str(self.get_argument('authorID', None)):
+                    r.rating = rating
+                    r.reason = reason
+            dataset.save()
+        except: #make a new one, for current company
+            company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
+            dataset = models.Dataset(
+                datasetName = datasetName,
+                datasetURL = datasetURL,
+                dataType = dataType
+            )
+            rating = models.Rating(
+                author = company.contact,
+                rating =rating,
+                reason = reason
+            )
+            dataset.ratings.append(rating)
+            dataset.save()
+            company.datasets.append(dataset)
+            company.save()
         #self.redirect("/")
 
 class DeleteCompanyHandler(tornado.web.RequestHandler):

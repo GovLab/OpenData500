@@ -32,14 +32,6 @@
 			<div class="m-form-line"><p>Phone: {{ company.recommendedBy.phone }}</p></div>
 		{% except %}
 		{% end %}
-		{% if (company.submitter) %}
-			<h3>Submitted by:</h3>
-			<div class="m-form-line"><p>First Name: {{ company.submitter.firstName }}</p></div>
-			<div class="m-form-line"><p>Last Name: {{ company.submitter.lastName }}</p></div>
-			<div class="m-form-line"><p>Title: {{ company.submitter.title }}</p></div>
-			<div class="m-form-line"><p>Email: {{ company.submitter.email }}</p></div>
-			<div class="m-form-line"><p>Phone: {{ company.submitter.phone }}</p></div>
-		{% end %}
 	</fieldset>
 	<fieldset class="m-form-half right">	
 		<h3>Company Info</h3>	

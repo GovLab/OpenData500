@@ -38,7 +38,7 @@ class Company(Document):
 	companyName = StringField()					#String limit 70				#Required
 	url = StringField()							#Valid URL 						#Required
 	ceo = ReferenceField(Person)				#Person, see above				#NOT Required
-	submitter = ReferenceField(Person)			#Person, see above				#Required
+	#submitter = ReferenceField(Person)			#Person, see above				#Required
 	recommendedBy = ReferenceField(Person)
 	recommended = BooleanField()				#Recommended or Submitted?
 	yearFounded = IntField()					#Valid year Integer				#NOT Required
