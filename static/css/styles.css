@@ -67,7 +67,7 @@ header {
 .m-main-menu a:last-child {
   border-right: 0; }
 
-.m-button { 
+.m-button {
   padding: 5px 14px 4px 14px;
   background-color: transparent;
   border: 1px solid #fff;
@@ -81,26 +81,6 @@ header {
   font-weight: 14px;
   letter-spacing: .6px;
   cursor: pointer; }
-
-  .l-button {
-  padding: 5px 14px 4px 14px;
-  background-color: transparent;
-  border: 1px solid #472b74;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  border-radius: 4px;
-  color: #472b74;
-  font-family: 'Exo', sans-serif;
-  text-transform: uppercase;
-  font-size: 14px;
-  font-weight: 14px;
-  letter-spacing: .6px;
-  cursor: pointer; }
-
-.l-button:hover {
-  background-color: #472b74;
-  border: 1px solid #fff;
-  color: #fff; }
 
 .m-button:hover {
   background-color: #472b74;
@@ -202,3 +182,110 @@ header {
   position: absolute;
   top: -8px;
   left: 30px; }
+
+.fancy-background {
+  margin-top: -30px;
+  text-align: center;
+  height: 270px; }
+  .fancy-background img {
+    position: relative;
+    z-index: -1;
+    left: -190px; }
+
+.m-homepage h1 {
+  margin-bottom: 80px; }
+.m-homepage h2 {
+  font-size: 2em; }
+.m-homepage ul {
+  padding: 0; }
+.m-homepage li {
+  list-style-type: none;
+  border-bottom: 1px solid #472b74;
+  padding: 10px 0;
+  max-height: 40px;
+  height: auto;
+  overflow: hidden;
+  -webkit-transition: all 0.4s ease;
+  -moz-transition: all 0.4s ease;
+  transition: all 0.4s ease; }
+.m-homepage li.s-active {
+  max-height: 700px;
+  -webkit-transition: all 0.4s ease;
+  -moz-transition: all 0.4s ease;
+  transition: all 0.4s ease; }
+
+.m-half {
+  width: calc(50% - 20px);
+  padding-right: 10px;
+  display: inline-block;
+  vertical-align: top; }
+
+.m-full {
+  display: block;
+  padding: 1px 10px;
+  margin-top: 10px; }
+
+.datasets {
+  box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.4);
+  background-color: #f6f6f6; }
+
+.m-list-head {
+  background-color: #472b74; }
+  .m-list-head div {
+    display: inline-block;
+    padding: 0 5px;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: .5px; }
+
+.m-list-company-summary {
+  margin-bottom: 10px; }
+  .m-list-company-summary div {
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 5px; }
+
+.m-list-company-full {
+  border-top: 1px solid #aaaaaa;
+  box-shadow: inset 0 3px 3px -3px rgba(0, 0, 0, 0.3); }
+
+.m-homepage-list-name {
+  width: calc(15% - 20px);
+  padding-left: 10px;
+  margin-right: 10px; }
+
+.m-homepage-list-sectors {
+  width: calc(25% - 20px);
+  margin-right: 10px; }
+
+.m-homepage-list-desc {
+  width: calc(50% - 20px); }
+
+.m-homepage-list-control {
+  width: calc(10% - 20px);
+  text-align: center; }
+
+.m-expand-arrow {
+  width: 0;
+  height: 0;
+  padding: 0 !important;
+  display: inline-block;
+  border-right: 12px solid #472b74;
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+  cursor: pointer; }
+
+.s-active .m-expand-arrow {
+  width: 0;
+  height: 0;
+  padding: 0 !important;
+  display: inline-block;
+  border-right: 12px solid transparent;
+  border-left: 12px solid transparent;
+  border-top: 12px solid #472b74;
+  cursor: pointer;
+  position: relative;
+  top: 6px; }
