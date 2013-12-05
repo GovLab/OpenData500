@@ -7,6 +7,14 @@
 
 
 // your fancy JS code goes here!
+
+$(function() {
+    $( "#accordion" ).accordion({
+      collapsible: true
+    });
+  });
+
+
 $("input.otherSector:text").focus(function() {
 	$("input.otherSector:checkbox").prop('checked', true);
 });
@@ -45,141 +53,110 @@ $("input#otherCompanyType:text").focus(function() {
 
 
 
-$('button#saveDataset').click(function(event) {
-	$('.error').hide();
-	var datasetID = $(this).val();
-	console.log(datasetID);
-	var datasetName = $('#datasetName_'+datasetID).val();
-	var datasetURL = $('#datasetURL_'+datasetID).val();
-	var dataTypes = [];
-    $('#dataType_'+datasetID+':checked').each(function() {
-    	dataTypes.push($(this).val());
-    });
-    var otherDataType = $('#otherDataType_'+datasetID).val();
-    if (otherDataType != '') {
-    	dataTypes.push(otherDataType);
-    } 
-    var rating = $('#rating_'+datasetID).val();
-    var reason = $('#reason_'+datasetID).val();
-    var authorID = $('#author_'+datasetID).val();
-    var data = {
-					'datasetName': datasetName,
-					'datasetURL': datasetURL,
-					'dataTypes': dataTypes.join(),
-					'rating': rating,
-					'reason': reason,
-					'authorID': authorID
-				}
-    if (datasetName != '' && datasetURL != '' && dataTypes.length > 0) {
-    	$('.saving').fadeIn(200);
-		$.ajax({
-			type: 'POST',
-			url: '/editData/' + datasetID,
-			data: data,
-			error: function(error) {
-				console.debug("error is " +JSON.stringify(error));
-				console.log("error, bro");
-				$('.saving').hide();
-				$('.error').fadeIn(200);
-			},
-			beforeSend: function(xhr, settings) {
-				$(event.target).attr('disabled', 'disabled'); },
-			success: function() {
-				$('.saving').hide(200);
-				$('.saved').fadeIn(200);
-				$(event.target).removeAttr('disabled');
-			}
-		});
-	}
-	$('.error').fadeOut(1000);
-	return false;
-});
+// $('button#saveDataset').click(function(event) {
+// 	$('.error').hide();
+// 	var datasetID = $(this).val();
+// 	console.log(datasetID);
+// 	var datasetName = $('#datasetName_'+datasetID).val();
+// 	var datasetURL = $('#datasetURL_'+datasetID).val();
+// 	var dataTypes = [];
+//     $('#dataType_'+datasetID+':checked').each(function() {
+//     	dataTypes.push($(this).val());
+//     });
+//     var otherDataType = $('#otherDataType_'+datasetID).val();
+//     if (otherDataType != '') {
+//     	dataTypes.push(otherDataType);
+//     } 
+//     var rating = $('#rating_'+datasetID).val();
+//     var reason = $('#reason_'+datasetID).val();
+//     var authorID = $('#author_'+datasetID).val();
+//     var data = {
+// 					'datasetName': datasetName,
+// 					'datasetURL': datasetURL,
+// 					'dataTypes': dataTypes.join(),
+// 					'rating': rating,
+// 					'reason': reason,
+// 					'authorID': authorID
+// 				}
+//     if (datasetName != '' && datasetURL != '' && dataTypes.length > 0) {
+//     	$('.saving').fadeIn(200);
+// 		$.ajax({
+// 			type: 'POST',
+// 			url: '/editData/' + datasetID,
+// 			data: data,
+// 			error: function(error) {
+// 				console.debug("error is " +JSON.stringify(error));
+// 				console.log("error, bro");
+// 				$('.saving').hide();
+// 				$('.error').fadeIn(200);
+// 			},
+// 			beforeSend: function(xhr, settings) {
+// 				$(event.target).attr('disabled', 'disabled'); },
+// 			success: function() {
+// 				$('.saving').hide(200);
+// 				$('.saved').fadeIn(200);
+// 				$(event.target).removeAttr('disabled');
+// 			}
+// 		});
+// 	}
+// 	$('.error').fadeOut(1000);
+// 	return false;
+// });
 
-var i =0;
-function getDatasetForm(i){
-	return '<form id="datasetForm'+i+'" class="m-form" data-validate="parsley">' +
-				'<h3>New Dataset</h3>' +
-				'<div class="m-form-line"><label for="datasetName">Name of Dataset: *</label><input type="text" name="datasetName" id="datasetName'+i+'" data-required="true"></div>' +
-				'<div class="m-form-line"><label for="datasetURL">URL of Dataset: *</label><input type="text" name="datasetURL" id="datasetURL'+i+'" data-required="true" data-trigger="change" data-type="url"></div>'+
+var newDatasetForm = '<h3 class="datasetHeader">New Dataset</h3>' +
+			'<form class="m-form datasetForm" data-validate="parsley">' +
+				'<div class="m-form-line"><label for="datasetName">Name of Dataset: *</label><input type="text" name="datasetName" data-required="true"></div>' +
+				'<div class="m-form-line"><label for="datasetURL">URL of Dataset: *</label><input type="text" name="datasetURL" data-required="true" data-trigger="change" data-type="url"></div>'+
 				'<div class="m-form-box">Type of Dataset: *<br>'+
-					'<label for=""><input type="checkbox" id="dataType'+i+'" name="dataType" data-trigger="change" data-group="typeofdataset" data-mincheck="1" value="Federal Open Data">Federal Open Data</label><br>'+
-					'<label for=""><input type="checkbox" id="dataType'+i+'" name="dataType" data-trigger="change" data-group="typeofdataset" data-mincheck="1" value="State Open Data">State Open Data</label><br>'+
-					'<label for=""><input type="checkbox" id="dataType'+i+'" name="dataType" data-trigger="change" data-group="typeofdataset" data-mincheck="1" value="City/Local Open Data">City/Local Open Data</label><br>'+
-					'<label for=""><input type="checkbox" id="dataType'+i+'" name="dataType" data-trigger="change" data-group="typeofdataset" data-mincheck="1" value="Other">Other</label>'+
-					'<label for=""><input type="text" name="otherDataType" id="otherDataType'+i+'"></label>'+
+					'<label for=""><input type="checkbox" name="dataType" data-trigger="change" data-group="typeofdataset" data-mincheck="1" value="Federal Open Data">Federal Open Data</label><br>'+
+					'<label for=""><input type="checkbox" name="dataType" data-trigger="change" data-group="typeofdataset" data-mincheck="1" value="State Open Data">State Open Data</label><br>'+
+					'<label for=""><input type="checkbox" name="dataType" data-trigger="change" data-group="typeofdataset" data-mincheck="1" value="City/Local Open Data">City/Local Open Data</label><br>'+
+					'<label for=""><input type="checkbox" name="dataType" data-trigger="change" data-group="typeofdataset" data-mincheck="1" value="Other">Other</label>'+
+					'<label for=""><input type="text" name="otherDataType"></label>'+
 				'</div>'+
 				'<p>How would you rate the usefulness of this dataset? Your answer can reflect your experience with data quality, format of the data, or other factors.</p>'+
-				'<input type="text" name="rating" id="rating'+i+'">'+
+				'<input type="text" name="rating">'+
 				'<p>Why did you give it this rating? [50 words or less]</p>'+
-				'<textarea rows="6" cols="70" name="reason" id="reason'+i+'" data-trigger="keyup" data-maxwords="50"></textarea><br>'+
+				'<textarea rows="6" cols="70" name="reason" data-trigger="keyup" data-maxwords="50"></textarea><br>'+
 				'<br>'+
+				'<button class="l-button createDataset" type="button">Save</button>' +
+				'<span class="saving" style="display:none">Saving...</span>' +
+				'<span class="saved" style="display:none">Saved!</span>' +
+				'<span class="error" style="display:none">Something went wrong :/</span><br>' +
 			'</form>';
-	}
 
-$('#dataForms').on('addDatasetForm', function() {
-	i++;
-	newDatasetForm = getDatasetForm(i);
-	$('#dataForms').append(newDatasetForm);
-	$('#addDatasetForm').hide();
-});
-$('#addDatasetForm').click(function() {
-	$('#dataForms').trigger('addDatasetForm');
+$('.data').on('click', '#addDatasetForm', function() {
+	$('.dataForms').append(newDatasetForm).accordion('destroy').accordion({ collapsible: true });
 })
-
-
 
 //Make a new dataset:
 
-$('button#createDataset').click(function(event) {
-	console.log('entering function');
-	if ($('#datasetForm'+i).parsley( 'validate' )) {
-		console.log("working on "+i);
-		$('.error').hide();
-		var datasetID = $(this).val();
-		var datasetName = $('#datasetName'+i).val();
-		var datasetURL = $('#datasetURL'+i).val();
-		var dataTypes = [];
-	    $('#dataType'+i+':checked').each(function() {
-	    	dataTypes.push($(this).val());
-	    });
-	    var otherDataType = $('#otherDataType'+i).val();
-	    if (otherDataType != '') {
-	    	dataTypes.push(otherDataType);
-	    } 
-	    var rating = $('#rating'+i).val();
-	    var reason = $('#reason'+i).val();
-	    var id = $('#companyID').val();
-	    var data = {
-						'datasetName': datasetName,
-						'datasetURL': datasetURL,
-						'dataTypes': dataTypes.join(),
-						'rating': rating,
-						'reason': reason,
+$('.dataForms').on('click', '.createDataset', function(event) {
+	console.log($(this).parent().find('.datasetForm').first());
+	if ($(this).parent().find('.datasetForm').parsley( 'validate' )) {
+		var currentForm = $(this).parent();
+		console.log($(this).parent().parent());
+		$(this).parent().parent().find('.datasetHeader').text(currentForm.find('[name="datasetName"]').val());
+		currentForm.find('.error').hide();
+		var id = $('#companyID').val();
+		$.ajax({
+					type: 'POST',
+					url: '/editData/' + id,
+					data: $(this).parent().serializeArray(),
+					error: function(error) {
+						console.debug(JSON.stringify(error));
+						currentForm.find('.saving').hide();
+						currentForm.find('.error').fadeIn();
+					},
+					beforeSend: function(xhr, settings) {
+						$(event.target).attr('disabled', 'disabled'); },
+					success: function() {
+						currentForm.find('.saving').hide();
+						currentForm.find('.saved').fadeIn().delay(5000).fadeOut();
+						$(event.target).removeAttr('disabled');
+						//$('#addDatasetForm').show();
 					}
-	    if (datasetName != '' && datasetURL != '' && dataTypes.length > 0) {
-	    	console.log('we have the required info');
-	    	$('.saving').fadeIn(200);
-			$.ajax({
-				type: 'POST',
-				url: '/editData/' + id,
-				data: data,
-				error: function(error) {
-					console.debug("error is " +JSON.stringify(error));
-					console.log("error, bro");
-					$('.saving').hide();
-					$('.error').fadeIn(200);
-				},
-				// beforeSend: function(xhr, settings) {
-				// 	$(event.target).attr('disabled', 'disabled'); },
-				success: function() {
-					$('.saving').hide(200);
-					$('.saved').fadeIn(200);
-					//$(event.target).removeAttr('disabled');
-					$('#addDatasetForm').show();
-				}
-			});
-		}
-		$('.error'+i).fadeOut(1000);
-		//return false;
+				});
+		return false;
 	}
 });

@@ -589,7 +589,10 @@ class EditDataHandler(tornado.web.RequestHandler):
         #get values
         datasetName = self.get_argument('datasetName', None)
         datasetURL = self.get_argument('datasetURL', None)
-        dataType = self.get_argument('dataTypes', None).split(',')
+        dataTypes = self.request.arguments['dataType']
+        if 'Other' in dataTypes:
+            del dataTypes[dataTypes.index('Other')]
+            dataTypes.append(self.get_argument('otherDataType', None))
         rating = self.get_argument('rating', None)
         reason = self.get_argument('reason', None)
         try: #to find existing dataset
@@ -607,8 +610,9 @@ class EditDataHandler(tornado.web.RequestHandler):
             dataset = models.Dataset(
                 datasetName = datasetName,
                 datasetURL = datasetURL,
-                dataType = dataType
+                dataType = dataTypes,
             )
+            dataset.usedBy.append(company)
             rating = models.Rating(
                 author = company.contact,
                 rating =rating,

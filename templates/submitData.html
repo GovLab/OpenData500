@@ -7,32 +7,34 @@
 
 
 <p>Please fill out the following information for the datasets that you consider to be the most important to your core business.</p>
+<div class="data">
+	<div class="dataForms" id="accordion">
+		<h3 class="datasetHeader">New Dataset</h3>
+		<form class="m-form datasetForm" data-validate="parsley">
+			<div class="m-form-line"><label for="datasetName">Name of Dataset: *</label><input type="text" name="datasetName" data-required="true"></div>
+			<div class="m-form-line"><label for="datasetURL">URL of Dataset: *</label><input type="text" name="datasetURL" data-required="true" data-trigger="change" data-type="url"></div>
+			
+			<div class="m-form-box">Type of Dataset: *<br>
+				<label for=""><input type="checkbox" name="dataType" data-trigger="change" data-group="typeofdataset" data-mincheck="1" value="Federal Open Data">Federal Open Data</label><br>
+				<label for=""><input type="checkbox" name="dataType" data-trigger="change" data-group="typeofdataset" data-mincheck="1" value="State Open Data">State Open Data</label><br>
+				<label for=""><input type="checkbox" name="dataType" data-trigger="change" data-group="typeofdataset" data-mincheck="1" value="City/Local Open Data">City/Local Open Data</label><br>
+				<label for=""><input type="checkbox" name="dataType" data-trigger="change" data-group="typeofdataset" data-mincheck="1" value="Other">Other</label>
+				<label for=""><input type="text" name="otherDataType"></label>
+			</div>
 
-<div id="dataForms">
-	<form id="datasetForm0" class="m-form" data-validate="parsley">
-		<div class="m-form-line"><label for="datasetName">Name of Dataset: *</label><input type="text" name="datasetName" id="datasetName0" data-required="true"></div>
-		<div class="m-form-line"><label for="datasetURL">URL of Dataset: *</label><input type="text" name="datasetURL" id="datasetURL0" data-required="true" data-trigger="change" data-type="url"></div>
-		
-		<div class="m-form-box">Type of Dataset: *<br>
-			<label for=""><input type="checkbox" id="dataType0" name="dataType" data-trigger="change" data-group="typeofdataset" data-mincheck="1" value="Federal Open Data">Federal Open Data</label><br>
-			<label for=""><input type="checkbox" id="dataType0" name="dataType" data-trigger="change" data-group="typeofdataset" data-mincheck="1" value="State Open Data">State Open Data</label><br>
-			<label for=""><input type="checkbox" id="dataType0" name="dataType" data-trigger="change" data-group="typeofdataset" data-mincheck="1" value="City/Local Open Data">City/Local Open Data</label><br>
-			<label for=""><input type="checkbox" id="dataType0" name="dataType" data-trigger="change" data-group="typeofdataset" data-mincheck="1" value="Other">Other</label>
-			<label for=""><input type="text" name="otherDataType" id="otherDataType0"></label>
-		</div>
-
-		<p>How would you rate the usefulness of this dataset? Your answer can reflect your experience with data quality, format of the data, or other factors.</p>
-		<input type="text" name="rating" id="rating0">
-		<p>Why did you give it this rating? [50 words or less]</p>
-		<textarea rows="6" cols="70" name="reason" id="reason0" data-trigger="keyup" data-maxwords="50"></textarea><br>
-		<input type="hidden" id="companyID" name="id" value="{{ id }}">
-	</form>
+			<p>How would you rate the usefulness of this dataset? Your answer can reflect your experience with data quality, format of the data, or other factors.</p>
+			<input type="text" name="rating">
+			<p>Why did you give it this rating? [50 words or less]</p>
+			<textarea rows="6" cols="70" name="reason" data-trigger="keyup" data-maxwords="50"></textarea><br>
+			<input type="hidden" id="companyID" name="id" value="{{ id }}">
+			<button class="l-button createDataset" type="button">Save</button>
+			<span class="saving" style="display:none">Saving...</span>
+			<span class="saved" style="display:none">Saved!</span>
+			<span class="error" style="display:none">Something went wrong :/</span><br>
+		</form>
+	</div>
+	<button class="l-button" type="button" id="addDatasetForm">Add Another</button><br>
+	<a href="/"><button class="l-button" type="button" id="done">Done</button><br></a>
 </div>
-<button class="l-button" type="button" id="createDataset">Save</button>
-<span class="saving" style="display:none">Saving...</span>
-<span class="saved" style="display:none">Saved!</span>
-<span class="error" style="display:none">Something went wrong :/</span><br>
-<button class="l-button" type="button" id="addDatasetForm" style="display:none;">Add Another</button><br>
-<a href="/"><button class="l-button" type="button" id="done">Done</button><br></a>
 
 {% end %}
