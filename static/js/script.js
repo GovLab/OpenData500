@@ -132,8 +132,8 @@ $('.data').on('click', '#addDatasetForm', function() {
 //Make a new dataset:
 
 $('.dataForms').on('click', '.createDataset', function(event) {
-	console.log($(this).parent().find('.datasetForm').first());
-	if ($(this).parent().find('.datasetForm').parsley( 'validate' )) {
+	//console.log($(this).parent().find('.datasetForm').first());
+	//if ($(this).parent().find('.datasetForm').parsley( 'validate' )) {
 		var currentForm = $(this).parent();
 		console.log($(this).parent().parent());
 		$(this).parent().parent().find('.datasetHeader').text(currentForm.find('[name="datasetName"]').val());
@@ -158,5 +158,5 @@ $('.dataForms').on('click', '.createDataset', function(event) {
 					}
 				});
 		return false;
-	}
+	//}
 });

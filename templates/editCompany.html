@@ -115,10 +115,10 @@
 		<textarea rows="10" cols="59" name="financialInfo" id="financialInfo" data-trigger="keyup" data-maxwords="100">{{ company.financialInfo }}</textarea><br>
 		<h3>Datasets</h3>
 		<!--------------------------------------------DATASETS--------------------------------------!-->
-		<div id="dataForms">
+		<div class="dataForms">
 			{% for dataset in company.datasets %}
 				<div class="form_{{dataset.id}}">
-					<p style="border: 1px solid #000;">Editing {{dataset.datasetName}}</p>
+					<h3 class="datasetHeader">Editing {{dataset.datasetName}}</h3>
 					<div class="m-form-line"><label for="datasetName">Name of Dataset:</label><input type="text" name="datasetName" id="datasetName_{{dataset.id}}" value ="{{ dataset.datasetName }}"></div>
 					<div class="m-form-line"><label for="datasetURL">URL of Dataset:</label><input type="text" name="datasetURL" id="datasetURL_{{dataset.id}}" value ="{{ dataset.datasetURL }}"></div>
 					<h4>Type of Dataset:</h4>
@@ -137,6 +137,7 @@
 					<p>Why did you give it this rating? [50 words or less]</p>
 					<textarea rows="6" cols="70" name="reason" id="reason_{{dataset.id}}" data-trigger="keyup" data-maxwords="50" >{{dataset.ratings[0].reason}}</textarea><br>
 					<input type="hidden" name="author" id="author_{{dataset.id}}" value="{{ company.contact.id }}">
+					<input type="hidden" name="datasetID" id="datasetID" value="{{dataset.id}}">
 					<button class="l-button" type="button" id="saveDataset" value="{{dataset.id}}">Save</button><span class="saving" style="display:none">Saving {{dataset.datasetName}}...</span><span class="saved" style="display:none">Saved!</span><span class="error" style="display:none">Something went wrong :/</span>
 				</div>
 			{% end %}
