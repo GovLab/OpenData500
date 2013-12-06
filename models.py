@@ -5,6 +5,7 @@ from mongoengine import *
 from datetime import datetime
 
 class Person(Document):
+	ts = ComplexDateTimeField(default=datetime.now())
 	firstName = StringField()					#String limit to 35 characters	#Required
 	lastName = StringField()					#String limit to 35 characters	#Required
 	title = StringField()						#String limit to 35 characters	#Required

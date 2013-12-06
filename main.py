@@ -51,7 +51,8 @@ class Application(tornado.web.Application):
             (r"/delete/([a-zA-Z0-9]{24})", DeleteCompanyHandler),
             (r"/recommendCompany/", RecommendCompanyHandler),
             (r"/admin/", AdminHandler),
-            (r"/admin/edit/([a-zA-Z0-9]{24})", AdminEditCompanyHandler)
+            (r"/admin/edit/([a-zA-Z0-9]{24})", AdminEditCompanyHandler),
+            (r"/about/", AboutHandler)
         ]
         settings = dict(
             template_path=os.path.join(os.path.dirname(__file__), "templates"),
@@ -72,6 +73,14 @@ class MainHandler(tornado.web.RequestHandler):
             page_title='OpenData500',
             page_heading='Welcome to the OpenData 500',
             submittedCompanies = submittedCompanies
+        )
+
+class AboutHandler(tornado.web.RequestHandler):
+    def get(self):
+        self.render(
+            "about.html",
+            page_title='About the OpenData500',
+            page_heading='About the OpenData 500'
         )
 
 class AdminHandler(tornado.web.RequestHandler):
