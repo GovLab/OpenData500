@@ -200,7 +200,6 @@ header {
 .m-form-footer {
 	background-color: $light_purple;
 	padding: 5px;
-
 	margin: 5px 5px 20px;
 	overflow:hidden;
 }
@@ -420,6 +419,43 @@ header {
 	position: relative;
 	top: 6px;
 }
+
+
+// About
+.about-page {
+	
+	font-size: 12px;
+	line-height: 16px;
+
+	section {
+		padding-bottom: 25px;
+		margin-bottom: 35px;
+		border-bottom: 1px solid $light_gray;
+	}
+
+	h1 {
+		margin-top: 65px;
+		margin-bottom: 65px;
+	}
+
+	.m-half {
+		width: calc(50% - 70px);
+		padding-right: 60px;
+		display: inline-block;
+		vertical-align: top;
+	}
+
+	.m-page-title {
+		font-size: 2em;
+		margin-bottom: 35px;
+	}
+
+
+}
+
+
+
+
 
 // Footer 
 
