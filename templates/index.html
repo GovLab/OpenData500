@@ -13,18 +13,18 @@
 
 <ul class="m-homepage-list">
 	<li class="m-list-head">
+		<div class="m-homepage-list-control"></div>
 		<div class="m-homepage-list-name">Company</div>
 		<div class="m-homepage-list-sectors">Sector</div>
 		<div class="m-homepage-list-desc">Description</div>
-		<div class="m-homepage-list-control"></div>
 	</li>
 	{% for company in submittedCompanies %}
 	<li class="m-list-company">
 		<div class="m-list-company-summary">
+			<div class="m-homepage-list-control"><span class="m-expand-arrow"></span></div>
 			<div class="m-homepage-list-name"><strong>{{ company.companyName }}</strong></div>
 			<div class="m-homepage-list-sectors">{% for sector in company.sector %} {{sector}} {%end%}</div>
 			<div class="m-homepage-list-desc">{{ company.descriptionShort }}</div>
-			<div class="m-homepage-list-control"><span class="m-expand-arrow"></span></div>
 		</div>
 		<div class="m-list-company-full">
 			<div class="m-half">
@@ -59,46 +59,23 @@
 	</li>
 	{%end%}
 </ul>
-
-
-
-<!-- <table borer="1" style="width:100%;">
-	<tr>
-		<th>Company</th>
-		<th>Sector</th>
-		<th>Description</th>
-	</tr>
+<h2>Comming Soon...</h2>
+<ul class="m-homepage-list">
+	<li class="m-list-head">
+		<div class="m-homepage-list-name">Company</div>
+		<div class="m-homepage-list-sectors">Sector</div>
+		<div class="m-homepage-list-desc">Description</div>
+	</li>
 	{% for company in submittedCompanies %}
-		<tr style="text-align:center;">
-			<td>{{ company.companyName }}</td>
-			<td>{% for sector in company.sector %} {{sector}} {%end%}</td>
-			<td>{{ company.descriptionShort }}</td>
-		</tr>
-		<tr colspan="3">
-			<td>
-				<h3>Company Information</h3>
-				<p>Year Founded: {{company.yearFounded}}</p>
-				<p>Location: {{company.city}}, USA</p>
-				<p>FTE: {{company.fte}}</p>
-				<p>Type of Company: {{company.companyType}}</p>
-				<p>Company Function: {{company.companyFunction}}</p>
-				<p>Sector(s): {% for sector in company.sector %} {{sector}} {%end%}</p>
-				<p>Source of Revenue: {% for source in company.revenueSource %} {{source}}, {%end%}</p>
-				<p>Description: {{company.descriptionLong}}</p>
-				<p>Social Impact: {{company.socialImpact}}</p>
-				<p>Financial Info: {{company.financialInfo}}</p>
-				<h3>Datasets</h3>
-				<p>{% for datatype in company.criticalDataTypes %} {{datatype}}, {%end%}</p>
-				{% for data in company.datasets %}
-					<p>Dataset Name: {{data.datasetName}}</p>
-					<p>Dataset URL: {{data.datasetURL}}</p>
-					<p>Rating: {% for rating in data.ratings %} {% if company.contact.id == rating.author.id %} {{rating.rating}}{%end%}{%end%}</p>
-					<p>Review: {% for rating in data.ratings %} {% if company.contact.id == rating.author.id %} {{rating.reason}}{%end%}{%end%}</p>
-				{%end%}
-			</td>
-		</tr>
+	<li class="m-list-company">
+		<div class="m-list-company-summary">
+			<div class="m-homepage-list-name"><strong>{{ company.companyName }}</strong></div>
+			<div class="m-homepage-list-sectors">{% for sector in company.sector %} {{sector}} {%end%}</div>
+			<div class="m-homepage-list-desc">{{ company.descriptionShort }}</div>
+		</div>
+	</li>
 	{%end%}
-</table> -->
+</ul>
 
 </div>
 {% end %}
