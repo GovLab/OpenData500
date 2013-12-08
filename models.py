@@ -30,6 +30,7 @@ class Dataset(Document):
 	ts = ComplexDateTimeField(default=datetime.now())
 	datasetName = StringField()					#String limit to 100 characters	#Required
 	datasetURL = StringField()					#Valid URL 						#Required
+	agency = StringField()
 	ratings = ListField(EmbeddedDocumentField('Rating'))
 	dataType = ListField(StringField())											#Required
 	usedBy = ListField(ReferenceField('Company'))
@@ -44,7 +45,8 @@ class Company(Document):
 	recommended = BooleanField()				#Recommended or Submitted?
 	yearFounded = IntField()					#Valid year Integer				#NOT Required
 	previousName = StringField()				#String limit 70				#NOT Required
-	city = StringField()						#String, limit 80 chars?		#NOT Required
+	city = StringField()
+	state = StringField()						#String, limit 80 chars?		#NOT Required
 	zipCode = IntField()						#Int, 5 Digits					#NOT Required
 	fte = IntField()							#Integer, 0-1,000,000			#NOT Required
 	companyType = StringField()													#Required
@@ -60,6 +62,7 @@ class Company(Document):
 	vetted = BooleanField()						#Automatic set to False
 	vettedByCompany = BooleanField()
 	submitType = StringField()
+	confidentiality = StringField()
 	contact = ReferenceField(Person)
 	reasonForRecommending = StringField()
 

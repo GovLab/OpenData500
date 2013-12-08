@@ -20,3 +20,4 @@ venv
 .env
 ninja*
 notes.txt
+uploadScript.py
