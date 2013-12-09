@@ -22,8 +22,10 @@
 {% end %}
 
 <h2>Vetted Submitted Companies</h2>
+<div id="accordion">
 {% for company in vettedCompanies %}
-	<p><strong>{{ company.companyName }}</strong> is currently using the following datasets:</p>
+	<h3><strong>{{ company.companyName }}</strong></h3>
+	<div>
 	<ul>
 		{% try %}
 			{% for dataset in company.datasets %}
@@ -33,8 +35,9 @@
 		{% end %}
 	</ul>
 	<p><a href="/admin/edit/{{ company.id }}">Edit</a> <a href="/delete/{{ company.id }}">Delete</a> <a href="/addData/{{ company.id }}">Add Dataset</a></p>
-	
+	</div>
 {% end %}
+</div>
 
 <h2>Recommended Companies</h2>
 {% for company in recommendedCompanies %}

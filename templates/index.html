@@ -47,13 +47,11 @@
 			</div>
 			<div class="m-full datasets">
 				<h3>Datasets</h3>
-				<p>{% for datatype in company.criticalDataTypes %} {{datatype}}, {%end%}</p>
+				<ul>
 				{% for data in company.datasets %}
-					<p>Dataset Name: {{data.datasetName}}</p>
-					<p>Dataset URL: {{data.datasetURL}}</p>
-					<p>Rating: {% for rating in data.ratings %} {% if company.contact.id == rating.author.id %} {{rating.rating}}{%end%}{%end%}</p>
-					<p>Review: {% for rating in data.ratings %} {% if company.contact.id == rating.author.id %} {{rating.reason}}{%end%}{%end%}</p>
+						<li><a href="{{data.datasetURL}}">{{data.datasetName}}</a></li>
 				{%end%}
+				</ul>
 			</div>
 		</div>	
 	</li>
@@ -66,7 +64,7 @@
 		<div class="m-homepage-list-sectors">Sector</div>
 		<div class="m-homepage-list-desc">Description</div>
 	</li>
-	{% for company in submittedCompanies %}
+	{% for company in comingSoonCompanies %}
 	<li class="m-list-company">
 		<div class="m-list-company-summary">
 			<div class="m-homepage-list-name"><strong>{{ company.companyName }}</strong></div>

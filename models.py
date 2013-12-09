@@ -18,7 +18,7 @@ class Person(Document):
 	datasetWishList = StringField()												#NOT Required
 	companyRec = StringField()													#NOT Required
 	conferenceRec = StringField()												#NOT Required
-	submittedCompany = ListField(ReferenceField('Company'))							#Required (Entered below)
+	submittedCompany = ReferenceField('Company')							#Required (Entered below)
 	submittedDatasets = ListField(ReferenceField('Dataset'))					#Required (Entered below)
 
 class Rating(EmbeddedDocument):
