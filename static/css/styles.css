@@ -1,3 +1,4 @@
+@charset "UTF-8";
 body {
   margin: 0;
   color: #444444;
@@ -201,17 +202,32 @@ header {
   list-style-type: none;
   border-bottom: 1px solid #472b74;
   padding: 0 0 12px;
-  max-height: 40px;
+  max-height: 38px;
   height: auto;
   overflow: hidden;
   -webkit-transition: all 0.4s ease;
   -moz-transition: all 0.4s ease;
   transition: all 0.4s ease; }
+  .m-homepage li div {
+    max-height: 42px;
+    overflow: hidden;
+    text-overflow: "…" "…";
+    -webkit-transition: all 0.4s ease;
+    -moz-transition: all 0.4s ease;
+    transition: all 0.4s ease; }
 .m-homepage li.s-active {
-  max-height: 700px;
+  max-height: 2000px;
   -webkit-transition: all 0.4s ease;
   -moz-transition: all 0.4s ease;
   transition: all 0.4s ease; }
+  .m-homepage li.s-active div {
+    max-height: 800px;
+    -webkit-transition: all 0.4s ease;
+    -moz-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+    height: auto;
+    overflow: visible;
+    text-overflow: visible; }
 
 .m-half {
   width: calc(50% - 20px);
@@ -227,6 +243,12 @@ header {
 .datasets {
   box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.4);
   background-color: #f6f6f6; }
+  .datasets li {
+    border-bottom: 0; }
+  .datasets a {
+    color: #472b74; }
+  .datasets a:hover {
+    text-decoration: underline; }
 
 .m-list-head {
   background-color: #472b74; }
@@ -239,14 +261,14 @@ header {
     letter-spacing: .5px; }
 
 .m-list-company-summary {
-  margin-bottom: 10px; }
+  margin-bottom: 10px;
+  cursor: pointer; }
   .m-list-company-summary div {
     display: inline-block;
     vertical-align: top;
     margin-top: 5px;
     margin-bottom: 5px;
-    padding: 5px;
-    vertical-align: middle; }
+    padding: 5px; }
 
 .m-list-company-full {
   border-top: 1px solid #aaaaaa;
@@ -258,11 +280,11 @@ header {
   margin-right: 10px; }
 
 .m-homepage-list-sectors {
-  width: calc(25% - 20px);
+  width: calc(35% - 20px);
   margin-right: 10px; }
 
 .m-homepage-list-desc {
-  width: calc(56% - 20px); }
+  width: calc(46% - 20px); }
 
 .m-homepage-list-control {
   width: calc(4% - 20px);

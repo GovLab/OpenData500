@@ -318,15 +318,30 @@ header {
 		list-style-type: none;
 		border-bottom: 1px solid $purple;
 		padding: 0 0 12px;
-		max-height: 40px;
+		max-height: 38px;
 		height: auto;
 		overflow: hidden;
 		@include transition;
+
+		div {
+			max-height: 42px;
+			overflow: hidden;
+			text-overflow: "…" "…";
+			@include transition;
+		}
 	}
 
 	li.s-active {
-		max-height: 700px;
+		max-height: 2000px;
 		@include transition;
+
+		div {
+			max-height: 800px;
+			@include transition;
+			height: auto;
+			overflow: visible;
+			text-overflow: visible;
+		}
 	}
 }
 
@@ -346,6 +361,18 @@ header {
 .datasets {
 	box-shadow: inset 0 0 3px rgba(0,0,0,0.4);
 	background-color: #f6f6f6;
+
+	li {
+		border-bottom: 0;
+	}
+
+	a {
+		color: $purple;
+	}
+
+	a:hover {
+		text-decoration: underline;
+	}
 }
 
 .m-list-head {
@@ -363,6 +390,7 @@ header {
 
 .m-list-company-summary {
 	margin-bottom: 10px;
+	cursor: pointer;
 	
 	div {
 		display: inline-block;
@@ -370,7 +398,7 @@ header {
 		margin-top: 5px;
 		margin-bottom: 5px;
 		padding: 5px;
-		vertical-align: middle;
+		// vertical-align: middle;
 	}
 }
 
@@ -385,11 +413,11 @@ header {
 	margin-right: 10px;
 }
 .m-homepage-list-sectors {
-	width: calc(25% - 20px);
+	width: calc(35% - 20px);
 	margin-right: 10px;
 }
 .m-homepage-list-desc {
-	width: calc(56% - 20px);
+	width: calc(46% - 20px);
 }
 .m-homepage-list-control {
 	width: calc(4% - 20px);
