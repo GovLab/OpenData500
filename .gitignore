@@ -21,3 +21,4 @@ venv
 ninja*
 notes.txt
 uploadScript.py
+companies.csv
