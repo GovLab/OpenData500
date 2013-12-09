@@ -71,6 +71,7 @@ class MainHandler(tornado.web.RequestHandler):
         #companies = models.Company.objects()
         submittedCompanies = models.Company.objects(Q(vetted=True) & Q(vettedByCompany=True))
         comingSoonCompanies = models.Company.objects(Q(vetted=True) & Q(vettedByCompany=False))
+        #tst
         self.render(
             "index.html",
             page_title='OpenData500',
