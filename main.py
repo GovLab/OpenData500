@@ -23,6 +23,7 @@ import models
 import bson
 from bson import json_util
 import csv
+import json
 
 # import and define tornado-y things
 from tornado.options import define
@@ -44,19 +45,19 @@ class Application(tornado.web.Application):
     def __init__(self):
         handlers = [
             (r"/", MainHandler),
-                (r"/submitCompany/", SubmitCompanyHandler),
+            (r"/submitCompany/", SubmitCompanyHandler),
             (r"/edit/([a-zA-Z0-9]{24})", EditCompanyHandler),
             (r"/addData/([a-zA-Z0-9]{24})", SubmitDataHandler),
             (r"/editData/([a-zA-Z0-9]{24})", EditDataHandler),
             (r"/view/([a-zA-Z0-9]{24})", ViewHandler),
             (r"/delete/([a-zA-Z0-9]{24})", DeleteCompanyHandler),
-            (r"/recommendCompany/", RecommendCompanyHandler),
+            #(r"/recommendCompany/", RecommendCompanyHandler),
             (r"/admin/", AdminHandler),
             (r"/admin/edit/([a-zA-Z0-9]{24})", AdminEditCompanyHandler),
             (r"/about/", AboutHandler),
-            (r"/generateFiles/", GenerateFilesHandler),
+            #(r"/generateFiles/", GenerateFilesHandler),
             (r"/download/", DownloadHandler),
-            (r'/download/(.*)',tornado.web.StaticFileHandler,{'path':os.path.join(os.path.dirname(__file__), "static")}),
+            (r'/download/(.*)',tornado.web.StaticFileHandler,{'path':os.path.join(os.path.dirname(__file__), 'static')}),
             #(r"/upload/", UploadHandler),
             (r"/candidates/", CandidateHandler),
             (r"/preview/", PreviewHandler)
@@ -956,15 +957,15 @@ class DownloadHandler(tornado.web.RequestHandler):
     def get(self):
         self.render(
             "download.html",
-            page_title='Download OpenData500 Data',
-            page_heading='Download the OpenData 500 Data',
+            page_title='Download Data',
+            page_heading='Download Data',
         )
 
 class GenerateFilesHandler(tornado.web.RequestHandler):
     def get(self):
-        #companies = models.Company.objects()
+        #Get published companies, turn each one into an array and put into CSV file
         companies = models.Company.objects(Q(vetted=True) & Q(vettedByCompany=True))
-        csvwriter = csv.writer(open("/OD500_Companies.csv", "w"))
+        csvwriter = csv.writer(open("OD500_Companies.csv", "w"))
         csvwriter.writerow([
             'CompanyName',
             'URL',
@@ -1021,8 +1022,67 @@ class GenerateFilesHandler(tornado.web.RequestHandler):
                     if hasattr(newrow[i], 'encode'):
                         newrow[i] = newrow[i].encode('utf8')
                 csvwriter.writerow(newrow)
-        #companiesJSON = []
-        #for c in companies:
+        #Get companies, turn into objects, and then dump into JSON File
+        companiesJSON = []
+        for c in companies:
+            datasetIDs = []
+            for d in c.datasets:
+                i = str(d.id)
+                j, k, l, m = i[:len(i)/4], i[len(i)/4:2*len(i)/4], i[2*len(i)/4:3*len(i)/4], i[3*len(i)/4:]
+                datasetIDs.append(l + m + k + j)
+            i = str(c.id)
+            j, k, l, m = i[:len(i)/4], i[len(i)/4:2*len(i)/4], i[2*len(i)/4:3*len(i)/4], i[3*len(i)/4:]
+            companyID = l + m + k + j
+            company = {
+                "companyID": companyID,
+                "companyName": c.companyName,
+                "url": c.url,
+                "city": c.city,
+                "state": c.state,
+                "zipCode": c.zipCode,
+                "ceoFirstName": c.ceo.firstName,
+                "ceoLastName": c.ceo.lastName,
+                "previousName": c.previousName,
+                "yearFounded": c.yearFounded,
+                "fte": c.fte,
+                "companyType": c.companyType,
+                "companyCategory": c.companyCategory,
+                "companyFunction": c.companyFunction,
+                "sector": c.sector,
+                "revenueSource": c.revenueSource,
+                "descriptionLong": c.descriptionLong,
+                "descriptionShort": c.descriptionShort,
+                "socialImpact": c.socialImpact,
+                "socialInfo": c.financialInfo,
+                "criticalDataTypes": c.criticalDataTypes,
+                "datasets": datasetIDs
+            }
+            companiesJSON.append(company)
+        with open('OD500_Companies.json', 'w') as outfile:
+            json.dump(companiesJSON, outfile)
+        #Get Datasets, turn into objects, and then dump into JSON file
+        datasets = models.Dataset.objects()
+        datasetsJSON = []
+        for d in datasets:
+            companyIDs = []
+            for c in d.usedBy:
+                i = str(c.id)
+                j, k, l, m = i[:len(i)/4], i[len(i)/4:2*len(i)/4], i[2*len(i)/4:3*len(i)/4], i[3*len(i)/4:]
+                companyIDs.append(l + m + k + j)
+            i = str(d.id)
+            j, k, l, m = i[:len(i)/4], i[len(i)/4:2*len(i)/4], i[2*len(i)/4:3*len(i)/4], i[3*len(i)/4:]
+            datasetID = l + m + k + j
+            dataset = {
+                "datasetID": datasetID,
+                "datasetName": d.datasetName,
+                "datasetURL": d.datasetURL,
+                "source": d.agency,
+                "usedByCompany": companyIDs
+            }
+            datasetsJSON.append(dataset)
+        with open('OD500_Datasets.json', 'w') as outfile:
+            json.dump(datasetsJSON, outfile)
+
 
 
 
