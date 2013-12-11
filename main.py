@@ -44,7 +44,7 @@ class Application(tornado.web.Application):
     def __init__(self):
         handlers = [
             (r"/", MainHandler),
-            (r"/submitCompany/", SubmitCompanyHandler),
+                (r"/submitCompany/", SubmitCompanyHandler),
             (r"/edit/([a-zA-Z0-9]{24})", EditCompanyHandler),
             (r"/addData/([a-zA-Z0-9]{24})", SubmitDataHandler),
             (r"/editData/([a-zA-Z0-9]{24})", EditDataHandler),
