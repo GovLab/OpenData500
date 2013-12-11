@@ -23,9 +23,11 @@
     <header>
         <div id="mainMenu" class="l-centered m-main-menu">
             <a href="/">Home</a>
-            <a href="/admin/">Admin (hide this link later)</a><a href="http://thegovlab.org/submit-your-company">Submit Your Company</a><a href="http://thegovlab.org/open500/">Recommend a Company</a><a href="/download/">Download</a>
-            <!-- <a href="/submitCompany/">Submit Your Company</a> -->
-            <!-- <a href="/recommendCompany/">Recommend a Company</a> -->
+            <a href="/about/">About</a>
+            <a href="/preview/">Preview</a>
+            <a href="/candidates/">Candidates</a>
+            <a href="http://thegovlab.org/submit-your-company">Submit</a>
+            <a href="/download/">Download</a>
         </div>
     </header><!-- end header -->
 
@@ -43,23 +45,20 @@
            <li class="footer-menu-item last"><a href="mailto:opendata500@thegovlab.org">Contact</a></li> 
         </ul>
     </footer><!-- end footer -->
-
     <!-- Load jQuery -->
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
     <script>!window.jQuery && document.write('<script src="{{ static_url("js/libs/jquery/jquery-1.10.1.min.js") }}"><\/script>')</script>
-
     <!-- plugins -->
     <script src="{{ static_url("js/plugins.js") }}"></script>
-
+    <!-- parsley.js (for form validation) -->
+    <script src="{{ static_url("js/parsley.js") }}"></script>
+    <script src="{{ static_url("js/parsley.extend.js") }}"></script>
+    <!-- Isotopes.js (for form validation) -->
+    <script src="{{ static_url("js/isotope.pkgd.min.js") }}"></script>
     <!-- main script -->
     <script src="{{ static_url("js/script.js") }}"></script>
     <script src="{{ static_url("js/ui-scripts.js") }}"></script>
-
-       <!-- parsley.js (for form validation) -->
-    <script src="{{ static_url("js/parsley.js") }}"></script>
-    <script src="{{ static_url("js/parsley.extend.js") }}"></script>
-    <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
     </body>
 </html>

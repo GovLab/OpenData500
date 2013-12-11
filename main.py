@@ -57,7 +57,9 @@ class Application(tornado.web.Application):
             (r"/generateFiles/", GenerateFilesHandler),
             (r"/download/", DownloadHandler),
             (r'/download/(.*)',tornado.web.StaticFileHandler,{'path':os.path.join(os.path.dirname(__file__), "static")}),
-            (r"/upload/", UploadHandler)
+            #(r"/upload/", UploadHandler),
+            (r"/candidates/", CandidateHandler),
+            (r"/preview/", PreviewHandler)
         ]
         settings = dict(
             template_path=os.path.join(os.path.dirname(__file__), "templates"),
@@ -71,15 +73,31 @@ class Application(tornado.web.Application):
 # the main page
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
-        #companies = models.Company.objects()
-        submittedCompanies = models.Company.objects(Q(vetted=True) & Q(vettedByCompany=True))
-        comingSoonCompanies = models.Company.objects(Q(vetted=True) & Q(vettedByCompany=False))
         self.render(
             "index.html",
             page_title='OpenData500',
             page_heading='Welcome to the OpenData 500',
+        )
+class PreviewHandler(tornado.web.RequestHandler):
+    def get(self):
+        #companies = models.Company.objects()
+        submittedCompanies = models.Company.objects(Q(vetted=True) & Q(vettedByCompany=True))
+        self.render(
+            "preview.html",
+            page_title='OpenData500',
+            page_heading='Preview of the Open Data 500',
             submittedCompanies = submittedCompanies,
-            comingSoonCompanies = comingSoonCompanies
+        )
+
+class CandidateHandler(tornado.web.RequestHandler):
+    def get(self):
+        companies = models.Company.objects(Q(vetted=True) & Q(vettedByCompany=True))
+        self.render(
+            "candidates.html",
+            page_title='OpenData500',
+            page_heading='Candidates for the OD500',
+            companies = companies,
+            sectors = sectors
         )
 
 class AboutHandler(tornado.web.RequestHandler):
@@ -946,7 +964,7 @@ class GenerateFilesHandler(tornado.web.RequestHandler):
     def get(self):
         #companies = models.Company.objects()
         companies = models.Company.objects(Q(vetted=True) & Q(vettedByCompany=True))
-        csvwriter = csv.writer(open("OD500_Companies.csv", "w"))
+        csvwriter = csv.writer(open("/OD500_Companies.csv", "w"))
         csvwriter.writerow([
             'CompanyName',
             'URL',

@@ -1,0 +1,36 @@
+{% extends "main.html" %}
+{% autoescape None %}
+
+{% block body %}
+
+<div class="m-homepage">
+	<div class="fancy-background">
+		<img src="{{ static_url("img/home-bg.jpg") }}" />
+	</div>
+	<h1>{{ page_heading }}</h1>
+	<h2>Filter by Sector</h2>
+	<div id="filters" class="button-group" data-toggle="buttons-checkbox">
+	    <button data-filter="*">show all</button>
+	    {% for sector in sectors %}
+	    <button data-filter=".{{sector.strip().replace(" ", "-").replace("/","")}}">{{sector}}</button>
+	    {%end%}
+	</div>
+	<ul class="m-homepage-list">
+		<li class="m-list-head">
+			<div class="m-homepage-list-control"></div>
+			<div class="m-homepage-list-name">Company</div>
+			<div class="m-homepage-list-sectors">Sector</div>
+			<div class="m-homepage-list-desc">Description</div>
+		</li>
+		{% for company in companies %}
+		<li class="isotopes-container">
+			<div class="m-list-company-summary {% for sector in company.sector %}{{sector.strip().replace(" ", "-").replace("/","")}} {%end%}">
+				<div class="m-homepage-list-name companyName"><strong>{{ company.companyName }}</strong></div>
+				<div class="m-homepage-list-sectors">{{ ', '.join(company.sector) }}</div>
+				<div class="m-homepage-list-desc">{{ company.descriptionShort }}</div>
+			</div>
+		</li>
+		{%end%}
+	</ul>
+	</div>
+{% end %}
