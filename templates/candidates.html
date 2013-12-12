@@ -15,22 +15,14 @@
 	    <button data-filter=".{{sector.strip().replace(" ", "-").replace("/","")}}">{{sector}}</button>
 	    {%end%}
 	</div>
-	<ul class="m-homepage-list">
-		<li class="m-list-head">
-			<div class="m-homepage-list-control"></div>
-			<div class="m-homepage-list-name">Company</div>
-			<div class="m-homepage-list-sectors">Sector</div>
-			<div class="m-homepage-list-desc">Description</div>
-		</li>
-		{% for company in companies %}
-		<li class="isotopes-container">
-			<div class="m-list-company-summary {% for sector in company.sector %}{{sector.strip().replace(" ", "-").replace("/","")}} {%end%}">
-				<div class="m-homepage-list-name companyName"><strong>{{ company.companyName }}</strong></div>
-				<div class="m-homepage-list-sectors">{{ ', '.join(company.sector) }}</div>
-				<div class="m-homepage-list-desc">{{ company.descriptionShort }}</div>
-			</div>
-		</li>
-		{%end%}
-	</ul>
+		<div class="m-candidates isotopes-container" data-isotope-options='{ "layoutMode": "fitColumns" }'>
+			{% for company in companies %}
+				<div class="m-candidates-item {% for sector in company.sector %}{{sector.strip().replace(" ", "-").replace("/","")}} {%end%}">
+					<div class="m-homepage-list-name companyName"><p><strong>{{ company.companyName }}</strong></p></div>
+					<div class="m-homepage-list-sectors"><p>{{ ', '.join(company.sector) }}</p></div>
+					<div class="m-homepage-list-desc"><p>{{ company.descriptionShort }}</p></div>
+				</div>
+			{%end%}
+		</div>
 	</div>
 {% end %}

@@ -331,6 +331,18 @@ header {
     font-size: 2em;
     margin-bottom: 35px; }
 
+.m-candidates {
+  padding: 0; }
+
+.m-candidates-item {
+  list-style-type: none;
+  padding: 10px;
+  margin: 5px;
+  float: left;
+  background-color: rgba(0, 0, 0, 0.1);
+  width: 180px; }
+
+
 footer {
   background-color: #444444;
   padding: 20px 0;
@@ -353,3 +365,15 @@ footer {
     margin-right: 40px;
     margin-top: 0;
     float: left; }
+
+
+
+
+
+
+
+
+
+
+
+

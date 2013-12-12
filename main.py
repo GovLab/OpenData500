@@ -350,7 +350,7 @@ class SubmitCompanyHandler(tornado.web.RequestHandler):
         #org = self.get_argument("org", None)
         url = self.get_argument('url', None)
         companyName = self.get_argument("companyName", None)
-        company.prettyName = re.sub(r'([^\s\w])+', '', companyName).replace(" ", "-")
+        prettyName = re.sub(r'([^\s\w])+', '', companyName).replace(" ", "-")
         email = self.get_argument("email", None)
         phone = self.get_argument("phone", None)
         city = self.get_argument("city", None)
@@ -371,7 +371,7 @@ class SubmitCompanyHandler(tornado.web.RequestHandler):
         yearFounded = self.get_argument("yearFounded", None)
         if not yearFounded:
             yearFounded = 9999
-        fte = self.get_argument("fte", None)
+        fte = self.get_argument("fte", None).replace(",","")
         if not fte:
             fte = 0
         companyFunction = self.get_argument("companyFunction", None)
