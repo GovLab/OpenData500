@@ -7,6 +7,8 @@ $white: #fff;
 $light_red: rgba(214, 17, 17, .1);
 $red: rgba(214, 17, 17, 1);
 
+$fancy_type: 'Exo', sans-serif;
+
 @mixin rounded { 
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
@@ -28,25 +30,24 @@ body {
 	color: $black;
 	font-family: Helvetica,Arial,sans-serif;
 	font-size: 12px;
-	line-height: 16px;
+	line-height: 1.4em;
 }
 
 header {
 	padding: 10px 0;
-	margin-bottom: 30px;
 }
 
 //  Typography
 
 h1 {
-	font-family: 'Exo', sans-serif;
+	font-family: $fancy_type;
 	font-weight: 100;
 	// font-style: italic;
 	font-size: 5.6em;
 }
 
 h2 {
-	font-family: 'Exo', sans-serif;
+	font-family: $fancy_type;
 	font-weight: 500;
 	font-size: 3em;
 }
@@ -120,7 +121,7 @@ header {
 	border: 1px solid #fff;	
 	@include rounded;
 	color: #fff;
-	font-family: 'Exo', sans-serif;
+	font-family: $fancy_type;
 	text-transform: uppercase;
 	font-size: 14px;
 	font-weight: 14px;
@@ -209,6 +210,7 @@ header {
 }
 
 
+
 // Special Cases
 
 // Contacted Box
@@ -286,11 +288,9 @@ header {
 
 // }
 
-// Homepage Styles
-
+// HomePage
 
 .fancy-background {
-	margin-top: -30px;
 	text-align: center;
 	height: 270px;
 	img {
@@ -300,8 +300,92 @@ header {
 	}
 }
 
+.fancy-background-all {
+	width: 1200px;
+	img {
+		position: absolute;
+		z-index: -1;
+		left: 130px;
+	}	
+}
 
 .m-homepage {
+	
+	section {
+		margin-bottom: 30px;
+	}
+
+	.m-home-big-links {
+		font-size: 30px;
+		padding: 30px 0;
+		text-transform: uppercase;
+		text-align: center;
+		a {
+			font-family: $fancy_type;
+			display: inline-block;
+			padding: 20px 40px;
+			border: 3px solid $light_purple;
+			@include rounded;
+			margin-right: 20px;
+		}
+
+		a:hover {
+			background-color: $purple;
+			color: $white;
+		}
+	}
+
+	.m-quotes {
+		font-size: 36px;
+		font-style: italic;
+		font-family: $fancy-type;
+		font-weight: 100;
+		line-height: 42px;
+		color: $light_purple;
+		text-align: right;
+
+		p {
+			margin-bottom: 10px;
+		}
+	}
+
+	.m-quotes-author {
+		font-size: 20px;
+		font-weight: 500;
+		line-height: 20px;
+		color: $purple;
+
+		em {
+			font-weight: 300;
+		}
+	}
+
+
+	ul {
+		display: inline-block;
+		width: 266px;
+		border: 1px solid $light_purple;
+		margin-right: 10px;
+		padding: 0 20px 20px;
+		@include rounded;
+
+		h2 {
+			font-size: 26px;
+		}
+
+		li {
+			list-style-type: none;
+			font-size: 14px;
+			line-height: 20px;
+		}
+	}
+}
+
+
+
+// Preview Page  Styles
+
+.m-preview {
 	h1 {
 		margin-bottom: 80px;
 	}
@@ -407,19 +491,19 @@ header {
 	box-shadow: inset 0 3px 3px -3px rgba(0,0,0,0.3);
 }
 
-.m-homepage-list-name {
+.m-preview-list-name {
 	width: calc(15% - 20px);
 	padding-left: 10px;
 	margin-right: 10px;
 }
-.m-homepage-list-sectors {
+.m-preview-list-sectors {
 	width: calc(35% - 20px);
 	margin-right: 10px;
 }
-.m-homepage-list-desc {
+.m-preview-list-desc {
 	width: calc(46% - 20px);
 }
-.m-homepage-list-control {
+.m-preview-list-control {
 	width: calc(4% - 20px);
 	text-align: center;
 }
@@ -481,6 +565,34 @@ header {
 
 }
 
+// Download Page
+
+.m-download-button {
+	display: inline-block;
+	width: 30%;
+	border: 3px solid $purple;
+	margin-right: 20px;
+	margin-bottom: 20px;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+	vertical-align: top;
+
+
+	span {
+		padding: 30px 20px 10px;
+		border: 3px solid $light_purple;
+		display: block;
+		-webkit-border-radius: 2px;
+		-moz-border-radius: 2px;
+		border-radius: 2px;
+		height: 200px;
+		font-family: $fancy_type;
+		font-size: 48px;
+		line-height: 60px;
+		text-align: center;
+	}
+}
 
 
 
@@ -522,7 +634,55 @@ footer {
 	}
 }
 
+// Candidates Page
 
+.m-candidates-list {
+	padding: 0;
+	overflow: hidden;
+}
+
+.m-candidates-buttons {
+
+	button {
+		background-color: $light_purple;
+		font-size: 11px;
+		@include rounded;
+		border: 0;
+		color: $white;
+		cursor: pointer;
+		padding: 3px 7px 5px;
+	}
+
+	button:hover {
+		background-color: $purple;
+	}
+}
+
+.m-candidates-item {
+	list-style-type: none;
+	padding:15px;
+	background-color: $purple;
+	width: 180px;
+	height: 180px;
+	float: left;
+	margin: 0 10px 10px 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	color: $white;
+
+	h3 {
+		color: #fff;
+		margin-top: 0;
+	}
+
+	em {
+		color: $light_purple;
+		display: inline-block;
+		height: 15px;
+		overflow: hidden;
+	}
+
+}
 
 
 

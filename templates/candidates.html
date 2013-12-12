@@ -3,17 +3,16 @@
 
 {% block body %}
 
-<div class="m-homepage">
-	<div class="fancy-background">
-		<img src="{{ static_url("img/home-bg.jpg") }}" />
-	</div>
+<div class="m-candidates">
 	<h1>{{ page_heading }}</h1>
-	<h2>Filter by Sector</h2>
-	<div id="filters" class="button-group" data-toggle="buttons-checkbox">
+	<h3>Filter by Sector</h3>
+	<div id="filters" class="m-candidates-buttons button-group" data-toggle="buttons-checkbox">
 	    <button data-filter="*">show all</button>
+	    <select name="" id="">
 	    {% for sector in sectors %}
-	    <button data-filter=".{{sector.strip().replace(" ", "-").replace("/","")}}">{{sector}}</button>
+		    <option data-filter=".{{sector.strip().replace(" ", "-").replace("/","")}}">{{sector}}</option>
 	    {%end%}
+	    </select>
 	</div>
 		<div class="m-candidates isotopes-container" data-isotope-options='{ "layoutMode": "fitColumns" }'>
 			{% for company in companies %}
