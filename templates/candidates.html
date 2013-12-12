@@ -3,23 +3,25 @@
 
 {% block body %}
 
-<div class="">
+<div class="m-candidates">
 	<h1>{{ page_heading }}</h1>
-	<h2>Filter by Sector</h2>
-	<div id="filters" class="button-group" data-toggle="buttons-checkbox">
+	<h3>Filter by Sector</h3>
+	<div id="filters" class="m-candidates-buttons button-group" data-toggle="buttons-checkbox">
 	    <button data-filter="*">show all</button>
+	    <select name="" id="">
 	    {% for sector in sectors %}
-	    <button data-filter=".{{sector.strip().replace(" ", "-").replace("/","")}}">{{sector}}</button>
+		    <option data-filter=".{{sector.strip().replace(" ", "-").replace("/","")}}">{{sector}}</option>
 	    {%end%}
+	    </select>
 	</div>
-	<ul class="m-candidates isotopes-container">
+	<ul class="m-candidates-list isotopes-container">
 		{% for company in companies %}
 		<li class="m-candidates-item {% for sector in company.sector %}{{sector.strip().replace(" ", "-").replace("/","")}} {%end%}">
-			<h4>{{ company.companyName }}</h4>
-			<em>{{ ', '.join(company.sector) }}</em>
+			<h3>{{ company.companyName }}</h3>
 			<p>{{ company.descriptionShort }}</p>
+			<em>{{ ', '.join(company.sector) }}</em>
 		</li>
 		{%end%}
 	</ul>
-	</div>
+</div>
 {% end %}
