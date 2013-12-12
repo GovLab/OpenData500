@@ -11,12 +11,12 @@ header {
   margin-bottom: 30px; }
 
 h1 {
-  font-family: 'Exo', sans-serif;
+  font-family: "Exo", sans-serif;
   font-weight: 100;
   font-size: 5.6em; }
 
 h2 {
-  font-family: 'Exo', sans-serif;
+  font-family: "Exo", sans-serif;
   font-weight: 500;
   font-size: 3em; }
 
@@ -75,7 +75,7 @@ header {
   -moz-border-radius: 4px;
   border-radius: 4px;
   color: #fff;
-  font-family: 'Exo', sans-serif;
+  font-family: "Exo", sans-serif;
   text-transform: uppercase;
   font-size: 14px;
   font-weight: 14px;
@@ -331,6 +331,29 @@ header {
     font-size: 2em;
     margin-bottom: 35px; }
 
+.m-download-button {
+  display: inline-block;
+  width: 30%;
+  border: 3px solid #472b74;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  vertical-align: top; }
+  .m-download-button span {
+    padding: 30px 20px 10px;
+    border: 3px solid #8977a7;
+    display: block;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    height: 200px;
+    font-family: "Exo", sans-serif;
+    font-size: 48px;
+    line-height: 60px;
+    text-align: center; }
+
 footer {
   background-color: #444444;
   padding: 20px 0;
@@ -353,3 +376,12 @@ footer {
     margin-right: 40px;
     margin-top: 0;
     float: left; }
+
+.m-candidates {
+  padding: 0; }
+
+.m-candidates-item {
+  list-style-type: none;
+  padding: 0 15px;
+  background-color: rgba(0, 0, 0, 0.1);
+  width: 180px; }

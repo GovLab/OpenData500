@@ -172,21 +172,6 @@ $('.dataForms').on('click', '.createDataset', function(event) {
 
 
 
-//Istopes
-// init Isotope
-var $container = $('.isotopes-container').isotope({
-	layoutMode: 'vertical',
-	vertical: {
-		horizontalAlignment: 0.5,
-	}
-});
-// filter items on button click
-$('#filters').on( 'click', 'button', function( event ) {
-  var filtr = $(this).attr('data-filter');
-  $container.isotope({ filter: filtr });
-});
-
-
 
 
 
