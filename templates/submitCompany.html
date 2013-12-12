@@ -22,7 +22,7 @@
 		<h3>Personal Information</h3>
 		<div class="m-form-line"><label for="firstName">First Name: *</label><input type="text" name="firstName" id="firstName" data-required="true"></div>
 		<div class="m-form-line"><label for="lastName">Last Name: *</label><input type="text" name="lastName" id="lastName" data-required="true"></div>
-		<div class="m-form-line"><label for="title">Title: *</label><input type="text" name="title" id="title"></div>
+		<div class="m-form-line"><label for="title">Title: </label><input type="text" name="title" id="title"></div>
 		<div class="m-form-line"><label for="email">Email: *</label><input type="text" name="email" id="email" data-trigger="change" data-type="email" data-required="true"></div>
 		<div class="m-form-line"><label for="phone">Phone:</label><input type="text" name="phone" id="phone" data-trigger="change" data-type="phone"></div>
 		<div class="m-form-box contacted-box"><label for="contacted"><input type="checkbox" name="contacted" id="contacted" value="contacted">Please check here if you would be willing to be contacted for further information about your company.</label></div>
@@ -99,7 +99,7 @@
 		</div>
 		<div class="m-form-line">
 			<label for="zipCode">Zip Code:</label>
-			<input type="text" name="zipCode" id="zipCode" data-trigger="change" data-type="number">
+			<input type="text" name="zipCode" id="zipCode" data-trigger="change" data-type="number" parsley-regexp="^\d{5}(?:[-\s]\d{4})?$">
 		</div>
 		<div class="m-form-line">
 			<label for="ceoFirstName">First Name of CEO:</label>
@@ -113,8 +113,8 @@
 			<label for="ceoEmail">CEO Email:</label>
 			<input type="text" name="ceoEmail" id="ceoEmail" data-trigger="change" data-type="email">
 		</div>
-		<div class="m-form-box type-of-company-box">Type of Company: *<br>
-			<label for=""><input type="radio" name="companyType" data-trigger="change" data-group="companyType" data-mincheck="1" value="Public">Public</label>
+		<div class="m-form-box ">Type of Company: *<br>
+			<label for=""><input type="radio" name="companyType" data-trigger="change" data-group="companyType" data-mincheck="1" parsley-required="true" value="Public">Public</label>
 			<label for=""><input type="radio" name="companyType" data-trigger="change" data-group="companyType" data-mincheck="1" value="Private">Private</label>
 			<label for=""><input type="radio" name="companyType" data-trigger="change" data-group="companyType" data-mincheck="1" value="Nonprofit">Nonprofit</label>
 			<label for=""><input type="radio" name="companyType" data-trigger="change" data-group="companyType" data-mincheck="1" value="other">Other

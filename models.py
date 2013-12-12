@@ -37,6 +37,7 @@ class Dataset(Document):
 
 class Company(Document):
 	companyName = StringField()
+	prettyName = StringField()
 	url = StringField()
 	ceo = ReferenceField(Person)
 	yearFounded = IntField()

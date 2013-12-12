@@ -24,6 +24,7 @@ import bson
 from bson import json_util
 import csv
 import json
+import re
 
 # import and define tornado-y things
 from tornado.options import define
@@ -45,22 +46,23 @@ class Application(tornado.web.Application):
     def __init__(self):
         handlers = [
             (r"/", MainHandler),
-            (r"/submitCompany/", SubmitCompanyHandler),
-            (r"/edit/([a-zA-Z0-9]{24})", EditCompanyHandler),
-            (r"/addData/([a-zA-Z0-9]{24})", SubmitDataHandler),
-            (r"/editData/([a-zA-Z0-9]{24})", EditDataHandler),
-            (r"/view/([a-zA-Z0-9]{24})", ViewHandler),
-            (r"/delete/([a-zA-Z0-9]{24})", DeleteCompanyHandler),
-            #(r"/recommendCompany/", RecommendCompanyHandler),
-            (r"/admin/", AdminHandler),
-            (r"/admin/edit/([a-zA-Z0-9]{24})", AdminEditCompanyHandler),
-            (r"/about/", AboutHandler),
-            #(r"/generateFiles/", GenerateFilesHandler),
-            (r"/download/", DownloadHandler),
-            (r'/download/(.*)',tornado.web.StaticFileHandler,{'path':os.path.join(os.path.dirname(__file__), 'static')}),
-            #(r"/upload/", UploadHandler),
-            (r"/candidates/", CandidateHandler),
-            (r"/preview/", PreviewHandler)
+            (r"/submitCompany/?", SubmitCompanyHandler),
+            (r"/edit/([a-zA-Z0-9]{24})/?", EditCompanyHandler),
+            (r"/addData/([a-zA-Z0-9]{24})/?", SubmitDataHandler),
+            (r"/editData/([a-zA-Z0-9]{24})/?", EditDataHandler),
+            (r"/view/([a-zA-Z0-9]{24})/?", ViewHandler),
+            (r"/delete/([a-zA-Z0-9]{24})/?", DeleteCompanyHandler),
+            #(r"/recommendCompany/?", RecommendCompanyHandler),
+            (r"/admin/?", AdminHandler),
+            (r"/admin/edit/([a-zA-Z0-9]{24})/?", AdminEditCompanyHandler),
+            (r"/about/?", AboutHandler),
+            #(r"/generateFiles/?", GenerateFilesHandler),
+            (r"/download/?", DownloadHandler),
+            (r'/download/(.*)/?',tornado.web.StaticFileHandler,{'path':os.path.join(os.path.dirname(__file__), 'static')}),
+            #(r"/upload/?", UploadHandler),
+            (r"/candidates/?", CandidateHandler),
+            (r"/preview/?", PreviewHandler),
+            (r"/([^/]+)/?", CompanyHandler)
         ]
         settings = dict(
             template_path=os.path.join(os.path.dirname(__file__), "templates"),
@@ -73,13 +75,29 @@ class Application(tornado.web.Application):
 
 # the main page
 class MainHandler(tornado.web.RequestHandler):
+    @tornado.web.addslash
     def get(self):
         self.render(
             "index.html",
             page_title='OpenData500',
             page_heading='Welcome to the OpenData 500',
         )
+
+class CompanyHandler(tornado.web.RequestHandler):
+    @tornado.web.addslash
+    def get(self, companyName):
+        company = models.Company.objects.get(prettyName=companyName)
+        logging.info(company.companyName)
+        self.render(
+            "company.html",
+            page_title='OpenData500',
+            page_heading=company.companyName,
+            company = company,
+        )
+
+      
 class PreviewHandler(tornado.web.RequestHandler):
+    @tornado.web.addslash
     def get(self):
         #companies = models.Company.objects()
         submittedCompanies = models.Company.objects(Q(vetted=True) & Q(vettedByCompany=True))
@@ -91,6 +109,7 @@ class PreviewHandler(tornado.web.RequestHandler):
         )
 
 class CandidateHandler(tornado.web.RequestHandler):
+    @tornado.web.addslash
     def get(self):
         companies = models.Company.objects(Q(vetted=True) & Q(vettedByCompany=True))
         self.render(
@@ -102,6 +121,7 @@ class CandidateHandler(tornado.web.RequestHandler):
         )
 
 class AboutHandler(tornado.web.RequestHandler):
+    @tornado.web.addslash
     def get(self):
         self.render(
             "about.html",
@@ -111,6 +131,7 @@ class AboutHandler(tornado.web.RequestHandler):
 
 
 class UploadHandler(tornado.web.RequestHandler):
+    @tornado.web.addslash
     def get(self):
         companies = []
         with open('companies.csv', 'rb') as csvfile:
@@ -298,6 +319,7 @@ class UploadHandler(tornado.web.RequestHandler):
         self.redirect('/')
 
 class AdminHandler(tornado.web.RequestHandler):
+    @tornado.web.addslash
     def get(self):
         unvettedCompanies = models.Company.objects(Q(vetted=False) & Q(recommended=False))
         vettedCompanies = models.Company.objects(Q(vetted=True) & Q(vettedByCompany=True))
@@ -314,6 +336,7 @@ class AdminHandler(tornado.web.RequestHandler):
         )
 
 class SubmitCompanyHandler(tornado.web.RequestHandler):
+    @tornado.web.addslash
     def get(self):
         self.render(
             "submitCompany.html",
@@ -327,6 +350,7 @@ class SubmitCompanyHandler(tornado.web.RequestHandler):
         #org = self.get_argument("org", None)
         url = self.get_argument('url', None)
         companyName = self.get_argument("companyName", None)
+        company.prettyName = re.sub(r'([^\s\w])+', '', companyName).replace(" ", "-")
         email = self.get_argument("email", None)
         phone = self.get_argument("phone", None)
         city = self.get_argument("city", None)
@@ -411,6 +435,7 @@ class SubmitCompanyHandler(tornado.web.RequestHandler):
             ceo.save()
         company = models.Company(
             companyName = companyName,
+            prettyName = prettyName,
             url = url,
             ceo = ceo,
             city = city,
@@ -438,6 +463,7 @@ class SubmitCompanyHandler(tornado.web.RequestHandler):
         self.redirect("/addData/" + id)
 
 class RecommendCompanyHandler(tornado.web.RequestHandler):
+    @tornado.web.addslash
     def get(self, id=None):
         try:
             recommenderId = models.Person.objects.get(id=bson.objectid.ObjectId(id))
@@ -531,6 +557,7 @@ class RecommendCompanyHandler(tornado.web.RequestHandler):
 
 
 class SubmitDataHandler(tornado.web.RequestHandler):
+    @tornado.web.addslash
     def get(self, id):
         #Make not whether we are submitting a Co. and adding a dataset or editing a Co. and adding a dataset
         action = self.get_argument('action', None)
@@ -595,6 +622,7 @@ class SubmitDataHandler(tornado.web.RequestHandler):
             self.redirect("/")
 
 class EditCompanyHandler(tornado.web.RequestHandler):
+    @tornado.web.addslash
     def get(self, id):
         try: 
             company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
@@ -642,6 +670,7 @@ class EditCompanyHandler(tornado.web.RequestHandler):
         company.ceo.save()
         #Company Info
         company.companyName = self.get_argument("companyName", None)
+        company.prettyName = re.sub(r'([^\s\w])+', '', company.companyName).replace(" ", "-")
         url = self.get_argument('url', None)
         company.city = self.get_argument('city', None)
         company.zipCode = self.get_argument('zipCode', None)
@@ -690,6 +719,7 @@ class EditCompanyHandler(tornado.web.RequestHandler):
 
 #Editing section for Admins
 class AdminEditCompanyHandler(tornado.web.RequestHandler):
+    @tornado.web.addslash
     def get(self, id):
         company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
         page_heading = "Editing " + company.companyName
@@ -741,7 +771,9 @@ class AdminEditCompanyHandler(tornado.web.RequestHandler):
             company.ceo = ceo
             company.save()
         #Company Info
-        company.companyName = self.get_argument("companyName", None)
+        companyName = self.get_argument("companyName", None)
+        company.companyName = companyName
+        company.prettyName = re.sub(r'([^\s\w])+', '', companyName).replace(" ", "-")
         url = self.get_argument('url', None)
         company.city = self.get_argument('city', None)
         company.zipCode = self.get_argument('zipCode', None)
@@ -799,6 +831,7 @@ class AdminEditCompanyHandler(tornado.web.RequestHandler):
         self.redirect('/admin/')
 
 class EditDataHandler(tornado.web.RequestHandler):
+    @tornado.web.addslash
     def get(self, id):
         #Are we adding a new dataset? or are we editing an existing dataset?
         dataset = models.Dataset.objects.get(id=bson.objectid.ObjectId(id))
@@ -954,6 +987,7 @@ class ViewHandler(tornado.web.RequestHandler):
         self.write(json_encode(obj))
 
 class DownloadHandler(tornado.web.RequestHandler):
+    @tornado.web.addslash
     def get(self):
         self.render(
             "download.html",
@@ -962,6 +996,7 @@ class DownloadHandler(tornado.web.RequestHandler):
         )
 
 class GenerateFilesHandler(tornado.web.RequestHandler):
+    @tornado.web.addslash
     def get(self):
         #Get published companies, turn each one into an array and put into CSV file
         companies = models.Company.objects(Q(vetted=True) & Q(vettedByCompany=True))
@@ -1084,10 +1119,6 @@ class GenerateFilesHandler(tornado.web.RequestHandler):
             json.dump(datasetsJSON, outfile)
 
 
-
-
-
-
 class CompanyModule(tornado.web.UIModule):
     def render(self, company):
         return self.render_string(
@@ -1099,8 +1130,6 @@ class CompanyModule(tornado.web.UIModule):
     def javascript_files(self):
         return "/static/js/script.js"
 
-
-# RAMMING SPEEEEEEED!
 def main():
     tornado.options.parse_command_line()
     http_server = tornado.httpserver.HTTPServer(Application())
