@@ -13,6 +13,11 @@
     <!-- <link rel="stylesheet" href="{{ static_url("css/bootstrap.css") }}" /> -->
     <link rel="stylesheet" href="{{ static_url("css/libs/normalize/normalize.css") }}" />
     <link href='http://fonts.googleapis.com/css?family=Exo:100,500,100italic,500italic' rel='stylesheet' type='text/css'>
+    <!-- Load jQuery -->
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script>!window.jQuery && document.write('<script src="{{ static_url("js/libs/jquery/jquery-1.10.1.min.js") }}"><\/script>')</script>
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -40,18 +45,14 @@
            <li class="footer-menu-item last"><a href="mailto:opendata500@thegovlab.org">Contact Us</a></li> 
         </ul>
     </footer><!-- end footer -->
-    <!-- Load jQuery -->
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-    <script>!window.jQuery && document.write('<script src="{{ static_url("js/libs/jquery/jquery-1.10.1.min.js") }}"><\/script>')</script>
+    
     <!-- plugins -->
     <script src="{{ static_url("js/plugins.js") }}"></script>
     <!-- parsley.js (for form validation) -->
     <script src="{{ static_url("js/parsley.min.js") }}"></script>
     <script src="{{ static_url("js/parsley.extend.min.js") }}"></script>
     <!-- Isotopes.js (for form validation) -->
-    <script src="{{ static_url("js/isotope.pkgd.min.js") }}"></script>
+    
     <!-- Parallax Effects -->
     <script src="{{ static_url("js/libs/jquery.stellar.min.js") }}"></script>
     <!-- main script -->

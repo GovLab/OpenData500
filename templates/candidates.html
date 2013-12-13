@@ -3,8 +3,12 @@
 
 {% block body %}
 
+<h1>{{ page_heading }}</h1>
+<br>
+<div id="chart"></div>
+
 <div class="m-candidates">
-	<h1>{{ page_heading }}</h1>
+	
 	<h3>Filter by Sector</h3>
 	<div id="filters" class="m-candidates-buttons button-group" data-toggle="buttons-checkbox">
 	    <button data-filter="*">show all</button>
@@ -15,7 +19,7 @@
 	<br>
 	<div class="m-candidates isotopes-container" data-isotope-options='{ "layoutMode": "fitColumns" }'>
 		{% for company in companies %}
-			<div class="m-candidates-item {% for sector in company.sector %}{{sector.strip().replace(" ", "-").replace("/","")}} {%end%}">
+			<div class="m-candidates-item {% for sector in company.sector %}{{sector.strip().replace(" ", "-").replace("/","")}} {%end%}{{ company.state }}">
 				<div class="m-homepage-list-name companyName"><p><strong>{{ company.companyName }}</strong></p></div>
 				<div class="m-homepage-list-sectors"><p>{{ ', '.join(company.sector) }}</p></div>
 				<div class="m-homepage-list-desc"><p>{{ company.descriptionShort }}</p></div>
@@ -23,4 +27,395 @@
 		{%end%}
 	</div>
 </div>
+
+<div id="hidden" style="display:none;"><[{"abbrev": "AL","STATE":"Alabama","VALUE":"0"},
+{"abbrev": "AK","STATE":"Alaska","VALUE":"0"},
+{"abbrev": "AZ","STATE":"Arizona","VALUE":"2"},
+{"abbrev": "AR","STATE":"Arkansas","VALUE":"0"},
+{"abbrev": "CA","STATE":"California","VALUE":"60"},
+{"abbrev": "CO","STATE":"Colorado","VALUE":"5"},
+{"abbrev": "CT","STATE":"Connecticut","VALUE":"5"},
+{"abbrev": "DE","STATE":"Delaware","VALUE":"0"},
+{"abbrev": "DC","STATE":"District of Columbia","VALUE":"0"},
+{"abbrev": "FL","STATE":"Florida","VALUE":"3"},
+{"abbrev": "GA","STATE":"Georgia","VALUE":"2"},
+{"abbrev": "HI","STATE":"Hawaii","VALUE":"0"},
+{"abbrev": "ID","STATE":"Idaho","VALUE":"0"},
+{"abbrev": "IL","STATE":"Illinois","VALUE":"5"},
+{"abbrev": "IN","STATE":"Indiana","VALUE":"0"},
+{"abbrev": "IA","STATE":"Iowa","VALUE":"0"},
+{"abbrev": "KA","STATE":"Kansas","VALUE":"1"},
+{"abbrev": "KY","STATE":"Kentucky","VALUE":"1"},
+{"abbrev": "LA","STATE":"Louisiana","VALUE":"0"},
+{"abbrev": "ME","STATE":"Maine","VALUE":"1"},
+{"abbrev": "MD","STATE":"Maryland","VALUE":"6"},
+{"abbrev": "MA","STATE":"Massachusetts","VALUE":"17"},
+{"abbrev": "MI","STATE":"Michigan","VALUE":"3"},
+{"abbrev": "MN","STATE":"Minnesota","VALUE":"0"},
+{"abbrev": "MS","STATE":"Mississippi","VALUE":"0"},
+{"abbrev": "MO","STATE":"Missouri","VALUE":"2"},
+{"abbrev": "MT","STATE":"Montana","VALUE":"0"},
+{"abbrev": "NE","STATE":"Nebraska","VALUE":"0"},
+{"abbrev": "NV","STATE":"Nevada","VALUE":"0"},
+{"abbrev": "NH","STATE":"New Hampshire","VALUE":"0"},
+{"abbrev": "NJ","STATE":"New Jersey","VALUE":"3"},
+{"abbrev": "NM","STATE":"New Mexico","VALUE":"0"},
+{"abbrev": "NY","STATE":"New York","VALUE":"33"},
+{"abbrev": "NC","STATE":"North Carolina","VALUE":"1"},
+{"abbrev": "ND","STATE":"North Dakota","VALUE":"0"},
+{"abbrev": "OH","STATE":"Ohio","VALUE":"1"},
+{"abbrev": "OK","STATE":"Oklahoma","VALUE":"0"},
+{"abbrev": "OR","STATE":"Oregon","VALUE":"1"},
+{"abbrev": "PA","STATE":"Pennsylvania","VALUE":"1"},
+{"abbrev": "RI","STATE":"Rhode Island","VALUE":"0"},
+{"abbrev": "SC","STATE":"South Carolina","VALUE":"0"},
+{"abbrev": "SD","STATE":"South Dakota","VALUE":"0"},
+{"abbrev": "TN","STATE":"Tennessee","VALUE":"2"},
+{"abbrev": "TX","STATE":"Texas","VALUE":"4"},
+{"abbrev": "UT","STATE":"Utah","VALUE":"1"},
+{"abbrev": "VT","STATE":"Vermont","VALUE":"0"},
+{"abbrev": "VA","STATE":"Virginia","VALUE":"5"},
+{"abbrev": "WA","STATE":"Washington","VALUE":"8"},
+{"abbrev": "WV","STATE":"West Virginia","VALUE":"0"},
+{"abbrev": "WI","STATE":"Wisconsin","VALUE":"2"},
+{"abbrev": "WY","STATE":"Wyoming","VALUE":"0"},
+{"abbrev": "PR","STATE":"Puerto Rico","VALUE":"0"}]>
+</[{"abbrev": "AL","STATE":"Alabama","VALUE":"0"},
+{"abbrev": "AK","STATE":"Alaska","VALUE":"0"},
+{"abbrev": "AZ","STATE":"Arizona","VALUE":"2"},
+{"abbrev": "AR","STATE":"Arkansas","VALUE":"0"},
+{"abbrev": "CA","STATE":"California","VALUE":"60"},
+{"abbrev": "CO","STATE":"Colorado","VALUE":"5"},
+{"abbrev": "CT","STATE":"Connecticut","VALUE":"5"},
+{"abbrev": "DE","STATE":"Delaware","VALUE":"0"},
+{"abbrev": "DC","STATE":"District of Columbia","VALUE":"0"},
+{"abbrev": "FL","STATE":"Florida","VALUE":"3"},
+{"abbrev": "GA","STATE":"Georgia","VALUE":"2"},
+{"abbrev": "HI","STATE":"Hawaii","VALUE":"0"},
+{"abbrev": "ID","STATE":"Idaho","VALUE":"0"},
+{"abbrev": "IL","STATE":"Illinois","VALUE":"5"},
+{"abbrev": "IN","STATE":"Indiana","VALUE":"0"},
+{"abbrev": "IA","STATE":"Iowa","VALUE":"0"},
+{"abbrev": "KA","STATE":"Kansas","VALUE":"1"},
+{"abbrev": "KY","STATE":"Kentucky","VALUE":"1"},
+{"abbrev": "LA","STATE":"Louisiana","VALUE":"0"},
+{"abbrev": "ME","STATE":"Maine","VALUE":"1"},
+{"abbrev": "MD","STATE":"Maryland","VALUE":"6"},
+{"abbrev": "MA","STATE":"Massachusetts","VALUE":"17"},
+{"abbrev": "MI","STATE":"Michigan","VALUE":"3"},
+{"abbrev": "MN","STATE":"Minnesota","VALUE":"0"},
+{"abbrev": "MS","STATE":"Mississippi","VALUE":"0"},
+{"abbrev": "MO","STATE":"Missouri","VALUE":"2"},
+{"abbrev": "MT","STATE":"Montana","VALUE":"0"},
+{"abbrev": "NE","STATE":"Nebraska","VALUE":"0"},
+{"abbrev": "NV","STATE":"Nevada","VALUE":"0"},
+{"abbrev": "NH","STATE":"New Hampshire","VALUE":"0"},
+{"abbrev": "NJ","STATE":"New Jersey","VALUE":"3"},
+{"abbrev": "NM","STATE":"New Mexico","VALUE":"0"},
+{"abbrev": "NY","STATE":"New York","VALUE":"33"},
+{"abbrev": "NC","STATE":"North Carolina","VALUE":"1"},
+{"abbrev": "ND","STATE":"North Dakota","VALUE":"0"},
+{"abbrev": "OH","STATE":"Ohio","VALUE":"1"},
+{"abbrev": "OK","STATE":"Oklahoma","VALUE":"0"},
+{"abbrev": "OR","STATE":"Oregon","VALUE":"1"},
+{"abbrev": "PA","STATE":"Pennsylvania","VALUE":"1"},
+{"abbrev": "RI","STATE":"Rhode Island","VALUE":"0"},
+{"abbrev": "SC","STATE":"South Carolina","VALUE":"0"},
+{"abbrev": "SD","STATE":"South Dakota","VALUE":"0"},
+{"abbrev": "TN","STATE":"Tennessee","VALUE":"2"},
+{"abbrev": "TX","STATE":"Texas","VALUE":"4"},
+{"abbrev": "UT","STATE":"Utah","VALUE":"1"},
+{"abbrev": "VT","STATE":"Vermont","VALUE":"0"},
+{"abbrev": "VA","STATE":"Virginia","VALUE":"5"},
+{"abbrev": "WA","STATE":"Washington","VALUE":"8"},
+{"abbrev": "WV","STATE":"West Virginia","VALUE":"0"},
+{"abbrev": "WI","STATE":"Wisconsin","VALUE":"2"},
+{"abbrev": "WY","STATE":"Wyoming","VALUE":"0"},
+{"abbrev": "PR","STATE":"Puerto Rico","VALUE":"0"}]></div></body>
+<script src="{{ static_url("js/d3.v3.min.js") }}"></script>
+<script src="{{ static_url("js/queue.v1.min.js") }}"></script>
+<script src="{{ static_url("js/isotope.pkgd.min.js") }}"></script>
+<script>
+(function(){
+	var $container = $('.isotopes-container').isotope({
+		layoutMode: 'fitRows',
+		resizesContainer : false,
+	});
+	// filter items on button click
+	$('#filters').on( 'click', 'button', function( event ) {
+	  var filtr = $(this).attr('data-filter');
+	  console.log(filtr);
+	  $container.isotope({ filter: filtr });
+	});
+
+	// $('.states').on('click', 'path', function(event) {
+	// 	var filtr = $(this).attr('class').split(' ')[1];
+	// 	//$container.isotope({ filter: filtr });
+	// 	console.log(filtr);
+	// });
+
+	$container.delegate( '.m-candidates-item', 'click', function(){
+	        $(this).toggleClass('large');
+	        $container.isotope();
+	});
+
+    data = [{"abbrev": "AL", "STATE":"Alabama", "VALUE":14}, 
+            {"abbrev": "AK", "STATE":"Alaska", "VALUE":52}, 
+            {"abbrev": "AZ", "STATE":"Arizona", "VALUE":42},
+            {"abbrev": "AR", "STATE":"Arkansas", "VALUE":11},
+            {"abbrev": "CA", "STATE":"California", "VALUE":63},
+            {"abbrev": "CO", "STATE":"Colorado", "VALUE":86},
+            {"abbrev": "CT", "STATE":"Connecticut", "VALUE":59}, 
+            {"abbrev": "DE", "STATE":"Delaware", "VALUE":96}, 
+            {"abbrev": "DC", "STATE":"District of Columbia", "VALUE":22},
+            {"abbrev": "FL", "STATE":"Florida", "VALUE":35},
+            {"abbrev": "GA", "STATE":"Georgia", "VALUE":53},
+            {"abbrev": "HI", "STATE":"Hawaii", "VALUE":62},
+            {"abbrev": "ID", "STATE":"Idaho", "VALUE":72}, 
+            {"abbrev": "IL", "STATE":"Illinois", "VALUE":46},
+            {"abbrev": "IN", "STATE":"Indiana", "VALUE":92},
+            {"abbrev": "IA", "STATE":"Iowa", "VALUE":35},
+            {"abbrev": "KA", "STATE":"Kansas", "VALUE":73},
+            {"abbrev": "KY", "STATE":"Kentucky", "VALUE":33}, 
+            {"abbrev": "LA", "STATE":"Louisiana", "VALUE":37}, 
+            {"abbrev": "ME", "STATE":"Maine", "VALUE":62},
+            {"abbrev": "MD", "STATE":"Maryland", "VALUE":87},
+            {"abbrev": "MA", "STATE":"Massachusetts", "VALUE":26},
+            {"abbrev": "MI", "STATE":"Michigan", "VALUE":57},
+            {"abbrev": "MN", "STATE":"Minnesota", "VALUE":37},
+            {"abbrev": "MS", "STATE":"Mississippi", "VALUE":24},
+            {"abbrev": "MO", "STATE":"Missouri", "VALUE":46},
+            {"abbrev": "MT", "STATE":"Montana", "VALUE":71}, 
+            {"abbrev": "NE", "STATE":"Nebraska", "VALUE":26}, 
+            {"abbrev": "NV", "STATE":"Nevada", "VALUE":49},
+            {"abbrev": "NH", "STATE":"New Hampshire", "VALUE":30},
+            {"abbrev": "NJ", "STATE":"New Jersey", "VALUE":61},
+            {"abbrev": "NM", "STATE":"New Mexico", "VALUE":35},
+            {"abbrev": "NY", "STATE":"New York", "VALUE":74}, 
+            {"abbrev": "NC", "STATE":"North Carolina", "VALUE":17},
+            {"abbrev": "ND", "STATE":"North Dakota", "VALUE":42},
+            {"abbrev": "OH", "STATE":"Ohio", "VALUE":74},
+            {"abbrev": "OK", "STATE":"Oklahoma", "VALUE":28},
+            {"abbrev": "OR", "STATE":"Oregon", "VALUE":58}, 
+            {"abbrev": "PA", "STATE":"Pennsylvania", "VALUE":42}, 
+            {"abbrev": "RI", "STATE":"Rhode Island", "VALUE":73},
+            {"abbrev": "SC", "STATE":"South Carolina", "VALUE":26},
+            {"abbrev": "SD", "STATE":"South Dakota", "VALUE":71},
+            {"abbrev": "TN", "STATE":"Tennessee", "VALUE":60},
+            {"abbrev": "TX", "STATE":"Texas", "VALUE":53},
+            {"abbrev": "UT", "STATE":"Utah", "VALUE":82},
+            {"abbrev": "VT", "STATE":"Vermont", "VALUE":48},
+            {"abbrev": "VA", "STATE":"Virginia", "VALUE":24}, 
+            {"abbrev": "WA", "STATE":"Washington", "VALUE":17}, 
+            {"abbrev": "WV", "STATE":"West Virginia", "VALUE":5},
+            {"abbrev": "WI", "STATE":"Wisconsin", "VALUE":34},
+            {"abbrev": "WY", "STATE":"Wyoming", "VALUE":71},
+            {"abbrev": "PR", "STATE":"Puerto Rico", "VALUE":25}];
+            
+    var userData = document.getElementById('hidden').innerText.replace('<','').replace('>','')                
+    userData = JSON.parse(userData)
+    if (userData) data = userData
+    
+    createChart = function(){
+        var hoverDisplay = "State &amp; Value".replace('&amp;', '&')
+        
+        //General chart
+        this.Title = '500 Companies';
+        this.Size = 600;
+        this.MarginTop = 60;
+        this.MarginRight = 40;
+        this.MarginBottom = 40;
+        this.MarginLeft = 40;
+        this.Guide = false;
+        this.DataType = 'Number';
+        this.BackgroundColor = '#ffffff';
+        //States
+        this.StateBaseColor = '#ffffff';
+        this.StateMaxColor = '#472b74';
+        this.Range = 10.246260488872673;
+        this.LineThickness = 1;
+        this.LineColor = '#bbbbbb';
+        //Labels
+        this.ChartTitle = true;
+        this.ChartTitleText = 'Filter By State';
+        this.ChartTitleXLocation = 'Center';
+        this.ChartTitleYLocation = 0;
+        this.ChartTitleFont = 'Arial';
+        this.ChartTitleSize = 24;
+        this.ChartTitleColor = '#472b74';
+        this.PointLabel = true;
+        this.PointLabelLocation = -10;
+        this.PointLabelFont = 'Arial';
+        this.PointLabelSize = 14;
+        this.PointLabelColor = '#000000';
+        //Hover State
+        this.HoverStates = true;
+        this.HoverDisplay = hoverDisplay;
+        this.HoverLabelFont = 'Arial';
+        this.HoverLabelSize = 10;
+        this.HoverLabelColor = '#000000';
+        this.HoverValueFont = 'Arial';
+        this.HoverValueSize = 16;
+        this.HoverValueColor = '#000000';
+        
+        this.mainChart = function() {
+        
+            var height = 550;
+            var width = 950;
+            
+            var size = this.Size/width,
+                marginTop = this.MarginTop,
+                marginRight = this.MarginRight,
+                marginBottom = this.MarginBottom,
+                marginLeft = this.MarginLeft,
+                guideOn = this.Guide,
+                dataType = this.DataType,
+                backgroundColor = this.BackgroundColor,
+                stateBaseColor = this.StateBaseColor,
+                stateMaxColor = this.StateMaxColor,
+                range = this.Range,
+                lineThickness = this.LineThickness,
+                lineColor = this.LineColor,
+                chartTitle = this.ChartTitle,
+                chartTitleText = this.ChartTitleText,
+                chartTitleXLoc = this.ChartTitleXLocation,
+                chartTitleYLoc = this.ChartTitleYLocation,
+                chartTitleFont = this.ChartTitleFont,
+                chartTitleSize = this.ChartTitleSize,
+                chartTitleColor = this.ChartTitleColor,
+                pointLabelLoc = this.PointLabelLocation,
+                pointLabelFont = this.PointLabelFont,
+                pointLabelSize = this.PointLabelSize,
+                pointLabelColor = this.PointLabelColor,
+                hoverStates = this.HoverStates,
+                hoverDisplay = this.HoverDisplay,
+                hoverLabelFont = this.HoverLabelFont,
+                hoverLabelSize = this.HoverLabelSize,
+                hoverLabelColor = this.HoverLabelColor,
+                hoverValueFont = this.HoverValueFont,
+                hoverValueSize = this.HoverValueSize,
+                hoverValueColor = this.HoverValueColor;
+                
+            var margin = {top: marginTop, right: marginRight, bottom: marginBottom, left: marginLeft},
+                w = (width*size) + margin.left + margin.right,
+                h = (height*size) + margin.top + margin.bottom;
+                
+            var bkgdColor = document.getElementsByTagName("body")[0];
+            bkgdColor.setAttribute("style","background-color:" + backgroundColor + ";margin:0px;");
+            
+            var elem = document.getElementById("chart");
+            elem.setAttribute("style","width:" + w + "; height:" + h + "; ");
+            
+            var graph = d3.select('#chart').append('svg')
+                .attr('width', w)
+                .attr('height', h);
+                
+            //Background Color
+            graph.append("svg:rect")
+                .attr("class", "bkgd")
+                .attr("width", w)
+                .attr("height", h)
+                .style("fill", "none");
+                
+            var group = graph.append('g');
+            
+            var hover = d3.select("#chart")
+                .append("div")
+                .attr("class", "tooltip")
+                .style("position", "absolute")
+                .style("z-index", "1000")
+                .style("padding", "5px")
+                .style("font-family", hoverLabelFont)
+                .style("font-size", hoverLabelSize)
+                .style("color", hoverLabelColor);
+                
+            queue()
+                .defer(d3.json, "{{ static_url("us_states.json") }}")
+                .await(ready);
+                
+            var numberFormat = d3.format("0,000");
+            var percentFormat = function(d) { return numberFormat(d) + "%"; };
+            var dollarFormat = function(d) { return "$" + numberFormat(d); };
+            
+            var projection = d3.geo.albersUsa();
+            var path = d3.geo.path()
+                .projection(projection);
+                
+            group.attr('transform', 'translate(' + margin.left + ', ' + margin.top + '),scale(' + size + ', ' + size + ')');
+            
+            var color = d3.scale.linear().domain([0,range]).range([stateMaxColor, stateBaseColor]);
+            
+            var maxVal = d3.max(data, function(d) { return d.VALUE; });
+            var minVal = d3.min(data, function(d) { return d.VALUE; });
+            var total = maxVal - minVal;
+            
+            var number = d3.format("0,000");
+            
+            function ready(error, us, _data) {
+            
+                group.selectAll('path')
+                    .data(us.features)
+                    .enter().append('path')
+                    .attr('class', function(d) {
+                    	return 'states '+ d.properties.NAME;
+                    })
+                    .attr('d', d3.geo.path().projection(projection))
+                    //.attr('id', function(d){return d.properties.name.replace(/\s+/g, '')})
+                    .style('stroke', lineColor)
+                    .style('stroke-width', lineThickness/size);
+                    
+                group.selectAll('.states')
+                    .data(data)
+                    .style('fill', function(d){return color( total/d.VALUE )})
+                    .on("mouseover", function(d, i) {   
+                        if (hoverStates == true) {
+                                hover.transition().duration(100).style("opacity", 1)
+                                    .style("background-color", color(total/d.VALUE))
+                                    .style("left", (d3.event.pageX) + 20 + "px")
+                                    .style("top", (d3.event.pageY) + "px");
+                        if (hoverDisplay == "State & Value") {
+                                if (dataType == "Number") hover.html(d.STATE + "<br><span style='font-size:" + hoverValueSize + ";font-family:" + hoverValueFont + ";color:" + hoverValueColor + ";'>" + numberFormat(d.VALUE) + "</span>");
+                                if (dataType == "Percent") hover.html(d.STATE + "<br><span style='font-size:" + hoverValueSize + ";font-family:" + hoverValueFont + ";color:" + hoverValueColor + ";'>" + percentFormat(d.VALUE) + "</span>");
+                                if (dataType == "Dollar") hover.html(d.STATE + "<br><span style='font-size:" + hoverValueSize + ";font-family:" + hoverValueFont + ";color:" + hoverValueColor + ";'>" + dollarFormat(d.VALUE) + "</span>");
+                        }
+                            if (hoverDisplay == "Value") {
+                                if (dataType == "Number") hover.html("<span style='font-size:" + hoverValueSize + ";font-family:" + hoverValueFont + ";color:" + hoverValueColor + ";'>" + numberFormat(d.VALUE) + "</span>");
+                                if (dataType == "Percent") hover.html("<span style='font-size:" + hoverValueSize + ";font-family:" + hoverValueFont + ";color:" + hoverValueColor + ";'>" + percentFormat(d.VALUE) + "</span>");
+                                if (dataType == "Dollar") hover.html("<span style='font-size:" + hoverValueSize + ";font-family:" + hoverValueFont + ";color:" + hoverValueColor + ";'>" + dollarFormat(d.VALUE) + "</span>");
+                            }
+                        }
+                    })
+                    .on("mouseout", function(d) { if (hoverStates == true) hover.style("left", -100).style("top", -100).transition().duration(100).style("opacity", 0); })
+                    .on("mousemove", function(d, i) { if (hoverStates == true)hover.style("left", (d3.event.pageX) + 20 + "px").style("top", (d3.event.pageY) + "px"); })
+                    .on('click', function(d) { var filtr = "." + d.abbrev; $container.isotope({ filter: filtr }); console.log(filtr); });
+                    
+                if (chartTitleXLoc == "Left") { var cxpos = margin.left; var ctextanchor = "start"; };
+                if (chartTitleXLoc == "Center") { var cxpos = (w - margin.right - margin.left)/2 + margin.left; var ctextanchor = "middle"; };
+                if (chartTitleXLoc == "Right") { var cxpos = (w - margin.right - margin.left) + margin.left; var ctextanchor = "end"; };
+                
+                if (chartTitle == true) {
+                graph.append("text")
+                    .attr("transform", "translate(" + cxpos + "," + (margin.top + chartTitleYLoc) + ")")
+                    .style({ 'text-anchor': ctextanchor, 'font-family': chartTitleFont, 'font-size': chartTitleSize, 'fill': chartTitleColor})
+                    .text(chartTitleText);
+                }
+                
+            }
+            
+        };
+        
+            this.updateChart = function(){
+                d3.select("svg").remove()
+                this.mainChart()
+            };  
+        };
+        
+    var chart = new createChart()         
+    chart.mainChart()
+})()</script>
+
+
+
+
+
 {% end %}

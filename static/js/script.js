@@ -195,20 +195,26 @@ $('.dataForms').on('click', '.createDataset', function(event) {
 
 //Istopes
 // init Isotope
-var $container = $('.isotopes-container').isotope({
-	layoutMode: 'masonry',
-	resizesContainer : false,
-});
-// filter items on button click
-$('#filters').on( 'click', 'button', function( event ) {
-  var filtr = $(this).attr('data-filter');
-  $container.isotope({ filter: filtr });
-});
+// var $container = $('.isotopes-container').isotope({
+// 	layoutMode: 'masonry',
+// 	resizesContainer : false,
+// });
+// // filter items on button click
+// $('#filters').on( 'click', 'button', function( event ) {
+//   var filtr = $(this).attr('data-filter');
+//   $container.isotope({ filter: filtr });
+// });
 
-$container.delegate( '.m-candidates-item', 'click', function(){
-        $(this).toggleClass('large');
-        $container.isotope();
-      });
+// $('.states').on('click', 'path', function(event) {
+// 	var filtr = $(this).attr('class').split(' ')[1];
+// 	//$container.isotope({ filter: filtr });
+// 	console.log(filtr);
+// });
+
+// $container.delegate( '.m-candidates-item', 'click', function(){
+//         $(this).toggleClass('large');
+//         $container.isotope();
+// });
 
 
 
