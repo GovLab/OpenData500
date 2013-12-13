@@ -1,81 +1,38 @@
-$purple: #472b74;
-$light_purple: #8977a7;
-$black: #444;
-$dark_gray: #666;
-$light_gray: #aaa;
-$white: #fff;
-$light_red: rgba(214, 17, 17, .1);
-$red: rgba(214, 17, 17, 1);
+@import 'variables';
+@import 'form-styles';
+@import 'layout';
+@import 'typography';
+@import 'homepage';
+@import 'about';
+@import 'preview';
+@import 'candidates';
+@import 'download';
 
-$fancy_type: 'Exo', sans-serif;
-
-@mixin rounded { 
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
-}
-
-@mixin drop_shadow {
-	box-shadow: 0 0 6px rgba(0,0,0,0.2);
-}
-
-@mixin transition {
-	-webkit-transition: all 0.4s ease;
-	-moz-transition: all 0.4s ease;
-	transition: all 0.4s ease;
-}
+// Reset
 
 body {
 	margin: 0;
-	color: $black;
-	font-family: Helvetica,Arial,sans-serif;
-	font-size: 12px;
-	line-height: 1.4em;
 }
 
-header {
-	padding: 10px 0;
-}
+// === Base Styles
 
-//  Typography
+h1, h2, h3, h4 {
+	margin: 0;
+}
 
 h1 {
-	font-family: $fancy_type;
-	font-weight: 100;
-	// font-style: italic;
-	font-size: 5.6em;
+	margin-top: 65px;
+	margin-bottom: 65px;
+	text-align: center;
 }
 
-h2 {
-	font-family: $fancy_type;
-	font-weight: 500;
-	font-size: 3em;
-}
 
-h3 {
-	color: $purple;
-}
+// Header Module
 
-a {
-	font-family: Helvetica,Arial,sans-serif;
-	text-decoration: none;
-	color: $light_purple;
-}
-
-a:hover {
-	color: $purple;
-}
-
-input[type="text"] {
-	padding: 5px 10px;
-	@include rounded;
-	border: 1px solid #ccc;
-}
-
-textarea {
-	padding: 5px 10px;
-	@include rounded;
-	border: 1px solid #ccc;	
+header {
+	background-color: $purple;
+	border-bottom: 5px solid $light_purple;
+	padding: 10px 0;
 }
 
 // === Layout classes
@@ -85,14 +42,7 @@ textarea {
 	margin: 0 auto;
 }
 
-// === Module Classes
 
-// Header Module
-
-header {
-	background-color: $purple;
-	border-bottom: 5px solid $light_purple;
-}
 
 // Main Menu Module
 
@@ -113,488 +63,19 @@ header {
 	border-right: 0;
 }
 
-// Button Module
+// Background
 
-.m-button {
-	padding: 5px 14px 4px 14px;
-	background-color: transparent;
-	border: 1px solid #fff;	
-	@include rounded;
-	color: #fff;
-	font-family: $fancy_type;
-	text-transform: uppercase;
-	font-size: 14px;
-	font-weight: 14px;
-	letter-spacing: .6px;
-	cursor: pointer;
+#background {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: url(../img/bg-element-2.png) no-repeat center -350px;
+	z-index: -1;
 }
-
-.m-button:hover {
-	background-color: $purple;
-	border: 1px solid #fff;
-	color: #fff;
-}
-
-// Form Module
-
-.m-form-group {
-	padding: 20px 0;
-	border: 0;
-}
-
-
-.m-form h2 {
-	margin-bottom: 0;
-	margin-top: 70px;
-}
-
-.m-form h3 {
-	border-bottom: 1px solid $light_purple;
-	padding-bottom: 5px;
-	margin-bottom: 10px;
-}
-
-.m-form-half {
-	@extend .m-form-group;
-	display: inline-block;
-	width: 456px / 960px * 100%;
-	vertical-align: top;
-	margin-right: 40px;
-}
-.m-form-half.right {
-	margin-right: 0;
-}
-
-
-.m-form-full {
-	@extend .m-form-group;
-}
-	
-.m-form-line {
-	margin-bottom: 5px;
-	text-align: right;
-}
-
-.m-form-line label {
-	width: 46%;
-	display: inline-block;
-	text-align: left;
-}
-.m-form-half input[type='text'] {
-	width: 48%;
-}
-
-.m-form-half textarea {
-	width: 430px;
-	height: 150px;
-	min-width:430px;
-	max-width:430px;
-}
-
-.m-form-box {
-	padding: 5px 10px;
-	margin: 10px 0;
-	border: 1px solid #ccc;
-	overflow: hidden;
-}
-
-.m-form-footer {
-	background-color: $light_purple;
-	padding: 5px;
-	margin: 5px 5px 20px;
-	overflow:hidden;
-}
-
-.m-form-footer input[type="submit"] {
-	float: right;
-}
-
-
-
-// Special Cases
-
-// Contacted Box
-
-.contacted-box {
-	padding-left: 30px;
-	position: relative;
-	background-color: #fafafa;
-}
-#contacted {
-	position: absolute;
-	left: 5px;
-}
-// Type of Company
-
-.type-of-company-box {
-	line-height: 23px;
-}
-
-#otherCompanyType {
-	width: 37%;
-	margin-left: 5px;
-}
-
-//  Error Messages
-
-.parsley-error-list {
-	list-style: none;
-	background-color: $light_red;
-	padding: 5px 10px;
-	@include rounded;
-	border: 1px solid $red;
-	color: $red;
-	font-weight: bold;
-	text-align: center;
-	position: relative;
-	@include drop_shadow;
-}
-
-
-.parsley-error-list:after {
-	content: "";
-	width: 0;
-	height: 0;
-	border-bottom: 8px solid $red;
-	border-right: 10px solid transparent;
-	border-left: 10px solid transparent;
-	position: absolute;
-	top: -8px;
-	left: 30px;
-}
-
-// .m-form-line {
-// 	margin-bottom: 5px;
-// 	text-align: right;
-// 	position: relative;
-// }
-
-// .parsley-error-list {
-// 	list-style: none;
-// 	background-color: $light_red;
-// 	padding: 6px 3px;
-// 	@include rounded;
-// 	border: 1px solid $red;
-// 	color: $red;
-// 	font-weight: bold;
-// 	text-align: left;
-// 	position: absolute;
-// 	@include drop_shadow;
-// 	width: 100%;
-// 	left: -5px;
-// 	top: -12px;
-// 	z-index: 0;
-// 	cursor-events: none;
-
-// }
-
-// HomePage
-
-.fancy-background {
-	text-align: center;
-	height: 270px;
-	img {
-		position: relative;
-		z-index: -1;
-		left: -180px;
-	}
-}
-
-.fancy-background-all {
-	width: 1200px;
-	img {
-		position: absolute;
-		z-index: -1;
-		left: 130px;
-	}	
-}
-
-.m-homepage {
-	
-	section {
-		margin-bottom: 30px;
-	}
-
-	.m-home-big-links {
-		font-size: 30px;
-		padding: 30px 0;
-		text-transform: uppercase;
-		text-align: center;
-		a {
-			font-family: $fancy_type;
-			display: inline-block;
-			padding: 20px 40px;
-			border: 3px solid $light_purple;
-			@include rounded;
-			margin-right: 20px;
-		}
-
-		a:hover {
-			background-color: $purple;
-			color: $white;
-		}
-	}
-
-	.m-quotes {
-		font-size: 36px;
-		font-style: italic;
-		font-family: $fancy-type;
-		font-weight: 100;
-		line-height: 42px;
-		color: $light_purple;
-		text-align: right;
-
-		p {
-			margin-bottom: 10px;
-		}
-	}
-
-	.m-quotes-author {
-		font-size: 20px;
-		font-weight: 500;
-		line-height: 20px;
-		color: $purple;
-
-		em {
-			font-weight: 300;
-		}
-	}
-
-
-	ul {
-		display: inline-block;
-		width: 266px;
-		border: 1px solid $light_purple;
-		margin-right: 10px;
-		padding: 0 20px 20px;
-		@include rounded;
-
-		h2 {
-			font-size: 26px;
-		}
-
-		li {
-			list-style-type: none;
-			font-size: 14px;
-			line-height: 20px;
-		}
-	}
-}
-
-
-
-// Preview Page  Styles
-
-.m-preview {
-	h1 {
-		margin-bottom: 80px;
-	}
-
-	h2 {
-		font-size: 2em;
-	}
-
-	ul {
-		padding: 0;
-	}
-
-	li {
-		list-style-type: none;
-		border-bottom: 1px solid $purple;
-		padding: 0 0 12px;
-		max-height: 38px;
-		height: auto;
-		overflow: hidden;
-		@include transition;
-
-		div {
-			max-height: 42px;
-			overflow: hidden;
-			text-overflow: "…" "…";
-			@include transition;
-		}
-	}
-
-	li.s-active {
-		max-height: 2000px;
-		@include transition;
-
-		div {
-			max-height: 800px;
-			@include transition;
-			height: auto;
-			overflow: visible;
-			text-overflow: visible;
-		}
-	}
-}
-
-.m-half {
-	width: calc(50% - 20px);
-	padding-right: 10px;
-	display: inline-block;
-	vertical-align: top;
-}
-
-.m-full {
-	display: block;
-	padding: 1px 10px;
-	margin-top: 10px;
-}
-
-.datasets {
-	box-shadow: inset 0 0 3px rgba(0,0,0,0.4);
-	background-color: #f6f6f6;
-
-	li {
-		border-bottom: 0;
-	}
-
-	a {
-		color: $purple;
-	}
-
-	a:hover {
-		text-decoration: underline;
-	}
-}
-
-.m-list-head {
-	background-color: $purple;
-
-	div {
-		display: inline-block;
-		padding: 10px 5px 0;
-		color: $white;
-		font-weight: bold;
-		text-transform: uppercase;
-		letter-spacing: .5px;
-	}
-}
-
-.m-list-company-summary {
-	margin-bottom: 10px;
-	cursor: pointer;
-	
-	div {
-		display: inline-block;
-		vertical-align: top;
-		margin-top: 5px;
-		margin-bottom: 5px;
-		padding: 5px;
-		// vertical-align: middle;
-	}
-}
-
-.m-list-company-full {
-	border-top: 1px solid $light_gray;
-	box-shadow: inset 0 3px 3px -3px rgba(0,0,0,0.3);
-}
-
-.m-preview-list-name {
-	width: calc(15% - 20px);
-	padding-left: 10px;
-	margin-right: 10px;
-}
-.m-preview-list-sectors {
-	width: calc(35% - 20px);
-	margin-right: 10px;
-}
-.m-preview-list-desc {
-	width: calc(46% - 20px);
-}
-.m-preview-list-control {
-	width: calc(4% - 20px);
-	text-align: center;
-}
-
-.m-expand-arrow {
-	width: 0;
-	height: 0;
-	padding: 0 !important;
-	display: inline-block;
-	border-left: 8px solid $purple;
-	border-top: 8px solid transparent;
-	border-bottom: 8px solid transparent;
-	cursor: pointer;
-}
-
-.s-active .m-expand-arrow {
-	width: 0;
-	height: 0;
-	padding: 0 !important;
-	display: inline-block;
-	border-right: 8px solid transparent;
-	border-left: 8px solid transparent;
-	border-top: 8px solid $purple;
-	cursor: pointer;
-	position: relative;
-	top: 6px;
-}
-
-
-// About
-.about-page {
-	
-	font-size: 12px;
-	line-height: 16px;
-
-	section {
-		padding-bottom: 25px;
-		margin-bottom: 35px;
-		border-bottom: 1px solid $light_gray;
-	}
-
-	h1 {
-		margin-top: 65px;
-		margin-bottom: 65px;
-	}
-
-	.m-half {
-		width: calc(50% - 70px);
-		padding-right: 60px;
-		display: inline-block;
-		vertical-align: top;
-	}
-
-	.m-page-title {
-		font-size: 2em;
-		margin-bottom: 35px;
-	}
-
-
-}
-
-// Download Page
-
-.m-download-button {
-	display: inline-block;
-	width: 30%;
-	border: 3px solid $purple;
-	margin-right: 20px;
-	margin-bottom: 20px;
-	-webkit-border-radius: 6px;
-	-moz-border-radius: 6px;
-	border-radius: 6px;
-	vertical-align: top;
-
-
-	span {
-		padding: 30px 20px 10px;
-		border: 3px solid $light_purple;
-		display: block;
-		-webkit-border-radius: 2px;
-		-moz-border-radius: 2px;
-		border-radius: 2px;
-		height: 200px;
-		font-family: $fancy_type;
-		font-size: 48px;
-		line-height: 60px;
-		text-align: center;
-	}
-}
-
-
 
 
 // Footer 
@@ -633,76 +114,3 @@ footer {
 		float: left;
 	}
 }
-
-// Candidates Page
-
-.m-candidates-list {
-	padding: 0;
-	overflow: hidden;
-}
-
-.m-candidates-buttons {
-
-	button {
-		background-color: $light_purple;
-		font-size: 11px;
-		@include rounded;
-		border: 0;
-		color: $white;
-		cursor: pointer;
-		padding: 3px 7px 5px;
-	}
-
-	button:hover {
-		background-color: $purple;
-	}
-}
-
-.m-candidates-item {
-	list-style-type: none;
-	padding:15px;
-	background-color: $purple;
-	width: 180px;
-	height: 180px;
-	float: left;
-	margin: 0 10px 10px 0;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	color: $white;
-
-	h3 {
-		color: #fff;
-		margin-top: 0;
-	}
-
-	em {
-		color: $light_purple;
-		display: inline-block;
-		height: 15px;
-		overflow: hidden;
-	}
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,0 +1,35 @@
+// === Colors
+
+$purple: #472b74;
+$purple_alpha: rgba(71, 43, 116, .9);
+$light_purple: #8977a7;
+$black: #444;
+$dark_gray: #666;
+$light_gray: #aaa;
+$white: #fff;
+$light_red: rgba(214, 17, 17, .1);
+$red: rgba(214, 17, 17, 1);
+
+// === Type
+
+$fancy_type: 'Exo', sans-serif;
+$regular_type: Helvetica,Arial,sans-serif;
+
+
+// === Mixins
+
+@mixin rounded { 
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+
+@mixin drop_shadow {
+	box-shadow: 0 0 6px rgba(0,0,0,0.2);
+}
+
+@mixin transition {
+	-webkit-transition: all 0.4s ease;
+	-moz-transition: all 0.4s ease;
+	transition: all 0.4s ease;
+}

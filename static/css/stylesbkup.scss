@@ -1,0 +1,161 @@
+<div class="fancy-background">
+	<img src="{{ static_url("img/home-bg.jpg") }}" />
+</div>
+
+<div class="fancy-background-all l-centered">
+        <img src="{{ static_url("img/bg.jpg") }}" />
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+$purple: #472b74;
+$light_purple: #8977a7;
+$black: #444;
+$dark_gray: #666;
+$light_gray: #aaa;
+$white: #fff;
+$light_red: rgba(214, 17, 17, .1);
+$red: rgba(214, 17, 17, 1);
+
+$fancy_type: 'Exo', sans-serif;
+
+@mixin rounded { 
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+
+@mixin drop_shadow {
+	box-shadow: 0 0 6px rgba(0,0,0,0.2);
+}
+
+@mixin transition {
+	-webkit-transition: all 0.4s ease;
+	-moz-transition: all 0.4s ease;
+	transition: all 0.4s ease;
+}
+
+body {
+	margin: 0;
+	color: $black;
+	font-family: Helvetica,Arial,sans-serif;
+	font-size: 12px;
+	line-height: 1.4em;
+}
+
+header {
+	padding: 10px 0;
+}
+
+//  Typography
+
+h1 {
+	font-family: $fancy_type;
+	font-weight: 100;
+	// font-style: italic;
+	font-size: 5.6em;
+}
+
+h2 {
+	font-family: $fancy_type;
+	font-weight: 500;
+	font-size: 3em;
+}
+
+h3 {
+	color: $purple;
+}
+
+a {
+	font-family: Helvetica,Arial,sans-serif;
+	text-decoration: none;
+	color: $light_purple;
+}
+
+a:hover {
+	color: $purple;
+}
+
+input[type="text"] {
+	padding: 5px 10px;
+	@include rounded;
+	border: 1px solid #ccc;
+}
+
+textarea {
+	padding: 5px 10px;
+	@include rounded;
+	border: 1px solid #ccc;	
+}
+
+
+
+// === Module Classes
+
+
+
+// Button Module
+
+.m-button {
+	padding: 5px 14px 4px 14px;
+	background-color: transparent;
+	border: 1px solid #fff;	
+	@include rounded;
+	color: #fff;
+	font-family: $fancy_type;
+	text-transform: uppercase;
+	font-size: 14px;
+	font-weight: 14px;
+	letter-spacing: .6px;
+	cursor: pointer;
+}
+
+.m-button:hover {
+	background-color: $purple;
+	border: 1px solid #fff;
+	color: #fff;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

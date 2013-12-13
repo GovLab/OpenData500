@@ -1,0 +1,40 @@
+//  Typography
+
+body {
+	color: $black;
+	font-family: $regular_type;
+	font-size: 12px;
+	line-height: 1.4em;
+}
+
+h1 {
+	font-family: $fancy_type;
+	font-weight: 100;
+	font-size: 5.624em;
+	line-height: 1em;
+	margin-bottom: 30px;
+
+}
+
+h2 {
+	font-family: $fancy_type;
+	font-weight: 500;
+	font-size: 3em;
+	line-height: 1em;
+}
+
+h3 {
+	color: $purple;
+	font-size: 1.6em;
+	line-height: 1em;
+}
+
+a {
+	font-family: $regular_type;
+	text-decoration: none;
+	color: $light_purple;
+}
+
+a:hover {
+	color: $purple;
+}
