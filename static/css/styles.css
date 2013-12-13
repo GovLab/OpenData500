@@ -472,3 +472,32 @@ footer {
     height: 15px;
     overflow: hidden; }
 
+.m-candidates-item.large{
+  list-style-type: none;
+  padding: 15px;
+  background-color: #472b74;
+  width: 360px;
+  height: 360px;
+  float: left;
+  margin: 0 10px 10px 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: white; }
+  .m-candidates-item h3 {
+    color: #fff;
+    margin-top: 0; }
+  .m-candidates-item em {
+    color: #8977a7;
+    display: inline-block;
+    height: 15px;
+    overflow: hidden; }
+
+
+
+
+
+
+
+
+
+

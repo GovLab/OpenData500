@@ -205,10 +205,10 @@ $('#filters').on( 'click', 'button', function( event ) {
   $container.isotope({ filter: filtr });
 });
 
-
-
-
-
+$container.delegate( '.m-candidates-item', 'click', function(){
+        $(this).toggleClass('large');
+        $container.isotope();
+      });
 
 
 
