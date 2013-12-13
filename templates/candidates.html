@@ -19,14 +19,16 @@
 	<br>
 	<div class="m-candidates isotopes-container" data-isotope-options='{ "layoutMode": "fitColumns" }'>
 		{% for company in companies %}
+			
 			<div class="m-candidates-item {% for sector in company.sector %}{{sector.strip().replace(" ", "-").replace("/","")}} {%end%}{{ company.state }}">
-				<div class="m-homepage-list-name companyName"><p><strong>{{ company.companyName }}</strong></p></div>
-				<div class="m-homepage-list-sectors"><p>{{ ', '.join(company.sector) }}</p></div>
-				<div class="m-homepage-list-desc"><p>{{ company.descriptionShort }}</p></div>
+				<h3>{{ company.companyName }}</h3>
+				<p class="m-homepage-list-desc">{{ company.descriptionShort }}</p>
+				<em> {{ ', '.join(company.sector) }}</em>
 			</div>
 		{%end%}
 	</div>
 </div>
+
 
 <div id="hidden" style="display:none;"><[{"abbrev": "AL","STATE":"Alabama","VALUE":"0"},
 {"abbrev": "AK","STATE":"Alaska","VALUE":"0"},
@@ -144,7 +146,6 @@
 	// filter items on button click
 	$('#filters').on( 'click', 'button', function( event ) {
 	  var filtr = $(this).attr('data-filter');
-	  console.log(filtr);
 	  $container.isotope({ filter: filtr });
 	});
 
@@ -155,6 +156,7 @@
 	// });
 
 	$container.delegate( '.m-candidates-item', 'click', function(){
+			//$('.m-candidates-item.large').removeClass('large');
 	        $(this).toggleClass('large');
 	        $container.isotope();
 	});
@@ -356,9 +358,7 @@
                 group.selectAll('path')
                     .data(us.features)
                     .enter().append('path')
-                    .attr('class', function(d) {
-                    	return 'states '+ d.properties.NAME;
-                    })
+                    .attr('class', 'states')
                     .attr('d', d3.geo.path().projection(projection))
                     //.attr('id', function(d){return d.properties.name.replace(/\s+/g, '')})
                     .style('stroke', lineColor)
