@@ -196,7 +196,7 @@ $('.dataForms').on('click', '.createDataset', function(event) {
 //Istopes
 // init Isotope
 var $container = $('.isotopes-container').isotope({
-	layoutMode: 'fitRows',
+	layoutMode: 'masonry',
 	resizesContainer : false,
 });
 // filter items on button click
