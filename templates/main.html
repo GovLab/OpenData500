@@ -19,15 +19,13 @@
     <![endif]-->
 </head>
 <body>
-
+    <div id="background" data-stellar-ratio="-3"></div>  
     <header>
         <div id="mainMenu" class="l-centered m-main-menu">
             <a href="/">Home</a><a href="/about/">About</a><a href="/preview/">Preview</a><a href="/candidates/">Candidates</a><a href="http://thegovlab.org/submit-your-company">Submit</a><a href="/download/">Download</a>
         </div>
     </header><!-- end header -->
-    <div class="fancy-background-all ">
-        <img src="{{ static_url("img/bg.jpg") }}" />
-    </div>
+    
     <div id="main" class="l-centered">
         <div id="container">
             {% block body %}{% end %}
@@ -54,6 +52,8 @@
     <script src="{{ static_url("js/parsley.extend.js") }}"></script>
     <!-- Isotopes.js (for form validation) -->
     <script src="{{ static_url("js/isotope.pkgd.min.js") }}"></script>
+    <!-- Parallax Effects -->
+    <script src="{{ static_url("js/libs/jquery.stellar.min.js") }}"></script>
     <!-- main script -->
     <script src="{{ static_url("js/script.js") }}"></script>
     <script src="{{ static_url("js/ui-scripts.js") }}"></script>

@@ -1,0 +1,39 @@
+// About
+.about-page {
+	
+	font-size: 14px;
+	line-height: 20px;
+
+	section {
+		padding-bottom: 25px;
+		margin-bottom: 35px;
+		border-bottom: 1px solid $light_gray;
+	}
+
+	section:last-child {
+		border-bottom: 0;
+	}
+
+	.intro {
+		font-family: $fancy_type;
+		font-weight: 100;
+		font-style: italic;
+		font-size: 1.8em;
+		line-height: 1.5em;
+	}
+
+	.m-half {
+		width: calc(50% - 70px);
+		padding-right: 60px;
+		display: inline-block;
+		vertical-align: top;
+	}
+
+	.m-page-title {
+		font-size: 2.3em;
+		margin-bottom: 35px;
+		font-weight: 100;
+	}
+
+
+}
