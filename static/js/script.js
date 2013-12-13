@@ -20,42 +20,63 @@ $(function() {
     });
   });
 
-
-$("input.otherSector:text").focus(function() {
-	$("input.otherSector:checkbox").prop('checked', true);
-});
-$("input.otherSector:text").focusout(function() {
-	if ($("input.otherSector:text").val() == '') {
-		$("input.otherSector:checkbox").prop('checked', false);
-	}
-});
-
-$("input.otherRevenueSource:text").focus(function() {
-	$("input.otherRevenueSource:checkbox").prop('checked', true);
-});
-$("input.otherRevenueSource:text").focusout(function() {
-	if ($("input.otherRevenueSource:text").val() == '') {
-		$("input.otherRevenueSource:checkbox").prop('checked', false);
-	}
-});
-
-$("input.otherCriticalDataTypes:text").focus(function() {
-	$("input.otherCriticalDataTypes:checkbox").prop('checked', true);
-});
-$("input.otherCriticalDataTypes:text").focusout(function() {
-	if ($("input.otherCriticalDataTypes:text").val() == '') {
-		$("input.otherCriticalDataTypes:checkbox").prop('checked', false);
-	}
-});
+// $("input.otherInput").focus(function() {
+// 	$("input.otherOption").prop('checked', true);
+// });
+// $("input.otherInput").focusout(function() {
+// 	if ($("input.otherInput").val() == '') {
+// 		$("input.otherOption").prop('checked', false);
+// 	}
+// });
 
 
-$("input#otherCompanyFunction:text").focus(function() {
-	$("input[name='companyFunction'][value='Other']").prop('checked', true);
-});
 
-$("input#otherCompanyType:text").focus(function() {
-	$("input[name='companyType'][value='Other']").prop('checked', true);
-});
+//This messes up Parsley
+
+// $("input.otherSector:text").focus(function() {
+// 	$("input.otherSector:checkbox").prop('checked', true);
+// });
+// $("input.otherSector:text").focusout(function() {
+// 	if ($("input.otherSector:text").val() == '') {
+// 		$("input.otherSector:checkbox").prop('checked', false);
+// 	}
+// });
+
+// $("input.otherRevenueSource:text").focus(function() {
+// 	$("input.otherRevenueSource:checkbox").prop('checked', true);
+// });
+// $("input.otherRevenueSource:text").focusout(function() {
+// 	if ($("input.otherRevenueSource:text").val() == '') {
+// 		$("input.otherRevenueSource:checkbox").prop('checked', false);
+// 	}
+// });
+
+// $("input.otherCriticalDataTypes:text").focus(function() {
+// 	$("input.otherCriticalDataTypes:checkbox").prop('checked', true);
+// });
+// $("input.otherCriticalDataTypes:text").focusout(function() {
+// 	if ($("input.otherCriticalDataTypes:text").val() == '') {
+// 		$("input.otherCriticalDataTypes:checkbox").prop('checked', false);
+// 	}
+// });
+
+// $("input.otherCompanyFunction:text").focus(function() {
+// 	$("input.otherCompanyFunction:radio").prop('checked', true);
+// });
+// $("input.otherCompanyFunction:text").focusout(function() {
+// 	if ($("input.otherCompanyFunction:text").val() == '') {
+// 		$("input.otherCompanyFunction:radio").prop('checked', false);
+// 	}
+// });
+
+// $("input.otherCompanyType:text").focus(function() {
+// 	$("input.otherCompanyType:radio").prop('checked', true);
+// });
+// $("input.otherCompanyType:text").focusout(function() {
+// 	if ($("input.otherCompanyType:text").val() == '') {
+// 		$("input.otherCompanyType:radio").prop('checked', false);
+// 	}
+// });
 
 
 
@@ -174,10 +195,10 @@ $('.dataForms').on('click', '.createDataset', function(event) {
 
 //Istopes
 // init Isotope
-// var $container = $('.isotopes-container').isotope({
-// 	layoutMode: 'fitColumns',
-// 	resizesContainer : false,
-// });
+var $container = $('.isotopes-container').isotope({
+	layoutMode: 'fitRows',
+	resizesContainer : false,
+});
 // filter items on button click
 $('#filters').on( 'click', 'button', function( event ) {
   var filtr = $(this).attr('data-filter');

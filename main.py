@@ -40,6 +40,7 @@ criticalDataTypes = ['Federal Open Data', 'State Open Data', 'City/Local Open Da
 revenueSource = ['Advertising', 'Data Management and Analytic Services', 'Database Licensing', 'Lead Generation To Other Businesses', 'Philanthropy', 'Software Licensing', 'Subscriptions', 'User Fees for Web or Mobile Access']
 sectors = ['Agriculture', 'Arts, Entertainment and Recreation' 'Crime', 'Education', 'Energy', 'Environmental', 'Finance', 'Geospatial data/mapping', 'Health and Healthcare', 'Housing/Real Estate', 'Manufacturing', 'Nutrition', 'Scientific Research', 'Social Assistance', 'Trade', 'Transportation', 'Telecom', 'Weather']
 datatypes = ['Federal Open Data', 'State Open Data', 'City/Local Open Data']
+categories = ['Business & Legal Services', 'Data/Technology', 'Education', 'Energy', 'Environment & Weather', 'Finance & Investment', 'Food & Agriculture', 'Geospatial/Mapping', 'Governance', 'Healthcare', 'Housing/Real Estate', 'Insurance', 'Lifestyle & Consumer', 'Research & Consulting', 'Scientific Research', 'Transportation']
 
 # application settings and handle mapping info
 class Application(tornado.web.Application):
@@ -79,8 +80,8 @@ class MainHandler(tornado.web.RequestHandler):
     def get(self):
         self.render(
             "index.html",
-            page_title='OpenData500',
-            page_heading='Welcome to the OpenData 500',
+            page_title='Open Data500',
+            page_heading='Welcome to the Open Data 500',
         )
 
 class CompanyHandler(tornado.web.RequestHandler):
@@ -90,7 +91,7 @@ class CompanyHandler(tornado.web.RequestHandler):
         logging.info(company.companyName)
         self.render(
             "company.html",
-            page_title='OpenData500',
+            page_title='Open Data500',
             page_heading=company.companyName,
             company = company,
         )
@@ -103,7 +104,7 @@ class PreviewHandler(tornado.web.RequestHandler):
         submittedCompanies = models.Company.objects(Q(vetted=True) & Q(vettedByCompany=True))
         self.render(
             "preview.html",
-            page_title='OpenData500',
+            page_title='Open Data500',
             page_heading='Preview of the Open Data 500',
             submittedCompanies = submittedCompanies,
         )
@@ -114,7 +115,7 @@ class CandidateHandler(tornado.web.RequestHandler):
         companies = models.Company.objects(Q(vetted=True) & Q(vettedByCompany=True))
         self.render(
             "candidates.html",
-            page_title='OpenData500',
+            page_title='Open Data 500',
             page_heading='Candidates for the OD500',
             companies = companies,
             sectors = sectors

@@ -98,7 +98,7 @@
 		</div>
 		<div class="m-form-line">
 			<label for="zipCode">Zip Code:</label>
-			<input type="text" name="zipCode" id="zipCode" parsley-trigger="change" parsley-regexp="/(^\d{5}$)|(^\d{5}-\d{4}$)/">
+			<input type="text" name="zipCode" id="zipCode" parsley-trigger="change" parsley-regexp="(^\d{5}$)|(^\d{5}-\d{4}$)">
 		</div>
 		<div class="m-form-line">
 			<label for="ceoFirstName">First Name of CEO:</label>
@@ -110,17 +110,17 @@
 		</div>
 		<div class="m-form-line">
 			<label for="ceoEmail">CEO Email:</label>
-			<input type="text" name="ceoEmail" id="ceoEmail" parsley-trigger="change" data-type="email">
+			<input type="text" name="ceoEmail" id="ceoEmail" parsley-trigger="change" parsley-type="email">
 		</div>
 		<div class="m-form-box">Type of Company: *<br>
-			<label for=""><input type="radio" name="companyType" data-group="companyType" value="Public">Public</label>
-			<label for=""><input type="radio" name="companyType" data-group="companyType" value="Private">Private</label>
-			<label for=""><input type="radio" name="companyType" data-group="companyType" value="Nonprofit">Nonprofit</label>
-			<label for=""><input type="radio" name="companyType" data-group="companyType" value="other" parsley-required="true">Other
-			<input type="text" name="otherCompanyType" data-trigger="change" data-group="companyType" id="otherCompanyType"></label>
+			<label for=""><input type="radio" name="companyType" value="Public">Public</label>
+			<label for=""><input type="radio" name="companyType" value="Private">Private</label>
+			<label for=""><input type="radio" name="companyType" value="Nonprofit">Nonprofit</label>
+			<label for=""><input type="radio" name="companyType" value="other" class="otherCompanyType" parsley-required="true">Other
+			<input type="text" class="otherCompanyType" name="otherCompanyType" id="otherCompanyType"></label>
 		</div>
 		<div class="m-form-line"><label for="yearFounded">Founding Year:</label><input type="text" name="yearFounded" id="yearFounded" parsley-trigger="change" parsley-range="[1000, 2014]"></div>
-		<div class="m-form-line"><label for="fte">Number of FTE's:</label><input type="text" name="fte" id="fte" parsley-trigger="change" data-type="number"></div>
+		<div class="m-form-line"><label for="fte">Number of FTE's:</label><input type="text" name="fte" id="fte" parsley-trigger="change" parsley-type="number"></div>
 	</fieldset>
 	
 	<fieldset class="m-form-half">
@@ -130,7 +130,7 @@
 		<label for=""><input type="radio" name="companyFunction" value="Data Management and Analysis">Data Management and Analysis<br></label>
 		<label for=""><input type="radio" name="companyFunction" value="Financial/Investment Services">Financial/Investment Services<br></label>
 		<label for=""><input type="radio" name="companyFunction" value="Information for Consumers">Information for Consumers<br></label>
-		<label for=""><input type="radio" name="companyFunction" value="other" parsley-required="true">Other <input type="text" name="otherCompanyFunction" id="otherCompanyFunction"></label>
+		<label for=""><input type="radio" name="companyFunction" value="other" class="otherCompanyFunction" parsley-required="true">Other <input type="text" class="otherCompanyFunction" name="otherCompanyFunction" id="otherCompanyFunction"></label>
 	</fieldset>
 
 	<fieldset class="m-form-half right">
@@ -139,7 +139,7 @@
 		<label for=""><input type="checkbox" name="criticalDataTypes" value="State Open Data">State Open Data<br></label>
 		<label for=""><input type="checkbox" name="criticalDataTypes" value="City/Local Open Data">City/Local Open Data<br></label>
 		<label for=""><input type="checkbox" name="criticalDataTypes" value="Private/Proprietary Data Sources">Private/Proprietary Data Sources<br></label>
-		<label for=""><input type="checkbox" name="criticalDataTypes" value="Other" parsley-required="true">Other <input type="text" name="otherCriticalDataTypes" id="otherCriticalDataTypes"></label>
+		<label for=""><input type="checkbox" name="criticalDataTypes" value="Other" class="otherCriticalDataTypes" parsley-required="true">Other <input type="text" class="otherCriticalDataTypes" name="otherCriticalDataTypes" id="otherCriticalDataTypes"></label>
 	</fieldset>
 	
 	<fieldset class="m-form-half">
@@ -152,7 +152,7 @@
 		<label for=""><input type="checkbox" name="revenueSource" value="Software Licensing">Software Licensing<br></label>
 		<label for=""><input type="checkbox" name="revenueSource" value="Subscriptions">Subscriptions<br></label>
 		<label for=""><input type="checkbox" name="revenueSource" value="User Fees for Web or Mobile Access">User Fees for Web or Mobile Access<br></label>
-		<label for=""><input type="checkbox" name="revenueSource" value="Other" parsley-required="true">Other <input type="text" name="otherRevenueSource" id="otherRevenueSource"></label>
+		<label for=""><input type="checkbox" name="revenueSource" value="Other" class="otherRevenueSource" parsley-required="true">Other <input type="text" class="otherRevenueSource" name="otherRevenueSource" id="otherRevenueSource"></label>
 	</fieldset>
 	
 	<fieldset class="m-form-half right">
@@ -175,30 +175,30 @@
 		<label for=""><input type="checkbox" name="sector" value="Transportation">Transportation<br></label>
 		<label for=""><input type="checkbox" name="sector" value="Telecom">Telecom<br></label>
 		<label for=""><input type="checkbox" name="sector" value="Weather">Weather<br></label>
-		<label for=""><input type="checkbox" name="sector" value="Other" parsley-required="true">Other <input type="text" name="otherSector" id="otherSector"></label>
+		<label for=""><input type="checkbox" name="sector" value="Other" class="otherSector" parsley-required="true">Other <input type="text" class="otherSector" name="otherSector" id="otherSector"></label>
 	</fieldset>
 
 	<fieldset class="m-form-half">
 		<h3>Please give us a short public statement describing your company’s mission and work. You can take this material from your website or other publications if you choose to. [200 words or less] *</h3>
-		<textarea rows="10" cols="59" name="descriptionLong" id="descriptionLong" data-trigger="keyup" data-maxwords="200" parsley-required="true"></textarea>
+		<textarea rows="10" cols="59" name="descriptionLong" id="descriptionLong" parsley-trigger="keyup" parsley-maxwords="200" parsley-required="true"></textarea>
 		<h3>As a summary, please provide a one sentence description of your company. [25 words or less] *</h3>
-		<textarea rows="10" cols="59" name="descriptionShort" id="descriptionShort" data-trigger="keyup" data-maxwords="25" parsley-required="true"></textarea>
+		<textarea rows="10" cols="59" name="descriptionShort" id="descriptionShort" parsley-trigger="keyup" parsley-maxwords="25" parsley-required="true"></textarea>
 		<h3>Besides revenue generation, how do you measure the impact your company has for society and the public good? [50 words or less]</h3>
-		<textarea rows="10" cols="59" name="socialImpact" id="socialImpact" data-trigger="keyup" data-maxwords="50"></textarea>
+		<textarea rows="10" cols="59" name="socialImpact" id="socialImpact" parsley-trigger="keyup" parsley-maxwords="50"></textarea>
 	</fieldset>
 	
 	<fieldset class="m-form-half right">
 		<h3>Please include any financial or operational information that will help us understand your company. We are interested in specific information like past and projected annual revenues, total outside investment dollars to date, and significant investors or partners. [100 words or less]</h3>
-		<textarea rows="10" cols="59" name="financialInfo" id="financialInfo" data-trigger="keyup" data-maxwords="100"></textarea>
+		<textarea rows="10" cols="59" name="financialInfo" id="financialInfo" parsley-trigger="keyup" parsley-maxwords="100"></textarea>
 		<h3>What datasets (if any) are not currently available that would be useful for your company to have as government open data? [50 words or less]</h3>
-		<textarea rows="10" cols="59" name="datasetWishList" id="datasetWishList" data-trigger="keyup" data-maxwords="50"></textarea>
+		<textarea rows="10" cols="59" name="datasetWishList" id="datasetWishList" parsley-trigger="keyup" parsley-maxwords="50"></textarea>
 		<h3>What other companies, either in your sector or other sectors, would you recommend we contact regarding their use of government open data? [50 words or less]</h3>
-		<textarea rows="10" cols="59" name="companyRec" id="companyRec" data-trigger="keyup" data-maxwords="50"></textarea>
+		<textarea rows="10" cols="59" name="companyRec" id="companyRec" parsley-trigger="keyup" parsley-maxwords="50"></textarea>
 		<h3>What conferences or events do you think would be helpful to us in surveying the field of open data companies? [50 words or less]</h3>
-		<textarea rows="10" cols="59" name="conferenceRec" id="conferenceRec" data-trigger="keyup" data-maxwords="50"></textarea>
+		<textarea rows="10" cols="59" name="conferenceRec" id="conferenceRec" parsley-trigger="keyup" parsley-maxwords="50"></textarea>
 	</fieldset>
 	<footer class="m-form-footer">
-		<input type="submit" id="submit" class="m-button">
+		<input type="submit" id="submit" class="m-button" value="Continue to Add Datasets">
 	</footer>
 </form>
 

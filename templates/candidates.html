@@ -8,20 +8,19 @@
 	<h3>Filter by Sector</h3>
 	<div id="filters" class="m-candidates-buttons button-group" data-toggle="buttons-checkbox">
 	    <button data-filter="*">show all</button>
-	    <select name="" id="">
 	    {% for sector in sectors %}
-		    <option data-filter=".{{sector.strip().replace(" ", "-").replace("/","")}}">{{sector}}</option>
+		    <button data-filter=".{{sector.strip().replace(" ", "-").replace("/","")}}">{{sector}}</button>
 	    {%end%}
-	    </select>
 	</div>
-		<div class="m-candidates isotopes-container" data-isotope-options='{ "layoutMode": "fitColumns" }'>
-			{% for company in companies %}
-				<div class="m-candidates-item {% for sector in company.sector %}{{sector.strip().replace(" ", "-").replace("/","")}} {%end%}">
-					<div class="m-homepage-list-name companyName"><p><strong>{{ company.companyName }}</strong></p></div>
-					<div class="m-homepage-list-sectors"><p>{{ ', '.join(company.sector) }}</p></div>
-					<div class="m-homepage-list-desc"><p>{{ company.descriptionShort }}</p></div>
-				</div>
-			{%end%}
-		</div>
+	<br>
+	<div class="m-candidates isotopes-container" data-isotope-options='{ "layoutMode": "fitColumns" }'>
+		{% for company in companies %}
+			<div class="m-candidates-item {% for sector in company.sector %}{{sector.strip().replace(" ", "-").replace("/","")}} {%end%}">
+				<div class="m-homepage-list-name companyName"><p><strong>{{ company.companyName }}</strong></p></div>
+				<div class="m-homepage-list-sectors"><p>{{ ', '.join(company.sector) }}</p></div>
+				<div class="m-homepage-list-desc"><p>{{ company.descriptionShort }}</p></div>
+			</div>
+		{%end%}
 	</div>
+</div>
 {% end %}
