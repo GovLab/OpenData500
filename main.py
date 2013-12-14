@@ -57,6 +57,7 @@ class Application(tornado.web.Application):
             (r"/admin/?", AdminHandler),
             (r"/admin/edit/([a-zA-Z0-9]{24})/?", AdminEditCompanyHandler),
             (r"/about/?", AboutHandler),
+            (r"/resources/?", ResourcesHandler),
             #(r"/generateFiles/?", GenerateFilesHandler),
             (r"/download/?", DownloadHandler),
             (r'/download/(.*)/?',tornado.web.StaticFileHandler,{'path':os.path.join(os.path.dirname(__file__), 'static')}),
@@ -130,6 +131,14 @@ class AboutHandler(tornado.web.RequestHandler):
             page_heading='About the OpenData 500'
         )
 
+class ResourcesHandler(tornado.web.RequestHandler):
+    @tornado.web.addslash
+    def get(self):
+        self.render(
+            "resources.html",
+            page_title='Open Data Resources',
+            page_heading='Open Data Resources'
+        )
 
 class UploadHandler(tornado.web.RequestHandler):
     @tornado.web.addslash
