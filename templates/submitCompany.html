@@ -198,6 +198,7 @@
 		<textarea rows="10" cols="59" name="conferenceRec" id="conferenceRec" parsley-trigger="keyup" parsley-maxwords="50"></textarea>
 	</fieldset>
 	<footer class="m-form-footer">
+		{% raw xsrf_form_html() %}
 		<input type="submit" id="submit" class="m-button" value="Continue to Add Datasets">
 	</footer>
 </form>

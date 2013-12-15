@@ -1,0 +1,24 @@
+
+
+{% extends "main.html" %}
+{% autoescape None %}
+
+{% block body %}
+
+<br>
+<br>
+<br>
+
+
+
+<form action="/register/" method="POST">
+	Email: <input type="text" name="username" /><br>
+	Password: <input type="password" name="password" /><br>
+	{% raw xsrf_form_html() %}
+<input type="submit" value="Register" /> </form>
+
+
+
+
+
+{% end %}

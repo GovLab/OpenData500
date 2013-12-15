@@ -67,6 +67,13 @@ class Company(Document):
 	ts = ComplexDateTimeField(default=datetime.now())
 
 
+
+class Users(Document):
+	ts = ComplexDateTimeField(default=datetime.now())
+	email = StringField()
+	password = StringField()
+
+
 Dataset.register_delete_rule(Company, "datasets", PULL)
 Dataset.register_delete_rule(Person, "submittedDatasets", PULL)
 Company.register_delete_rule(Dataset, "usedBy", PULL)

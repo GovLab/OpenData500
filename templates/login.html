@@ -1,0 +1,22 @@
+
+
+{% extends "main.html" %}
+{% autoescape None %}
+
+{% block body %}
+
+<br>
+<br>
+
+<form action="/login" method="POST">
+	Email: <input type="text" name="username" /><br>
+	Password: <input type="password" name="password" /><br>
+	{% raw xsrf_form_html() %}
+<input type="submit" value="Log In" /> </form>
+
+
+
+
+
+
+{% end %}

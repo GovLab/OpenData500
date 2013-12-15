@@ -25,6 +25,7 @@ from bson import json_util
 import csv
 import json
 import re
+import bcrypt
 
 # import and define tornado-y things
 from tornado.options import define
@@ -64,6 +65,9 @@ class Application(tornado.web.Application):
             #(r"/upload/?", UploadHandler),
             (r"/candidates/?", CandidateHandler),
             (r"/preview/?", PreviewHandler),
+            (r'/login/?', LoginHandler),
+            (r'/logout/?', LogoutHandler),
+            (r'/register/?', RegisterHandler),
             (r"/([^/]+)/?", CompanyHandler)
         ]
         settings = dict(
@@ -71,19 +75,97 @@ class Application(tornado.web.Application):
             static_path=os.path.join(os.path.dirname(__file__), "static"),
             ui_modules={"Company": CompanyModule},
             debug=True,
+            cookie_secret=os.environ.get('COOKIE_SECRET'),
+            xsrf_cookies=True,
+            login_url="/login"
         )
         tornado.web.Application.__init__(self, handlers, **settings)
 
+class BaseHandler(tornado.web.RequestHandler): 
+    def get_login_url(self):
+        return u"/login"
+    def get_current_user(self):
+        user_json = self.get_secure_cookie("user")
+        if user_json:
+            return tornado.escape.json_decode(user_json)
+        else:
+            return None
 
 # the main page
-class MainHandler(tornado.web.RequestHandler):
+class MainHandler(BaseHandler):
     @tornado.web.addslash
+    #@tornado.web.authenticated
     def get(self):
         self.render(
             "index.html",
+            user=self.current_user,
             page_title='Open Data500',
             page_heading='Welcome to the Open Data 500',
         )
+
+
+class LoginHandler(BaseHandler): 
+    @tornado.web.addslash
+    def get(self):
+        self.render(
+            "login.html", 
+            next=self.get_argument("next","/"), 
+            message=self.get_argument("error",""),
+            page_title="Please Login",
+            page_heading="Login to OD500" 
+            )
+
+    def post(self):
+        email = self.get_argument("email", "")
+        password = self.get_argument("password", "")
+        user = models.Users.objects.get(email=email)
+        if user and user.password and bcrypt.hashpw(password, user.password) == user.password:
+            self.set_current_user(email)
+            self.redirect("/")
+        else: 
+            error_msg = u"?error=" + tornado.escape.url_escape("Login incorrect.")
+            self.redirect(u"/login" + error_msg)
+
+    def set_current_user(self, user):
+        logging.info('setting ' + user)
+        if user:
+            self.set_secure_cookie("user", tornado.escape.json_encode(user))
+        else: 
+            self.clear_cookie("user")
+
+class RegisterHandler(LoginHandler):
+    def get(self):
+        self.render(
+            "register.html", 
+            next=self.get_argument("next","/"),
+            page_title="Register",
+            page_heading="Register for OD500"
+            )
+
+    def post(self):
+        email = self.get_argument("email", "")
+        try:
+            user = models.Users.objects.get(email=email)
+            error_msg = u"?error=" + tornado.escape.url_escape("Login name already taken")
+            self.redirect(u"/login" + error_msg)
+        except:
+            pass
+        password = self.get_argument("password", "")
+        hashedPassword = bcrypt.hashpw(password, bcrypt.gensalt(8))
+        newUser = models.Users(
+            email=email,
+            password = hashedPassword
+            )
+        newUser.save()
+        self.set_current_user(email)
+        self.redirect("/")
+
+class LogoutHandler(BaseHandler): 
+    def get(self):
+        if (self.get_argument("logout", None)): 
+            self.clear_cookie("username") 
+            self.redirect("/")
+
 
 class CompanyHandler(tornado.web.RequestHandler):
     @tornado.web.addslash
