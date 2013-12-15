@@ -533,3 +533,14 @@ footer {
       color: white; }
   footer .footer-menu-item.last {
     border-right: 0; }
+
+
+
+
+.creative-commons-license {
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  color: #aaaaaa;
+}

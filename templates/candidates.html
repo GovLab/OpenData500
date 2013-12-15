@@ -20,14 +20,15 @@
 	<div id="filters" class="m-candidates-buttons button-group" data-toggle="buttons-checkbox">
 	    <button data-filter="*">show all</button>
 	    {% for category in categories %}
-		    <button data-filter=".{{category.strip().replace(" ", "-").replace("/","")}}">{{category}}</button>
+		    <button data-filter=".{{category.strip().replace(" ", "-").replace("/","").replace("&", "")}}">{{category}}</button>
 	    {%end%}
 	</div>
 	<br>
 	<div class="m-candidates isotopes-container" data-isotope-options='{ "layoutMode": "fitColumns" }'>
 		{% for company in companies %}
-            <div class="m-candidates-item {%try%} {{company.companyCategory.strip().replace(" ", "-").replace("/","")}} {%except%}None{%end%} {{ company.state }}">
-                <h3>{{ company.companyName }}</h3>
+            <div class="m-candidates-item {%try%} {{company.companyCategory.strip().replace(" ", "-").replace("/","").replace("&", "")}} {%except%}None{%end%} {{ company.state }}">
+                <a href="/{{company.prettyName}}"><h3>{{ company.companyName }}</h3></a>
+                {% if company.vettedByCompany %} <small>Survey √</small>{%end%} {% if company.vetted %} <small>List of 50 √</small> {%end%}
                 <p class="m-homepage-list-desc">{{ company.descriptionShort }}</p>
                 <em> {{ company.companyCategory }}</em>
 			</div>

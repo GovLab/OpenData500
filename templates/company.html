@@ -14,8 +14,8 @@
 		<p><strong>FTE:</strong> {{company.fte}}</p>
 		<p><strong>Type of Company:</strong> {{company.companyType}}</p>
 		<p><strong>Company Function:</strong> {{company.companyFunction}}</p>
-		<p><strong>Sector(s):</strong> {% for sector in company.sector %} {{sector}} {%end%}</p>
-		<p><strong>Source of Revenue:</strong> {% for source in company.revenueSource %} {{source}}, {%end%}</p>
+		<p><strong>Sector(s):</strong> {{ ", ".join(company.sector) }}</p>
+		<p><strong>Source of Revenue:</strong> {{ ", ".join(company.revenueSource) }}</p>
 	</div>
 	<div class="m-half">
 		<h3>Description:</h3>
@@ -28,9 +28,11 @@
 	<div class="m-full datasets">
 		<h3>Datasets</h3>
 		<ul>
-		{% for data in company.datasets %}
-				<li><a href="{{data.datasetURL}}">{{data.datasetName}}</a></li>
-		{%end%}
+			{% for data in company.datasets %}
+					{% if data.datasetName %}<li><a href="{{data.datasetURL}}">{{data.datasetName}}</a></li>
+					{% elif data.datasetURL %}<li><a href="{{data.datasetURL}}">{{data.datasetURL}}</a></li>
+					{% elif data.agency %}<li>{{data.agency}}</li>{%end%}
+			{%end%}
 		</ul>
 	</div>
 </div>	

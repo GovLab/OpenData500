@@ -102,7 +102,7 @@ class MainHandler(BaseHandler):
             "index.html",
             user=self.current_user,
             page_title='Open Data500',
-            page_heading='Welcome to the Open Data 500',
+            page_heading='Welcome to the Open Data 500 Pre-Launch',
         )
 
 
@@ -179,7 +179,14 @@ class CompanyHandler(BaseHandler):
     @tornado.web.addslash
     @tornado.web.authenticated
     def get(self, companyName):
-        company = models.Company.objects.get(prettyName=companyName)
+        try:
+            company = models.Company.objects.get(prettyName=companyName)
+        except: 
+            self.render(
+                "404.html",
+                page_title='404 - Open Data500',
+                page_heading='Oh no...',
+            )
         logging.info(company.companyName)
         self.render(
             "company.html",
@@ -239,7 +246,7 @@ class Upload50Handler(BaseHandler):
     @tornado.web.addslash
     @tornado.web.authenticated
     def get(self):
-        # Preview 50 Companies
+        # Preview Survey Companies
         companies = []
         with open('companies.csv', 'rb') as csvfile:
             companyreader = csv.reader(csvfile, delimiter=',')
@@ -295,6 +302,7 @@ class Upload50Handler(BaseHandler):
                             personType="CEO"
                             )
                         ceo.save()
+                    prettyName = re.sub(r'([^\s\w])+', '', companyName).replace(" ", "-")
                     url = c[1]
                     city = c[9]
                     state = c[10]
@@ -344,6 +352,7 @@ class Upload50Handler(BaseHandler):
                     #Make new Company Object and save this stuff
                     company = models.Company(
                         companyName=companyName,
+                        prettyName=prettyName,
                         url = url,
                         city=city,
                         state=state,
@@ -491,6 +500,7 @@ class Upload500Handler(BaseHandler):
                         personType="CEO"
                         )
                     ceo.save()
+                prettyName = re.sub(r'([^\s\w])+', '', companyName).replace(" ", "-")
                 url = c[1]
                 city = c[9]
                 state = c[10]
@@ -536,6 +546,7 @@ class Upload500Handler(BaseHandler):
                 #Make new Company Object and save this stuff
                 company = models.Company(
                     companyName=companyName,
+                    prettyName=prettyName,
                     url = url,
                     city=city,
                     state=state,
@@ -813,7 +824,6 @@ class SubmitDataHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self, id):
         #Make not whether we are submitting a Co. and adding a dataset or editing a Co. and adding a dataset
-        action = self.get_argument('action', None)
         #get company
         company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
         page_heading = "Enter Data Sets for " + company.companyName
@@ -831,6 +841,7 @@ class SubmitDataHandler(BaseHandler):
         #get dataset fields from form:
         datasetName = self.get_argument('datasetName', None)
         datasetURL = self.get_argument('datasetURL', None)
+        agency = self.get_argument('agency', None)
         try: #get all entered dataTypes
             dataType = self.request.arguments['dataType']
         except: #if none, then make empty attay
@@ -851,6 +862,7 @@ class SubmitDataHandler(BaseHandler):
         dataset = models.Dataset(
             datasetName = datasetName,
             datasetURL = datasetURL,
+            agency=agency,
             dataType = dataType,
         )
         #save the rating
@@ -869,10 +881,9 @@ class SubmitDataHandler(BaseHandler):
         company.save()
         #If want to add another, redirect to form again. 
         if self.get_argument('submit', None) == 'Add Another':
+            logging.info('adding another')
             self.redirect("/addData/" + id)
-        if action == 'editing': #we were editing a Co., return to edit page.
-            self.redirect("/edit/" + id)
-        elif action == 'submitting': #else, you're done, go home.
+        if self.get_argument('submit', None) == 'Done': #else, you're done, go home.
             self.redirect("/")
 
 class EditCompanyHandler(BaseHandler):
@@ -1153,6 +1164,9 @@ class DeleteCompanyHandler(BaseHandler):
             if company.contact:
                 contact = company.contact
                 contact.delete()
+            #delete its datasets
+            for d in company.datasets:
+                d.delete()
             company.delete()
         except:
             dataset = models.Dataset.objects.get(id=bson.objectid.ObjectId(id))
