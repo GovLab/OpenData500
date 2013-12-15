@@ -182,7 +182,8 @@ a:hover {
 .m-homepage {
   margin-top: 20px; }
   .m-homepage h1 {
-    margin: 0; }
+    margin: 0;
+    font-size: 5.5em; }
   .m-homepage section {
     margin-bottom: 20px; }
   .m-homepage .m-home-big-links {
@@ -234,12 +235,6 @@ a:hover {
     border-bottom: 1px solid #aaaaaa; }
   .about-page section:last-child {
     border-bottom: 0; }
-  .about-page .intro {
-    font-family: "Exo", sans-serif;
-    font-weight: 100;
-    font-style: italic;
-    font-size: 1.8em;
-    line-height: 1.5em; }
   .about-page .m-half {
     width: calc(50% - 70px);
     padding-right: 60px;
@@ -377,7 +372,6 @@ a:hover {
 .m-candidates h1 {
   font-size: 6.79em; }
 
-
 .m-candidates-list {
   padding: 0;
   overflow: hidden; }
@@ -399,11 +393,12 @@ a:hover {
   list-style-type: none;
   padding: 15px;
   background-color: rgba(71, 43, 116, 0.9);
-  width: 12.4%;
-  height: 150px;
+  width: 20.83333%;
+  height: 200px;
   float: left;
   margin: 0 10px 10px 0;
   overflow: hidden;
+  text-overflow: ellipsis;
   color: white; }
   .m-candidates-item h3 {
     color: #fff;
@@ -415,32 +410,6 @@ a:hover {
     display: inline-block;
     height: 15px;
     overflow: hidden; }
-
-
-.m-candidates-item.large{
-  list-style-type: none;
-  padding: 15px;
-  background-color: #472b74;
-  width: 45.5%;
-  height: 300px;
-  float: left;
-  margin: 0 10px 10px 0;
-  overflow: hidden;
-  color: white; }
-  .m-candidates-item h3 {
-    color: #fff;
-    margin-top: 0; }
-  .m-candidates-item em {
-    color: #8977a7;
-    display: inline-block;
-    height: 15px;
-    overflow: hidden; }
-
-.m-homepage-list-desc {
-  width: auto;
-  height: 80px;
-  overflow: hidden;
-}
 
 .m-download-big-links {
   text-align: center;
@@ -482,6 +451,13 @@ h1 {
   margin-bottom: 65px;
   text-align: center; }
 
+.intro {
+  font-family: "Exo", sans-serif;
+  font-weight: 100;
+  font-style: italic;
+  font-size: 1.8em;
+  line-height: 1.5em; }
+
 header {
   background-color: #472b74;
   border-bottom: 5px solid #8977a7;
@@ -505,7 +481,7 @@ header {
 .m-main-menu a:last-child {
   border-right: 0; }
 
-#background {
+.parallax-bg {
   position: fixed;
   top: 0;
   right: 0;
@@ -513,7 +489,22 @@ header {
   left: 0;
   width: 100%;
   height: 100%;
-  background: url(../img/bg-element-2.png) no-repeat center -350px;
+  z-index: -2; }
+
+#background {
+  top: -450px;
+  background: url(../img/bg-element-2.png) no-repeat center; }
+
+#background-2 {
+  top: -380px;
+  left: 300px;
+  background: url(../img/bg-element-1.png) no-repeat center;
+  z-index: -1; }
+
+#background-3 {
+  top: -400px;
+  left: -300px;
+  background: url(../img/bg-element-1.png) no-repeat center;
   z-index: -1; }
 
 footer {
@@ -538,18 +529,3 @@ footer {
     margin-right: 40px;
     margin-top: 0;
     float: left; }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
