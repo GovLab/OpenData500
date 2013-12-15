@@ -19,17 +19,17 @@
 	<h3>Filter by Sector</h3>
 	<div id="filters" class="m-candidates-buttons button-group" data-toggle="buttons-checkbox">
 	    <button data-filter="*">show all</button>
-	    {% for sector in sectors %}
-		    <button data-filter=".{{sector.strip().replace(" ", "-").replace("/","")}}">{{sector}}</button>
+	    {% for category in categories %}
+		    <button data-filter=".{{category.strip().replace(" ", "-").replace("/","")}}">{{category}}</button>
 	    {%end%}
 	</div>
 	<br>
 	<div class="m-candidates isotopes-container" data-isotope-options='{ "layoutMode": "fitColumns" }'>
 		{% for company in companies %}
-            <div class="m-candidates-item {% for sector in company.sector %}{{sector.strip().replace(" ", "-").replace("/","")}} {%end%}{{ company.state }}">
+            <div class="m-candidates-item {%try%} {{company.companyCategory.strip().replace(" ", "-").replace("/","")}} {%except%}None{%end%} {{ company.state }}">
                 <h3>{{ company.companyName }}</h3>
                 <p class="m-homepage-list-desc">{{ company.descriptionShort }}</p>
-                <em> {{ ', '.join(company.sector) }}</em>
+                <em> {{ company.companyCategory }}</em>
 			</div>
 		{%end%}
 	</div>

@@ -15,7 +15,13 @@
 // your fancy JS code goes here!
 
 $(function() {
-    $( "#accordion" ).accordion({
+    $( "#accordionUnvetted" ).accordion({
+      collapsible: true
+    });
+  });
+
+$(function() {
+    $( "#accordionVetted" ).accordion({
       collapsible: true
     });
   });

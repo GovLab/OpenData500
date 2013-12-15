@@ -42,6 +42,7 @@ revenueSource = ['Advertising', 'Data Management and Analytic Services', 'Databa
 sectors = ['Agriculture', 'Arts, Entertainment and Recreation' 'Crime', 'Education', 'Energy', 'Environmental', 'Finance', 'Geospatial data/mapping', 'Health and Healthcare', 'Housing/Real Estate', 'Manufacturing', 'Nutrition', 'Scientific Research', 'Social Assistance', 'Trade', 'Transportation', 'Telecom', 'Weather']
 datatypes = ['Federal Open Data', 'State Open Data', 'City/Local Open Data']
 categories = ['Business & Legal Services', 'Data/Technology', 'Education', 'Energy', 'Environment & Weather', 'Finance & Investment', 'Food & Agriculture', 'Geospatial/Mapping', 'Governance', 'Healthcare', 'Housing/Real Estate', 'Insurance', 'Lifestyle & Consumer', 'Research & Consulting', 'Scientific Research', 'Transportation']
+states ={ "AL": "Alabama", "AK": "Alaska", "AZ": "Arizona", "AR": "Arkansas", "CA": "California", "CO": "Colorado", "CT": "Connecticut", "DE": "Delaware", "DC": "District of Columbia", "FL": "Florida", "GA": "Georgia", "HI": "Hawaii", "ID": "Idaho", "IL": "Illinois", "IN": "Indiana", "IA": "Iowa", "KA": "Kansas", "KY": "Kentucky", "LA": "Louisiana", "ME": "Maine", "MD": "Maryland", "MA": "Massachusetts", "MI": "Michigan", "MN": "Minnesota", "MS": "Mississippi", "MO": "Missouri", "MT": "Montana", "NE": "Nebraska", "NV": "Nevada", "NH": "New Hampshire", "NJ": "New Jersey", "NM": "New Mexico", "NY": "New York", "NC": "North Carolina", "ND": "North Dakota", "OH": "Ohio", "OK": "Oklahoma", "OR": "Oregon", "PA": "Pennsylvania", "RI": "Rhode Island", "SC": "South Carolina", "SD": "South Dakota", "TN": "Tennessee", "TX": "Texas", "UT": "Utah", "VT": "Vermont", "VA": "Virginia", "WA": "Washington", "WV": "West Virginia", "WI": "Wisconsin", "WY": "Wyoming", "PR": "Puerto Rico"}
 
 # application settings and handle mapping info
 class Application(tornado.web.Application):
@@ -59,10 +60,11 @@ class Application(tornado.web.Application):
             (r"/admin/edit/([a-zA-Z0-9]{24})/?", AdminEditCompanyHandler),
             (r"/about/?", AboutHandler),
             (r"/resources/?", ResourcesHandler),
-            #(r"/generateFiles/?", GenerateFilesHandler),
+            (r"/generateFiles/?", GenerateFilesHandler),
             (r"/download/?", DownloadHandler),
             (r'/download/(.*)/?',tornado.web.StaticFileHandler,{'path':os.path.join(os.path.dirname(__file__), 'static')}),
-            #(r"/upload/?", UploadHandler),
+            (r"/upload50/?", Upload50Handler),
+            (r"/upload500/?", Upload500Handler),
             (r"/candidates/?", CandidateHandler),
             (r"/preview/?", PreviewHandler),
             (r'/login/?', LoginHandler),
@@ -204,13 +206,13 @@ class CandidateHandler(BaseHandler):
     @tornado.web.addslash
     @tornado.web.authenticated
     def get(self):
-        companies = models.Company.objects(Q(vetted=True) & Q(vettedByCompany=True))
+        companies = models.Company.objects()
         self.render(
             "candidates.html",
             page_title='Open Data 500',
             page_heading='Candidates for the OD500',
             companies = companies,
-            sectors = sectors
+            categories = categories
         )
 
 class AboutHandler(BaseHandler):
@@ -233,10 +235,11 @@ class ResourcesHandler(BaseHandler):
             page_heading='Open Data Resources'
         )
 
-class UploadHandler(BaseHandler):
+class Upload50Handler(BaseHandler):
     @tornado.web.addslash
     @tornado.web.authenticated
     def get(self):
+        # Preview 50 Companies
         companies = []
         with open('companies.csv', 'rb') as csvfile:
             companyreader = csv.reader(csvfile, delimiter=',')
@@ -299,7 +302,10 @@ class UploadHandler(BaseHandler):
                         zip = int(c[11])
                     except: 
                         zip = 99999
-                    yearFounded = c[15]
+                    if c[15]:
+                        yearFounded = c[15]
+                    else: 
+                        yearFounded = 0
                     previousName = c[16]
                     try: 
                         fte = int(c[17])
@@ -325,11 +331,16 @@ class UploadHandler(BaseHandler):
                     if c[27]:
                         sectorOther = c[27]
                         sector.append(sectorOther)
+                    companyCategory = c[41]
                     descriptionLong = c[28]
                     descriptionShort = c[29]
                     socialImpact = c[30]
                     financialInfo = c[31]
                     confidentiality = c[38]
+                    if c[42] == 'Y':
+                        vetted = True
+                    else:
+                        vetted = False
                     #Make new Company Object and save this stuff
                     company = models.Company(
                         companyName=companyName,
@@ -342,6 +353,7 @@ class UploadHandler(BaseHandler):
                         fte=fte,
                         companyType=companyType,
                         companyFunction=companyFunction,
+                        companyCategory=companyCategory,
                         criticalDataTypes=criticalDataTypes,
                         revenueSource=revenueSource,
                         sector=sector,
@@ -352,7 +364,7 @@ class UploadHandler(BaseHandler):
                         ceo=ceo,
                         contact=contact,
                         confidentiality = confidentiality,
-                        vetted = True,
+                        vetted = vetted,
                         vettedByCompany = True
                         )
                     company.save()
@@ -420,16 +432,146 @@ class UploadHandler(BaseHandler):
                     company.save()
                     #update PreviousName
                     previosName = companyName
-        self.redirect('/')
+        self.redirect('/admin/')
+
+class Upload500Handler(BaseHandler):
+    @tornado.web.addslash
+    @tornado.web.authenticated
+    def get(self):
+        #Rest of 500
+        companies = []
+        with open('500companies.csv', 'rb') as csvfile:
+            companyreader = csv.reader(csvfile, delimiter=',')
+            for row in companyreader:
+                companies.append(row)
+        for c in companies:
+            companyName = c[0]
+            if c[43] != 'Y' and c[42] != 'Y' and c[0] != 'companyName':
+                logging.info("Working on " + companyName)
+                dateAdded = c[2]
+                firstName = c[3].lstrip()
+                lastName = c[4]
+                title = c[5]
+                email = c[6]
+                phone = c[7]
+                if c[8] == 'checked':
+                    contacted = True
+                else: 
+                    contacted = False
+                datasetWishList = c[37]
+                companyRec = c[39]
+                conferenceRec = c[40]
+                #otherInfo = c[]
+                #make contact
+                contact = models.Person(
+                    firstName=firstName,
+                    lastName=lastName,
+                    title=title,
+                    personType="Contact",
+                    email=email,
+                    phone=phone,
+                    contacted=contacted,
+                    org=companyName,
+                    #otherInfo=otherInfo,
+                    datasetWishList=datasetWishList,
+                    companyRec=companyRec,
+                    conferenceRec=conferenceRec,
+                    )
+                contact.save()
+                ceoFirstName = c[12].lstrip()
+                ceoLastName = c[13]
+                ceoEmail = c[14]
+                if ceoEmail == email:
+                    ceo = contact
+                else: 
+                    ceo = models.Person(
+                        firstName=ceoFirstName,
+                        lastName=ceoLastName,
+                        email=ceoEmail,
+                        personType="CEO"
+                        )
+                    ceo.save()
+                url = c[1]
+                city = c[9]
+                state = c[10]
+                try: 
+                    zip = int(c[11])
+                except: 
+                    zip = 99999
+                if c[15]:
+                    yearFounded = c[15]
+                else: 
+                    yearFounded = 0
+                previousName = c[16]
+                try: 
+                    fte = int(c[17])
+                except: 
+                    fte = None
+                companyType = c[18]
+                if c[19]:
+                    companyTypeOther = c[19]
+                    companyType = companyTypeOther
+                companyFunction = c[20]
+                if c[21]:
+                    companyFunctionOther = c[21]
+                    companyFunction = companyFunctionOther
+                criticalDataTypes = c[22].split(',')
+                if c[23]:
+                    criticalDataTypesOther = c[23]
+                    criticalDataTypes.append(criticalDataTypesOther)
+                revenueSource = c[24].split(',')
+                if c[25]:
+                    revenueSourceOther = c[25]
+                    revenueSource.append(revenueSourceOther)
+                sector = c[26].split(',')
+                if c[27]:
+                    sectorOther = c[27]
+                    sector.append(sectorOther)
+                companyCategory = c[41]
+                descriptionLong = c[28]
+                descriptionShort = c[29]
+                socialImpact = c[30]
+                financialInfo = c[31]
+                confidentiality = c[38]
+                #Make new Company Object and save this stuff
+                company = models.Company(
+                    companyName=companyName,
+                    url = url,
+                    city=city,
+                    state=state,
+                    zipCode=zip,
+                    yearFounded=yearFounded,
+                    previousName=previousName,
+                    fte=fte,
+                    companyType=companyType,
+                    companyFunction=companyFunction,
+                    companyCategory=companyCategory,
+                    criticalDataTypes=criticalDataTypes,
+                    revenueSource=revenueSource,
+                    sector=sector,
+                    descriptionLong=descriptionLong,
+                    descriptionShort=descriptionShort,
+                    socialImpact=socialImpact,
+                    financialInfo=financialInfo,
+                    ceo=ceo,
+                    contact=contact,
+                    confidentiality = confidentiality,
+                    vetted = False,
+                    vettedByCompany = False
+                    )
+                company.save()
+                company.contact.submittedCompany = company
+        self.redirect('/admin/')
 
 class AdminHandler(BaseHandler):
     @tornado.web.addslash
     @tornado.web.authenticated
     def get(self):
-        unvettedCompanies = models.Company.objects(Q(vetted=False) & Q(recommended=False))
+        unvettedCompanies = models.Company.objects(Q(vetted=False) & Q(vettedByCompany=True))
+        logging.info(len(unvettedCompanies))
         vettedCompanies = models.Company.objects(Q(vetted=True) & Q(vettedByCompany=True))
         recommendedCompanies = models.Company.objects(Q(vetted=False) & Q(recommended=True))
-        unvettedByCompanies = models.Company.objects(Q(vetted=True) & Q(vettedByCompany=False))
+        unvettedByCompanies = models.Company.objects(Q(vetted=False) & Q(vettedByCompany=False))
         self.render(
             "admin.html",
             page_title='OpenData500',
@@ -1008,6 +1150,9 @@ class DeleteCompanyHandler(BaseHandler):
             if company.ceo:
                 ceo = company.ceo
                 ceo.delete()
+            if company.contact:
+                contact = company.contact
+                contact.delete()
             company.delete()
         except:
             dataset = models.Dataset.objects.get(id=bson.objectid.ObjectId(id))
@@ -1123,12 +1268,13 @@ class GenerateFilesHandler(BaseHandler):
     def get(self):
         #Get published companies, turn each one into an array and put into CSV file
         companies = models.Company.objects(Q(vetted=True) & Q(vettedByCompany=True))
-        csvwriter = csv.writer(open("OD500_Companies.csv", "w"))
+        csvwriter = csv.writer(open(os.path.join(os.path.dirname(__file__), 'static') + "/OD500_Companies.csv", "w"))
         csvwriter.writerow([
             'CompanyName',
             'URL',
             'city',
-            'state',
+            'STATE',
+            'abbrev',
             'zipCode',
             'ceoFirstName',
             'ceoLastName',
@@ -1147,7 +1293,8 @@ class GenerateFilesHandler(BaseHandler):
             'criticalDataTypes',
             'datasetName',
             'datasetURL',
-            'agencyOrDatasetSource'
+            'agencyOrDatasetSource',
+            'DATASETS'
             ])
         for c in companies:
             for d in c.datasets:
@@ -1155,6 +1302,7 @@ class GenerateFilesHandler(BaseHandler):
                     c.companyName,
                     c.url,
                     c.city,
+                    states[str(c.state).replace(" ","")],
                     c.state,
                     c.zipCode,
                     c.ceo.firstName,
@@ -1174,7 +1322,8 @@ class GenerateFilesHandler(BaseHandler):
                     ', '.join(c.criticalDataTypes),
                     d.datasetName,
                     d.datasetURL,
-                    d.agency
+                    d.agency,
+                    len(c.datasets)
                 ]
                 for i in range(len(newrow)):  # For every value in our newrow
                     if hasattr(newrow[i], 'encode'):
@@ -1216,7 +1365,7 @@ class GenerateFilesHandler(BaseHandler):
                 "datasets": datasetIDs
             }
             companiesJSON.append(company)
-        with open('OD500_Companies.json', 'w') as outfile:
+        with open(os.path.join(os.path.dirname(__file__), 'static') + '/OD500_Companies.json', 'w') as outfile:
             json.dump(companiesJSON, outfile)
         #Get Datasets, turn into objects, and then dump into JSON file
         datasets = models.Dataset.objects()
@@ -1238,7 +1387,7 @@ class GenerateFilesHandler(BaseHandler):
                 "usedByCompany": companyIDs
             }
             datasetsJSON.append(dataset)
-        with open('OD500_Datasets.json', 'w') as outfile:
+        with open(os.path.join(os.path.dirname(__file__), 'static') + '/OD500_Datasets.json', 'w') as outfile:
             json.dump(datasetsJSON, outfile)
 
 

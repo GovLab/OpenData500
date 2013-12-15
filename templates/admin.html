@@ -6,23 +6,26 @@
 
 <h1>{{ page_heading }}</h1>
 
-<h2>Unvetted Submitted Companies</h2>
-{% for company in unvettedCompanies %}
-	<p><strong>{{ company.companyName }}</strong> is currently using the following datasets:</p>
-	<ul>
-		{% try %}
-			{% for dataset in company.datasets %}
-				<li><p><strong>{{ dataset.datasetName }}</strong> - <a href="/editData/{{ dataset.id }}">Edit</a> <a href="/delete/{{ dataset.id }}">Delete</a></p></li>
-			{% end %}
-		{% except %}
-		{%end%}
-	</ul>
-	<p><a href="/admin/edit/{{ company.id }}">Edit</a> <a href="/delete/{{ company.id }}">Delete</a> <a href="/addData/{{ company.id }}">Add Dataset</a></p>
-	
-{% end %}
-
-<h2>Vetted Submitted Companies</h2>
-<div id="accordion">
+<h2>Submitted Survey (Not In 50)</h2>
+<div id="accordionUnvetted">
+	{% for company in unvettedCompanies %}
+		<h3><strong>{{ company.companyName }}</strong></h3>
+		<div class="unvettedCompanyDatasets">
+			<ul>
+				{% try %}
+					{% for dataset in company.datasets %}
+						<li><p><strong>{{ dataset.datasetName }}</strong> - <a href="/editData/{{ dataset.id }}">Edit</a> <a href="/delete/{{ dataset.id }}">Delete</a></p></li>
+					{% end %}
+				{% except %}
+				{%end%}
+			</ul>
+			<p><a href="/admin/edit/{{ company.id }}">Edit</a> <a href="/delete/{{ company.id }}">Delete</a> <a href="/addData/{{ company.id }}">Add Dataset</a></p>
+		</div>
+	{% end %}
+</div>
+<br>
+<h2>Preview 50</h2>
+<div id="accordionVetted">
 {% for company in vettedCompanies %}
 	<h3><strong>{{ company.companyName }}</strong></h3>
 	<div>
@@ -38,13 +41,9 @@
 	</div>
 {% end %}
 </div>
+<br>
 
-<h2>Recommended Companies</h2>
-{% for company in recommendedCompanies %}
-	<p><strong>{{ company.companyName }}</strong> <a href="/view/{{ company.id }}">View</a> <a href="/admin/edit/{{ company.id }}">Edit</a> <a href="/delete/{{ company.id }}">Delete</a></p>
-{% end %}
-
-<h2>Links To Be Sent Out for Editing</h2>
+<h2>Need to fill out Surveys</h2>
 <table style="width:100%; text-align:left;">
 	<tr>
 		<th>Company Name</th>
@@ -61,6 +60,7 @@
 		</tr>
 	{% end %}
 </table>
+<br>
 
 
 {% end %}
