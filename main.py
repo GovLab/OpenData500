@@ -94,7 +94,7 @@ class BaseHandler(tornado.web.RequestHandler):
 # the main page
 class MainHandler(BaseHandler):
     @tornado.web.addslash
-    #@tornado.web.authenticated
+    @tornado.web.authenticated
     def get(self):
         self.render(
             "index.html",
@@ -120,9 +120,11 @@ class LoginHandler(BaseHandler):
         password = self.get_argument("password", "")
         user = models.Users.objects.get(email=email)
         if user and user.password and bcrypt.hashpw(password, user.password) == user.password:
+            logging.info('successful login for '+email)
             self.set_current_user(email)
             self.redirect("/")
         else: 
+            logging.info('unsuccessful login')
             error_msg = u"?error=" + tornado.escape.url_escape("Login incorrect.")
             self.redirect(u"/login" + error_msg)
 
@@ -134,6 +136,8 @@ class LoginHandler(BaseHandler):
             self.clear_cookie("user")
 
 class RegisterHandler(LoginHandler):
+    @tornado.web.addslash
+    @tornado.web.authenticated
     def get(self):
         self.render(
             "register.html", 
@@ -162,13 +166,13 @@ class RegisterHandler(LoginHandler):
 
 class LogoutHandler(BaseHandler): 
     def get(self):
-        if (self.get_argument("logout", None)): 
-            self.clear_cookie("username") 
-            self.redirect("/")
+        self.clear_cookie("user")
+        self.redirect(u"/login")
 
 
-class CompanyHandler(tornado.web.RequestHandler):
+class CompanyHandler(BaseHandler):
     @tornado.web.addslash
+    @tornado.web.authenticated
     def get(self, companyName):
         company = models.Company.objects.get(prettyName=companyName)
         logging.info(company.companyName)
@@ -180,8 +184,9 @@ class CompanyHandler(tornado.web.RequestHandler):
         )
 
       
-class PreviewHandler(tornado.web.RequestHandler):
+class PreviewHandler(BaseHandler):
     @tornado.web.addslash
+    @tornado.web.authenticated
     def get(self):
         #companies = models.Company.objects()
         submittedCompanies = models.Company.objects(Q(vetted=True) & Q(vettedByCompany=True))
@@ -192,8 +197,9 @@ class PreviewHandler(tornado.web.RequestHandler):
             submittedCompanies = submittedCompanies,
         )
 
-class CandidateHandler(tornado.web.RequestHandler):
+class CandidateHandler(BaseHandler):
     @tornado.web.addslash
+    @tornado.web.authenticated
     def get(self):
         companies = models.Company.objects(Q(vetted=True) & Q(vettedByCompany=True))
         self.render(
@@ -204,8 +210,9 @@ class CandidateHandler(tornado.web.RequestHandler):
             sectors = sectors
         )
 
-class AboutHandler(tornado.web.RequestHandler):
+class AboutHandler(BaseHandler):
     @tornado.web.addslash
+    @tornado.web.authenticated
     def get(self):
         self.render(
             "about.html",
@@ -213,8 +220,9 @@ class AboutHandler(tornado.web.RequestHandler):
             page_heading='About the OpenData 500'
         )
 
-class ResourcesHandler(tornado.web.RequestHandler):
+class ResourcesHandler(BaseHandler):
     @tornado.web.addslash
+    @tornado.web.authenticated
     def get(self):
         self.render(
             "resources.html",
@@ -222,8 +230,9 @@ class ResourcesHandler(tornado.web.RequestHandler):
             page_heading='Open Data Resources'
         )
 
-class UploadHandler(tornado.web.RequestHandler):
+class UploadHandler(BaseHandler):
     @tornado.web.addslash
+    @tornado.web.authenticated
     def get(self):
         companies = []
         with open('companies.csv', 'rb') as csvfile:
@@ -410,8 +419,9 @@ class UploadHandler(tornado.web.RequestHandler):
                     previosName = companyName
         self.redirect('/')
 
-class AdminHandler(tornado.web.RequestHandler):
+class AdminHandler(BaseHandler):
     @tornado.web.addslash
+    @tornado.web.authenticated
     def get(self):
         unvettedCompanies = models.Company.objects(Q(vetted=False) & Q(recommended=False))
         vettedCompanies = models.Company.objects(Q(vetted=True) & Q(vettedByCompany=True))
@@ -427,14 +437,17 @@ class AdminHandler(tornado.web.RequestHandler):
             unvettedByCompanies = unvettedByCompanies
         )
 
-class SubmitCompanyHandler(tornado.web.RequestHandler):
+class SubmitCompanyHandler(BaseHandler):
     @tornado.web.addslash
+    @tornado.web.authenticated
     def get(self):
         self.render(
             "submitCompany.html",
             page_title = "Submit Your Company",
             page_heading = "Submit Your Company"
         )
+
+    @tornado.web.authenticated
     def post(self):
         firstName = self.get_argument("firstName", None)
         lastName = self.get_argument("lastName", None)
@@ -554,8 +567,9 @@ class SubmitCompanyHandler(tornado.web.RequestHandler):
         id = str(company.id)
         self.redirect("/addData/" + id)
 
-class RecommendCompanyHandler(tornado.web.RequestHandler):
+class RecommendCompanyHandler(BaseHandler):
     @tornado.web.addslash
+    @tornado.web.authenticated
     def get(self, id=None):
         try:
             recommenderId = models.Person.objects.get(id=bson.objectid.ObjectId(id))
@@ -568,6 +582,7 @@ class RecommendCompanyHandler(tornado.web.RequestHandler):
             recommenderId = recommenderId
         )
 
+    @tornado.web.authenticated
     def post(self): #A person has just recommended a company
         #Recommenders info:
         firstName = self.get_argument("firstName", None)
@@ -648,8 +663,9 @@ class RecommendCompanyHandler(tornado.web.RequestHandler):
             self.redirect("/")
 
 
-class SubmitDataHandler(tornado.web.RequestHandler):
+class SubmitDataHandler(BaseHandler):
     @tornado.web.addslash
+    @tornado.web.authenticated
     def get(self, id):
         #Make not whether we are submitting a Co. and adding a dataset or editing a Co. and adding a dataset
         action = self.get_argument('action', None)
@@ -662,6 +678,7 @@ class SubmitDataHandler(tornado.web.RequestHandler):
             id = id #Company id.
         )
 
+    @tornado.web.authenticated
     def post(self, id):
         #get the company we are dealing with:
         id = self.get_argument('id', None)
@@ -713,8 +730,9 @@ class SubmitDataHandler(tornado.web.RequestHandler):
         elif action == 'submitting': #else, you're done, go home.
             self.redirect("/")
 
-class EditCompanyHandler(tornado.web.RequestHandler):
+class EditCompanyHandler(BaseHandler):
     @tornado.web.addslash
+    @tornado.web.authenticated
     def get(self, id):
         try: 
             company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
@@ -739,6 +757,7 @@ class EditCompanyHandler(tornado.web.RequestHandler):
             id = str(company.id)
         )
 
+    @tornado.web.authenticated
     def post(self, id):
         #get the company you will be editing
         company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
@@ -810,8 +829,9 @@ class EditCompanyHandler(tornado.web.RequestHandler):
         self.redirect('/')
 
 #Editing section for Admins
-class AdminEditCompanyHandler(tornado.web.RequestHandler):
+class AdminEditCompanyHandler(BaseHandler):
     @tornado.web.addslash
+    @tornado.web.authenticated
     def get(self, id):
         company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
         page_heading = "Editing " + company.companyName
@@ -829,6 +849,7 @@ class AdminEditCompanyHandler(tornado.web.RequestHandler):
             sectors = sectors
         )
 
+    @tornado.web.authenticated
     def post(self, id):
         #get the company you will be editing
         company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
@@ -922,8 +943,9 @@ class AdminEditCompanyHandler(tornado.web.RequestHandler):
         company.save()
         self.redirect('/admin/')
 
-class EditDataHandler(tornado.web.RequestHandler):
+class EditDataHandler(BaseHandler):
     @tornado.web.addslash
+    @tornado.web.authenticated
     def get(self, id):
         #Are we adding a new dataset? or are we editing an existing dataset?
         dataset = models.Dataset.objects.get(id=bson.objectid.ObjectId(id))
@@ -933,6 +955,8 @@ class EditDataHandler(tornado.web.RequestHandler):
             datatypes = datatypes,
             dataset = dataset
         )
+
+    @tornado.web.authenticated
     def post(self, id):
         #get values
         datasetName = self.get_argument('datasetName', None)
@@ -972,7 +996,8 @@ class EditDataHandler(tornado.web.RequestHandler):
             company.save()
         #self.redirect("/")
 
-class DeleteCompanyHandler(tornado.web.RequestHandler):
+class DeleteCompanyHandler(BaseHandler):
+    @tornado.web.authenticated
     def get(self, id):
         try:
             company = models.Company.objects.get(id=bson.objectid.ObjectId(id)) 
@@ -986,7 +1011,8 @@ class DeleteCompanyHandler(tornado.web.RequestHandler):
             dataset.delete()
         self.redirect('/admin/')
 
-class ViewHandler(tornado.web.RequestHandler):
+class ViewHandler(BaseHandler):
+    @tornado.web.authenticated
     def get(self, id):
         # c = models.Company.objects.get(id=bson.objectid.ObjectId(id))
         # d = []
@@ -1078,8 +1104,9 @@ class ViewHandler(tornado.web.RequestHandler):
         }
         self.write(json_encode(obj))
 
-class DownloadHandler(tornado.web.RequestHandler):
+class DownloadHandler(BaseHandler):
     @tornado.web.addslash
+    @tornado.web.authenticated
     def get(self):
         self.render(
             "download.html",
@@ -1087,8 +1114,9 @@ class DownloadHandler(tornado.web.RequestHandler):
             page_heading='Download Data',
         )
 
-class GenerateFilesHandler(tornado.web.RequestHandler):
+class GenerateFilesHandler(BaseHandler):
     @tornado.web.addslash
+    @tornado.web.authenticated
     def get(self):
         #Get published companies, turn each one into an array and put into CSV file
         companies = models.Company.objects(Q(vetted=True) & Q(vettedByCompany=True))
