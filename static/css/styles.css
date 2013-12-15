@@ -235,12 +235,6 @@ a:hover {
     border-bottom: 1px solid #aaaaaa; }
   .about-page section:last-child {
     border-bottom: 0; }
-  .about-page .intro {
-    font-family: "Exo", sans-serif;
-    font-weight: 100;
-    font-style: italic;
-    font-size: 1.8em;
-    line-height: 1.5em; }
   .about-page .m-half {
     width: calc(50% - 70px);
     padding-right: 60px;
@@ -456,6 +450,13 @@ h1 {
   margin-top: 65px;
   margin-bottom: 65px;
   text-align: center; }
+
+.intro {
+  font-family: "Exo", sans-serif;
+  font-weight: 100;
+  font-style: italic;
+  font-size: 1.8em;
+  line-height: 1.5em; }
 
 header {
   background-color: #472b74;
