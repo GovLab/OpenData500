@@ -46,10 +46,14 @@ header {
 // === Layout classes
 
 .l-centered {
-	width: 960px;
+	width: 960px / 960px * 100%;
+	max-width: 960px;
 	margin: 0 auto;
 }
 
+#container {
+	min-height: 534px;
+}
 
 
 // Main Menu Module
@@ -112,6 +116,23 @@ footer {
 	background-color: $black;
 	padding: 20px 0;
 	overflow: hidden;
+	clear: both;
+	margin-top: 30px;
+
+	.m-footer-logos {
+		float: left;
+
+		img {
+			height: 37px;
+			margin-right: 30px;
+			opacity: .4;
+		}
+
+		#govlab-logo {
+			height: 30px;
+			vertical-align: 2px;
+		}
+	}
 
 	ul {
 		text-align: right;
@@ -133,12 +154,5 @@ footer {
 
 	.footer-menu-item.last {
 		border-right: 0;
-	}
-
-	.govlab-logo {
-		border: 0;
-		margin-right: 40px;
-		margin-top: 0;
-		float: left;
 	}
 }

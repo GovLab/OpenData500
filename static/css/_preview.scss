@@ -14,12 +14,13 @@
 
 	ul {
 		padding: 0;
+		background-color: $white_alpha;
 	}
 
 	li {
 		list-style-type: none;
 		border-bottom: 1px solid $purple;
-		padding: 0 0 12px;
+		padding: 0 20px 12px 10px;
 		max-height: 38px;
 		height: auto;
 		overflow: hidden;

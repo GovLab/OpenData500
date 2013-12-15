@@ -1,6 +1,9 @@
 $(document).ready(function() {
 
-$.stellar();
+if (!($('html').hasClass('no-js'))) {
+	$.stellar();
+};
+
 
 $('.m-list-company-summary').click(function() {
 	$(this).parent().toggleClass('s-active');
