@@ -13,6 +13,7 @@
     <!-- <link rel="stylesheet" href="{{ static_url("css/bootstrap.css") }}" /> -->
     <link rel="stylesheet" href="{{ static_url("css/libs/normalize/normalize.css") }}" />
     <link href='http://fonts.googleapis.com/css?family=Exo:100,500,100italic,500italic' rel='stylesheet' type='text/css'>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
     <!-- Load jQuery -->
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
@@ -25,7 +26,7 @@
 </head>
 <body>
     <div class="parallax-bg" id="background" data-stellar-ratio="-0.01"></div>
-    <div class="parallax-bg" id="background-2" data-stellar-ratio="-0.04"></div>  
+    <div class="parallax-bg" id="background-2" data-stellar-ratio="-0.015"></div>  
     <div class="parallax-bg" id="background-3" data-stellar-ratio="-0.02"></div>  
     <header>
         <div id="mainMenu" class="l-centered m-main-menu">
@@ -40,16 +41,20 @@
     </div><!-- end main -->
 
     <footer>
-        <ul class="l-centered">
-            <li class="govlab-logo"><a href="http://thegovlab.org/">
-                <img src="{{ static_url("img/govlab-logo.png") }}" alt="The GovLab"></a>
-            </li>
-            <li class="footer-menu-item"><a href="https://twitter.com/thegovlab" target="_blank">https://twitter.com/thegovlab</a></li> 
-            <li class="footer-menu-item"><a href="/about/">About</a></li> 
-            <li class="footer-menu-item"><a href="/terms/">Terms of Service</a></li>
-            <li class="footer-menu-item last"><a href="mailto:opendata500@thegovlab.org">Contact Us</a></li> 
-        </ul>
-        <p>This work by GovLab is licensed under a Creative Commons Attribution-ShareAlike 3.0 Unported License.</p>
+        <div class="l-centered">
+            <div class="m-footer-logos">
+                <img id="govlab-logo" src="{{ static_url("img/govlab-logo.png") }}" alt="The GovLab"></a>
+                <img id="knight-logo" src="{{ static_url("img/knight-logo.png") }}" alt="Knight Foundation"></a>
+            </div>
+            
+            <ul>
+                <li class="footer-menu-item"><a href="https://twitter.com/thegovlab" target="_blank">Twitter</a></li> 
+                <li class="footer-menu-item"><a href="/about/">About</a></li> 
+                <li class="footer-menu-item"><a href="/terms/">Terms of Service</a></li>
+                <li class="footer-menu-item last"><a href="mailto:opendata500@thegovlab.org">Contact Us</a></li> 
+            </ul>
+            <p>This work by GovLab is licensed under a Creative Commons Attribution-ShareAlike 3.0 Unported License.</p>
+        </div>
     </footer><!-- end footer -->
     
     <!-- plugins -->
@@ -59,7 +64,7 @@
     <script src="{{ static_url("js/parsley.extend.min.js") }}"></script>
     <!-- Isotopes.js (for form validation) -->
     
-    <!-- Parallax Effects -->
+    <!-- Parallax Effect -->
     <script src="{{ static_url("js/libs/jquery.stellar.min.js") }}"></script>
     <!-- main script -->
     <script src="{{ static_url("js/script.js") }}"></script>

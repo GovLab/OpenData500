@@ -179,52 +179,45 @@ a:hover {
   .logo img {
     width: 200px; }
 
-.m-homepage {
-  margin-top: 20px; }
-  .m-homepage h1 {
-    margin: 0;
-    font-size: 5.5em; }
-  .m-homepage section {
-    margin-bottom: 20px; }
-  .m-homepage .m-home-big-links {
-    text-transform: uppercase;
-    text-align: center;
-    margin-top: 30px; }
-    .m-homepage .m-home-big-links a {
-      font-family: "Exo", sans-serif;
-      display: inline-block;
-      padding: 60px 20px;
-      width: 44.58333%;
-      text-align: center;
-      background-color: #8977a7;
-      margin-right: 20px;
-      font-size: 4em;
-      color: #472b74;
-      -webkit-border-radius: 4px;
-      -moz-border-radius: 4px;
-      border-radius: 4px; }
-    .m-homepage .m-home-big-links a:hover {
-      background-color: #472b74;
-      color: white; }
-    .m-homepage .m-home-big-links a:last-child {
-      margin-right: 0; }
-  .m-homepage .m-home-resources {
-    margin-top: 60px; }
-    .m-homepage .m-home-resources ul {
-      display: inline-block;
-      width: 28.75%;
-      border-right: 1px solid #8977a7;
-      padding: 0 20px 0; }
-      .m-homepage .m-home-resources ul h2 {
-        font-size: 26px;
-        margin-top: 0;
-        margin-bottom: 10px; }
-      .m-homepage .m-home-resources ul li {
-        list-style-type: none;
-        font-size: 14px;
-        line-height: 20px; }
-    .m-homepage .m-home-resources ul:first-child {
-      border-left: 1px solid #8977a7; }
+.m-homepage h1 {
+  margin: 0 0 60px 0;
+  font-size: 5.5em; }
+.m-homepage .m-homepage-box {
+  width: 20.83333%;
+  display: inline-block;
+  vertical-align: top;
+  border: 1px solid #472b74;
+  padding: 16px 20px 10px;
+  background-color: rgba(255, 255, 255, 0.7); }
+  .m-homepage .m-homepage-box h2 {
+    font-size: 2em; }
+  .m-homepage .m-homepage-box .m-button {
+    display: block;
+    text-align: center; }
+.m-homepage .m-homepage-about {
+  margin-right: 3.125%; }
+.m-homepage .m-homepage-participate {
+  margin-left: 3.125%; }
+.m-homepage .m-homepage-explore {
+  display: inline-block;
+  width: 42.5%;
+  text-align: center; }
+  .m-homepage .m-homepage-explore > div {
+    padding-bottom: 30px;
+    border-bottom: 1px solid #472b74;
+    margin-bottom: 30px; }
+  .m-homepage .m-homepage-explore h2, .m-homepage .m-homepage-explore p {
+    margin-bottom: 10px; }
+  .m-homepage .m-homepage-explore h2 {
+    color: #472b74; }
+  .m-homepage .m-homepage-explore .m-button {
+    display: block;
+    margin-top: 20px;
+    padding: 20px;
+    font-size: 1.6em;
+    background-color: #472b74;
+    border-color: #8977a7;
+    color: white; }
 
 .about-page {
   font-size: 14px;
@@ -252,11 +245,12 @@ a:hover {
   font-weight: 100;
   margin-top: 15px; }
 .m-preview ul {
-  padding: 0; }
+  padding: 0;
+  background-color: rgba(255, 255, 255, 0.7); }
 .m-preview li {
   list-style-type: none;
   border-bottom: 1px solid #472b74;
-  padding: 0 0 12px;
+  padding: 0 20px 12px 10px;
   max-height: 38px;
   height: auto;
   overflow: hidden;
@@ -464,8 +458,12 @@ header {
   padding: 10px 0; }
 
 .l-centered {
-  width: 960px;
+  width: 100%;
+  max-width: 960px;
   margin: 0 auto; }
+
+#container {
+  min-height: 534px; }
 
 .m-main-menu a {
   padding: 5px 20px;
@@ -510,7 +508,18 @@ header {
 footer {
   background-color: #444444;
   padding: 20px 0;
-  overflow: hidden; }
+  overflow: hidden;
+  clear: both;
+  margin-top: 30px; }
+  footer .m-footer-logos {
+    float: left; }
+    footer .m-footer-logos img {
+      height: 37px;
+      margin-right: 30px;
+      opacity: .4; }
+    footer .m-footer-logos #govlab-logo {
+      height: 30px;
+      vertical-align: 2px; }
   footer ul {
     text-align: right; }
   footer .footer-menu-item {
@@ -524,8 +533,3 @@ footer {
       color: white; }
   footer .footer-menu-item.last {
     border-right: 0; }
-  footer .govlab-logo {
-    border: 0;
-    margin-right: 40px;
-    margin-top: 0;
-    float: left; }
