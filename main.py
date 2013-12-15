@@ -137,7 +137,7 @@ class LoginHandler(BaseHandler):
 
 class RegisterHandler(LoginHandler):
     @tornado.web.addslash
-    #@tornado.web.authenticated
+    @tornado.web.authenticated
     def get(self):
         self.render(
             "register.html", 
@@ -146,6 +146,7 @@ class RegisterHandler(LoginHandler):
             page_heading="Register for OD500"
             )
 
+    @tornado.web.authenticated
     def post(self):
         email = self.get_argument("email", "")
         try:
