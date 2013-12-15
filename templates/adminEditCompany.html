@@ -192,6 +192,7 @@
 		<input type="radio" name="vettedByCompany" id="vettedByCompany" value="False" {% if not company.vettedByCompany %} checked {% end %}>False<br>
 	</fieldset>
 	<div class="m-form-footer">	
+		{% raw xsrf_form_html() %}
 		<input type="hidden" class="id" name="id" value="{{ id }}">
 		<input class="m-button" type="submit" id="submit" value="Save">
 	</div>

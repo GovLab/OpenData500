@@ -8,8 +8,10 @@
 <br>
 <br>
 
+
+<h1>{{ page_heading }}</h1>
 <form action="/login" method="POST">
-	Email: <input type="text" name="email" /><br>
+	Email/Username: <input type="text" name="email" /><br>
 	Password: <input type="password" name="password" /><br>
 	{% raw xsrf_form_html() %}
 <input type="submit" value="Log In" /> </form>

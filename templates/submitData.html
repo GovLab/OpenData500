@@ -31,6 +31,7 @@
 			<span class="saving" style="display:none">Saving...</span>
 			<span class="saved" style="display:none">Saved!</span>
 			<span class="error" style="display:none">Something went wrong :/</span><br>
+			{% raw xsrf_form_html() %}
 		</form>
 	</div>
 	<button class="l-button" type="button" id="addDatasetForm">Add Another</button><br>

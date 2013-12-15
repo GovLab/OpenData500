@@ -44,7 +44,7 @@
 			<textarea rows="10" cols="59" name="otherInfo" id="otherInfo" data-maxwords="100"></textarea><br>
 		{% end %}
 	</fieldset>
-
+	{% raw xsrf_form_html() %}
 	<footer class="m-form-footer">
 		<input type="submit" id="submit" name="submit" value="Submit" class="m-button">
 		<input type="submit" id="submit" name="submit" value="Recommend Another Company" class="m-button">

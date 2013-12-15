@@ -29,6 +29,7 @@
 		<input type="text" name="otherDataType" id="otherDataType"><br>
 	{% end %}
 	</fieldset>
+	{% raw xsrf_form_html() %}
 	<input type="hidden" class="id" name="id" value="{{ id }}">
 	<input type="submit" id="submit">
 </form>

@@ -137,7 +137,7 @@ class LoginHandler(BaseHandler):
 
 class RegisterHandler(LoginHandler):
     @tornado.web.addslash
-    @tornado.web.authenticated
+    #@tornado.web.authenticated
     def get(self):
         self.render(
             "register.html", 
@@ -150,19 +150,21 @@ class RegisterHandler(LoginHandler):
         email = self.get_argument("email", "")
         try:
             user = models.Users.objects.get(email=email)
-            error_msg = u"?error=" + tornado.escape.url_escape("Login name already taken")
-            self.redirect(u"/login" + error_msg)
         except:
-            pass
-        password = self.get_argument("password", "")
-        hashedPassword = bcrypt.hashpw(password, bcrypt.gensalt(8))
-        newUser = models.Users(
-            email=email,
-            password = hashedPassword
-            )
-        newUser.save()
-        self.set_current_user(email)
-        self.redirect("/")
+            user = ''
+        if user:
+            error_msg = u"?error=" + tornado.escape.url_escape("Login name already taken")
+            self.redirect(u"/register" + error_msg)
+        else: 
+            password = self.get_argument("password", "")
+            hashedPassword = bcrypt.hashpw(password, bcrypt.gensalt(8))
+            newUser = models.Users(
+                email=email,
+                password = hashedPassword
+                )
+            newUser.save()
+            self.set_current_user(email)
+            self.redirect("/")
 
 class LogoutHandler(BaseHandler): 
     def get(self):
