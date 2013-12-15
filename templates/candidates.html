@@ -26,11 +26,10 @@
 	<br>
 	<div class="m-candidates isotopes-container" data-isotope-options='{ "layoutMode": "fitColumns" }'>
 		{% for company in companies %}
-			
-			<div class="m-candidates-item {% for sector in company.sector %}{{sector.strip().replace(" ", "-").replace("/","")}} {%end%}{{ company.state }}">
-				<h3>{{ company.companyName }}</h3>
-				<p class="m-homepage-list-desc">{{ company.descriptionShort }}</p>
-				<em> {{ ', '.join(company.sector) }}</em>
+            <div class="m-candidates-item {% for sector in company.sector %}{{sector.strip().replace(" ", "-").replace("/","")}} {%end%}{{ company.state }}">
+                <h3>{{ company.companyName }}</h3>
+                <p class="m-homepage-list-desc">{{ company.descriptionShort }}</p>
+                <em> {{ ', '.join(company.sector) }}</em>
 			</div>
 		{%end%}
 	</div>
