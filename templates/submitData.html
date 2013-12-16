@@ -22,8 +22,8 @@
 				<label for=""><input type="checkbox" name="dataType" parsley-required="true" value="Other">Other <label for=""><input type="text" name="otherDataType"></label></label>
 			</div>
 
-			<p>On a scale of 1 to 5, how would you rate the usefulness of this dataset? Your answer can reflect your experience with data quality, format of the data, or other factors.</p>
-			<input type="text" name="rating" parsley-trigger="change" parsley-range="[0, 5]">
+			<p>On a scale of 1 to 4, how would you rate the usefulness of this dataset? (1- poor, 4- excellent) Your answer can reflect your experience with data quality, format of the data, or other factors.</p>
+			<input type="text" name="rating" parsley-trigger="change" parsley-range="[0, 4]">
 			<p>Why did you give it this rating? [50 words or less]</p>
 			<textarea rows="6" cols="70" name="reason" parsley-trigger="keyup" parsley-maxwords="50"></textarea><br>
 			<input type="hidden" id="companyID" name="id" value="{{ id }}">
