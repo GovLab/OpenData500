@@ -49,9 +49,9 @@
 		<div class="m-form-line"><label for="city">In which city is this company located?</label><input type="text" name="city" id="city" {% if company.city %} value="{{ company.city }}" {% end %}></div>
 		<div class="m-form-line">
 			<label for="state">State:</label>
-			<select id="state" >
+			<select name='state' id="state" >
 				{% for i in range(0, 53) %}
-					<option value="{{stateListAbbrev[i]}}" {%if company.state.replace(' ','') == stateListAbbrev[i] %} selected="selected" {%end%}>{{ stateList[i] }}</option>
+					<option name="state" value="{{stateListAbbrev[i]}}" {%try%}{%if company.state.replace(' ','') == stateListAbbrev[i] %} selected="selected" {%end%}{%except%}{%end%}>{{ stateList[i] }}</option>
 				{%end%}
 			</select>
 		</div>

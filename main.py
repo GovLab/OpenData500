@@ -630,6 +630,7 @@ class SubmitCompanyHandler(BaseHandler):
         zipCode = self.get_argument("zipCode", None)
         if not zipCode:
             zipCode = 0
+        state = self.get_argument('state', None)
         ceoFirstName = self.get_argument("ceoFirstName", None)
         ceoLastName = self.get_argument("ceoLastName", None)
         ceoEmail = self.get_argument("ceoEmail", None)
@@ -716,6 +717,7 @@ class SubmitCompanyHandler(BaseHandler):
             ceo = ceo,
             city = city,
             zipCode = zipCode,
+            state=state,
             yearFounded = yearFounded,
             fte = fte,
             companyType = companyType,
@@ -1065,6 +1067,7 @@ class AdminEditCompanyHandler(BaseHandler):
         company.zipCode = self.get_argument('zipCode', None)
         if not company.zipCode:
             company.zipCode = 0
+        company.state = self.get_argument("state", None)
         company.companyType = self.get_argument("companyType", None)
         if company.companyType == 'Other': #if user entered custom option for Type
             company.companyType = self.get_argument('otherCompanyType', None)
