@@ -1132,42 +1132,46 @@ class EditDataHandler(BaseHandler):
     @tornado.web.authenticated
     def post(self, id):
         #get values
+        id = self.get_argument("id", None)
         datasetName = self.get_argument('datasetName', None)
         datasetURL = self.get_argument('datasetURL', None)
-        dataTypes = self.request.arguments['dataType']
-        if 'Other' in dataTypes:
-            del dataTypes[dataTypes.index('Other')]
-            dataTypes.append(self.get_argument('otherDataType', None))
+        agency = self.get_argument('agency', None)
+        dataType = self.request.arguments['dataType']
+        if 'Other' in dataType:
+            del dataType[dataType.index('Other')]
+            dataType.append(self.get_argument('otherDataType', None))
         rating = self.get_argument('rating', None)
         reason = self.get_argument('reason', None)
-        try: #to find existing dataset
-            dataset = models.Dataset.objects.get(id=bson.objectid.ObjectId(id))
-            dataset.datasetName = datasetName
-            dataset.datasetURL = datasetURL
-            dataset.dataType = dataType 
-            for r in dataset.ratings: #get review that corresponds with this author and save the info.
-                if str(r.author.id) == str(self.get_argument('authorID', None)):
-                    r.rating = rating
-                    r.reason = reason
-            dataset.save()
-        except: #make a new one, for current company
-            company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
-            dataset = models.Dataset(
-                datasetName = datasetName,
-                datasetURL = datasetURL,
-                dataType = dataTypes,
-            )
-            dataset.usedBy.append(company)
-            rating = models.Rating(
-                author = company.contact,
-                rating =rating,
-                reason = reason
-            )
-            dataset.ratings.append(rating)
-            dataset.save()
-            company.datasets.append(dataset)
-            company.save()
-        #self.redirect("/")
+        #try: #to find existing dataset
+        dataset = models.Dataset.objects.get(id=bson.objectid.ObjectId(id))
+        dataset.datasetName = datasetName
+        dataset.datasetURL = datasetURL
+        dataset.dataType = dataType
+        dataset.agency = agency
+        for r in dataset.ratings: #get review that corresponds with this author and save the info.
+            if str(r.author.id) == str(self.get_argument('authorID', None)):
+                r.rating = rating
+                r.reason = reason
+        dataset.save()
+        #except: #make a new one, for current company
+            # company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
+            # dataset = models.Dataset(
+            #     datasetName = datasetName,
+            #     datasetURL = datasetURL,
+            #     dataType = dataTypes,
+            #     agency = agency
+            # )
+            # dataset.usedBy.append(company)
+            # rating = models.Rating(
+            #     author = company.contact,
+            #     rating =rating,
+            #     reason = reason
+            # )
+            # dataset.ratings.append(rating)
+            # dataset.save()
+            # company.datasets.append(dataset)
+            # company.save()
+        self.redirect("/")
 
 class DeleteCompanyHandler(BaseHandler):
     @tornado.web.authenticated
