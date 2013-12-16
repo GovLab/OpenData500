@@ -202,7 +202,7 @@ class PreviewHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self):
         #companies = models.Company.objects()
-        submittedCompanies = models.Company.objects(Q(vetted=True) & Q(vettedByCompany=True))
+        submittedCompanies = models.Company.objects(Q(vetted=True) & Q(vettedByCompany=True)).order_by('prettyName')
         self.render(
             "preview.html",
             page_title='Open Data500',
@@ -214,7 +214,7 @@ class CandidateHandler(BaseHandler):
     @tornado.web.addslash
     @tornado.web.authenticated
     def get(self):
-        companies = models.Company.objects()
+        companies = models.Company.objects.order_by('prettyName')
         stateInfo = []
         with open(os.path.join(os.path.dirname(__file__), 'static') + '/states.csv', 'rb') as csvfile:
             statereader = csv.reader(csvfile, delimiter=',')
@@ -314,7 +314,7 @@ class Upload50Handler(BaseHandler):
                             personType="CEO"
                             )
                         ceo.save()
-                    prettyName = re.sub(r'([^\s\w])+', '', companyName).replace(" ", "-")
+                    prettyName = re.sub(r'([^\s\w])+', '', companyName).replace(" ", "-").title()
                     url = c[1]
                     city = c[9]
                     state = c[10]
@@ -512,7 +512,7 @@ class Upload500Handler(BaseHandler):
                         personType="CEO"
                         )
                     ceo.save()
-                prettyName = re.sub(r'([^\s\w])+', '', companyName).replace(" ", "-")
+                prettyName = re.sub(r'([^\s\w])+', '', companyName).replace(" ", "-").title()
                 url = c[1]
                 city = c[9]
                 state = c[10]
@@ -590,11 +590,11 @@ class AdminHandler(BaseHandler):
     @tornado.web.addslash
     @tornado.web.authenticated
     def get(self):
-        unvettedCompanies = models.Company.objects(Q(vetted=False) & Q(vettedByCompany=True))
+        unvettedCompanies = models.Company.objects(Q(vetted=False) & Q(vettedByCompany=True)).order_by('prettyName')
         logging.info(len(unvettedCompanies))
-        vettedCompanies = models.Company.objects(Q(vetted=True) & Q(vettedByCompany=True))
+        vettedCompanies = models.Company.objects(Q(vetted=True) & Q(vettedByCompany=True)).order_by('prettyName')
         recommendedCompanies = models.Company.objects(Q(vetted=False) & Q(recommended=True))
-        unvettedByCompanies = models.Company.objects(Q(vetted=False) & Q(vettedByCompany=False))
+        unvettedByCompanies = models.Company.objects(Q(vetted=False) & Q(vettedByCompany=False)).order_by('prettyName')
         self.render(
             "admin.html",
             page_title='OpenData500',
@@ -623,7 +623,7 @@ class SubmitCompanyHandler(BaseHandler):
         #org = self.get_argument("org", None)
         url = self.get_argument('url', None)
         companyName = self.get_argument("companyName", None)
-        prettyName = re.sub(r'([^\s\w])+', '', companyName).replace(" ", "-")
+        prettyName = re.sub(r'([^\s\w])+', '', companyName).replace(" ", "-").title()
         email = self.get_argument("email", None)
         phone = self.get_argument("phone", None)
         city = self.get_argument("city", None)
@@ -954,7 +954,7 @@ class EditCompanyHandler(BaseHandler):
         company.ceo.save()
         #Company Info
         company.companyName = self.get_argument("companyName", None)
-        company.prettyName = re.sub(r'([^\s\w])+', '', company.companyName).replace(" ", "-")
+        company.prettyName = re.sub(r'([^\s\w])+', '', company.companyName).replace(" ", "-").title()
         url = self.get_argument('url', None)
         company.city = self.get_argument('city', None)
         company.zipCode = self.get_argument('zipCode', None)
@@ -1061,7 +1061,7 @@ class AdminEditCompanyHandler(BaseHandler):
         #Company Info
         companyName = self.get_argument("companyName", None)
         company.companyName = companyName
-        company.prettyName = re.sub(r'([^\s\w])+', '', companyName).replace(" ", "-")
+        company.prettyName = re.sub(r'([^\s\w])+', '', companyName).replace(" ", "-").title()
         url = self.get_argument('url', None)
         company.city = self.get_argument('city', None)
         company.zipCode = self.get_argument('zipCode', None)
