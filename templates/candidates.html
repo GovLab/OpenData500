@@ -25,8 +25,8 @@
 	<br>
 	<div class="m-candidates isotopes-container" data-isotope-options='{ "layoutMode": "fitColumns" }'>
 		{% for company in companies %}
-            <div class="m-candidates-item {%try%} {{company.companyCategory.strip().replace(" ", "-").replace("/","").replace("&", "")}} {%except%}None{%end%} {{ company.state }} {% if company.vetted %}preview-company{%end%}">
-                <a href="/{{company.prettyName}}"><h3>{{ company.companyName }}</h3>
+            <div class="m-candidates-item {%try%} {{company.companyCategory.strip().replace(" ", "-").replace("/","").replace("&", "")}} {%except%}None{%end%} {{ company.state }}{% if company.vetted %} preview-company{%end%} {% if company.vettedByCompany %} survey-company{%end%}">
+                {%if company.vetted %}<a href="/{{company.prettyName}}"><h3>{{ company.companyName }}</h3></a>{%else%}<h3>{{ company.companyName }}</h3>{%end%}
                 <em> {{ company.companyCategory }}</em>
 
                 <!-- {% if company.vettedByCompany %} <small>Survey √</small>{%end%} {% if company.vetted %} <small>List of 50 √</small> {%end%} -->

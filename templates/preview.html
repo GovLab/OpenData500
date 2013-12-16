@@ -32,8 +32,8 @@
 					<p><strong>FTE:</strong> {{company.fte}}</p>
 					<p><strong>Type of Company:</strong> {{company.companyType}}</p>
 					<p><strong>Company Function:</strong> {{company.companyFunction}}</p>
-					<p><strong>Sector(s):</strong> {% for sector in company.sector %} {{sector}} {%end%}</p>
-					<p><strong>Source of Revenue:</strong> {% for source in company.revenueSource %} {{source}}, {%end%}</p>
+					<p><strong>Category:</strong> {{company.companyCategory}}</p>
+					<p><strong>Source of Revenue: </strong>{{ ', '.join(company.revenueSource) }}</p>
 					<br>
 					<a href="/{{company.prettyName}}/"><h3>Comment</h3></a>
 					<br>
