@@ -7,22 +7,24 @@
 <br>
 <section>
 	<h1 class="m-page-title">{{ page_heading }}</h1>
-	<p>Explore our preliminary list of 500 candidate companies that we believe meet our criteria for the Open Data 500. We have invited all listed companies to fill out our survey.</p>
-	<p><strong>Please Note:</strong> We expect to that this list may change as we learn more about how each company operates – that’s part of our open process. Many of these companies have not yet responded to our survey, so information about them may change as we receive more input from them and from others.</p>
+	<p class="intro">Explore our preliminary list of 500 candidate companies that we believe meet our criteria for the Open Data 500. We have invited all listed companies to fill out our survey.</p>
+	<p class="warning"><strong>Please Note:</strong> We expect to that this list may change as we learn more about how each company operates – that’s part of our open process. Many of these companies have not yet responded to our survey, so information about them may change as we receive more input from them and from others.</p>
 </section>
-<br>
-<div id="chart"></div>
 
 <div class="m-candidates">
-	
-	<h3>Filter by Category</h3>
-	<div id="filters" class="m-candidates-buttons button-group" data-toggle="buttons-checkbox">
-	    <button data-filter="*">show all</button>
-	    {% for category in categories %}
-		    <button data-filter=".{{category.strip().replace(" ", "-").replace("/","").replace("&", "")}}">{{category}}</button>
-	    {%end%}
-	</div>
-	<br>
+    
+    <div class="m-filter-menu">
+        <h3>Filter by Category</h3>
+        <div id="filters" class="m-candidates-buttons button-group" data-toggle="buttons-checkbox">
+            <button data-filter="*">Show All</button>
+            {% for category in categories %}
+                <button data-filter=".{{category.strip().replace(" ", "-").replace("/","").replace("&", "")}}">{{category}}</button>
+            {%end%}
+        </div>
+    </div>
+
+<div id="chart"></div>
+
 	<div class="m-candidates isotopes-container" data-isotope-options='{ "layoutMode": "fitColumns" }'>
 		{% for company in companies %}
             <div class="m-candidates-item {%try%} {{company.companyCategory.strip().replace(" ", "-").replace("/","").replace("&", "")}} {%except%}None{%end%} {{ company.state }}{% if company.vetted %} preview-company{%end%} {% if company.vettedByCompany %} survey-company{%end%}">

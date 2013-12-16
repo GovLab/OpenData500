@@ -4,6 +4,22 @@
 	h1 {
 		font-size: 6.79em;
 	}
+
+	.m-filter-menu {
+		width: 200px;
+		float: right;
+		border-left: 1px solid $lighter_gray;
+		padding-left: 75px;
+		
+		h3 {
+			margin-bottom: 10px;
+			font-weight: normal;
+		}
+
+		button {
+			display: block;
+		}
+	}
 }
 
 .m-candidates-list {
@@ -31,19 +47,19 @@
 .m-candidates-item {
 	list-style-type: none;
 	padding:15px;
-	background-color: $purple_alpha;
+	background-color: $light_gray_alpha;
 	width: 152px / 960px * 100%;
 	height: 150px;
 	float: left;
 	margin: 0 10px 10px 0;
-	color: $white;
+	color: $black;
 	overflow: hidden;
 
 
 	h3 {
-		color: #fff;
+		color: $purple;
 		margin-top: 0;
-		font-weight: 100;
+		font-weight: 300;
 		font-family: $fancy_type;
 		overflow: hidden;
 		white-space: nowrap;
@@ -56,11 +72,11 @@
 		width: 152px;
 		height: 80px;
 		overflow: hidden;
-		color: $white;
+		color: $black;
 	}
 
 	em {
-		color: $white_alpha;
+		color: $black;
 		display: block;
 		height: 15px;
 		margin-top: 5px;
@@ -73,6 +89,22 @@
 
 }
 
-.m-candidates-item.preview-company {
-	background-color: $blue_alpha;
+.m-candidates-item.survey-company {
+	background-color: $dark_gray_alpha;
+	h3, .m-homepage-list-desc, em {
+		color: $white;
+	}
 }
+
+.m-candidates-item.preview-company {
+	background-color: $purple_alpha;
+
+	h3, .m-homepage-list-desc, em {
+		color: $white;
+	}
+}
+
+.m-candidates-item:hover {
+	
+}
+

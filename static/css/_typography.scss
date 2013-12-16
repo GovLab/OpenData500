@@ -38,3 +38,19 @@ a {
 a:hover {
 	color: $purple;
 }
+
+.intro {
+	font-family: $fancy_type;
+	font-weight: 100;
+	font-style: italic;
+	font-size: 1.8em;
+	line-height: 1.5em;
+}
+
+.warning {
+	padding: 10px;
+	background-color: $lighter_gray;
+	-webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.3);
+	-moz-box-shadow: inset 0 0 5px rgba(0,0,0,0.3);
+	box-shadow: inset 0 0 5px rgba(0,0,0,0.3);
+}
