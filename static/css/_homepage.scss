@@ -12,7 +12,7 @@
 	
 	h1 {
 		margin: 0 0 60px 0;
-		font-size: 5.5em;
+		font-size: 4em;
 
 	}
 	
@@ -37,6 +37,19 @@
 
 	.m-homepage-about {
 		margin-right: 30px/ 960px * 100%;
+		height: 508px;
+
+		.separator-title {
+			margin-top: 20px;
+			border-top: 1px solid $light_purple;
+			padding-top: 15px;
+			margin-bottom: 10px;
+		}
+
+		input {
+			display: block;
+			width: 89%;
+		}
 	}
 
 	.m-homepage-participate {
@@ -70,6 +83,37 @@
 			background-color: $purple;
 			border-color: $light_purple;
 			color: $white;
+		}
+
+		.m-button:hover {
+			background-color: $light_purple;
+			border-color: $purple;
+			color: $purple;	
+		}
+	}
+
+	.m-homepage-press {
+		background-color: $lighter_gray;
+		padding: 10px;
+		text-align: center;
+		margin-top: 20px;
+		@include rounded;
+		
+		h2 {
+			font-size: 18px;
+			font-style: italic;
+			font-weight: 300;
+			color: $dark_gray;
+			margin-bottom: 10px;
+		}
+
+		img {
+			margin-right: 20px;
+			opacity: .5;
+		}
+
+		a:hover img {
+			opacity: 1;
 		}
 	}
 }

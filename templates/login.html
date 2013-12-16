@@ -5,20 +5,13 @@
 
 {% block body %}
 
-<br>
-<br>
-
-
 <h1>{{ page_heading }}</h1>
-<form action="/login" method="POST">
-	Email/Username: <input type="text" name="email" /><br>
-	Password: <input type="password" name="password" /><br>
+
+<form class="login-form" action="/login" method="POST">
+	<div class="m-form-line"><label for="">Email/Username:</label><input type="text" name="email" /></div>
+	<div class="m-form-line"><label for="">Password:</label><input type="password" name="password" /></div>
 	{% raw xsrf_form_html() %}
-<input type="submit" value="Log In" /> </form>
-
-
-
-
-
+	<div class="m-form-line submit"><input class="m-button" type="submit" value="Log In" /></div>
+</form>
 
 {% end %}

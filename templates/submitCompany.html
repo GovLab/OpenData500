@@ -3,17 +3,17 @@
 
 {% block body %}
 
-<div class="submitDescription">
-	<h2>Thank you for helping us create the Open Data 500!</h2>
-	<p>The Open Data 500 will be the first comprehensive census of U.S.-based companies using government data to develop new products and services. The goal of the Open Data 500 is to understand how companies use open government data in their business, how it can be made more useful, and how it can help promote innovation. <b>To qualify for the Open Data 500, a company must:</b></p>
+<section class="submitDescription">
+	<h1>Thank you for helping us create the Open Data 500!</h1>
+	<p>The Open Data 500 will be the first comprehensive census of U.S.-based companies using government data to develop new products and services. The goal of the Open Data 500 is to understand how companies use open government data in their business, how it can be made more useful, and how it can help promote innovation. <strong>To qualify for the Open Data 500, a company must:</strong></p>
 	<ul>
 		<li>Be U.S.-based,</li>
 		<li>Earn revenue from its products and services, and</li>
 		<li>Use open government data as a critical resource for its business. (While most Open Data 500 companies will work with federal data, we are also interested in those that use city or state data if their work can scale regionally or nationally.)</li>
 	</ul>
-	<p>If your company meets these criteria, please take a few minutes to fill out this short online form. By being part of this <b>first major public study of Open Data companies, </b>you will help us understand how government data can serve business needs more effectively. We also expect that the Open Data 500 list will become a widely used resource for other businesses, investors, the media, and others to identify companies that are using Open Data in innovative ways. Thank you again for your participation.</p>
+	<p>If your company meets these criteria, please take a few minutes to fill out this short online form. By being part of this <strong>first major public study of Open Data companies, </strong>you will help us understand how government data can serve business needs more effectively. We also expect that the Open Data 500 list will become a widely used resource for other businesses, investors, the media, and others to identify companies that are using Open Data in innovative ways. Thank you again for your participation.</p>
 	<p><em>The fields marked with * are required</em></p>
-</div>
+</section>
 
 
 <form method="post" id="submitCompany" class="m-form" parsley-validate>
@@ -134,7 +134,7 @@
 	</fieldset>
 
 	<fieldset class="m-form-half right">
-		<h3>Which of the following are critical sources of data for your company? By “critical,” we mean that your company would have to shut down a line of business, shut down completely, or replace the data in some way if the data were no longer available. (check all that apply) *</h3>
+		<h3>Which of the following are critical sources of data for your company? By “critical,” we mean that your company would have to shut down a line of business, shut down completely, or replace the data in some way if the data were no longer available. <br><em>(check all that apply)</em> *</h3>
 		<label for=""><input type="checkbox" name="criticalDataTypes" value="Federal Open Data">Federal Open Data<br></label>
 		<label for=""><input type="checkbox" name="criticalDataTypes" value="State Open Data">State Open Data<br></label>
 		<label for=""><input type="checkbox" name="criticalDataTypes" value="City/Local Open Data">City/Local Open Data<br></label>
@@ -143,7 +143,7 @@
 	</fieldset>
 	
 	<fieldset class="m-form-half">
-		<h3>Which of the following are significant sources of revenue for your company? (check all that apply) *</h3>
+		<h3>Which of the following are significant sources of revenue for your company? <br><em>(check all that apply)</em> *</h3>
 		<label for=""><input type="checkbox" name="revenueSource" value="Advertising">Advertising<br></label>
 		<label for=""><input type="checkbox" name="revenueSource" value="Data Management and Analytic Services">Data Management and Analytic Services<br></label>
 		<label for=""><input type="checkbox" name="revenueSource" value="Database Licensing">Database Licensing<br></label>
@@ -177,22 +177,22 @@
 	</fieldset>
 
 	<fieldset class="m-form-half">
-		<h3>Please give us a short public statement describing your company’s mission and work. You can take this material from your website or other publications if you choose to. [200 words or less] *</h3>
+		<h3>Please give us a short public statement describing your company’s mission and work. You can take this material from your website or other publications if you choose to. <br><em>[200 words or less]</em> *</h3>
 		<textarea rows="10" cols="59" name="descriptionLong" id="descriptionLong" parsley-trigger="keyup" parsley-maxwords="200" parsley-required="true"></textarea>
-		<h3>As a summary, please provide a one sentence description of your company. [25 words or less] *</h3>
+		<h3>As a summary, please provide a one sentence description of your company. <br><em>[25 words or less]</em> *</h3>
 		<textarea rows="10" cols="59" name="descriptionShort" id="descriptionShort" parsley-trigger="keyup" parsley-maxwords="25" parsley-required="true"></textarea>
-		<h3>Besides revenue generation, how do you measure the impact your company has for society and the public good? [50 words or less]</h3>
+		<h3>Besides revenue generation, how do you measure the impact your company has for society and the public good? <br><em>[50 words or less]</em></h3>
 		<textarea rows="10" cols="59" name="socialImpact" id="socialImpact" parsley-trigger="keyup" parsley-maxwords="50"></textarea>
 	</fieldset>
 	
 	<fieldset class="m-form-half right">
-		<h3>Please include any financial or operational information that will help us understand your company. We are interested in specific information like past and projected annual revenues, total outside investment dollars to date, and significant investors or partners. [100 words or less]</h3>
+		<h3>Please include any financial or operational information that will help us understand your company. We are interested in specific information like past and projected annual revenues, total outside investment dollars to date, and significant investors or partners. <br><em> [100 words or less]</em></h3>
 		<textarea rows="10" cols="59" name="financialInfo" id="financialInfo" parsley-trigger="keyup" parsley-maxwords="100"></textarea>
-		<h3>What datasets (if any) are not currently available that would be useful for your company to have as government open data? [50 words or less]</h3>
+		<h3>What datasets (if any) are not currently available that would be useful for your company to have as government open data? <br><em>[50 words or less]</em></h3>
 		<textarea rows="10" cols="59" name="datasetWishList" id="datasetWishList" parsley-trigger="keyup" parsley-maxwords="50"></textarea>
-		<h3>What other companies, either in your sector or other sectors, would you recommend we contact regarding their use of government open data? [50 words or less]</h3>
+		<h3>What other companies, either in your sector or other sectors, would you recommend we contact regarding their use of government open data? <br><em>[50 words or less]</em></h3>
 		<textarea rows="10" cols="59" name="companyRec" id="companyRec" parsley-trigger="keyup" parsley-maxwords="50"></textarea>
-		<h3>What conferences or events do you think would be helpful to us in surveying the field of open data companies? [50 words or less]</h3>
+		<h3>What conferences or events do you think would be helpful to us in surveying the field of open data companies? <br><em>[50 words or less]</em></h3>
 		<textarea rows="10" cols="59" name="conferenceRec" id="conferenceRec" parsley-trigger="keyup" parsley-maxwords="50"></textarea>
 	</fieldset>
 	<footer class="m-form-footer">
@@ -203,38 +203,3 @@
 
 
 {% end %}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
