@@ -119,9 +119,9 @@ class LoginHandler(BaseHandler):
 
     def post(self):
         email = self.get_argument("email", "")
-        password = self.get_argument("password", "")
+        password = self.get_argument("password", "").encode('utf-8')
         user = models.Users.objects.get(email=email)
-        if user and user.password and bcrypt.hashpw(password, user.password) == user.password:
+        if user and user.password and bcrypt.hashpw(password, user.password.encode('utf-8')) == user.password:
             logging.info('successful login for '+email)
             self.set_current_user(email)
             self.redirect("/")
@@ -221,10 +221,9 @@ class CandidateHandler(BaseHandler):
                 if row[0] != 'abbrev':
                     stateInfo.append({
                         "abbrev": row[0],
-                        "state": row[1],
-                        "value": row[2]
+                        "STATE": row[1],
+                        "VALUE": row[2]
                         })
-        logging.info(stateInfo)
         self.render(
             "candidates.html",
             page_title='Open Data 500',
@@ -664,13 +663,16 @@ class SubmitCompanyHandler(BaseHandler):
         if 'Other' in revenueSource:
             del revenueSource[revenueSource.index('Other')]
             revenueSource.append(self.get_argument('otherRevenueSource', None))
-        try:
-            sector = self.request.arguments['sector']
-        except:
-            sector = []
-        if 'Other' in sector:
-            del sector[sector.index('Other')]
-            sector.append(self.get_argument('otherSector', None))
+        companyCategory = self.get_argument("category", None)
+        if companyCategory == 'Other':
+            companyCategory = self.get_argument('otherCategory', None)
+        # try:
+        #     sector = self.request.arguments['sector']
+        # except:
+        #     sector = []
+        # if 'Other' in sector:
+        #     del sector[sector.index('Other')]
+        #     sector.append(self.get_argument('otherSector', None))
         descriptionLong = self.get_argument('descriptionLong', None)
         descriptionShort = self.get_argument('descriptionShort', None)
         socialImpact = self.get_argument('socialImpact', None)
@@ -719,7 +721,7 @@ class SubmitCompanyHandler(BaseHandler):
             companyFunction = companyFunction,
             criticalDataTypes = criticalDataTypes,
             revenueSource = revenueSource,
-            sector = sector,
+            companyCategory = companyCategory,
             descriptionLong = descriptionLong,
             descriptionShort = descriptionShort,
             socialImpact = socialImpact,
@@ -1014,7 +1016,7 @@ class AdminEditCompanyHandler(BaseHandler):
             companyFunction = companyFunction,
             criticalDataTypes = criticalDataTypes,
             revenueSource = revenueSource,
-            sectors = sectors
+            categories=categories
         )
 
     @tornado.web.authenticated
@@ -1088,14 +1090,17 @@ class AdminEditCompanyHandler(BaseHandler):
             del company.revenueSource[company.revenueSource.index('Other')] #delete 'Other' from list
             if self.get_argument('otherRevenueSource', None):
                 company.revenueSource.append(self.get_argument('otherRevenueSource', None)) #add custom option to list.
-        try: #try and get all checked items. 
-            company.sector = self.request.arguments['sector']
-        except: #if no checked items, then make it into an empty array (form validation should prevent this always)
-            company.sector = []
-        if 'Other' in company.sector: #if user entered a custom option for Sector
-            del company.sector[company.sector.index('Other')] #delete 'Other' from list
-            if self.get_argument('otherSector', None):
-                company.sector.append(self.get_argument('otherSector', None)) #add custom option to list.
+        company.companyCategory = self.get_argument("category", None)
+        if company.companyCategory == 'Other': #if user entered custom option for Category
+            company.companyCategory = self.get_argument('otherCategory', None)
+        # try: #try and get all checked items. 
+        #     company.sector = self.request.arguments['sector']
+        # except: #if no checked items, then make it into an empty array (form validation should prevent this always)
+        #     company.sector = []
+        # if 'Other' in company.sector: #if user entered a custom option for Sector
+        #     del company.sector[company.sector.index('Other')] #delete 'Other' from list
+        #     if self.get_argument('otherSector', None):
+        #         company.sector.append(self.get_argument('otherSector', None)) #add custom option to list.
         company.descriptionLong = self.get_argument('descriptionLong', None)
         company.descriptionShort = self.get_argument('descriptionShort', None)
         company.socialImpact = self.get_argument('socialImpact', None)

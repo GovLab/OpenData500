@@ -13,7 +13,7 @@
 		<li class="m-list-head">
 			<div class="m-preview-list-control"></div>
 			<div class="m-preview-list-name">Company</div>
-			<div class="m-preview-list-sectors">Sector</div>
+			<div class="m-preview-list-sectors">Category</div>
 			<div class="m-preview-list-desc">Description</div>
 		</li>
 		{% for company in submittedCompanies %}
@@ -21,14 +21,14 @@
 			<div class="m-list-company-summary">
 				<div class="m-preview-list-control"><span class="m-expand-arrow"></span></div>
 				<div class="m-preview-list-name"><strong>{{ company.companyName }}</strong></div>
-				<div class="m-preview-list-sectors">{% for sector in company.sector %} {{sector}} {%end%}</div>
+				<div class="m-preview-list-sectors">{{ company.companyCategory }}</div>
 				<div class="m-preview-list-desc">{{ company.descriptionShort }}</div>
 			</div>
 			<div class="m-list-company-full">
 				<div class="m-half">
 					<h3>Company Information</h3>
 					<p><strong>Year Founded:</strong> {{company.yearFounded}}</p>
-					<p><strong>Location:</strong> {{company.city}}, USA</p>
+					<p><strong>Location:</strong> {{company.city}}, {{company.state}}</p>
 					<p><strong>FTE:</strong> {{company.fte}}</p>
 					<p><strong>Type of Company:</strong> {{company.companyType}}</p>
 					<p><strong>Company Function:</strong> {{company.companyFunction}}</p>

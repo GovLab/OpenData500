@@ -7,8 +7,7 @@
 <br>
 <section>
 	<h1 class="m-page-title">{{ page_heading }}</h1>
-	<p>Explore our preliminary list of 500 candidate companies that we believe meet our criteria for the Open Data 500 and that we have invited to fill out our survey. To see what we’ve learned so far, browse the companies in this alphabetical list or click on the buttons below to sort them by location or category.</p>
-	<p>Whether you represent one of these companies, want your business to be considered, or have other insights to offer, please let us know. Click the Comment button for a specific company, Join the Conversation in our general forum, tweet at #OD500, or email us at opendata500@thegovlab.org.</p>
+	<p>Explore our preliminary list of 500 candidate companies that we believe meet our criteria for the Open Data 500. We have invited all listed companies to fill out our survey.</p>
 	<p><strong>Please Note:</strong> We expect to that this list may change as we learn more about how each company operates – that’s part of our open process. Many of these companies have not yet responded to our survey, so information about them may change as we receive more input from them and from others.</p>
 </section>
 <br>
@@ -16,7 +15,7 @@
 
 <div class="m-candidates">
 	
-	<h3>Filter by Sector</h3>
+	<h3>Filter by Category</h3>
 	<div id="filters" class="m-candidates-buttons button-group" data-toggle="buttons-checkbox">
 	    <button data-filter="*">show all</button>
 	    {% for category in categories %}
@@ -36,7 +35,110 @@
 	</div>
 </div>
 
-<div id="hidden" style="display:none;"><[{% for state in stateInfo %}{"abbrev": "{{state['abbrev']}}", "STATE":"{{state['state']}}","VALUE":"{{state['value']}}"},{%end%}]></[{% for state in stateInfo %}{"abbrev": "{{state['abbrev']}}", "STATE":"{{state['state']}}","VALUE":"{{state['value']}}"},{%end%}]></div>
+<!-- <div id="hidden" style="display:none;"><{#{{ stateInfo }}#}></{#{{ stateInfo }}#}></div> -->
+<div id="hidden" style="display:none;"><[{"abbrev": "AL","STATE":"Alabama","VALUE":"0"},
+{"abbrev": "AK","STATE":"Alaska","VALUE":"0"},
+{"abbrev": "AZ","STATE":"Arizona","VALUE":"2"},
+{"abbrev": "AR","STATE":"Arkansas","VALUE":"0"},
+{"abbrev": "CA","STATE":"California","VALUE":"60"},
+{"abbrev": "CO","STATE":"Colorado","VALUE":"5"},
+{"abbrev": "CT","STATE":"Connecticut","VALUE":"5"},
+{"abbrev": "DE","STATE":"Delaware","VALUE":"0"},
+{"abbrev": "DC","STATE":"District of Columbia","VALUE":"0"},
+{"abbrev": "FL","STATE":"Florida","VALUE":"3"},
+{"abbrev": "GA","STATE":"Georgia","VALUE":"2"},
+{"abbrev": "HI","STATE":"Hawaii","VALUE":"0"},
+{"abbrev": "ID","STATE":"Idaho","VALUE":"0"},
+{"abbrev": "IL","STATE":"Illinois","VALUE":"5"},
+{"abbrev": "IN","STATE":"Indiana","VALUE":"0"},
+{"abbrev": "IA","STATE":"Iowa","VALUE":"0"},
+{"abbrev": "KA","STATE":"Kansas","VALUE":"1"},
+{"abbrev": "KY","STATE":"Kentucky","VALUE":"1"},
+{"abbrev": "LA","STATE":"Louisiana","VALUE":"0"},
+{"abbrev": "ME","STATE":"Maine","VALUE":"1"},
+{"abbrev": "MD","STATE":"Maryland","VALUE":"6"},
+{"abbrev": "MA","STATE":"Massachusetts","VALUE":"17"},
+{"abbrev": "MI","STATE":"Michigan","VALUE":"3"},
+{"abbrev": "MN","STATE":"Minnesota","VALUE":"0"},
+{"abbrev": "MS","STATE":"Mississippi","VALUE":"0"},
+{"abbrev": "MO","STATE":"Missouri","VALUE":"2"},
+{"abbrev": "MT","STATE":"Montana","VALUE":"0"},
+{"abbrev": "NE","STATE":"Nebraska","VALUE":"0"},
+{"abbrev": "NV","STATE":"Nevada","VALUE":"0"},
+{"abbrev": "NH","STATE":"New Hampshire","VALUE":"0"},
+{"abbrev": "NJ","STATE":"New Jersey","VALUE":"3"},
+{"abbrev": "NM","STATE":"New Mexico","VALUE":"0"},
+{"abbrev": "NY","STATE":"New York","VALUE":"33"},
+{"abbrev": "NC","STATE":"North Carolina","VALUE":"1"},
+{"abbrev": "ND","STATE":"North Dakota","VALUE":"0"},
+{"abbrev": "OH","STATE":"Ohio","VALUE":"1"},
+{"abbrev": "OK","STATE":"Oklahoma","VALUE":"0"},
+{"abbrev": "OR","STATE":"Oregon","VALUE":"1"},
+{"abbrev": "PA","STATE":"Pennsylvania","VALUE":"1"},
+{"abbrev": "RI","STATE":"Rhode Island","VALUE":"0"},
+{"abbrev": "SC","STATE":"South Carolina","VALUE":"0"},
+{"abbrev": "SD","STATE":"South Dakota","VALUE":"0"},
+{"abbrev": "TN","STATE":"Tennessee","VALUE":"2"},
+{"abbrev": "TX","STATE":"Texas","VALUE":"4"},
+{"abbrev": "UT","STATE":"Utah","VALUE":"1"},
+{"abbrev": "VT","STATE":"Vermont","VALUE":"0"},
+{"abbrev": "VA","STATE":"Virginia","VALUE":"5"},
+{"abbrev": "WA","STATE":"Washington","VALUE":"8"},
+{"abbrev": "WV","STATE":"West Virginia","VALUE":"0"},
+{"abbrev": "WI","STATE":"Wisconsin","VALUE":"2"},
+{"abbrev": "WY","STATE":"Wyoming","VALUE":"0"},
+{"abbrev": "PR","STATE":"Puerto Rico","VALUE":"0"}]></[{"abbrev": "AL","STATE":"Alabama","VALUE":"0"},
+{"abbrev": "AK","STATE":"Alaska","VALUE":"0"},
+{"abbrev": "AZ","STATE":"Arizona","VALUE":"2"},
+{"abbrev": "AR","STATE":"Arkansas","VALUE":"0"},
+{"abbrev": "CA","STATE":"California","VALUE":"60"},
+{"abbrev": "CO","STATE":"Colorado","VALUE":"5"},
+{"abbrev": "CT","STATE":"Connecticut","VALUE":"5"},
+{"abbrev": "DE","STATE":"Delaware","VALUE":"0"},
+{"abbrev": "DC","STATE":"District of Columbia","VALUE":"0"},
+{"abbrev": "FL","STATE":"Florida","VALUE":"3"},
+{"abbrev": "GA","STATE":"Georgia","VALUE":"2"},
+{"abbrev": "HI","STATE":"Hawaii","VALUE":"0"},
+{"abbrev": "ID","STATE":"Idaho","VALUE":"0"},
+{"abbrev": "IL","STATE":"Illinois","VALUE":"5"},
+{"abbrev": "IN","STATE":"Indiana","VALUE":"0"},
+{"abbrev": "IA","STATE":"Iowa","VALUE":"0"},
+{"abbrev": "KA","STATE":"Kansas","VALUE":"1"},
+{"abbrev": "KY","STATE":"Kentucky","VALUE":"1"},
+{"abbrev": "LA","STATE":"Louisiana","VALUE":"0"},
+{"abbrev": "ME","STATE":"Maine","VALUE":"1"},
+{"abbrev": "MD","STATE":"Maryland","VALUE":"6"},
+{"abbrev": "MA","STATE":"Massachusetts","VALUE":"17"},
+{"abbrev": "MI","STATE":"Michigan","VALUE":"3"},
+{"abbrev": "MN","STATE":"Minnesota","VALUE":"0"},
+{"abbrev": "MS","STATE":"Mississippi","VALUE":"0"},
+{"abbrev": "MO","STATE":"Missouri","VALUE":"2"},
+{"abbrev": "MT","STATE":"Montana","VALUE":"0"},
+{"abbrev": "NE","STATE":"Nebraska","VALUE":"0"},
+{"abbrev": "NV","STATE":"Nevada","VALUE":"0"},
+{"abbrev": "NH","STATE":"New Hampshire","VALUE":"0"},
+{"abbrev": "NJ","STATE":"New Jersey","VALUE":"3"},
+{"abbrev": "NM","STATE":"New Mexico","VALUE":"0"},
+{"abbrev": "NY","STATE":"New York","VALUE":"33"},
+{"abbrev": "NC","STATE":"North Carolina","VALUE":"1"},
+{"abbrev": "ND","STATE":"North Dakota","VALUE":"0"},
+{"abbrev": "OH","STATE":"Ohio","VALUE":"1"},
+{"abbrev": "OK","STATE":"Oklahoma","VALUE":"0"},
+{"abbrev": "OR","STATE":"Oregon","VALUE":"1"},
+{"abbrev": "PA","STATE":"Pennsylvania","VALUE":"1"},
+{"abbrev": "RI","STATE":"Rhode Island","VALUE":"0"},
+{"abbrev": "SC","STATE":"South Carolina","VALUE":"0"},
+{"abbrev": "SD","STATE":"South Dakota","VALUE":"0"},
+{"abbrev": "TN","STATE":"Tennessee","VALUE":"2"},
+{"abbrev": "TX","STATE":"Texas","VALUE":"4"},
+{"abbrev": "UT","STATE":"Utah","VALUE":"1"},
+{"abbrev": "VT","STATE":"Vermont","VALUE":"0"},
+{"abbrev": "VA","STATE":"Virginia","VALUE":"5"},
+{"abbrev": "WA","STATE":"Washington","VALUE":"8"},
+{"abbrev": "WV","STATE":"West Virginia","VALUE":"0"},
+{"abbrev": "WI","STATE":"Wisconsin","VALUE":"2"},
+{"abbrev": "WY","STATE":"Wyoming","VALUE":"0"},
+{"abbrev": "PR","STATE":"Puerto Rico","VALUE":"0"}]></div>
 
 <script src="{{ static_url("js/d3.v3.min.js") }}"></script>
 <script src="{{ static_url("js/queue.v1.min.js") }}"></script>
@@ -118,7 +220,8 @@
             {"abbrev": "WY", "STATE":"Wyoming", "VALUE":71},
             {"abbrev": "PR", "STATE":"Puerto Rico", "VALUE":25}];
             
-    var userData = document.getElementById('hidden').innerText.replace('<','').replace('>','')                
+    var userData = document.getElementById('hidden').innerText.replace('<','').replace('>','');
+    console.log(userData);
     userData = JSON.parse(userData)
     if (userData) data = userData
     

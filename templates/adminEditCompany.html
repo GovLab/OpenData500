@@ -161,16 +161,16 @@
 		{% end %}
 	</fieldset>
 	<fieldset class="m-form-half right">
-		<h3>What sector(s) does your company's work involve? (check all that apply): *</h3>
-		{% for sector in sectors %}
-			<label for=""><input type="checkbox" name="sector" data-trigger="change" data-group="sector" value="{{ sector }}" {% if sector in company.sector %} checked {% end %}>{{ sector }}<br>
+		<h3>What category best describes your company? *</h3>
+		{% for category in categories %}
+			<label for=""><input type="radio" name="category" data-trigger="change" data-group="category" value="{{ category }}" {% if category == company.companyCategory %} checked {% end %}>{{ category }}<br>
 		{% end %}
-		{% if list(set(company.sector) - set(sectors)) %}
-			<label for=""><input type="checkbox" name="sector" class="otherSector" data-trigger="change" data-group="sector" value="Other" checked>Other
-			<input type="text" name="otherSector" id="otherSector" class="otherSector" data-trigger="change" data-group="sector" value="{{ list(set(company.sector) - set(sectors))[0] }}"></label>
+		{% if company.companyCategory not in categories %}
+			<label for=""><input type="radio" name="category" class="otherCategory" data-trigger="change" data-group="category" value="Other" checked>Other
+			<input type="text" name="otherCategory" id="otherCategory" class="otherCategory" data-trigger="change" data-group="category" {% if company.companyCategory %}value="{{ company.companyCategory }}"{%end%}></label>
 		{% else %}
-			<label for=""><input type="checkbox" name="sector" class="otherSector" data-trigger="change" data-group="sector" value="Other">Other
-			<input type="text" name="otherSector" id="otherSector" class="otherSector" data-trigger="change" data-group="sector"></label>
+			<label for=""><input type="checkbox" name="category" class="otherCategory" data-trigger="change" data-group="category" value="Other">Other
+			<input type="text" name="otherCategory" id="otherCategory" class="otherCategory" data-trigger="change" data-group="category"></label>
 		{% end %}
 	</fieldset>
 	<fieldset class="m-form-half">
@@ -200,3 +200,13 @@
 
 
 {% end %}
+
+
+
+
+<h3>Vetted?</h3>
+		<input type="radio" name="vetted" id="vetted" value="True" {% if company.vetted %} checked {% end %}>True<br>
+		<input type="radio" name="vetted" id="vetted" value="False" {% if not company.vetted %} checked {% end %}>False<br>
+		<h3>Vetted By Company?</h3>
+		<input type="radio" name="vettedByCompany" id="vettedByCompany" value="True" {% if company.vettedByCompany %} checked {% end %}>True<br>
+		<input type="radio" name="vettedByCompany" id="vettedByCompany" value="False" {% if not company.vettedByCompany %} checked {% end %}>False<br>
