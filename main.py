@@ -63,8 +63,8 @@ class Application(tornado.web.Application):
             (r"/generateFiles/?", GenerateFilesHandler),
             (r"/download/?", DownloadHandler),
             (r'/download/(.*)/?',tornado.web.StaticFileHandler,{'path':os.path.join(os.path.dirname(__file__), 'static')}),
-            (r"/upload50/?", Upload50Handler),
-            (r"/upload500/?", Upload500Handler),
+            #(r"/upload50/?", Upload50Handler),
+            #(r"/upload500/?", Upload500Handler),
             (r"/candidates/?", CandidateHandler),
             (r"/preview/?", PreviewHandler),
             (r'/login/?', LoginHandler),
@@ -214,12 +214,24 @@ class CandidateHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self):
         companies = models.Company.objects()
+        stateInfo = []
+        with open(os.path.join(os.path.dirname(__file__), 'static') + '/states.csv', 'rb') as csvfile:
+            statereader = csv.reader(csvfile, delimiter=',')
+            for row in statereader:
+                if row[0] != 'abbrev':
+                    stateInfo.append({
+                        "abbrev": row[0],
+                        "state": row[1],
+                        "value": row[2]
+                        })
+        logging.info(stateInfo)
         self.render(
             "candidates.html",
             page_title='Open Data 500',
             page_heading='Candidates for the OD500',
             companies = companies,
-            categories = categories
+            categories = categories,
+            stateInfo=stateInfo
         )
 
 class AboutHandler(BaseHandler):
@@ -1281,7 +1293,27 @@ class GenerateFilesHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self):
         #Get published companies, turn each one into an array and put into CSV file
-        companies = models.Company.objects(Q(vetted=True) & Q(vettedByCompany=True))
+        companies = models.Company.objects()
+        #make a csv for states info
+        statesCount = []
+        for c in companies:
+            statesCount.append(c.state)
+        count = [(i, statesCount.count(i)) for i in set(statesCount)]
+        csvwriter = csv.writer(open(os.path.join(os.path.dirname(__file__), 'static') + "/states.csv", "w"))
+        csvwriter.writerow(['abbrev','state','value'])
+        for s in states:
+            abbrev = s
+            stateName = states[s]
+            value = 0
+            for c in count:
+                if c[0] == abbrev:
+                    value = c[1]
+            newrow = [abbrev, stateName, value]
+            for i in range(len(newrow)):  # For every value in our newrow
+                    if hasattr(newrow[i], 'encode'):
+                        newrow[i] = newrow[i].encode('utf8')
+            csvwriter.writerow(newrow)
+        #CSV of all 500 companies
         csvwriter = csv.writer(open(os.path.join(os.path.dirname(__file__), 'static') + "/OD500_Companies.csv", "w"))
         csvwriter.writerow([
             'CompanyName',
@@ -1310,35 +1342,73 @@ class GenerateFilesHandler(BaseHandler):
             'agencyOrDatasetSource',
             'DATASETS'
             ])
+        logging.info(len(companies))
         for c in companies:
-            for d in c.datasets:
+            if len(c.datasets):
+                for d in c.datasets:
+                    newrow = [
+                        c.companyName,
+                        c.url,
+                        c.city,
+                        states[str(c.state).replace(" ","")],
+                        c.state,
+                        c.zipCode,
+                        c.ceo.firstName,
+                        c.ceo.lastName,
+                        c.previousName,
+                        c.yearFounded,
+                        c.fte,
+                        c.companyType,
+                        c.companyCategory,
+                        c.companyFunction,
+                        ', '.join(c.sector),
+                        ', '.join(c.revenueSource),
+                        c.descriptionLong,
+                        c.descriptionShort,
+                        c.socialImpact,
+                        c.financialInfo,
+                        ', '.join(c.criticalDataTypes),
+                        d.datasetName,
+                        d.datasetURL,
+                        d.agency,
+                        len(c.datasets)
+                    ]
+                    for i in range(len(newrow)):  # For every value in our newrow
+                        if hasattr(newrow[i], 'encode'):
+                            newrow[i] = newrow[i].encode('utf8')
+                    csvwriter.writerow(newrow)
+            else: 
+                try: 
+                    stateAbbrev = states[str(c.state).replace(" ","")]
+                except: 
+                    stateAbbrev = ''
                 newrow = [
-                    c.companyName,
-                    c.url,
-                    c.city,
-                    states[str(c.state).replace(" ","")],
-                    c.state,
-                    c.zipCode,
-                    c.ceo.firstName,
-                    c.ceo.lastName,
-                    c.previousName,
-                    c.yearFounded,
-                    c.fte,
-                    c.companyType,
-                    c.companyCategory,
-                    c.companyFunction,
-                    ', '.join(c.sector),
-                    ', '.join(c.revenueSource),
-                    c.descriptionLong,
-                    c.descriptionShort,
-                    c.socialImpact,
-                    c.financialInfo,
-                    ', '.join(c.criticalDataTypes),
-                    d.datasetName,
-                    d.datasetURL,
-                    d.agency,
-                    len(c.datasets)
-                ]
+                        c.companyName,
+                        c.url,
+                        c.city,
+                        stateAbbrev,
+                        c.state,
+                        c.zipCode,
+                        c.ceo.firstName,
+                        c.ceo.lastName,
+                        c.previousName,
+                        c.yearFounded,
+                        c.fte,
+                        c.companyType,
+                        c.companyCategory,
+                        c.companyFunction,
+                        ', '.join(c.sector),
+                        ', '.join(c.revenueSource),
+                        c.descriptionLong,
+                        c.descriptionShort,
+                        c.socialImpact,
+                        c.financialInfo,
+                        ', '.join(c.criticalDataTypes),
+                        '',
+                        '',
+                        '',
+                        len(c.datasets)
+                    ]
                 for i in range(len(newrow)):  # For every value in our newrow
                     if hasattr(newrow[i], 'encode'):
                         newrow[i] = newrow[i].encode('utf8')
@@ -1403,6 +1473,7 @@ class GenerateFilesHandler(BaseHandler):
             datasetsJSON.append(dataset)
         with open(os.path.join(os.path.dirname(__file__), 'static') + '/OD500_Datasets.json', 'w') as outfile:
             json.dump(datasetsJSON, outfile)
+        self.redirect('/admin/')
 
 
 class CompanyModule(tornado.web.UIModule):
