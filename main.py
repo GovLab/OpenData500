@@ -119,9 +119,9 @@ class LoginHandler(BaseHandler):
 
     def post(self):
         email = self.get_argument("email", "")
-        password = self.get_argument("password", "")
+        password = self.get_argument("password", "").encode('utf-8')
         user = models.Users.objects.get(email=email)
-        if user and user.password and bcrypt.hashpw(password, user.password) == user.password:
+        if user and user.password and bcrypt.hashpw(password, user.password.encode('utf-8')) == user.password:
             logging.info('successful login for '+email)
             self.set_current_user(email)
             self.redirect("/")

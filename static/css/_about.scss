@@ -26,6 +26,27 @@
 		margin-bottom: 35px;
 		font-weight: 100;
 	}
+	
+	.about-page-toc {
+		float: right;
+		margin: 0 0 30px 20px;
+		padding: 10px 20px;
+		border: 1px solid $light_gray;
 
+		h4 {
+			margin-bottom: 25px;
+			margin-top: 0;
+			font-family: $fancy_type;
+			font-weight: 300;
+			font-size: 1.7em;
+			font-style: italic;
+			color: $black;
+		}
+		
+		li {
+			list-style-type: none;
+			margin: 6px 0;
+		}
+	}
 
 }

@@ -7,6 +7,7 @@
 @import 'preview';
 @import 'candidates';
 @import 'download';
+@import 'login';
 
 // Reset
 
@@ -52,7 +53,7 @@ header {
 }
 
 #container {
-	min-height: 534px;
+	min-height: 460px;
 }
 
 
@@ -91,7 +92,7 @@ header {
 }
 
 #background {
-	top: -450px;
+	top: -500px; // 450px;
 	background: url(../img/bg-element-2.png) no-repeat center;
 }
 
@@ -118,6 +119,15 @@ footer {
 	overflow: hidden;
 	clear: both;
 	margin-top: 30px;
+	color: $light_gray;
+
+	a {
+			color: $light_gray;
+		}
+
+	a:hover {
+		color: $white;
+	}
 
 	.m-footer-logos {
 		float: left;
@@ -126,6 +136,10 @@ footer {
 			height: 37px;
 			margin-right: 30px;
 			opacity: .4;
+		}
+
+		a:hover img {
+			opacity: 1;
 		}
 
 		#govlab-logo {
@@ -142,17 +156,17 @@ footer {
 		padding: 2px 10px;
 		border-right: 1px solid #888;
 		margin-top: 10px;
-
-		a {
-			color: $light_gray;
-		}
-
-		a:hover {
-			color: $white;
-		}
 	}
 
 	.footer-menu-item.last {
 		border-right: 0;
+	}
+
+	.creative-commons-license {
+		margin-top: 30px;
+		img {
+			float: left;
+			margin-right: 10px;
+		}
 	}
 }

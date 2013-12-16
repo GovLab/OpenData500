@@ -1,0 +1,13 @@
+.login-form {
+	margin: 0 auto;
+	width: 300px / 960px * 100%;
+	@include rounded;
+	padding: 20px 20px 10px 0;
+	border: 1px solid $light_gray;
+
+	.m-form-line.submit {
+		text-align: center;
+		margin-top: 20px;
+	}
+
+}
