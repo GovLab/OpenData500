@@ -1,6 +1,7 @@
 @charset "UTF-8";
 input[type="text"],
-input[type="password"] {
+input[type="password"],
+input[type="email"] {
   padding: 5px 10px;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -219,9 +220,74 @@ a:hover {
     border-top: 1px solid #8977a7;
     padding-top: 15px;
     margin-bottom: 10px; }
-  .m-homepage .m-homepage-about input {
-    display: block;
-    width: 89%; }
+  .m-homepage .m-homepage-about form {
+    position: relative; }
+    .m-homepage .m-homepage-about form input[type="email"] {
+      width: 138px;
+      -webkit-border-radius: 4px 0 0 4px;
+      -moz-border-radius: 4px 0 0 4px;
+      border-radius: 4px 0 0 4px;
+      border-right: 0; }
+    .m-homepage .m-homepage-about form .m-button {
+      width: 40px;
+      display: inline-block;
+      padding: 5px 5px 4px;
+      margin-top: 1px;
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: 12px;
+      background-color: white;
+      color: #472b74;
+      border-color: #aaaaaa;
+      margin-left: 0;
+      -webkit-border-radius: 0 4px 4px 0;
+      -moz-border-radius: 0 4px 4px 0;
+      border-radius: 0 4px 4px 0; }
+    .m-homepage .m-homepage-about form .m-button:hover {
+      background-color: #472b74;
+      color: white;
+      border-color: #472b74; }
+  .m-homepage .m-homepage-about #mce-responses .response {
+    position: absolute;
+    width: 175px;
+    padding: 10px;
+    background-color: #8977a7;
+    border: 1px solid #472b74;
+    top: 89px;
+    color: #472b74;
+    @inlcude rounded;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.2); }
+  .m-homepage .m-homepage-about #mce-responses .response:after {
+    content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    border-bottom: 8px solid #472b74;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    top: -8px;
+    left: 48%; }
+  .m-homepage .m-homepage-about input.mce_inline_error {
+    border-color: #d61111 !important; }
+  .m-homepage .m-homepage-about div.mce_inline_error {
+    position: absolute;
+    width: 178px;
+    padding: 10px;
+    background-color: #dddddd !important;
+    border: 1px solid #d61111;
+    top: 89px;
+    color: #d61111 !important;
+    @inlcude rounded;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.2); }
+  .m-homepage .m-homepage-about div.mce_inline_error:after {
+    content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    border-bottom: 8px solid #d61111;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    top: -8px;
+    left: 48%; }
 .m-homepage .m-homepage-participate {
   margin-left: 3.125%; }
 .m-homepage .m-homepage-explore {

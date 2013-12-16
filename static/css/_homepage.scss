@@ -46,10 +46,97 @@
 			margin-bottom: 10px;
 		}
 
-		input {
-			display: block;
-			width: 89%;
+		form {
+			position: relative;
+
+			input[type="email"] {
+				width: 138px;
+				-webkit-border-radius: 4px 0 0 4px;
+				-moz-border-radius: 4px 0 0 4px;
+				border-radius: 4px 0 0 4px;
+				border-right: 0;
+			}
+
+			.m-button {
+				width: 40px;
+				display: inline-block;
+				padding: 5px 5px 4px;
+				margin-top: 1px;
+				font-family: $regular_type;
+				font-size: 12px;
+				background-color: $white;
+				color: $purple;
+				border-color: $light_gray;
+				margin-left: 0;
+				-webkit-border-radius: 0 4px 4px 0;
+				-moz-border-radius: 0 4px 4px 0;
+				border-radius: 0 4px 4px 0;
+			}
+
+			.m-button:hover {
+				background-color: $purple;
+				color: $white;
+				border-color: $purple;
+			}
 		}
+
+		#mce-responses {
+
+			.response {
+				position: absolute;
+				width: 175px;
+				padding: 10px;
+				background-color: $light_purple;
+				border: 1px solid $purple;
+				top: 89px;
+				color: $purple;
+				@inlcude rounded;
+				@include drop-shadow;
+			}
+
+			.response:after {
+				content: "";
+				width: 0;
+				height: 0;
+				position: absolute;
+				border-bottom: 8px solid $purple;
+				border-left: 8px solid transparent;
+				border-right: 8px solid transparent;
+				top: -8px;
+				left: 48%;
+				
+			}
+		}
+
+		input.mce_inline_error {
+			border-color: $red !important;
+		}
+
+		div.mce_inline_error {
+			position: absolute;
+			width: 178px;
+			padding: 10px;
+			background-color: $lighter_gray !important;
+			border: 1px solid $red;
+			top: 89px;
+			color: $red !important;
+			@inlcude rounded;
+			@include drop-shadow;
+			
+		}
+
+		div.mce_inline_error:after {
+			content: "";
+			width: 0;
+			height: 0;
+			position: absolute;
+			border-bottom: 8px solid $red;
+			border-left: 8px solid transparent;
+			border-right: 8px solid transparent;
+			top: -8px;
+			left: 48%;
+		}
+
 	}
 
 	.m-homepage-participate {
