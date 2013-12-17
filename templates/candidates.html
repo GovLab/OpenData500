@@ -226,7 +226,7 @@
             {"abbrev": "WY", "STATE":"Wyoming", "VALUE":71},
             {"abbrev": "PR", "STATE":"Puerto Rico", "VALUE":25}];
             
-    var userData = document.getElementById('hidden').innerText.replace('<','').replace('>','');
+    var userData = document.getElementById('hidden').textContent.replace('<','').replace('>','');
     console.log(userData);
     userData = JSON.parse(userData)
     if (userData) data = userData

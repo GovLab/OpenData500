@@ -802,3 +802,27 @@ footer {
     footer .creative-commons-license img {
       float: left;
       margin-right: 10px; }
+
+#chart {
+
+}
+
+.no-flexbox #chart {
+  width:180; 
+  height:447.36842105263156;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
