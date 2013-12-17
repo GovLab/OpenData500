@@ -70,6 +70,7 @@ class Application(tornado.web.Application):
             #(r"/upload500/?", Upload500Handler),
             (r"/candidates/?", CandidateHandler),
             (r"/preview/?", PreviewHandler),
+            (r'/thanks/?', ThanksHandler),
             (r'/login/?', LoginHandler),
             (r'/logout/?', LogoutHandler),
             (r'/register/?', RegisterHandler),
@@ -139,6 +140,15 @@ class LoginHandler(BaseHandler):
             self.set_secure_cookie("user", tornado.escape.json_encode(user))
         else: 
             self.clear_cookie("user")
+
+class ThanksHandler(BaseHandler): 
+    @tornado.web.addslash
+    def get(self):
+        self.render(
+            "thankyou.html", 
+            page_title="OD500 - Thanks!",
+            page_heading="Thank you for participating in the Open Data 500!" 
+            )
 
 class RegisterHandler(LoginHandler):
     @tornado.web.addslash
@@ -904,7 +914,7 @@ class SubmitDataHandler(BaseHandler):
             logging.info('adding another')
             self.redirect("/addData/" + id)
         if self.get_argument('submit', None) == 'Done': #else, you're done, go home.
-            self.redirect("/")
+            self.redirect("/thanks/")
 
 class EditCompanyHandler(BaseHandler):
     @tornado.web.addslash
