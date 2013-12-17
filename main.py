@@ -228,6 +228,7 @@ class CandidateHandler(BaseHandler):
     #@tornado.web.authenticated
     def get(self):
         companies = models.Company.objects.order_by('prettyName')
+        recentlySubmitted = models.Company.objects(Q(vetted=False) & Q(vettedByCompany=False) & Q(recommended=False)).order_by('prettyName')
         # stateInfo = []
         # with open(os.path.join(os.path.dirname(__file__), 'static') + '/states.csv', 'rb') as csvfile:
         #     statereader = csv.reader(csvfile, delimiter=',')
@@ -243,6 +244,7 @@ class CandidateHandler(BaseHandler):
             page_title='Open Data 500',
             page_heading='Candidates for the OD500',
             companies = companies,
+            recentlySubmitted=recentlySubmitted,
             categories = categories
             #stateInfo=stateInfo
         )
