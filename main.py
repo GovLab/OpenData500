@@ -50,7 +50,7 @@ stateList = ["(Select State)", "Alabama", "Alaska", "Arizona", "Arkansas", "Cali
 class Application(tornado.web.Application):
     def __init__(self):
         handlers = [
-            (r'/(favicon\.ico)', tornado.web.StaticFileHandler, {'path': favicon_path}),
+            (r'/(favicon.ico)', tornado.web.StaticFileHandler, {"path": ""}),
             (r"/", MainHandler),
             (r"/submitCompany/?", SubmitCompanyHandler),
             (r"/edit/([a-zA-Z0-9]{24})/?", EditCompanyHandler),
