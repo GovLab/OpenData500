@@ -200,7 +200,7 @@ class CompanyHandler(BaseHandler):
                 page_title='404 - Open Data500',
                 page_heading='Oh no...',
             )
-        logging.info(company.companyName)
+        #logging.info(company.companyName)
         self.render(
             "company.html",
             page_title='Open Data500',
