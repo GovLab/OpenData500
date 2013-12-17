@@ -194,6 +194,12 @@ class CompanyHandler(BaseHandler):
     def get(self, companyName):
         try:
             company = models.Company.objects.get(prettyName=companyName)
+            self.render(
+            "company.html",
+            page_title='Open Data500',
+            page_heading=company.companyName,
+            company = company,
+        )
         except: 
             self.render(
                 "404.html",
@@ -201,12 +207,7 @@ class CompanyHandler(BaseHandler):
                 page_heading='Oh no...',
             )
         #logging.info(company.companyName)
-        self.render(
-            "company.html",
-            page_title='Open Data500',
-            page_heading=company.companyName,
-            company = company,
-        )
+        
 
       
 class PreviewHandler(BaseHandler):
