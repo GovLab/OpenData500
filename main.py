@@ -63,7 +63,7 @@ class Application(tornado.web.Application):
             (r"/admin/edit/([a-zA-Z0-9]{24})/?", AdminEditCompanyHandler),
             (r"/about/?", AboutHandler),
             (r"/resources/?", ResourcesHandler),
-            (r"/generateFiles/?", GenerateFilesHandler),
+            #(r"/generateFiles/?", GenerateFilesHandler),
             (r"/download/?", DownloadHandler),
             (r'/download/(.*)/?',tornado.web.StaticFileHandler, {'path':os.path.join(os.path.dirname(__file__), 'static')}),
             #(r"/upload50/?", Upload50Handler),
@@ -99,7 +99,7 @@ class BaseHandler(tornado.web.RequestHandler):
 # the main page
 class MainHandler(BaseHandler):
     @tornado.web.addslash
-    @tornado.web.authenticated
+    #@tornado.web.authenticated
     def get(self):
         self.render(
             "index.html",
@@ -180,7 +180,7 @@ class LogoutHandler(BaseHandler):
 
 class CompanyHandler(BaseHandler):
     @tornado.web.addslash
-    @tornado.web.authenticated
+    #@tornado.web.authenticated
     def get(self, companyName):
         try:
             company = models.Company.objects.get(prettyName=companyName)
@@ -201,7 +201,7 @@ class CompanyHandler(BaseHandler):
       
 class PreviewHandler(BaseHandler):
     @tornado.web.addslash
-    @tornado.web.authenticated
+    #@tornado.web.authenticated
     def get(self):
         #companies = models.Company.objects()
         submittedCompanies = models.Company.objects(Q(vetted=True) & Q(vettedByCompany=True)).order_by('prettyName')
@@ -214,7 +214,7 @@ class PreviewHandler(BaseHandler):
 
 class CandidateHandler(BaseHandler):
     @tornado.web.addslash
-    @tornado.web.authenticated
+    #@tornado.web.authenticated
     def get(self):
         companies = models.Company.objects.order_by('prettyName')
         # stateInfo = []
@@ -238,7 +238,7 @@ class CandidateHandler(BaseHandler):
 
 class AboutHandler(BaseHandler):
     @tornado.web.addslash
-    @tornado.web.authenticated
+    #@tornado.web.authenticated
     def get(self):
         self.render(
             "about.html",
@@ -248,7 +248,7 @@ class AboutHandler(BaseHandler):
 
 class ResourcesHandler(BaseHandler):
     @tornado.web.addslash
-    @tornado.web.authenticated
+    #@tornado.web.authenticated
     def get(self):
         self.render(
             "resources.html",
@@ -610,7 +610,7 @@ class AdminHandler(BaseHandler):
 
 class SubmitCompanyHandler(BaseHandler):
     @tornado.web.addslash
-    @tornado.web.authenticated
+    #@tornado.web.authenticated
     def get(self):
         self.render(
             "submitCompany.html",
@@ -618,7 +618,7 @@ class SubmitCompanyHandler(BaseHandler):
             page_heading = "Submit Your Company"
         )
 
-    @tornado.web.authenticated
+    #@tornado.web.authenticated
     def post(self):
         firstName = self.get_argument("firstName", None)
         lastName = self.get_argument("lastName", None)
@@ -841,7 +841,7 @@ class RecommendCompanyHandler(BaseHandler):
 
 class SubmitDataHandler(BaseHandler):
     @tornado.web.addslash
-    @tornado.web.authenticated
+    #@tornado.web.authenticated
     def get(self, id):
         #Make not whether we are submitting a Co. and adding a dataset or editing a Co. and adding a dataset
         #get company
@@ -853,7 +853,7 @@ class SubmitDataHandler(BaseHandler):
             id = id #Company id.
         )
 
-    @tornado.web.authenticated
+    #@tornado.web.authenticated
     def post(self, id):
         #get the company we are dealing with:
         id = self.get_argument('id', None)
@@ -1298,7 +1298,7 @@ class ViewHandler(BaseHandler):
 
 class DownloadHandler(BaseHandler):
     @tornado.web.addslash
-    @tornado.web.authenticated
+    #@tornado.web.authenticated
     def get(self):
         self.render(
             "download.html",
