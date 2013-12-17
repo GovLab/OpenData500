@@ -29,7 +29,7 @@
 					<h3>Company Information</h3>
 					<p><strong>Year Founded:</strong> {{company.yearFounded}}</p>
 					<p><strong>Location:</strong> {{company.city}}, {{company.state}}</p>
-					<p><strong>FTE:</strong> {{company.fte}}</p>
+					<p><strong>FTE:</strong> {% if company.fte == 0 %}Not Available{%else%}{{company.fte}}{%end%}</p>
 					<p><strong>Type of Company:</strong> {{company.companyType}}</p>
 					<p><strong>Company Function:</strong> {{company.companyFunction}}</p>
 					<p><strong>Category:</strong> {{company.companyCategory}}</p>
