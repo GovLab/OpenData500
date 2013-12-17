@@ -26,6 +26,12 @@ $(function() {
     });
   });
 
+$(function() {
+    $( "#accordionSubmitted" ).accordion({
+      collapsible: true
+    });
+  });
+
 // $("input.otherInput").focus(function() {
 // 	$("input.otherOption").prop('checked', true);
 // });

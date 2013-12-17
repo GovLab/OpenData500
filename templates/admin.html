@@ -42,7 +42,24 @@
 {% end %}
 </div>
 <br>
-
+<h2>Recently Submitted Through Website Survey</h2>
+<div id="accordionSubmitted">
+{% for company in recentlySubmitted %}
+	<h3><strong>{{ company.companyName }}</strong></h3>
+	<div>
+	<ul>
+		{% try %}
+			{% for dataset in company.datasets %}
+				<li><p><strong>{{ dataset.datasetName }}</strong> - <a href="/editData/{{ dataset.id }}">Edit</a> <a href="/delete/{{ dataset.id }}">Delete</a></p></li>
+			{% end %}
+		{% except %}
+		{% end %}
+	</ul>
+	<p><a href="/admin/edit/{{ company.id }}">Edit</a> <a href="/delete/{{ company.id }}">Delete</a> <a href="/addData/{{ company.id }}">Add Dataset</a></p>
+	</div>
+{% end %}
+</div>
+<br>
 <h2>Need to fill out Surveys</h2>
 <table style="width:100%; text-align:left;">
 	<tr>

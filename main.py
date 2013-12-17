@@ -35,6 +35,7 @@ define("port", default=5000, help="run on the given port", type=int)
 connect('db', host=os.environ.get('MONGOLAB_URI'))
 
 #Just some global varbs. 
+favicon_path = '/static/img/favicon.ico'
 companyType = ['Public', 'Private', 'Nonprofit']
 companyFunction = ['Consumer Research and/or Marketing', 'Consumer Services', 'Data Management and Analysis', 'Financial/Investment Services', 'Information for Consumers']
 criticalDataTypes = ['Federal Open Data', 'State Open Data', 'City/Local Open Data', 'Private/Proprietary Data Sources']
@@ -49,6 +50,7 @@ stateList = ["(Select State)", "Alabama", "Alaska", "Arizona", "Arkansas", "Cali
 class Application(tornado.web.Application):
     def __init__(self):
         handlers = [
+            (r'/(favicon\.ico)', tornado.web.StaticFileHandler, {'path': favicon_path}),
             (r"/", MainHandler),
             (r"/submitCompany/?", SubmitCompanyHandler),
             (r"/edit/([a-zA-Z0-9]{24})/?", EditCompanyHandler),
@@ -63,7 +65,7 @@ class Application(tornado.web.Application):
             (r"/resources/?", ResourcesHandler),
             (r"/generateFiles/?", GenerateFilesHandler),
             (r"/download/?", DownloadHandler),
-            (r'/download/(.*)/?',tornado.web.StaticFileHandler,{'path':os.path.join(os.path.dirname(__file__), 'static')}),
+            (r'/download/(.*)/?',tornado.web.StaticFileHandler, {'path':os.path.join(os.path.dirname(__file__), 'static')}),
             #(r"/upload50/?", Upload50Handler),
             #(r"/upload500/?", Upload500Handler),
             (r"/candidates/?", CandidateHandler),
@@ -594,7 +596,7 @@ class AdminHandler(BaseHandler):
         vettedCompanies = models.Company.objects(Q(vetted=True) & Q(vettedByCompany=True)).order_by('prettyName')
         #recommendedCompanies = models.Company.objects(Q(vetted=False) & Q(recommended=True))
         unvettedByCompanies = models.Company.objects(Q(vetted=False) & Q(vettedByCompany=False)).order_by('prettyName')
-        recentlySubmitted = models.Company.objects(recommended=False)
+        recentlySubmitted = models.Company.objects(Q(vetted=False) & Q(vettedByCompany=False) & Q(recommended=False)).order_by('prettyName')
         self.render(
             "admin.html",
             page_title='OpenData500',
