@@ -48,12 +48,14 @@
 	list-style-type: none;
 	padding:15px;
 	background-color: $light_gray_alpha;
-	width: 152px / 960px * 100%;
+	width: 150px / 960px * 100%;
 	height: 150px;
 	float: left;
-	margin: 0 10px 10px 0;
+	margin: 5px;
 	color: $black;
 	overflow: hidden;
+	cursor: pointer;
+	border: 1px solid transparent;
 
 
 	h3 {
@@ -105,6 +107,47 @@
 }
 
 .m-candidates-item:hover {
+	border-color: $purple;
+}
+
+.m-candidates-item.s-active {
+	width: 35.5%;
+	// height: 342px;
+	z-index: 1000;
+
+	em, .m-homepage-list-desc, h3 {
+		width: 330px;
+	}
 	
 }
 
+
+.legend {
+	text-align: center;
+	border: 1px solid $light_gray;
+	margin-bottom: 20px;
+	padding: 5px;
+
+
+	.color {
+		display: inline-block;
+		margin: 0 3px;
+		padding: 4px 10px;
+		color: $white;
+		letter-spacing: .4px;
+	}
+
+
+	.color.candidate {
+		background-color: $light_gray_alpha;
+		color: $dark_gray_alpha;
+	}
+
+	.color.survey {
+		background-color: $dark_gray_alpha;
+	}
+
+	.color.preview {
+		background-color: $purple_alpha;
+	}
+}

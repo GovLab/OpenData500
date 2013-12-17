@@ -147,12 +147,12 @@
 		display: inline-block;
 		width: 408px / 960px * 100%;
 		text-align: center;
-		margin-top: 44px;
+		margin-top: 46px;
 
 		> div {
 			padding-bottom: 30px;
 			border-bottom: 1px solid $purple;
-			margin-bottom: 30px;
+			margin-bottom: 35px;
 		}
 		
 		h2, p {
@@ -161,6 +161,7 @@
 
 		h2 {
 			color: $purple;
+			font-size: 2.8em;
 		}
 
 		.m-button {

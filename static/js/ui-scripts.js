@@ -9,6 +9,10 @@ $('.m-list-company-summary').click(function() {
 	$(this).parent().toggleClass('s-active');
 });
 
+$('.m-candidates-item').click(function() {
+	$(this).toggleClass('s-active');
+});
+
 // Smooth Scrolling Function
 	$(function() {
 		$('a[href*=#]:not([href=#])').click(function() {

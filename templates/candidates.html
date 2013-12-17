@@ -23,8 +23,10 @@
         </div>
     </div>
 
-<div id="chart"></div>
-
+    <div id="chart"></div>
+    <div class="legend">
+        <span class="color preview">Preview Company</span><span class="color survey">Submitted Survey</span><span class="color candidate">Candidate Company</span>
+    </div>
 	<div class="m-candidates isotopes-container" data-isotope-options='{ "layoutMode": "fitColumns" }'>
 		{% for company in companies %}
             <div class="m-candidates-item {%try%} {{company.companyCategory.strip().replace(" ", "-").replace("/","").replace("&", "")}} {%except%}None{%end%} {{ company.state }}{% if company.vetted %} preview-company{%end%} {% if company.vettedByCompany %} survey-company{%end%}">

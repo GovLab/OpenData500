@@ -308,15 +308,16 @@ a:hover {
   display: inline-block;
   width: 42.5%;
   text-align: center;
-  margin-top: 44px; }
+  margin-top: 46px; }
   .m-homepage .m-homepage-explore > div {
     padding-bottom: 30px;
     border-bottom: 1px solid #472b74;
-    margin-bottom: 30px; }
+    margin-bottom: 35px; }
   .m-homepage .m-homepage-explore h2, .m-homepage .m-homepage-explore p {
     margin-bottom: 10px; }
   .m-homepage .m-homepage-explore h2 {
-    color: #472b74; }
+    color: #472b74;
+    font-size: 2.8em; }
   .m-homepage .m-homepage-explore .m-button {
     display: block;
     margin-top: 20px;
@@ -547,12 +548,14 @@ a:hover {
   list-style-type: none;
   padding: 15px;
   background-color: rgba(0, 0, 0, 0.2);
-  width: 15.83333%;
+  width: 15.625%;
   height: 150px;
   float: left;
-  margin: 0 10px 10px 0;
+  margin: 5px;
   color: #444444;
-  overflow: hidden; }
+  overflow: hidden;
+  cursor: pointer;
+  border: 1px solid transparent; }
   .m-candidates-item h3 {
     color: #472b74;
     margin-top: 0;
@@ -588,6 +591,34 @@ a:hover {
   background-color: rgba(71, 43, 116, 0.9); }
   .m-candidates-item.preview-company h3, .m-candidates-item.preview-company .m-homepage-list-desc, .m-candidates-item.preview-company em {
     color: white; }
+
+.m-candidates-item:hover {
+  border-color: #472b74; }
+
+.m-candidates-item.s-active {
+  width: 35.5%;
+  z-index: 1000; }
+  .m-candidates-item.s-active em, .m-candidates-item.s-active .m-homepage-list-desc, .m-candidates-item.s-active h3 {
+    width: 330px; }
+
+.legend {
+  text-align: center;
+  border: 1px solid #aaaaaa;
+  margin-bottom: 20px;
+  padding: 5px; }
+  .legend .color {
+    display: inline-block;
+    margin: 0 3px;
+    padding: 4px 10px;
+    color: white;
+    letter-spacing: .4px; }
+  .legend .color.candidate {
+    background-color: rgba(0, 0, 0, 0.2);
+    color: rgba(0, 0, 0, 0.6); }
+  .legend .color.survey {
+    background-color: rgba(0, 0, 0, 0.6); }
+  .legend .color.preview {
+    background-color: rgba(71, 43, 116, 0.9); }
 
 .m-download {
   text-align: center;
@@ -644,7 +675,8 @@ a:hover {
   .resource-panel ul {
     width: 280px;
     display: inline-block;
-    padding: 15px; }
+    padding: 15px;
+    vertical-align: top; }
     .resource-panel ul li {
       list-style: none;
       margin-bottom: 5px;
