@@ -147,6 +147,7 @@
 		display: inline-block;
 		width: 408px / 960px * 100%;
 		text-align: center;
+		margin-top: 44px;
 
 		> div {
 			padding-bottom: 30px;
@@ -196,11 +197,22 @@
 
 		img {
 			margin-right: 20px;
-			opacity: .5;
+			opacity: .4;
 		}
 
 		a:hover img {
-			opacity: 1;
+			opacity: .7;
+		}
+
+		#fedscoop-logo {
+
+		}
+
+		#informationweek-logo {
+			position: relative;
+			top: -6px;
+			height: 26px;
+
 		}
 	}
 }
