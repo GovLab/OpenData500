@@ -629,7 +629,7 @@ a:hover {
     border: 1px solid #aaaaaa;
     padding: 20px;
     display: inline-block;
-    width: 265px;
+    width: 18%;
     margin-right: 10px;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
@@ -639,9 +639,9 @@ a:hover {
     font-family: "Exo", sans-serif;
     font-weight: 100;
     vertical-align: top;
-    height: 200px; }
+    height: 170px; }
     .m-download .m-download-item p {
-      height: 100px;
+      height: 70px;
       vertical-align: middle; }
   .m-download .m-button {
     display: block;
