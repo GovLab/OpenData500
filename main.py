@@ -591,16 +591,17 @@ class AdminHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self):
         unvettedCompanies = models.Company.objects(Q(vetted=False) & Q(vettedByCompany=True)).order_by('prettyName')
-        logging.info(len(unvettedCompanies))
         vettedCompanies = models.Company.objects(Q(vetted=True) & Q(vettedByCompany=True)).order_by('prettyName')
-        recommendedCompanies = models.Company.objects(Q(vetted=False) & Q(recommended=True))
+        #recommendedCompanies = models.Company.objects(Q(vetted=False) & Q(recommended=True))
         unvettedByCompanies = models.Company.objects(Q(vetted=False) & Q(vettedByCompany=False)).order_by('prettyName')
+        recentlySubmitted = models.Company.objects(recommended=False)
         self.render(
             "admin.html",
             page_title='OpenData500',
             page_heading='Welcome to the OpenData 500',
             unvettedCompanies = unvettedCompanies,
-            recommendedCompanies = recommendedCompanies,
+            recentlySubmitted=recentlySubmitted,
+            #recommendedCompanies = recommendedCompanies,
             vettedCompanies = vettedCompanies,
             unvettedByCompanies = unvettedByCompanies
         )
