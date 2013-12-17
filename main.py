@@ -61,7 +61,7 @@ class Application(tornado.web.Application):
             (r"/admin/edit/([a-zA-Z0-9]{24})/?", AdminEditCompanyHandler),
             (r"/about/?", AboutHandler),
             (r"/resources/?", ResourcesHandler),
-            #(r"/generateFiles/?", GenerateFilesHandler),
+            (r"/generateFiles/?", GenerateFilesHandler),
             (r"/download/?", DownloadHandler),
             (r'/download/(.*)/?',tornado.web.StaticFileHandler,{'path':os.path.join(os.path.dirname(__file__), 'static')}),
             #(r"/upload50/?", Upload50Handler),
@@ -215,23 +215,23 @@ class CandidateHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self):
         companies = models.Company.objects.order_by('prettyName')
-        stateInfo = []
-        with open(os.path.join(os.path.dirname(__file__), 'static') + '/states.csv', 'rb') as csvfile:
-            statereader = csv.reader(csvfile, delimiter=',')
-            for row in statereader:
-                if row[0] != 'abbrev':
-                    stateInfo.append({
-                        "abbrev": row[0],
-                        "STATE": row[1],
-                        "VALUE": row[2]
-                        })
+        # stateInfo = []
+        # with open(os.path.join(os.path.dirname(__file__), 'static') + '/states.csv', 'rb') as csvfile:
+        #     statereader = csv.reader(csvfile, delimiter=',')
+        #     for row in statereader:
+        #         if row[0] != 'abbrev':
+        #             stateInfo.append({
+        #                 "abbrev": row[0],
+        #                 "STATE": row[1],
+        #                 "VALUE": row[2]
+        #                 })
         self.render(
             "candidates.html",
             page_title='Open Data 500',
             page_heading='Candidates for the OD500',
             companies = companies,
-            categories = categories,
-            stateInfo=stateInfo
+            categories = categories
+            #stateInfo=stateInfo
         )
 
 class AboutHandler(BaseHandler):
