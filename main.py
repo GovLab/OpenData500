@@ -61,7 +61,7 @@ class Application(tornado.web.Application):
             (r"/admin/edit/([a-zA-Z0-9]{24})/?", AdminEditCompanyHandler),
             (r"/about/?", AboutHandler),
             (r"/resources/?", ResourcesHandler),
-            (r"/generateFiles/?", GenerateFilesHandler),
+            #(r"/generateFiles/?", GenerateFilesHandler),
             (r"/download/?", DownloadHandler),
             (r'/download/(.*)/?',tornado.web.StaticFileHandler,{'path':os.path.join(os.path.dirname(__file__), 'static')}),
             #(r"/upload50/?", Upload50Handler),
@@ -260,7 +260,7 @@ class Upload50Handler(BaseHandler):
     def get(self):
         # Preview Survey Companies
         companies = []
-        with open('companies.csv', 'rb') as csvfile:
+        with open('missingCompanies.csv', 'rb') as csvfile:
             companyreader = csv.reader(csvfile, delimiter=',')
             for row in companyreader:
                 companies.append(row)
@@ -357,7 +357,7 @@ class Upload50Handler(BaseHandler):
                     socialImpact = c[30]
                     financialInfo = c[31]
                     confidentiality = c[38]
-                    if c[42] == 'Y':
+                    if c[43] == 'Y':
                         vetted = True
                     else:
                         vetted = False
@@ -731,7 +731,7 @@ class SubmitCompanyHandler(BaseHandler):
             financialInfo = financialInfo,
             contact = contact,
             vetted = False,
-            vettedByCompany = True,
+            vettedByCompany = False,
             recommended = False #this was submitted not recommended. 
         )
         company.save()
@@ -1328,8 +1328,9 @@ class GenerateFilesHandler(BaseHandler):
                     if hasattr(newrow[i], 'encode'):
                         newrow[i] = newrow[i].encode('utf8')
             csvwriter.writerow(newrow)
-        #CSV of all 500 companies
-        csvwriter = csv.writer(open(os.path.join(os.path.dirname(__file__), 'static') + "/OD500_Companies.csv", "w"))
+        #CSV of List of 50
+        companies = models.Company.objects(Q(vetted=True) & Q(vettedByCompany=True))
+        csvwriter = csv.writer(open(os.path.join(os.path.dirname(__file__), 'static') + "/Preview50_Companies.csv", "w"))
         csvwriter.writerow([
             'CompanyName',
             'URL',
@@ -1360,12 +1361,16 @@ class GenerateFilesHandler(BaseHandler):
         logging.info(len(companies))
         for c in companies:
             if len(c.datasets):
+                try: 
+                    state = states[str(c.state).replace(" ","")] #I think this is actually the abbreviation
+                except: 
+                    state = ''
                 for d in c.datasets:
                     newrow = [
                         c.companyName,
                         c.url,
                         c.city,
-                        states[str(c.state).replace(" ","")],
+                        state,
                         c.state,
                         c.zipCode,
                         c.ceo.firstName,
@@ -1394,7 +1399,7 @@ class GenerateFilesHandler(BaseHandler):
                     csvwriter.writerow(newrow)
             else: 
                 try: 
-                    stateAbbrev = states[str(c.state).replace(" ","")]
+                    stateAbbrev = states[str(c.state).replace(" ","")] #This might the full name, and not the abbrev.
                 except: 
                     stateAbbrev = ''
                 newrow = [
@@ -1428,7 +1433,38 @@ class GenerateFilesHandler(BaseHandler):
                     if hasattr(newrow[i], 'encode'):
                         newrow[i] = newrow[i].encode('utf8')
                 csvwriter.writerow(newrow)
+        #Do that shit again for the 500. 
+        companies = models.Company.objects()
+        csvwriter = csv.writer(open(os.path.join(os.path.dirname(__file__), 'static') + "/500_Companies.csv", "w"))
+        csvwriter.writerow([
+            'CompanyName',
+            'URL',
+            'city',
+            'STATE',
+            'abbrev',
+            'companyCategory',
+            'descriptionShort',
+            ])
+        for c in companies: 
+            try: 
+                stateAbbrev = states[str(c.state).replace(" ","")] #This might the full name, and not the abbrev.
+            except: 
+                stateAbbrev = ''
+            newrow = [
+            c.companyName,
+            c.url,
+            c.city,
+            stateAbbrev,
+            c.state,
+            c.companyCategory,
+            c.descriptionShort
+            ]
+            for i in range(len(newrow)):  # For every value in our newrow
+                if hasattr(newrow[i], 'encode'):
+                    newrow[i] = newrow[i].encode('utf8')
+            csvwriter.writerow(newrow)
         #Get companies, turn into objects, and then dump into JSON File
+        companies = models.Company.objects(Q(vetted=True) & Q(vettedByCompany=True))
         companiesJSON = []
         for c in companies:
             datasetIDs = []
