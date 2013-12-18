@@ -554,7 +554,7 @@ a:hover {
   margin: 5px;
   color: #444444;
   overflow: hidden;
-  cursor: pointer;
+  cursor: e-resize;
   border: 1px solid transparent; 
 }
 
@@ -641,14 +641,18 @@ a:hover {
   letter-spacing: .4px; }
 .legend .color.candidate {
   background-color: rgba(0, 0, 0, 0.2);
-  color: rgba(0, 0, 0, 0.6); }
+  color: rgba(0, 0, 0, 0.6);
+  cursor: pointer; }
 .legend .color.survey {
-  background-color: rgba(0, 0, 0, 0.6); }
+  background-color: rgba(0, 0, 0, 0.6);
+  cursor: pointer; }
 .legend .color.preview {
-  background-color: rgba(71, 43, 116, 0.9); }
+  background-color: rgba(71, 43, 116, 0.9);
+  cursor: pointer; }
 .legend .color.all {
   color: rgba(71, 43, 116, 0.9);
-  border: 1px solid #aaaaaa; }
+  border: 1px solid #aaaaaa;
+  cursor: pointer; }
 
 .m-download {
   text-align: center;
