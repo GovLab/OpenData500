@@ -555,8 +555,10 @@ a:hover {
   color: #444444;
   overflow: hidden;
   cursor: pointer;
-  border: 1px solid transparent; }
-  .m-candidates-item h3 {
+  border: 1px solid transparent; 
+}
+
+.m-candidates-item h3 {
     color: #472b74;
     margin-top: 0;
     font-weight: 300;
@@ -565,60 +567,88 @@ a:hover {
     white-space: nowrap;
     text-overflow: ellipsis;
     width: 150px;
-    line-height: 1.3em; }
-  .m-candidates-item .m-homepage-list-desc {
+    line-height: 1.3em; 
+}
+
+.m-candidates-item .m-homepage-list-desc {
     width: 152px;
-    height: 80px;
+    height: 50px;
     overflow: hidden;
     color: #444444; }
-  .m-candidates-item em {
-    color: #444444;
-    display: block;
-    height: 15px;
-    margin-top: 5px;
-    letter-spacing: .6px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    width: 150px; }
+
+.m-candidates-item em {
+  color: #444444;
+  display: block;
+  height: 15px;
+  margin-top: 5px;
+  letter-spacing: .6px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 150px; 
+}
+
+.m-homepage-list-location p {
+  color: #444444;
+  display: block;
+  height: 15px;
+  margin-top: 5px;
+  letter-spacing: .6px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 150px; 
+}
 
 .m-candidates-item.survey-company {
-  background-color: rgba(0, 0, 0, 0.6); }
-  .m-candidates-item.survey-company h3, .m-candidates-item.survey-company .m-homepage-list-desc, .m-candidates-item.survey-company em {
-    color: white; }
+  background-color: rgba(0, 0, 0, 0.6); 
+}
+.m-candidates-item.survey-company h3, .m-candidates-item.survey-company .m-homepage-list-desc, .m-candidates-item.survey-company .m-homepage-list-location, .m-candidates-item.survey-company em {
+    color: white; 
+  }
 
 .m-candidates-item.preview-company {
-  background-color: rgba(71, 43, 116, 0.9); }
-  .m-candidates-item.preview-company h3, .m-candidates-item.preview-company .m-homepage-list-desc, .m-candidates-item.preview-company em {
-    color: white; }
+  background-color: rgba(71, 43, 116, 0.9); 
+}
+
+.m-candidates-item.preview-company h3, .m-candidates-item.preview-company .m-homepage-list-desc, .m-candidates-item.survey-company .m-homepage-list-location .m-candidates-item.preview-company em {
+    color: white; 
+}
 
 .m-candidates-item:hover {
-  border-color: #472b74; }
+  border-color: #472b74; 
+}
 
 .m-candidates-item.s-active {
   width: 35.5%;
-  z-index: 1000; }
-  .m-candidates-item.s-active em, .m-candidates-item.s-active .m-homepage-list-desc, .m-candidates-item.s-active h3 {
-    width: 330px; }
+  z-index: 1000; 
+}
+
+.m-candidates-item.s-active em, .m-candidates-item.s-active .m-homepage-list-desc, .m-candidates-item.s-active, .m-homepage-list-location.s-active h3 {
+    width: 342px; 
+}
 
 .legend {
   text-align: center;
   border: 1px solid #aaaaaa;
   margin-bottom: 20px;
   padding: 5px; }
-  .legend .color {
-    display: inline-block;
-    margin: 0 3px;
-    padding: 4px 10px;
-    color: white;
-    letter-spacing: .4px; }
-  .legend .color.candidate {
-    background-color: rgba(0, 0, 0, 0.2);
-    color: rgba(0, 0, 0, 0.6); }
-  .legend .color.survey {
-    background-color: rgba(0, 0, 0, 0.6); }
-  .legend .color.preview {
-    background-color: rgba(71, 43, 116, 0.9); }
+.legend .color {
+  display: inline-block;
+  margin: 0 3px;
+  padding: 4px 10px;
+  color: white;
+  letter-spacing: .4px; }
+.legend .color.candidate {
+  background-color: rgba(0, 0, 0, 0.2);
+  color: rgba(0, 0, 0, 0.6); }
+.legend .color.survey {
+  background-color: rgba(0, 0, 0, 0.6); }
+.legend .color.preview {
+  background-color: rgba(71, 43, 116, 0.9); }
+.legend .color.all {
+  color: rgba(71, 43, 116, 0.9);
+  border: 1px solid #aaaaaa; }
 
 .m-download {
   text-align: center;

@@ -245,6 +245,7 @@ class CandidateHandler(BaseHandler):
             page_heading='Candidates for the OD500',
             companies = companies,
             recentlySubmitted=recentlySubmitted,
+            states=states,
             categories = categories
             #stateInfo=stateInfo
         )
