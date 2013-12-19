@@ -566,7 +566,7 @@ a:hover {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    width: 150px;
+    width: auto;
     line-height: 1.3em; 
 }
 
