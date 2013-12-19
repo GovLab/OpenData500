@@ -1201,6 +1201,9 @@ class DeleteCompanyHandler(BaseHandler):
     def get(self, id):
         try:
             company = models.Company.objects.get(id=bson.objectid.ObjectId(id)) 
+        except:
+            dataset = models.Dataset.objects.get(id=bson.objectid.ObjectId(id))
+        if company:
             #we're deleting a company. Need to delete CEO, delete 
             if company.ceo:
                 ceo = company.ceo
@@ -1212,8 +1215,7 @@ class DeleteCompanyHandler(BaseHandler):
             for d in company.datasets:
                 d.delete()
             company.delete()
-        except:
-            dataset = models.Dataset.objects.get(id=bson.objectid.ObjectId(id))
+        elif dataset:
             dataset.delete()
         self.redirect('/admin/')
 

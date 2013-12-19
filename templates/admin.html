@@ -72,7 +72,7 @@
 		<tr>
 			<td><strong>{{ company.companyName }}</strong></a></td>
 			<td><a href="/edit/{{ company.id }}">www.opendata500.com/edit/{{company.id}}</a></td>
-			<td>{% if (company.contact) %} {{ company.contact.email }} {% end %}</td>
+			<td>{%try%}{% if (company.contact) %} {{ company.contact.email }} {% end %}{%except%}{%end%}</td>
 			<td><a href="/delete/{{ company.id }}">Delete</a></td>
 		</tr>
 	{% end %}

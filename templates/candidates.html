@@ -28,14 +28,14 @@
     	<span>Filter by:  </span>
     	<span class="color preview" data-filter=".preview-company">Preview Company</span>
     	<span class="color survey" data-filter=".survey-company, .preview-company">Submitted Survey</span>
-    	<span class="color candidate" data-filter=":not(.preview-company) :not(.survey-company)">Candidate Company</span>
+    	<span class="color candidate" data-filter=":not(.preview-company) :not(.survey-company)">No Survey Submitted</span>
     	<span class="color all" data-filter="*">Show all</span>
     </div>
 	<div class="m-candidates isotopes-container" data-isotope-options='{ "layoutMode": "fitColumns" }'>
 		{% for company in companies %}
 			{% if company not in recentlySubmitted %}
 	            <div class="m-candidates-item {%try%} {{company.companyCategory.strip().replace(" ", "-").replace("/","").replace("&", "")}} {%except%}None{%end%} {{ company.state }}{% if company.vetted %} preview-company{%end%} {% if company.vettedByCompany %} survey-company{%end%}">
-	                {%if company.vetted %}<a href="/{{company.prettyName}}"><h3>{{ company.companyName }}</h3></a>{%else%}<h3>{{ company.companyName }}</h3>{%end%}
+	                {%if company.vetted %}<a href="/{{company.prettyName}}"><h3><strong>{{ company.companyName }}</strong></h3></a>{%else%}<h3>{{ company.companyName }}</h3>{%end%}
 	                <p class="m-homepage-list-location"> {%try%}{{ states[company.state] }}{%except%}{%end%}</p>
 	                <em> {{ company.companyCategory }}</em>
 	                <p class="m-homepage-list-desc">{{ company.descriptionShort }}</p>
