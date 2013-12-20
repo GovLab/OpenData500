@@ -8,6 +8,7 @@
 <section>
 	<h1 class="m-page-title">{{ page_heading }}</h1>
 	<p class="intro">Explore our preliminary list of 500 candidate companies that we believe meet our criteria for the Open Data 500. We have invited all listed companies to fill out our survey. Detailed information is shown here as companies have provided it to us. We do not vouch for the objectivity of all information at this stage, and invite input and comment.</p>
+	<p class="warning"><strong>How to use this page:</strong> Click on a square to expand it and read the brief company description. Click on a company's name to view more information and for a space to comment. </p>
 	<p class="warning"><strong>Please Note:</strong> We expect to that this list may change as we learn more about how each company operates – that’s part of our open process. Many of these companies have not yet responded to our survey, so information about them may change as we receive more input from them and from others.</p>
 </section>
 
@@ -35,7 +36,7 @@
 		{% for company in companies %}
 			{% if company not in recentlySubmitted %}
 	            <div class="m-candidates-item {%try%} {{company.companyCategory.strip().replace(" ", "-").replace("/","").replace("&", "")}} {%except%}None{%end%} {{ company.state }}{% if company.vetted %} preview-company{%end%} {% if company.vettedByCompany %} survey-company{%end%}">
-	                {%if company.vetted %}<a href="/{{company.prettyName}}"><h3><strong>{{ company.companyName }}</strong></h3></a>{%else%}<h3>{{ company.companyName }}</h3>{%end%}
+	                <a href="/{{company.prettyName}}"><h3><strong>{{ company.companyName }}</strong></h3></a>
 	                <p class="m-homepage-list-location"> {%try%}{{ states[company.state] }}{%except%}{%end%}</p>
 	                <em> {{ company.companyCategory }}</em>
 	                <p class="m-homepage-list-desc">{{ company.descriptionShort }}</p>

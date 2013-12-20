@@ -4,37 +4,47 @@
 {% block body %}
 
 
-<h1>{{ page_heading }}</h1>
+<h1><a href="{{company.url}}">{{ page_heading }}</a></h1>
 
 <div class="m-list-company-full">
-	<div class="m-half">
-		<h3>Company Information</h3>
-		<p><strong>Year Founded:</strong> {{company.yearFounded}}</p>
-		<p><strong>Location:</strong> {{company.city}}, {{company.state}}</p>
-		<p><strong>FTE:</strong> {% if company.fte == 0 %}Not Available{%else%}{{company.fte}}{%end%}</p>
-		<p><strong>Type of Company:</strong> {{company.companyType}}</p>
-		<p><strong>Company Function:</strong> {{company.companyFunction}}</p>
-		<p><strong>Sector(s):</strong> {{ ", ".join(company.sector) }}</p>
-		<p><strong>Source of Revenue:</strong> {{ ", ".join(company.revenueSource) }}</p>
-	</div>
-	<div class="m-half">
-		<h3>Description:</h3>
-		<p>{{company.descriptionLong}}</p>
-		<h3>Social Impact:</h3>
-		<p>{{company.socialImpact}}</p>
-		<h3>Financial Info:</h3>
-		<p>{{company.financialInfo}}</p>
-	</div>
-	<div class="m-full datasets">
-		<h3>Datasets</h3>
-		<ul>
-			{% for data in company.datasets %}
-					{% if data.datasetName %}<li><a href="{{data.datasetURL}}">{{data.datasetName}}</a></li>
-					{% elif data.datasetURL %}<li><a href="{{data.datasetURL}}">{{data.datasetURL}}</a></li>
-					{% elif data.agency %}<li>{{data.agency}}</li>{%end%}
-			{%end%}
-		</ul>
-	</div>
+	{% if not company.vetted %}
+		<div class="m-half">
+			<h3>Company Information</h3>
+			<p><strong>Location:</strong>{{company.state}}</p>
+			<p><strong>Category: </strong> {{company.companyCategory}}</p>
+			<p><strong>Short Description: </strong> {{company.descriptionShort}}</p>
+		</div>
+	{% end %}s
+	{% if company.vetted %}
+		<div class="m-half">
+			<h3>Company Information</h3>
+			<p><strong>Year Founded:</strong> {{company.yearFounded}}</p>
+			<p><strong>Location:</strong> {{company.city}}, {{company.state}}</p>
+			<p><strong>FTE:</strong> {% if company.fte == 0 %}Not Available{%else%}{{company.fte}}{%end%}</p>
+			<p><strong>Type of Company:</strong> {{company.companyType}}</p>
+			<p><strong>Company Function:</strong> {{company.companyFunction}}</p>
+			<p><strong>Sector(s):</strong> {{ ", ".join(company.sector) }}</p>
+			<p><strong>Source of Revenue:</strong> {{ ", ".join(company.revenueSource) }}</p>
+		</div>
+		<div class="m-half">
+			<h3>Description:</h3>
+			<p>{{company.descriptionLong}}</p>
+			<h3>Social Impact:</h3>
+			<p>{{company.socialImpact}}</p>
+			<h3>Financial Info:</h3>
+			<p>{{company.financialInfo}}</p>
+		</div>
+		<div class="m-full datasets">
+			<h3>Datasets</h3>
+			<ul>
+				{% for data in company.datasets %}
+						{% if data.datasetName %}<li><a href="{{data.datasetURL}}">{{data.datasetName}}</a></li>
+						{% elif data.datasetURL %}<li><a href="{{data.datasetURL}}">{{data.datasetURL}}</a></li>
+						{% elif data.agency %}<li>{{data.agency}}</li>{%end%}
+				{%end%}
+			</ul>
+		</div>
+	{% end %}
 </div>	
 <br>
 <div id="disqus_thread"></div>

@@ -626,6 +626,7 @@ a:hover {
 
 .m-candidates-item.s-active em, .m-candidates-item.s-active .m-homepage-list-desc, .m-candidates-item.s-active, .m-homepage-list-location.s-active h3 {
     width: 342px; 
+    cursor: w-resize
 }
 
 .legend {

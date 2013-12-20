@@ -45,7 +45,7 @@
 <h2>Recently Submitted Through Website Survey</h2>
 <div id="accordionSubmitted">
 {% for company in recentlySubmitted %}
-	<h3><strong>{{ company.companyName }}</strong></h3>
+	<h3><strong>{{ company.companyName }}</strong> Submitted: {{company.ts}}</h3> 
 	<div>
 	<ul>
 		{% try %}
