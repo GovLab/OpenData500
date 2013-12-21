@@ -78,8 +78,8 @@ Dataset.register_delete_rule(Company, "datasets", PULL)
 Dataset.register_delete_rule(Person, "submittedDatasets", PULL)
 Company.register_delete_rule(Dataset, "usedBy", PULL)
 Company.register_delete_rule(Person, "submittedCompany", PULL)
-Person.register_delete_rule(Company, "contact", PULL)
-Person.register_delete_rule(Company, "ceo", PULL)
+Person.register_delete_rule(Company, "contact", NULLIFY)
+Person.register_delete_rule(Company, "ceo", NULLIFY)
 
 
 
