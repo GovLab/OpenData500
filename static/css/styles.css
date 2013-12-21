@@ -624,9 +624,15 @@ a:hover {
   z-index: 1000; 
 }
 
-.m-candidates-item.s-active em, .m-candidates-item.s-active .m-homepage-list-desc, .m-candidates-item.s-active, .m-homepage-list-location.s-active h3 {
+.m-candidates-item.s-active em, .m-candidates-item.s-active, .m-homepage-list-location.s-active h3 {
     width: 342px; 
-    cursor: w-resize
+    cursor: w-resize;
+}
+
+.m-candidates-item.s-active .m-homepage-list-desc {
+  width: 342px; 
+  cursor: w-resize;
+  height: 70px;
 }
 
 .legend {
