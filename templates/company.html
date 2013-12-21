@@ -3,7 +3,7 @@
 
 {% block body %}
 
-<h1><a href="{% if 'http://' in company.url %}{{company.url}}{%else%}http://{{company.url}}{%end%}">{{ page_heading }}</a></h1>
+<h1><a href="{% if 'http' in company.url %}{{company.url}}{%else%}http://{{company.url}}{%end%}">{{ page_heading }}</a></h1>
 
 <div class="m-list-company-full">
 	{% if not company.vetted %}
