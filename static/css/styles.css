@@ -353,6 +353,10 @@ a:hover {
     position: relative;
     top: -6px;
     height: 26px; }
+.m-homepage .m-homepage-press #forbes-logo {
+  position: relative;
+  top: -5px;
+  height: 26px; }
 
 .about-page {
   font-size: 14px;
