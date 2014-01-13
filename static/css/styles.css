@@ -548,6 +548,9 @@ a:hover {
 .m-candidates-buttons button:hover {
   background-color: #472b74; }
 
+.m-candidates-buttons .s-active {
+  background-color: #472b74; }
+
 .m-candidates-item {
   list-style-type: none;
   padding: 15px;

@@ -163,6 +163,8 @@
 	// filter items on button click
 	$('#filters').on( 'click', 'button', function( event ) {
 	  var filtr = $(this).attr('data-filter');
+      $("#filters button").removeClass('s-active');
+      $(this).addClass('s-active');
 	  $container.isotope({ filter: filtr });
 	});
 
