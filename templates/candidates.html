@@ -413,7 +413,12 @@
                     })
                     .on("mouseout", function(d) { if (hoverStates == true) hover.style("left", -100).style("top", -100).transition().duration(100).style("opacity", 0); })
                     .on("mousemove", function(d, i) { if (hoverStates == true)hover.style("left", (d3.event.pageX) + 20 + "px").style("top", (d3.event.pageY) + "px"); })
-                    .on('click', function(d) { var filtr = "." + d.abbrev; $container.isotope({ filter: filtr }); console.log(filtr); });
+                    .on('click', function(d) { 
+                        var filtr = "." + d.abbrev; 
+                        $container.isotope({ filter: filtr }); 
+                        console.log(filtr); 
+                        $("#filters button").removeClass('s-active');
+                    });
                     
                 if (chartTitleXLoc == "Left") { var cxpos = margin.left; var ctextanchor = "start"; };
                 if (chartTitleXLoc == "Center") { var cxpos = (w - margin.right - margin.left)/2 + margin.left; var ctextanchor = "middle"; };
