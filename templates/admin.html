@@ -8,7 +8,7 @@
 
 <h2>Submitted Survey (Not In 50)</h2>
 <div id="accordionUnvetted">
-	{% for company in unvettedCompanies %}
+	{% for company in surveyNotIn50 %}
 		<h3><strong>{{ company.companyName }}</strong></h3>
 		<div class="unvettedCompanyDatasets">
 			<ul>
@@ -26,7 +26,7 @@
 <br>
 <h2>Preview 50</h2>
 <div id="accordionVetted">
-{% for company in vettedCompanies %}
+{% for company in preview50 %}
 	<h3><strong>{{ company.companyName }}</strong></h3>
 	<div>
 	<ul>
@@ -68,7 +68,7 @@
 		<th>Contact Email</th>
 		<th>Danger Zone</th>
 	</tr>
-	{% for company in unvettedByCompanies %}
+	{% for company in candidate500 %}
 		<tr>
 			<td><strong>{{ company.companyName }}</strong></a></td>
 			<td><a href="/edit/{{ company.id }}">www.opendata500.com/edit/{{company.id}}</a></td>

@@ -87,6 +87,31 @@ class Application(tornado.web.Application):
         )
         tornado.web.Application.__init__(self, handlers, **settings)
 
+class FileGenerator(object):
+    def state_file(self):
+        #Get candidate companies, turn each one into an array and put into CSV file
+        companies = models.Company.objects()
+        #make a csv for states info
+        statesCount = []
+        for c in companies:
+            statesCount.append(c.state)
+        count = [(i, statesCount.count(i)) for i in set(statesCount)]
+        csvwriter = csv.writer(open(os.path.join(os.path.dirname(__file__), 'static') + "/states.csv", "w"))
+        csvwriter.writerow(['abbrev','state','value'])
+        for s in states:
+            abbrev = s
+            stateName = states[s]
+            value = 0
+            for c in count:
+                if c[0] == abbrev:
+                    value = c[1]
+            newrow = [abbrev, stateName, value]
+            for i in range(len(newrow)):  # For every value in our newrow
+                    if hasattr(newrow[i], 'encode'):
+                        newrow[i] = newrow[i].encode('utf8')
+            csvwriter.writerow(newrow)
+
+
 class BaseHandler(tornado.web.RequestHandler): 
     def get_login_url(self):
         return u"/login"
@@ -606,20 +631,18 @@ class AdminHandler(BaseHandler):
     @tornado.web.addslash
     @tornado.web.authenticated
     def get(self):
-        unvettedCompanies = models.Company.objects(Q(vetted=False) & Q(vettedByCompany=True)).order_by('prettyName')
-        vettedCompanies = models.Company.objects(Q(vetted=True) & Q(vettedByCompany=True)).order_by('prettyName')
-        #recommendedCompanies = models.Company.objects(Q(vetted=False) & Q(recommended=True))
-        unvettedByCompanies = models.Company.objects(Q(vetted=False) & Q(vettedByCompany=False)).order_by('prettyName')
-        recentlySubmitted = models.Company.objects(Q(vetted=False) & Q(vettedByCompany=False) & Q(recommended=False)).order_by('prettyName')
+        surveyNotIn50 = models.Company.objects(Q(preview50=False) & Q(candidate500=True) & Q(submittedSurvey=True)).order_by('prettyName')
+        preview50 = models.Company.objects(Q(preview50=True) & Q(candidate500=True) & Q(submittedSurvey=True)).order_by('prettyName')
+        candidate500 = models.Company.objects(Q(preview50=False) & Q(candidate500=True) & Q(submittedSurvey=False)).order_by('prettyName')
+        recentlySubmitted = models.Company.objects(Q(preview50=False) & Q(candidate500=False) & Q(submittedSurvey=True)).order_by('prettyName')
         self.render(
             "admin.html",
             page_title='OpenData500',
             page_heading='Welcome to the OpenData 500',
-            unvettedCompanies = unvettedCompanies,
+            surveyNotIn50 = surveyNotIn50,
             recentlySubmitted=recentlySubmitted,
-            #recommendedCompanies = recommendedCompanies,
-            vettedCompanies = vettedCompanies,
-            unvettedByCompanies = unvettedByCompanies
+            preview50 = preview50,
+            candidate500 = candidate500
         )
 
 class SubmitCompanyHandler(BaseHandler):
@@ -749,7 +772,10 @@ class SubmitCompanyHandler(BaseHandler):
             contact = contact,
             vetted = False,
             vettedByCompany = False,
-            recommended = False #this was submitted not recommended. 
+            recommended = False, #this was submitted not recommended. 
+            preview50 = False,
+            candidate500 = False, 
+            submittedSurvey = True
         )
         company.save()
         contact.submittedCompany = company
@@ -1137,6 +1163,7 @@ class AdminEditCompanyHandler(BaseHandler):
         elif self.get_argument('vettedByCompany') == 'False':
             company.vettedByCompany = False
         company.save()
+        #make state file
         self.redirect('/admin/')
 
 class EditDataHandler(BaseHandler):

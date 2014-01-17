@@ -136,10 +136,10 @@
 	<fieldset class="m-form-half right">
 		<h3>Please include any financial or operational information that will help us understand your company. We are interested in specific information like past and projected annual revenues, total outside investment dollars to date, and significant investors or partners. [100 words or less]</h3>
 		<textarea rows="10" cols="59" name="financialInfo" id="financialInfo" data-trigger="keyup" data-maxwords="100">{% if company.descriptionShort %}{{ company.financialInfo }}{% end %}</textarea><br>
-		<h3>Vetted?</h3>
+		<h3>Approved by Admin?</h3>
 		<input type="radio" name="vetted" id="vetted" value="True" {% if company.vetted %} checked {% end %}>True<br>
 		<input type="radio" name="vetted" id="vetted" value="False" {% if not company.vetted %} checked {% end %}>False<br>
-		<h3>Vetted By Company?</h3>
+		<h3>Submitted Survey?</h3>
 		<input type="radio" name="vettedByCompany" id="vettedByCompany" value="True" {% if company.vettedByCompany %} checked {% end %}>True<br>
 		<input type="radio" name="vettedByCompany" id="vettedByCompany" value="False" {% if not company.vettedByCompany %} checked {% end %}>False<br>
 	</fieldset>

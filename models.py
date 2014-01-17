@@ -65,6 +65,9 @@ class Company(Document):
 	reasonForRecommending = StringField()
 	datasets = ListField(ReferenceField(Dataset))
 	ts = ComplexDateTimeField(default=datetime.now())
+	preview50 = BooleanField()
+	candidate500 = BooleanField()
+	submittedSurvey = BooleanField()
 
 
 
