@@ -5,39 +5,32 @@
 
 <h2>{{ page_heading }}</h2>
 
-<p>The object ID is: {{ id }}</p> 
-
 <p>Please fill out the following information for the datasets that you consider to be the most important to your core business.</p>
 
-<form method="post" id="submitDataset" class="m-form">
-	<fieldset class="m-form-half">
-		<div class="m-form-line"><label for="datasetName">Name of Dataset:</label><input type="text" name="datasetName" id="datasetName" value ="{{ dataset.datasetName }}"></div>
-		<div class="m-form-line"><label for="datasetURL">URL of Dataset:</label><input type="text" name="datasetURL" id="datasetURL" value ="{{ dataset.datasetURL }}"></div>
-		<div class="m-form-line"><label for="agency">Agency or Source: *</label><input type="text" name="agency" id="datasetAgency" value="{{dataset.agency}}"></div>
-	</fieldset>
 
-	<fieldset class="m-form-half right">
-	<p>Type of Dataset:</p>
+{% if dataset %}
+<form method="post" class="m-form" parsley-validate>
+	<div class="m-form-line"><label for="datasetName">Name of Dataset:</label><input type="text" name="datasetName" id="datasetName" parsley-trigger="change" parsley-required="true" value ="{{ dataset.datasetName }}"></div>
+	<div class="m-form-line"><label for="datasetURL">URL of Dataset:</label><input type="text" name="datasetURL" id="datasetURL" parsley-trigger="change" parsley-type="url" value ="{{ dataset.datasetURL }}"></div>
+	<div class="m-form-line"><label for="agency">Agency or Source: *</label><input type="text" name="agency" id="datasetAgency" parsley-required="true" parsley-trigger="change" value="{{dataset.agency}}"></div>
 
-	{% for type in datatypes %}
-		<input type="checkbox" name="dataType" value="{{ type }}" {% if type in dataset.dataType %} checked {% end %}>{{ type }}<br>
-	{% end %}
-	{%if list(set(dataset.dataType) - set(datatypes)) %}
-		<input type="checkbox" name="dataType" value="Other" checked>Other<br>
-		<input type="text" name="otherDataType" id="otherDataType" value="{{ list(set(dataset.dataType) - set(datatypes))[0] }}"><br>
-	{% else %}
-		<input type="checkbox" name="dataType" value="Other">Other<br>
-		<input type="text" name="otherDataType" id="otherDataType"><br>
-	{% end %}
-	</fieldset>
-	<p>On a scale of 1 to 5, how would you rate the usefulness of this dataset? Your answer can reflect your experience with data quality, format of the data, or other factors.</p>
-	<input type="text" name="rating" parsley-trigger="change" parsley-range="[0, 5]" value="{{dataset.ratings[0].rating}}">
-	<p>Why did you give it this rating? [50 words or less]</p>
-	<textarea rows="6" cols="70" name="reason" parsley-trigger="keyup" parsley-maxwords="50">{{dataset.ratings[0].reason}}</textarea><br>
+	<div class="m-form-box">Type of Dataset: *<br>
+		<p>Type of Dataset:</p>
+		{% for type in datatypes %}
+			<input type="checkbox" name="dataType" value="{{ type }}" {% if type in dataset.dataType %} checked {% end %}>{{ type }}<br>
+		{% end %}
+		{%if list(set(dataset.dataType) - set(datatypes)) %}
+			<input type="checkbox" name="dataType" parsley-required="true" value="Other" checked>Other<br><input type="text" name="otherDataType" id="otherDataType" value="{{ list(set(dataset.dataType) - set(datatypes))[0] }}"><br>
+		{% else %}
+			<input type="checkbox" name="dataType" parsley-required="true" value="Other">Other<br><input type="text" name="otherDataType" id="otherDataType"><br>
+		{% end %}
+	</div>
 	<input type="hidden" class="id" name="id" value="{{ dataset.id }}">
 	{% raw xsrf_form_html() %}
-	<input type="submit" id="submit">
+	<div class="m-form-footer">
+		<input type="submit" id="submit" class="m-button" value="Save and Go Back">
+	</div>
 </form>
-
+{% end %}
 
 {% end %}

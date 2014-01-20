@@ -218,7 +218,10 @@ class CompanyHandler(BaseHandler):
     #@tornado.web.authenticated
     def get(self, companyName):
         try:
-            company = models.Company.objects.get(prettyName=companyName)
+            try:
+                company = models.Company.objects.get(prettyName=companyName)
+            except:
+                company = models.Company.objects(prettyName=companyName)[0]
             self.render(
             "company.html",
             page_title='Open Data500',
@@ -239,21 +242,19 @@ class PreviewHandler(BaseHandler):
     @tornado.web.addslash
     #@tornado.web.authenticated
     def get(self):
-        #companies = models.Company.objects()
-        submittedCompanies = models.Company.objects(Q(vetted=True) & Q(vettedByCompany=True)).order_by('prettyName')
+        companies = models.Company.objects(preview50=True).order_by('prettyName')
         self.render(
             "preview.html",
             page_title='Open Data500',
             page_heading='Preview of the Open Data 500',
-            submittedCompanies = submittedCompanies,
+            companies = companies,
         )
 
 class CandidateHandler(BaseHandler):
     @tornado.web.addslash
     #@tornado.web.authenticated
     def get(self):
-        companies = models.Company.objects.order_by('prettyName')
-        recentlySubmitted = models.Company.objects(Q(vetted=False) & Q(vettedByCompany=False) & Q(recommended=False)).order_by('prettyName')
+        companies = models.Company.objects(candidate500=True).order_by('prettyName')
         # stateInfo = []
         # with open(os.path.join(os.path.dirname(__file__), 'static') + '/states.csv', 'rb') as csvfile:
         #     statereader = csv.reader(csvfile, delimiter=',')
@@ -269,7 +270,7 @@ class CandidateHandler(BaseHandler):
             page_title='Open Data 500',
             page_heading='Candidates for the OD500',
             companies = companies,
-            recentlySubmitted=recentlySubmitted,
+            #recentlySubmitted=recentlySubmitted,
             states=states,
             categories = categories
             #stateInfo=stateInfo
@@ -634,7 +635,7 @@ class AdminHandler(BaseHandler):
         surveyNotIn50 = models.Company.objects(Q(preview50=False) & Q(candidate500=True) & Q(submittedSurvey=True)).order_by('prettyName')
         preview50 = models.Company.objects(Q(preview50=True) & Q(candidate500=True) & Q(submittedSurvey=True)).order_by('prettyName')
         candidate500 = models.Company.objects(Q(preview50=False) & Q(candidate500=True) & Q(submittedSurvey=False)).order_by('prettyName')
-        recentlySubmitted = models.Company.objects(Q(preview50=False) & Q(candidate500=False) & Q(submittedSurvey=True)).order_by('prettyName')
+        recentlySubmitted = models.Company.objects(Q(preview50=False) & Q(candidate500=False) & Q(submittedSurvey=True)).order_by('ts')
         self.render(
             "admin.html",
             page_title='OpenData500',
@@ -770,9 +771,9 @@ class SubmitCompanyHandler(BaseHandler):
             socialImpact = socialImpact,
             financialInfo = financialInfo,
             contact = contact,
-            vetted = False,
-            vettedByCompany = False,
-            recommended = False, #this was submitted not recommended. 
+            #vetted = False,
+            #vettedByCompany = False,
+            #recommended = False, #this was submitted not recommended. 
             preview50 = False,
             candidate500 = False, 
             submittedSurvey = True
@@ -783,100 +784,100 @@ class SubmitCompanyHandler(BaseHandler):
         id = str(company.id)
         self.redirect("/addData/" + id)
 
-class RecommendCompanyHandler(BaseHandler):
-    @tornado.web.addslash
-    @tornado.web.authenticated
-    def get(self, id=None):
-        try:
-            recommenderId = models.Person.objects.get(id=bson.objectid.ObjectId(id))
-        except:
-            recommenderId = None
-        self.render(
-            "recommendCompany.html",
-            page_title = "Recommend a Company",
-            page_heading = "Recommend a Company",
-            recommenderId = recommenderId
-        )
+# class RecommendCompanyHandler(BaseHandler):
+#     @tornado.web.addslash
+#     @tornado.web.authenticated
+#     def get(self, id=None):
+#         try:
+#             recommenderId = models.Person.objects.get(id=bson.objectid.ObjectId(id))
+#         except:
+#             recommenderId = None
+#         self.render(
+#             "recommendCompany.html",
+#             page_title = "Recommend a Company",
+#             page_heading = "Recommend a Company",
+#             recommenderId = recommenderId
+#         )
 
-    @tornado.web.authenticated
-    def post(self): #A person has just recommended a company
-        #Recommenders info:
-        firstName = self.get_argument("firstName", None)
-        lastName = self.get_argument("lastName", None)
-        org = self.get_argument("org", None)
-        email = self.get_argument("email", None)
-        otherInfo = self.get_argument("otherInfo", None) #What else you got to say?
-        #Check to see if Recommender exists already (via email or ID)
-        try: 
-            recommender = models.Person.objects.get(email=email) #if Recommender exists, update the info:
-            recommender.firstName = firstName
-            recommender.lastName = lastName
-            recommender.org = org
-            recommender.otherInfo.append(otherInfo)
-            recommender.save()
-        except: #not found by email, try by ID (If the user clicks on "Recommend another Company")
-            try:
-                recommenderId = self.get_argument('recommenderId', None)
-                recommender = models.Person.objects.get(id=bson.objectid.ObjectId(recommenderId))
-            except:
-                recommender = None
-        if not recommender: #If we don't have a recommender already, save a new one.
-            recommender = models.Person(
-                firstName = firstName, 
-                lastName = lastName,
-                org = org,
-                email = email,
-                personType = "Recommender"
-            )
-            recommender.otherInfo.append(otherInfo)
-            recommender.save()
-        #Company Info:
-        companyName = self.get_argument("companyName", None)
-        url = self.get_argument('url', None)
-        reasonForRecommending = self.get_argument("reasonForRecommending", None)
-        #Contact Info
-        firstNameContact = self.get_argument("firstNameContact", None)
-        lastNameContact = self.get_argument("lastNameContact", None)
-        emailContact = self.get_argument("emailContact", None)
-        #Save the contact
-        if emailContact:
-            contact = models.Person(
-                firstName = firstNameContact,
-                lastName = lastNameContact,
-                email =emailContact,
-                personType = "Contact",
-                org = companyName
-            )
-            contact.save()
-        else: 
-            contact = None
-        #Create new company and save the company Info
-        company = models.Company(
-            companyName = companyName,
-            url = url,
-            reasonForRecommending = reasonForRecommending,
-            vetted = False,
-            vettedByCompany = False,
-            recommended = True
-        )
-        company.save()
-        if contact:
-            company.contact = contact
-        recommender.submittedCompany = company
-        recommender.save()
-        company.recommendedBy = recommender
-        company.save()
-        #Add Another? Redirect to form
-        if self.get_argument('submit', None) == 'Recommend Another Company':
-            self.render(
-                "recommendCompany.html", 
-                page_title = "Recommend a Company",
-                page_heading = "Recommend a Company",
-                recommenderId = str(recommender.id)
-            )
-        #Done recommending? Redirect back home
-        else: 
-            self.redirect("/")
+#     @tornado.web.authenticated
+#     def post(self): #A person has just recommended a company
+#         #Recommenders info:
+#         firstName = self.get_argument("firstName", None)
+#         lastName = self.get_argument("lastName", None)
+#         org = self.get_argument("org", None)
+#         email = self.get_argument("email", None)
+#         otherInfo = self.get_argument("otherInfo", None) #What else you got to say?
+#         #Check to see if Recommender exists already (via email or ID)
+#         try: 
+#             recommender = models.Person.objects.get(email=email) #if Recommender exists, update the info:
+#             recommender.firstName = firstName
+#             recommender.lastName = lastName
+#             recommender.org = org
+#             recommender.otherInfo.append(otherInfo)
+#             recommender.save()
+#         except: #not found by email, try by ID (If the user clicks on "Recommend another Company")
+#             try:
+#                 recommenderId = self.get_argument('recommenderId', None)
+#                 recommender = models.Person.objects.get(id=bson.objectid.ObjectId(recommenderId))
+#             except:
+#                 recommender = None
+#         if not recommender: #If we don't have a recommender already, save a new one.
+#             recommender = models.Person(
+#                 firstName = firstName, 
+#                 lastName = lastName,
+#                 org = org,
+#                 email = email,
+#                 personType = "Recommender"
+#             )
+#             recommender.otherInfo.append(otherInfo)
+#             recommender.save()
+#         #Company Info:
+#         companyName = self.get_argument("companyName", None)
+#         url = self.get_argument('url', None)
+#         reasonForRecommending = self.get_argument("reasonForRecommending", None)
+#         #Contact Info
+#         firstNameContact = self.get_argument("firstNameContact", None)
+#         lastNameContact = self.get_argument("lastNameContact", None)
+#         emailContact = self.get_argument("emailContact", None)
+#         #Save the contact
+#         if emailContact:
+#             contact = models.Person(
+#                 firstName = firstNameContact,
+#                 lastName = lastNameContact,
+#                 email =emailContact,
+#                 personType = "Contact",
+#                 org = companyName
+#             )
+#             contact.save()
+#         else: 
+#             contact = None
+#         #Create new company and save the company Info
+#         company = models.Company(
+#             companyName = companyName,
+#             url = url,
+#             reasonForRecommending = reasonForRecommending,
+#             vetted = False,
+#             vettedByCompany = False,
+#             recommended = True
+#         )
+#         company.save()
+#         if contact:
+#             company.contact = contact
+#         recommender.submittedCompany = company
+#         recommender.save()
+#         company.recommendedBy = recommender
+#         company.save()
+#         #Add Another? Redirect to form
+#         if self.get_argument('submit', None) == 'Recommend Another Company':
+#             self.render(
+#                 "recommendCompany.html", 
+#                 page_title = "Recommend a Company",
+#                 page_heading = "Recommend a Company",
+#                 recommenderId = str(recommender.id)
+#             )
+#         #Done recommending? Redirect back home
+#         else: 
+#             self.redirect("/")
 
 
 class SubmitDataHandler(BaseHandler):
@@ -918,7 +919,6 @@ class SubmitDataHandler(BaseHandler):
         #Can't check if dataset exists. If check by URL, if someone enters data.gov instead of specific URL, 
         #datasets might be different but same URL.
         #Just save them all.
-        #Are we making a new one, or editing?
         dataset = models.Dataset(
             datasetName = datasetName,
             datasetURL = datasetURL,
@@ -967,9 +967,10 @@ class EditCompanyHandler(BaseHandler):
             companyFunction = companyFunction,
             criticalDataTypes = criticalDataTypes,
             revenueSource = revenueSource,
-            sectors = sectors,
+            categories=categories,
             datatypes = datatypes,
-            action = 'editing',
+            stateList = stateList,
+            stateListAbbrev=stateListAbbrev,
             id = str(company.id)
         )
 
@@ -1004,8 +1005,12 @@ class EditCompanyHandler(BaseHandler):
         company.companyType = self.get_argument("companyType", None)
         if company.companyType == 'other': #if user entered custom option for Type
             company.companyType = self.get_argument('otherCompanyType', None)
-        company.yearFounded = self.get_argument("yearFounded", 9999)
+        company.yearFounded = self.get_argument("yearFounded", 0)
+        if  not company.yearFounded:
+            company.yearFounded = 0
         company.fte = self.get_argument("fte", 0)
+        if not company.fte:
+            company.fte = 0
         company.companyFunction = self.get_argument("companyFunction", None)
         if company.companyFunction == 'other': #if user entered custom option for Function
             company.companyFunction = self.get_argument('otherCompanyFunction', None)
@@ -1037,12 +1042,12 @@ class EditCompanyHandler(BaseHandler):
         company.descriptionShort = self.get_argument('descriptionShort', None)
         company.socialImpact = self.get_argument('socialImpact', None)
         company.financialInfo = self.get_argument('financialInfo', None)
-        if self.get_argument('vettedByCompany') == 'True':
-            company.vettedByCompany = True
-        elif self.get_argument('vettedByCompany') == 'False':
-            company.vettedByCompany = False
+        company.submittedSurvey = True
         company.save()
-        self.redirect('/')
+        if self.get_argument('submit', None) == 'Save and Submit':
+            self.redirect('/')
+        if self.get_argument('submit', None) == 'Save And Continue Editing':
+            self.redirect('/edit/'+id)
 
 #Editing section for Admins
 class AdminEditCompanyHandler(BaseHandler):
@@ -1181,47 +1186,32 @@ class EditDataHandler(BaseHandler):
 
     @tornado.web.authenticated
     def post(self, id):
+        #get company
+        #company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
+        #get dataset
+        datasetID = self.get_argument('datasetID')
+        dataset = models.Dataset.objects.get(id=bson.objectid.ObjectId(datasetID))
         #get values
-        id = self.get_argument("id", None)
         datasetName = self.get_argument('datasetName', None)
         datasetURL = self.get_argument('datasetURL', None)
         agency = self.get_argument('agency', None)
         dataType = self.request.arguments['dataType']
+        logging.info(dataType)
         if 'Other' in dataType:
             del dataType[dataType.index('Other')]
             dataType.append(self.get_argument('otherDataType', None))
         rating = self.get_argument('rating', None)
         reason = self.get_argument('reason', None)
         #try: #to find existing dataset
-        dataset = models.Dataset.objects.get(id=bson.objectid.ObjectId(id))
+        #dataset = models.Dataset.objects.get(id=bson.objectid.ObjectId(id))
         dataset.datasetName = datasetName
         dataset.datasetURL = datasetURL
         dataset.dataType = dataType
         dataset.agency = agency
-        for r in dataset.ratings: #get review that corresponds with this author and save the info.
-            if str(r.author.id) == str(self.get_argument('authorID', None)):
-                r.rating = rating
-                r.reason = reason
+        dataset.ratings[0].rating = rating
+        dataset.ratings[0].reason = reason
         dataset.save()
-        #except: #make a new one, for current company
-            # company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
-            # dataset = models.Dataset(
-            #     datasetName = datasetName,
-            #     datasetURL = datasetURL,
-            #     dataType = dataTypes,
-            #     agency = agency
-            # )
-            # dataset.usedBy.append(company)
-            # rating = models.Rating(
-            #     author = company.contact,
-            #     rating =rating,
-            #     reason = reason
-            # )
-            # dataset.ratings.append(rating)
-            # dataset.save()
-            # company.datasets.append(dataset)
-            # company.save()
-        self.redirect("/")
+        self.write("success")
 
 class DeleteCompanyHandler(BaseHandler):
     @tornado.web.authenticated

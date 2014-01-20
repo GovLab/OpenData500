@@ -23,15 +23,6 @@
 			<div class="m-form-line"><label for="">Phone:</label><input type="text" name="phone" id="phone" data-type="phone" value=""></div>
 			<div class="m-form-box contacted-box"><label for="contacted"><input type="checkbox" name="contacted" id="contacted" value="contacted" checked>Please check here if you would be willing to be contacted for further information about your company.</label></div>
 		{% end %}
-		{% try %}
-			<h3>Recommended by:</h3>
-			<div class="m-form-line"><p>First Name: {{ company.recommendedBy.firstName }}</p></div>
-			<div class="m-form-line"><p>Last Name: {{ company.recommendedBy.lastName }}</p></div>
-			<div class="m-form-line"><p>Organization: {{ company.recommendedBy.org }}</p></div>
-			<div class="m-form-line"><p>Email: {{ company.recommendedBy.email }}</p></div>
-			<div class="m-form-line"><p>Phone: {{ company.recommendedBy.phone }}</p></div>
-		{% except %}
-		{% end %}
 	</fieldset>
 	<fieldset class="m-form-half right">	
 		<h3>Company Info</h3>	
@@ -126,15 +117,15 @@
 		{% end %}
 	</fieldset>
 	<fieldset class="m-form-half">
-		<h3>Please give us a short public statement describing your company’s mission and work. You can take this material from your website or other publications if you choose to. [200 words or less] *</h3>
+		<h3>Please give us a short public statement describing your company’s mission and work. You can take this material from your website or other publications if you choose to. <br><em>[200 words or less]</em> *</h3>
 		<textarea rows="10" cols="59" name="descriptionLong" id="descriptionLong" data-trigger="keyup" data-maxwords="200">{% if company.descriptionLong %} {{ company.descriptionLong }} {% end %}</textarea><br>
-		<h3>As a summary, please provide a one sentence description of your company. [25 words or less] *</h3>
+		<h3>As a summary, please provide a one sentence description of your company. <br><em>[25 words or less]</em> *</h3>
 		<textarea rows="10" cols="59" name="descriptionShort" id="descriptionShort" data-trigger="keyup" data-maxwords="25">{% if company.descriptionShort %}{{ company.descriptionShort }}{% end %}</textarea><br>
-		<h3>Besides revenue generation, how do you measure the impact your company has for society and the public good? [50 words or less]</h3>
+		<h3>Besides revenue generation, how do you measure the impact your company has for society and the public good? <br><em>[50 words or less]</em></h3>
 		<textarea rows="10" cols="59" name="socialImpact" id="socialImpact" data-trigger="keyup" data-maxwords="50">{% if company.descriptionShort %}{{ company.socialImpact }}{% end %}</textarea><br>
 	</fieldset>
 	<fieldset class="m-form-half right">
-		<h3>Please include any financial or operational information that will help us understand your company. We are interested in specific information like past and projected annual revenues, total outside investment dollars to date, and significant investors or partners. [100 words or less]</h3>
+		<h3>Please include any financial or operational information that will help us understand your company. We are interested in specific information like past and projected annual revenues, total outside investment dollars to date, and significant investors or partners. <br><em> [100 words or less]</em></h3>
 		<textarea rows="10" cols="59" name="financialInfo" id="financialInfo" data-trigger="keyup" data-maxwords="100">{% if company.descriptionShort %}{{ company.financialInfo }}{% end %}</textarea><br>
 		<h3>Approved by Admin?</h3>
 		<input type="radio" name="vetted" id="vetted" value="True" {% if company.vetted %} checked {% end %}>True<br>

@@ -40,16 +40,23 @@ select {
   color: #fff; }
 
 .m-form .m-button {
-  background-color: transparent;
-  border: 1px solid #fff;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  border-radius: 4px;
-  color: #fff; }
-.m-form .m-button:hover {
+  width: 100px;
+  display: inline-block;
+  padding: 5px 5px 4px;
+  margin-top: 1px;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  background-color: white;
+  color: #472b74;
+  border-color: #aaaaaa;
+  margin-left: 0;
+  -webkit-border-radius: 0 4px 4px 0;
+  -moz-border-radius: 0 4px 4px 0;
+  border-radius: 4px; }
+.dataForm .m-button:hover {
   background-color: #472b74;
-  border: 1px solid #fff;
-  color: #fff; }
+  color: white;
+  border-color: #472b74; }
 
 .m-form-group, .m-form-half, .m-form-full {
   padding: 20px 0;
@@ -109,7 +116,6 @@ select {
   overflow: hidden; }
 
 .m-form-footer {
-  background-color: #8977a7;
   padding: 5px;
   margin: 5px 5px 20px;
   overflow: hidden; }
@@ -242,24 +248,63 @@ a:hover {
       -moz-border-radius: 4px 0 0 4px;
       border-radius: 4px 0 0 4px;
       border-right: 0; }
-    .m-homepage .m-homepage-about form .m-button {
-      width: 40px;
-      display: inline-block;
-      padding: 5px 5px 4px;
-      margin-top: 1px;
-      font-family: Helvetica, Arial, sans-serif;
-      font-size: 12px;
-      background-color: white;
-      color: #472b74;
-      border-color: #aaaaaa;
-      margin-left: 0;
-      -webkit-border-radius: 0 4px 4px 0;
-      -moz-border-radius: 0 4px 4px 0;
-      border-radius: 0 4px 4px 0; }
-    .m-homepage .m-homepage-about form .m-button:hover {
-      background-color: #472b74;
-      color: white;
-      border-color: #472b74; }
+.m-homepage .m-homepage-about form .m-button {
+  width: 40px;
+  display: inline-block;
+  padding: 5px 5px 4px;
+  margin-top: 1px;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  background-color: white;
+  color: #472b74;
+  border-color: #aaaaaa;
+  margin-left: 0;
+  -webkit-border-radius: 0 4px 4px 0;
+  -moz-border-radius: 0 4px 4px 0;
+  border-radius: 0 4px 4px 0; }
+.m-homepage .m-homepage-about form .m-button:hover {
+  background-color: #472b74;
+  color: white;
+  border-color: #472b74; }
+
+.dataForm .m-button {
+  width: 100px;
+  display: inline-block;
+  padding: 5px 5px 4px;
+  margin-top: 1px;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  background-color: white;
+  color: #472b74;
+  border-color: #aaaaaa;
+  margin-left: 0;
+  -webkit-border-radius: 0 4px 4px 0;
+  -moz-border-radius: 0 4px 4px 0;
+  border-radius: 4px; }
+.dataForm .m-button:hover {
+  background-color: #472b74;
+  color: white;
+  border-color: #472b74; }
+
+.m-form-footer .m-button {
+  width: auto;
+  display: inline-block;
+  padding: 5px 5px 4px;
+  margin-top: 1px;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  background-color: white;
+  color: #472b74;
+  border-color: #aaaaaa;
+  margin-left: 10px;
+  -webkit-border-radius: 0 4px 4px 0;
+  -moz-border-radius: 0 4px 4px 0;
+  border-radius: 4px; }
+.m-form-footer .m-button:hover {
+  background-color: #472b74;
+  color: white;
+  border-color: #472b74; }
+
   .m-homepage .m-homepage-about #mce-responses .response {
     position: absolute;
     width: 175px;
