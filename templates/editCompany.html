@@ -43,7 +43,7 @@
 			<input type="text" name="otherCompanyType" id="otherCompanyType" data-trigger="change" data-group="companyType" data-mincheck="1"></label>
 		{% end %}
 		</div>
-		<div class="m-form-line"><label for="">Founding Year:</label><input type="text" name="yearFounded" id="yearFounded" parsley-type="number" parsley-trigger="change" parsley-range="[1000, 2014]" {% if company.yearFounded %} value="{{ company.yearFounded }}" {%end%}></div>
+		<div class="m-form-line"><label for="">Founding Year:</label><input type="text" name="yearFounded" id="yearFounded" parsley-type="number" parsley-trigger="change" parsley-range="[1000, 2014]" {% if company.yearFounded and company.yearFounded != 9999 %} value="{{ company.yearFounded }}" {%end%}></div>
 		<div class="m-form-line"><label for="">Number of FTE's:</label><input type="text" name="fte" id="fte" parsley-trigger="change" parsley-type="number" {% if company.fte %} value="{{ company.fte }}" {%end%}></div>
 	</fieldset>
 
