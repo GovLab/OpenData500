@@ -16,10 +16,10 @@
 			<div class="m-form-line"><label for="agency">Agency or Source: *</label><input type="text" name="agency" parsley-required="true" parsley-trigger="change"></div>
 			
 			<div class="m-form-box">Type of Dataset: *<br>
-				<label for=""><input type="checkbox" name="dataType" value="Federal Open Data">Federal Open Data</label><br>
-				<label for=""><input type="checkbox" name="dataType" value="State Open Data">State Open Data</label><br>
-				<label for=""><input type="checkbox" name="dataType" value="City/Local Open Data">City/Local Open Data</label><br>
-				<label for=""><input type="checkbox" name="dataType" parsley-required="true" value="Other">Other <label for=""><input type="text" name="otherDataType"></label></label>
+				<label for=""><input type="checkbox" name="typeOfDataset" value="Federal Open Data">Federal Open Data</label><br>
+				<label for=""><input type="checkbox" name="typeOfDataset" value="State Open Data">State Open Data</label><br>
+				<label for=""><input type="checkbox" name="typeOfDataset" value="City/Local Open Data">City/Local Open Data</label><br>
+				<label for=""><input type="checkbox" name="typeOfDataset" parsley-required="true" value="Other">Other <label for=""><input type="text" name="otherTypeOfDataset"></label></label>
 			</div>
 
 			<p>On a scale of 1 to 4, how would you rate the usefulness of this dataset? (1- poor, 4- excellent) Your answer can reflect your experience with data quality, format of the data, or other factors.</p>
@@ -28,9 +28,9 @@
 			<textarea rows="6" cols="70" name="reason" parsley-trigger="keyup" parsley-maxwords="50"></textarea><br>
 			<input type="hidden" id="companyID" name="id" value="{{ id }}">
 			{% raw xsrf_form_html() %}
-			<input type="submit" name="submit" class="l-button" value="Add Another"></a>
-			<input type="submit" name="submit" class="l-button" value="Done">
-			<a href="/">Continue Without Adding Datasets</a>
+			<input type="submit" name="submit" class="m-button" value="Add Another">
+			<input type="submit" name="submit" class="m-button" value="Done">
+			<input type="submit" name="submit" class="m-button" value="Continue Without Adding Datasets">
 		</form>
 	</div>
 </div>

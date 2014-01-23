@@ -117,123 +117,217 @@
 		<textarea rows="10" cols="59" name="companyRec" id="companyRec" parsley-trigger="keyup" parsley-maxwords="50">{%if company.contact %}{{ company.contact.companyRec}}{%end%}</textarea>
 		<h3>What conferences or events do you think would be helpful to us in surveying the field of open data companies? <br><em>[50 words or less]</em></h3>
 		<textarea rows="10" cols="59" name="conferenceRec" id="conferenceRec" parsley-trigger="keyup" parsley-maxwords="50">{%if company.contact %}{{ company.contact.conferenceRec }}{%end%}</textarea>
+		{% raw xsrf_form_html() %}
 	</fieldset>
 </form>
 	<!--------------------------------------------DATASETS--------------------------------------!-->
-<form method="post" class="m-form dataForm">
-	<div class="m-form-box">
+
+	<div class="m-form-box datasets">
 		<h3>Datasets</h3>
 		<div class="dataList">
 			{% if company.datasets %}
-				<ul>
 				{% for dataset in company.datasets %}
-					<li>
-						<p>{{dataset.datasetName}} <input type="button" name="editData" datasetName="{{dataset.datasetName}}" class="m-button" id="editData" value="Edit"><span class="savedMessage" style="display:none">Saved!</span></p>
-						<div datasetName="{{dataset.datasetName}}" datasetURL="{{dataset.datasetURL}}" agency="{{dataset.agency}}" dataType="{%for t in dataset.dataType %}{{ t }},{%end%}" {%try%}{%if dataset.ratings %} rating="{{dataset.ratings[0].rating}}" {%if dataset.ratings[0].reason %} reason="{{dataset.ratings[0].reason}}"{%end%}{%end%}{%except%}{%end%} datasetid="{{dataset.id}}"></div>
-					</li>
+					<div id="{{ dataset.datasetName.replace(' ', '_') }}" class="singleDataset">
+						<span class="datasetName {{dataset.datasetName.replace(' ', '_')}}">{{dataset.datasetName}}</span> 
+							<input type="button" name="editData" datasetName="{{dataset.datasetName.replace(' ', '_')}}" class="m-button editData" id="editData" value="Edit">
+							<span class="savedMessage_{{dataset.datasetName.replace(' ', '_')}}" style="display:none">Saved!</span>
+						<div datasetName="{{dataset.datasetName.replace(' ', '_')}}" 
+							datasetURL="{{dataset.datasetURL}}" 
+							agency="{{dataset.agency}}" 
+							typeOfDataset="{{ ','.join(dataset.dataType) }}"
+							otherTypeOfDataset="{%try%}{{ list(set(dataset.dataType) - set(datatypes))[0] }}{%except%}{%end%}" 
+							rating="{%try%}{%if dataset.ratings %}{{dataset.ratings[0].rating}}{%end%}{%except%}{%end%}" 
+							reason="{%try%}{%if dataset.ratings %}{{dataset.ratings[0].reason}}{%end%}{%except%}{%end%}"
+							datasetid="{{dataset.id}}">
+						</div>
+						<form method="post" class="m-form dataForm" id="dataFormContainer_{{dataset.datasetName.replace(' ', '_')}}" style="display:none">
+						</form>
+					</div>
 				{% end %}
-				</ul>
 			{% else %}
 				<div class="noDatasets"><p>No Datasets</p></div>
 			{% end %}
-			<br>
 		</div>
-		<div class="m-form-box" id="dataForm" style="display:none">
-			<div class="m-form-half left">
-				<div class="dataFormTitle"></div>
-				<div class="m-form-line"><label for="datasetName">Name of Dataset: * </label><input type="text" name="datasetName" parsley-trigger="change" parsley-required="true"></div>
-				<div class="m-form-line"><label for="datasetURL">URL of Dataset: * </label><input type="text" name="datasetURL" parsley-required="true" parsley-trigger="change" parsley-type="url"></div>
-				<div class="m-form-line"><label for="agency">Agency or Source: * </label><input type="text" name="agency" parsley-required="true" parsley-trigger="change"></div>
-				<h3>Type of Dataset: *</h3>
-				<label for=""><input type="checkbox" name="dataType" value="Federal Open Data">Federal Open Data</label><br>
-				<label for=""><input type="checkbox" name="dataType" value="State Open Data">State Open Data</label><br>
-				<label for=""><input type="checkbox" name="dataType" value="City/Local Open Data">City/Local Open Data</label><br>
-				<label for=""><input type="checkbox" name="dataType" parsley-required="true" value="Other">Other <label for=""><input type="text" name="otherDataType"></label></label>
-				<h3>On a scale of 1 to 4, how would you rate the usefulness of this dataset? (1- poor, 4- excellent) Your answer can reflect your experience with data quality, format of the data, or other factors.</h3>
-				<input type="text" name="rating" parsley-trigger="change" parsley-range="[0, 4]">
-				<h3>Why did you give it this rating? [50 words or less]</h3>
-				<textarea rows="6" cols="70" name="reason" parsley-trigger="keyup" parsley-maxwords="50"></textarea><br>
-				<input type="hidden" id="companyID" name="companyID" value="{{ id }}">
-				<input type="hidden" id="datasetID" name="datasetID" value="">
-				{% raw xsrf_form_html() %}
-				<input type="button" name="addData" class="m-button" id="addNew" value="Add" style="display:none">
-				<input type="button" name="saveData" class="m-button" id="saveData" value="Save" style="display:none">
-				<input type="button" name="cancel" class="m-button" id="cancel" value="Cancel">
-				<span class="errorMessage" style="display:none">Oops, something went wrong</span>
-				<span class="savingMessage" style="display:none">Saving...</span>
-			</div>
+		<br>
+		<div class="newSingleDataset">
+			<form method="post" class="m-form dataForm" id="dataFormContainer" style="display:none">
+			</form>
+			<input type="button" class='m-button' id="addDataset" name="dataAdd" value="Add New Dataset">
 		</div>
-		<input type="button" class='m-button' id="addDataset" name="dataAdd" value="Add Dataset">
-		</fieldset>
 		<!--------------------------------------------END DATASETS--------------------------------------!-->
 	</div>
-	<h3>Are you ready to submit this information? Using this same link you will be able to come back and edit this information until we review it in the next couple of days. Once we review it and approve the changes, you will have to contact us to make any changes.</h3>
-	<div class="m-form-footer">	
-		{% raw xsrf_form_html() %}
-		<input type="hidden" class="id" name="id" value="{{ id }}">
-		<input class="m-button" id="submit" name="companyEdit" value="Submit Form">
-	</div>
-</form>
+<h3>Are you ready to submit this information? Using this same link you will be able to come back and edit this information until we review it in the next couple of days. Once we review it and approve the changes, you will have to contact us to make any changes.</h3>
+<br>
+<div class="m-form-footer submitCompanyForm">	
+	<input type="hidden" class="companyID" name="companyID" value="{{ id }}">
+	<input type="button" class="m-button" id="companySubmit" name="companyEdit" value="Submit Form">
+	<span class="savingMessage_companyEdit" style="display:none">Saving...</span>
+	<span class="errorMessage_companyEdit" style="display:none">Oops... Something went wrong.</span>
+	<span class="savedMessage_companyEdit" style="display:none">Saved!</span>
+</div>
 
 
 <script type="text/javascript">
 $(document).ready(function() { 
-	$('#addDataset').on( 'click', function( event ) {
-		$('#dataForm').show();
-		$('.dataFormTitle').html('<h3>New Dataset</h3>');
-		$('#saveData').hide();
-		$('#addNew').show();
-		$('#addDataset').hide();
-	});
-	$('#editData').on( 'click', function( event ) {
-		$('#editData').hide();
-		$('.dataFormTitle').html('<h3>Editing Dataset</h3>');
-		$('#dataForm').show();
-		$('#addNew').hide();
-		$('#saveData').show();
-		$('#addDataset').hide();
-		//fill out fields
-		var datasetName = $(this).attr('datasetname');
-		var datasetURL = $("div[datasetname='"+datasetName+"']").attr('dataseturl');
-		var agency = $("div[datasetname='"+datasetName+"']").attr('agency');
-		var dataType = $("div[datasetname='"+datasetName+"']").attr('datatype').split(",");
-		dataType.pop();
-		var rating = $("div[datasetname='"+datasetName+"']").attr('rating');
-		var reason = $("div[datasetname='"+datasetName+"']").attr('reason');
-		var datasetID = $("div[datasetname='"+datasetName+"']").attr('datasetid');
-		$("input[name='datasetName']").val(datasetName);
-		$("input[name='datasetURL']").val(datasetURL);
-		$("input[name='agency']").val(agency);
-		for (var i = 0; i < dataType.length; i++) {
-			$("input:checkbox[value='" + dataType[i] + "']").attr("checked", true);
-		}
-		$("input[name='rating']").val(rating);
-		$("textarea[name='reason']").val(reason);
-		$("input[name='datasetID']").val(datasetID);
-	});
-	$('#cancel').on( 'click', function( event ) {
-		$('#dataForm').hide();
-		$('#saveData').hide();
-		$('#addNew').hide();
-		$('#addDataset').show();
-		$('#editData').show();
-	});
-	$('#addNew').on( 'click', function( event ) {
-		if ( $('.dataForm').parsley('validate') ) {
-            console.log("form is valid");       
-        } else {
-        	console.log("not valid");
-        }
-    });
-    $('#saveData').on( 'click', function( event ) {
-    	event.preventDefault();
-		if ( $('.dataForm').parsley('validate') ) {
-			$('.savingMessage').show();
-			var id = $('.id').val();
+	$('.submitCompanyForm').on('click', '#companySubmit', function() {
+		if ($('.companyForm').parsley('validate')) {
+			console.log('valid');
+			$('.savingMessage_companyEdit').show();
+			var companyID = $('.companyID').val();
+			var data = $('.companyForm').serializeArray();
 			$.ajax({
 				type: 'POST',
+				url: '/edit/' + companyID,
+				data: data,
+				error: function(error) {
+						console.debug(JSON.stringify(error));
+						$('.savingMessage_companyEdit').hide();
+						$('.errorMessage_companyEdit').show(); },
+				beforeSend: function(xhr, settings) {
+					$(event.target).attr('disabled', 'disabled'); },
+				success: function(success) {
+					console.log(success);
+					document.location.href = '/thanks/';
+				}
+			});
+		} else {
+			console.log('not valid');
+		}
+	});
+	var form = '<div class="m-form-half left">'+
+				'<div class="dataFormTitle"></div>'+
+				'<div class="m-form-line"><label for="datasetName">Name of Dataset: * </label><input type="text" name="datasetName" parsley-trigger="change" parsley-required="true">'+
+				'</div>'+
+				'<div class="m-form-line"><label for="datasetURL">URL of Dataset: * </label><input type="text" name="datasetURL" parsley-required="true" parsley-trigger="change" parsley-type="url">'+
+				'</div>'+
+				'<div class="m-form-line"><label for="agency">Agency or Source: * </label><input type="text" name="agency" parsley-required="true" parsley-trigger="change"></div>'+
+				'<h3>Type of Dataset: *</h3>'+
+				'<label for=""><input type="checkbox" name="typeOfDataset" value="Federal Open Data">Federal Open Data</label><br>'+
+				'<label for=""><input type="checkbox" name="typeOfDataset" value="State Open Data">State Open Data</label><br>'+
+				'<label for=""><input type="checkbox" name="typeOfDataset" value="City/Local Open Data">City/Local Open Data</label><br>'+
+				'<label for=""><input type="checkbox" name="typeOfDataset" parsley-required="true" value="Other">Other <label for=""><input type="text" parsley-regexp="[a-zA-Z0-9.,-\s\/\)\(]" parsley-regexp-flag="i" parsley-trigger="keyup" name="otherTypeOfDataset"></label></label>'+
+				'<h3>On a scale of 1 to 4, how would you rate the usefulness of this dataset? (1- poor, 4- excellent) Your answer can reflect your experience with data quality, format of the data, or other factors.</h3>'+
+				'<input type="text" name="rating" parsley-trigger="change" parsley-range="[0, 4]">'+
+				'<h3>Why did you give it this rating? [50 words or less]</h3>'+
+				'<textarea rows="6" cols="70" name="reason" parsley-trigger="keyup" parsley-maxwords="50"></textarea><br>'+
+				'<input type="hidden" id="companyID" name="companyID" value="{{ id }}">'+
+				'<input type="hidden" id="datasetID" name="datasetID" value="">'+
+				'<input type="hidden" id="action" name="action" value="Add New">'+
+				'{% raw xsrf_form_html() %}'+
+				'<input type="button" name="addData" class="m-button" id="addNew" value="Add" style="display:none">'+
+				'<input type="button" name="saveData" class="m-button" id="saveData" value="Save Edits" style="display:none">'+
+				'<input type="button" name="cancel" class="m-button" id="cancel" value="Cancel">'+
+				'<input type="button" name="deleteData" class="m-button" id="deleteData" value="Delete Dataset" style="display:none">'+
+				'<span class="errorMessage" style="display:none">Oops, something went wrong</span>'+
+				'<span class="savingMessage" style="display:none">Saving...</span>'+
+			'</div>';
+	var currentDataset = '';
+	$('.newSingleDataset').on( 'click', '#addDataset', function( event ) {
+		$('#addDataset').hide();
+		$.each($('.dataForm'), function() {
+			$(this).hide();
+			$(this).html('');
+			currentDataset = '';
+		});
+		$.each($('.editData'), function() {
+			$(this).show();
+		});
+		$('#dataFormContainer').show();
+		$('#dataFormContainer').html(form);
+		$('.dataFormTitle').html('<h3>New Dataset</h3>');
+		$('#addNew').show();
+	});
+	$('.dataList').on( 'click', '.editData', function( event ) {
+		currentDataset = '';
+		$.each($('.editData'), function() {
+			$(this).show();
+		});
+		$.each($('.dataForm'), function() {
+			$(this).hide();
+			$(this).html('');
+		});
+		var datasetName = $(this).attr('datasetname');
+		console.log(datasetName);
+		currentDataset = datasetName;
+		$('.editData[datasetname='+currentDataset+']').hide();
+		$('#dataFormContainer_'+currentDataset).show();
+		$('#dataFormContainer_'+currentDataset).html(form);
+		$('.dataFormTitle').html('<h3>Editing '+currentDataset.replace(/_/g, " ")+'</h3>');
+		$('#saveData').show();
+		$('#deleteData').show();
+		//Get Values to Fill Fields, then fill fields
+		$("input[name='datasetName']").val(currentDataset.replace(/_/g, " "));
+		var datasetURL = $("div[datasetname='"+currentDataset+"']").attr('dataseturl');
+		$("input[name='datasetURL']").val(datasetURL);
+		var agency = $("div[datasetname='"+currentDataset+"']").attr('agency');
+		$("input[name='agency']").val(agency);
+		var otherTypeOfDataset = $("div[datasetname='"+currentDataset+"']").attr('otherTypeOfDataset');
+		if (otherTypeOfDataset != '') {
+			$(".singleDataset input:checkbox[value='Other']").prop("checked", true);
+			$("input[name='otherTypeOfDataset']").val(otherTypeOfDataset);
+		} else {
+			$(".singleDataset input:checkbox[value='Other']").prop("checked", false);
+			$("input[name='otherTypeOfDataset']").val();
+		}
+		var typeOfDataset = $("div[datasetname='"+currentDataset+"']").attr('typeOfDataset').split(",");
+		for (var i = 0; i < typeOfDataset.length; i++) {
+			$(".dataForm input:checkbox[value='" + typeOfDataset[i] + "']").prop("checked", true);
+		}
+		var rating = $("div[datasetname='"+currentDataset+"']").attr('rating');
+		$("input[name='rating']").val(rating);
+		var reason = $("div[datasetname='"+currentDataset+"']").attr('reason');
+		$("textarea[name='reason']").val(reason);
+		var datasetID = $("div[datasetname='"+currentDataset+"']").attr('datasetID');
+		$("input[name='datasetID']").val(datasetID);
+	});
+	$('.datasets').on( 'click', '#cancel', function( event ) {
+		$.each($('.dataForm'), function() {
+			$(this).hide();
+			$(this).html('');
+		});
+		$.each($('.editData'), function() {
+			$(this).show();
+		});
+		currentDataset = '';
+	});
+	$('.datasets').on( 'click', '#deleteData', function( event ) {
+		event.preventDefault();
+		var id_to_delete = $('#datasetID').val();
+		var data = $('#dataFormContainer_'+currentDataset).serializeArray();
+		$.ajax({
+			type: 'POST',
+			url: '/deleteData/' + id_to_delete,
+			data: data,
+			error: function(error) {
+					console.debug(JSON.stringify(error)); },
+			beforeSend: function(xhr, settings) {
+				$(event.target).attr('disabled', 'disabled'); },
+			success: function(success) {
+				$(event.target).removeAttr('disabled');
+				console.log(success);
+				$('.singleDataset[id='+currentDataset+']').remove();
+				$.each($('.dataForm'), function() {
+					$(this).hide();
+					$(this).html('');
+				});
+				$.each($('.editData'), function() {
+					$(this).show();
+				});
+				currentDataset = '';
+				$('#addDataset').show();
+			}
+		});
+	});
+    $('.datasets').on( 'click', '#saveData', function( event ) {
+    	event.preventDefault();
+    	if($('#dataFormContainer_'+currentDataset).parsley('validate') ) {
+    		$('.savingMessage').show();
+    		var id = $('#datasetID').val();
+    		var data = $('#dataFormContainer_'+currentDataset).serializeArray();
+    		$.ajax({
+				type: 'POST',
 				url: '/editData/' + $('#datasetID').val(),
-            	data: $('.dataForm').serializeArray(),
+            	data: data,
 				error: function(error) {
 					console.debug(JSON.stringify(error));
 					$('.savingMessage').hide();
@@ -244,27 +338,161 @@ $(document).ready(function() {
 					$(event.target).removeAttr('disabled');
 					$('.savingMessage').hide();
 					$('.errorMessage').hide();
-					$('#editData').show();
-					$('.savedMessage').show().delay(5000).fadeOut();
-					$('.dataForm')[0].reset();
-					$('#datasetID').val('');
-					$('#dataForm').hide();
-					$('#saveData').hide();
+					//----------------------CREATE A TON OF NEW STUFF--------------------------//
+					//get all the varbs:
+					var datasetName = '';
+					var datasetURL = '';
+					var agency = '';
+					var typeOfDataset = [];
+					var otherTypeOfDataset = '';
+					var rating = '';
+					var reason = '';
+					var datasetID = id;
+					for (var i=0; i < data.length; i++) {
+						if (data[i]['name'] == 'datasetName') { datasetName = data[i]['value'].replace(/ /g, "_"); }
+						if (data[i]['name'] == 'datasetURL') { datasetURL = data[i]['value']; }
+						if (data[i]['name'] == 'agency') { agency = data[i]['value']; }
+						if (data[i]['name'] == 'typeOfDataset') { typeOfDataset.push(data[i]['value']); }
+						if (data[i]['name'] == 'otherTypeOfDataset') { if ($.inArray('Other', typeOfDataset) > -1) { otherTypeOfDataset = data[i]['value'];} }
+						if (data[i]['name'] == 'rating') { rating = data[i]['value']; }
+						if (data[i]['name'] == 'reason') { reason = data[i]['value']; }
+					}
+					//new HTML
+					var newHTMLforDataset = '<p><span class="datasetName '+datasetName+'">'+datasetName.replace(/_/g, " ")+'</span>'+
+							'<input type="button" name="editData" datasetName="'+datasetName+'" class="m-button editData" id="editData" value="Edit">'+
+							'<span class="savedMessage_'+datasetName+'" style="display:none">Saved!</span>'+
+						'</p>'+
+						'<div datasetName="'+datasetName+'" '+
+							'datasetURL="'+datasetURL+'" '+
+							'agency="'+agency+'" '+
+							'typeOfDataset="'+typeOfDataset.toString()+'" '+
+							'otherTypeOfDataset="'+otherTypeOfDataset+'" '+
+							'rating="'+rating+'" '+
+							'reason="'+reason+'" '+
+							'datasetid="'+datasetID+'">'+
+						'</div>'+
+						'<form method="post" class="m-form dataForm" id="dataFormContainer_'+datasetName+'" style="display:none">'+
+						'</form>';
+					//Out with the Old, in with the new
+					$('.singleDataset[id='+currentDataset+']').html('');
+					$('.singleDataset[id='+currentDataset+']').append(newHTMLforDataset);
+					$('.singleDataset[id='+currentDataset+']').attr('id', datasetName);
+					$.each($('.editData'), function() { //show all edit buttons
+						$(this).show();
+					});
+					$.each($('.dataForm'), function() { // clear all forms
+						$(this).hide();
+						$(this).html('');
+					});
+					$('.savedMessage_'+datasetName).show().delay(5000).fadeOut();
+					$('#addDataset').show();
+
+				}
+			});
+    	} else {
+    		console.log('not valid');
+    	}
+    });
+	$('.newSingleDataset').on( 'click', '#addNew', function( event ) {
+		if ( $('#dataFormContainer').parsley('validate') ) {
+			console.log('valid');
+            $('.savingMessage').show();
+            var data = $('#dataFormContainer').serializeArray();
+            $.ajax({
+            	type: 'POST',
+            	url: '/addData/' + $('#companyID').val(),
+            	data: data,
+            	error: function(error) {
+					console.debug(JSON.stringify(error));
+					$('.savingMessage').hide();
+					$('.errorMessage').fadeIn(); },
+				beforeSend: function(xhr, settings) {
+					$(event.target).attr('disabled', 'disabled'); },
+				success: function(id) {
+					$(event.target).removeAttr('disabled');
+					$('.savingMessage').hide();
+					$('.errorMessage').hide();
+					$.each($('.dataForm'), function() { // clear all forms
+						$(this).hide();
+						$(this).html('');
+					});
+					$('#addDataset').show();
+					//----------------------CREATE A TON OF NEW STUFF--------------------------//
+					//get all the varbs:
+					var datasetName = '';
+					var datasetURL = '';
+					var agency = '';
+					var typeOfDataset = [];
+					var otherTypeOfDataset = '';
+					var rating = '';
+					var reason = '';
+					var datasetID = id;
+					for (var i=0; i < data.length; i++) {
+						if (data[i]['name'] == 'datasetName') { datasetName = data[i]['value'].replace(/ /g, "_"); }
+						if (data[i]['name'] == 'datasetURL') { datasetURL = data[i]['value']; }
+						if (data[i]['name'] == 'agency') { agency = data[i]['value']; }
+						if (data[i]['name'] == 'typeOfDataset') { typeOfDataset.push(data[i]['value']); }
+						if (data[i]['name'] == 'otherTypeOfDataset') { if ($.inArray('Other', typeOfDataset) > -1) { otherTypeOfDataset = data[i]['value'];} }
+						if (data[i]['name'] == 'rating') { rating = data[i]['value']; }
+						if (data[i]['name'] == 'reason') { reason = data[i]['value']; }
+					}
+					//new HTML
+					var newHTMLforNewDataset = '<div id="'+datasetName+'" class="singleDataset">'+
+						'<p><span class="datasetName '+datasetName+'">'+datasetName.replace(/_/g, " ")+'</span>'+
+							'<input type="button" name="editData" datasetName="'+datasetName+'" class="m-button editData" id="editData" value="Edit">'+
+							'<span class="savedMessage_'+datasetName+'" style="display:none">Saved!</span>'+
+						'</p>'+
+						'<div datasetName="'+datasetName+'" '+
+							'datasetURL="'+datasetURL+'" '+
+							'agency="'+agency+'" '+
+							'typeOfDataset="'+typeOfDataset.toString()+'" '+
+							'otherTypeOfDataset="'+otherTypeOfDataset+'" '+
+							'rating="'+rating+'" '+
+							'reason="'+reason+'" '+
+							'datasetid="'+datasetID+'">'+
+						'</div>'+
+						'<form method="post" class="m-form dataForm" id="dataFormContainer_'+datasetName+'" style="display:none">'+
+						'</form>'+
+					'</div>';
+					$(newHTMLforNewDataset).appendTo('.dataList');
+					$('.savedMessage_'+datasetName).show().delay(5000).fadeOut();
 				}
 			});
         } else {
         	console.log("not valid");
         }
     });
-    //submit data on click and check if valid 
-    // $('.dataForm').submit(function(e) { 
-    // 	e.preventDefault();
-    // 	if ( $('dataForm').parsley('validate') ) {
-    //         console.log("form is valid");       
-    //     } else {
-    //     	console.log("not valid");
-    //     }
-    // });
+	function clearForm() {
+		$('.dataForm')[0].reset();
+		$('.dataForm input:checkbox').removeAttr('checked');
+		$('#datasetID').val('');
+		$('#action').val('');
+	}
+	function validateForm(form) {
+		var pass = true;
+		var a = $("input[name='datasetName']", form).val();
+		var b = $("input[name='datasetURL']", form).val();
+		var re = /^(https?|s?ftp|git):\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i;
+		var r = new RegExp(re);
+		var c = $("input[name='agency']", form).val();
+		var typeOfDataset = []
+		$("input[name='typeOfDataset']", form).each( function() {
+			if (this.checked) {
+				typeOfDataset.push($(this).val());
+			}
+		});
+		var d = $("input[name='otherTypeOfDataset']", form).val();
+		var e = $("input[name='rating']", form).val();
+		var f = $("input[name='reason']", form).val();
+		if (a == '') {  pass=false; } //need a name for dataset
+		if (!r.test(b)) { pass=false; } //need valid URL
+		if (c == '') { pass=false; } // need agency
+		if (!$.inArray('Other', typeOfDataset) > -1) { if (d == '') { pass=false; } } //need to enter 'other' if other checked
+		if (typeOfDataset.length == 0) { pass=false; } //at least 1 value
+		if (!isNaN(e)) {pass=false;} //needs to be a number
+		return pass;
+	}
+
 }); 
 </script>
 

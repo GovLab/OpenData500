@@ -118,6 +118,7 @@ select {
 .m-form-footer {
   padding: 5px;
   margin: 5px 5px 20px;
+  background-color: #472b74;
   overflow: hidden; }
 
 .m-form-footer input[type="submit"] {
@@ -268,7 +269,7 @@ a:hover {
   border-color: #472b74; }
 
 .dataForm .m-button {
-  width: 100px;
+  width: 130px;
   display: inline-block;
   padding: 5px 5px 4px;
   margin-top: 1px;

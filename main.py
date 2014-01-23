@@ -58,6 +58,7 @@ class Application(tornado.web.Application):
             (r"/editData/([a-zA-Z0-9]{24})/?", EditDataHandler),
             (r"/view/([a-zA-Z0-9]{24})/?", ViewHandler),
             (r"/delete/([a-zA-Z0-9]{24})/?", DeleteCompanyHandler),
+            (r"/deleteData/([a-zA-Z0-9]{24})/?", DeleteDatasetHandler),
             #(r"/recommendCompany/?", RecommendCompanyHandler),
             (r"/admin/?", AdminHandler),
             (r"/admin/edit/([a-zA-Z0-9]{24})/?", AdminEditCompanyHandler),
@@ -896,26 +897,31 @@ class SubmitDataHandler(BaseHandler):
 
     #@tornado.web.authenticated
     def post(self, id):
+        if self.get_argument('submit', None) == 'Continue Without Adding Datasets': #else, you're done, go home.
+            self.redirect("/thanks/")
         #get the company we are dealing with:
-        id = self.get_argument('id', None)
+        #id = self.get_argument('id', None)
         company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
         #get dataset fields from form:
         datasetName = self.get_argument('datasetName', None)
         datasetURL = self.get_argument('datasetURL', None)
         agency = self.get_argument('agency', None)
         try: #get all entered dataTypes
-            dataType = self.request.arguments['dataType']
+            typeOfDataset = self.request.arguments['typeOfDataset']
         except: #if none, then make empty attay
-            dataType = []
-        if 'Other' in dataType: #if Other, add the other.
-            del dataType[dataType.index('Other')]
-            dataType.append(self.get_argument('otherDataType', None))
+            typeOfDataset = []
+        if 'Other' in typeOfDataset: #if Other, add the other.
+            del typeOfDataset[typeOfDataset.index('Other')]
+            typeOfDataset.append(self.get_argument('otherTypeOfDataset', None))
         ratingSubmitted = self.get_argument('rating', None)
         if not ratingSubmitted:
             ratingSubmitted = 9999
         reason = self.get_argument('reason', None)
         #The author of this dataset review is always the contact.
-        author = company.contact
+        try: 
+            author = company.contact
+        except: 
+            author = models.Person()
         #Can't check if dataset exists. If check by URL, if someone enters data.gov instead of specific URL, 
         #datasets might be different but same URL.
         #Just save them all.
@@ -923,7 +929,7 @@ class SubmitDataHandler(BaseHandler):
             datasetName = datasetName,
             datasetURL = datasetURL,
             agency=agency,
-            dataType = dataType,
+            dataType = typeOfDataset,
         )
         #save the rating
         rating = models.Rating(
@@ -940,6 +946,8 @@ class SubmitDataHandler(BaseHandler):
         company.datasets.append(dataset)
         company.save()
         #If want to add another, redirect to form again. 
+        if self.get_argument('action', None) == 'Add New':
+            self.write(str(dataset.id))
         if self.get_argument('submit', None) == 'Add Another':
             logging.info('adding another')
             self.redirect("/addData/" + id)
@@ -1044,10 +1052,11 @@ class EditCompanyHandler(BaseHandler):
         company.financialInfo = self.get_argument('financialInfo', None)
         company.submittedSurvey = True
         company.save()
-        if self.get_argument('submit', None) == 'Save and Submit':
-            self.redirect('/')
-        if self.get_argument('submit', None) == 'Save And Continue Editing':
-            self.redirect('/edit/'+id)
+        self.redirect('/thanks/')
+        # if self.get_argument('submit', None) == 'Save and Submit':
+        #     self.redirect('/')
+        # if self.get_argument('submit', None) == 'Save And Continue Editing':
+        #     self.redirect('/edit/'+id)
 
 #Editing section for Admins
 class AdminEditCompanyHandler(BaseHandler):
@@ -1190,16 +1199,16 @@ class EditDataHandler(BaseHandler):
         #company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
         #get dataset
         datasetID = self.get_argument('datasetID')
-        dataset = models.Dataset.objects.get(id=bson.objectid.ObjectId(datasetID))
+        dataset = models.Dataset.objects.get(id=bson.objectid.ObjectId(id))
         #get values
         datasetName = self.get_argument('datasetName', None)
         datasetURL = self.get_argument('datasetURL', None)
         agency = self.get_argument('agency', None)
-        dataType = self.request.arguments['dataType']
-        logging.info(dataType)
+        dataType = self.request.arguments['typeOfDataset']
+        #logging.info(dataType)
         if 'Other' in dataType:
             del dataType[dataType.index('Other')]
-            dataType.append(self.get_argument('otherDataType', None))
+            dataType.append(self.get_argument('otherTypeOfDataset', None))
         rating = self.get_argument('rating', None)
         reason = self.get_argument('reason', None)
         #try: #to find existing dataset
@@ -1212,6 +1221,14 @@ class EditDataHandler(BaseHandler):
         dataset.ratings[0].reason = reason
         dataset.save()
         self.write("success")
+
+class DeleteDatasetHandler(BaseHandler):
+    def post(self, id):
+        dataset = models.Dataset.objects.get(id=bson.objectid.ObjectId(id))
+        dataset.delete()
+        self.write('success');
+
+
 
 class DeleteCompanyHandler(BaseHandler):
     @tornado.web.authenticated
