@@ -215,7 +215,8 @@
               , dataType = {};
 
             data[ self.$element.attr( 'name' ) ] = val;
-
+            data["_xsrf"] = $('[name="_xsrf"]').val();
+            
             if ( 'undefined' !== typeof self.options.remoteDatatype )
               dataType = { dataType: self.options.remoteDatatype };
 
@@ -252,7 +253,6 @@
             var manageErrorMessage = function ( response ) {
               return 'object' === typeof response && null !== response ? ( 'undefined' !== typeof response.error ? response.error : ( 'undefined' !== typeof response.message ? response.message : null ) ) : null;
             }
-
             $.ajax( $.extend( {}, {
                 url: url
               , data: data

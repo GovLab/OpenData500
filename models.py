@@ -56,18 +56,18 @@ class Company(Document):
 	descriptionShort = StringField()
 	socialImpact = StringField()
 	financialInfo = StringField()
-	vetted = BooleanField() #Do we approve?
-	vettedByCompany = BooleanField() #do they approve?
 	confidentiality = StringField() #What info does the contact want to hide?
 	contact = ReferenceField(Person)
-	recommendedBy = ReferenceField(Person) #only through the Recommend Company Form
-	recommended = BooleanField() #was this company submitted as a recommendation?
-	reasonForRecommending = StringField()
+	recommendedBy = ReferenceField(Person) #DEPRECATED
+	recommended = BooleanField() #DEPRECATED
+	reasonForRecommending = StringField() #DEPRECATED
 	datasets = ListField(ReferenceField(Dataset))
 	ts = ComplexDateTimeField(default=datetime.now())
 	preview50 = BooleanField()
 	candidate500 = BooleanField()
 	submittedSurvey = BooleanField()
+	vetted = BooleanField() #vetted by us
+	vettedByCompany = BooleanField() #vetted by them
 
 
 

@@ -30,7 +30,7 @@
 	<fieldset class="m-form-half right">
 		<h3>Company Information</h3>
 		<div class="m-form-line">
-			<label for="companyName">Name of your company:*</label><input type="text" name="companyName" id="companyName" parsley-required="true">
+			<label for="companyName">Name of your company:*</label><input type="text" name="companyName" id="companyName" parsley-remote="/validate/" parsley-remote-method="POST" parsley-required="true">
 		</div>
 		<div class="m-form-line">
 			<label for="url">Company URL: *</label>

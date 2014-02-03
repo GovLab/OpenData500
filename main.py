@@ -53,6 +53,7 @@ class Application(tornado.web.Application):
             (r'/(favicon.ico)', tornado.web.StaticFileHandler, {"path": ""}),
             (r"/", MainHandler),
             (r"/submitCompany/?", SubmitCompanyHandler),
+            (r"/validate/?", ValidateHandler),
             (r"/edit/([a-zA-Z0-9]{24})/?", EditCompanyHandler),
             (r"/addData/([a-zA-Z0-9]{24})/?", SubmitDataHandler),
             (r"/editData/([a-zA-Z0-9]{24})/?", EditDataHandler),
@@ -633,7 +634,7 @@ class AdminHandler(BaseHandler):
     @tornado.web.addslash
     @tornado.web.authenticated
     def get(self):
-        surveyNotIn50 = models.Company.objects(Q(preview50=False) & Q(candidate500=True) & Q(submittedSurvey=True)).order_by('prettyName')
+        surveyNotIn50 = models.Company.objects(Q(preview50=False) & Q(candidate500=True) & Q(submittedSurvey=True)).order_by('prettyName') #Not make distinction between preview 50 and submitted
         preview50 = models.Company.objects(Q(preview50=True) & Q(candidate500=True) & Q(submittedSurvey=True)).order_by('prettyName')
         candidate500 = models.Company.objects(Q(preview50=False) & Q(candidate500=True) & Q(submittedSurvey=False)).order_by('prettyName')
         recentlySubmitted = models.Company.objects(Q(preview50=False) & Q(candidate500=False) & Q(submittedSurvey=True)).order_by('ts')
@@ -646,6 +647,18 @@ class AdminHandler(BaseHandler):
             preview50 = preview50,
             candidate500 = candidate500
         )
+
+class ValidateHandler(BaseHandler):
+    def post(self):
+        #check if companyName exists:
+        companyName = self.get_argument("companyName", None)
+        logging.info('request made')
+        try: 
+            c = models.Company.objects.get(companyName=companyName)
+            self.write('{ "error": "This company has already been submitted. Email opendata500@thegovlab.org for questions." }')
+        except:
+            self.write('true')
+
 
 class SubmitCompanyHandler(BaseHandler):
     @tornado.web.addslash
@@ -772,12 +785,11 @@ class SubmitCompanyHandler(BaseHandler):
             socialImpact = socialImpact,
             financialInfo = financialInfo,
             contact = contact,
-            #vetted = False,
-            #vettedByCompany = False,
-            #recommended = False, #this was submitted not recommended. 
             preview50 = False,
             candidate500 = False, 
-            submittedSurvey = True
+            submittedSurvey = True,
+            vetted = False, 
+            vettedByCompany = True
         )
         company.save()
         contact.submittedCompany = company
