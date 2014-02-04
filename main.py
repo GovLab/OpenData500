@@ -652,7 +652,6 @@ class ValidateHandler(BaseHandler):
     def post(self):
         #check if companyName exists:
         companyName = self.get_argument("companyName", None)
-        logging.info('request made')
         try: 
             c = models.Company.objects.get(companyName=companyName)
             self.write('{ "error": "This company has already been submitted. Email opendata500@thegovlab.org for questions." }')
@@ -1017,8 +1016,8 @@ class EditCompanyHandler(BaseHandler):
         company.ceo.email = self.get_argument("ceoEmail", None)
         company.ceo.save()
         #Company Info
-        company.companyName = self.get_argument("companyName", None)
-        company.prettyName = re.sub(r'([^\s\w])+', '', company.companyName).replace(" ", "-").title()
+        #company.companyName = self.get_argument("companyName", None)
+        #company.prettyName = re.sub(r'([^\s\w])+', '', company.companyName).replace(" ", "-").title()
         url = self.get_argument('url', None)
         company.city = self.get_argument('city', None)
         company.zipCode = self.get_argument('zipCode', None)
@@ -1250,13 +1249,6 @@ class DeleteCompanyHandler(BaseHandler):
         except:
             dataset = models.Dataset.objects.get(id=bson.objectid.ObjectId(id))
         if company:
-            #we're deleting a company. Need to delete CEO, delete 
-            if company.ceo:
-                ceo = company.ceo
-                ceo.delete()
-            if company.contact:
-                contact = company.contact
-                contact.delete()
             #delete its datasets
             for d in company.datasets:
                 d.delete()

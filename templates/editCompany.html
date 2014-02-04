@@ -16,7 +16,6 @@
 	</fieldset>
 	<fieldset class="m-form-half right">
 		<h3>Company Information</h3>	
-		<div class="m-form-line"><label for="companyName">Name of your company: *</label><input type="text" name="companyName" id="companyName" parsley-required="true" value="{{ company.companyName }}" ></div>
 		<div class="m-form-line"><label for="url">Company URL: *</label><input type='text' name="url" id='url' parsley-trigger="change" parsley-type="url" parsley-required="true" value="{{ company.url }}"></div>
 		<div class="m-form-line"><label for="city">In which city is this company located?</label><input type="text" name="city" id="city" {% if company.city %} value="{{ company.city }}" {% end %}></div>
 		<div class="m-form-line">
@@ -27,7 +26,7 @@
 				{%end%}
 			</select>
 		</div>
-		<div class="m-form-line"><label for="zipCode">Zip Code:</label><input type="text" name="zipCode" id="zipCode" parsley-trigger="change" parsley-regexp="(^\d{5}$)|(^\d{5}-\d{4}$)" {% if company.zipCode %} value="{{ company.zipCode }}" {% end %}></div>
+		<div class="m-form-line"><label for="zipCode">Zip Code:</label><input type="text" name="zipCode" id="zipCode" parsley-trigger="change" parsley-regexp="(^\d{5}$)|(^\d{5}-\d{4}$)" {% if company.zipCode & company.zipCode != 99999 %}value="{{ company.zipCode }}" {% end %}></div>
 		<div class="m-form-line"><label for="ceoFirstName">First Name of CEO:</label><input type="text" name="ceoFirstName" id="ceoFirstName" value="{{ company.ceo.firstName}}"></div>
 		<div class="m-form-line"><label for="ceoLastName">Last Name of CEO:</label><input type="text" name="ceoLastName" id="ceoLastName" value="{{ company.ceo.lastName }}"></div>
 		<div class="m-form-line"><label for="ceoEmail">CEO Email:</label><input type="text" name="ceoEmail" id="ceoEmail" data-trigger="change" data-type="email" value="{{ company.ceo.email }}"></div>
@@ -53,7 +52,7 @@
 			<label for=""><input type="radio" name="companyFunction" data-trigger="change" data-group="companyFunction" data-mincheck="1" value="{{ function }}" {% if company.companyFunction == function %} checked {% end %}>{{ function }}</label><br>
 		{% end %}
 		{%if company.companyFunction not in companyFunction %}
-			<label for=""><input type="radio" name="companyFunction" parsley-required="true" value="other" checked>Other</label><br>
+			<label for=""><input type="radio" name="companyFunction" parsley-required="true" value="other" {%if company.companyFunction %}checked{%end%}>Other</label><br>
 			<label for=""><input type="text" name="otherCompanyFunction" id="otherCompanyFunction" data-trigger="change" data-group="companyFunction" data-mincheck="1" value="{{ company.companyFunction }}"></label><br>
 		{% else %}
 			<label for=""><input type="radio" name="companyFunction" parsley-required="true" value="other">Other</label>
@@ -67,7 +66,7 @@
 			<label for=""><input type="checkbox" name="criticalDataTypes" data-trigger="change" data-group="criticalDataTypes" data-mincheck="1" value="{{ dataType }}" {% if dataType in company.criticalDataTypes %} checked {% end %}>{{ dataType }}</label><br>
 		{% end %}
 		{% if list(set(company.criticalDataTypes) - set(criticalDataTypes)) %}
-			<label for=""><input type="checkbox" name="criticalDataTypes" parsley-required="true" value="Other" checked>Other</label>
+			<label for=""><input type="checkbox" name="criticalDataTypes" parsley-required="true" value="Other" {%if company.criticalDataTypes[0] %}checked{%end%}>Other</label>
 			<label for=""><input type="text" name="otherCriticalDataTypes" id="otherCriticalDataTypes" data-trigger="change" data-group="criticalDataTypes" data-mincheck="1" value="{{ list(set(company.criticalDataTypes) - set(criticalDataTypes))[0] }}"></label><br>
 		{% else %}
 			<label for=""><input type="checkbox" name="criticalDataTypes" parsley-required="true" value="Other">Other</label>
@@ -80,7 +79,7 @@
 			<label for=""><input type="checkbox" name="revenueSource" data-trigger="change" data-group="revenueSource" data-mincheck="1" value="{{ source }}" {% if source in company.revenueSource %} checked {% end %}>{{ source }}<br>
 		{% end %}
 		{% if list(set(company.revenueSource) - set(revenueSource)) %}
-			<label for=""><input type="checkbox" name="revenueSource" parsley-required="true" value="Other" checked>Other
+			<label for=""><input type="checkbox" name="revenueSource" parsley-required="true" value="Other" {%if company.revenueSource[0] %}checked{%end%}>Other
 			<input type="text" name="otherRevenueSource" id="otherRevenueSource" data-trigger="change" data-group="revenueSource" data-mincheck="1" value="{{ list(set(company.revenueSource) - set(revenueSource))[0] }}"></label>
 		{% else %}
 			<label for=""><input type="checkbox" name="revenueSource" parsley-required="true" value="Other">Other
