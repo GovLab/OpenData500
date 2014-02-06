@@ -256,7 +256,7 @@ class CandidateHandler(BaseHandler):
     @tornado.web.addslash
     #@tornado.web.authenticated
     def get(self):
-        companies = models.Company.objects(candidate500=True).order_by('prettyName')
+        companies = models.Company.objects(display=True).order_by('prettyName')
         # stateInfo = []
         # with open(os.path.join(os.path.dirname(__file__), 'static') + '/states.csv', 'rb') as csvfile:
         #     statereader = csv.reader(csvfile, delimiter=',')
@@ -298,354 +298,356 @@ class ResourcesHandler(BaseHandler):
             page_heading='Open Data Resources'
         )
 
-class Upload50Handler(BaseHandler):
-    @tornado.web.addslash
-    @tornado.web.authenticated
-    def get(self):
-        # Preview Survey Companies
-        companies = []
-        with open('missingCompanies.csv', 'rb') as csvfile:
-            companyreader = csv.reader(csvfile, delimiter=',')
-            for row in companyreader:
-                companies.append(row)
-        previousName = ""
-        id = ''
-        for c in companies:
-            companyName = c[0]
-            if c[0] != 'companyName':
-                if companyName != previousName: #New company
-                    logging.info(companyName + " <-> " + previousName)
-                    dateAdded = c[2]
-                    firstName = c[3].lstrip()
-                    lastName = c[4]
-                    title = c[5]
-                    email = c[6]
-                    phone = c[7]
-                    if c[8] == 'checked':
-                        contacted = True
-                    else: 
-                        contacted = False
-                    datasetWishList = c[37]
-                    companyRec = c[39]
-                    conferenceRec = c[40]
-                    #otherInfo = c[]
-                    #make contact
-                    contact = models.Person(
-                        firstName=firstName,
-                        lastName=lastName,
-                        title=title,
-                        personType="Contact",
-                        email=email,
-                        phone=phone,
-                        contacted=contacted,
-                        org=companyName,
-                        #otherInfo=otherInfo,
-                        datasetWishList=datasetWishList,
-                        companyRec=companyRec,
-                        conferenceRec=conferenceRec,
-                        )
-                    contact.save()
-                    ceoFirstName = c[12].lstrip()
-                    ceoLastName = c[13]
-                    ceoEmail = c[14]
-                    if ceoEmail == email:
-                        ceo = contact
-                    else: 
-                        ceo = models.Person(
-                            firstName=ceoFirstName,
-                            lastName=ceoLastName,
-                            email=ceoEmail,
-                            personType="CEO"
-                            )
-                        ceo.save()
-                    prettyName = re.sub(r'([^\s\w])+', '', companyName).replace(" ", "-").title()
-                    url = c[1]
-                    city = c[9]
-                    state = c[10]
-                    try: 
-                        zip = int(c[11])
-                    except: 
-                        zip = 99999
-                    if c[15]:
-                        yearFounded = c[15]
-                    else: 
-                        yearFounded = 0
-                    previousName = c[16]
-                    try: 
-                        fte = int(c[17])
-                    except: 
-                        fte = None
-                    companyType = c[18]
-                    if c[19]:
-                        companyTypeOther = c[19]
-                        companyType = companyTypeOther
-                    companyFunction = c[20]
-                    if c[21]:
-                        companyFunctionOther = c[21]
-                        companyFunction = companyFunctionOther
-                    criticalDataTypes = c[22].split(',')
-                    if c[23]:
-                        criticalDataTypesOther = c[23]
-                        criticalDataTypes.append(criticalDataTypesOther)
-                    revenueSource = c[24].split(',')
-                    if c[25]:
-                        revenueSourceOther = c[25]
-                        revenueSource.append(revenueSourceOther)
-                    sector = c[26].split(',')
-                    if c[27]:
-                        sectorOther = c[27]
-                        sector.append(sectorOther)
-                    companyCategory = c[41]
-                    descriptionLong = c[28]
-                    descriptionShort = c[29]
-                    socialImpact = c[30]
-                    financialInfo = c[31]
-                    confidentiality = c[38]
-                    if c[43] == 'Y':
-                        vetted = True
-                    else:
-                        vetted = False
-                    #Make new Company Object and save this stuff
-                    company = models.Company(
-                        companyName=companyName,
-                        prettyName=prettyName,
-                        url = url,
-                        city=city,
-                        state=state,
-                        zipCode=zip,
-                        yearFounded=yearFounded,
-                        previousName=previousName,
-                        fte=fte,
-                        companyType=companyType,
-                        companyFunction=companyFunction,
-                        companyCategory=companyCategory,
-                        criticalDataTypes=criticalDataTypes,
-                        revenueSource=revenueSource,
-                        sector=sector,
-                        descriptionLong=descriptionLong,
-                        descriptionShort=descriptionShort,
-                        socialImpact=socialImpact,
-                        financialInfo=financialInfo,
-                        ceo=ceo,
-                        contact=contact,
-                        confidentiality = confidentiality,
-                        vetted = vetted,
-                        vettedByCompany = True
-                        )
-                    company.save()
-                    company.contact.submittedCompany = company
-                    #make new dataset object and append to company
-                    datasetName = c[32]
-                    datasetURL = c[33]
-                    agency = c[34]
-                    try: 
-                        rating = int(c[35])
-                    except:
-                        rating = None
-                    reason = c[36]
-                    review = models.Rating(
-                        rating=rating,
-                        reason=reason,
-                        author=contact
-                        )
-                    #make dataset
-                    dataset = models.Dataset(
-                        datasetName=datasetName,
-                        datasetURL=datasetURL,
-                        agency=agency
-                        )
-                    dataset.save()
-                    dataset.ratings.append(review)
-                    dataset.usedBy.append(company)
-                    dataset.save()
-                    company.datasets.append(dataset)
-                    company.save()
-                    #update previousName
-                    id = company.id
-                    previousName = companyName
-                else: #dealing with same company, add rest of datasets
-                    #get company
-                    company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
-                    logging.info("repeat. Saving datasets to: " + company.companyName)
-                    #skip all company info, get dataset info
-                    datasetName = c[32]
-                    datasetURL = c[33]
-                    agency = c[34]
-                    try: 
-                        rating = int(c[35])
-                    except:
-                        rating = None
-                    reason = c[36]
-                    review = models.Rating(
-                        rating=rating,
-                        reason=reason,
-                        author=company.contact
-                        )
-                    #create new dataset
-                    dataset = models.Dataset(
-                        datasetName=datasetName,
-                        datasetURL=datasetURL,
-                        agency=agency,
-                        )
-                    dataset.save()
-                    dataset.ratings.append(review)
-                    dataset.usedBy.append(company)
-                    dataset.save()
-                    #append dataset to company
-                    company.contact.submittedDatasets.append(dataset)
-                    company.datasets.append(dataset)
-                    company.save()
-                    #update PreviousName
-                    previosName = companyName
-        self.redirect('/admin/')
+# class Upload50Handler(BaseHandler):
+#     @tornado.web.addslash
+#     @tornado.web.authenticated
+#     def get(self):
+#         # Preview Survey Companies
+#         companies = []
+#         with open('missingCompanies.csv', 'rb') as csvfile:
+#             companyreader = csv.reader(csvfile, delimiter=',')
+#             for row in companyreader:
+#                 companies.append(row)
+#         previousName = ""
+#         id = ''
+#         for c in companies:
+#             companyName = c[0]
+#             if c[0] != 'companyName':
+#                 if companyName != previousName: #New company
+#                     logging.info(companyName + " <-> " + previousName)
+#                     dateAdded = c[2]
+#                     firstName = c[3].lstrip()
+#                     lastName = c[4]
+#                     title = c[5]
+#                     email = c[6]
+#                     phone = c[7]
+#                     if c[8] == 'checked':
+#                         contacted = True
+#                     else: 
+#                         contacted = False
+#                     datasetWishList = c[37]
+#                     companyRec = c[39]
+#                     conferenceRec = c[40]
+#                     #otherInfo = c[]
+#                     #make contact
+#                     contact = models.Person(
+#                         firstName=firstName,
+#                         lastName=lastName,
+#                         title=title,
+#                         personType="Contact",
+#                         email=email,
+#                         phone=phone,
+#                         contacted=contacted,
+#                         org=companyName,
+#                         #otherInfo=otherInfo,
+#                         datasetWishList=datasetWishList,
+#                         companyRec=companyRec,
+#                         conferenceRec=conferenceRec,
+#                         )
+#                     contact.save()
+#                     ceoFirstName = c[12].lstrip()
+#                     ceoLastName = c[13]
+#                     ceoEmail = c[14]
+#                     if ceoEmail == email:
+#                         ceo = contact
+#                     else: 
+#                         ceo = models.Person(
+#                             firstName=ceoFirstName,
+#                             lastName=ceoLastName,
+#                             email=ceoEmail,
+#                             personType="CEO"
+#                             )
+#                         ceo.save()
+#                     prettyName = re.sub(r'([^\s\w])+', '', companyName).replace(" ", "-").title()
+#                     url = c[1]
+#                     city = c[9]
+#                     state = c[10]
+#                     try: 
+#                         zip = int(c[11])
+#                     except: 
+#                         zip = 99999
+#                     if c[15]:
+#                         yearFounded = c[15]
+#                     else: 
+#                         yearFounded = 0
+#                     previousName = c[16]
+#                     try: 
+#                         fte = int(c[17])
+#                     except: 
+#                         fte = None
+#                     companyType = c[18]
+#                     if c[19]:
+#                         companyTypeOther = c[19]
+#                         companyType = companyTypeOther
+#                     companyFunction = c[20]
+#                     if c[21]:
+#                         companyFunctionOther = c[21]
+#                         companyFunction = companyFunctionOther
+#                     criticalDataTypes = c[22].split(',')
+#                     if c[23]:
+#                         criticalDataTypesOther = c[23]
+#                         criticalDataTypes.append(criticalDataTypesOther)
+#                     revenueSource = c[24].split(',')
+#                     if c[25]:
+#                         revenueSourceOther = c[25]
+#                         revenueSource.append(revenueSourceOther)
+#                     sector = c[26].split(',')
+#                     if c[27]:
+#                         sectorOther = c[27]
+#                         sector.append(sectorOther)
+#                     companyCategory = c[41]
+#                     descriptionLong = c[28]
+#                     descriptionShort = c[29]
+#                     socialImpact = c[30]
+#                     financialInfo = c[31]
+#                     confidentiality = c[38]
+#                     if c[43] == 'Y':
+#                         vetted = True
+#                     else:
+#                         vetted = False
+#                     #Make new Company Object and save this stuff
+#                     company = models.Company(
+#                         companyName=companyName,
+#                         prettyName=prettyName,
+#                         url = url,
+#                         city=city,
+#                         state=state,
+#                         zipCode=zip,
+#                         yearFounded=yearFounded,
+#                         previousName=previousName,
+#                         fte=fte,
+#                         companyType=companyType,
+#                         companyFunction=companyFunction,
+#                         companyCategory=companyCategory,
+#                         criticalDataTypes=criticalDataTypes,
+#                         revenueSource=revenueSource,
+#                         sector=sector,
+#                         descriptionLong=descriptionLong,
+#                         descriptionShort=descriptionShort,
+#                         socialImpact=socialImpact,
+#                         financialInfo=financialInfo,
+#                         ceo=ceo,
+#                         contact=contact,
+#                         confidentiality = confidentiality,
+#                         vetted = vetted,
+#                         vettedByCompany = True
+#                         )
+#                     company.save()
+#                     company.contact.submittedCompany = company
+#                     #make new dataset object and append to company
+#                     datasetName = c[32]
+#                     datasetURL = c[33]
+#                     agency = c[34]
+#                     try: 
+#                         rating = int(c[35])
+#                     except:
+#                         rating = None
+#                     reason = c[36]
+#                     review = models.Rating(
+#                         rating=rating,
+#                         reason=reason,
+#                         author=contact
+#                         )
+#                     #make dataset
+#                     dataset = models.Dataset(
+#                         datasetName=datasetName,
+#                         datasetURL=datasetURL,
+#                         agency=agency
+#                         )
+#                     dataset.save()
+#                     dataset.ratings.append(review)
+#                     dataset.usedBy.append(company)
+#                     dataset.save()
+#                     company.datasets.append(dataset)
+#                     company.save()
+#                     #update previousName
+#                     id = company.id
+#                     previousName = companyName
+#                 else: #dealing with same company, add rest of datasets
+#                     #get company
+#                     company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
+#                     logging.info("repeat. Saving datasets to: " + company.companyName)
+#                     #skip all company info, get dataset info
+#                     datasetName = c[32]
+#                     datasetURL = c[33]
+#                     agency = c[34]
+#                     try: 
+#                         rating = int(c[35])
+#                     except:
+#                         rating = None
+#                     reason = c[36]
+#                     review = models.Rating(
+#                         rating=rating,
+#                         reason=reason,
+#                         author=company.contact
+#                         )
+#                     #create new dataset
+#                     dataset = models.Dataset(
+#                         datasetName=datasetName,
+#                         datasetURL=datasetURL,
+#                         agency=agency,
+#                         )
+#                     dataset.save()
+#                     dataset.ratings.append(review)
+#                     dataset.usedBy.append(company)
+#                     dataset.save()
+#                     #append dataset to company
+#                     company.contact.submittedDatasets.append(dataset)
+#                     company.datasets.append(dataset)
+#                     company.save()
+#                     #update PreviousName
+#                     previosName = companyName
+#         self.redirect('/admin/')
 
-class Upload500Handler(BaseHandler):
-    @tornado.web.addslash
-    @tornado.web.authenticated
-    def get(self):
-        #Rest of 500
-        companies = []
-        with open('500companies.csv', 'rb') as csvfile:
-            companyreader = csv.reader(csvfile, delimiter=',')
-            for row in companyreader:
-                companies.append(row)
-        for c in companies:
-            companyName = c[0]
-            if c[43] != 'Y' and c[42] != 'Y' and c[0] != 'companyName':
-                logging.info("Working on " + companyName)
-                dateAdded = c[2]
-                firstName = c[3].lstrip()
-                lastName = c[4]
-                title = c[5]
-                email = c[6]
-                phone = c[7]
-                if c[8] == 'checked':
-                    contacted = True
-                else: 
-                    contacted = False
-                datasetWishList = c[37]
-                companyRec = c[39]
-                conferenceRec = c[40]
-                #otherInfo = c[]
-                #make contact
-                contact = models.Person(
-                    firstName=firstName,
-                    lastName=lastName,
-                    title=title,
-                    personType="Contact",
-                    email=email,
-                    phone=phone,
-                    contacted=contacted,
-                    org=companyName,
-                    #otherInfo=otherInfo,
-                    datasetWishList=datasetWishList,
-                    companyRec=companyRec,
-                    conferenceRec=conferenceRec,
-                    )
-                contact.save()
-                ceoFirstName = c[12].lstrip()
-                ceoLastName = c[13]
-                ceoEmail = c[14]
-                if ceoEmail == email:
-                    ceo = contact
-                else: 
-                    ceo = models.Person(
-                        firstName=ceoFirstName,
-                        lastName=ceoLastName,
-                        email=ceoEmail,
-                        personType="CEO"
-                        )
-                    ceo.save()
-                prettyName = re.sub(r'([^\s\w])+', '', companyName).replace(" ", "-").title()
-                url = c[1]
-                city = c[9]
-                state = c[10]
-                try: 
-                    zip = int(c[11])
-                except: 
-                    zip = 99999
-                if c[15]:
-                    yearFounded = c[15]
-                else: 
-                    yearFounded = 0
-                previousName = c[16]
-                try: 
-                    fte = int(c[17])
-                except: 
-                    fte = None
-                companyType = c[18]
-                if c[19]:
-                    companyTypeOther = c[19]
-                    companyType = companyTypeOther
-                companyFunction = c[20]
-                if c[21]:
-                    companyFunctionOther = c[21]
-                    companyFunction = companyFunctionOther
-                criticalDataTypes = c[22].split(',')
-                if c[23]:
-                    criticalDataTypesOther = c[23]
-                    criticalDataTypes.append(criticalDataTypesOther)
-                revenueSource = c[24].split(',')
-                if c[25]:
-                    revenueSourceOther = c[25]
-                    revenueSource.append(revenueSourceOther)
-                sector = c[26].split(',')
-                if c[27]:
-                    sectorOther = c[27]
-                    sector.append(sectorOther)
-                companyCategory = c[41]
-                descriptionLong = c[28]
-                descriptionShort = c[29]
-                socialImpact = c[30]
-                financialInfo = c[31]
-                confidentiality = c[38]
-                #Make new Company Object and save this stuff
-                company = models.Company(
-                    companyName=companyName,
-                    prettyName=prettyName,
-                    url = url,
-                    city=city,
-                    state=state,
-                    zipCode=zip,
-                    yearFounded=yearFounded,
-                    previousName=previousName,
-                    fte=fte,
-                    companyType=companyType,
-                    companyFunction=companyFunction,
-                    companyCategory=companyCategory,
-                    criticalDataTypes=criticalDataTypes,
-                    revenueSource=revenueSource,
-                    sector=sector,
-                    descriptionLong=descriptionLong,
-                    descriptionShort=descriptionShort,
-                    socialImpact=socialImpact,
-                    financialInfo=financialInfo,
-                    ceo=ceo,
-                    contact=contact,
-                    confidentiality = confidentiality,
-                    vetted = False,
-                    vettedByCompany = False
-                    )
-                company.save()
-                company.contact.submittedCompany = company
-        self.redirect('/admin/')
+# class Upload500Handler(BaseHandler):
+#     @tornado.web.addslash
+#     @tornado.web.authenticated
+#     def get(self):
+#         #Rest of 500
+#         companies = []
+#         with open('500companies.csv', 'rb') as csvfile:
+#             companyreader = csv.reader(csvfile, delimiter=',')
+#             for row in companyreader:
+#                 companies.append(row)
+#         for c in companies:
+#             companyName = c[0]
+#             if c[43] != 'Y' and c[42] != 'Y' and c[0] != 'companyName':
+#                 logging.info("Working on " + companyName)
+#                 dateAdded = c[2]
+#                 firstName = c[3].lstrip()
+#                 lastName = c[4]
+#                 title = c[5]
+#                 email = c[6]
+#                 phone = c[7]
+#                 if c[8] == 'checked':
+#                     contacted = True
+#                 else: 
+#                     contacted = False
+#                 datasetWishList = c[37]
+#                 companyRec = c[39]
+#                 conferenceRec = c[40]
+#                 #otherInfo = c[]
+#                 #make contact
+#                 contact = models.Person(
+#                     firstName=firstName,
+#                     lastName=lastName,
+#                     title=title,
+#                     personType="Contact",
+#                     email=email,
+#                     phone=phone,
+#                     contacted=contacted,
+#                     org=companyName,
+#                     #otherInfo=otherInfo,
+#                     datasetWishList=datasetWishList,
+#                     companyRec=companyRec,
+#                     conferenceRec=conferenceRec,
+#                     )
+#                 contact.save()
+#                 ceoFirstName = c[12].lstrip()
+#                 ceoLastName = c[13]
+#                 ceoEmail = c[14]
+#                 if ceoEmail == email:
+#                     ceo = contact
+#                 else: 
+#                     ceo = models.Person(
+#                         firstName=ceoFirstName,
+#                         lastName=ceoLastName,
+#                         email=ceoEmail,
+#                         personType="CEO"
+#                         )
+#                     ceo.save()
+#                 prettyName = re.sub(r'([^\s\w])+', '', companyName).replace(" ", "-").title()
+#                 url = c[1]
+#                 city = c[9]
+#                 state = c[10]
+#                 try: 
+#                     zip = int(c[11])
+#                 except: 
+#                     zip = 99999
+#                 if c[15]:
+#                     yearFounded = c[15]
+#                 else: 
+#                     yearFounded = 0
+#                 previousName = c[16]
+#                 try: 
+#                     fte = int(c[17])
+#                 except: 
+#                     fte = None
+#                 companyType = c[18]
+#                 if c[19]:
+#                     companyTypeOther = c[19]
+#                     companyType = companyTypeOther
+#                 companyFunction = c[20]
+#                 if c[21]:
+#                     companyFunctionOther = c[21]
+#                     companyFunction = companyFunctionOther
+#                 criticalDataTypes = c[22].split(',')
+#                 if c[23]:
+#                     criticalDataTypesOther = c[23]
+#                     criticalDataTypes.append(criticalDataTypesOther)
+#                 revenueSource = c[24].split(',')
+#                 if c[25]:
+#                     revenueSourceOther = c[25]
+#                     revenueSource.append(revenueSourceOther)
+#                 sector = c[26].split(',')
+#                 if c[27]:
+#                     sectorOther = c[27]
+#                     sector.append(sectorOther)
+#                 companyCategory = c[41]
+#                 descriptionLong = c[28]
+#                 descriptionShort = c[29]
+#                 socialImpact = c[30]
+#                 financialInfo = c[31]
+#                 confidentiality = c[38]
+#                 #Make new Company Object and save this stuff
+#                 company = models.Company(
+#                     companyName=companyName,
+#                     prettyName=prettyName,
+#                     url = url,
+#                     city=city,
+#                     state=state,
+#                     zipCode=zip,
+#                     yearFounded=yearFounded,
+#                     previousName=previousName,
+#                     fte=fte,
+#                     companyType=companyType,
+#                     companyFunction=companyFunction,
+#                     companyCategory=companyCategory,
+#                     criticalDataTypes=criticalDataTypes,
+#                     revenueSource=revenueSource,
+#                     sector=sector,
+#                     descriptionLong=descriptionLong,
+#                     descriptionShort=descriptionShort,
+#                     socialImpact=socialImpact,
+#                     financialInfo=financialInfo,
+#                     ceo=ceo,
+#                     contact=contact,
+#                     confidentiality = confidentiality,
+#                     vetted = False,
+#                     vettedByCompany = False
+#                     )
+#                 company.save()
+#                 company.contact.submittedCompany = company
+#         self.redirect('/admin/')
 
 class AdminHandler(BaseHandler):
     @tornado.web.addslash
     @tornado.web.authenticated
     def get(self):
-        surveyNotIn50 = models.Company.objects(Q(preview50=False) & Q(candidate500=True) & Q(submittedSurvey=True)).order_by('prettyName') #Not make distinction between preview 50 and submitted
-        preview50 = models.Company.objects(Q(preview50=True) & Q(candidate500=True) & Q(submittedSurvey=True)).order_by('prettyName')
-        candidate500 = models.Company.objects(Q(preview50=False) & Q(candidate500=True) & Q(submittedSurvey=False)).order_by('prettyName')
-        recentlySubmitted = models.Company.objects(Q(preview50=False) & Q(candidate500=False) & Q(submittedSurvey=True)).order_by('ts')
+        # surveyNotIn50 = models.Company.objects(Q(preview50=False) & Q(candidate500=True) & Q(submittedSurvey=True)).order_by('prettyName') #Not make distinction between preview 50 and submitted
+        # preview50 = models.Company.objects(Q(preview50=True) & Q(candidate500=True) & Q(submittedSurvey=True)).order_by('prettyName')
+        surveySubmitted = models.Company.objects(Q(submittedSurvey=True) & Q(display=True) & Q(vetted=True) & Q(vettedByCompany=True) & Q(submittedThroughWebsite=False)).order_by('prettyName')
+        sendSurveys = models.Company.objects(Q(submittedSurvey=False) & Q(display=True) & Q(vetted=False) & Q(vettedByCompany=False) & Q(submittedThroughWebsite=False)).order_by('prettyName')
+        # candidate500 = models.Company.objects(Q(preview50=False) & Q(candidate500=True) & Q(submittedSurvey=False)).order_by('prettyName')
+        # recentlySubmitted = models.Company.objects(Q(preview50=False) & Q(candidate500=False) & Q(submittedSurvey=True)).order_by('ts')
+        recentlySubmitted = models.Company.objects(Q(submittedThroughWebsite=True) & Q(vettedByCompany=True) & Q(display=False) & Q(vetted=False) & Q(submittedSurvey=True)).order_by('ts')
         self.render(
             "admin.html",
             page_title='OpenData500',
             page_heading='Welcome to the OpenData 500',
-            surveyNotIn50 = surveyNotIn50,
+            surveySubmitted = surveySubmitted,
             recentlySubmitted=recentlySubmitted,
-            preview50 = preview50,
-            candidate500 = candidate500
+            sendSurveys = sendSurveys
         )
 
 class ValidateHandler(BaseHandler):
@@ -784,11 +786,12 @@ class SubmitCompanyHandler(BaseHandler):
             socialImpact = socialImpact,
             financialInfo = financialInfo,
             contact = contact,
-            preview50 = False,
-            candidate500 = False, 
+            #preview50 = False,
+            display = False, 
             submittedSurvey = True,
             vetted = False, 
-            vettedByCompany = True
+            vettedByCompany = True,
+            submittedThroughWebsite = True
         )
         company.save()
         contact.submittedCompany = company
@@ -960,8 +963,9 @@ class SubmitDataHandler(BaseHandler):
         if self.get_argument('action', None) == 'Add New':
             self.write(str(dataset.id))
         if self.get_argument('submit', None) == 'Add Another':
-            logging.info('adding another')
             self.redirect("/addData/" + id)
+        if self.get_argument('submit', None) == 'Save and Finish':
+            self.redirect("/thanks/")
         if self.get_argument('submit', None) == 'Done': #else, you're done, go home.
             self.redirect("/thanks/")
 
@@ -1075,8 +1079,8 @@ class AdminEditCompanyHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self, id):
         company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
-        page_heading = "Editing " + company.companyName
-        page_title = "Editing " + company.companyName
+        page_heading = "Editing " + company.companyName + ' (Admin)'
+        page_title = "Editing " + company.companyName + ' (Admin)'
         if company is None:
             self.render("404.html", message=id)
         self.render("adminEditCompany.html",
@@ -1088,15 +1092,17 @@ class AdminEditCompanyHandler(BaseHandler):
             criticalDataTypes = criticalDataTypes,
             revenueSource = revenueSource,
             categories=categories,
+            datatypes = datatypes,
             stateList = stateList,
-            stateListAbbrev=stateListAbbrev
+            stateListAbbrev=stateListAbbrev,
+            id = str(company.id)
         )
 
     @tornado.web.authenticated
     def post(self, id):
         #get the company you will be editing
         company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
-        #Contact info
+        #Submitter info
         company.contact.firstName = self.get_argument("firstName", None)
         company.contact.lastName = self.get_argument("lastName", None)
         company.contact.title = self.get_argument("title", None)
@@ -1109,44 +1115,28 @@ class AdminEditCompanyHandler(BaseHandler):
         except:
             company.contact.contacted = False
         company.contact.save()
-        if company.ceo: #Is there a CEO?
-            #CEO Info
-            company.ceo.firstName = self.get_argument("ceoFirstName", None)
-            company.ceo.lastName = self.get_argument("ceoLastName", None)
-            company.ceo.email = self.get_argument("ceoEmail", None)
-            company.ceo.save()
-        else: #No previously recorded CEO, make a new one.
-            ceo = models.Person(
-                firstName = self.get_argument("ceoFirstName", None),
-                lastName = self.get_argument("ceoLastName", None),
-                email = self.get_argument("ceoEmail", None),
-                org = self.get_argument("companyName", None),
-                personType = "CEO"
-            )
-            ceo.save()
-            company.ceo = ceo
-            company.save()
+        #CEO Info
+        company.ceo.firstName = self.get_argument("ceoFirstName", None)
+        company.ceo.lastName = self.get_argument("ceoLastName", None)
+        company.ceo.email = self.get_argument("ceoEmail", None)
+        company.ceo.save()
         #Company Info
-        companyName = self.get_argument("companyName", None)
-        company.companyName = companyName
-        company.prettyName = re.sub(r'([^\s\w])+', '', companyName).replace(" ", "-").title()
+        #company.companyName = self.get_argument("companyName", None)
+        #company.prettyName = re.sub(r'([^\s\w])+', '', company.companyName).replace(" ", "-").title()
         url = self.get_argument('url', None)
         company.city = self.get_argument('city', None)
         company.zipCode = self.get_argument('zipCode', None)
-        if not company.zipCode:
-            company.zipCode = 0
-        company.state = self.get_argument("state", None)
         company.companyType = self.get_argument("companyType", None)
-        if company.companyType == 'Other': #if user entered custom option for Type
+        if company.companyType == 'other': #if user entered custom option for Type
             company.companyType = self.get_argument('otherCompanyType', None)
-        company.yearFounded = self.get_argument("yearFounded", None)
-        if not company.yearFounded: #Did not enter year?
+        company.yearFounded = self.get_argument("yearFounded", 0)
+        if  not company.yearFounded:
             company.yearFounded = 0
         company.fte = self.get_argument("fte", 0)
-        if not company.fte: #did not enter fte?
+        if not company.fte:
             company.fte = 0
         company.companyFunction = self.get_argument("companyFunction", None)
-        if company.companyFunction == 'Other': #if user entered custom option for Function
+        if company.companyFunction == 'other': #if user entered custom option for Function
             company.companyFunction = self.get_argument('otherCompanyFunction', None)
         try: #try and get all checked items. 
             company.criticalDataTypes = self.request.arguments['criticalDataTypes']
@@ -1164,32 +1154,36 @@ class AdminEditCompanyHandler(BaseHandler):
             del company.revenueSource[company.revenueSource.index('Other')] #delete 'Other' from list
             if self.get_argument('otherRevenueSource', None):
                 company.revenueSource.append(self.get_argument('otherRevenueSource', None)) #add custom option to list.
-        company.companyCategory = self.get_argument("category", None)
-        if company.companyCategory == 'Other': #if user entered custom option for Category
-            company.companyCategory = self.get_argument('otherCategory', None)
-        # try: #try and get all checked items. 
-        #     company.sector = self.request.arguments['sector']
-        # except: #if no checked items, then make it into an empty array (form validation should prevent this always)
-        #     company.sector = []
-        # if 'Other' in company.sector: #if user entered a custom option for Sector
-        #     del company.sector[company.sector.index('Other')] #delete 'Other' from list
-        #     if self.get_argument('otherSector', None):
-        #         company.sector.append(self.get_argument('otherSector', None)) #add custom option to list.
+        try: #try and get all checked items. 
+            company.sector = self.request.arguments['sector']
+        except: #if no checked items, then make it into an empty array (form validation should prevent this always)
+            company.sector = []
+        if 'Other' in company.sector: #if user entered a custom option for Sector
+            del company.sector[company.sector.index('Other')] #delete 'Other' from list
+            if self.get_argument('otherSector', None):
+                company.sector.append(self.get_argument('otherSector', None)) #add custom option to list.
         company.descriptionLong = self.get_argument('descriptionLong', None)
         company.descriptionShort = self.get_argument('descriptionShort', None)
         company.socialImpact = self.get_argument('socialImpact', None)
         company.financialInfo = self.get_argument('financialInfo', None)
-        if self.get_argument('vetted') == 'True':
+        if self.get_argument('vetted'):
             company.vetted = True
-        elif self.get_argument('vetted') == 'False':
-            company.vetted = False
-        if self.get_argument('vettedByCompany') == 'True':
+        else:
+            company.vetted=False
+        if self.get_argument('vettedByCompany'):
             company.vettedByCompany = True
-        elif self.get_argument('vettedByCompany') == 'False':
+        else:
             company.vettedByCompany = False
+        if self.get_argument('submittedSurvey'):
+            company.submittedSurvey = True
+        else:
+            company.submittedSurvey = False
         company.save()
-        #make state file
         self.redirect('/admin/')
+        # if self.get_argument('submit', None) == 'Save and Submit':
+        #     self.redirect('/')
+        # if self.get_argument('submit', None) == 'Save And Continue Editing':
+        #     self.redirect('/edit/'+id)
 
 class EditDataHandler(BaseHandler):
     @tornado.web.addslash
@@ -1252,6 +1246,12 @@ class DeleteCompanyHandler(BaseHandler):
             #delete its datasets
             for d in company.datasets:
                 d.delete()
+            p = company.contact
+            c = company.ceo
+            if c:
+                c.delete()
+            if p:
+                p.delete()
             company.delete()
         elif dataset:
             dataset.delete()

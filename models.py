@@ -63,11 +63,12 @@ class Company(Document):
 	reasonForRecommending = StringField() #DEPRECATED
 	datasets = ListField(ReferenceField(Dataset))
 	ts = ComplexDateTimeField(default=datetime.now())
-	preview50 = BooleanField()
-	candidate500 = BooleanField()
+	preview50 = BooleanField() #Soon to be DEPRECATED
+	display = BooleanField() #Changed Name to Display
 	submittedSurvey = BooleanField()
 	vetted = BooleanField() #vetted by us
 	vettedByCompany = BooleanField() #vetted by them
+	submittedThroughWebsite = BooleanField() #submitted through website
 
 
 

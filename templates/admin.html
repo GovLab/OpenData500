@@ -6,9 +6,9 @@
 
 <h1>{{ page_heading }}</h1>
 
-<h2>Submitted Survey (Not In 50)</h2>
+<h2>Submitted Survey, Vetted, and Displayed</h2>
 <div id="accordionUnvetted">
-	{% for company in surveyNotIn50 %}
+	{% for company in surveySubmitted %}
 		<h3><strong>{{ company.companyName }}</strong></h3>
 		<div class="unvettedCompanyDatasets">
 			<ul>
@@ -19,27 +19,9 @@
 				{% except %}
 				{%end%}
 			</ul>
-			<p><a href="/admin/edit/{{ company.id }}">Edit</a> <a href="/delete/{{ company.id }}">Delete</a> <a href="/addData/{{ company.id }}">Add Dataset</a></p>
+			<p><a href="/admin/edit/{{ company.id }}">Edit</a> <a href="/delete/{{ company.id }}">Delete</a></p>
 		</div>
 	{% end %}
-</div>
-<br>
-<h2>Preview 50</h2>
-<div id="accordionVetted">
-{% for company in preview50 %}
-	<h3><strong>{{ company.companyName }}</strong></h3>
-	<div>
-	<ul>
-		{% try %}
-			{% for dataset in company.datasets %}
-				<li><p><strong>{{ dataset.datasetName }}</strong> - <a href="/editData/{{ dataset.id }}">Edit</a> <a href="/delete/{{ dataset.id }}">Delete</a></p></li>
-			{% end %}
-		{% except %}
-		{% end %}
-	</ul>
-	<p><a href="/admin/edit/{{ company.id }}">Edit</a> <a href="/delete/{{ company.id }}">Delete</a> <a href="/addData/{{ company.id }}">Add Dataset</a></p>
-	</div>
-{% end %}
 </div>
 <br>
 <h2>Recently Submitted Through Website Survey</h2>
@@ -55,7 +37,7 @@
 		{% except %}
 		{% end %}
 	</ul>
-	<p><a href="/admin/edit/{{ company.id }}">Edit</a> <a href="/delete/{{ company.id }}">Delete</a> <a href="/addData/{{ company.id }}">Add Dataset</a></p>
+	<p><a href="/admin/edit/{{ company.id }}">Edit</a> <a href="/delete/{{ company.id }}">Delete</a></p>
 	</div>
 {% end %}
 </div>
@@ -66,13 +48,15 @@
 		<th>Company Name</th>
 		<th>Edit URL</th>
 		<th>Contact Email</th>
+		<th>Admin Edit</th>
 		<th>Danger Zone</th>
 	</tr>
-	{% for company in candidate500 %}
+	{% for company in sendSurveys %}
 		<tr>
 			<td><strong>{{ company.companyName }}</strong></a></td>
 			<td><a href="/edit/{{ company.id }}">www.opendata500.com/edit/{{company.id}}</a></td>
 			<td>{%try%}{% if (company.contact) %} {{ company.contact.email }} {% end %}{%except%}{%end%}</td>
+			<td>{% if (company.vettedByCompany) %}<a href="/admin/edit/{{ company.id }}">Edit</a>{%end%}</td>
 			<td><a href="/delete/{{ company.id }}">Delete</a></td>
 		</tr>
 	{% end %}
