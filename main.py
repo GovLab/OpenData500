@@ -637,7 +637,8 @@ class AdminHandler(BaseHandler):
         # surveyNotIn50 = models.Company.objects(Q(preview50=False) & Q(candidate500=True) & Q(submittedSurvey=True)).order_by('prettyName') #Not make distinction between preview 50 and submitted
         # preview50 = models.Company.objects(Q(preview50=True) & Q(candidate500=True) & Q(submittedSurvey=True)).order_by('prettyName')
         surveySubmitted = models.Company.objects(Q(submittedSurvey=True) & Q(display=True) & Q(vetted=True) & Q(vettedByCompany=True) & Q(submittedThroughWebsite=False)).order_by('prettyName')
-        sendSurveys = models.Company.objects(Q(submittedSurvey=False) & Q(display=True) & Q(vetted=False) & Q(vettedByCompany=False) & Q(submittedThroughWebsite=False)).order_by('prettyName')
+        sendSurveys = models.Company.objects(Q(submittedSurvey=False) & Q(vetted=False) & Q(vettedByCompany=False)).order_by('prettyName')
+        needVetting = models.Company.objects(Q(submittedSurvey=True) & Q(vetted=False) & Q(vettedByCompany=True) & Q(submittedThroughWebsite=False))
         # candidate500 = models.Company.objects(Q(preview50=False) & Q(candidate500=True) & Q(submittedSurvey=False)).order_by('prettyName')
         # recentlySubmitted = models.Company.objects(Q(preview50=False) & Q(candidate500=False) & Q(submittedSurvey=True)).order_by('ts')
         recentlySubmitted = models.Company.objects(Q(submittedThroughWebsite=True) & Q(vettedByCompany=True) & Q(display=False) & Q(vetted=False) & Q(submittedSurvey=True)).order_by('ts')
@@ -647,6 +648,7 @@ class AdminHandler(BaseHandler):
             page_heading='Welcome to the OpenData 500',
             surveySubmitted = surveySubmitted,
             recentlySubmitted=recentlySubmitted,
+            needVetting = needVetting,
             sendSurveys = sendSurveys
         )
 
@@ -1066,6 +1068,10 @@ class EditCompanyHandler(BaseHandler):
         company.socialImpact = self.get_argument('socialImpact', None)
         company.financialInfo = self.get_argument('financialInfo', None)
         company.submittedSurvey = True
+        company.vettedByCompany = True
+        company.display = True
+        company.vetted = False
+        company.submittedThroughWebsite = False
         company.save()
         self.redirect('/thanks/')
         # if self.get_argument('submit', None) == 'Save and Submit':
@@ -1166,18 +1172,24 @@ class AdminEditCompanyHandler(BaseHandler):
         company.descriptionShort = self.get_argument('descriptionShort', None)
         company.socialImpact = self.get_argument('socialImpact', None)
         company.financialInfo = self.get_argument('financialInfo', None)
-        if self.get_argument('vetted'):
+        if self.get_argument('vetted', None) == 'True':
             company.vetted = True
-        else:
-            company.vetted=False
-        if self.get_argument('vettedByCompany'):
+            company.display = True
             company.vettedByCompany = True
-        else:
-            company.vettedByCompany = False
-        if self.get_argument('submittedSurvey'):
             company.submittedSurvey = True
-        else:
+        elif self.get_argument('vetted', None) == 'False':
+            company.vetted=False
+            company.vettedByCompany = False
             company.submittedSurvey = False
+        if self.get_argument('keepInList', None) == 'True':
+            company.display = True
+            company.vetted=False
+            company.submittedSurvey = True
+            company.vettedByCompany = True
+        if self.get_argument('display', None) == 'True':
+            company.display = True
+        elif self.get_argument('display', None) == 'False':
+            company.display = False
         company.save()
         self.redirect('/admin/')
         # if self.get_argument('submit', None) == 'Save and Submit':

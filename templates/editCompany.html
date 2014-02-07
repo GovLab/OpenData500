@@ -155,11 +155,11 @@
 		</div>
 		<!--------------------------------------------END DATASETS--------------------------------------!-->
 	</div>
-<h3>Are you ready to submit this information? Using this same link you will be able to come back and edit this information until we review it in the next couple of days. Once we review it and approve the changes, you will have to contact us to make any changes.</h3>
+<h3>Are you ready to submit this information? You will not be able to come back to this form afterwards. If you wish to make more changes, you will need to contact <a href="mailto:opendata500@thegovlab.org">opendata500@thegovlab.org</a></h3>
 <br>
 <div class="m-form-footer submitCompanyForm">	
 	<input type="hidden" class="companyID" name="companyID" value="{{ id }}">
-	<input type="button" class="m-button" id="companySubmit" name="companyEdit" value="Submit Form">
+	<input type="button" class="m-button" id="companySubmit" name="submit" value="Submit Form">
 	<span class="savingMessage_companyEdit" style="display:none">Saving...</span>
 	<span class="errorMessage_companyEdit" style="display:none">Oops... Something went wrong.</span>
 	<span class="savedMessage_companyEdit" style="display:none">Saved!</span>
@@ -190,7 +190,8 @@ $(document).ready(function() {
 				}
 			});
 		} else {
-			console.log('not valid');
+			$('.errorMessage_companyEdit').show();
+			//console.log('not valid');
 		}
 	});
 	var form = '<div class="m-form-half left">'+

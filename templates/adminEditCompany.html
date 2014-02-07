@@ -119,15 +119,15 @@
 		{% raw xsrf_form_html() %}
 	</fieldset>
 	<fieldset class="m-form-half right">
-		<h3>Vetted By Admin?</h3>
-		<label for=""><input type="radio" name="vetted" value="True" {% if company.vetted %} checked {% end %}>True</label><br>
-		<label for=""><input type="radio" name="vetted" value="False" {% if not company.vetted %} checked {% end %}>False</label><br><br>
-		<h3>Vetted By Company?</h3>
-		<label for=""><input type="radio" name="vettedByCompany" value="True" {% if company.vettedByCompany %} checked {% end %}>True</label><br>
-		<label for=""><input type="radio" name="vettedByCompany" value="False" {% if not company.vettedByCompany %} checked {% end %}>False</label><br><br>
-		<h3>Submitted Survey?</h3>
-		<label for=""><input type="radio" name="submittedSurvey" value="True" {% if company.submittedSurvey %} checked {% end %}>True</label><br>
-		<label for=""><input type="radio" name="submittedSurvey" value="False" {% if not company.submittedSurvey %} checked {% end %}>False</label><br><br>
+		<h3>Do we approve the survey and are ready to display this company? If not, the company will be tagged for survey resubmission</h3>
+		<label for=""><input type="radio" name="vetted" value="True">Approve</label><br>
+		<label for=""><input type="radio" name="vetted" value="False">No</label><br><br>
+		<h3>Keep Company in "Needs Vetting" List</h3>
+		<label for=""><input type="radio" name="keepInList" value="True">Yes</label><br>
+		<label for=""><input type="radio" name="keepInList" value="False">No</label><br><br>
+		<h3>Display this company?</h3>
+		<label for=""><input type="radio" name="display" value="True" {% if company.display %} checked {% end %}>Show</label><br>
+		<label for=""><input type="radio" name="display" value="False" {% if not company.display %} checked {% end %}>Hide</label><br><br>
 	</fieldset>	
 </form>
 	<!--------------------------------------------DATASETS--------------------------------------!-->
@@ -166,11 +166,10 @@
 		</div>
 		<!--------------------------------------------END DATASETS--------------------------------------!-->
 	</div>
-<h3>Are you ready to submit this information? Using this same link you will be able to come back and edit this information until we review it in the next couple of days. Once we review it and approve the changes, you will have to contact us to make any changes.</h3>
 <br>
 <div class="m-form-footer submitCompanyForm">	
 	<input type="hidden" class="companyID" name="companyID" value="{{ id }}">
-	<input type="button" class="m-button" id="companySubmit" name="companyEdit" value="Submit Form">
+	<input type="button" class="m-button" id="companySubmit" name="companyEdit" value="Save">
 	<span class="savingMessage_companyEdit" style="display:none">Saving...</span>
 	<span class="errorMessage_companyEdit" style="display:none">Oops... Something went wrong.</span>
 	<span class="savedMessage_companyEdit" style="display:none">Saved!</span>
@@ -187,7 +186,7 @@ $(document).ready(function() {
 			var data = $('.companyForm').serializeArray();
 			$.ajax({
 				type: 'POST',
-				url: '/edit/' + companyID,
+				url: '/admin/edit/' + companyID,
 				data: data,
 				error: function(error) {
 						console.debug(JSON.stringify(error));
@@ -197,7 +196,7 @@ $(document).ready(function() {
 					$(event.target).attr('disabled', 'disabled'); },
 				success: function(success) {
 					console.log(success);
-					document.location.href = '/thanks/';
+					document.location.href = '/admin/';
 				}
 			});
 		} else {
