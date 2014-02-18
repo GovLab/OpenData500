@@ -979,6 +979,7 @@ class EditCompanyHandler(BaseHandler):
     def get(self, id):
         try: 
             company = models.Company2.objects.get(id=bson.objectid.ObjectId(id))
+            #Datasets by agency, with no subagency
             page_heading = "Editing " + company.companyName
             page_title = "Editing " + company.companyName
         except:
@@ -1435,9 +1436,6 @@ class LoadEverythingNewHandler(BaseHandler):
                         )
                     agency = models.Agency(
                             name = d['agency'],
-                            url = '',
-                            prettyName = '',
-                            subagency = '',
                             dataType = ','.join(d['dataType']),
                             ts = json.loads(d['ts'], object_hook=json_util.object_hook),
                             datasets = []

@@ -115,17 +115,22 @@ class Agency(Document):
 	name = StringField()
 	prettyName = StringField()
 	url = StringField() #for whatever is more specific, agency or subagency
-	subagency = StringField()
+	subagencies = ListField(EmbeddedDocumentField('Subagency'))
 	dataType = StringField() #Federal, State, City/County, Other
 	datasets = ListField(EmbeddedDocumentField('Dataset2'))
-	usedBy = ListField(ReferenceField(Company))
+	usedBy = ListField(ReferenceField(Company2))
+
+class Subagency(EmbeddedDocument):
+	name = StringField()
+	url = StringField()
+	datasets = ListField(EmbeddedDocumentField('Dataset2'))
+	usedBy = ListField(ReferenceField(Company2))
 
 class Dataset2(EmbeddedDocument):
 	datasetName = StringField()
 	datasetURL = StringField()
 	rating = IntField()
-	reason = StringField()
-	usedBy = ReferenceField(Company)
+	usedBy = ReferenceField(Company2)
 
 class Users(Document):
 	ts = ComplexDateTimeField(default=datetime.now())

@@ -89,18 +89,54 @@
 		<h3>Please tell us more about the data your company uses. Select from which agencies your company utilizes data, and if possible, please specify which data set it uses.</h3><br>
 		<div class="agencyList">
 			<div id="accordionAgency">
+				{% set displayHeader = False %}
 				{% for agency in company.agencies %}
 					<h3 class="agency"><a href="#">{{agency.name}}</a></h3>
 					<div>
-						<div id="accordionSubAgency">
-							<h3><a href="#">{% if agency.subagency %}{{agency.subagency}}{% end %}</a></h3>
-							<div>
+						{% if len(agency.datasets) != 0 and not displayHeader %}
+							<table class="datasetTable">
+								<tr>
+									<th>Dataset Name</th>
+									<th>Dataset URL</th>
+									<th>Rating (1-4)</th>
+									<th></th>
+								</tr>
+								{%  set displayHeader = True %}
 								{% for dataset in agency.datasets %}
-									<strong>{{dataset.datasetName}}</strong>
+									<tr>
+										<td><input type="text" name="datasetName" id="datasetName" {% if (dataset.datasetName) %} value="{{dataset.datasetName}}" {% end %}></td>
+										<td><input type="text" name="datasetURL" id="datasetURL" {% if (dataset.datasetURL) %} value="{{dataset.datasetURL}}" {% end %}></td>
+										<td><input type="text" name="rating" id="rating" {% if (dataset.rating) %} value="{{dataset.rating}}" {% end %}></td>
+										<td><input type="button" class="m-button" id="addDataset" value="Add Another"></td>
+									</tr>
 								{% end %}
-							</div>
+							</table>	
+						{% end %}
+						{% if len(agency.subagencies) != 0 %}
+						<div id="accordionSubAgency">
+							<h3><a href="#">{{agency.subagency}}</a></h3>
+						</div>
+						{% end %}
+						<div>
+							<table class="datasetTable">
+								<tr>
+									<th>Dataset Name</th>
+									<th>Dataset URL</th>
+									<th>Rating (1-4)</th>
+									<th></th>
+								</tr>
+								{% for dataset in agency.datasets %}
+									<tr>
+										<td><input type="text" name="datasetName" id="datasetName" {% if (dataset.datasetName) %} value="{{dataset.datasetName}}" {% end %}></td>
+										<td><input type="text" name="datasetURL" id="datasetURL" {% if (dataset.datasetURL) %} value="{{dataset.datasetURL}}" {% end %}></td>
+										<td><input type="text" name="rating" id="rating" {% if (dataset.rating) %} value="{{dataset.rating}}" {% end %}></td>
+										<td><input type="button" class="m-button" id="addDataset" value="Add Another"></td>
+									</tr>
+								{% end %}
+							</table>
 						</div>
 					</div>
+					{% set displayHeader = False %}
 				{% end %}
 			</div>
 		</div>
@@ -125,9 +161,20 @@
 $(document).ready(function() { 
 	$(function() {
 	    $( "#accordionAgency, #accordionSubAgency" ).accordion({
-	      collapsible: true
+	      collapsible: true,
+	      autoHeight: false,
+	      heightStyle: "content"
 	    });
 	  });
+	var datasetForm = '<tr>'+
+							'<td><input type="text" name="datasetName" id="datasetName" value=""></td>'+
+							'<td><input type="text" name="datasetURL" id="datasetURL" value=""></td>'+
+							'<td><input type="text" name="rating" id="rating" value=""></td>'+
+							'<td><input type="button" class="m-button" id="addDataset" value="Add Another"></td>'+
+						'</tr>';
+	$('.agencyList').on('click', '#addDataset', function() {
+		$('.datasetTable').append(datasetForm);
+	})
 
 
 	$('.submitCompanyForm').on('click', '#companySubmit', function() {

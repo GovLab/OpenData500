@@ -16,7 +16,8 @@
 
 $(function() {
     $( "#accordionUnvetted" ).accordion({
-      collapsible: true
+      collapsible: true,
+      autoHeight: false
     });
   });
 
@@ -28,7 +29,8 @@ $(function() {
 
 $(function() {
     $( "#accordionSubmitted" ).accordion({
-      collapsible: true
+      collapsible: true,
+      autoHeight: false
     });
   });
 
