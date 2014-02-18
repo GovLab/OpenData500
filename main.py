@@ -70,12 +70,14 @@ class Application(tornado.web.Application):
             (r'/download/(.*)/?',tornado.web.StaticFileHandler, {'path':os.path.join(os.path.dirname(__file__), 'static')}),
             #(r"/upload50/?", Upload50Handler),
             #(r"/upload500/?", Upload500Handler),
+            (r"/uploadAll/?", LoadEverythingNewHandler),
             (r"/candidates/?", CandidateHandler),
             (r"/preview/?", PreviewHandler),
             (r'/thanks/?', ThanksHandler),
             (r'/login/?', LoginHandler),
             (r'/logout/?', LogoutHandler),
             (r'/register/?', RegisterHandler),
+            #(r'/dump/?', EverythingHandler),
             (r"/([^/]+)/?", CompanyHandler)
         ]
         settings = dict(
@@ -256,7 +258,7 @@ class CandidateHandler(BaseHandler):
     @tornado.web.addslash
     #@tornado.web.authenticated
     def get(self):
-        companies = models.Company.objects(display=True).order_by('prettyName')
+        companies = models.Company2.objects(display=True).order_by('prettyName')
         # stateInfo = []
         # with open(os.path.join(os.path.dirname(__file__), 'static') + '/states.csv', 'rb') as csvfile:
         #     statereader = csv.reader(csvfile, delimiter=',')
@@ -636,12 +638,12 @@ class AdminHandler(BaseHandler):
     def get(self):
         # surveyNotIn50 = models.Company.objects(Q(preview50=False) & Q(candidate500=True) & Q(submittedSurvey=True)).order_by('prettyName') #Not make distinction between preview 50 and submitted
         # preview50 = models.Company.objects(Q(preview50=True) & Q(candidate500=True) & Q(submittedSurvey=True)).order_by('prettyName')
-        surveySubmitted = models.Company.objects(Q(submittedSurvey=True) & Q(display=True) & Q(vetted=True) & Q(vettedByCompany=True) & Q(submittedThroughWebsite=False)).order_by('prettyName')
-        sendSurveys = models.Company.objects(Q(submittedSurvey=False) & Q(vetted=False) & Q(vettedByCompany=False)).order_by('prettyName')
-        needVetting = models.Company.objects(Q(submittedSurvey=True) & Q(vetted=False) & Q(vettedByCompany=True) & Q(submittedThroughWebsite=False))
+        surveySubmitted = models.Company2.objects(Q(submittedSurvey=True) & Q(display=True) & Q(vetted=True) & Q(vettedByCompany=True) & Q(submittedThroughWebsite=False)).order_by('prettyName')
+        sendSurveys = models.Company2.objects(Q(submittedSurvey=False) & Q(vetted=False) & Q(vettedByCompany=False)).order_by('prettyName')
+        needVetting = models.Company2.objects(Q(submittedSurvey=True) & Q(vetted=False) & Q(vettedByCompany=True) & Q(submittedThroughWebsite=False))
         # candidate500 = models.Company.objects(Q(preview50=False) & Q(candidate500=True) & Q(submittedSurvey=False)).order_by('prettyName')
         # recentlySubmitted = models.Company.objects(Q(preview50=False) & Q(candidate500=False) & Q(submittedSurvey=True)).order_by('ts')
-        recentlySubmitted = models.Company.objects(Q(submittedThroughWebsite=True) & Q(vettedByCompany=True) & Q(display=False) & Q(vetted=False) & Q(submittedSurvey=True)).order_by('ts')
+        recentlySubmitted = models.Company2.objects(Q(submittedThroughWebsite=True) & Q(vettedByCompany=True) & Q(display=False) & Q(vetted=False) & Q(submittedSurvey=True)).order_by('ts')
         self.render(
             "admin.html",
             page_title='OpenData500',
@@ -976,7 +978,7 @@ class EditCompanyHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self, id):
         try: 
-            company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
+            company = models.Company2.objects.get(id=bson.objectid.ObjectId(id))
             page_heading = "Editing " + company.companyName
             page_title = "Editing " + company.companyName
         except:
@@ -984,7 +986,7 @@ class EditCompanyHandler(BaseHandler):
                 page_title = "That ain't even a thing.",
                 page_heading = "Check yo'self",
                 message=id)
-        self.render("editCompany.html",
+        self.render("editCompany2.html",
             page_title = page_title,
             page_heading = page_heading,
             company = company,
@@ -1371,6 +1373,173 @@ class DownloadHandler(BaseHandler):
             page_title='Download Data',
             page_heading='Download Data',
         )
+
+class LoadEverythingNewHandler(BaseHandler):
+    def get(self):
+        file = open("AllCompanies.json", "r")
+        companies = []
+        for line in file:
+            companies.append(json.loads(line))
+        companies = companies[0]
+        for c in companies:
+            contact = models.Person2(
+                firstName = c['contact']['firstName'],
+                lastName = c['contact']['lastName'],
+                title = c['contact']['title'],
+                email = c['contact']['email'],
+                phone = c['contact']['phone'],
+                org = c['contact']['org'],
+                contacted = c['contact']['contacted'],
+            )
+            ceo = models.Person2(
+                firstName = c['ceo']['firstName'],
+                lastName = c['ceo']['lastName']
+            )
+            company = models.Company2(
+                    companyName = c['companyName'],
+                    prettyName = c['prettyName'],
+                    url = c['url'],
+                    contact = contact,
+                    ceo = ceo,
+                    yearFounded = c['yearFounded'],
+                    previousName = c['previousName'],
+                    city = c['city'],
+                    state = c['state'],
+                    zipCode = c['zipCode'],
+                    fte = c['fte'],
+                    companyType = c['companyType'],
+                    companyCategory = c['companyCategory'],
+                    revenueSource = c['revenueSource'].split(','),
+                    description = c['descriptionLong'],
+                    descriptionShort = c['descriptionShort'],
+                    financialInfo = c['financialInfo'],
+                    datasetWishList = c['contact']['datasetWishList'],
+                    confidentiality =c['confidentiality'],
+                    ts = json.loads(c['ts'], object_hook=json_util.object_hook),
+                    display = c['display'],
+                    submittedSurvey = c['submittedSurvey'],
+                    vetted = c['vetted'],
+                    vettedByCompany = c['vettedByCompany'],
+                    submittedThroughWebsite = c['submittedThroughWebsite'],
+                    agencies = []
+                )
+            company.save()
+            try:
+                for d in c['datasets']:
+                    dataset = models.Dataset2(
+                            datasetName = d['datasetName'],
+                            datasetURL = d['datasetURL'],
+                            rating = d['ratings']['rating'],
+                            reason = d['ratings']['reason'],
+                            usedBy = str(company.id)
+                        )
+                    agency = models.Agency(
+                            name = d['agency'],
+                            url = '',
+                            prettyName = '',
+                            subagency = '',
+                            dataType = ','.join(d['dataType']),
+                            ts = json.loads(d['ts'], object_hook=json_util.object_hook),
+                            datasets = []
+                        )
+                    agency.datasets.append(dataset)
+                    agency.save()
+                    company.agencies.append(agency)
+                    company.save()
+            except:
+                continue
+
+
+class EverythingHandler(BaseHandler):
+    @tornado.web.addslash
+    @tornado.web.authenticated
+    def get(self):
+        companies = models.Company.objects()
+        companyList = []
+        for c in companies:
+            company = {
+                "companyName": c.companyName,
+                "prettyName": c.prettyName,
+                "url": c.url,
+                "yearFounded": c.yearFounded,
+                "previousName": c.previousName,
+                "city": c.city,
+                "state": c.state,
+                "zipCode": c.zipCode,
+                "fte": c.fte,
+                "companyType": c.companyType,
+                "companyCategory": c.companyCategory,
+                "companyFunction": c.companyFunction,
+                "criticalDataTypes": ','.join(c.criticalDataTypes),
+                "revenueSource": ','.join(c.revenueSource),
+                "sector": ','.join(c.sector),
+                "descriptionLong": c.descriptionLong,
+                "descriptionShort": c.descriptionShort,
+                "socialImpact": c.socialImpact,
+                "financialInfo": c.financialInfo,
+                "confidentiality": c.confidentiality,
+                #"contact": c.contact,
+                #"recommendedBy": c.recommendedBy,
+                "recommended": c.recommended,
+                "reasonForRecommending": c.reasonForRecommending,
+                #"datasets": c.datasets,
+                "ts": json.dumps(c.ts, default=json_util.default),
+                "preview50": c.preview50,
+                "display": c.display,
+                "submittedSurvey": c.submittedSurvey,
+                "vetted": c.vetted,
+                "vettedByCompany": c.vettedByCompany,
+                "submittedThroughWebsite": c.submittedThroughWebsite
+            }
+            if c.contact:
+                company['contact'] = {
+                    "firstName": c.contact.firstName,
+                    "lastName": c.contact.lastName,
+                    "title": c.contact.title,
+                    "personType": c.contact.personType,
+                    "email": c.contact.email,
+                    "phone": c.contact.phone,
+                    "org": c.contact.org,
+                    "contacted": c.contact.contacted,
+                    "otherInfo": ','.join(c.contact.otherInfo),
+                    "datasetWishList": c.contact.datasetWishList,
+                    "companyRec": c.contact.companyRec,
+                    "conferenceRec": c.contact.conferenceRec,
+                    #"submittedCompany": c.contact.submittedCompany.id,
+                    #"submittedDatasets": c.contact.submittedDatasets
+                }
+                if c.contact.submittedCompany:
+                    company['contact']['submittedCompany'] = str(c.contact.submittedCompany.id)
+                if c.contact.submittedDatasets:
+                    company['contact']['submittedDatasets'] = []
+                    for d in c.contact.submittedDatasets:
+                        company['contact']['submittedDatasets'].append(str(d.id))
+            if c.ceo:
+                company['ceo'] = {
+                    "firstName": c.ceo.firstName,
+                    "lastName": c.ceo.lastName,
+                    "email": c.ceo.email
+                }
+            if c.datasets:
+                company['datasets'] = []
+                for d in c.datasets:
+                    dataset = {
+                        "ts": json.dumps(d.ts, default=json_util.default),
+                        "datasetName": d.datasetName,
+                        "datasetURL": d.datasetURL,
+                        "agency": d.agency,
+                        "ratings": {
+                            "rating": d.ratings[0].rating,
+                            "reason": d.ratings[0].reason
+                        },
+                        "dataType": d.dataType,
+                        "usedBy": str(d.usedBy[0].id)
+                    }
+                    company['datasets'].append(dataset)
+            companyList.append(company)
+        with open(os.path.join(os.path.dirname(__file__), 'static') + '/AllCompanies.json', 'w') as outfile:
+            json.dump(companyList, outfile)
+
 
 class GenerateFilesHandler(BaseHandler):
     @tornado.web.addslash

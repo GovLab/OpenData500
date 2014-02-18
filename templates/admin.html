@@ -13,8 +13,14 @@
 	<div>
 	<ul>
 		{% try %}
-			{% for dataset in company.datasets %}
-				<li><p><strong>{{ dataset.datasetName }}</strong> - <a href="/editData/{{ dataset.id }}">Edit</a></p></li>
+			{% for agency in company.agencies %}
+				<li><p><strong>{{ agency.name }}{%if agency.subagency %} - {{ agency.subagency }}{%end%}</strong></p>
+					<ul>
+						{% for dataset in agency.datasets %}
+							<li>{%if dataset.datasetName %}{{dataset.datasetName}}{%end%}</li>
+						{% end %}
+					</ul>
+				</li>
 			{% end %}
 		{% except %}
 		{% end %}
@@ -62,20 +68,26 @@
 <br>
 <h2>Submitted Survey, Vetted, and Displayed</h2>
 <div id="accordionUnvetted">
-	{% for company in surveySubmitted %}
-		<h3><strong>{{ company.companyName }}</strong></h3>
-		<div class="unvettedCompanyDatasets">
-			<ul>
-				{% try %}
-					{% for dataset in company.datasets %}
-						<li><p><strong>{{ dataset.datasetName }}</strong> - <a href="/editData/{{ dataset.id }}">Edit</a></p></li>
-					{% end %}
-				{% except %}
-				{%end%}
-			</ul>
-			<p><a href="/admin/edit/{{ company.id }}">Edit</a></p>
-		</div>
-	{% end %}
+{% for company in surveySubmitted %}
+	<h3><strong>{{ company.companyName }}</strong> Submitted: {{company.ts}}</h3> 
+	<div>
+	<ul>
+		{% try %}
+			{% for agency in company.agencies %}
+				<li><p><strong>{{ agency.name }}{%if agency.subagency %} - {{ agency.subagency }}{%end%}</strong></p>
+					<ul>
+						{% for dataset in agency.datasets %}
+							<li>{%if dataset.datasetName %}{{dataset.datasetName}}{%end%}</li>
+						{% end %}
+					</ul>
+				</li>
+			{% end %}
+		{% except %}
+		{% end %}
+	</ul>
+	<p><a href="/admin/edit/{{ company.id }}">Edit</a></p>
+	</div>
+{% end %}
 </div>
 
 

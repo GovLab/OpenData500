@@ -15,9 +15,9 @@ class Person(Document):
 	org = StringField()
 	contacted = BooleanField()
 	otherInfo = ListField(StringField())
-	datasetWishList = StringField()
-	companyRec = StringField()
-	conferenceRec = StringField()
+	datasetWishList = StringField() #DEPRECATED
+	companyRec = StringField() #DEPRECATED
+	conferenceRec = StringField() #DEPRECATED
 	submittedCompany = ReferenceField('Company')
 	submittedDatasets = ListField(ReferenceField('Dataset'))
 
@@ -54,7 +54,7 @@ class Company(Document):
 	sector = ListField(StringField())
 	descriptionLong = StringField()
 	descriptionShort = StringField()
-	socialImpact = StringField()
+	socialImpact = StringField() #DEPRECATED
 	financialInfo = StringField()
 	confidentiality = StringField() #What info does the contact want to hide?
 	contact = ReferenceField(Person)
@@ -70,7 +70,62 @@ class Company(Document):
 	vettedByCompany = BooleanField() #vetted by them
 	submittedThroughWebsite = BooleanField() #submitted through website
 
+class Person2(EmbeddedDocument):
+	firstName = StringField()
+	lastName = StringField()
+	title = StringField()
+	email = StringField()
+	phone = StringField()
+	org = StringField()
+	contacted = BooleanField()
 
+class Company2(Document):
+	companyName = StringField()
+	prettyName = StringField()
+	url = StringField()
+	contact = EmbeddedDocumentField(Person2)
+	ceo = EmbeddedDocumentField(Person2)
+	yearFounded = IntField()
+	previousName = StringField()
+	city = StringField()
+	state = StringField()
+	zipCode = IntField()
+	fte = IntField()
+	companyType = StringField() #Public, Private, etc
+	companyCategory = StringField() #Categories
+	revenueSource = ListField(StringField()) #checkbox with options
+	description = StringField()
+	descriptionShort = StringField()
+	financialInfo = StringField() #long question, write paragraph
+	datasetWishList = StringField() #What datasets...
+	datasetComments = StringField() #Please give comments, good or bad....
+	confidentiality = StringField() #What info does the contact want to hide?
+	agencies = ListField(ReferenceField('Agency'))
+	ts = ComplexDateTimeField(default=datetime.now())
+	display = BooleanField() #Display on site
+	submittedSurvey = BooleanField()
+	vetted = BooleanField() #vetted by us
+	vettedByCompany = BooleanField() #vetted by them
+	submittedThroughWebsite = BooleanField() #submitted through website
+
+
+
+class Agency(Document):
+	ts = ComplexDateTimeField(default=datetime.now())
+	name = StringField()
+	prettyName = StringField()
+	url = StringField() #for whatever is more specific, agency or subagency
+	subagency = StringField()
+	dataType = StringField() #Federal, State, City/County, Other
+	datasets = ListField(EmbeddedDocumentField('Dataset2'))
+	usedBy = ListField(ReferenceField(Company))
+
+class Dataset2(EmbeddedDocument):
+	datasetName = StringField()
+	datasetURL = StringField()
+	rating = IntField()
+	reason = StringField()
+	usedBy = ReferenceField(Company)
 
 class Users(Document):
 	ts = ComplexDateTimeField(default=datetime.now())
@@ -85,7 +140,7 @@ Company.register_delete_rule(Person, "submittedCompany", PULL)
 Person.register_delete_rule(Company, "contact", NULLIFY)
 Person.register_delete_rule(Company, "ceo", NULLIFY)
 
-
+Agency.register_delete_rule(Company2, "agencies", PULL)
 
 
 
