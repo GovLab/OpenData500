@@ -71,6 +71,7 @@ class Application(tornado.web.Application):
             #(r"/upload50/?", Upload50Handler),
             #(r"/upload500/?", Upload500Handler),
             (r"/uploadAll/?", LoadEverythingNewHandler),
+            #(r"/uploadAgencies/?", UploadAgencies),
             (r"/candidates/?", CandidateHandler),
             (r"/preview/?", PreviewHandler),
             (r'/thanks/?', ThanksHandler),
@@ -915,63 +916,116 @@ class SubmitDataHandler(BaseHandler):
 
     #@tornado.web.authenticated
     def post(self, id):
-        if self.get_argument('submit', None) == 'Continue Without Adding Datasets': #else, you're done, go home.
-            self.redirect("/thanks/")
-        #get the company we are dealing with:
-        #id = self.get_argument('id', None)
-        company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
-        #get dataset fields from form:
-        datasetName = self.get_argument('datasetName', None)
-        datasetURL = self.get_argument('datasetURL', None)
-        agency = self.get_argument('agency', None)
-        try: #get all entered dataTypes
-            typeOfDataset = self.request.arguments['typeOfDataset']
-        except: #if none, then make empty attay
-            typeOfDataset = []
-        if 'Other' in typeOfDataset: #if Other, add the other.
-            del typeOfDataset[typeOfDataset.index('Other')]
-            typeOfDataset.append(self.get_argument('otherTypeOfDataset', None))
-        ratingSubmitted = self.get_argument('rating', None)
-        if not ratingSubmitted:
-            ratingSubmitted = 9999
-        reason = self.get_argument('reason', None)
-        #The author of this dataset review is always the contact.
-        try: 
-            author = company.contact
-        except: 
-            author = models.Person()
-        #Can't check if dataset exists. If check by URL, if someone enters data.gov instead of specific URL, 
-        #datasets might be different but same URL.
-        #Just save them all.
-        dataset = models.Dataset(
-            datasetName = datasetName,
-            datasetURL = datasetURL,
-            agency=agency,
-            dataType = typeOfDataset,
-        )
-        #save the rating
-        rating = models.Rating(
-            author = author,
-            rating =ratingSubmitted,
-            reason = reason
-        )
-        #Save ratings, datasets, author, and company
-        dataset.ratings.append(rating)
-        dataset.usedBy.append(company)
-        dataset.save()
-        author.submittedDatasets.append(dataset)
-        author.save()
-        company.datasets.append(dataset)
-        company.save()
-        #If want to add another, redirect to form again. 
-        if self.get_argument('action', None) == 'Add New':
-            self.write(str(dataset.id))
-        if self.get_argument('submit', None) == 'Add Another':
-            self.redirect("/addData/" + id)
-        if self.get_argument('submit', None) == 'Save and Finish':
-            self.redirect("/thanks/")
-        if self.get_argument('submit', None) == 'Done': #else, you're done, go home.
-            self.redirect("/thanks/")
+        company = models.Company2.objects.get(id=bson.objectid.ObjectId(id))
+        agencyName = self.get_argument("agency", None)
+        subagencyName = self.get_argument("subagency", None)
+        action = self.get_argument("action", None)
+        #------------------------------------ADDING AGENCY/SUBAGENCY------------------------
+        if action == "add agency":
+            #Existing AGENCY
+            try:
+                agency = models.Agency.objects.get(name=agencyName)
+            except:
+                self.write("something went wrong")
+            for s in agency.subagencies:
+                if s.name == subagencyName:
+                    logging.info("going to check if company in subagency.usedBy")
+                    if company not in s.usedBy: #only add if it's not already there.
+                        logging.info(subagencyName + " is used by" + company.companyName)
+                        s.usedBy.append(company)
+            agency.save()
+            if company not in agency.usedBy: #only add if it's not already there.
+                logging.info(agencyName + " is used by" + company.companyName)
+                agency.usedBy.append(company)
+                agency.save()
+            if agency not in company.agencies: #only add if it's not already there.
+                logging.info(company.companyName + " is used by" + agencyName)
+                company.agencies.append(agency)
+                company.save()
+            self.write("success")
+        #------------------------------------DELETING AGENCY/SUBAGENCY------------------------
+        if action == "delete agency":
+            try: 
+                agency = models.Agency.objects.get(name=agencyName)
+            except:
+                self.write("something went wrong")
+            if subagencyName == '': #delete from agency and subagency
+                #remove agency from company
+                if agency in company.agencies:
+                    company.agencies.remove(agency)
+                #remove company from agency
+                if company in agency.usedBy:
+                    agency.usedBy.remove(company)
+                #remove from all subagencies
+                for s in agency.subagencies:
+                    if company in s.usedBy:
+                        s.usedBy.remove(company)
+            if subagencyName:
+                #remove company from specific subagency
+                for s in agency.subagencies:
+                    if company in s.usedBy and s.name == subagencyName:
+                        s.usedBy.remove(company)
+            agency.save()
+            company.save()
+            self.write("deleted")
+
+        # if self.get_argument('submit', None) == 'Continue Without Adding Datasets': #else, you're done, go home.
+        #     self.redirect("/thanks/")
+        # #get the company we are dealing with:
+        # #id = self.get_argument('id', None)
+        # company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
+        # #get dataset fields from form:
+        # datasetName = self.get_argument('datasetName', None)
+        # datasetURL = self.get_argument('datasetURL', None)
+        # agency = self.get_argument('agency', None)
+        # try: #get all entered dataTypes
+        #     typeOfDataset = self.request.arguments['typeOfDataset']
+        # except: #if none, then make empty attay
+        #     typeOfDataset = []
+        # if 'Other' in typeOfDataset: #if Other, add the other.
+        #     del typeOfDataset[typeOfDataset.index('Other')]
+        #     typeOfDataset.append(self.get_argument('otherTypeOfDataset', None))
+        # ratingSubmitted = self.get_argument('rating', None)
+        # if not ratingSubmitted:
+        #     ratingSubmitted = 9999
+        # reason = self.get_argument('reason', None)
+        # #The author of this dataset review is always the contact.
+        # try: 
+        #     author = company.contact
+        # except: 
+        #     author = models.Person()
+        # #Can't check if dataset exists. If check by URL, if someone enters data.gov instead of specific URL, 
+        # #datasets might be different but same URL.
+        # #Just save them all.
+        # dataset = models.Dataset(
+        #     datasetName = datasetName,
+        #     datasetURL = datasetURL,
+        #     agency=agency,
+        #     dataType = typeOfDataset,
+        # )
+        # #save the rating
+        # rating = models.Rating(
+        #     author = author,
+        #     rating =ratingSubmitted,
+        #     reason = reason
+        # )
+        # #Save ratings, datasets, author, and company
+        # dataset.ratings.append(rating)
+        # dataset.usedBy.append(company)
+        # dataset.save()
+        # author.submittedDatasets.append(dataset)
+        # author.save()
+        # company.datasets.append(dataset)
+        # company.save()
+        # #If want to add another, redirect to form again. 
+        # if self.get_argument('action', None) == 'Add New':
+        #     self.write(str(dataset.id))
+        # if self.get_argument('submit', None) == 'Add Another':
+        #     self.redirect("/addData/" + id)
+        # if self.get_argument('submit', None) == 'Save and Finish':
+        #     self.redirect("/thanks/")
+        # if self.get_argument('submit', None) == 'Done': #else, you're done, go home.
+        #     self.redirect("/thanks/")
 
 class EditCompanyHandler(BaseHandler):
     @tornado.web.addslash
@@ -1538,6 +1592,43 @@ class EverythingHandler(BaseHandler):
         with open(os.path.join(os.path.dirname(__file__), 'static') + '/AllCompanies.json', 'w') as outfile:
             json.dump(companyList, outfile)
 
+# class UploadAgencies(BaseHandler):
+#     @tornado.web.addslash
+#     @tornado.web.authenticated
+#     def get(self):
+#         with open('agenciesFormatted.csv', 'rb') as csvfile:
+#             csvreader = csv.reader(csvfile, delimiter=',')
+#             previousAgency = ''
+#             a = models.Agency()
+#             for row in csvreader:
+#                 if row[0] != 'agency':
+#                     try: #check if Agency exists
+#                         a = models.Agency.objects.get(name=row[0])
+#                     except: #make a new one.
+#                         a = models.Agency(
+#                             name = row[0],
+#                             abbrev = row[1],
+#                             prettyName = row[6],
+#                             url = row[8],
+#                             dataType = row[9],
+#                             source = "dataGov",
+#                             subagencies = [],
+#                             usedBy = [],
+#                             datasets = []
+#                         )
+#                         a.save()
+#                     if row[3]: #if there is a subagency
+#                         s = models.Subagency(
+#                             name = row[3],
+#                             abbrev = row[4],
+#                             url = row[8],
+#                             usedBy = [],
+#                             datasets = []
+#                         )
+#                         a.subagencies.append(s)
+#                         a.save()
+
+        
 
 class GenerateFilesHandler(BaseHandler):
     @tornado.web.addslash

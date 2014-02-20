@@ -113,8 +113,10 @@ class Company2(Document):
 class Agency(Document):
 	ts = ComplexDateTimeField(default=datetime.now())
 	name = StringField()
+	abbrev = StringField()
 	prettyName = StringField()
 	url = StringField() #for whatever is more specific, agency or subagency
+	source = StringField() #DATA.GOV WEBSITE OR USER INPUT
 	subagencies = ListField(EmbeddedDocumentField('Subagency'))
 	dataType = StringField() #Federal, State, City/County, Other
 	datasets = ListField(EmbeddedDocumentField('Dataset2'))
@@ -122,6 +124,7 @@ class Agency(Document):
 
 class Subagency(EmbeddedDocument):
 	name = StringField()
+	abbrev = StringField()
 	url = StringField()
 	datasets = ListField(EmbeddedDocumentField('Dataset2'))
 	usedBy = ListField(ReferenceField(Company2))
@@ -146,6 +149,7 @@ Person.register_delete_rule(Company, "contact", NULLIFY)
 Person.register_delete_rule(Company, "ceo", NULLIFY)
 
 Agency.register_delete_rule(Company2, "agencies", PULL)
+Company2.register_delete_rule(Agency, 'usedBy', PULL)
 
 
 

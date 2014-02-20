@@ -2,6 +2,10 @@
 {% autoescape None %}
 
 {% block body %}
+<style>
+
+</style>
+
 <br>
 <h2>{{ page_heading }}</h2>
 
@@ -83,69 +87,87 @@
 	</fieldset>
 </form>
 	<!--------------------------------------------DATASETS--------------------------------------!-->
-
-	<div class="m-form-box datasets">
+	<div class="m-form-box data">
 		<h2>Data</h2><br>
 		<h3>Please tell us more about the data your company uses. Select from which agencies your company utilizes data, and if possible, please specify which data set it uses.</h3><br>
+		<div class="ui-widget">
+			<label for="tags">Agency/Sub-agency Search: </label>
+			<input id="agencyTags" value="">
+			<input type="hidden" id="searchval" />
+			<input type="button" class="l-button" id="addSearchResult" value="Add Agency/Sub-Agency">
+			<span class="agenciesExist" style="display:none">Agency or Sub-Agency already on list.</span>
+			<span class="invalidInput" style="display:none">Nothing to add.</span>
+		</div>
 		<div class="agencyList">
 			<div id="accordionAgency">
-				{% set displayHeader = False %}
 				{% for agency in company.agencies %}
-					<h3 class="agency"><a href="#">{{agency.name}}</a></h3>
-					<div>
-						{% if len(agency.datasets) != 0 and not displayHeader %}
-							<table class="datasetTable">
+					<h3 class="agency" name='{{agency.name.replace(" ", "-") }}'><a href="#">{{agency.name}}</a>
+						<span style="float:right; display: none;" class="toolbar ui-corner-all ui-icon ui-icon-circle-close red" subagency="" agency="{{agency.name.replace(" ","-")}}"></span>
+					</h3>
+					<div id="{{agency.name.replace(" ","-")}}Accordion">
+						<br><h3>Agency Level Datasets</h3><br>
+						<table class="datasetTable">
+							<tr>
+								<th>Dataset Name</th>
+								<th>Dataset URL</th>
+								<th>Rating (1-4)</th>
+								<th></th>
+							</tr>
+							{% for dataset in agency.datasets %}{% if company is dataset.usedBy %}
 								<tr>
-									<th>Dataset Name</th>
-									<th>Dataset URL</th>
-									<th>Rating (1-4)</th>
-									<th></th>
+									<td><input type="text" name="datasetName" id="datasetName" {% if (dataset.datasetName) %} value="{{dataset.datasetName}}" {% end %}></td>
+									<td><input type="text" name="datasetURL" id="datasetURL" {% if (dataset.datasetURL) %} value="{{dataset.datasetURL}}" {% end %}></td>
+									<td><input type="text" name="rating" id="rating" {% if (dataset.rating) %} value="{{dataset.rating}}" {% end %}></td>
+									<td><input type="button" class="l-button" id="saveDataset" value="Save" style="display: none;"><input type="button" class="l-button" id="deleteDataset" value="Delete"></td>
 								</tr>
-								{%  set displayHeader = True %}
-								{% for dataset in agency.datasets %}
-									<tr>
-										<td><input type="text" name="datasetName" id="datasetName" {% if (dataset.datasetName) %} value="{{dataset.datasetName}}" {% end %}></td>
-										<td><input type="text" name="datasetURL" id="datasetURL" {% if (dataset.datasetURL) %} value="{{dataset.datasetURL}}" {% end %}></td>
-										<td><input type="text" name="rating" id="rating" {% if (dataset.rating) %} value="{{dataset.rating}}" {% end %}></td>
-										<td><input type="button" class="m-button" id="addDataset" value="Add Another"></td>
-									</tr>
-								{% end %}
-							</table>	
-						{% end %}
-						{% if len(agency.subagencies) != 0 %}
+							{% end %}{% end %}<!---END DATASETS FROM JUST AGENCY !-->
+							<tr>
+								<td><input type="text" name="datasetName" id="datasetName" value=""></td>
+								<td><input type="text" name="datasetURL" id="datasetURL" value=""></td>
+								<td><input type="text" name="rating" id="rating" value=""></td>
+								<td><input type="button" class="l-button" id="saveDataset" value="Save"><input type="button" class="l-button" id="deleteDataset" value="Delete" style="display:none"></td>
+							</tr>
+						</table>	
+						<!-- ROLL THROUGH SUBAGENCIES !-->
+						{% if agency.subagencies %}<br><h3>Sub-Agencies</h3><br>{% end %}
 						<div id="accordionSubAgency">
-							<h3><a href="#">{{agency.subagency}}</a></h3>
-						</div>
-						{% end %}
-						<div>
-							<table class="datasetTable">
-								<tr>
-									<th>Dataset Name</th>
-									<th>Dataset URL</th>
-									<th>Rating (1-4)</th>
-									<th></th>
-								</tr>
-								{% for dataset in agency.datasets %}
-									<tr>
-										<td><input type="text" name="datasetName" id="datasetName" {% if (dataset.datasetName) %} value="{{dataset.datasetName}}" {% end %}></td>
-										<td><input type="text" name="datasetURL" id="datasetURL" {% if (dataset.datasetURL) %} value="{{dataset.datasetURL}}" {% end %}></td>
-										<td><input type="text" name="rating" id="rating" {% if (dataset.rating) %} value="{{dataset.rating}}" {% end %}></td>
-										<td><input type="button" class="m-button" id="addDataset" value="Add Another"></td>
-									</tr>
-								{% end %}
-							</table>
+							{% for sub in agency.subagencies %}{% if company in sub.usedBy %}
+								<h3 class="subagency"><a href="#">{{sub.name}}</a>
+									<span style="float:right; display: none;" class="toolbar ui-corner-all ui-icon ui-icon-circle-close red" subagency="{{sub.name.replace(" ","-")}}" agency="{{agency.name.replace(" ","-")}}"></span>
+								</h3>
+								<div class="{{sub.name}}">
+									<table class="subagencyDatasetTable">
+										<tr>
+											<th>Dataset Name</th>
+											<th>Dataset URL</th>
+											<th>Rating (1-4)</th>
+											<th></th>
+										</tr>
+										{% for d in sub.datasets %}{%if company in d.usedBy %}
+											<tr class="{{d.datasetName}}">
+												<td><input type="text" name="datasetName" id="datasetName" {% if (dataset.datasetName) %} value="{{dataset.datasetName}}" {% end %}></td>
+												<td><input type="text" name="datasetURL" id="datasetURL" {% if (dataset.datasetURL) %} value="{{dataset.datasetURL}}" {% end %}></td>
+												<td><input type="text" name="rating" id="rating" {% if (dataset.rating) %} value="{{dataset.rating}}" {% end %}></td>
+												<td><input type="button" class="l-button" id="saveDataset" value="Save" style="display:none"><input type="button" class="l-button" id="deleteDataset" value="Delete"></td>
+											</tr>
+										{% end %}{% end %}
+										<tr>
+											<td><input type="text" name="datasetName" id="datasetName" value=""></td>
+											<td><input type="text" name="datasetURL" id="datasetURL" value=""></td>
+											<td><input type="text" name="rating" id="rating" value=""></td>
+											<td><input type="button" class="l-button" id="saveDataset" value="Save"><input type="button" class="l-button" id="deleteDataset" value="Delete" style="display:none"></td>
+										</tr>
+									</table>
+								</div>
+							{% end %}{% end %} <!-- END OF SUBAGENCIES !-->
 						</div>
 					</div>
 					{% set displayHeader = False %}
 				{% end %}
-			</div>
+			</div><br>
 		</div>
-		<div class="ui-widget">
-			<label for="tags">Agency/Sub-agency Search: </label>
-			<input id="tags"><input type="button" class="m-button" id="addSearchResult" value="Add Agency/Sub-Agency">
-		</div>
-		<!--------------------------------------------END DATASETS--------------------------------------!-->
 	</div>
+	<!--------------------------------------------END DATASETS--------------------------------------!-->
 <h3>Are you ready to submit this information? You will not be able to come back to this form afterwards. If you wish to make more changes, you will need to contact <a href="mailto:opendata500@thegovlab.org">opendata500@thegovlab.org</a></h3>
 <br>
 <div class="m-form-footer submitCompanyForm">	
@@ -159,24 +181,203 @@
 
 <script type="text/javascript">
 $(document).ready(function() { 
-	$(function() {
-	    $( "#accordionAgency, #accordionSubAgency" ).accordion({
+	var companyID = "{{company.id}}"
+	//----------------------------------START ACCORDIONS--------------------------------------
+	$( "#accordionAgency, #accordionSubAgency" ).accordion({
+		active: false,
+		collapsible: true,
+		autoHeight: false,
+		heightStyle: "content"
+	});
+	//----------------------------------DELETE AGENCIES AND SUBAGENCIES--------------------------------------
+	$('#accordionAgency, #accordionSubAgency').on('click', '.toolbar', function(e){
+		agency = $(this).attr('agency').replace("delete", "").replace(/-/g, " ");
+		subagency = $(this).attr('subagency').replace("delete", "").replace(/-/g, " ");
+		console.log(agency + subagency);
+		data = { "agency": agency, "subagency": subagency, "action": "delete agency", "_xsrf": $("[name='_xsrf']").val() };
+		$(this).closest('h3').remove();
+		$( "#accordionAgency, #accordionSubAgency" ).accordion({
+	      active: false,
 	      collapsible: true,
 	      autoHeight: false,
 	      heightStyle: "content"
 	    });
-	  });
+	    $.ajax({
+			type: 'POST',
+			url: '/addData/'+companyID,
+			data: data,
+			error: function(error) {
+					console.debug(JSON.stringify(error));
+					$('.savingMessage_companyEdit').hide();
+					$('.errorMessage_companyEdit').show(); },
+			beforeSend: function(xhr, settings) {
+				$(event.target).attr('disabled', 'disabled'); },
+			success: function(success) {
+				$('.toolbar').removeAttr('disabled');
+				console.log(success);
+			}
+		});
+	});
+	//----------------------------------SAVE DATASET AND ADD NEW EMPTY FORM--------------------------------------
 	var datasetForm = '<tr>'+
 							'<td><input type="text" name="datasetName" id="datasetName" value=""></td>'+
 							'<td><input type="text" name="datasetURL" id="datasetURL" value=""></td>'+
 							'<td><input type="text" name="rating" id="rating" value=""></td>'+
-							'<td><input type="button" class="m-button" id="addDataset" value="Add Another"></td>'+
+							'<td><input type="button" class="m-button" id="saveDataset" value="Save"><input type="button" class="m-button" id="deleteDataset" value="Delete" style="display:none"></td>'+
 						'</tr>';
-	$('.agencyList').on('click', '#addDataset', function() {
-		$('.datasetTable').append(datasetForm);
-	})
-
-
+	$('.agencyList').on('click', '#saveDataset', function() {
+		$(this).parent().parent().parent().append(datasetForm);
+		$(this).hide();
+		$(this).parent().find('#deleteDataset').show();
+	});
+	//----------------------------------DELETE DATASET--------------------------------------
+	$('.agencyList').on('click', '#deleteDataset', function() {
+		$(this).parent().parent().remove();
+	});
+	//----------------------------------ADD AGENCY FROM SEARCH BAR--------------------------------------
+	$('.data').on('click', '#addSearchResult', function () {
+		console.log("clicked to add");
+		a = $('#searchval').val().trim().split(" - ");
+		if (a == 0) {
+			$('.invalidInput').show().delay(5000).fadeOut();
+		} else {
+			agency = a[0];
+			if (a[1] != undefined) {
+				subagency = a[1];
+			} else {
+				subagency = '';
+			}
+			data = { "agency": agency, "subagency": subagency, "action": "add agency", "_xsrf": $("[name='_xsrf']").val()};
+			var safeToAdd = false;
+			var newAgency = '<h3 class="agency"><a href="#">'+ agency +'</a>'+
+								'<span style="float:right; display:none;" class="toolbar ui-corner-all ui-icon ui-icon-circle-close red" subagency="" agency="'+agency.replace(/ /g, "-")+'"></span>'+
+							'</h3>'+
+							'<div id="'+agency.replace(/ /g, "-") +'Accordion">'+
+							'<br><h3>Agency Level Datasets</h3><br>'+
+							'<table class="datasetTable">'+
+								'<tr>'+
+									'<th>Dataset Name</th>'+
+									'<th>Dataset URL</th>'+
+									'<th>Rating (1-4)</th>'+
+									'<th></th>'+
+								'</tr>'+
+								'<tr>'+
+									'<td><input type="text" name="datasetName" id="datasetName" value=""></td>'+
+									'<td><input type="text" name="datasetURL" id="datasetURL" value=""></td>'+
+									'<td><input type="text" name="rating" id="rating" value=""></td>'+
+									'<td><input type="button" class="m-button" id="saveDataset" value="Save"><input type="button" class="m-button" id="deleteDataset" value="Delete" style="display:none"></td>'+
+								'</tr>'+
+							'</table>';
+			var newSubagency = '<h3><a href="#">' +subagency+ '</a>'+
+									'<span style="float:right; display:none;" class="toolbar ui-corner-all ui-icon ui-icon-circle-close red" subagency="'+subagency.replace(/ /g, "-")+'" agency="'+agency.replace(/ /g, "-")+'"></span>'+
+								'</h3>'+
+									'<div class="' +subagency.replace(/ /g, "-")+ '">'+
+										'<table class="subagencyDatasetTable">'+
+											'<tr>'+
+												'<th>Dataset Name</th>'+
+												'<th>Dataset URL</th>'+
+												'<th>Rating (1-4)</th>'+
+												'<th></th>'+
+											'</tr>'+
+											'<tr>'+
+												'<td><input type="text" name="datasetName" id="datasetName" value=""></td>'+
+												'<td><input type="text" name="datasetURL" id="datasetURL" value=""></td>'+
+												'<td><input type="text" name="rating" id="rating" value=""></td>'+
+												'<td><input type="button" class="m-button" id="saveDataset" value="Save"><input type="button" class="m-button" id="deleteDataset" value="Delete" style="display:none"></td>'+
+											'</tr>'+
+										'</table>'+
+									'</div>';
+			if ($('.agency').find('*:contains("'+agency+'")').parent().length != 0) {
+				//--IF AGENCY ALREADY EXISTS, JUST ADD SUBAGENCY--
+				if (a[1] == undefined ){
+					//no subagency, and agency already exists, nothing to add. Display error, or just go to that agency/subagency
+					$('.agenciesExist').show().delay(5000).fadeOut();
+					safeToAdd = false;
+				} else {
+					// check if subagency exists within this agency:
+					if ($('#'+agency.replace(/ /g, "-")+'Accordion').find('*:contains("'+subagency+'")').length !=0 ) {
+						//subagency exists. 
+						$('.agenciesExist').show().delay(5000).fadeOut();
+						safeToAdd = false;
+					} else {
+						//add subagency
+						if ($('#'+agency.replace(/ /g, "-")+'Accordion').find('#accordionSubAgency').length == 0) {
+							//first time adding subagency. 
+							$('#'+agency.replace(/ /g, "-")+'Accordion').append('<div id="accordionSubAgency">');
+							$('#'+agency.replace(/ /g, "-")+'Accordion').find('#accordionSubAgency').append(newSubagency).accordion({
+								active: false,
+								collapsible: true,
+								autoHeight: false,
+								heightStyle: "content"
+						    });
+						    safeToAdd = true;
+						} else {
+							$('#'+agency.replace(/ /g, "-")+'Accordion').find('#accordionSubAgency').append(newSubagency).accordion('destroy').accordion({
+								active: false,
+								collapsible: true,
+								autoHeight: false,
+								heightStyle: "content"
+						    });
+						    safeToAdd = true;
+						}
+					}
+				}
+			} else {
+				//--ADD BOTH AGENCY AND SUBAGENCY TO ACCORDION--
+				if (a[1] == undefined) { //no subagency, just add agency
+					$('#accordionAgency').append(newAgency).accordion('destroy').accordion({
+						active: false,
+						collapsible: true,
+						autoHeight: false,
+						heightStyle: "content"
+				    });
+				    safeToAdd =true;
+				} else {
+					$('#accordionAgency').append(newAgency).accordion('destroy').accordion({
+						active: false,
+						collapsible: true,
+						autoHeight: false,
+						heightStyle: "content"
+				    });
+				   	$('#'+agency.replace(/ /g, "-")+'Accordion').append('<br><h3>Sub-Agencies</h3><br><div id="accordionSubAgency" class="'+subagency.replace(/ /g, "-")+'Accordion">')
+				    $('.'+subagency.replace(/ /g, "-")+'Accordion').append(newSubagency).accordion({
+						active: false,
+						collapsible: true,
+						autoHeight: false,
+						heightStyle: "content"
+				    });
+				    safeToAdd = true;
+				}
+			}
+			//---SAVE ADDED AGENCIES TO COMPANY---
+			if (safeToAdd) {
+				$.ajax({
+					type: 'POST',
+					url: '/addData/'+companyID,
+					data: data,
+					error: function(error) {
+							console.debug(JSON.stringify(error));
+							$('.savingMessage_companyEdit').hide();
+							$('.errorMessage_companyEdit').show(); },
+					beforeSend: function(xhr, settings) {
+						$(event.target).attr('disabled', 'disabled'); },
+					success: function(success) {
+						$('#addSearchResult').removeAttr('disabled');
+						$('#agencyTags').val('');
+						hideDeleteIcons();
+						console.log(success);
+					}
+				});
+			}
+		}
+	});
+	//----------------------------------SHOW DELETE ICONS ON HOVER--------------------------------------
+	$('.agency, .subagency').hover(function() {
+		$(this).find('.toolbar').show();
+	}, function() {
+		$(this).find('.toolbar').hide();
+	});
+	//----------------------------------SUBMIT FORM--------------------------------------
 	$('.submitCompanyForm').on('click', '#companySubmit', function() {
 		if ($('.companyForm').parsley('validate')) {
 			console.log('valid');
@@ -506,9 +707,14 @@ $(document).ready(function() {
 		if (!isNaN(e)) {pass=false;} //needs to be a number
 		return pass;
 	}
+	//----------------------------------AUTCOMPLETE SEARCH BAR--------------------------------------
 	var agencies = ["Alabama","Alaska","Albuquerque","Ann Arbor","Arctic Landscape Conservation Cooperative","Arizona","Arizona - Arizona Geological Survey","Arkansas","Arvada","Asheville","Atlanta","Austin","Baltimore","Belleville","Boston","Boston - Boston Enterprise GIS","Broadcasting Board of Governors","California","California - California Environmental Health Tracking Program","California - California Department of Resources","Champaign","Chicago","City of Orem","Colorado","Colorado - Denver Regional Council","Columbia University - Center for International Earth Science Information Network","Commodity Futures Trading Commission","Connecticut","Consumer Financial Protection Bureau","Cook County","Cornell University","Corporation for National and Community Service","Court Services and Offender Supervision Agency","Delaware","Denver","Department of Agriculture - Agricultural Marketing Service","Department of Agriculture - Agricultural Research Service","Department of Agriculture - Animal and Plant Health Inspection Service","Department of Agriculture","Department of Agriculture - Departmental Management","Department of Agriculture - Economic Research Service","Department of Agriculture - Farm Service Agency","Department of Agriculture - Food and Nutrition Service","Department of Agriculture - Food Safety and Inspection Service","Department of Agriculture - Foreign Agricultural Service","Department of Agriculture - National Agricultural Statistics Service","Department of Agriculture - National Appeals Division","Department of Agriculture - National Institute of Food and Agriculture","Department of Agriculture - Natural Resources Conservation Service","Department of Agriculture - Office of the Chief Economist","Department of Agriculture - Rural Development","Department of Agriculture - US Forest Service","Department of Commerce","Department of Commerce - Bureau of Economic Analysis","Department of Commerce - Bureau of Industry and Security","Department of Commerce - US Patent and Trademark Office","Department of Commerce - International Trade Administration","Department of Commerce - National Institute of Standards and Technology","Department of Commerce - National Oceanic and Atmospheric Administration","Department of Commerce - National Technical Information Service","Department of Commerce - National Telecommunication and Information Administration","Department of Commerce - National Weather Service","Department of Commerce - US Census Bureau","Department of Defense - Army Corps of Engineers","Department of Defense - Acquisition Technology and Logistics","Department of Defense","Department of Defense - National Geospatial Intelligence Agency","Department of Defense - Defense Logistics Agency","Department of Defense - Defense Technical Information Center","Department of Defense - Department of the Army","Department of Defense - Federal Voting Assistance Program","Department of Education","Department of Education - Federal Student Aid","Department of Education - Institute of Education Sciences","Department of Education - National Center for Education Statistics","Department of Education - Office for Civil Rights","Department of Education - Office of Hearings and Appeals","Department of Education - Office of Innovation and Improvement","Department of Education - Office of Postsecondary Education","Department of Education - Office of Special Education and Rehabilitative Services","Department of Education - Office of Vocational and Adult Education","Department of Energy","Department of Energy - Energy Information Administration","Department of Energy - Office of Scientific and Technical Information","Department of Health and Human Services - Centers for Medicare and Medicaid Services","Department of Health and Human Services","Department of Health and Human Services - National Institutes of Health","Department of Health and Human Services - Substance Abuse and Mental Health Services Administration","Department of Homeland Security - U.S. Coast Guard","Department of Homeland Security","Department of Homeland Security - Federal Emergency Management Agency","Department of Homeland Security - United States Coast Guard","Department of Homeland Security - Office of Health Affairs","Department of Homeland Security - Office of Immigration Statistics","Department of Homeland Security - U.S. Citizenship and Immigration Services","Department of Housing and Urban Development - Office of Housing","Department of Justice","Department of Justice - Antitrust Division","Department of Justice - Bureau of Justice Statistics","Department of Justice - Civil Division","Department of Justice - Civil Rights Division","Department of Justice - Federal Bureau of Investigation","Department of Justice - US Trustee Program","Department of Justice - Office of Legal Counsel","Department of Justice - US Attorney's Office","Department of Labor - Benefits Review Board","Department of Labor - Bureau of Labor Statistics","Department of Labor - Employee Benefits Security Administration","Department of Labor - Employees' Compensation Appeals Board","Department of Labor - Employment and Training Administration","Department of Labor - Mine Safety and Health Administration","Department of Labor","Department of Labor - Occupational Safety and Health Administration","Department of Labor - Office of Administrative Law Judges","Department of Labor - Wage and Hour Division","Department of Labor - Office of Job Corps","Department of Labor - Office of the Assistant Secretary for Policy","Department of State","Department of State - Organisation for Economic Cooperation and Development","Department of the Interior","Department of the Interior - Bureau of Indian Education","Department of the Interior - Bureau of Land Management","Department of the Interior - Bureau of Ocean Energy Management","Department of the Interior - National Park Service","Department of the Interior - Office of Hearings and Appeals","Department of the Interior - Federal Geographic Data Committee","Department of the Interior - U.S. Geological Survey","Department of the Interior - Office of the Solicitor","Department of the Interior - US Bureau of Reclamation","Department of the Interior - US Fish and Wildlife Service","Department of the Treasury","Department of the Treasury - Bureau of Engraving and Printing","Department of the Treasury - Bureau of the Public Debt","Department of the Treasury - Departmental Offices","Department of the Treasury - Financial Crimes Enforcement Network","Department of the Treasury - Financial Management Service","Department of the Treasury - Internal Revenue Service","Department of the Treasury - United States Mint","Department of Transportation - National Highway Traffic Safety Administration","Department of Transportation","Department of Transportation - Bureau of Transportation Statistics","Department of Transportation - Federal Aviation Administration","Department of Transportation - Federal Highway Administration","Department of Transportation - Federal Motor Carrier Safety Administration","Department of Transportation - Federal Railroad Administration","Department of Transportation - Federal Transit Administration","Department of Transportation - Maritime Administration","Department of Transportation - National Highway Traffice Safety Administration","Department of Transportation - Office of the Secretary of Transportation","Department of Transportation - Pipeline and Hazardous Materials Safety Administration","Department of Transportation - Research and Innovative Technology Administration","Department of Transportation - Saint Lawrence Seaway Development Corporation","Department of Transportation - Surface Transportation Board","Department of Veterans Affairs - National Cemetery Administration","Department of Veterans Affairs","Department of Veterans Affairs - Veterans Benefits Administration","Department of Veterans Affairs - Veterans Health Administration","Department of Veterans Affairs - Environmental Protection Agency","District of Columbia","Election Assistance Commission","Executive Office of the President - Networking and Information Technology Research and Development","Executive Office of the President - Council on Environmental Quality","Executive Office of the President - Office of Management and Budget","Executive Office of the President - Office of National Drug Control Policy","Executive Office of the President - Office of Science and Technology Policy","Executive Office of the President","Executive Office of the President - US Trade Representative","Executive Office of the President - White House","Export-Import Bank of the US","Federal Communications Commission","Federal Deposit Insurance Corporation","Federal Election Commission","Federal Geographic Data Committee","Federal Government - Department of Housing and Urban Development","Federal Housing Finance Agency","Federal Reserve Board","Florida","General Services Administration","General Services Administration - Federal Acquisition Service","General Services Administration - Office of Citizen Services and Innovative Technologies","General Services Administration - Office of Governmentwide Policy","General Services Administration - Office of Performance Improvement","General Services Administration - Office of the Chief Financial Officer","General Services Administration - Office of the Chief People Officer","General Services Administration - Public Buildings Service","Georgia","Gilpin County","Great Lakes Commission","Hawaii","Hawaii - Hawaii GIS","Honolulu","Houston","Idaho - Coeur d'Alene Tribe","Idaho State University","Illinois","Illinois - South Suburban Mayors and Managers","Indiana","Information Sharing Environment","Institute of Museum and Library Services","Iowa","Iowa State University GIS Support and Research Facility","Kansas","Kansas - Kansas Data Access and Support Center","Kansas City","Kentucky","Kentucky - Kentucky Geography Network","King County","Las Vegas","Lexington","Los Angeles","Louisiana","Louisiana - Louisiana Geographic Information Center","Louisville","Madison","Maine","Maryland","Massachusetts","Merit Systems Protection Board","Michigan","Millenium Challenge Corporation","Minneapolis-St Paul - MetroGIS (Minneapolis-St. Paul Regional GIS Consortium)","Minnesota - Minnesota Department of Natural Resources","Minnesota","Missouri","Missouri - Accountability Portal","Missouri - Missouri Spatial Data Information Service","Montana","Montgomery County","National Aeronautics and Space Administration - Jet Propulsion Laboratory","National Aeronautics and Space Administration","National Archives and Records Administration","National Archives and Records Administration - Office of the Federal Register","National Capital Planning Commission","National Endowment for the Arts","National Endowment for the Humanities","National Labor Relations Board","National Science Foundation","National States Geographic Information Council - GIS Inventory (aka Ramona)","National Transportation Safety Board","Nebraska","New Hampshire","New Mexico","New Orleans","New York","New York - NY State Senate","New York - New York State Data Center","New York - NY Department of Health","New York City","North Carolina - NC OpenBook","North Carolina","North Dakota - North Dakota GIS Hub","North Dakota","Nuclear Regulatory Commission","Nuna Technologies","Oak Ridge National Laboratory","Occupational Safety and Health Review Commission","Office of Navajo and Hopi Indian Relocation","Office of Personnel Management","Ohio","Oklahoma","Open Door Kentucky","Oregon","Oregon State University","Overseas Private Investment Corporation","Pacific States Marine Fisheries Commission","Palo Alto","Pension Benefit Guaranty Corporation","Philadelphia","Portland","Providence","Railroad Retirement Board","Raleigh","Rhode Island","Rockford","San Francisco","San Mateo County","Santa Cruz","Scottsdale","Seattle","Securities and Exchange Commission","Selective Service System","Small Business Administration","Social Security Administration","Somerville","South Bend","South Dakota","Tennessee","Texas","Texas - Texas Transparency","U.S. Department of Health & Human Services","U.S. Environmental Protection Agency","Univ of South Carolina - Baruch Institute for Marine and Coastal Sciences","University of Alaska - Geographic Information Network of Alaska - University of Alaska","University of Arizona","University of California San Diego","University of Idaho","University of New Hampshire","University of New Mexico - Earth Data Analysis Center","University of Rhode Island - University of Rhode Island Geospatial Extension Program","University of Washington","US Agency for International Development","US Consumer Product Safety Commission","US Equal Employment Opportunity Commission","US International Trade Commission","US Office of the Special Counsel","Utah","Virginia","Virginia - Virginia Department of Environmental Quality","Wake County","Washington","Weatherford","Wellington","Department of Defense - Defense Advanced Research Projects Agency"];
-    $( "#tags" ).autocomplete({
-      source: agencies
+    $( "#agencyTags" ).autocomplete({
+    	minLength: 2,
+		source: agencies,
+		select: function(event, ui) { 
+	        $("#searchval").val(ui.item.value) 
+	    }
     });
 
 }); 

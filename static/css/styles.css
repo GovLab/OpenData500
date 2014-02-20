@@ -21,6 +21,10 @@ select {
   padding: 5px 10px; }
   
 
+.ui-icon .red {
+  background-image: url(ui-icons_red.png);
+}
+
 .m-button {
   padding: 5px 14px 4px 14px;
   border: 1px solid #8977a7;
@@ -36,6 +40,26 @@ select {
   cursor: pointer; }
 
 .m-button:hover {
+  background-color: #472b74;
+  border: 1px solid #fff;
+  color: #fff; }
+
+.l-button {
+  padding: 5px 14px 4px 14px;
+  border: 1px solid #8977a7;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  color: #472b74;
+  font-family: "Exo", sans-serif;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 14px;
+  letter-spacing: .6px;
+  cursor: pointer;
+  background-color: white; }
+
+.l-button:hover {
   background-color: #472b74;
   border: 1px solid #fff;
   color: #fff; }
@@ -305,7 +329,7 @@ a:hover {
 .m-form-footer .m-button:hover {
   background-color: #472b74;
   color: white;
-  border-color: #472b74; }
+  border-color: #white; }
 
   .m-homepage .m-homepage-about #mce-responses .response {
     position: absolute;
