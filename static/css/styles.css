@@ -360,6 +360,14 @@ a:hover {
     padding-bottom: 25px;
     margin-bottom: 35px;
     border-bottom: 1px solid #aaaaaa; }
+    .about-page section ul li.list-title {
+      list-style: none;
+      margin-top: 15px;
+      margin-bottom: 5px; }
+      .about-page section ul li.list-title h3 {
+        font-size: 16px; }
+  .about-page .intro {
+    overflow: hidden; }
   .about-page section:last-child {
     border-bottom: 0; }
   .about-page .m-half {
@@ -367,6 +375,8 @@ a:hover {
     padding-right: 60px;
     display: inline-block;
     vertical-align: top; }
+  .about-page ul.m-half {
+    width: calc(50% - 105px); }
   .about-page .m-page-title {
     font-size: 2.3em;
     margin-bottom: 35px;

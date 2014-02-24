@@ -8,6 +8,21 @@
 		padding-bottom: 25px;
 		margin-bottom: 35px;
 		border-bottom: 1px solid $light_gray;
+
+		ul li.list-title {
+			list-style: none;
+			margin-top: 15px;
+			margin-bottom: 5px;
+
+			h3 {
+				font-size: 16px;
+
+			}
+		}
+	}
+
+	.intro {
+		overflow: hidden;
 	}
 
 	section:last-child {
@@ -19,6 +34,10 @@
 		padding-right: 60px;
 		display: inline-block;
 		vertical-align: top;
+	}
+
+	ul.m-half {
+		width: calc(50% - 105px);
 	}
 
 	.m-page-title {
