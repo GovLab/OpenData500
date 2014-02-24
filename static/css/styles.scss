@@ -54,12 +54,16 @@ header {
 
 // Main Menu Module
 
-.m-main-menu a {
-	padding: 5px 20px;
-	color: #fff;
-	text-transform: uppercase;
-	display: inline-block;
-	border-right: 2px solid $light_purple;
+.m-main-menu {
+	font-size: 0;
+	a {
+		font-size: 12px;
+		padding: 5px 20px;
+		color: #fff;
+		text-transform: uppercase;
+		display: inline-block;
+		border-right: 2px solid $light_purple;
+	}
 }
 
 .m-main-menu a:hover {
