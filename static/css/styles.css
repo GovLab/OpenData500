@@ -933,9 +933,18 @@ footer {
 
 
 
+.ui-autocomplete-input {
+  width: 504px;
+}
 
-
-
+.error-agency-search {
+  display:block;
+  color: red;
+  width: 400px;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+}
 
 
 

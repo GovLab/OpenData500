@@ -89,14 +89,17 @@
 	<!--------------------------------------------DATASETS--------------------------------------!-->
 	<div class="m-form-box data">
 		<h2>Data</h2><br>
-		<h3>Please tell us more about the data your company uses. Select from which agencies your company utilizes data, and if possible, please specify which data set it uses.</h3><br>
+		<h3>Please tell us more about the data your company uses. First tell us which agencies and/or subagencies provide the data your company uses. Then, optionally, tell us specifically which datasets from those agencies/subagencies does your company use. Use the search bar to find agencies and subagencies and select from the list provided.</h3><br>
 		<div class="ui-widget">
 			<label for="tags">Agency/Sub-agency Search: </label>
 			<input id="agencyTags" value="">
 			<input type="hidden" id="searchval" />
 			<input type="button" class="l-button" id="addSearchResult" value="Add Agency/Sub-Agency">
-			<span class="agenciesExist" style="display:none">Agency or Sub-Agency already on list.</span>
-			<span class="invalidInput" style="display:none">Nothing to add.</span>
+			<div class="errors-search">
+				<span class="agenciesExist error-agency-search" style="display:none">Agency or Sub-Agency already on list.</span>
+				<span class="emptyInput error-agency-search" style="display:none">Nothing to add.</span>
+				<span class="invalidInput error-agency-search" style="display:none">Please select an item from the provided list.</span>
+			</div>
 		</div>
 		<div class="agencyList">
 			<div id="accordionAgency">
@@ -130,12 +133,12 @@
 						</table>	
 						<!-- ROLL THROUGH SUBAGENCIES !-->
 						{% if agency.subagencies %}<br><h3>Sub-Agencies</h3><br>{% end %}
-						<div id="accordionSubAgency">
+						<div id="accordionSubAgency" class="{{agency.name.replace(" ", "-") }}Subagencies">
 							{% for sub in agency.subagencies %}{% if company in sub.usedBy %}
-								<h3 class="subagency"><a href="#">{{sub.name}}</a>
+								<h3 class="subagency" name="{{sub.name.replace(" ", "-") }}"><a href="#">{{sub.name}}</a>
 									<span style="float:right; display: none;" class="toolbar ui-corner-all ui-icon ui-icon-circle-close red" subagency="{{sub.name.replace(" ","-")}}" agency="{{agency.name.replace(" ","-")}}"></span>
 								</h3>
-								<div class="{{sub.name}}">
+								<div class="{{ sub.name.replace(" ", "-") }}">
 									<table class="subagencyDatasetTable">
 										<tr>
 											<th>Dataset Name</th>
@@ -195,13 +198,24 @@ $(document).ready(function() {
 		subagency = $(this).attr('subagency').replace("delete", "").replace(/-/g, " ");
 		console.log(agency + subagency);
 		data = { "agency": agency, "subagency": subagency, "action": "delete agency", "_xsrf": $("[name='_xsrf']").val() };
+		//console.log($(this).closest('h3'));
+		$(this).parent().next().remove();
 		$(this).closest('h3').remove();
-		$( "#accordionAgency, #accordionSubAgency" ).accordion({
-	      active: false,
-	      collapsible: true,
-	      autoHeight: false,
-	      heightStyle: "content"
-	    });
+		if (subagency == '') {
+			$( "#accordionAgency" ).accordion({
+				active: false,
+				collapsible: true,
+				autoHeight: false,
+				heightStyle: "content"
+			});
+		} else {
+			$( "#accordionSubAgency" ).accordion({
+		      active: false,
+		      collapsible: true,
+		      autoHeight: false,
+		      heightStyle: "content"
+		    });
+		}
 	    $.ajax({
 			type: 'POST',
 			url: '/addData/'+companyID,
@@ -236,7 +250,7 @@ $(document).ready(function() {
 	});
 	//----------------------------------ADD AGENCY FROM SEARCH BAR--------------------------------------
 	$('.data').on('click', '#addSearchResult', function () {
-		console.log("clicked to add");
+		//console.log("clicked to add");
 		a = $('#searchval').val().trim().split(" - ");
 		if (a == 0) {
 			$('.invalidInput').show().delay(5000).fadeOut();
@@ -249,10 +263,10 @@ $(document).ready(function() {
 			}
 			data = { "agency": agency, "subagency": subagency, "action": "add agency", "_xsrf": $("[name='_xsrf']").val()};
 			var safeToAdd = false;
-			var newAgency = '<h3 class="agency"><a href="#">'+ agency +'</a>'+
+			var newAgency = '<h3 class="agency" name="'+agency.replace(/ /g, "-")+'"><a href="#">'+ agency +'</a>'+
 								'<span style="float:right; display:none;" class="toolbar ui-corner-all ui-icon ui-icon-circle-close red" subagency="" agency="'+agency.replace(/ /g, "-")+'"></span>'+
 							'</h3>'+
-							'<div id="'+agency.replace(/ /g, "-") +'Accordion">'+
+							'<div id="'+ agency.replace(/ /g, "-") +'Accordion">'+
 							'<br><h3>Agency Level Datasets</h3><br>'+
 							'<table class="datasetTable">'+
 								'<tr>'+
@@ -268,42 +282,44 @@ $(document).ready(function() {
 									'<td><input type="button" class="m-button" id="saveDataset" value="Save"><input type="button" class="m-button" id="deleteDataset" value="Delete" style="display:none"></td>'+
 								'</tr>'+
 							'</table>';
-			var newSubagency = '<h3><a href="#">' +subagency+ '</a>'+
+			var newSubagency = '<h3 class="subagency" name="'+subagency.replace(/ /g, "-")+'"><a href="#">' +subagency+ '</a>'+
 									'<span style="float:right; display:none;" class="toolbar ui-corner-all ui-icon ui-icon-circle-close red" subagency="'+subagency.replace(/ /g, "-")+'" agency="'+agency.replace(/ /g, "-")+'"></span>'+
 								'</h3>'+
-									'<div class="' +subagency.replace(/ /g, "-")+ '">'+
-										'<table class="subagencyDatasetTable">'+
-											'<tr>'+
-												'<th>Dataset Name</th>'+
-												'<th>Dataset URL</th>'+
-												'<th>Rating (1-4)</th>'+
-												'<th></th>'+
-											'</tr>'+
-											'<tr>'+
-												'<td><input type="text" name="datasetName" id="datasetName" value=""></td>'+
-												'<td><input type="text" name="datasetURL" id="datasetURL" value=""></td>'+
-												'<td><input type="text" name="rating" id="rating" value=""></td>'+
-												'<td><input type="button" class="m-button" id="saveDataset" value="Save"><input type="button" class="m-button" id="deleteDataset" value="Delete" style="display:none"></td>'+
-											'</tr>'+
-										'</table>'+
-									'</div>';
+								'<div class="' + subagency.replace(/ /g, "-") + 'Accordion">'+
+									'<table class="subagencyDatasetTable">'+
+										'<tr>'+
+											'<th>Dataset Name</th>'+
+											'<th>Dataset URL</th>'+
+											'<th>Rating (1-4)</th>'+
+											'<th></th>'+
+										'</tr>'+
+										'<tr>'+
+											'<td><input type="text" name="datasetName" id="datasetName" value=""></td>'+
+											'<td><input type="text" name="datasetURL" id="datasetURL" value=""></td>'+
+											'<td><input type="text" name="rating" id="rating" value=""></td>'+
+											'<td><input type="button" class="m-button" id="saveDataset" value="Save"><input type="button" class="m-button" id="deleteDataset" value="Delete" style="display:none"></td>'+
+										'</tr>'+
+									'</table>'+
+								'</div>';
 			if ($('.agency').find('*:contains("'+agency+'")').parent().length != 0) {
-				//--IF AGENCY ALREADY EXISTS, JUST ADD SUBAGENCY--
+				//--AGENCY ALREADY EXISTS, JUST ADD SUBAGENCY--
 				if (a[1] == undefined ){
 					//no subagency, and agency already exists, nothing to add. Display error, or just go to that agency/subagency
 					$('.agenciesExist').show().delay(5000).fadeOut();
 					safeToAdd = false;
 				} else {
-					// check if subagency exists within this agency:
+					// --THERE IS A SUBAGENCY TO ADD, CHECK TO SEE IF ALREADY THERE FIRST:
 					if ($('#'+agency.replace(/ /g, "-")+'Accordion').find('*:contains("'+subagency+'")').length !=0 ) {
-						//subagency exists. 
+						//subagency exists, show error. 
 						$('.agenciesExist').show().delay(5000).fadeOut();
 						safeToAdd = false;
 					} else {
-						//add subagency
+						//--ADD SUBAGENCY-----IS THIS THE FIRST ONE?----
 						if ($('#'+agency.replace(/ /g, "-")+'Accordion').find('#accordionSubAgency').length == 0) {
-							//first time adding subagency. 
-							$('#'+agency.replace(/ /g, "-")+'Accordion').append('<div id="accordionSubAgency">');
+							//first time adding a subagency, add header. 
+							//console.log("First time adding a subagency");
+							$('#'+agency.replace(/ /g, "-")+'Accordion').append('<br><h3>Sub-Agencies</h3><br>');
+							$('#'+agency.replace(/ /g, "-")+'Accordion').append('<div id="accordionSubAgency" class="' + agency.replace(/ /g, "-") + 'Subagencies">');
 							$('#'+agency.replace(/ /g, "-")+'Accordion').find('#accordionSubAgency').append(newSubagency).accordion({
 								active: false,
 								collapsible: true,
@@ -312,7 +328,9 @@ $(document).ready(function() {
 						    });
 						    safeToAdd = true;
 						} else {
-							$('#'+agency.replace(/ /g, "-")+'Accordion').find('#accordionSubAgency').append(newSubagency).accordion('destroy').accordion({
+							//--ADD SUBAGENCY-----NOT THE FIRST ONE, APPEND TO ACCORDION----
+							console.log("adding subagency");
+							$('.'+agency.replace(/ /g, "-")+'Subagencies').append(newSubagency).accordion('destroy').accordion({
 								active: false,
 								collapsible: true,
 								autoHeight: false,
@@ -364,7 +382,6 @@ $(document).ready(function() {
 					success: function(success) {
 						$('#addSearchResult').removeAttr('disabled');
 						$('#agencyTags').val('');
-						hideDeleteIcons();
 						console.log(success);
 					}
 				});
@@ -372,11 +389,22 @@ $(document).ready(function() {
 		}
 	});
 	//----------------------------------SHOW DELETE ICONS ON HOVER--------------------------------------
-	$('.agency, .subagency').hover(function() {
-		$(this).find('.toolbar').show();
-	}, function() {
-		$(this).find('.toolbar').hide();
+	$('table').on('click', '#saveDataset', function() {
+		datasetName = $(this).parent().parent().find('#datasetName').val();
+		datasetURL = $(this).parent().parent().find('#datasetURL').val();
+		rating = $(this).parent().parent().find('#rating').val();
+		console.log(datasetName);
 	});
+
+	//----------------------------------SHOW DELETE ICONS ON HOVER--------------------------------------
+	$('#accordionAgency, #accordionSubAgency').on({
+		mouseenter: function() {
+			$(this).find('.toolbar').show();
+		},
+		mouseleave: function() {
+			$(this).find('.toolbar').hide();
+		}
+	}, '.agency, .subagency');
 	//----------------------------------SUBMIT FORM--------------------------------------
 	$('.submitCompanyForm').on('click', '#companySubmit', function() {
 		if ($('.companyForm').parsley('validate')) {
