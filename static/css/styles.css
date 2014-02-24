@@ -183,7 +183,6 @@ h3 {
   line-height: 1em; }
 
 a {
-  font-family: Helvetica, Arial, sans-serif;
   text-decoration: none;
   color: #8977a7; }
 
@@ -682,7 +681,7 @@ a:hover {
     font-weight: 100;
     font-style: italic; }
   .resource-panel ul {
-    width: 280px;
+    width: 448px;
     display: inline-block;
     padding: 15px;
     vertical-align: top; }
@@ -810,7 +809,8 @@ footer {
   footer .footer-menu-item.last {
     border-right: 0; }
   footer .creative-commons-license {
-    margin-top: 30px; }
+    margin-top: 30px;
+    font-size: 11px; }
     footer .creative-commons-license img {
       float: left;
       margin-right: 10px; }
