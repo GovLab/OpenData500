@@ -946,6 +946,9 @@ footer {
   text-align: center;
 }
 
+.error-dataset {
+  color: red;
+}
 
 
 

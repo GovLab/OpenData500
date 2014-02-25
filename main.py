@@ -929,9 +929,7 @@ class SubmitDataHandler(BaseHandler):
                 self.write("something went wrong")
             for s in agency.subagencies:
                 if s.name == subagencyName:
-                    logging.info("going to check if company in subagency.usedBy")
                     if company not in s.usedBy: #only add if it's not already there.
-                        logging.info(subagencyName + " is used by" + company.companyName)
                         s.usedBy.append(company)
             agency.save()
             if company not in agency.usedBy: #only add if it's not already there.
@@ -950,17 +948,42 @@ class SubmitDataHandler(BaseHandler):
             except:
                 self.write("something went wrong")
             if subagencyName == '': #delete from agency and subagency
+                #remove datasets from agency:
+                temp = []
+                for d in agency.datasets:
+                    if company != d.usedBy:
+                        temp.append(d)
+                    agency.datasets = temp
                 #remove agency from company
                 if agency in company.agencies:
                     company.agencies.remove(agency)
                 #remove company from agency
                 if company in agency.usedBy:
                     agency.usedBy.remove(company)
+                #remove datasets from subagencies
+                for s in agency.subagencies:
+                    if company in s.usedBy: #does the company even use this subagency?
+                        temp = []
+                        for d in s.datasets: #loop through all datasets for each subagency
+                            if company != d.usedBy: #to make an array of the datasets not used by company
+                                temp.append(d)
+                        s.datasets = temp #and then set the datasets array equal to the remaining.
+                        s.usedBy.remove(company)
                 #remove from all subagencies
                 for s in agency.subagencies:
-                    if company in s.usedBy:
+                    if company in s.usedBy and s.name == subagencyName:
                         s.usedBy.remove(company)
-            if subagencyName:
+            if subagencyName: #removing just subagency
+                #remove datasets from subagency:
+                temp = []
+                for s in agency.subagencies:
+                    if s.name == subagencyName:
+                        for d in s.datasets:
+                            if company != d.usedBy:
+                                temp.append(d)
+                        s.datasets = temp
+                        #s.usedBy.remove(company)
+                        logging.info(temp)
                 #remove company from specific subagency
                 for s in agency.subagencies:
                     if company in s.usedBy and s.name == subagencyName:
@@ -968,6 +991,35 @@ class SubmitDataHandler(BaseHandler):
             agency.save()
             company.save()
             self.write("deleted")
+        #------------------------------------ADDING DATASET------------------------
+        if action == "add dataset":
+            try:
+                agency = models.Agency.objects.get(name=agencyName)
+            except:
+                self.write("something went wrong")
+            datasetName = self.get_argument("datasetName", None)
+            datasetURL = self.get_argument("datasetURL", None)
+            try: 
+                rating = int(self.get_argument("rating", None))
+            except:
+                rating = 0
+            dataset = models.Dataset2(
+                datasetName = datasetName,
+                datasetURL = datasetURL,
+                rating = rating,
+                usedBy = company)
+            #Adding to agency or subagency?
+            if subagencyName == '':
+                #Add to Agency
+                agency.datasets.append(dataset)
+            else:
+                #add to subagency
+                for s in agency.subagencies:
+                    if subagencyName == s.name:
+                        s.datasets.append(dataset)
+            agency.save()
+            self.write("success")
+
 
         # if self.get_argument('submit', None) == 'Continue Without Adding Datasets': #else, you're done, go home.
         #     self.redirect("/thanks/")

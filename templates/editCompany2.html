@@ -116,19 +116,27 @@
 								<th>Rating (1-4)</th>
 								<th></th>
 							</tr>
-							{% for dataset in agency.datasets %}{% if company is dataset.usedBy %}
-								<tr>
-									<td><input type="text" name="datasetName" id="datasetName" {% if (dataset.datasetName) %} value="{{dataset.datasetName}}" {% end %}></td>
-									<td><input type="text" name="datasetURL" id="datasetURL" {% if (dataset.datasetURL) %} value="{{dataset.datasetURL}}" {% end %}></td>
-									<td><input type="text" name="rating" id="rating" {% if (dataset.rating) %} value="{{dataset.rating}}" {% end %}></td>
-									<td><input type="button" class="l-button" id="saveDataset" value="Save" style="display: none;"><input type="button" class="l-button" id="deleteDataset" value="Delete"></td>
+							{% for d in agency.datasets %}{% if company == d.usedBy %}
+								<tr class="dataset-row" name="{{d.datasetName}}" subagency="" agency="{{agency.name.replace(" ","-")}}">
+									<td><input type="text" name="datasetName" id="datasetName" {% if (d.datasetName) %} value="{{d.datasetName}}" {% end %}></td>
+									<td><input type="text" name="datasetURL" id="datasetURL" {% if (d.datasetURL) %} value="{{d.datasetURL}}" {% end %}></td>
+									<td><input type="text" name="rating" id="rating" {% if (d.rating) %} value="{{d.rating}}" {% end %}></td>
+									<td><input type="button" class="l-button" id="saveDataset" value="Save" style="display: none;"><input type="button" class="l-button" id="deleteDataset" value="Delete">
+										<span class="invalidURL error-dataset" style="display:none">Invalid URL.</span>
+										<span class="emptyName error-dataset" style="display:none">Enter a dataset name.</span>
+										<span class="invalidRating error-dataset" style="display:none">Invalid rating</span>
+										<span class="serverError error-dataset" style="display:none">Oops! Something went wrong.</span></td>
 								</tr>
 							{% end %}{% end %}<!---END DATASETS FROM JUST AGENCY !-->
-							<tr>
+							<tr class="dataset-row" subagency="" agency="{{agency.name.replace(" ","-")}}">
 								<td><input type="text" name="datasetName" id="datasetName" value=""></td>
 								<td><input type="text" name="datasetURL" id="datasetURL" value=""></td>
 								<td><input type="text" name="rating" id="rating" value=""></td>
-								<td><input type="button" class="l-button" id="saveDataset" value="Save"><input type="button" class="l-button" id="deleteDataset" value="Delete" style="display:none"></td>
+								<td><input type="button" class="l-button" id="saveDataset" value="Save"><input type="button" class="l-button" id="deleteDataset" value="Delete" style="display:none">
+									<span class="invalidURL error-dataset" style="display:none">Invalid URL</span>
+									<span class="emptyName error-dataset" style="display:none">Enter a dataset name</span>
+									<span class="invalidRating error-dataset" style="display:none">Invalid rating</span>
+									<span class="serverError error-dataset" style="display:none">Oops! Something went wrong.</span></td>
 							</tr>
 						</table>	
 						<!-- ROLL THROUGH SUBAGENCIES !-->
@@ -146,19 +154,27 @@
 											<th>Rating (1-4)</th>
 											<th></th>
 										</tr>
-										{% for d in sub.datasets %}{%if company in d.usedBy %}
-											<tr class="{{d.datasetName}}">
-												<td><input type="text" name="datasetName" id="datasetName" {% if (dataset.datasetName) %} value="{{dataset.datasetName}}" {% end %}></td>
-												<td><input type="text" name="datasetURL" id="datasetURL" {% if (dataset.datasetURL) %} value="{{dataset.datasetURL}}" {% end %}></td>
-												<td><input type="text" name="rating" id="rating" {% if (dataset.rating) %} value="{{dataset.rating}}" {% end %}></td>
-												<td><input type="button" class="l-button" id="saveDataset" value="Save" style="display:none"><input type="button" class="l-button" id="deleteDataset" value="Delete"></td>
+										{% for d in sub.datasets %}{%if company == d.usedBy %}
+											<tr class="dataset-row" name="{{d.datasetName}}" subagency="{{ sub.name.replace(" ", "-") }}" agency="{{agency.name.replace(" ","-")}}">
+												<td><input type="text" name="datasetName" id="datasetName" {% if (d.datasetName) %} value="{{d.datasetName}}" {% end %}></td>
+												<td><input type="text" name="datasetURL" id="datasetURL" {% if (d.datasetURL) %} value="{{d.datasetURL}}" {% end %}></td>
+												<td><input type="text" name="rating" id="rating" {% if (d.rating) %} value="{{d.rating}}" {% end %}></td>
+												<td><input type="button" class="l-button" id="saveDataset" value="Save" style="display:none"><input type="button" class="l-button" id="deleteDataset" value="Delete">
+													<span class="invalidURL error-dataset" style="display:none">Invalid URL.</span>
+													<span class="emptyName error-dataset" style="display:none">Enter a dataset name</span>
+													<span class="invalidRating error-dataset" style="display:none">Invalid rating</span>
+													<span class="serverError error-dataset" style="display:none">Oops! Something went wrong.</span></td>
 											</tr>
 										{% end %}{% end %}
-										<tr>
+										<tr class="dataset-row" subagency="{{ sub.name.replace(" ", "-") }}" agency="{{agency.name.replace(" ","-")}}">
 											<td><input type="text" name="datasetName" id="datasetName" value=""></td>
 											<td><input type="text" name="datasetURL" id="datasetURL" value=""></td>
 											<td><input type="text" name="rating" id="rating" value=""></td>
-											<td><input type="button" class="l-button" id="saveDataset" value="Save"><input type="button" class="l-button" id="deleteDataset" value="Delete" style="display:none"></td>
+											<td><input type="button" class="l-button" id="saveDataset" value="Save"><input type="button" class="l-button" id="deleteDataset" value="Delete" style="display:none">
+												<span class="invalidURL error-dataset" style="display:none">Invalid URL</span>
+												<span class="emptyName error-dataset" style="display:none">Enter a dataset name</span>
+												<span class="invalidRating error-dataset" style="display:none">Invalid rating</span>
+												<span class="serverError error-dataset" style="display:none">Oops! Something went wrong.</span></td>
 										</tr>
 									</table>
 								</div>
@@ -196,7 +212,7 @@ $(document).ready(function() {
 	$('#accordionAgency, #accordionSubAgency').on('click', '.toolbar', function(e){
 		agency = $(this).attr('agency').replace("delete", "").replace(/-/g, " ");
 		subagency = $(this).attr('subagency').replace("delete", "").replace(/-/g, " ");
-		console.log(agency + subagency);
+		//console.log(agency + subagency);
 		data = { "agency": agency, "subagency": subagency, "action": "delete agency", "_xsrf": $("[name='_xsrf']").val() };
 		//console.log($(this).closest('h3'));
 		$(this).parent().next().remove();
@@ -232,18 +248,75 @@ $(document).ready(function() {
 			}
 		});
 	});
-	//----------------------------------SAVE DATASET AND ADD NEW EMPTY FORM--------------------------------------
-	var datasetForm = '<tr>'+
-							'<td><input type="text" name="datasetName" id="datasetName" value=""></td>'+
-							'<td><input type="text" name="datasetURL" id="datasetURL" value=""></td>'+
-							'<td><input type="text" name="rating" id="rating" value=""></td>'+
-							'<td><input type="button" class="m-button" id="saveDataset" value="Save"><input type="button" class="m-button" id="deleteDataset" value="Delete" style="display:none"></td>'+
-						'</tr>';
+	//----------------------------------SAVE NEW DATASET AND ADD NEW EMPTY FORM--------------------------------------
 	$('.agencyList').on('click', '#saveDataset', function() {
-		$(this).parent().parent().parent().append(datasetForm);
-		$(this).hide();
-		$(this).parent().find('#deleteDataset').show();
+		currentDatasetForm = $(this).parent().parent();
+		datasetName = currentDatasetForm.find('#datasetName').val();
+		datasetURL = currentDatasetForm.find('#datasetURL').val();
+		rating = currentDatasetForm.find('#rating').val();
+		agency = currentDatasetForm.attr('agency').replace(/-/g, " ");
+		subagency = currentDatasetForm.attr('subagency').replace(/-/g, " ");
+		action = "add dataset";
+		var datasetForm = '<tr class="dataset-row" name="'+datasetName.replace(/ /g, "-")+'" subagency="'+subagency.replace(/ /g, "-")+'" agency="'+agency.replace(/ /g, "-")+'">'+
+								'<td><input type="text" name="datasetName" id="datasetName" value=""></td>'+
+								'<td><input type="text" name="datasetURL" id="datasetURL" value=""></td>'+
+								'<td><input type="text" name="rating" id="rating" value=""></td>'+
+								'<td><input type="button" class="l-button" id="saveDataset" value="Save"><input type="button" class="l-button" id="deleteDataset" value="Delete" style="display:none">'+
+									'<span class="invalidURL error-dataset" style="display:none">Invalid URL</span>'+
+									'<span class="emptyName error-dataset" style="display:none">Enter a dataset name</span>'+
+									'<span class="invalidRating error-dataset" style="display:none">Invalid rating</span>'+
+									'<span class="serverError error-dataset" style="display:none">Oops! Something went wrong.</span></td>'+
+							'</tr>';
+		data = { "agency": agency, "subagency": subagency, "datasetName":datasetName, "datasetURL": datasetURL, "rating": rating, "action": action, "_xsrf": $("[name='_xsrf']").val() }
+	    var validForm = true;
+	    if (datasetName == '') {
+	    	validForm = false;
+	    	currentDatasetForm.find('.invalidURL').hide();
+	    	currentDatasetForm.find('.invalidRating').hide();
+	    	currentDatasetForm.find('.emptyName').show().delay(5000).fadeOut();
+	    } else if (!validURL(datasetURL) && datasetURL != '') {
+	    	validForm = false;
+	    	currentDatasetForm.find('.invalidURL').show().delay(5000).fadeOut();
+	    	currentDatasetForm.find('.invalidRating').hide();
+	    	currentDatasetForm.find('.emptyName').hide();
+	    } else if ( isNaN(rating) || rating > 4 || (rating != '' && rating < 1)) {
+	    	validForm = false;
+	    	currentDatasetForm.find('.invalidURL').hide();
+	    	currentDatasetForm.find('.invalidRating').show().delay(5000).fadeOut();
+	    	currentDatasetForm.find('.emptyName').hide();
+	    }
+	    if (validForm) {
+	    	currentDatasetForm.find('.invalidURL').hide();
+	    	currentDatasetForm.find('.invalidRating').hide();
+	    	currentDatasetForm.find('.emptyName').hide();
+		    $.ajax({
+				type: 'POST',
+				url: '/addData/'+companyID,
+				data: data,
+				error: function(error) {
+						console.debug(JSON.stringify(error));
+						currentDatasetForm.find('.invalidURL').hide();
+				    	currentDatasetForm.find('.invalidRating').hide();
+				    	currentDatasetForm.find('.emptyName').hide();
+				    	currentDatasetForm.find('.serverError').show().delay(5000).fadeOut(); },
+				beforeSend: function(xhr, settings) {
+					$(event.target).attr('disabled', 'disabled'); },
+				success: function(success) {
+					$(event.target).removeAttr('disabled');
+					currentDatasetForm.find('.invalidURL').hide();
+			    	currentDatasetForm.find('.invalidRating').hide();
+			    	currentDatasetForm.find('.emptyName').hide();
+			    	currentDatasetForm.find('.serverError').hide();
+					currentDatasetForm.parent().append(datasetForm);
+					currentDatasetForm.parent().find('#datasetName').focus();
+					currentDatasetForm.find('#saveDataset').hide();
+					currentDatasetForm.find('#deleteDataset').show();
+					console.log(success);
+				}
+			});
+		}
 	});
+
 	//----------------------------------DELETE DATASET--------------------------------------
 	$('.agencyList').on('click', '#deleteDataset', function() {
 		$(this).parent().parent().remove();
@@ -275,11 +348,15 @@ $(document).ready(function() {
 									'<th>Rating (1-4)</th>'+
 									'<th></th>'+
 								'</tr>'+
-								'<tr>'+
+								'<tr class="dataset-row" subagency="'+subagency.replace(/ /g, "-")+'" agency="'+agency.replace(/ /g, "-")+'">'+
 									'<td><input type="text" name="datasetName" id="datasetName" value=""></td>'+
 									'<td><input type="text" name="datasetURL" id="datasetURL" value=""></td>'+
 									'<td><input type="text" name="rating" id="rating" value=""></td>'+
-									'<td><input type="button" class="m-button" id="saveDataset" value="Save"><input type="button" class="m-button" id="deleteDataset" value="Delete" style="display:none"></td>'+
+									'<td><input type="button" class="l-button" id="saveDataset" value="Save"><input type="button" class="l-button" id="deleteDataset" value="Delete" style="display:none">'+
+										'<span class="invalidURL error-dataset" style="display:none">Invalid URL</span>'+
+										'<span class="emptyName error-dataset" style="display:none">Enter a dataset name</span>'+
+										'<span class="invalidRating error-dataset" style="display:none">Invalid rating</span>'+
+										'<span class="serverError error-dataset" style="display:none">Oops! Something went wrong.</span></td>'+
 								'</tr>'+
 							'</table>';
 			var newSubagency = '<h3 class="subagency" name="'+subagency.replace(/ /g, "-")+'"><a href="#">' +subagency+ '</a>'+
@@ -293,11 +370,15 @@ $(document).ready(function() {
 											'<th>Rating (1-4)</th>'+
 											'<th></th>'+
 										'</tr>'+
-										'<tr>'+
+										'<tr class="dataset-row" subagency="'+subagency.replace(/ /g, "-")+'" agency="'+agency.replace(/ /g, "-")+'">'+
 											'<td><input type="text" name="datasetName" id="datasetName" value=""></td>'+
 											'<td><input type="text" name="datasetURL" id="datasetURL" value=""></td>'+
 											'<td><input type="text" name="rating" id="rating" value=""></td>'+
-											'<td><input type="button" class="m-button" id="saveDataset" value="Save"><input type="button" class="m-button" id="deleteDataset" value="Delete" style="display:none"></td>'+
+											'<td><input type="button" class="l-button" id="saveDataset" value="Save"><input type="button" class="l-button" id="deleteDataset" value="Delete" style="display:none">'+
+												'<span class="invalidURL error-dataset" style="display:none">Invalid URL</span>'+
+												'<span class="emptyName error-dataset" style="display:none">Enter a dataset name</span>'+
+												'<span class="invalidRating error-dataset" style="display:none">Invalid rating</span>'+
+												'<span class="serverError error-dataset" style="display:none">Oops! Something went wrong.</span></td>'+
 										'</tr>'+
 									'</table>'+
 								'</div>';
@@ -329,7 +410,7 @@ $(document).ready(function() {
 						    safeToAdd = true;
 						} else {
 							//--ADD SUBAGENCY-----NOT THE FIRST ONE, APPEND TO ACCORDION----
-							console.log("adding subagency");
+							//console.log("adding subagency");
 							$('.'+agency.replace(/ /g, "-")+'Subagencies').append(newSubagency).accordion('destroy').accordion({
 								active: false,
 								collapsible: true,
@@ -387,13 +468,6 @@ $(document).ready(function() {
 				});
 			}
 		}
-	});
-	//----------------------------------SHOW DELETE ICONS ON HOVER--------------------------------------
-	$('table').on('click', '#saveDataset', function() {
-		datasetName = $(this).parent().parent().find('#datasetName').val();
-		datasetURL = $(this).parent().parent().find('#datasetURL').val();
-		rating = $(this).parent().parent().find('#rating').val();
-		console.log(datasetName);
 	});
 
 	//----------------------------------SHOW DELETE ICONS ON HOVER--------------------------------------
@@ -710,6 +784,11 @@ $(document).ready(function() {
 		$('.dataForm input:checkbox').removeAttr('checked');
 		$('#datasetID').val('');
 		$('#action').val('');
+	}
+	function validURL(url) {
+		var re = /^((https?|s?ftp|git):\/\/)?(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i;
+		var r = new RegExp(re);
+		if (r.test(url)) { return true; } else { return false; }
 	}
 	function validateForm(form) {
 		var pass = true;
