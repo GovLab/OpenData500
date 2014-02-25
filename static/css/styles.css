@@ -109,7 +109,7 @@ select {
   overflow: hidden; }
 
 .m-form-footer {
-  background-color: #8977a7;
+  background-color: #472b74;
   padding: 5px;
   margin: 5px 5px 20px;
   overflow: hidden; }
@@ -825,7 +825,7 @@ footer {
 }
 
 
-
+/* Why you always gotta be messing with Luis' STYLEZZ? */
 .ui-autocomplete-input {
   width: 504px;
 }
@@ -841,6 +841,50 @@ footer {
 
 .error-dataset {
   color: red;
+  padding-left: 5px;
+}
+
+.l-button {
+  padding: 5px 14px 4px 14px;
+  border: 1px solid #8977a7;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  color: #472b74;
+  font-family: "Exo", sans-serif;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 14px;
+  letter-spacing: .6px;
+  cursor: pointer;
+  background-color: white; }
+
+.l-button:hover {
+  background-color: #472b74;
+  border: 1px solid #fff;
+  color: #fff; }
+
+table {
+  width: 100%;
+}
+th.table-header-name, th.table-header-url {
+  width: 15%;
+}
+th.table-header-buttons {
+  width: 60%;
+}
+th.table-header-rating {
+  width: 5%; /* Not necessary, since only 70% width remains */
+}
+
+h2.disclaimer-text {
+  font-family: "Exo", sans-serif;
+  font-size: 1.5em;
+  font-weight: 350;
+}
+
+.savingMessage_companyEdit, .savedMessage_companyEdit, .errorMessage_companyEdit {
+  color: white;
 }
 
 

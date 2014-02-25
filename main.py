@@ -916,7 +916,10 @@ class SubmitDataHandler(BaseHandler):
 
     #@tornado.web.authenticated
     def post(self, id):
-        company = models.Company2.objects.get(id=bson.objectid.ObjectId(id))
+        try:
+            company = models.Company2.objects.get(id=bson.objectid.ObjectId(id))
+        except:
+            self.set_status(400)
         agencyName = self.get_argument("agency", None)
         subagencyName = self.get_argument("subagency", None)
         action = self.get_argument("action", None)
@@ -926,7 +929,7 @@ class SubmitDataHandler(BaseHandler):
             try:
                 agency = models.Agency.objects.get(name=agencyName)
             except:
-                self.write("something went wrong")
+                self.set_status(400)
             for s in agency.subagencies:
                 if s.name == subagencyName:
                     if company not in s.usedBy: #only add if it's not already there.
@@ -946,7 +949,7 @@ class SubmitDataHandler(BaseHandler):
             try: 
                 agency = models.Agency.objects.get(name=agencyName)
             except:
-                self.write("something went wrong")
+                self.set_status(400)
             if subagencyName == '': #delete from agency and subagency
                 #remove datasets from agency:
                 temp = []
@@ -996,7 +999,7 @@ class SubmitDataHandler(BaseHandler):
             try:
                 agency = models.Agency.objects.get(name=agencyName)
             except:
-                self.write("something went wrong")
+                self.set_status(400)
             datasetName = self.get_argument("datasetName", None)
             datasetURL = self.get_argument("datasetURL", None)
             try: 
@@ -1017,6 +1020,58 @@ class SubmitDataHandler(BaseHandler):
                 for s in agency.subagencies:
                     if subagencyName == s.name:
                         s.datasets.append(dataset)
+            agency.save()
+            self.write("success")
+        #------------------------------------EDITING DATASET------------------------
+        if action == "edit dataset":
+            try:
+                agency = models.Agency.objects.get(name=agencyName)
+            except:
+                self.set_status(400)
+            datasetName = self.get_argument("datasetName", None)
+            previousDatasetName = self.get_argument("previousDatasetName", None)
+            datasetURL = self.get_argument("datasetURL", None)
+            try: 
+                rating = int(self.get_argument("rating", None))
+            except:
+                rating = 0
+            #-- At Agency Level?--
+            if subagencyName == '':
+                #find dataset:
+                for d in agency.datasets:
+                    if d.datasetName == previousDatasetName:
+                        d.datasetName = datasetName
+                        d.datasetURL = datasetURL
+                        d.rating = rating
+            else: #look for dataset in subagencies
+                for s in agency.subagencies:
+                    if s.name == subagencyName:
+                        for d in s.datasets:
+                            if d.datasetName == previousDatasetName:
+                                d.datasetName = datasetName
+                                d.datasetURL = datasetURL
+                                d.rating = rating
+            agency.save()
+            self.write("success")
+        #------------------------------------DELETING DATASET------------------------
+        if action == "delete dataset":
+            try:
+                agency = models.Agency.objects.get(name=agencyName)
+            except:
+                self.set_status(400)
+            datasetName = self.get_argument("datasetName", None)
+            #Find dataset
+            #--At Agency level?--
+            if subagencyName == '':
+                for d in agency.datasets:
+                    if d.datasetName == datasetName:
+                        agency.datasets.remove(d)
+            else: #--SUBAGENCY LEVEL--
+                for s in agency.subagencies:
+                    if s.name == subagencyName:
+                        for d in s.datasets:
+                            if d.datasetName == datasetName:
+                                s.datasets.remove(d)
             agency.save()
             self.write("success")
 
@@ -1111,8 +1166,8 @@ class EditCompanyHandler(BaseHandler):
     @tornado.web.authenticated
     def post(self, id):
         #get the company you will be editing
-        company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
-        #Submitter info
+        company = models.Company2.objects.get(id=bson.objectid.ObjectId(id))
+        #------------------CONTACT INFO-------------------
         company.contact.firstName = self.get_argument("firstName", None)
         company.contact.lastName = self.get_argument("lastName", None)
         company.contact.title = self.get_argument("title", None)
@@ -1124,16 +1179,13 @@ class EditCompanyHandler(BaseHandler):
                 company.contact.contacted = True
         except:
             company.contact.contacted = False
-        company.contact.save()
-        #CEO Info
+        #------------------CEO INFO-------------------
         company.ceo.firstName = self.get_argument("ceoFirstName", None)
         company.ceo.lastName = self.get_argument("ceoLastName", None)
-        company.ceo.email = self.get_argument("ceoEmail", None)
-        company.ceo.save()
-        #Company Info
+        #------------------COMPANY INFO-------------------
         #company.companyName = self.get_argument("companyName", None)
         #company.prettyName = re.sub(r'([^\s\w])+', '', company.companyName).replace(" ", "-").title()
-        url = self.get_argument('url', None)
+        company.url = self.get_argument('url', None)
         company.city = self.get_argument('city', None)
         company.zipCode = self.get_argument('zipCode', None)
         company.companyType = self.get_argument("companyType", None)
@@ -1145,17 +1197,6 @@ class EditCompanyHandler(BaseHandler):
         company.fte = self.get_argument("fte", 0)
         if not company.fte:
             company.fte = 0
-        company.companyFunction = self.get_argument("companyFunction", None)
-        if company.companyFunction == 'other': #if user entered custom option for Function
-            company.companyFunction = self.get_argument('otherCompanyFunction', None)
-        try: #try and get all checked items. 
-            company.criticalDataTypes = self.request.arguments['criticalDataTypes']
-        except: #if no checked items, then make it into an empty array (form validation should prevent this always)
-            company.criticalDataTypes = []
-        if 'Other' in company.criticalDataTypes: #if user entered a custom option for Data Type
-            del company.criticalDataTypes[company.criticalDataTypes.index('Other')] #delete 'Other' from list
-            if self.get_argument('otherCriticalDataTypes', None):
-                company.criticalDataTypes.append(self.get_argument('otherCriticalDataTypes', None)) #add custom option to list.
         try: #try and get all checked items. 
             company.revenueSource = self.request.arguments['revenueSource']
         except: #if no checked items, then make it into an empty array (form validation should prevent this always)
@@ -1164,23 +1205,12 @@ class EditCompanyHandler(BaseHandler):
             del company.revenueSource[company.revenueSource.index('Other')] #delete 'Other' from list
             if self.get_argument('otherRevenueSource', None):
                 company.revenueSource.append(self.get_argument('otherRevenueSource', None)) #add custom option to list.
-        try: #try and get all checked items. 
-            company.sector = self.request.arguments['sector']
-        except: #if no checked items, then make it into an empty array (form validation should prevent this always)
-            company.sector = []
-        if 'Other' in company.sector: #if user entered a custom option for Sector
-            del company.sector[company.sector.index('Other')] #delete 'Other' from list
-            if self.get_argument('otherSector', None):
-                company.sector.append(self.get_argument('otherSector', None)) #add custom option to list.
-        company.descriptionLong = self.get_argument('descriptionLong', None)
+        company.description = self.get_argument('description', None)
         company.descriptionShort = self.get_argument('descriptionShort', None)
-        company.socialImpact = self.get_argument('socialImpact', None)
         company.financialInfo = self.get_argument('financialInfo', None)
+        company.datasetComments = self.get_argument('datasetComments', None)
         company.submittedSurvey = True
         company.vettedByCompany = True
-        company.display = True
-        company.vetted = False
-        company.submittedThroughWebsite = False
         company.save()
         self.redirect('/thanks/')
         # if self.get_argument('submit', None) == 'Save and Submit':

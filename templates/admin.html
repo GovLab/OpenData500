@@ -11,21 +11,7 @@
 {% for company in recentlySubmitted %}
 	<h3><strong>{{ company.companyName }}</strong> Submitted: {{company.ts}}</h3> 
 	<div>
-	<ul>
-		{% try %}
-			{% for agency in company.agencies %}
-				<li><p><strong>{{ agency.name }}{%if agency.subagency %} - {{ agency.subagency }}{%end%}</strong></p>
-					<ul>
-						{% for dataset in agency.datasets %}
-							<li>{%if dataset.datasetName %}{{dataset.datasetName}}{%end%}</li>
-						{% end %}
-					</ul>
-				</li>
-			{% end %}
-		{% except %}
-		{% end %}
-	</ul>
-	<p><a href="/admin/edit/{{ company.id }}">Edit</a></p>
+		<p><a href="/admin/edit/{{ company.id }}">Edit</a></p>
 	</div>
 {% end %}
 </div>
@@ -71,21 +57,7 @@
 {% for company in surveySubmitted %}
 	<h3><strong>{{ company.companyName }}</strong> Submitted: {{company.ts}}</h3> 
 	<div>
-	<ul>
-		{% try %}
-			{% for agency in company.agencies %}
-				<li><p><strong>{{ agency.name }}{%if agency.subagency %} - {{ agency.subagency }}{%end%}</strong></p>
-					<ul>
-						{% for dataset in agency.datasets %}
-							<li>{%if dataset.datasetName %}{{dataset.datasetName}}{%end%}</li>
-						{% end %}
-					</ul>
-				</li>
-			{% end %}
-		{% except %}
-		{% end %}
-	</ul>
-	<p><a href="/admin/edit/{{ company.id }}">Edit</a></p>
+		<p><a href="/admin/edit/{{ company.id }}">Edit</a></p>
 	</div>
 {% end %}
 </div>
