@@ -881,10 +881,41 @@ h2.disclaimer-text {
   font-family: "Exo", sans-serif;
   font-size: 1.5em;
   font-weight: 350;
+  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 .savingMessage_companyEdit, .savedMessage_companyEdit, .errorMessage_companyEdit {
   color: white;
+}
+
+.error-form {
+  color: red;
+  padding-left: 5px;
+}
+
+.message-form {
+  color: black;
+  padding-left: 5px;
+}
+
+.m-form-box h3 {
+  font-size: 1em;
+}
+
+.submitCompanyForm, .saveCompanyForm, .saveCompanyForm-new {
+  margin-bottom: 20px;
+  margin-top: 20px;
+  width: 100%;
+  text-align: center;
+}
+
+.dialog-example {
+  display: none;
+}
+
+.ui-dialog-titlebar-close {
+  visibility: hidden;
 }
 
 

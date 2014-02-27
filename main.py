@@ -660,7 +660,7 @@ class ValidateHandler(BaseHandler):
         #check if companyName exists:
         companyName = self.get_argument("companyName", None)
         try: 
-            c = models.Company.objects.get(companyName=companyName)
+            c = models.Company2.objects.get(companyName=companyName)
             self.write('{ "error": "This company has already been submitted. Email opendata500@thegovlab.org for questions." }')
         except:
             self.write('true')
@@ -673,52 +673,64 @@ class SubmitCompanyHandler(BaseHandler):
         self.render(
             "submitCompany.html",
             page_title = "Submit Your Company",
-            page_heading = "Submit Your Company"
+            page_heading = "Submit Your Company",
+            companyType = companyType,
+            companyFunction = companyFunction,
+            criticalDataTypes = criticalDataTypes,
+            revenueSource = revenueSource,
+            categories=categories,
+            datatypes = datatypes,
+            stateList = stateList,
+            stateListAbbrev=stateListAbbrev
         )
 
     #@tornado.web.authenticated
     def post(self):
+        #-------------------CONTACT INFO---------------
         firstName = self.get_argument("firstName", None)
         lastName = self.get_argument("lastName", None)
         title = self.get_argument("title", None)
-        #org = self.get_argument("org", None)
-        url = self.get_argument('url', None)
-        companyName = self.get_argument("companyName", None)
-        prettyName = re.sub(r'([^\s\w])+', '', companyName).replace(" ", "-").title()
         email = self.get_argument("email", None)
         phone = self.get_argument("phone", None)
-        city = self.get_argument("city", None)
-        zipCode = self.get_argument("zipCode", None)
-        if not zipCode:
-            zipCode = 0
-        state = self.get_argument('state', None)
-        ceoFirstName = self.get_argument("ceoFirstName", None)
-        ceoLastName = self.get_argument("ceoLastName", None)
-        ceoEmail = self.get_argument("ceoEmail", None)
-        companyType = self.get_argument("companyType", None)
         try:
             if self.request.arguments['contacted']:
                 contacted = True
         except:
             contacted = False
+        contact = models.Person2(
+            firstName = firstName,
+            lastName = lastName,
+            title = title,
+            email = email,
+            phone = phone,
+            contacted = contacted,
+        )
+        #-------------------CEO INFO---------------
+        ceoFirstName = self.get_argument("ceoFirstName", None)
+        ceoLastName = self.get_argument("ceoLastName", None)
+        ceo = models.Person2(
+                firstName = ceoFirstName,
+                lastName = ceoLastName,
+                title = "CEO"
+            )
+        #-------------------COMPANY INFO---------------
+        url = self.get_argument('url', None)
+        companyName = self.get_argument("companyName", None)
+        prettyName = re.sub(r'([^\s\w])+', '', companyName).replace(" ", "-").title()
+        city = self.get_argument("city", None)
+        zipCode = self.get_argument("zipCode", None)
+        if not zipCode:
+            zipCode = 0
+        state = self.get_argument('state', None)
+        companyType = self.get_argument("companyType", None)
         if companyType == 'other':
             companyType = self.get_argument('otherCompanyType', None)
         yearFounded = self.get_argument("yearFounded", None)
         if not yearFounded:
-            yearFounded = 9999
+            yearFounded = 0
         fte = self.get_argument("fte", None).replace(",","")
         if not fte:
             fte = 0
-        companyFunction = self.get_argument("companyFunction", None)
-        if companyFunction == 'other':
-            companyFunction = self.get_argument('otherCompanyFunction', None)
-        try:
-            criticalDataTypes = self.request.arguments['criticalDataTypes']
-        except:
-            criticalDataTypes = []
-        if 'Other' in criticalDataTypes:
-            del criticalDataTypes[criticalDataTypes.index('Other')]
-            criticalDataTypes.append(self.get_argument('otherCriticalDataTypes', None))
         try:
             revenueSource = self.request.arguments['revenueSource']
         except:
@@ -729,49 +741,12 @@ class SubmitCompanyHandler(BaseHandler):
         companyCategory = self.get_argument("category", None)
         if companyCategory == 'Other':
             companyCategory = self.get_argument('otherCategory', None)
-        # try:
-        #     sector = self.request.arguments['sector']
-        # except:
-        #     sector = []
-        # if 'Other' in sector:
-        #     del sector[sector.index('Other')]
-        #     sector.append(self.get_argument('otherSector', None))
-        descriptionLong = self.get_argument('descriptionLong', None)
+        description = self.get_argument('description', None)
         descriptionShort = self.get_argument('descriptionShort', None)
-        socialImpact = self.get_argument('socialImpact', None)
         financialInfo = self.get_argument('financialInfo')
         datasetWishList = self.get_argument('datasetWishList', None)
-        companyRec = self.get_argument('companyRec', None)
-        conferenceRec = self.get_argument('conferenceRec', None)
-        contact = models.Person(
-            firstName = firstName,
-            lastName = lastName,
-            title = title,
-            #org = org,
-            email = email,
-            phone = phone,
-            contacted = contacted,
-            personType = "Submitter",
-            datasetWishList = datasetWishList,
-            companyRec = companyRec,
-            conferenceRec = conferenceRec
-        )
-        #if the ceo email and the contact email are the same, then we only save one person.
-        if email == ceoEmail:
-            ceo = contact
-            ceo.personType = "CEO"
-            ceo.save()
-            contact.save()
-        else:
-            ceo = models.Person(
-                firstName = ceoFirstName,
-                lastName = ceoLastName,
-                email = ceoEmail,
-                personType = "CEO"
-            )
-            contact.save()
-            ceo.save()
-        company = models.Company(
+        #--SAVE COMPANY--
+        company = models.Company2(
             companyName = companyName,
             prettyName = prettyName,
             url = url,
@@ -782,16 +757,13 @@ class SubmitCompanyHandler(BaseHandler):
             yearFounded = yearFounded,
             fte = fte,
             companyType = companyType,
-            companyFunction = companyFunction,
-            criticalDataTypes = criticalDataTypes,
             revenueSource = revenueSource,
             companyCategory = companyCategory,
-            descriptionLong = descriptionLong,
+            description= description,
             descriptionShort = descriptionShort,
-            socialImpact = socialImpact,
             financialInfo = financialInfo,
+            datasetWishList = datasetWishList,
             contact = contact,
-            #preview50 = False,
             display = False, 
             submittedSurvey = True,
             vetted = False, 
@@ -799,10 +771,8 @@ class SubmitCompanyHandler(BaseHandler):
             submittedThroughWebsite = True
         )
         company.save()
-        contact.submittedCompany = company
-        contact.save()
         id = str(company.id)
-        self.redirect("/addData/" + id)
+        self.write({"id": id})
 
 # class RecommendCompanyHandler(BaseHandler):
 #     @tornado.web.addslash
@@ -906,12 +876,12 @@ class SubmitDataHandler(BaseHandler):
     def get(self, id):
         #Make not whether we are submitting a Co. and adding a dataset or editing a Co. and adding a dataset
         #get company
-        company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
-        page_heading = "Enter Data Sets for " + company.companyName
+        company = models.Company2.objects.get(id=bson.objectid.ObjectId(id))
+        page_heading = "Agency and Data Information for " + company.companyName
         self.render("submitData.html",
             page_title = "Submit Data Sets For Company",
             page_heading = page_heading,
-            id = id #Company id.
+            company = company
         )
 
     #@tornado.web.authenticated
@@ -1148,7 +1118,7 @@ class EditCompanyHandler(BaseHandler):
                 page_title = "That ain't even a thing.",
                 page_heading = "Check yo'self",
                 message=id)
-        self.render("editCompany2.html",
+        self.render("editCompany.html",
             page_title = page_title,
             page_heading = page_heading,
             company = company,
@@ -1187,7 +1157,10 @@ class EditCompanyHandler(BaseHandler):
         #company.prettyName = re.sub(r'([^\s\w])+', '', company.companyName).replace(" ", "-").title()
         company.url = self.get_argument('url', None)
         company.city = self.get_argument('city', None)
-        company.zipCode = self.get_argument('zipCode', None)
+        try: 
+            company.zipCode = int(self.get_argument('zipCode', None))
+        except:
+            company.zipCode = 0
         company.companyType = self.get_argument("companyType", None)
         if company.companyType == 'other': #if user entered custom option for Type
             company.companyType = self.get_argument('otherCompanyType', None)
@@ -1197,6 +1170,9 @@ class EditCompanyHandler(BaseHandler):
         company.fte = self.get_argument("fte", 0)
         if not company.fte:
             company.fte = 0
+        company.companyCategory = self.get_argument("category", None)
+        if company.companyCategory == "Other":
+            company.companyCategory = self.get_argument("otherCategory", None)
         try: #try and get all checked items. 
             company.revenueSource = self.request.arguments['revenueSource']
         except: #if no checked items, then make it into an empty array (form validation should prevent this always)
@@ -1208,11 +1184,13 @@ class EditCompanyHandler(BaseHandler):
         company.description = self.get_argument('description', None)
         company.descriptionShort = self.get_argument('descriptionShort', None)
         company.financialInfo = self.get_argument('financialInfo', None)
+        company.datasetWishList = self.get_argument('datasetWishList', None) 
         company.datasetComments = self.get_argument('datasetComments', None)
         company.submittedSurvey = True
         company.vettedByCompany = True
         company.save()
-        self.redirect('/thanks/')
+        self.write('success')
+        #self.redirect('/thanks/')
         # if self.get_argument('submit', None) == 'Save and Submit':
         #     self.redirect('/')
         # if self.get_argument('submit', None) == 'Save And Continue Editing':

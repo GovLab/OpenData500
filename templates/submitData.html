@@ -6,33 +6,106 @@
 <h1>{{ page_heading }}</h1>
 
 
-<p>Please fill out the following information for the datasets that you consider to be the most important to your core business.</p>
-<div class="data">
-	<div class="dataForms">
-		<h3 class="datasetHeader">New Dataset</h3>
-		<form method="post" class="m-form" parsley-validate>
-			<div class="m-form-line"><label for="datasetName">Name of Dataset: *</label><input type="text" name="datasetName" parsley-trigger="change" parsley-required="true"></div>
-			<div class="m-form-line"><label for="datasetURL">URL of Dataset: *</label><input type="text" name="datasetURL" parsley-required="true" parsley-trigger="change" parsley-type="url"></div>
-			<div class="m-form-line"><label for="agency">Agency or Source: *</label><input type="text" name="agency" parsley-required="true" parsley-trigger="change"></div>
-			
-			<div class="m-form-box">Type of Dataset: *<br>
-				<label for=""><input type="checkbox" name="typeOfDataset" value="Federal Open Data">Federal Open Data</label><br>
-				<label for=""><input type="checkbox" name="typeOfDataset" value="State Open Data">State Open Data</label><br>
-				<label for=""><input type="checkbox" name="typeOfDataset" value="City/Local Open Data">City/Local Open Data</label><br>
-				<label for=""><input type="checkbox" name="typeOfDataset" parsley-required="true" value="Other">Other <label for=""><input type="text" name="otherTypeOfDataset"></label></label>
-			</div>
-
-			<p>On a scale of 1 to 4, how would you rate the usefulness of this dataset? (1- poor, 4- excellent) Your answer can reflect your experience with data quality, format of the data, or other factors.</p>
-			<input type="text" name="rating" parsley-trigger="change" parsley-range="[0, 4]">
-			<p>Why did you give it this rating? [50 words or less]</p>
-			<textarea rows="6" cols="70" name="reason" parsley-trigger="keyup" parsley-maxwords="50"></textarea><br>
-			<input type="hidden" id="companyID" name="id" value="{{ id }}">
+<!--------------------------------------------DATASETS--------------------------------------!-->
+	<div class="m-form-box data">
+		<h3>Please tell us more about the data your company uses. Use the search bar to find agencies and subagencies and select from the list provided. <div class="example-popup"><a>See Example.</a></div></h3><br>
+		<div class="dialog-example">
+			<img src="{{ static_url("img/ExampleData.png") }}">
+		</div>
+		<div class="ui-widget">
+			<label for="tags">Agency/Sub-agency Search: </label>
+			<input id="agencyTags" value="">
+			<input type="hidden" id="searchval" />
+			<input type="button" class="l-button" id="addSearchResult" value="Add Agency/Sub-Agency">
+			<input type="hidden" class="companyID" name="companyID" value="{{ company.id }}">
 			{% raw xsrf_form_html() %}
-			<input type="submit" name="submit" class="m-button" value="Save and Add Another">
-			<input type="submit" name="submit" class="m-button" value="Save and Finish">
-			<input type="submit" name="submit" class="m-button" value="Finish">
-		</form>
+			<div class="errors-search">
+				<span class="agenciesExist error-agency-search" style="display:none">Agency or Sub-Agency already on list.</span>
+				<span class="emptyInput error-agency-search" style="display:none">Nothing to add.</span>
+				<span class="invalidInput error-agency-search" style="display:none">Please select an item from the provided list.</span>
+			</div>
+		</div>
+		<div class="agencyList">
+			<div id="accordionAgency">
+				{% for agency in company.agencies %}
+					<h3 class="agency" name='{{agency.name.replace(" ", "-") }}'><a href="#">{{agency.name}}</a>
+						<span style="float:right; display: none;" class="toolbar ui-corner-all ui-icon ui-icon-circle-close red" subagency="" agency="{{agency.name.replace(" ","-")}}"></span>
+					</h3>
+					<div id="{{agency.name.replace(" ","-")}}Accordion">
+						<br><h3>Agency Level Datasets</h3><br>
+						<table class="datasetTable">
+							<tr>
+								<th class="table-header-name">Dataset Name</th>
+								<th class="table-header-url">Dataset URL</th>
+								<th class="table-header-rating">Rating (1-4)</th>
+								<th class="table-header-buttons"></th>
+							</tr>
+							{% for d in agency.datasets %}{% if company == d.usedBy %}
+								<tr class="dataset-row" name="{{d.datasetName}}" subagency="" agency="{{agency.name.replace(" ","-")}}">
+									<td><input type="text" name="datasetName" id="datasetName" {% if (d.datasetName) %} value="{{d.datasetName}}" {% end %}></td>
+									<td><input type="text" name="datasetURL" id="datasetURL" {% if (d.datasetURL) %} value="{{d.datasetURL}}" {% end %}></td>
+									<td><input type="text" name="rating" id="rating" size="3" {% if (d.rating) %} value="{{d.rating}}" {% end %}></td>
+									<td><input type="button" class="l-button" id="saveDataset" value="Save"><input type="button" class="l-button" id="deleteDataset" value="Delete">
+										<span class="error-dataset" style="display:none"></span>
+										<span class="message-dataset" style="display:none"></span></td>
+								</tr>
+							{% end %}{% end %}
+							<tr class="dataset-row" subagency="" agency="{{agency.name.replace(" ","-")}}">
+								<td><input type="text" name="datasetName" id="datasetName" value=""></td>
+								<td><input type="text" name="datasetURL" id="datasetURL" value=""></td>
+								<td><input type="text" name="rating" id="rating" size="3" value=""></td>
+								<td><input type="button" class="l-button" id="saveDataset" value="Save"><input type="button" class="l-button" id="deleteDataset" value="Delete" style="display:none">
+									<span class="error-dataset" style="display:none"></span>
+									<span class="message-dataset" style="display:none"></span></td>
+							</tr>
+						</table>	<!---END DATASETS FROM JUST AGENCY !-->
+						<!-- ROLL THROUGH SUBAGENCIES !-->
+						{% if agency.subagencies %}<br><h3>Sub-Agencies</h3><br>{% end %}
+						<div id="accordionSubAgency" class="{{agency.name.replace(" ", "-") }}Subagencies">
+							{% for sub in agency.subagencies %}{% if company in sub.usedBy %}
+								<h3 class="subagency" name="{{sub.name.replace(" ", "-") }}"><a href="#">{{sub.name}}</a>
+									<span style="float:right; display: none;" class="toolbar ui-corner-all ui-icon ui-icon-circle-close red" subagency="{{sub.name.replace(" ","-")}}" agency="{{agency.name.replace(" ","-")}}"></span>
+								</h3>
+								<div class="{{ sub.name.replace(" ", "-") }}">
+									<table class="subagencyDatasetTable">
+										<tr>
+											<th class="table-header-name">Dataset Name</th>
+											<th class="table-header-url">Dataset URL</th>
+											<th class="table-header-rating">Rating (1-4)</th>
+											<th class="table-header-buttons"></th>
+										</tr>
+										{% for d in sub.datasets %}{%if company == d.usedBy %}
+											<tr class="dataset-row" name="{{d.datasetName}}" subagency="{{ sub.name.replace(" ", "-") }}" agency="{{agency.name.replace(" ","-")}}">
+												<td><input type="text" name="datasetName" id="datasetName" {% if (d.datasetName) %} value="{{d.datasetName}}" {% end %}></td>
+												<td><input type="text" name="datasetURL" id="datasetURL" {% if (d.datasetURL) %} value="{{d.datasetURL}}" {% end %}></td>
+												<td><input type="text" name="rating" id="rating" size="3" {% if (d.rating) %} value="{{d.rating}}" {% end %}></td>
+												<td><input type="button" class="l-button" id="saveDataset" value="Save"><input type="button" class="l-button" id="deleteDataset" value="Delete">
+													<span class="error-dataset" style="display:none"></span>
+													<span class="message-dataset" style="display:none"></span></td>
+											</tr>
+										{% end %}{% end %}
+										<tr class="dataset-row" subagency="{{ sub.name.replace(" ", "-") }}" agency="{{agency.name.replace(" ","-")}}">
+											<td><input type="text" name="datasetName" id="datasetName" value=""></td>
+											<td><input type="text" name="datasetURL" id="datasetURL" value=""></td>
+											<td><input type="text" name="rating" id="rating" size="3" value=""></td>
+											<td><input type="button" class="l-button" id="saveDataset" value="Save"><input type="button" class="l-button" id="deleteDataset" value="Delete" style="display:none">
+												<span class="error-dataset" style="display:none"></span>
+												<span class="message-dataset" style="display:none"></span></td>
+										</tr>
+									</table>
+								</div>
+							{% end %}{% end %} <!-- END OF SUBAGENCIES !-->
+						</div>
+					</div>
+				{% end %}
+			</div><br>
+		</div>
 	</div>
+<!--------------------------------------------END DATASETS--------------------------------------!-->
+
+<div class="finish-data-submit">	
+	<a href="/thanks/"><input type="button" class="l-button" value="Save And Finish"></a>
 </div>
+
 
 {% end %}
