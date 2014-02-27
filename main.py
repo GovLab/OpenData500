@@ -70,7 +70,7 @@ class Application(tornado.web.Application):
             (r'/download/(.*)/?',tornado.web.StaticFileHandler, {'path':os.path.join(os.path.dirname(__file__), 'static')}),
             #(r"/upload50/?", Upload50Handler),
             #(r"/upload500/?", Upload500Handler),
-            (r"/uploadAll/?", LoadEverythingNewHandler),
+            #(r"/uploadAll/?", LoadEverythingNewHandler),
             #(r"/uploadAgencies/?", UploadAgencies),
             (r"/candidates/?", CandidateHandler),
             (r"/preview/?", PreviewHandler),
