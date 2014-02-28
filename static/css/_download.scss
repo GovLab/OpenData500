@@ -4,24 +4,29 @@
 	margin-top: 30px;
 	margin-bottom: 30px;
 	font-size: 1em;
+
+	h1 {
+		margin-bottom: 20px;
+	}
 	
 	.m-download-item {
 		border: 1px solid $light-gray;
 		padding: 20px;
 		display: inline-block;
-		width: 265px;
-		margin-right: 10px;
+		width: 300px;
+		margin: 7px;
 		@include rounded;
 		font-size: 2.4em;
 		line-height: 1.2em;
 		font-family: $fancy_type;
 		font-weight: 100;
 		vertical-align: top;
-		height: 200px;
+		height: 115px;
 
 		p {
-			height: 100px;
+			height: 40px;
 			vertical-align: middle;
+			margin-top: 0;
 		}
 	}
 	

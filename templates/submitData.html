@@ -9,28 +9,37 @@
 <p>Please fill out the following information for the datasets that you consider to be the most important to your core business.</p>
 <div class="data">
 	<div class="dataForms">
-		<h3 class="datasetHeader">New Dataset</h3>
+		<h2 class="datasetHeader">New Dataset</h2>
 		<form method="post" class="m-form" parsley-validate>
-			<div class="m-form-line"><label for="datasetName">Name of Dataset: *</label><input type="text" name="datasetName" parsley-trigger="change" parsley-required="true"></div>
-			<div class="m-form-line"><label for="datasetURL">URL of Dataset: *</label><input type="text" name="datasetURL" parsley-required="true" parsley-trigger="change" parsley-type="url"></div>
-			<div class="m-form-line"><label for="agency">Agency or Source: *</label><input type="text" name="agency" parsley-required="true" parsley-trigger="change"></div>
-			
-			<div class="m-form-box">Type of Dataset: *<br>
-				<label for=""><input type="checkbox" name="typeOfDataset" value="Federal Open Data">Federal Open Data</label><br>
-				<label for=""><input type="checkbox" name="typeOfDataset" value="State Open Data">State Open Data</label><br>
+			<fieldset class="m-form-half">
+				<div class="m-form-line"><label for="datasetName">Name of Dataset: *</label><input type="text" name="datasetName" parsley-trigger="change" parsley-required="true"></div>
+				<div class="m-form-line"><label for="datasetURL">URL of Dataset: *</label><input type="text" name="datasetURL" parsley-required="true" parsley-trigger="change" parsley-type="url"></div>
+				<div class="m-form-line"><label for="agency">Agency or Source: *</label><input type="text" name="agency" parsley-required="true" parsley-trigger="change"></div>
+			</fieldset>
+			<fieldset class="m-form-half right">		
+				<h3>Type of Dataset:*</h3>
+				<label for=""><input type="checkbox" name="typeOfDataset" value="Federal Open Data">Federal Open Data</label>
+				<label for=""><input type="checkbox" name="typeOfDataset" value="State Open Data">State Open Data</label>
 				<label for=""><input type="checkbox" name="typeOfDataset" value="City/Local Open Data">City/Local Open Data</label><br>
 				<label for=""><input type="checkbox" name="typeOfDataset" parsley-required="true" value="Other">Other <label for=""><input type="text" name="otherTypeOfDataset"></label></label>
-			</div>
-
-			<p>On a scale of 1 to 4, how would you rate the usefulness of this dataset? (1- poor, 4- excellent) Your answer can reflect your experience with data quality, format of the data, or other factors.</p>
-			<input type="text" name="rating" parsley-trigger="change" parsley-range="[0, 4]">
-			<p>Why did you give it this rating? [50 words or less]</p>
-			<textarea rows="6" cols="70" name="reason" parsley-trigger="keyup" parsley-maxwords="50"></textarea><br>
-			<input type="hidden" id="companyID" name="id" value="{{ id }}">
-			{% raw xsrf_form_html() %}
-			<input type="submit" name="submit" class="m-button" value="Save and Add Another">
-			<input type="submit" name="submit" class="m-button" value="Save and Finish">
-			<input type="submit" name="submit" class="m-button" value="Finish">
+			</fieldset>
+			<fieldset class="m-form-half">
+				<p>On a scale of 1 to 4, how would you rate the usefulness of this dataset? <br>
+				<em>(1- poor, 4- excellent)</em></p>
+				<input type="text" name="rating" parsley-trigger="change" parsley-range="[0, 4]">
+				<p><em>Your answer can reflect your experience with data quality, format of the data, or other factors.</em></p>
+			</fieldset>
+			<fieldset class="m-form-half right">
+				<p>Why did you give it this rating? [50 words or less]</p>
+				<textarea rows="6" cols="70" name="reason" parsley-trigger="keyup" parsley-maxwords="50"></textarea><br>
+				<input type="hidden" id="companyID" name="id" value="{{ id }}">
+				{% raw xsrf_form_html() %}
+			</fieldset>
+			<footer class="m-form-footer">
+				<input type="submit" name="submit" class="m-button" value="Save and Add Another">
+				<input type="submit" name="submit" class="m-button" value="Save and Finish">
+				<input type="submit" name="submit" class="m-button" value="Finish">
+			</footer>
 		</form>
 	</div>
 </div>
