@@ -56,7 +56,7 @@ class Application(tornado.web.Application):
             (r"/validate/?", ValidateHandler),
             (r"/edit/([a-zA-Z0-9]{24})/?", EditCompanyHandler),
             (r"/addData/([a-zA-Z0-9]{24})/?", SubmitDataHandler),
-            (r"/editData/([a-zA-Z0-9]{24})/?", EditDataHandler),
+            #(r"/editData/([a-zA-Z0-9]{24})/?", EditDataHandler),
             (r"/view/([a-zA-Z0-9]{24})/?", ViewHandler),
             (r"/delete/([a-zA-Z0-9]{24})/?", DeleteCompanyHandler),
             (r"/deleteData/([a-zA-Z0-9]{24})/?", DeleteDatasetHandler),
@@ -224,16 +224,18 @@ class CompanyHandler(BaseHandler):
     def get(self, companyName):
         try:
             try:
-                company = models.Company.objects.get(prettyName=companyName)
-            except:
-                company = models.Company.objects(prettyName=companyName)[0]
+                company = models.Company2.objects.get(prettyName=companyName)
+            except Exception, e:
+                logging.info(str(e))
+                company = models.Company2.objects(prettyName=companyName)[0]
             self.render(
             "company.html",
             page_title='Open Data500',
             page_heading=company.companyName,
             company = company,
         )
-        except: 
+        except Exception, e:
+            logging.info(str(e)) 
             self.render(
                 "404.html",
                 page_title='404 - Open Data500',
@@ -1368,23 +1370,39 @@ class DeleteCompanyHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self, id):
         try:
-            company = models.Company.objects.get(id=bson.objectid.ObjectId(id)) 
+            company = models.Company2.objects.get(id=bson.objectid.ObjectId(id)) 
         except:
-            dataset = models.Dataset.objects.get(id=bson.objectid.ObjectId(id))
-        if company:
-            #delete its datasets
-            for d in company.datasets:
-                d.delete()
-            p = company.contact
-            c = company.ceo
-            if c:
-                c.delete()
-            if p:
-                p.delete()
-            company.delete()
-        elif dataset:
-            dataset.delete()
+            self.render(
+                "404.html",
+                page_title='404 - Open Data500',
+                page_heading='Oh no...',
+            )
+        #-----REMOVE FROM ALL AGENCIES-----
+        agencies = models.Agency.objects(usedBy__in=[str(company.id)])
+        for a in agencies:
+            #-----REMOVE DATASETS (AGENCY)-----
+            temp = []
+            for d in a.datasets:
+                if d.usedBy != company:
+                    temp.append(d)
+            a.datasets = temp
+            #---REMOVE DATASETS (SUBAGENCY)---
+            for s in a.subagencies:
+                temp = []
+                for d in s.datasets:
+                    if company != d.usedBy:
+                        temp.append(d)
+                s.datasets = temp
+                #--REMOVE FROM SUBAGENCIES--
+                if company in s.usedBy:
+                    s.usedBy.remove(company)
+            #-----REMOVE FROM AGENCY----
+            a.usedBy.remove(company)
+            a.save()
+        ##----------DELETE COMPANY--------
+        company.delete()
         self.redirect('/admin/')
+
 
 class ViewHandler(BaseHandler):
     @tornado.web.authenticated

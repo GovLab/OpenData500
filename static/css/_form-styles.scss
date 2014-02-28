@@ -44,7 +44,6 @@ select {
 
 .m-form {
 	.m-button {
-		background-color: transparent;
 		border: 1px solid #fff;	
 		@include rounded;
 		color: #fff;
@@ -135,7 +134,8 @@ select {
 }
 
 .m-form-footer {
-	background-color: $light_purple;
+	background-color: transparent;
+	border-top: 1px solid $light_gray;
 	padding: 5px;
 	margin: 5px 5px 20px;
 	overflow:hidden;
