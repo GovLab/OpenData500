@@ -832,6 +832,12 @@ footer {
 .ui-autocomplete-input {
   width: 504px;
 }
+.ui-autocomplete {
+    max-height: 200px;
+    overflow-y: auto;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden;
+}
 
 .error-agency-search {
   display:block;

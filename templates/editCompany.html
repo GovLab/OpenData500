@@ -114,7 +114,7 @@
 	</div>
 	<div class="ui-widget">
 		<label for="tags">Agency/Sub-agency Search: </label>
-		<input id="agencyTags" value="">
+		<input id="agencyTags" placeholder="e.g. NYC, Department of Transportation, DARPA, Defense, Texas, Census..."value="">
 		<input type="hidden" id="searchval" />
 		<input type="button" class="l-button" id="addSearchResult" value="Add Agency/Sub-Agency">
 		<div class="errors-search">
@@ -149,7 +149,7 @@
 							</tr>
 						{% end %}{% end %}
 						<tr class="dataset-row" subagency="" agency="{{agency.name.replace(" ","-")}}">
-							<td><input type="text" name="datasetName" id="datasetName" value=""></td>
+							<td><input type="text" name="datasetName" id="datasetName" placeholder="Agency-Level Dataset..."value=""></td>
 							<td><input type="text" name="datasetURL" id="datasetURL" value=""></td>
 							<td><input type="text" name="rating" id="rating" size="3" value=""></td>
 							<td><input type="button" class="l-button" id="saveDataset" value="Save"><input type="button" class="l-button" id="deleteDataset" value="Delete" style="display:none">
@@ -183,7 +183,7 @@
 										</tr>
 									{% end %}{% end %}
 									<tr class="dataset-row" subagency="{{ sub.name.replace(" ", "-") }}" agency="{{agency.name.replace(" ","-")}}">
-										<td><input type="text" name="datasetName" id="datasetName" value=""></td>
+										<td><input type="text" name="datasetName" id="datasetName" placeholder="Subagency-Level Dataset" value=""></td>
 										<td><input type="text" name="datasetURL" id="datasetURL" value=""></td>
 										<td><input type="text" name="rating" id="rating" size="3" value=""></td>
 										<td><input type="button" class="l-button" id="saveDataset" value="Save"><input type="button" class="l-button" id="deleteDataset" value="Delete" style="display:none">

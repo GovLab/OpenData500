@@ -1,7 +1,7 @@
 
 $(document).ready(function() { 
 
-  var agencies = ["Alabama","Alaska","Albuquerque","Ann Arbor","Arctic Landscape Conservation Cooperative","Arizona","Arizona - Arizona Geological Survey","Arkansas","Arvada","Asheville","Atlanta","Austin","Baltimore","Belleville","Boston","Boston - Boston Enterprise GIS","Broadcasting Board of Governors","California","California - California Environmental Health Tracking Program","California - California Department of Resources","Champaign","Chicago","City of Orem","Colorado","Colorado - Denver Regional Council","Columbia University - Center for International Earth Science Information Network","Commodity Futures Trading Commission","Connecticut","Consumer Financial Protection Bureau","Cook County","Cornell University","Corporation for National and Community Service","Court Services and Offender Supervision Agency","Delaware","Denver","Department of Agriculture - Agricultural Marketing Service","Department of Agriculture - Agricultural Research Service","Department of Agriculture - Animal and Plant Health Inspection Service","Department of Agriculture","Department of Agriculture - Departmental Management","Department of Agriculture - Economic Research Service","Department of Agriculture - Farm Service Agency","Department of Agriculture - Food and Nutrition Service","Department of Agriculture - Food Safety and Inspection Service","Department of Agriculture - Foreign Agricultural Service","Department of Agriculture - National Agricultural Statistics Service","Department of Agriculture - National Appeals Division","Department of Agriculture - National Institute of Food and Agriculture","Department of Agriculture - Natural Resources Conservation Service","Department of Agriculture - Office of the Chief Economist","Department of Agriculture - Rural Development","Department of Agriculture - US Forest Service","Department of Commerce","Department of Commerce - Bureau of Economic Analysis","Department of Commerce - Bureau of Industry and Security","Department of Commerce - US Patent and Trademark Office","Department of Commerce - International Trade Administration","Department of Commerce - National Institute of Standards and Technology","Department of Commerce - National Oceanic and Atmospheric Administration","Department of Commerce - National Technical Information Service","Department of Commerce - National Telecommunication and Information Administration","Department of Commerce - National Weather Service","Department of Commerce - US Census Bureau","Department of Defense - Army Corps of Engineers","Department of Defense - Acquisition Technology and Logistics","Department of Defense","Department of Defense - National Geospatial Intelligence Agency","Department of Defense - Defense Logistics Agency","Department of Defense - Defense Technical Information Center","Department of Defense - Department of the Army","Department of Defense - Federal Voting Assistance Program","Department of Education","Department of Education - Federal Student Aid","Department of Education - Institute of Education Sciences","Department of Education - National Center for Education Statistics","Department of Education - Office for Civil Rights","Department of Education - Office of Hearings and Appeals","Department of Education - Office of Innovation and Improvement","Department of Education - Office of Postsecondary Education","Department of Education - Office of Special Education and Rehabilitative Services","Department of Education - Office of Vocational and Adult Education","Department of Energy","Department of Energy - Energy Information Administration","Department of Energy - Office of Scientific and Technical Information","Department of Health and Human Services - Centers for Medicare and Medicaid Services","Department of Health and Human Services","Department of Health and Human Services - National Institutes of Health","Department of Health and Human Services - Substance Abuse and Mental Health Services Administration","Department of Homeland Security - U.S. Coast Guard","Department of Homeland Security","Department of Homeland Security - Federal Emergency Management Agency","Department of Homeland Security - United States Coast Guard","Department of Homeland Security - Office of Health Affairs","Department of Homeland Security - Office of Immigration Statistics","Department of Homeland Security - U.S. Citizenship and Immigration Services","Department of Housing and Urban Development - Office of Housing","Department of Justice","Department of Justice - Antitrust Division","Department of Justice - Bureau of Justice Statistics","Department of Justice - Civil Division","Department of Justice - Civil Rights Division","Department of Justice - Federal Bureau of Investigation","Department of Justice - US Trustee Program","Department of Justice - Office of Legal Counsel","Department of Justice - US Attorney's Office","Department of Labor - Benefits Review Board","Department of Labor - Bureau of Labor Statistics","Department of Labor - Employee Benefits Security Administration","Department of Labor - Employees' Compensation Appeals Board","Department of Labor - Employment and Training Administration","Department of Labor - Mine Safety and Health Administration","Department of Labor","Department of Labor - Occupational Safety and Health Administration","Department of Labor - Office of Administrative Law Judges","Department of Labor - Wage and Hour Division","Department of Labor - Office of Job Corps","Department of Labor - Office of the Assistant Secretary for Policy","Department of State","Department of State - Organisation for Economic Cooperation and Development","Department of the Interior","Department of the Interior - Bureau of Indian Education","Department of the Interior - Bureau of Land Management","Department of the Interior - Bureau of Ocean Energy Management","Department of the Interior - National Park Service","Department of the Interior - Office of Hearings and Appeals","Department of the Interior - Federal Geographic Data Committee","Department of the Interior - U.S. Geological Survey","Department of the Interior - Office of the Solicitor","Department of the Interior - US Bureau of Reclamation","Department of the Interior - US Fish and Wildlife Service","Department of the Treasury","Department of the Treasury - Bureau of Engraving and Printing","Department of the Treasury - Bureau of the Public Debt","Department of the Treasury - Departmental Offices","Department of the Treasury - Financial Crimes Enforcement Network","Department of the Treasury - Financial Management Service","Department of the Treasury - Internal Revenue Service","Department of the Treasury - United States Mint","Department of Transportation - National Highway Traffic Safety Administration","Department of Transportation","Department of Transportation - Bureau of Transportation Statistics","Department of Transportation - Federal Aviation Administration","Department of Transportation - Federal Highway Administration","Department of Transportation - Federal Motor Carrier Safety Administration","Department of Transportation - Federal Railroad Administration","Department of Transportation - Federal Transit Administration","Department of Transportation - Maritime Administration","Department of Transportation - National Highway Traffice Safety Administration","Department of Transportation - Office of the Secretary of Transportation","Department of Transportation - Pipeline and Hazardous Materials Safety Administration","Department of Transportation - Research and Innovative Technology Administration","Department of Transportation - Saint Lawrence Seaway Development Corporation","Department of Transportation - Surface Transportation Board","Department of Veterans Affairs - National Cemetery Administration","Department of Veterans Affairs","Department of Veterans Affairs - Veterans Benefits Administration","Department of Veterans Affairs - Veterans Health Administration","Department of Veterans Affairs - Environmental Protection Agency","District of Columbia","Election Assistance Commission","Executive Office of the President - Networking and Information Technology Research and Development","Executive Office of the President - Council on Environmental Quality","Executive Office of the President - Office of Management and Budget","Executive Office of the President - Office of National Drug Control Policy","Executive Office of the President - Office of Science and Technology Policy","Executive Office of the President","Executive Office of the President - US Trade Representative","Executive Office of the President - White House","Export-Import Bank of the US","Federal Communications Commission","Federal Deposit Insurance Corporation","Federal Election Commission","Federal Geographic Data Committee","Federal Government - Department of Housing and Urban Development","Federal Housing Finance Agency","Federal Reserve Board","Florida","General Services Administration","General Services Administration - Federal Acquisition Service","General Services Administration - Office of Citizen Services and Innovative Technologies","General Services Administration - Office of Governmentwide Policy","General Services Administration - Office of Performance Improvement","General Services Administration - Office of the Chief Financial Officer","General Services Administration - Office of the Chief People Officer","General Services Administration - Public Buildings Service","Georgia","Gilpin County","Great Lakes Commission","Hawaii","Hawaii - Hawaii GIS","Honolulu","Houston","Idaho - Coeur d'Alene Tribe","Idaho State University","Illinois","Illinois - South Suburban Mayors and Managers","Indiana","Information Sharing Environment","Institute of Museum and Library Services","Iowa","Iowa State University GIS Support and Research Facility","Kansas","Kansas - Kansas Data Access and Support Center","Kansas City","Kentucky","Kentucky - Kentucky Geography Network","King County","Las Vegas","Lexington","Los Angeles","Louisiana","Louisiana - Louisiana Geographic Information Center","Louisville","Madison","Maine","Maryland","Massachusetts","Merit Systems Protection Board","Michigan","Millenium Challenge Corporation","Minneapolis-St Paul - MetroGIS (Minneapolis-St. Paul Regional GIS Consortium)","Minnesota - Minnesota Department of Natural Resources","Minnesota","Missouri","Missouri - Accountability Portal","Missouri - Missouri Spatial Data Information Service","Montana","Montgomery County","National Aeronautics and Space Administration - Jet Propulsion Laboratory","National Aeronautics and Space Administration","National Archives and Records Administration","National Archives and Records Administration - Office of the Federal Register","National Capital Planning Commission","National Endowment for the Arts","National Endowment for the Humanities","National Labor Relations Board","National Science Foundation","National States Geographic Information Council - GIS Inventory (aka Ramona)","National Transportation Safety Board","Nebraska","New Hampshire","New Mexico","New Orleans","New York","New York - NY State Senate","New York - New York State Data Center","New York - NY Department of Health","New York City","North Carolina - NC OpenBook","North Carolina","North Dakota - North Dakota GIS Hub","North Dakota","Nuclear Regulatory Commission","Nuna Technologies","Oak Ridge National Laboratory","Occupational Safety and Health Review Commission","Office of Navajo and Hopi Indian Relocation","Office of Personnel Management","Ohio","Oklahoma","Open Door Kentucky","Oregon","Oregon State University","Overseas Private Investment Corporation","Pacific States Marine Fisheries Commission","Palo Alto","Pension Benefit Guaranty Corporation","Philadelphia","Portland","Providence","Railroad Retirement Board","Raleigh","Rhode Island","Rockford","San Francisco","San Mateo County","Santa Cruz","Scottsdale","Seattle","Securities and Exchange Commission","Selective Service System","Small Business Administration","Social Security Administration","Somerville","South Bend","South Dakota","Tennessee","Texas","Texas - Texas Transparency","U.S. Department of Health & Human Services","U.S. Environmental Protection Agency","Univ of South Carolina - Baruch Institute for Marine and Coastal Sciences","University of Alaska - Geographic Information Network of Alaska - University of Alaska","University of Arizona","University of California San Diego","University of Idaho","University of New Hampshire","University of New Mexico - Earth Data Analysis Center","University of Rhode Island - University of Rhode Island Geospatial Extension Program","University of Washington","US Agency for International Development","US Consumer Product Safety Commission","US Equal Employment Opportunity Commission","US International Trade Commission","US Office of the Special Counsel","Utah","Virginia","Virginia - Virginia Department of Environmental Quality","Wake County","Washington","Weatherford","Wellington","Department of Defense - Defense Advanced Research Projects Agency"];
+  //var agencies = ["Alabama","Alaska","Albuquerque","Ann Arbor","Arctic Landscape Conservation Cooperative","Arizona","Arizona - Arizona Geological Survey","Arkansas","Arvada","Asheville","Atlanta","Austin","Baltimore","Belleville","Boston","Boston - Boston Enterprise GIS","Broadcasting Board of Governors","California","California - California Environmental Health Tracking Program","California - California Department of Resources","Champaign","Chicago","City of Orem","Colorado","Colorado - Denver Regional Council","Columbia University - Center for International Earth Science Information Network","Commodity Futures Trading Commission","Connecticut","Consumer Financial Protection Bureau","Cook County","Cornell University","Corporation for National and Community Service","Court Services and Offender Supervision Agency","Delaware","Denver","Department of Agriculture - Agricultural Marketing Service","Department of Agriculture - Agricultural Research Service","Department of Agriculture - Animal and Plant Health Inspection Service","Department of Agriculture","Department of Agriculture - Departmental Management","Department of Agriculture - Economic Research Service","Department of Agriculture - Farm Service Agency","Department of Agriculture - Food and Nutrition Service","Department of Agriculture - Food Safety and Inspection Service","Department of Agriculture - Foreign Agricultural Service","Department of Agriculture - National Agricultural Statistics Service","Department of Agriculture - National Appeals Division","Department of Agriculture - National Institute of Food and Agriculture","Department of Agriculture - Natural Resources Conservation Service","Department of Agriculture - Office of the Chief Economist","Department of Agriculture - Rural Development","Department of Agriculture - US Forest Service","Department of Commerce","Department of Commerce - Bureau of Economic Analysis","Department of Commerce - Bureau of Industry and Security","Department of Commerce - US Patent and Trademark Office","Department of Commerce - International Trade Administration","Department of Commerce - National Institute of Standards and Technology","Department of Commerce - National Oceanic and Atmospheric Administration","Department of Commerce - National Technical Information Service","Department of Commerce - National Telecommunication and Information Administration","Department of Commerce - National Weather Service","Department of Commerce - US Census Bureau","Department of Defense - Army Corps of Engineers","Department of Defense - Acquisition Technology and Logistics","Department of Defense","Department of Defense - National Geospatial Intelligence Agency","Department of Defense - Defense Logistics Agency","Department of Defense - Defense Technical Information Center","Department of Defense - Department of the Army","Department of Defense - Federal Voting Assistance Program","Department of Education","Department of Education - Federal Student Aid","Department of Education - Institute of Education Sciences","Department of Education - National Center for Education Statistics","Department of Education - Office for Civil Rights","Department of Education - Office of Hearings and Appeals","Department of Education - Office of Innovation and Improvement","Department of Education - Office of Postsecondary Education","Department of Education - Office of Special Education and Rehabilitative Services","Department of Education - Office of Vocational and Adult Education","Department of Energy","Department of Energy - Energy Information Administration","Department of Energy - Office of Scientific and Technical Information","Department of Health and Human Services - Centers for Medicare and Medicaid Services","Department of Health and Human Services","Department of Health and Human Services - National Institutes of Health","Department of Health and Human Services - Substance Abuse and Mental Health Services Administration","Department of Homeland Security - U.S. Coast Guard","Department of Homeland Security","Department of Homeland Security - Federal Emergency Management Agency","Department of Homeland Security - United States Coast Guard","Department of Homeland Security - Office of Health Affairs","Department of Homeland Security - Office of Immigration Statistics","Department of Homeland Security - U.S. Citizenship and Immigration Services","Department of Housing and Urban Development - Office of Housing","Department of Justice","Department of Justice - Antitrust Division","Department of Justice - Bureau of Justice Statistics","Department of Justice - Civil Division","Department of Justice - Civil Rights Division","Department of Justice - Federal Bureau of Investigation","Department of Justice - US Trustee Program","Department of Justice - Office of Legal Counsel","Department of Justice - US Attorney's Office","Department of Labor - Benefits Review Board","Department of Labor - Bureau of Labor Statistics","Department of Labor - Employee Benefits Security Administration","Department of Labor - Employees' Compensation Appeals Board","Department of Labor - Employment and Training Administration","Department of Labor - Mine Safety and Health Administration","Department of Labor","Department of Labor - Occupational Safety and Health Administration","Department of Labor - Office of Administrative Law Judges","Department of Labor - Wage and Hour Division","Department of Labor - Office of Job Corps","Department of Labor - Office of the Assistant Secretary for Policy","Department of State","Department of State - Organisation for Economic Cooperation and Development","Department of the Interior","Department of the Interior - Bureau of Indian Education","Department of the Interior - Bureau of Land Management","Department of the Interior - Bureau of Ocean Energy Management","Department of the Interior - National Park Service","Department of the Interior - Office of Hearings and Appeals","Department of the Interior - Federal Geographic Data Committee","Department of the Interior - U.S. Geological Survey","Department of the Interior - Office of the Solicitor","Department of the Interior - US Bureau of Reclamation","Department of the Interior - US Fish and Wildlife Service","Department of the Treasury","Department of the Treasury - Bureau of Engraving and Printing","Department of the Treasury - Bureau of the Public Debt","Department of the Treasury - Departmental Offices","Department of the Treasury - Financial Crimes Enforcement Network","Department of the Treasury - Financial Management Service","Department of the Treasury - Internal Revenue Service","Department of the Treasury - United States Mint","Department of Transportation - National Highway Traffic Safety Administration","Department of Transportation","Department of Transportation - Bureau of Transportation Statistics","Department of Transportation - Federal Aviation Administration","Department of Transportation - Federal Highway Administration","Department of Transportation - Federal Motor Carrier Safety Administration","Department of Transportation - Federal Railroad Administration","Department of Transportation - Federal Transit Administration","Department of Transportation - Maritime Administration","Department of Transportation - National Highway Traffice Safety Administration","Department of Transportation - Office of the Secretary of Transportation","Department of Transportation - Pipeline and Hazardous Materials Safety Administration","Department of Transportation - Research and Innovative Technology Administration","Department of Transportation - Saint Lawrence Seaway Development Corporation","Department of Transportation - Surface Transportation Board","Department of Veterans Affairs - National Cemetery Administration","Department of Veterans Affairs","Department of Veterans Affairs - Veterans Benefits Administration","Department of Veterans Affairs - Veterans Health Administration","Department of Veterans Affairs - Environmental Protection Agency","District of Columbia","Election Assistance Commission","Executive Office of the President - Networking and Information Technology Research and Development","Executive Office of the President - Council on Environmental Quality","Executive Office of the President - Office of Management and Budget","Executive Office of the President - Office of National Drug Control Policy","Executive Office of the President - Office of Science and Technology Policy","Executive Office of the President","Executive Office of the President - US Trade Representative","Executive Office of the President - White House","Export-Import Bank of the US","Federal Communications Commission","Federal Deposit Insurance Corporation","Federal Election Commission","Federal Geographic Data Committee","Federal Government - Department of Housing and Urban Development","Federal Housing Finance Agency","Federal Reserve Board","Florida","General Services Administration","General Services Administration - Federal Acquisition Service","General Services Administration - Office of Citizen Services and Innovative Technologies","General Services Administration - Office of Governmentwide Policy","General Services Administration - Office of Performance Improvement","General Services Administration - Office of the Chief Financial Officer","General Services Administration - Office of the Chief People Officer","General Services Administration - Public Buildings Service","Georgia","Gilpin County","Great Lakes Commission","Hawaii","Hawaii - Hawaii GIS","Honolulu","Houston","Idaho - Coeur d'Alene Tribe","Idaho State University","Illinois","Illinois - South Suburban Mayors and Managers","Indiana","Information Sharing Environment","Institute of Museum and Library Services","Iowa","Iowa State University GIS Support and Research Facility","Kansas","Kansas - Kansas Data Access and Support Center","Kansas City","Kentucky","Kentucky - Kentucky Geography Network","King County","Las Vegas","Lexington","Los Angeles","Louisiana","Louisiana - Louisiana Geographic Information Center","Louisville","Madison","Maine","Maryland","Massachusetts","Merit Systems Protection Board","Michigan","Millenium Challenge Corporation","Minneapolis-St Paul - MetroGIS (Minneapolis-St. Paul Regional GIS Consortium)","Minnesota - Minnesota Department of Natural Resources","Minnesota","Missouri","Missouri - Accountability Portal","Missouri - Missouri Spatial Data Information Service","Montana","Montgomery County","National Aeronautics and Space Administration - Jet Propulsion Laboratory","National Aeronautics and Space Administration","National Archives and Records Administration","National Archives and Records Administration - Office of the Federal Register","National Capital Planning Commission","National Endowment for the Arts","National Endowment for the Humanities","National Labor Relations Board","National Science Foundation","National States Geographic Information Council - GIS Inventory (aka Ramona)","National Transportation Safety Board","Nebraska","New Hampshire","New Mexico","New Orleans","New York","New York - NY State Senate","New York - New York State Data Center","New York - NY Department of Health","New York City","North Carolina - NC OpenBook","North Carolina","North Dakota - North Dakota GIS Hub","North Dakota","Nuclear Regulatory Commission","Nuna Technologies","Oak Ridge National Laboratory","Occupational Safety and Health Review Commission","Office of Navajo and Hopi Indian Relocation","Office of Personnel Management","Ohio","Oklahoma","Open Door Kentucky","Oregon","Oregon State University","Overseas Private Investment Corporation","Pacific States Marine Fisheries Commission","Palo Alto","Pension Benefit Guaranty Corporation","Philadelphia","Portland","Providence","Railroad Retirement Board","Raleigh","Rhode Island","Rockford","San Francisco","San Mateo County","Santa Cruz","Scottsdale","Seattle","Securities and Exchange Commission","Selective Service System","Small Business Administration","Social Security Administration","Somerville","South Bend","South Dakota","Tennessee","Texas","Texas - Texas Transparency","U.S. Department of Health & Human Services","U.S. Environmental Protection Agency","Univ of South Carolina - Baruch Institute for Marine and Coastal Sciences","University of Alaska - Geographic Information Network of Alaska - University of Alaska","University of Arizona","University of California San Diego","University of Idaho","University of New Hampshire","University of New Mexico - Earth Data Analysis Center","University of Rhode Island - University of Rhode Island Geospatial Extension Program","University of Washington","US Agency for International Development","US Consumer Product Safety Commission","US Equal Employment Opportunity Commission","US International Trade Commission","US Office of the Special Counsel","Utah","Virginia","Virginia - Virginia Department of Environmental Quality","Wake County","Washington","Weatherford","Wellington","Department of Defense - Defense Advanced Research Projects Agency"];
   //----------------------------------ADMIN ACCORDIONS--------------------------------------
   $(function() {
       $( "#accordionUnvetted" ).accordion({
@@ -510,280 +510,7 @@ $(document).ready(function() {
       //console.log('not valid');
     }
   });
-  //----------------------------------OLD DATA HANDLERS TO DEPRECATE--------------------------------------
-  // var form = '<div class="m-form-half left">'+
-  //         '<div class="dataFormTitle"></div>'+
-  //         '<div class="m-form-line"><label for="datasetName">Name of Dataset: * </label><input type="text" name="datasetName" parsley-trigger="change" parsley-required="true">'+
-  //         '</div>'+
-  //         '<div class="m-form-line"><label for="datasetURL">URL of Dataset: * </label><input type="text" name="datasetURL" parsley-required="true" parsley-trigger="change" parsley-type="url">'+
-  //         '</div>'+
-  //         '<div class="m-form-line"><label for="agency">Agency or Source: * </label><input type="text" name="agency" parsley-required="true" parsley-trigger="change"></div>'+
-  //         '<h3>Type of Dataset: *</h3>'+
-  //         '<label for=""><input type="checkbox" name="typeOfDataset" value="Federal Open Data">Federal Open Data</label><br>'+
-  //         '<label for=""><input type="checkbox" name="typeOfDataset" value="State Open Data">State Open Data</label><br>'+
-  //         '<label for=""><input type="checkbox" name="typeOfDataset" value="City/Local Open Data">City/Local Open Data</label><br>'+
-  //         '<label for=""><input type="checkbox" name="typeOfDataset" parsley-required="true" value="Other">Other <label for=""><input type="text" parsley-regexp="[a-zA-Z0-9.,-\s\/\)\(]" parsley-regexp-flag="i" parsley-trigger="keyup" name="otherTypeOfDataset"></label></label>'+
-  //         '<h3>On a scale of 1 to 4, how would you rate the usefulness of this dataset? (1- poor, 4- excellent) Your answer can reflect your experience with data quality, format of the data, or other factors.</h3>'+
-  //         '<input type="text" name="rating" parsley-trigger="change" parsley-range="[0, 4]">'+
-  //         '<h3>Why did you give it this rating? [50 words or less]</h3>'+
-  //         '<textarea rows="6" cols="70" name="reason" parsley-trigger="keyup" parsley-maxwords="50"></textarea><br>'+
-  //         '<input type="hidden" id="companyID" name="companyID" value="{{ id }}">'+
-  //         '<input type="hidden" id="datasetID" name="datasetID" value="">'+
-  //         '<input type="hidden" id="action" name="action" value="Add New">'+
-  //         '{% raw xsrf_form_html() %}'+
-  //         '<input type="button" name="addData" class="m-button" id="addNew" value="Add" style="display:none">'+
-  //         '<input type="button" name="saveData" class="m-button" id="saveData" value="Save Edits" style="display:none">'+
-  //         '<input type="button" name="cancel" class="m-button" id="cancel" value="Cancel">'+
-  //         '<input type="button" name="deleteData" class="m-button" id="deleteData" value="Delete Dataset" style="display:none">'+
-  //         '<span class="errorMessage" style="display:none">Oops, something went wrong</span>'+
-  //         '<span class="savingMessage" style="display:none">Saving...</span>'+
-  //     '</div>'+
-  //     '<div class="m-form-half right">'+
-  //       '<div class="m-form-line"><label for="agencySearch">Search For Agency: </label><input type="text" name="agencySearch"></div>'+
-  //       '<div class="m-form-line"><label for="agencyName">Agency Name</label><input type="text" name="agencyName" parsley-required="true" parsley-trigger="change"></div>'+
-  //       '<div class="m-form-line"><label for="subagencyName">Sub Agency Name</label><input type="text" name="subagencyName"></div>'+
-  //     '</div>';
-  // var currentDataset = '';
-  // $('.newSingleDataset').on( 'click', '#addDataset', function( event ) {
-  //   $('#addDataset').hide();
-  //   $.each($('.dataForm'), function() {
-  //     $(this).hide();
-  //     $(this).html('');
-  //     currentDataset = '';
-  //   });
-  //   $.each($('.editData'), function() {
-  //     $(this).show();
-  //   });
-  //   $('#dataFormContainer').show();
-  //   $('#dataFormContainer').html(form);
-  //   $('.dataFormTitle').html('<h3>New Dataset</h3>');
-  //   $('#addNew').show();
-  // });
-  // $('.dataList').on( 'click', '.editData', function( event ) {
-  //   currentDataset = '';
-  //   $.each($('.editData'), function() {
-  //     $(this).show();
-  //   });
-  //   $.each($('.dataForm'), function() {
-  //     $(this).hide();
-  //     $(this).html('');
-  //   });
-  //   var datasetName = $(this).attr('datasetname');
-  //   console.log(datasetName);
-  //   currentDataset = datasetName;
-  //   $('.editData[datasetname='+currentDataset+']').hide();
-  //   $('#dataFormContainer_'+currentDataset).show();
-  //   $('#dataFormContainer_'+currentDataset).html(form);
-  //   $('.dataFormTitle').html('<h3>Editing '+currentDataset.replace(/_/g, " ")+'</h3>');
-  //   $('#saveData').show();
-  //   $('#deleteData').show();
-  //   //Get Values to Fill Fields, then fill fields
-  //   $("input[name='datasetName']").val(currentDataset.replace(/_/g, " "));
-  //   var datasetURL = $("div[datasetname='"+currentDataset+"']").attr('dataseturl');
-  //   $("input[name='datasetURL']").val(datasetURL);
-  //   var agency = $("div[datasetname='"+currentDataset+"']").attr('agency');
-  //   $("input[name='agency']").val(agency);
-  //   var otherTypeOfDataset = $("div[datasetname='"+currentDataset+"']").attr('otherTypeOfDataset');
-  //   if (otherTypeOfDataset != '') {
-  //     $(".singleDataset input:checkbox[value='Other']").prop("checked", true);
-  //     $("input[name='otherTypeOfDataset']").val(otherTypeOfDataset);
-  //   } else {
-  //     $(".singleDataset input:checkbox[value='Other']").prop("checked", false);
-  //     $("input[name='otherTypeOfDataset']").val();
-  //   }
-  //   var typeOfDataset = $("div[datasetname='"+currentDataset+"']").attr('typeOfDataset').split(",");
-  //   for (var i = 0; i < typeOfDataset.length; i++) {
-  //     $(".dataForm input:checkbox[value='" + typeOfDataset[i] + "']").prop("checked", true);
-  //   }
-  //   var rating = $("div[datasetname='"+currentDataset+"']").attr('rating');
-  //   $("input[name='rating']").val(rating);
-  //   var reason = $("div[datasetname='"+currentDataset+"']").attr('reason');
-  //   $("textarea[name='reason']").val(reason);
-  //   var datasetID = $("div[datasetname='"+currentDataset+"']").attr('datasetID');
-  //   $("input[name='datasetID']").val(datasetID);
-  // });
-  // $('.datasets').on( 'click', '#cancel', function( event ) {
-  //   $.each($('.dataForm'), function() {
-  //     $(this).hide();
-  //     $(this).html('');
-  //   });
-  //   $.each($('.editData'), function() {
-  //     $(this).show();
-  //   });
-  //   currentDataset = '';
-  // });
-  // $('.datasets').on( 'click', '#deleteData', function( event ) {
-  //   event.preventDefault();
-  //   var id_to_delete = $('#datasetID').val();
-  //   var data = $('#dataFormContainer_'+currentDataset).serializeArray();
-  //   $.ajax({
-  //     type: 'POST',
-  //     url: '/deleteData/' + id_to_delete,
-  //     data: data,
-  //     error: function(error) {
-  //         console.debug(JSON.stringify(error)); },
-  //     beforeSend: function(xhr, settings) {
-  //       $(event.target).attr('disabled', 'disabled'); },
-  //     success: function(success) {
-  //       $(event.target).removeAttr('disabled');
-  //       console.log(success);
-  //       $('.singleDataset[id='+currentDataset+']').remove();
-  //       $.each($('.dataForm'), function() {
-  //         $(this).hide();
-  //         $(this).html('');
-  //       });
-  //       $.each($('.editData'), function() {
-  //         $(this).show();
-  //       });
-  //       currentDataset = '';
-  //       $('#addDataset').show();
-  //     }
-  //   });
-  // });
-  //   $('.datasets').on( 'click', '#saveData', function( event ) {
-  //     event.preventDefault();
-  //     if($('#dataFormContainer_'+currentDataset).parsley('validate') ) {
-  //       $('.savingMessage').show();
-  //       var id = $('#datasetID').val();
-  //       var data = $('#dataFormContainer_'+currentDataset).serializeArray();
-  //       $.ajax({
-  //       type: 'POST',
-  //       url: '/editData/' + $('#datasetID').val(),
-  //             data: data,
-  //       error: function(error) {
-  //         console.debug(JSON.stringify(error));
-  //         $('.savingMessage').hide();
-  //         $('.errorMessage').fadeIn(); },
-  //       beforeSend: function(xhr, settings) {
-  //         $(event.target).attr('disabled', 'disabled'); },
-  //       success: function() {
-  //         $(event.target).removeAttr('disabled');
-  //         $('.savingMessage').hide();
-  //         $('.errorMessage').hide();
-  //         //----------------------CREATE A TON OF NEW STUFF--------------------------//
-  //         //get all the varbs:
-  //         var datasetName = '';
-  //         var datasetURL = '';
-  //         var agency = '';
-  //         var typeOfDataset = [];
-  //         var otherTypeOfDataset = '';
-  //         var rating = '';
-  //         var reason = '';
-  //         var datasetID = id;
-  //         for (var i=0; i < data.length; i++) {
-  //           if (data[i]['name'] == 'datasetName') { datasetName = data[i]['value'].replace(/ /g, "_"); }
-  //           if (data[i]['name'] == 'datasetURL') { datasetURL = data[i]['value']; }
-  //           if (data[i]['name'] == 'agency') { agency = data[i]['value']; }
-  //           if (data[i]['name'] == 'typeOfDataset') { typeOfDataset.push(data[i]['value']); }
-  //           if (data[i]['name'] == 'otherTypeOfDataset') { if ($.inArray('Other', typeOfDataset) > -1) { otherTypeOfDataset = data[i]['value'];} }
-  //           if (data[i]['name'] == 'rating') { rating = data[i]['value']; }
-  //           if (data[i]['name'] == 'reason') { reason = data[i]['value']; }
-  //         }
-  //         //new HTML
-  //         var newHTMLforDataset = '<p><span class="datasetName '+datasetName+'">'+datasetName.replace(/_/g, " ")+'</span>'+
-  //             '<input type="button" name="editData" datasetName="'+datasetName+'" class="m-button editData" id="editData" value="Edit">'+
-  //             '<span class="savedMessage_'+datasetName+'" style="display:none">Saved!</span>'+
-  //           '</p>'+
-  //           '<div datasetName="'+datasetName+'" '+
-  //             'datasetURL="'+datasetURL+'" '+
-  //             'agency="'+agency+'" '+
-  //             'typeOfDataset="'+typeOfDataset.toString()+'" '+
-  //             'otherTypeOfDataset="'+otherTypeOfDataset+'" '+
-  //             'rating="'+rating+'" '+
-  //             'reason="'+reason+'" '+
-  //             'datasetid="'+datasetID+'">'+
-  //           '</div>'+
-  //           '<form method="post" class="m-form dataForm" id="dataFormContainer_'+datasetName+'" style="display:none">'+
-  //           '</form>';
-  //         //Out with the Old, in with the new
-  //         $('.singleDataset[id='+currentDataset+']').html('');
-  //         $('.singleDataset[id='+currentDataset+']').append(newHTMLforDataset);
-  //         $('.singleDataset[id='+currentDataset+']').attr('id', datasetName);
-  //         $.each($('.editData'), function() { //show all edit buttons
-  //           $(this).show();
-  //         });
-  //         $.each($('.dataForm'), function() { // clear all forms
-  //           $(this).hide();
-  //           $(this).html('');
-  //         });
-  //         $('.savedMessage_'+datasetName).show().delay(5000).fadeOut();
-  //         $('#addDataset').show();
 
-  //       }
-  //     });
-  //     } else {
-  //       console.log('not valid');
-  //     }
-  //   });
-  // $('.newSingleDataset').on( 'click', '#addNew', function( event ) {
-  //   if ( $('#dataFormContainer').parsley('validate') ) {
-  //     console.log('valid');
-  //           $('.savingMessage').show();
-  //           var data = $('#dataFormContainer').serializeArray();
-  //           $.ajax({
-  //             type: 'POST',
-  //             url: '/addData/' + $('#companyID').val(),
-  //             data: data,
-  //             error: function(error) {
-  //         console.debug(JSON.stringify(error));
-  //         $('.savingMessage').hide();
-  //         $('.errorMessage').fadeIn(); },
-  //       beforeSend: function(xhr, settings) {
-  //         $(event.target).attr('disabled', 'disabled'); },
-  //       success: function(id) {
-  //         $(event.target).removeAttr('disabled');
-  //         $('.savingMessage').hide();
-  //         $('.errorMessage').hide();
-  //         $.each($('.dataForm'), function() { // clear all forms
-  //           $(this).hide();
-  //           $(this).html('');
-  //         });
-  //         $('#addDataset').show();
-  //         //----------------------CREATE A TON OF NEW STUFF--------------------------//
-  //         //get all the varbs:
-  //         var datasetName = '';
-  //         var datasetURL = '';
-  //         var agency = '';
-  //         var typeOfDataset = [];
-  //         var otherTypeOfDataset = '';
-  //         var rating = '';
-  //         var reason = '';
-  //         var datasetID = id;
-  //         for (var i=0; i < data.length; i++) {
-  //           if (data[i]['name'] == 'datasetName') { datasetName = data[i]['value'].replace(/ /g, "_"); }
-  //           if (data[i]['name'] == 'datasetURL') { datasetURL = data[i]['value']; }
-  //           if (data[i]['name'] == 'agency') { agency = data[i]['value']; }
-  //           if (data[i]['name'] == 'typeOfDataset') { typeOfDataset.push(data[i]['value']); }
-  //           if (data[i]['name'] == 'otherTypeOfDataset') { if ($.inArray('Other', typeOfDataset) > -1) { otherTypeOfDataset = data[i]['value'];} }
-  //           if (data[i]['name'] == 'rating') { rating = data[i]['value']; }
-  //           if (data[i]['name'] == 'reason') { reason = data[i]['value']; }
-  //         }
-  //         //new HTML
-  //         var newHTMLforNewDataset = '<div id="'+datasetName+'" class="singleDataset">'+
-  //           '<p><span class="datasetName '+datasetName+'">'+datasetName.replace(/_/g, " ")+'</span>'+
-  //             '<input type="button" name="editData" datasetName="'+datasetName+'" class="m-button editData" id="editData" value="Edit">'+
-  //             '<span class="savedMessage_'+datasetName+'" style="display:none">Saved!</span>'+
-  //           '</p>'+
-  //           '<div datasetName="'+datasetName+'" '+
-  //             'datasetURL="'+datasetURL+'" '+
-  //             'agency="'+agency+'" '+
-  //             'typeOfDataset="'+typeOfDataset.toString()+'" '+
-  //             'otherTypeOfDataset="'+otherTypeOfDataset+'" '+
-  //             'rating="'+rating+'" '+
-  //             'reason="'+reason+'" '+
-  //             'datasetid="'+datasetID+'">'+
-  //           '</div>'+
-  //           '<form method="post" class="m-form dataForm" id="dataFormContainer_'+datasetName+'" style="display:none">'+
-  //           '</form>'+
-  //         '</div>';
-  //         $(newHTMLforNewDataset).appendTo('.dataList');
-  //         $('.savedMessage_'+datasetName).show().delay(5000).fadeOut();
-  //       }
-  //     });
-  //       } else {
-  //         console.log("not valid");
-  //       }
-  //   });
   function clearForm() {
     $('.dataForm')[0].reset();
     $('.dataForm input:checkbox').removeAttr('checked');
@@ -820,13 +547,355 @@ $(document).ready(function() {
     return pass;
   }
   //----------------------------------AUTCOMPLETE SEARCH BAR--------------------------------------
+  var agencies= [
+    {"label": "Alabama (AL)", "a":"Alabama", "aa":"AL", "s":"", "sa": ""},
+    {"label": "Alaska (AK)", "a":"Alaska", "aa":"AK", "s":"", "sa": ""},
+    {"label": "Albuquerque (ABQ)", "a":"Albuquerque", "aa":"ABQ", "s":"", "sa": ""},
+    {"label": "Ann Arbor (AA)", "a":"Ann Arbor", "aa":"AA", "s":"", "sa": ""},
+    {"label": "Arctic Landscape Conservation Cooperative (ALCC)", "a":"Arctic Landscape Conservation Cooperative", "aa":"ALCC", "s":"", "sa": ""},
+    {"label": "Arizona (AZ)", "a":"Arizona", "aa":"AZ", "s":"", "sa": ""},
+    {"label": "Arizona (AZ) - Arizona Geological Survey (AZGS)", "a":"Arizona", "aa":"AZ", "s":"Arizona Geological Survey", "sa": "AZGS"},
+    {"label": "Arkansas (AR)", "a":"Arkansas", "aa":"AR", "s":"", "sa": ""},
+    {"label": "Arvada", "a":"Arvada", "aa":"", "s":"", "sa": ""},
+    {"label": "Asheville", "a":"Asheville", "aa":"", "s":"", "sa": ""},
+    {"label": "Atlanta (ATL)", "a":"Atlanta", "aa":"ATL", "s":"", "sa": ""},
+    {"label": "Austin (AUS)", "a":"Austin", "aa":"AUS", "s":"", "sa": ""},
+    {"label": "Baltimore (BAL)", "a":"Baltimore", "aa":"BAL", "s":"", "sa": ""},
+    {"label": "Belleville (BVW)", "a":"Belleville", "aa":"BVW", "s":"", "sa": ""},
+    {"label": "Boston (BOS)", "a":"Boston", "aa":"BOS", "s":"", "sa": ""},
+    {"label": "Boston (BOS) - Boston Enterprise GIS", "a":"Boston", "aa":"BOS", "s":"Boston Enterprise GIS", "sa": ""},
+    {"label": "Broadcasting Board of Governors (BBG)", "a":"Broadcasting Board of Governors", "aa":"BBG", "s":"", "sa": ""},
+    {"label": "California (CA)", "a":"California", "aa":"CA", "s":"", "sa": ""},
+    {"label": "California (CA) - California Environmental Health Tracking Program (CEHTP)", "a":"California", "aa":"CA", "s":"California Environmental Health Tracking Program", "sa": "CEHTP"},
+    {"label": "California (CA) - California Department of Resources (CDR)", "a":"California", "aa":"CA", "s":"California Department of Resources", "sa": "CDR"},
+    {"label": "Champaign", "a":"Champaign", "aa":"", "s":"", "sa": ""},
+    {"label": "Chicago (CHI)", "a":"Chicago", "aa":"CHI", "s":"", "sa": ""},
+    {"label": "City of Orem", "a":"City of Orem", "aa":"", "s":"", "sa": ""},
+    {"label": "Colorado (CO)", "a":"Colorado", "aa":"CO", "s":"", "sa": ""},
+    {"label": "Colorado (CO) - Denver Regional Council (DRCOG)", "a":"Colorado", "aa":"CO", "s":"Denver Regional Council", "sa": "DRCOG"},
+    {"label": "Columbia University (CU) - Center for International Earth Science Information Network (CIESIN)", "a":"Columbia University", "aa":"CU", "s":"Center for International Earth Science Information Network", "sa": "CIESIN"},
+    {"label": "Commodity Futures Trading Commission (CFTC)", "a":"Commodity Futures Trading Commission", "aa":"CFTC", "s":"", "sa": ""},
+    {"label": "Connecticut (CT)", "a":"Connecticut", "aa":"CT", "s":"", "sa": ""},
+    {"label": "Consumer Financial Protection Bureau (CFPB)", "a":"Consumer Financial Protection Bureau", "aa":"CFPB", "s":"", "sa": ""},
+    {"label": "Cook County (CC)", "a":"Cook County", "aa":"CC", "s":"", "sa": ""},
+    {"label": "Cornell University (CU)", "a":"Cornell University", "aa":"CU", "s":"", "sa": ""},
+    {"label": "Corporation for National and Community Service (CNCS)", "a":"Corporation for National and Community Service", "aa":"CNCS", "s":"", "sa": ""},
+    {"label": "Court Services and Offender Supervision Agency (CSOSA)", "a":"Court Services and Offender Supervision Agency", "aa":"CSOSA", "s":"", "sa": ""},
+    {"label": "Delaware (DE)", "a":"Delaware", "aa":"DE", "s":"", "sa": ""},
+    {"label": "Denver (DV)", "a":"Denver", "aa":"DV", "s":"", "sa": ""},
+    {"label": "Department of Agriculture (USDA) - Agricultural Marketing Service (AMS)", "a":"Department of Agriculture", "aa":"USDA", "s":"Agricultural Marketing Service", "sa": "AMS"},
+    {"label": "Department of Agriculture (USDA) - Agricultural Research Service (ARS)", "a":"Department of Agriculture", "aa":"USDA", "s":"Agricultural Research Service", "sa": "ARS"},
+    {"label": "Department of Agriculture (USDA) - Animal and Plant Health Inspection Service (APHIS)", "a":"Department of Agriculture", "aa":"USDA", "s":"Animal and Plant Health Inspection Service", "sa": "APHIS"},
+    {"label": "Department of Agriculture (USDA)", "a":"Department of Agriculture", "aa":"USDA", "s":"", "sa": ""},
+    {"label": "Department of Agriculture (USDA) - Departmental Management (DM)", "a":"Department of Agriculture", "aa":"USDA", "s":"Departmental Management", "sa": "DM"},
+    {"label": "Department of Agriculture (USDA) - Economic Research Service (ERS)", "a":"Department of Agriculture", "aa":"USDA", "s":"Economic Research Service", "sa": "ERS"},
+    {"label": "Department of Agriculture (USDA) - Farm Service Agency (FSA)", "a":"Department of Agriculture", "aa":"USDA", "s":"Farm Service Agency", "sa": "FSA"},
+    {"label": "Department of Agriculture (USDA) - Food and Nutrition Service (FNS)", "a":"Department of Agriculture", "aa":"USDA", "s":"Food and Nutrition Service", "sa": "FNS"},
+    {"label": "Department of Agriculture (USDA) - Food Safety and Inspection Service (FSIS)", "a":"Department of Agriculture", "aa":"USDA", "s":"Food Safety and Inspection Service", "sa": "FSIS"},
+    {"label": "Department of Agriculture (USDA) - Foreign Agricultural Service (FAS)", "a":"Department of Agriculture", "aa":"USDA", "s":"Foreign Agricultural Service", "sa": "FAS"},
+    {"label": "Department of Agriculture (USDA) - National Agricultural Statistics Service (NASS)", "a":"Department of Agriculture", "aa":"USDA", "s":"National Agricultural Statistics Service", "sa": "NASS"},
+    {"label": "Department of Agriculture (USDA) - National Appeals Division (NAD)", "a":"Department of Agriculture", "aa":"USDA", "s":"National Appeals Division", "sa": "NAD"},
+    {"label": "Department of Agriculture (USDA) - National Institute of Food and Agriculture (NIFA)", "a":"Department of Agriculture", "aa":"USDA", "s":"National Institute of Food and Agriculture", "sa": "NIFA"},
+    {"label": "Department of Agriculture (USDA) - Natural Resources Conservation Service (NRCS)", "a":"Department of Agriculture", "aa":"USDA", "s":"Natural Resources Conservation Service", "sa": "NRCS"},
+    {"label": "Department of Agriculture (USDA) - Office of the Chief Economist (OCE)", "a":"Department of Agriculture", "aa":"USDA", "s":"Office of the Chief Economist", "sa": "OCE"},
+    {"label": "Department of Agriculture (USDA) - Rural Development (RD)", "a":"Department of Agriculture", "aa":"USDA", "s":"Rural Development", "sa": "RD"},
+    {"label": "Department of Agriculture (USDA) - US Forest Service (FS)", "a":"Department of Agriculture", "aa":"USDA", "s":"US Forest Service", "sa": "FS"},
+    {"label": "Department of Commerce (USDC)", "a":"Department of Commerce", "aa":"USDC", "s":"", "sa": ""},
+    {"label": "Department of Commerce (USDC) - Bureau of Economic Analysis (BEA)", "a":"Department of Commerce", "aa":"USDC", "s":"Bureau of Economic Analysis", "sa": "BEA"},
+    {"label": "Department of Commerce (USDC) - Bureau of Industry and Security (BIS)", "a":"Department of Commerce", "aa":"USDC", "s":"Bureau of Industry and Security", "sa": "BIS"},
+    {"label": "Department of Commerce (USDC) - US Patent and Trademark Office (USPTO)", "a":"Department of Commerce", "aa":"USDC", "s":"US Patent and Trademark Office", "sa": "USPTO"},
+    {"label": "Department of Commerce (USDC) - International Trade Administration (ITA)", "a":"Department of Commerce", "aa":"USDC", "s":"International Trade Administration", "sa": "ITA"},
+    {"label": "Department of Commerce (USDC) - National Institute of Standards and Technology (NIST)", "a":"Department of Commerce", "aa":"USDC", "s":"National Institute of Standards and Technology", "sa": "NIST"},
+    {"label": "Department of Commerce (USDC) - National Oceanic and Atmospheric Administration (NOAA)", "a":"Department of Commerce", "aa":"USDC", "s":"National Oceanic and Atmospheric Administration", "sa": "NOAA"},
+    {"label": "Department of Commerce (USDC) - National Technical Information Service (NTIS)", "a":"Department of Commerce", "aa":"USDC", "s":"National Technical Information Service", "sa": "NTIS"},
+    {"label": "Department of Commerce (USDC) - National Telecommunication and Information Administration (NTIA)", "a":"Department of Commerce", "aa":"USDC", "s":"National Telecommunication and Information Administration", "sa": "NTIA"},
+    {"label": "Department of Commerce (USDC) - National Weather Service (NWS)", "a":"Department of Commerce", "aa":"USDC", "s":"National Weather Service", "sa": "NWS"},
+    {"label": "Department of Commerce (USDC) - US Census Bureau (Census)", "a":"Department of Commerce", "aa":"USDC", "s":"US Census Bureau", "sa": "Census"},
+    {"label": "Department of Defense (DOD) - Army Corps of Engineers (ACE)", "a":"Department of Defense", "aa":"DOD", "s":"Army Corps of Engineers", "sa": "ACE"},
+    {"label": "Department of Defense (DOD) - Acquisition Technology and Logistics (AT&L)", "a":"Department of Defense", "aa":"DOD", "s":"Acquisition Technology and Logistics", "sa": "AT&L"},
+    {"label": "Department of Defense (DOD)", "a":"Department of Defense", "aa":"DOD", "s":"", "sa": ""},
+    {"label": "Department of Defense (DOD) - National Geospatial Intelligence Agency (NGA)", "a":"Department of Defense", "aa":"DOD", "s":"National Geospatial Intelligence Agency", "sa": "NGA"},
+    {"label": "Department of Defense (DOD) - Defense Logistics Agency (DLA)", "a":"Department of Defense", "aa":"DOD", "s":"Defense Logistics Agency", "sa": "DLA"},
+    {"label": "Department of Defense (DOD) - Defense Technical Information Center (DTIC)", "a":"Department of Defense", "aa":"DOD", "s":"Defense Technical Information Center", "sa": "DTIC"},
+    {"label": "Department of Defense (DOD) - Department of the Army (Army)", "a":"Department of Defense", "aa":"DOD", "s":"Department of the Army", "sa": "Army"},
+    {"label": "Department of Defense (DOD) - Federal Voting Assistance Program (FVAP)", "a":"Department of Defense", "aa":"DOD", "s":"Federal Voting Assistance Program", "sa": "FVAP"},
+    {"label": "Department of Defense (DOD) - Defense Advanced Research Projects Agency (DARPA)", "a":"Department of Defense", "aa":"DOD", "s":"Defense Advanced Research Projects Agency", "sa": "DARPA"},
+    {"label": "Department of Education (ED / DOED)", "a":"Department of Education", "aa":"ED / DOED", "s":"", "sa": ""},
+    {"label": "Department of Education (ED / DOED) - Federal Student Aid (FAFSA)", "a":"Department of Education", "aa":"ED / DOED", "s":"Federal Student Aid", "sa": "FAFSA"},
+    {"label": "Department of Education (ED / DOED) - Institute of Education Sciences (IES)", "a":"Department of Education", "aa":"ED / DOED", "s":"Institute of Education Sciences", "sa": "IES"},
+    {"label": "Department of Education (ED / DOED) - National Center for Education Statistics (NCES)", "a":"Department of Education", "aa":"ED / DOED", "s":"National Center for Education Statistics", "sa": "NCES"},
+    {"label": "Department of Education (ED / DOED) - Office for Civil Rights (OCR)", "a":"Department of Education", "aa":"ED / DOED", "s":"Office for Civil Rights", "sa": "OCR"},
+    {"label": "Department of Education (ED / DOED) - Office of Hearings and Appeals (OHA)", "a":"Department of Education", "aa":"ED / DOED", "s":"Office of Hearings and Appeals", "sa": "OHA"},
+    {"label": "Department of Education (ED / DOED) - Office of Innovation and Improvement (OII)", "a":"Department of Education", "aa":"ED / DOED", "s":"Office of Innovation and Improvement", "sa": "OII"},
+    {"label": "Department of Education (ED / DOED) - Office of Postsecondary Education (OPE)", "a":"Department of Education", "aa":"ED / DOED", "s":"Office of Postsecondary Education", "sa": "OPE"},
+    {"label": "Department of Education (ED / DOED) - Office of Special Education and Rehabilitative Services (OSERS)", "a":"Department of Education", "aa":"ED / DOED", "s":"Office of Special Education and Rehabilitative Services", "sa": "OSERS"},
+    {"label": "Department of Education (ED / DOED) - Office of Vocational and Adult Education (OVAE)", "a":"Department of Education", "aa":"ED / DOED", "s":"Office of Vocational and Adult Education", "sa": "OVAE"},
+    {"label": "Department of Energy (DOE)", "a":"Department of Energy", "aa":"DOE", "s":"", "sa": ""},
+    {"label": "Department of Energy (DOE) - Energy Information Administration (EIA)", "a":"Department of Energy", "aa":"DOE", "s":"Energy Information Administration", "sa": "EIA"},
+    {"label": "Department of Energy (DOE) - Office of Scientific and Technical Information (OSTI)", "a":"Department of Energy", "aa":"DOE", "s":"Office of Scientific and Technical Information", "sa": "OSTI"},
+    {"label": "Department of Health and Human Services (HHS) - Centers for Medicare and Medicaid Services (CMS)", "a":"Department of Health and Human Services", "aa":"HHS", "s":"Centers for Medicare and Medicaid Services", "sa": "CMS"},
+    {"label": "Department of Health and Human Services (HHS)", "a":"Department of Health and Human Services", "aa":"HHS", "s":"", "sa": ""},
+    {"label": "Department of Health and Human Services (HHS) - National Institutes of Health (NIH)", "a":"Department of Health and Human Services", "aa":"HHS", "s":"National Institutes of Health", "sa": "NIH"},
+    {"label": "Department of Health and Human Services (HHS) - Substance Abuse and Mental Health Services Administration (SAMHSA)", "a":"Department of Health and Human Services", "aa":"HHS", "s":"Substance Abuse and Mental Health Services Administration", "sa": "SAMHSA"},
+    {"label": "Department of Homeland Security (DHS) - U.S. Coast Guard", "a":"Department of Homeland Security", "aa":"DHS", "s":"U.S. Coast Guard", "sa": ""},
+    {"label": "Department of Homeland Security (DHS)", "a":"Department of Homeland Security", "aa":"DHS", "s":"", "sa": ""},
+    {"label": "Department of Homeland Security (DHS) - Federal Emergency Management Agency (FEMA)", "a":"Department of Homeland Security", "aa":"DHS", "s":"Federal Emergency Management Agency", "sa": "FEMA"},
+    {"label": "Department of Homeland Security (DHS) - United States Coast Guard (USCG)", "a":"Department of Homeland Security", "aa":"DHS", "s":"United States Coast Guard", "sa": "USCG"},
+    {"label": "Department of Homeland Security (DHS) - Office of Health Affairs (OHA)", "a":"Department of Homeland Security", "aa":"DHS", "s":"Office of Health Affairs", "sa": "OHA"},
+    {"label": "Department of Homeland Security (DHS) - Office of Immigration Statistics (OIS)", "a":"Department of Homeland Security", "aa":"DHS", "s":"Office of Immigration Statistics", "sa": "OIS"},
+    {"label": "Department of Homeland Security (DHS) - U.S. Citizenship and Immigration Services (USCIS)", "a":"Department of Homeland Security", "aa":"DHS", "s":"U.S. Citizenship and Immigration Services", "sa": "USCIS"},
+    {"label": "Department of Housing and Urban Development (HUD) - Office of Housing", "a":"Department of Housing and Urban Development", "aa":"HUD", "s":"Office of Housing", "sa": ""},
+    {"label": "Department of Justice (DOJ)", "a":"Department of Justice", "aa":"DOJ", "s":"", "sa": ""},
+    {"label": "Department of Justice (DOJ) - Antitrust Division (Antitrust)", "a":"Department of Justice", "aa":"DOJ", "s":"Antitrust Division", "sa": "Antitrust"},
+    {"label": "Department of Justice (DOJ) - Bureau of Justice Statistics (BJS)", "a":"Department of Justice", "aa":"DOJ", "s":"Bureau of Justice Statistics", "sa": "BJS"},
+    {"label": "Department of Justice (DOJ) - Civil Division (CD)", "a":"Department of Justice", "aa":"DOJ", "s":"Civil Division", "sa": "CD"},
+    {"label": "Department of Justice (DOJ) - Civil Rights Division (CRD)", "a":"Department of Justice", "aa":"DOJ", "s":"Civil Rights Division", "sa": "CRD"},
+    {"label": "Department of Justice (DOJ) - Federal Bureau of Investigation (FBI)", "a":"Department of Justice", "aa":"DOJ", "s":"Federal Bureau of Investigation", "sa": "FBI"},
+    {"label": "Department of Justice (DOJ) - US Trustee Program (USTP)", "a":"Department of Justice", "aa":"DOJ", "s":"US Trustee Program", "sa": "USTP"},
+    {"label": "Department of Justice (DOJ) - Office of Legal Counsel (OLC)", "a":"Department of Justice", "aa":"DOJ", "s":"Office of Legal Counsel", "sa": "OLC"},
+    {"label": "Department of Justice (DOJ) - US Attorney's Office (USAO)", "a":"Department of Justice", "aa":"DOJ", "s":"US Attorney's Office", "sa": "USAO"},
+    {"label": "Department of Labor (DOL) - Benefits Review Board (BRB)", "a":"Department of Labor", "aa":"DOL", "s":"Benefits Review Board", "sa": "BRB"},
+    {"label": "Department of Labor (DOL) - Bureau of Labor Statistics (BLS)", "a":"Department of Labor", "aa":"DOL", "s":"Bureau of Labor Statistics", "sa": "BLS"},
+    {"label": "Department of Labor (DOL) - Employee Benefits Security Administration (EBSA)", "a":"Department of Labor", "aa":"DOL", "s":"Employee Benefits Security Administration", "sa": "EBSA"},
+    {"label": "Department of Labor (DOL) - Employees' Compensation Appeals Board (ECAB)", "a":"Department of Labor", "aa":"DOL", "s":"Employees' Compensation Appeals Board", "sa": "ECAB"},
+    {"label": "Department of Labor (DOL) - Employment and Training Administration (ETA)", "a":"Department of Labor", "aa":"DOL", "s":"Employment and Training Administration", "sa": "ETA"},
+    {"label": "Department of Labor (DOL) - Mine Safety and Health Administration (MSHA)", "a":"Department of Labor", "aa":"DOL", "s":"Mine Safety and Health Administration", "sa": "MSHA"},
+    {"label": "Department of Labor (DOL)", "a":"Department of Labor", "aa":"DOL", "s":"", "sa": ""},
+    {"label": "Department of Labor (DOL) - Occupational Safety and Health Administration (OSHA)", "a":"Department of Labor", "aa":"DOL", "s":"Occupational Safety and Health Administration", "sa": "OSHA"},
+    {"label": "Department of Labor (DOL) - Office of Administrative Law Judges (OALJ)", "a":"Department of Labor", "aa":"DOL", "s":"Office of Administrative Law Judges", "sa": "OALJ"},
+    {"label": "Department of Labor (DOL) - Wage and Hour Division (WHD)", "a":"Department of Labor", "aa":"DOL", "s":"Wage and Hour Division", "sa": "WHD"},
+    {"label": "Department of Labor (DOL) - Office of Job Corps (OJC)", "a":"Department of Labor", "aa":"DOL", "s":"Office of Job Corps", "sa": "OJC"},
+    {"label": "Department of Labor (DOL) - Office of the Assistant Secretary for Policy (OASP)", "a":"Department of Labor", "aa":"DOL", "s":"Office of the Assistant Secretary for Policy", "sa": "OASP"},
+    {"label": "Department of State (DOS)", "a":"Department of State", "aa":"DOS", "s":"", "sa": ""},
+    {"label": "Department of State (DOS) - Organisation for Economic Cooperation and Development (OECD)", "a":"Department of State", "aa":"DOS", "s":"Organisation for Economic Cooperation and Development", "sa": "OECD"},
+    {"label": "Department of the Interior (DOI)", "a":"Department of the Interior", "aa":"DOI", "s":"", "sa": ""},
+    {"label": "Department of the Interior (DOI) - Bureau of Indian Education (BIE)", "a":"Department of the Interior", "aa":"DOI", "s":"Bureau of Indian Education", "sa": "BIE"},
+    {"label": "Department of the Interior (DOI) - Bureau of Land Management (BLM)", "a":"Department of the Interior", "aa":"DOI", "s":"Bureau of Land Management", "sa": "BLM"},
+    {"label": "Department of the Interior (DOI) - Bureau of Ocean Energy Management (BOEM)", "a":"Department of the Interior", "aa":"DOI", "s":"Bureau of Ocean Energy Management", "sa": "BOEM"},
+    {"label": "Department of the Interior (DOI) - National Park Service (NPS)", "a":"Department of the Interior", "aa":"DOI", "s":"National Park Service", "sa": "NPS"},
+    {"label": "Department of the Interior (DOI) - Office of Hearings and Appeals (OHA)", "a":"Department of the Interior", "aa":"DOI", "s":"Office of Hearings and Appeals", "sa": "OHA"},
+    {"label": "Department of the Interior (DOI) - Federal Geographic Data Committee (FGDC)", "a":"Department of the Interior", "aa":"DOI", "s":"Federal Geographic Data Committee", "sa": "FGDC"},
+    {"label": "Department of the Interior (DOI) - U.S. Geological Survey (USGS)", "a":"Department of the Interior", "aa":"DOI", "s":"U.S. Geological Survey", "sa": "USGS"},
+    {"label": "Department of the Interior (DOI) - Office of the Solicitor (SOL)", "a":"Department of the Interior", "aa":"DOI", "s":"Office of the Solicitor", "sa": "SOL"},
+    {"label": "Department of the Interior (DOI) - US Bureau of Reclamation (USBR)", "a":"Department of the Interior", "aa":"DOI", "s":"US Bureau of Reclamation", "sa": "USBR"},
+    {"label": "Department of the Interior (DOI) - US Fish and Wildlife Service (FWS)", "a":"Department of the Interior", "aa":"DOI", "s":"US Fish and Wildlife Service", "sa": "FWS"},
+    {"label": "Department of the Treasury", "a":"Department of the Treasury", "aa":"", "s":"", "sa": ""},
+    {"label": "Department of the Treasury - Bureau of Engraving and Printing (BEP)", "a":"Department of the Treasury", "aa":"", "s":"Bureau of Engraving and Printing", "sa": "BEP"},
+    {"label": "Department of the Treasury - Bureau of the Public Debt (BPD)", "a":"Department of the Treasury", "aa":"", "s":"Bureau of the Public Debt", "sa": "BPD"},
+    {"label": "Department of the Treasury - Departmental Offices (DO)", "a":"Department of the Treasury", "aa":"", "s":"Departmental Offices", "sa": "DO"},
+    {"label": "Department of the Treasury - Financial Crimes Enforcement Network (FINCEN)", "a":"Department of the Treasury", "aa":"", "s":"Financial Crimes Enforcement Network", "sa": "FINCEN"},
+    {"label": "Department of the Treasury - Financial Management Service (FMS)", "a":"Department of the Treasury", "aa":"", "s":"Financial Management Service", "sa": "FMS"},
+    {"label": "Department of the Treasury - Internal Revenue Service (IRS)", "a":"Department of the Treasury", "aa":"", "s":"Internal Revenue Service", "sa": "IRS"},
+    {"label": "Department of the Treasury - United States Mint", "a":"Department of the Treasury", "aa":"", "s":"United States Mint", "sa": ""},
+    {"label": "Department of Transportation (DOT) - National Highway Traffic Safety Administration (NHTSA)", "a":"Department of Transportation", "aa":"DOT", "s":"National Highway Traffic Safety Administration", "sa": "NHTSA"},
+    {"label": "Department of Transportation (DOT)", "a":"Department of Transportation", "aa":"DOT", "s":"", "sa": ""},
+    {"label": "Department of Transportation (DOT) - Bureau of Transportation Statistics (BTS)", "a":"Department of Transportation", "aa":"DOT", "s":"Bureau of Transportation Statistics", "sa": "BTS"},
+    {"label": "Department of Transportation (DOT) - Federal Aviation Administration (FAA)", "a":"Department of Transportation", "aa":"DOT", "s":"Federal Aviation Administration", "sa": "FAA"},
+    {"label": "Department of Transportation (DOT) - Federal Highway Administration (FHWA)", "a":"Department of Transportation", "aa":"DOT", "s":"Federal Highway Administration", "sa": "FHWA"},
+    {"label": "Department of Transportation (DOT) - Federal Motor Carrier Safety Administration (FMCSA)", "a":"Department of Transportation", "aa":"DOT", "s":"Federal Motor Carrier Safety Administration", "sa": "FMCSA"},
+    {"label": "Department of Transportation (DOT) - Federal Railroad Administration (FRA)", "a":"Department of Transportation", "aa":"DOT", "s":"Federal Railroad Administration", "sa": "FRA"},
+    {"label": "Department of Transportation (DOT) - Federal Transit Administration (FTA)", "a":"Department of Transportation", "aa":"DOT", "s":"Federal Transit Administration", "sa": "FTA"},
+    {"label": "Department of Transportation (DOT) - Maritime Administration (MARAD)", "a":"Department of Transportation", "aa":"DOT", "s":"Maritime Administration", "sa": "MARAD"},
+    {"label": "Department of Transportation (DOT) - National Highway Traffice Safety Administration (NHTSA)", "a":"Department of Transportation", "aa":"DOT", "s":"National Highway Traffice Safety Administration", "sa": "NHTSA"},
+    {"label": "Department of Transportation (DOT) - Office of the Secretary of Transportation (OST)", "a":"Department of Transportation", "aa":"DOT", "s":"Office of the Secretary of Transportation", "sa": "OST"},
+    {"label": "Department of Transportation (DOT) - Pipeline and Hazardous Materials Safety Administration (PHMSA)", "a":"Department of Transportation", "aa":"DOT", "s":"Pipeline and Hazardous Materials Safety Administration", "sa": "PHMSA"},
+    {"label": "Department of Transportation (DOT) - Research and Innovative Technology Administration (RITA)", "a":"Department of Transportation", "aa":"DOT", "s":"Research and Innovative Technology Administration", "sa": "RITA"},
+    {"label": "Department of Transportation (DOT) - Saint Lawrence Seaway Development Corporation (SLSDC)", "a":"Department of Transportation", "aa":"DOT", "s":"Saint Lawrence Seaway Development Corporation", "sa": "SLSDC"},
+    {"label": "Department of Transportation (DOT) - Surface Transportation Board (STB)", "a":"Department of Transportation", "aa":"DOT", "s":"Surface Transportation Board", "sa": "STB"},
+    {"label": "Department of Veterans Affairs (VA) - National Cemetery Administration (NCA)", "a":"Department of Veterans Affairs", "aa":"VA", "s":"National Cemetery Administration", "sa": "NCA"},
+    {"label": "Department of Veterans Affairs (VA)", "a":"Department of Veterans Affairs", "aa":"VA", "s":"", "sa": ""},
+    {"label": "Department of Veterans Affairs (VA) - Veterans Benefits Administration (VBA)", "a":"Department of Veterans Affairs", "aa":"VA", "s":"Veterans Benefits Administration", "sa": "VBA"},
+    {"label": "Department of Veterans Affairs (VA) - Veterans Health Administration (VHA)", "a":"Department of Veterans Affairs", "aa":"VA", "s":"Veterans Health Administration", "sa": "VHA"},
+    {"label": "Department of Veterans Affairs (VA) - Environmental Protection Agency (EPA)", "a":"Department of Veterans Affairs", "aa":"VA", "s":"Environmental Protection Agency", "sa": "EPA"},
+    {"label": "District of Columbia (DC)", "a":"District of Columbia", "aa":"DC", "s":"", "sa": ""},
+    {"label": "Election Assistance Commission (EAC)", "a":"Election Assistance Commission", "aa":"EAC", "s":"", "sa": ""},
+    {"label": "Executive Office of the President (EOP) - Networking and Information Technology Research and Development (NITRD)", "a":"Executive Office of the President", "aa":"EOP", "s":"Networking and Information Technology Research and Development", "sa": "NITRD"},
+    {"label": "Executive Office of the President (EOP) - Council on Environmental Quality (CEQ)", "a":"Executive Office of the President", "aa":"EOP", "s":"Council on Environmental Quality", "sa": "CEQ"},
+    {"label": "Executive Office of the President (EOP) - Office of Management and Budget (OMB)", "a":"Executive Office of the President", "aa":"EOP", "s":"Office of Management and Budget", "sa": "OMB"},
+    {"label": "Executive Office of the President (EOP) - Office of National Drug Control Policy (ONDCP)", "a":"Executive Office of the President", "aa":"EOP", "s":"Office of National Drug Control Policy", "sa": "ONDCP"},
+    {"label": "Executive Office of the President (EOP) - Office of Science and Technology Policy (OSTP)", "a":"Executive Office of the President", "aa":"EOP", "s":"Office of Science and Technology Policy", "sa": "OSTP"},
+    {"label": "Executive Office of the President (EOP)", "a":"Executive Office of the President", "aa":"EOP", "s":"", "sa": ""},
+    {"label": "Executive Office of the President (EOP) - US Trade Representative (USTR)", "a":"Executive Office of the President", "aa":"EOP", "s":"US Trade Representative", "sa": "USTR"},
+    {"label": "Executive Office of the President (EOP) - White House (WH)", "a":"Executive Office of the President", "aa":"EOP", "s":"White House", "sa": "WH"},
+    {"label": "Export-Import Bank of the US (EX-IM)", "a":"Export-Import Bank of the US", "aa":"EX-IM", "s":"", "sa": ""},
+    {"label": "Federal Communications Commission (FCC)", "a":"Federal Communications Commission", "aa":"FCC", "s":"", "sa": ""},
+    {"label": "Federal Deposit Insurance Corporation (FDIC)", "a":"Federal Deposit Insurance Corporation", "aa":"FDIC", "s":"", "sa": ""},
+    {"label": "Federal Election Commission (FED)", "a":"Federal Election Commission", "aa":"FED", "s":"", "sa": ""},
+    {"label": "Federal Geographic Data Committee (FGDC)", "a":"Federal Geographic Data Committee", "aa":"FGDC", "s":"", "sa": ""},
+    {"label": "Federal Government - Department of Housing and Urban Development (HUD)", "a":"Federal Government", "aa":"", "s":"Department of Housing and Urban Development", "sa": "HUD"},
+    {"label": "Federal Housing Finance Agency (FHFA)", "a":"Federal Housing Finance Agency", "aa":"FHFA", "s":"", "sa": ""},
+    {"label": "Federal Reserve Board (FED)", "a":"Federal Reserve Board", "aa":"FED", "s":"", "sa": ""},
+    {"label": "Florida (FL)", "a":"Florida", "aa":"FL", "s":"", "sa": ""},
+    {"label": "General Services Administration (GSA)", "a":"General Services Administration", "aa":"GSA", "s":"", "sa": ""},
+    {"label": "General Services Administration (GSA) - Federal Acquisition Service (FAS)", "a":"General Services Administration", "aa":"GSA", "s":"Federal Acquisition Service", "sa": "FAS"},
+    {"label": "General Services Administration (GSA) - Office of Citizen Services and Innovative Technologies (OCSIT)", "a":"General Services Administration", "aa":"GSA", "s":"Office of Citizen Services and Innovative Technologies", "sa": "OCSIT"},
+    {"label": "General Services Administration (GSA) - Office of Governmentwide Policy (OGP)", "a":"General Services Administration", "aa":"GSA", "s":"Office of Governmentwide Policy", "sa": "OGP"},
+    {"label": "General Services Administration (GSA) - Office of Performance Improvement (OPI)", "a":"General Services Administration", "aa":"GSA", "s":"Office of Performance Improvement", "sa": "OPI"},
+    {"label": "General Services Administration (GSA) - Office of the Chief Financial Officer (OCFO)", "a":"General Services Administration", "aa":"GSA", "s":"Office of the Chief Financial Officer", "sa": "OCFO"},
+    {"label": "General Services Administration (GSA) - Office of the Chief People Officer (OCPO)", "a":"General Services Administration", "aa":"GSA", "s":"Office of the Chief People Officer", "sa": "OCPO"},
+    {"label": "General Services Administration (GSA) - Public Buildings Service (PBS)", "a":"General Services Administration", "aa":"GSA", "s":"Public Buildings Service", "sa": "PBS"},
+    {"label": "Georgia (GA)", "a":"Georgia", "aa":"GA", "s":"", "sa": ""},
+    {"label": "Gilpin County (GC)", "a":"Gilpin County", "aa":"GC", "s":"", "sa": ""},
+    {"label": "Great Lakes Commission (GLC)", "a":"Great Lakes Commission", "aa":"GLC", "s":"", "sa": ""},
+    {"label": "Hawaii (HI)", "a":"Hawaii", "aa":"HI", "s":"", "sa": ""},
+    {"label": "Hawaii (HI) - Hawaii GIS", "a":"Hawaii", "aa":"HI", "s":"Hawaii GIS", "sa": ""},
+    {"label": "Honolulu (HNL)", "a":"Honolulu", "aa":"HNL", "s":"", "sa": ""},
+    {"label": "Houston", "a":"Houston", "aa":"", "s":"", "sa": ""},
+    {"label": "Idaho (ID) - Coeur d'Alene Tribe (CDATRIBE)", "a":"Idaho", "aa":"ID", "s":"Coeur d'Alene Tribe", "sa": "CDATRIBE"},
+    {"label": "Idaho State University (ISU)", "a":"Idaho State University", "aa":"ISU", "s":"", "sa": ""},
+    {"label": "Illinois (IL)", "a":"Illinois", "aa":"IL", "s":"", "sa": ""},
+    {"label": "Illinois (IL) - South Suburban Mayors and Managers (SSMMA)", "a":"Illinois", "aa":"IL", "s":"South Suburban Mayors and Managers", "sa": "SSMMA"},
+    {"label": "Indiana (IN)", "a":"Indiana", "aa":"IN", "s":"", "sa": ""},
+    {"label": "Information Sharing Environment (ISE)", "a":"Information Sharing Environment", "aa":"ISE", "s":"", "sa": ""},
+    {"label": "Institute of Museum and Library Services (IMLS)", "a":"Institute of Museum and Library Services", "aa":"IMLS", "s":"", "sa": ""},
+    {"label": "Iowa (IA)", "a":"Iowa", "aa":"IA", "s":"", "sa": ""},
+    {"label": "Iowa State University GIS Support and Research Facility (ISU GIS)", "a":"Iowa State University GIS Support and Research Facility", "aa":"ISU GIS", "s":"", "sa": ""},
+    {"label": "Kansas (KS)", "a":"Kansas", "aa":"KS", "s":"", "sa": ""},
+    {"label": "Kansas (KS) - Kansas Data Access and Support Center (DASC)", "a":"Kansas", "aa":"KS", "s":"Kansas Data Access and Support Center", "sa": "DASC"},
+    {"label": "Kansas City (KC)", "a":"Kansas City", "aa":"KC", "s":"", "sa": ""},
+    {"label": "Kentucky (KY)", "a":"Kentucky", "aa":"KY", "s":"", "sa": ""},
+    {"label": "Kentucky (KY) - Kentucky Geography Network (KYGEONET)", "a":"Kentucky", "aa":"KY", "s":"Kentucky Geography Network", "sa": "KYGEONET"},
+    {"label": "King County", "a":"King County", "aa":"", "s":"", "sa": ""},
+    {"label": "Las Vegas (LV)", "a":"Las Vegas", "aa":"LV", "s":"", "sa": ""},
+    {"label": "Lexington", "a":"Lexington", "aa":"", "s":"", "sa": ""},
+    {"label": "Los Angeles (LA)", "a":"Los Angeles", "aa":"LA", "s":"", "sa": ""},
+    {"label": "Louisiana (LA)", "a":"Louisiana", "aa":"LA", "s":"", "sa": ""},
+    {"label": "Louisiana (LA) - Louisiana Geographic Information Center (LAGIC)", "a":"Louisiana", "aa":"LA", "s":"Louisiana Geographic Information Center", "sa": "LAGIC"},
+    {"label": "Louisville (LVL)", "a":"Louisville", "aa":"LVL", "s":"", "sa": ""},
+    {"label": "Madison", "a":"Madison", "aa":"", "s":"", "sa": ""},
+    {"label": "Maine (ME)", "a":"Maine", "aa":"ME", "s":"", "sa": ""},
+    {"label": "Maryland (MD)", "a":"Maryland", "aa":"MD", "s":"", "sa": ""},
+    {"label": "Massachusetts (MA)", "a":"Massachusetts", "aa":"MA", "s":"", "sa": ""},
+    {"label": "Merit Systems Protection Board (MSPB)", "a":"Merit Systems Protection Board", "aa":"MSPB", "s":"", "sa": ""},
+    {"label": "Michigan (MI)", "a":"Michigan", "aa":"MI", "s":"", "sa": ""},
+    {"label": "Millenium Challenge Corporation (MCC)", "a":"Millenium Challenge Corporation", "aa":"MCC", "s":"", "sa": ""},
+    {"label": "Minneapolis-St Paul (MSP) - MetroGIS (Minneapolis-St. Paul Regional GIS Consortium) (METROGIS)", "a":"Minneapolis-St Paul", "aa":"MSP", "s":"MetroGIS (Minneapolis-St. Paul Regional GIS Consortium)", "sa": "METROGIS"},
+    {"label": "Minnesota (MN) - Minnesota Department of Natural Resources (DNR)", "a":"Minnesota", "aa":"MN", "s":"Minnesota Department of Natural Resources", "sa": "DNR"},
+    {"label": "Minnesota (MN)", "a":"Minnesota", "aa":"MN", "s":"", "sa": ""},
+    {"label": "Missouri (MO)", "a":"Missouri", "aa":"MO", "s":"", "sa": ""},
+    {"label": "Missouri (MO) - Accountability Portal (MAP)", "a":"Missouri", "aa":"MO", "s":"Accountability Portal", "sa": "MAP"},
+    {"label": "Missouri (MO) - Missouri Spatial Data Information Service (MSDIS)", "a":"Missouri", "aa":"MO", "s":"Missouri Spatial Data Information Service", "sa": "MSDIS"},
+    {"label": "Montana (MT)", "a":"Montana", "aa":"MT", "s":"", "sa": ""},
+    {"label": "Montgomery County", "a":"Montgomery County", "aa":"", "s":"", "sa": ""},
+    {"label": "National Aeronautics and Space Administration (NASA) - Jet Propulsion Laboratory (JPL)", "a":"National Aeronautics and Space Administration", "aa":"NASA", "s":"Jet Propulsion Laboratory", "sa": "JPL"},
+    {"label": "National Aeronautics and Space Administration (NASA)", "a":"National Aeronautics and Space Administration", "aa":"NASA", "s":"", "sa": ""},
+    {"label": "National Archives and Records Administration (NARA)", "a":"National Archives and Records Administration", "aa":"NARA", "s":"", "sa": ""},
+    {"label": "National Archives and Records Administration (NARA) - Office of the Federal Register (OFR)", "a":"National Archives and Records Administration", "aa":"NARA", "s":"Office of the Federal Register", "sa": "OFR"},
+    {"label": "National Capital Planning Commission (NCPC)", "a":"National Capital Planning Commission", "aa":"NCPC", "s":"", "sa": ""},
+    {"label": "National Endowment for the Arts (NEA)", "a":"National Endowment for the Arts", "aa":"NEA", "s":"", "sa": ""},
+    {"label": "National Endowment for the Humanities (NEH)", "a":"National Endowment for the Humanities", "aa":"NEH", "s":"", "sa": ""},
+    {"label": "National Labor Relations Board (NLRB)", "a":"National Labor Relations Board", "aa":"NLRB", "s":"", "sa": ""},
+    {"label": "National Science Foundation (NSF)", "a":"National Science Foundation", "aa":"NSF", "s":"", "sa": ""},
+    {"label": "National States Geographic Information Council (NSGIC) - GIS Inventory (aka Ramona) (RAMONA)", "a":"National States Geographic Information Council", "aa":"NSGIC", "s":"GIS Inventory (aka Ramona)", "sa": "RAMONA"},
+    {"label": "National Transportation Safety Board (NTSB)", "a":"National Transportation Safety Board", "aa":"NTSB", "s":"", "sa": ""},
+    {"label": "Nebraska (NE)", "a":"Nebraska", "aa":"NE", "s":"", "sa": ""},
+    {"label": "New Hampshire (NH)", "a":"New Hampshire", "aa":"NH", "s":"", "sa": ""},
+    {"label": "New Mexico (NM)", "a":"New Mexico", "aa":"NM", "s":"", "sa": ""},
+    {"label": "New Orleans (NO)", "a":"New Orleans", "aa":"NO", "s":"", "sa": ""},
+    {"label": "New York (NY)", "a":"New York", "aa":"NY", "s":"", "sa": ""},
+    {"label": "New York (NY) - NY State Senate (Senate)", "a":"New York", "aa":"NY", "s":"NY State Senate", "sa": "Senate"},
+    {"label": "New York (NY) - New York State Data Center (SDC)", "a":"New York", "aa":"NY", "s":"New York State Data Center", "sa": "SDC"},
+    {"label": "New York (NY) - NY Department of Health (DOH)", "a":"New York", "aa":"NY", "s":"NY Department of Health", "sa": "DOH"},
+    {"label": "New York City (NYC)", "a":"New York City", "aa":"NYC", "s":"", "sa": ""},
+    {"label": "North Carolina (NC) - NC OpenBook", "a":"North Carolina", "aa":"NC", "s":"NC OpenBook", "sa": ""},
+    {"label": "North Carolina (NC)", "a":"North Carolina", "aa":"NC", "s":"", "sa": ""},
+    {"label": "North Dakota (ND) - North Dakota GIS Hub (ND GIS)", "a":"North Dakota", "aa":"ND", "s":"North Dakota GIS Hub", "sa": "ND GIS"},
+    {"label": "North Dakota (ND)", "a":"North Dakota", "aa":"ND", "s":"", "sa": ""},
+    {"label": "Nuclear Regulatory Commission (NRC)", "a":"Nuclear Regulatory Commission", "aa":"NRC", "s":"", "sa": ""},
+    {"label": "Nuna Technologies", "a":"Nuna Technologies", "aa":"", "s":"", "sa": ""},
+    {"label": "Oak Ridge National Laboratory (ORNL)", "a":"Oak Ridge National Laboratory", "aa":"ORNL", "s":"", "sa": ""},
+    {"label": "Occupational Safety and Health Review Commission (OSHRC)", "a":"Occupational Safety and Health Review Commission", "aa":"OSHRC", "s":"", "sa": ""},
+    {"label": "Office of Navajo and Hopi Indian Relocation (ONHIR)", "a":"Office of Navajo and Hopi Indian Relocation", "aa":"ONHIR", "s":"", "sa": ""},
+    {"label": "Office of Personnel Management (OPM)", "a":"Office of Personnel Management", "aa":"OPM", "s":"", "sa": ""},
+    {"label": "Ohio (OH)", "a":"Ohio", "aa":"OH", "s":"", "sa": ""},
+    {"label": "Oklahoma (OK)", "a":"Oklahoma", "aa":"OK", "s":"", "sa": ""},
+    {"label": "Open Door Kentucky", "a":"Open Door Kentucky", "aa":"", "s":"", "sa": ""},
+    {"label": "Oregon (OR)", "a":"Oregon", "aa":"OR", "s":"", "sa": ""},
+    {"label": "Oregon State University (OSU)", "a":"Oregon State University", "aa":"OSU", "s":"", "sa": ""},
+    {"label": "Overseas Private Investment Corporation (OPIC)", "a":"Overseas Private Investment Corporation", "aa":"OPIC", "s":"", "sa": ""},
+    {"label": "Pacific States Marine Fisheries Commission (PSMFC)", "a":"Pacific States Marine Fisheries Commission", "aa":"PSMFC", "s":"", "sa": ""},
+    {"label": "Palo Alto (PA)", "a":"Palo Alto", "aa":"PA", "s":"", "sa": ""},
+    {"label": "Pension Benefit Guaranty Corporation (PBGC)", "a":"Pension Benefit Guaranty Corporation", "aa":"PBGC", "s":"", "sa": ""},
+    {"label": "Philadelphia (PHILA)", "a":"Philadelphia", "aa":"PHILA", "s":"", "sa": ""},
+    {"label": "Portland (PDX)", "a":"Portland", "aa":"PDX", "s":"", "sa": ""},
+    {"label": "Providence", "a":"Providence", "aa":"", "s":"", "sa": ""},
+    {"label": "Railroad Retirement Board (RRB)", "a":"Railroad Retirement Board", "aa":"RRB", "s":"", "sa": ""},
+    {"label": "Raleigh", "a":"Raleigh", "aa":"", "s":"", "sa": ""},
+    {"label": "Rhode Island (RI)", "a":"Rhode Island", "aa":"RI", "s":"", "sa": ""},
+    {"label": "Rockford (RFD)", "a":"Rockford", "aa":"RFD", "s":"", "sa": ""},
+    {"label": "San Francisco (SF)", "a":"San Francisco", "aa":"SF", "s":"", "sa": ""},
+    {"label": "San Mateo County (SMC)", "a":"San Mateo County", "aa":"SMC", "s":"", "sa": ""},
+    {"label": "Santa Cruz (SC)", "a":"Santa Cruz", "aa":"SC", "s":"", "sa": ""},
+    {"label": "Scottsdale (SDL)", "a":"Scottsdale", "aa":"SDL", "s":"", "sa": ""},
+    {"label": "Seattle (SEA)", "a":"Seattle", "aa":"SEA", "s":"", "sa": ""},
+    {"label": "Securities and Exchange Commission (SEC)", "a":"Securities and Exchange Commission", "aa":"SEC", "s":"", "sa": ""},
+    {"label": "Selective Service System (SSS)", "a":"Selective Service System", "aa":"SSS", "s":"", "sa": ""},
+    {"label": "Small Business Administration (SBA)", "a":"Small Business Administration", "aa":"SBA", "s":"", "sa": ""},
+    {"label": "Social Security Administration (SSA)", "a":"Social Security Administration", "aa":"SSA", "s":"", "sa": ""},
+    {"label": "Somerville", "a":"Somerville", "aa":"", "s":"", "sa": ""},
+    {"label": "South Bend (SBN)", "a":"South Bend", "aa":"SBN", "s":"", "sa": ""},
+    {"label": "South Dakota (SD)", "a":"South Dakota", "aa":"SD", "s":"", "sa": ""},
+    {"label": "Tennessee (TN)", "a":"Tennessee", "aa":"TN", "s":"", "sa": ""},
+    {"label": "Texas (TX)", "a":"Texas", "aa":"TX", "s":"", "sa": ""},
+    {"label": "Texas (TX) - Texas Transparency", "a":"Texas", "aa":"TX", "s":"Texas Transparency", "sa": ""},
+    {"label": "U.S. Department of Health & Human Services (HHS)", "a":"U.S. Department of Health & Human Services", "aa":"HHS", "s":"", "sa": ""},
+    {"label": "U.S. Environmental Protection Agency (EPA)", "a":"U.S. Environmental Protection Agency", "aa":"EPA", "s":"", "sa": ""},
+    {"label": "Univ of South Carolina (SC) - Baruch Institute for Marine and Coastal Sciences", "a":"Univ of South Carolina", "aa":"SC", "s":"Baruch Institute for Marine and Coastal Sciences", "sa": ""},
+    {"label": "University of Alaska (UA) - Geographic Information Network of Alaska - University of Alaska (GINA)", "a":"University of Alaska", "aa":"UA", "s":"Geographic Information Network of Alaska - University of Alaska", "sa": "GINA"},
+    {"label": "University of Arizona (UA)", "a":"University of Arizona", "aa":"UA", "s":"", "sa": ""},
+    {"label": "University of California San Diego (UCSD)", "a":"University of California San Diego", "aa":"UCSD", "s":"", "sa": ""},
+    {"label": "University of Idaho (UI)", "a":"University of Idaho", "aa":"UI", "s":"", "sa": ""},
+    {"label": "University of New Hampshire (UNH)", "a":"University of New Hampshire", "aa":"UNH", "s":"", "sa": ""},
+    {"label": "University of New Mexico (UNH) - Earth Data Analysis Center (EDAC)", "a":"University of New Mexico", "aa":"UNH", "s":"Earth Data Analysis Center", "sa": "EDAC"},
+    {"label": "University of Rhode Island (URI) - University of Rhode Island Geospatial Extension Program (GEP)", "a":"University of Rhode Island", "aa":"URI", "s":"University of Rhode Island Geospatial Extension Program", "sa": "GEP"},
+    {"label": "University of Washington (UW)", "a":"University of Washington", "aa":"UW", "s":"", "sa": ""},
+    {"label": "US Agency for International Development (USAID)", "a":"US Agency for International Development", "aa":"USAID", "s":"", "sa": ""},
+    {"label": "US Consumer Product Safety Commission (CPSC)", "a":"US Consumer Product Safety Commission", "aa":"CPSC", "s":"", "sa": ""},
+    {"label": "US Equal Employment Opportunity Commission (EEOC)", "a":"US Equal Employment Opportunity Commission", "aa":"EEOC", "s":"", "sa": ""},
+    {"label": "US International Trade Commission (USITC)", "a":"US International Trade Commission", "aa":"USITC", "s":"", "sa": ""},
+    {"label": "US Office of the Special Counsel (OSC)", "a":"US Office of the Special Counsel", "aa":"OSC", "s":"", "sa": ""},
+    {"label": "Utah (UT)", "a":"Utah", "aa":"UT", "s":"", "sa": ""},
+    {"label": "Virginia (VA)", "a":"Virginia", "aa":"VA", "s":"", "sa": ""},
+    {"label": "Virginia (VA) - Virginia Department of Environmental Quality (DEQ)", "a":"Virginia", "aa":"VA", "s":"Virginia Department of Environmental Quality", "sa": "DEQ"},
+    {"label": "Wake County", "a":"Wake County", "aa":"", "s":"", "sa": ""},
+    {"label": "Washington (WA)", "a":"Washington", "aa":"WA", "s":"", "sa": ""},
+    {"label": "Weatherford (WF)", "a":"Weatherford", "aa":"WF", "s":"", "sa": ""},
+    {"label": "Wellington (WEF)", "a":"Wellington", "aa":"WEF", "s":"", "sa": ""}
+  ]
   $( "#agencyTags" ).autocomplete({
     minLength: 2,
     source: agencies,
+    focus: function(event, ui) {
+      if (ui.item.s == '') {
+        $('#agencyTags').val(ui.item.a);
+      } else {
+        $('#agencyTags').val(ui.item.a + " - " + ui.item.s);
+      }
+      return false;
+    },
     select: function(event, ui) { 
-      $("#searchval").val(ui.item.value) 
+      if (ui.item.s == '') {
+        $("#searchval").val(ui.item.a);
+        $("#agencyTags").val(ui.item.a);
+      } else {
+        $("#searchval").val(ui.item.a + ' - ' + ui.item.s);
+        $("#agencyTags").val(ui.item.a + ' - ' + ui.item.s);
+      }
+      return false;
     }
-  });
+  }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+    if ( item.s == '' ) {
+      return $( "<li></li>" )
+        .data( "ui-autocomplete-item", item )
+        .append( "<a>" + item.a + "</a>" )
+        .appendTo( ul );
+    } else {
+      return $( "<li></li>" )
+        .data( "ui-autocomplete-item", item )
+        .append( "<a>" + item.a + " - " + item.s + "</a>")
+        .appendTo( ul );
+    }
+  };
 
 
 
