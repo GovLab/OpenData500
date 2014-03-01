@@ -86,6 +86,15 @@
 		<textarea rows="10" cols="59" name="financialInfo" id="financialInfo" parsley-trigger="keyup" parsley-maxwords="100">{{ company.financialInfo }}</textarea><br><br>
 		<h3>What datasets (if any) are not currently available that would be useful for your company to have as government open data?<br><em>[50 words or less]</em></h3>
 		<textarea rows="10" cols="59" name="datasetWishList" id="datasetWishList" parsley-trigger="keyup" parsley-maxwords="50">{% if company.datasetWishList %} {{ company.datasetWishList }}{% end %}</textarea><br>
+	</fieldset>
+	<fieldset class="m-form-half">
+		<h3>From approximately how many sources (i.e. agencies, subagencies, local and state governments) does your company use data? *</h3>
+		<div class="source-count-buttons">
+			<input type="radio" name="sourceCount" id="count1" value="1-10" {% if company.sourceCount == '1-10' %}checked{%end%}><label for="count1">1-10</label>
+			<input type="radio" name="sourceCount" id="count2" value="10-50" {% if company.sourceCount == '10-50' %}checked{%end%}><label for="count2">10-50</label>
+			<input type="radio" name="sourceCount" id="count3" value="50-100" {% if company.sourceCount == '50-100' %}checked{%end%}><label for="count3">50-100</label>
+			<input type="radio" name="sourceCount" id="count4" parsley-required="true" value="100+" {% if company.sourceCount == '100+' %}checked{%end%}><label for="count4">100+</label>
+		</div>
 		{% raw xsrf_form_html() %}
 	</fieldset>
 </form>

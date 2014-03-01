@@ -921,4 +921,30 @@ h2.disclaimer-text {
   visibility: hidden;
 }
 
+.source-count-buttons input[type="radio"] {
+    display:none; 
+}
+
+.source-count-buttons label {
+  padding: 5px 14px 4px 14px;
+  border: 1px solid #8977a7;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  color: #472b74;
+  font-family: "Exo", sans-serif;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 14px;
+  letter-spacing: .6px;
+  cursor: pointer;
+  background-color: white;
+}
+
+.source-count-buttons input[type="radio"]:checked + label { 
+  background-color: #472b74;
+  border: 1px solid #fff;
+  color: #fff;
+}
+
 
