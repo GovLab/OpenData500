@@ -862,40 +862,44 @@ $(document).ready(function() {
     {"label": "Weatherford (WF)", "a":"Weatherford", "aa":"WF", "s":"", "sa": ""},
     {"label": "Wellington (WEF)", "a":"Wellington", "aa":"WEF", "s":"", "sa": ""}
   ]
-  $( "#agencyTags" ).autocomplete({
-    minLength: 2,
-    source: agencies,
-    focus: function(event, ui) {
-      if (ui.item.s == '') {
-        $('#agencyTags').val(ui.item.a);
-      } else {
-        $('#agencyTags').val(ui.item.a + " - " + ui.item.s);
+  try {
+    $( "#agencyTags" ).autocomplete({
+      minLength: 2,
+      source: agencies,
+      focus: function(event, ui) {
+        if (ui.item.s == '') {
+          $('#agencyTags').val(ui.item.a);
+        } else {
+          $('#agencyTags').val(ui.item.a + " - " + ui.item.s);
+        }
+        return false;
+      },
+      select: function(event, ui) { 
+        if (ui.item.s == '') {
+          $("#searchval").val(ui.item.a);
+          $("#agencyTags").val(ui.item.a);
+        } else {
+          $("#searchval").val(ui.item.a + ' - ' + ui.item.s);
+          $("#agencyTags").val(ui.item.a + ' - ' + ui.item.s);
+        }
+        return false;
       }
-      return false;
-    },
-    select: function(event, ui) { 
-      if (ui.item.s == '') {
-        $("#searchval").val(ui.item.a);
-        $("#agencyTags").val(ui.item.a);
+    }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+      if ( item.s == '' ) {
+        return $( "<li></li>" )
+          .data( "ui-autocomplete-item", item )
+          .append( "<a>" + item.a + "</a>" )
+          .appendTo( ul );
       } else {
-        $("#searchval").val(ui.item.a + ' - ' + ui.item.s);
-        $("#agencyTags").val(ui.item.a + ' - ' + ui.item.s);
+        return $( "<li></li>" )
+          .data( "ui-autocomplete-item", item )
+          .append( "<a>" + item.a + " - " + item.s + "</a>")
+          .appendTo( ul );
       }
-      return false;
-    }
-  }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
-    if ( item.s == '' ) {
-      return $( "<li></li>" )
-        .data( "ui-autocomplete-item", item )
-        .append( "<a>" + item.a + "</a>" )
-        .appendTo( ul );
-    } else {
-      return $( "<li></li>" )
-        .data( "ui-autocomplete-item", item )
-        .append( "<a>" + item.a + " - " + item.s + "</a>")
-        .appendTo( ul );
-    }
-  };
+    };
+  } catch(err) {
+    console.log(err.message);
+  }
 
 
 
