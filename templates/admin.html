@@ -6,28 +6,23 @@
 
 <h1>{{ page_heading }}</h1>
 
-<h2>Recently Submitted Through Website Survey</h2>
-<div id="accordionSubmitted">
-{% for company in recentlySubmitted %}
-	<h3><strong>{{ company.companyName }}</strong> Submitted: {{company.ts}}</h3> 
-	<div>
-		<p><a href="/edit/{{ company.id }}">Edit</a>  <a href="/delete/{{ company.id }}">Delete</a></p>
-	</div>
-{% end %}
-</div>
-<br>
-<h2>Need Vetting (Survey Returned)</h2>
+
+<h2>Need Vetting</h2>
 <table style="width:100%; text-align:left;">
 	<tr>
 		<th>Company Name</th>
 		<th>Edit URL</th>
 		<th>Contact Email</th>
+		<th>Via Web?</th>
+		<th>Displayed?</th>
 	</tr>
 	{% for company in needVetting %}
 		<tr>
 			<td><strong>{{ company.companyName }}</strong></a></td>
 			<td><a href="/admin/edit/{{ company.id }}">Edit</a></td>
 			<td>{%try%}{% if (company.contact) %} {{ company.contact.email }} {% end %}{%except%}{%end%}</td>
+			<td>{%if company.submittedThroughWebsite %} √ {%end%}</td>
+			<td>{%if company.display %} √ {%end%}</td>
 		</tr>
 	{% end %}
 </table>

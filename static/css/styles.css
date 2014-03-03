@@ -906,6 +906,7 @@ h2.disclaimer-text {
 .message-form {
   color: black;
   padding-left: 5px;
+  font-size: 12px;
 }
 
 .m-form-box h3 {

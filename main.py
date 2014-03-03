@@ -644,17 +644,17 @@ class AdminHandler(BaseHandler):
         # surveyNotIn50 = models.Company.objects(Q(preview50=False) & Q(candidate500=True) & Q(submittedSurvey=True)).order_by('prettyName') #Not make distinction between preview 50 and submitted
         # preview50 = models.Company.objects(Q(preview50=True) & Q(candidate500=True) & Q(submittedSurvey=True)).order_by('prettyName')
         surveySubmitted = models.Company2.objects(Q(submittedSurvey=True) & Q(display=True) & Q(vetted=True) & Q(vettedByCompany=True) & Q(submittedThroughWebsite=False)).order_by('prettyName')
-        sendSurveys = models.Company2.objects(Q(submittedSurvey=False) & Q(vetted=False) & Q(vettedByCompany=False)).order_by('prettyName')
-        needVetting = models.Company2.objects(Q(submittedSurvey=True) & Q(vetted=False) & Q(vettedByCompany=True) & Q(submittedThroughWebsite=False))
+        sendSurveys = models.Company2.objects(Q(vetted=False) & Q(vettedByCompany=False)).order_by('prettyName')
+        needVetting = models.Company2.objects(Q(submittedSurvey=True) & Q(vetted=False) & Q(vettedByCompany=True))
         # candidate500 = models.Company.objects(Q(preview50=False) & Q(candidate500=True) & Q(submittedSurvey=False)).order_by('prettyName')
         # recentlySubmitted = models.Company.objects(Q(preview50=False) & Q(candidate500=False) & Q(submittedSurvey=True)).order_by('ts')
-        recentlySubmitted = models.Company2.objects(Q(submittedThroughWebsite=True) & Q(vettedByCompany=True) & Q(display=False) & Q(vetted=False) & Q(submittedSurvey=True)).order_by('ts')
+        #recentlySubmitted = models.Company2.objects(Q(submittedThroughWebsite=True) & Q(vettedByCompany=True) & Q(display=False) & Q(vetted=False) & Q(submittedSurvey=True)).order_by('ts')
         self.render(
             "admin.html",
             page_title='OpenData500',
             page_heading='Welcome to the OpenData 500',
             surveySubmitted = surveySubmitted,
-            recentlySubmitted=recentlySubmitted,
+            #recentlySubmitted=recentlySubmitted,
             needVetting = needVetting,
             sendSurveys = sendSurveys
         )
@@ -1207,7 +1207,7 @@ class AdminEditCompanyHandler(BaseHandler):
     @tornado.web.addslash
     @tornado.web.authenticated
     def get(self, id):
-        company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
+        company = models.Company2.objects.get(id=bson.objectid.ObjectId(id))
         page_heading = "Editing " + company.companyName + ' (Admin)'
         page_title = "Editing " + company.companyName + ' (Admin)'
         if company is None:
@@ -1229,9 +1229,9 @@ class AdminEditCompanyHandler(BaseHandler):
 
     @tornado.web.authenticated
     def post(self, id):
-        #get the company you will be editing
-        company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
-        #Submitter info
+                #get the company you will be editing
+        company = models.Company2.objects.get(id=bson.objectid.ObjectId(id))
+        #------------------CONTACT INFO-------------------
         company.contact.firstName = self.get_argument("firstName", None)
         company.contact.lastName = self.get_argument("lastName", None)
         company.contact.title = self.get_argument("title", None)
@@ -1243,18 +1243,18 @@ class AdminEditCompanyHandler(BaseHandler):
                 company.contact.contacted = True
         except:
             company.contact.contacted = False
-        company.contact.save()
-        #CEO Info
+        #------------------CEO INFO-------------------
         company.ceo.firstName = self.get_argument("ceoFirstName", None)
         company.ceo.lastName = self.get_argument("ceoLastName", None)
-        company.ceo.email = self.get_argument("ceoEmail", None)
-        company.ceo.save()
-        #Company Info
-        #company.companyName = self.get_argument("companyName", None)
-        #company.prettyName = re.sub(r'([^\s\w])+', '', company.companyName).replace(" ", "-").title()
-        url = self.get_argument('url', None)
+        #------------------COMPANY INFO-------------------
+        company.companyName = self.get_argument("companyName", None)
+        company.prettyName = re.sub(r'([^\s\w])+', '', company.companyName).replace(" ", "-").title()
+        company.url = self.get_argument('url', None)
         company.city = self.get_argument('city', None)
-        company.zipCode = self.get_argument('zipCode', None)
+        try: 
+            company.zipCode = int(self.get_argument('zipCode', None))
+        except:
+            company.zipCode = 0
         company.companyType = self.get_argument("companyType", None)
         if company.companyType == 'other': #if user entered custom option for Type
             company.companyType = self.get_argument('otherCompanyType', None)
@@ -1264,17 +1264,9 @@ class AdminEditCompanyHandler(BaseHandler):
         company.fte = self.get_argument("fte", 0)
         if not company.fte:
             company.fte = 0
-        company.companyFunction = self.get_argument("companyFunction", None)
-        if company.companyFunction == 'other': #if user entered custom option for Function
-            company.companyFunction = self.get_argument('otherCompanyFunction', None)
-        try: #try and get all checked items. 
-            company.criticalDataTypes = self.request.arguments['criticalDataTypes']
-        except: #if no checked items, then make it into an empty array (form validation should prevent this always)
-            company.criticalDataTypes = []
-        if 'Other' in company.criticalDataTypes: #if user entered a custom option for Data Type
-            del company.criticalDataTypes[company.criticalDataTypes.index('Other')] #delete 'Other' from list
-            if self.get_argument('otherCriticalDataTypes', None):
-                company.criticalDataTypes.append(self.get_argument('otherCriticalDataTypes', None)) #add custom option to list.
+        company.companyCategory = self.get_argument("category", None)
+        if company.companyCategory == "Other":
+            company.companyCategory = self.get_argument("otherCategory", None)
         try: #try and get all checked items. 
             company.revenueSource = self.request.arguments['revenueSource']
         except: #if no checked items, then make it into an empty array (form validation should prevent this always)
@@ -1283,38 +1275,32 @@ class AdminEditCompanyHandler(BaseHandler):
             del company.revenueSource[company.revenueSource.index('Other')] #delete 'Other' from list
             if self.get_argument('otherRevenueSource', None):
                 company.revenueSource.append(self.get_argument('otherRevenueSource', None)) #add custom option to list.
-        try: #try and get all checked items. 
-            company.sector = self.request.arguments['sector']
-        except: #if no checked items, then make it into an empty array (form validation should prevent this always)
-            company.sector = []
-        if 'Other' in company.sector: #if user entered a custom option for Sector
-            del company.sector[company.sector.index('Other')] #delete 'Other' from list
-            if self.get_argument('otherSector', None):
-                company.sector.append(self.get_argument('otherSector', None)) #add custom option to list.
-        company.descriptionLong = self.get_argument('descriptionLong', None)
+        company.description = self.get_argument('description', None)
         company.descriptionShort = self.get_argument('descriptionShort', None)
-        company.socialImpact = self.get_argument('socialImpact', None)
         company.financialInfo = self.get_argument('financialInfo', None)
-        if self.get_argument('vetted', None) == 'True':
-            company.vetted = True
-            company.display = True
-            company.vettedByCompany = True
+        company.datasetWishList = self.get_argument('datasetWishList', None)
+        company.sourceCount = self.get_argument('sourceCount', None) 
+        company.datasetComments = self.get_argument('datasetComments', None)
+        if self.get_argument("submittedSurvey", None) == "submittedSurvey":
             company.submittedSurvey = True
-        elif self.get_argument('vetted', None) == 'False':
-            company.vetted=False
-            company.vettedByCompany = False
+        else:
             company.submittedSurvey = False
-        if self.get_argument('keepInList', None) == 'True':
-            company.display = True
-            company.vetted=False
-            company.submittedSurvey = True
+        if self.get_argument("vettedByCompany", None) == "vettedByCompany":
+            company.vettedByCompany = False
+        else:
             company.vettedByCompany = True
-        if self.get_argument('display', None) == 'True':
+        if self.get_argument("vetted", None) == "vetted":
+            company.vetted = True
+        else: 
+            company.vetted = False
+        if self.get_argument("display", None) == "display":
             company.display = True
-        elif self.get_argument('display', None) == 'False':
+        else: 
             company.display = False
+
         company.save()
-        self.redirect('/admin/')
+        self.write('success')
+        #self.redirect('/thanks/')
         # if self.get_argument('submit', None) == 'Save and Submit':
         #     self.redirect('/')
         # if self.get_argument('submit', None) == 'Save And Continue Editing':

@@ -100,15 +100,15 @@
 </form>
 <div class="saveCompanyForm">	
 	<input type="hidden" class="companyID" name="companyID" value="{{ id }}">
-	<h3>Save Company Info (you can keep editing after saving): <input type="button" class="l-button" id="companySave" name="submit" value="Save Company Info">
-		<span class="message-form" style="display:none"></span>
+	<h3><input type="button" class="l-button" id="companySave" name="submit" value="Save Company Info"><br>
+		<span class="message-form">(You can keep editing after saving)</span>
 		<span class="error-form" style="display:none"></span>
 	</h3>
 </div>
 <!--------------------------------------------DATASETS--------------------------------------!-->
 <br><br><h2>Agency and Data Information</h2><br>
 <div class="m-form-box data">
-	<h3>Please tell us more about the data your company uses. Use the search bar to find agencies and subagencies and select from the list provided. <div class="example-popup"><a>See Example.</a></div></h3><br>
+	<h3>Please tell us more about the data your company uses. Use the search bar to find and select government agencies, subagencies, city and state governments, or government-funded research programs from the list provided. <div class="example-popup"><a>See Example.</a></div></h3><br>
 	<div class="dialog-example">
 		<img src="{{ static_url("img/ExampleData.png") }}">
 	</div>

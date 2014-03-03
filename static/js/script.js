@@ -401,7 +401,7 @@ $(document).ready(function() {
     if ($('.companyForm').parsley('validate')) {
       console.log('valid');
       $('.message-form').text('Saving...');
-      $('.message-form').show();
+      // $('.message-form').show();
       var companyID = $('.companyID').val();
       var data = $('.companyForm').serializeArray();
       $.ajax({
@@ -410,7 +410,7 @@ $(document).ready(function() {
         data: data,
         error: function(error) {
             console.debug(JSON.stringify(error));
-            $('.message-form').hide();
+            $('.message-form');
             $('.error-form').text('Oops... Something went wrong :/')
             $('.error-form').show().delay(5000).fadeOut(); },
         beforeSend: function(xhr, settings) {
@@ -430,6 +430,7 @@ $(document).ready(function() {
       //console.log('not valid');
     }
   });
+
 //----------------------------------SAVE FORM NEW COMPANY--------------------------------------
   var dataForm =  '<br><br><h2>Agency and Data Information</h2><br>'+
                           '<div class="m-form-box data">'+
