@@ -97,7 +97,7 @@
 			<input type="radio" name="sourceCount" id="count4" value="100+" {% if company.sourceCount == '100+' %}checked{%end%}><label for="count4">100+</label>
 		</div>
 	</fieldset>
-	<h2>Admin Settings</h2>
+	<h2>Admin Settings</h2><br>
 	<fieldset class="m-form">
 		<fieldset class="m-form-half">
 			<h3>Mark {{company.companyName}} as vetted?</h3>
@@ -119,13 +119,7 @@
 	{% raw xsrf_form_html() %}
 </form>
 <br>
-<div class="saveCompanyForm">	
-	<input type="hidden" class="companyID" name="companyID" value="{{ id }}">
-	<h3><input type="button" class="l-button" id="companyAdminSave" name="submit" value="Save Company Info">
-		<span class="message-form" style="display:none"></span>
-		<span class="error-form" style="display:none"></span>
-	</h3>
-</div>
+
 <!--------------------------------------------DATASETS--------------------------------------!-->
 <br><br><h2>Agency and Data Information</h2><br>
 <div class="m-form-box data">
@@ -221,15 +215,15 @@
 	</div>
 </div>
 <!--------------------------------------------END DATASETS--------------------------------------!-->
-<h2 class="disclaimer-text">Your responses will become part of a public database of information on Open Data companies. By submitting this form you are agreeing that, other than personal contact information, this information will be part of a publicly available database.</h2><br>
-<!--<h2 class="disclaimer-text">Are you ready to submit this information? You will not be able to come back to this form afterwards. If you wish to make more changes, you will need to contact <a href="mailto:opendata500@thegovlab.org">opendata500@thegovlab.org</a></h2>!-->
-<div class="submitCompanyForm">	
+
+<div class="saveCompanyForm">	
 	<input type="hidden" class="companyID" name="companyID" value="{{ id }}">
-	<input type="button" class="l-button" id="companySubmit" name="submit" value="Save and Finish">
-	<span class="savingMessage_companyEdit" style="display:none">Saving...</span>
-	<span class="errorMessage_companyEdit" style="display:none">Oops... Something went wrong.</span>
-	<span class="savedMessage_companyEdit" style="display:none">Saved!</span>
+	<h3><input type="button" class="l-button" id="companyAdminSave" name="submit" value="Save Company Info">
+		<span class="message-form" style="display:none"></span>
+		<span class="error-form" style="display:none"></span>
+	</h3>
 </div>
+
 
 
 <script>

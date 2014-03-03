@@ -41,7 +41,7 @@
 			<td><strong>{{ company.companyName }}</strong></a></td>
 			<td><a href="/edit/{{ company.id }}">www.opendata500.com/edit/{{company.id}}</a></td>
 			<td>{%try%}{% if (company.contact) %} {{ company.contact.email }} {% end %}{%except%}{%end%}</td>
-			<td><a href="/edit/{{ company.id }}">Edit</a></td>
+			<td><a href="/admin/edit/{{ company.id }}">Edit</a></td>
 		</tr>
 	{% end %}
 </table>
