@@ -690,6 +690,7 @@ class EditCompanyHandler(BaseHandler):
         #company.prettyName = re.sub(r'([^\s\w])+', '', company.companyName).replace(" ", "-").title()
         company.url = self.get_argument('url', None)
         company.city = self.get_argument('city', None)
+        company.state = self.get_argument('state', None)
         try: 
             company.zipCode = int(self.get_argument('zipCode', None))
         except:
@@ -723,6 +724,7 @@ class EditCompanyHandler(BaseHandler):
         company.submittedSurvey = True
         company.vettedByCompany = True
         company.save()
+        self.application.stats.update_all_state_counts()
         self.write('success')
         #self.redirect('/thanks/')
         # if self.get_argument('submit', None) == 'Save and Submit':
