@@ -3,12 +3,14 @@
 $purple: #472b74;
 $purple_alpha: rgba(71, 43, 116, .9);
 $light_purple: #8977a7;
+$super_light_purple: rgba(71, 43, 116, .1);
 $black: #444;
 $dark_gray: #666;
 $light_gray: #aaa;
 $dark_gray_alpha: rgba(0,0,0,0.6);
 $light_gray_alpha: rgba(0,0,0,0.2);
 $lighter_gray: #ddd;
+$super_light_gray: rgba(0,0,0,.05);
 $white: #fff;
 $white_alpha: rgba(255,255,255,.7);
 $light_red: rgba(214, 17, 17, .1);
@@ -20,7 +22,7 @@ $light_blue: #b9dfef;
 // === Type
 
 $fancy_type: 'Exo', sans-serif;
-$regular_type: Helvetica,Arial,sans-serif;
+$regular_type: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
 
 
 // === Mixins

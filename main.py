@@ -83,6 +83,7 @@ class Application(tornado.web.Application):
             (r'/logout/?', LogoutHandler),
             (r'/register/?', RegisterHandler),
             #(r'/dump/?', EverythingHandler),
+            (r"/media/?", MediaHandler),
             (r"/([^/]+)/?", CompanyHandler)
         ]
         settings = dict(

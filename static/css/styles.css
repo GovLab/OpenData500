@@ -160,7 +160,7 @@ select {
 
 body {
   color: #444444;
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-size: 12px;
   line-height: 1.4em; }
 
@@ -247,7 +247,7 @@ a:hover {
       display: inline-block;
       padding: 5px 5px 4px;
       margin-top: 1px;
-      font-family: Helvetica, Arial, sans-serif;
+      font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
       font-size: 12px;
       background-color: white;
       color: #472b74;
@@ -712,6 +712,37 @@ a:hover {
   border-bottom: 1px solid #dddddd;
   padding-bottom: 10px;
   margin-bottom: 20px; }
+
+.m-press {
+  cursor: pointer; }
+
+.m-press-item {
+  display: inline-block;
+  width: 260px;
+  border: 1px solid #472b74;
+  border-left: 0;
+  border-right: 0;
+  height: 160px;
+  padding: 0 20px;
+  vertical-align: top;
+  margin: 5px;
+  background-color: rgba(0, 0, 0, 0.05);
+  position: relative; }
+
+.m-press-title {
+  font-size: 15px;
+  line-height: 19px;
+  color: #666666; }
+
+.m-press-meta {
+  font-style: italic;
+  position: absolute;
+  bottom: 0; }
+
+.m-press-item:hover {
+  background-color: rgba(71, 43, 116, 0.1); }
+  .m-press-item:hover p {
+    color: #472b74; }
 
 body {
   margin: 0; }

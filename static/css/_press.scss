@@ -1,0 +1,38 @@
+.m-press {
+	cursor: pointer;
+}
+
+.m-press-item {
+	display: inline-block;
+	width: 260px;
+	border: 1px solid $purple;
+	border-left: 0;
+	border-right: 0;
+	height: 160px;
+	padding: 0 20px;
+	vertical-align: top;
+	margin: 5px;
+	background-color:$super_light_gray;
+	position: relative;
+}
+
+.m-press-title {
+	font-size: 15px;
+	line-height: 19px;
+	color: $dark_gray;
+}
+
+.m-press-meta {
+	font-style: italic;
+	position: absolute;
+	bottom: 0;
+}
+
+.m-press-item:hover {
+	background-color: $super_light_purple;
+	p {
+		color: $purple;	
+	}
+
+
+}
