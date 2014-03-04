@@ -61,6 +61,7 @@ class Application(tornado.web.Application):
             (r"/addData/([a-zA-Z0-9]{24})/?", SubmitDataHandler),
             #(r"/editData/([a-zA-Z0-9]{24})/?", EditDataHandler),
             (r"/view/([a-zA-Z0-9]{24})/?", ViewHandler),
+            (r"/media/?", MediaHandler),
             (r"/delete/([a-zA-Z0-9]{24})/?", DeleteCompanyHandler),
             (r"/deleteData/([a-zA-Z0-9]{24})/?", DeleteDatasetHandler),
             #(r"/recommendCompany/?", RecommendCompanyHandler),
@@ -124,33 +125,14 @@ class StatsGenerator(object):
         stateCount = []
         for c in companies:
             stateCount.append(c.state)
-        count = count = [{"name":stateList[i], "abbrev":stateListAbbrev[i], "count":stateCount.count(stateListAbbrev[i])} for i in range(1,53)]
-
-
-    def create_state_file(self):
-        #Get companies displayed live, turn each one into an array and put into CSV file
-        companies = models.Company.objects()
-        #make a csv for states info
-        statesCount = []
-        for c in companies:
-            statesCount.append(c.state)
-        count = [(i, statesCount.count(i)) for i in set(statesCount)]
-        csvwriter = csv.writer(open(os.path.join(os.path.dirname(__file__), 'static') + "/states.csv", "w"))
-        csvwriter.writerow(['abbrev','state','value'])
-        for s in states:
-            abbrev = s
-            stateName = states[s]
-            value = 0
-            for c in count:
-                if c[0] == abbrev:
-                    value = c[1]
-            newrow = [abbrev, stateName, value]
-            for i in range(len(newrow)):  # For every value in our newrow
-                    if hasattr(newrow[i], 'encode'):
-                        newrow[i] = newrow[i].encode('utf8')
-            csvwriter.writerow(newrow)
-
-
+        stats.states = []
+        for i in range(1, 53):
+            s = models.States(
+                name = stateList[i],
+                abbrev = stateListAbbrev[i],
+                count = stateCount.count(stateListAbbrev[i]))
+            stats.states.append(s)
+        stats.save()
 
 class BaseHandler(tornado.web.RequestHandler): 
     def get_login_url(self):
@@ -205,6 +187,11 @@ class LoginHandler(BaseHandler):
             self.set_secure_cookie("user", tornado.escape.json_encode(user))
         else: 
             self.clear_cookie("user")
+
+class MediaHandler(BaseHandler):
+    @tornado.web.addslash
+    def get(self):
+        self.render("media.html")
 
 class ThanksHandler(BaseHandler): 
     @tornado.web.addslash
@@ -274,7 +261,7 @@ class CompanyHandler(BaseHandler):
             self.render(
                 "404.html",
                 page_title='404 - Open Data500',
-                page_heading='Oh no...',
+                page_heading='Hmm...',
             )
         
 
