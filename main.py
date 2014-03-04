@@ -97,15 +97,21 @@ class Application(tornado.web.Application):
 
 class StatsGenerator(object):
     def get_total_companies(self):
-        return models.Company2.objects().count()
+        return models.Stats.objects().first().totalCompanies
     
     def get_total_companies_web(self):
-        return models.Company2.objects(submittedThroughWebsite=True).count()
+        return models.Stats.objects().first().totalCompaniesWeb
     
     def get_total_companies_surveys(self):
-        return models.Company2.objects(submittedSurvey=True).count()
+        return models.Stats.objects().first().totalCompaniesSurvey
+
+    def update_totals_companies(self):
+        s = models.Stats.objects().first()
+        s.totalCompanies = models.Company2.objects().count()
+        s.totalCompaniesWeb = models.Company2.objects(submittedThroughWebsite = True).count()
+        s.totalCompaniesSurvey = models.Company2.objects(submittedSurvey = True).count()
     
-    def update_ind_state_count(self, state):
+    def increase_individual_state_count(self, state):
         stats = models.Stats.object().first()
         for s in stats.states:
             if s.name == state:
@@ -114,6 +120,11 @@ class StatsGenerator(object):
 
     def update_all_state_counts(self):
         stats = models.Stats.object().first()
+        companies  = models.Company2.objects(display=True)
+        stateCount = []
+        for c in companies:
+            stateCount.append(c.state)
+        count = count = [{"name":stateList[i], "abbrev":stateListAbbrev[i], "count":stateCount.count(stateListAbbrev[i])} for i in range(1,53)]
 
 
     def create_state_file(self):
@@ -250,7 +261,7 @@ class CompanyHandler(BaseHandler):
             try:
                 company = models.Company2.objects.get(prettyName=companyName)
             except Exception, e:
-                logging.info(str(e))
+                logging.info("Company: " + companyName + ": " + str(e))
                 company = models.Company2.objects(prettyName=companyName)[0]
             self.render(
             "company.html",
@@ -259,13 +270,12 @@ class CompanyHandler(BaseHandler):
             company = company,
         )
         except Exception, e:
-            logging.info(str(e)) 
+            logging.info("Company: " + companyName + ": " + str(e)) 
             self.render(
                 "404.html",
                 page_title='404 - Open Data500',
                 page_heading='Oh no...',
             )
-        #logging.info(company.companyName)
         
 
       
@@ -286,16 +296,6 @@ class CandidateHandler(BaseHandler):
     #@tornado.web.authenticated
     def get(self):
         companies = models.Company2.objects(display=True).order_by('prettyName')
-        # stateInfo = []
-        # with open(os.path.join(os.path.dirname(__file__), 'static') + '/states.csv', 'rb') as csvfile:
-        #     statereader = csv.reader(csvfile, delimiter=',')
-        #     for row in statereader:
-        #         if row[0] != 'abbrev':
-        #             stateInfo.append({
-        #                 "abbrev": row[0],
-        #                 "STATE": row[1],
-        #                 "VALUE": row[2]
-        #                 })
         self.render(
             "candidates.html",
             page_title='Open Data 500',
