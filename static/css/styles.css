@@ -305,17 +305,21 @@ a:hover {
 .m-homepage .m-homepage-explore {
   display: inline-block;
   width: 42.5%;
-  text-align: center;
-  margin-top: 46px; }
+  text-align: center; }
   .m-homepage .m-homepage-explore > div {
-    padding-bottom: 30px;
+    padding-bottom: 26px;
     border-bottom: 1px solid #472b74;
-    margin-bottom: 35px; }
+    margin-bottom: 25px; }
   .m-homepage .m-homepage-explore h2, .m-homepage .m-homepage-explore p {
     margin-bottom: 10px; }
   .m-homepage .m-homepage-explore h2 {
     color: #472b74;
     font-size: 2.8em; }
+  .m-homepage .m-homepage-explore .map-title {
+    font-family: "Exo", sans-serif;
+    font-weight: 100;
+    font-size: 22px;
+    font-style: italic; }
   .m-homepage .m-homepage-explore .m-button {
     display: block;
     margin-top: 20px;
