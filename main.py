@@ -79,6 +79,7 @@ class Application(tornado.web.Application):
             (r'/logout/?', LogoutHandler),
             (r'/register/?', RegisterHandler),
             #(r'/dump/?', EverythingHandler),
+            (r"/media/?", MediaHandler),
             (r"/([^/]+)/?", CompanyHandler)
         ]
         settings = dict(
@@ -170,6 +171,11 @@ class LoginHandler(BaseHandler):
             self.set_secure_cookie("user", tornado.escape.json_encode(user))
         else: 
             self.clear_cookie("user")
+
+class MediaHandler(BaseHandler):
+    @tornado.web.addslash
+    def get(self):
+        self.render("media.html")
 
 class ThanksHandler(BaseHandler): 
     @tornado.web.addslash
