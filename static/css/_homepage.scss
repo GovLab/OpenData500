@@ -147,12 +147,12 @@
 		display: inline-block;
 		width: 408px / 960px * 100%;
 		text-align: center;
-		margin-top: 46px;
+		// margin-top: 46px;
 
 		> div {
-			padding-bottom: 30px;
+			padding-bottom: 26px;
 			border-bottom: 1px solid $purple;
-			margin-bottom: 35px;
+			margin-bottom: 25px;
 		}
 		
 		h2, p {
@@ -162,6 +162,14 @@
 		h2 {
 			color: $purple;
 			font-size: 2.8em;
+		}
+
+		.map-title {
+			font-family: $fancy_type;
+			font-weight: 100;
+			font-size: 22px;
+			font-style: italic;
+
 		}
 
 		.m-button {
