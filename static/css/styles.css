@@ -241,7 +241,9 @@ a:hover {
       -webkit-border-radius: 4px 0 0 4px;
       -moz-border-radius: 4px 0 0 4px;
       border-radius: 4px 0 0 4px;
-      border-right: 0; }
+      border-right: 0;
+      padding: 6px 10px 5px;
+      border-color: #aaaaaa; }
     .m-homepage .m-homepage-participate form .m-button {
       width: 40px;
       display: inline-block;
@@ -307,7 +309,7 @@ a:hover {
   width: 42.5%;
   text-align: center; }
   .m-homepage .m-homepage-explore > div {
-    padding-bottom: 26px;
+    padding-bottom: 24px;
     border-bottom: 1px solid #472b74;
     margin-bottom: 25px; }
   .m-homepage .m-homepage-explore h2, .m-homepage .m-homepage-explore p {
@@ -320,6 +322,11 @@ a:hover {
     font-weight: 100;
     font-size: 22px;
     font-style: italic; }
+  .m-homepage .m-homepage-explore .map img {
+    width: 450px;
+    position: relative;
+    left: -30px;
+    top: 0; }
   .m-homepage .m-homepage-explore .m-button {
     display: block;
     margin-top: 20px;
