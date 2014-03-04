@@ -120,7 +120,7 @@ class StatsGenerator(object):
         stats.save()
 
     def update_all_state_counts(self):
-        stats = models.Stats.object().first()
+        stats = models.Stats.objects().first()
         companies  = models.Company2.objects(display=True)
         stateCount = []
         for c in companies:
@@ -283,11 +283,13 @@ class CandidateHandler(BaseHandler):
     #@tornado.web.authenticated
     def get(self):
         companies = models.Company2.objects(display=True).order_by('prettyName')
+        stats = models.Stats.objects().first()
         self.render(
             "candidates.html",
             page_title='Open Data 500',
             page_heading='Candidates for the OD500',
             companies = companies,
+            stats = stats,
             #recentlySubmitted=recentlySubmitted,
             states=states,
             categories = categories
