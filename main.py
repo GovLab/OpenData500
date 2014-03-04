@@ -26,6 +26,7 @@ import csv
 import json
 import re
 import bcrypt
+from datetime import datetime
 
 # import and define tornado-y things
 from tornado.options import define
@@ -134,6 +135,26 @@ class StatsGenerator(object):
                 count = stateCount.count(stateListAbbrev[i]))
             stats.states.append(s)
         stats.save()
+
+    def refresh_stats(self):
+        stats = models.Stats.objects().first()
+        stats.totalCompanies = models.Company2.objects().count()
+        stats.totalCompaniesWeb = models.Company2.objects(submittedThroughWebsite = True).count()
+        stats.totalCompaniesSurvey = models.Company2.objects(submittedSurvey = True).count()
+        companies  = models.Company2.objects(display=True)
+        stateCount = []
+        for c in companies:
+            stateCount.append(c.state)
+        stats.states = []
+        for i in range(1, 53):
+            s = models.States(
+                name = stateList[i],
+                abbrev = stateListAbbrev[i],
+                count = stateCount.count(stateListAbbrev[i]))
+            stats.states.append(s)
+        stats.lastUpdate = datetime.now()
+        stats.save()
+
 
 class BaseHandler(tornado.web.RequestHandler): 
     def get_login_url(self):
@@ -324,23 +345,23 @@ class AdminHandler(BaseHandler):
     @tornado.web.addslash
     @tornado.web.authenticated
     def get(self):
-        # surveyNotIn50 = models.Company.objects(Q(preview50=False) & Q(candidate500=True) & Q(submittedSurvey=True)).order_by('prettyName') #Not make distinction between preview 50 and submitted
-        # preview50 = models.Company.objects(Q(preview50=True) & Q(candidate500=True) & Q(submittedSurvey=True)).order_by('prettyName')
         surveySubmitted = models.Company2.objects(Q(submittedSurvey=True) & Q(display=True) & Q(vetted=True) & Q(vettedByCompany=True) & Q(submittedThroughWebsite=False)).order_by('prettyName')
         sendSurveys = models.Company2.objects(Q(vetted=False) & Q(vettedByCompany=False)).order_by('prettyName')
         needVetting = models.Company2.objects(Q(submittedSurvey=True) & Q(vetted=False) & Q(vettedByCompany=True)).order_by('ts')
-        # candidate500 = models.Company.objects(Q(preview50=False) & Q(candidate500=True) & Q(submittedSurvey=False)).order_by('prettyName')
-        # recentlySubmitted = models.Company.objects(Q(preview50=False) & Q(candidate500=False) & Q(submittedSurvey=True)).order_by('ts')
-        #recentlySubmitted = models.Company2.objects(Q(submittedThroughWebsite=True) & Q(vettedByCompany=True) & Q(display=False) & Q(vetted=False) & Q(submittedSurvey=True)).order_by('ts')
+        stats = models.Stats.objects().first()
         self.render(
             "admin.html",
             page_title='OpenData500',
             page_heading='Welcome to the OpenData 500',
             surveySubmitted = surveySubmitted,
-            #recentlySubmitted=recentlySubmitted,
             needVetting = needVetting,
-            sendSurveys = sendSurveys
+            sendSurveys = sendSurveys,
+            stats = stats
         )
+    def post(self):
+        self.application.stats.refresh_stats()
+        stats = models.Stats.objects().first();
+        self.write({"totalCompanies": stats.totalCompanies, "totalCompaniesWeb":stats.totalCompaniesWeb, "totalCompaniesSurvey":stats.totalCompaniesSurvey})
 
 class ValidateHandler(BaseHandler):
     def post(self):
@@ -460,6 +481,7 @@ class SubmitCompanyHandler(BaseHandler):
             submittedThroughWebsite = True
         )
         company.save()
+        self.application.stats.update_all_state_counts()
         id = str(company.id)
         self.write({"id": id})
 
@@ -781,6 +803,7 @@ class AdminEditCompanyHandler(BaseHandler):
         company.prettyName = re.sub(r'([^\s\w])+', '', company.companyName).replace(" ", "-").title()
         company.url = self.get_argument('url', None)
         company.city = self.get_argument('city', None)
+        company.state = self.get_argument('state', None)
         try: 
             company.zipCode = int(self.get_argument('zipCode', None))
         except:
@@ -827,8 +850,8 @@ class AdminEditCompanyHandler(BaseHandler):
             company.display = True
         else: 
             company.display = False
-
         company.save()
+        self.application.stats.update_all_state_counts()
         self.write('success')
         #self.redirect('/thanks/')
         # if self.get_argument('submit', None) == 'Save and Submit':

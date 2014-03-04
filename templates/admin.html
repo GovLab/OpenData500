@@ -6,7 +6,19 @@
 
 <h1>{{ page_heading }}</h1>
 
-
+<h2>Stats</h2>
+<fieldset class="m-form">
+	<fieldset class="m-form-half">
+		<h3>Total Companies: </h3><p id="totalCompanies">{{stats.totalCompanies}}</p>
+		<h3>Total Companies Submitted Via Web: </h3><p id="totalCompaniesWeb">{{stats.totalCompaniesWeb}}</p>
+		<h3>Total Companies With Complete Surveys: </h3><p id="totalCompaniesSurvey">{{stats.totalCompaniesSurvey}}</p>
+	</fieldset>
+	<fieldset class="m-form-half">
+		{% raw xsrf_form_html() %}
+		<input type="button" class="l-button" id="refresh" name="refresh" value="Refresh">
+	</fieldset>
+</fieldset>
+<br>
 <h2>Need Vetting</h2>
 <table style="width:100%; text-align:left;">
 	<tr>
@@ -58,6 +70,31 @@
 	</div>
 {% end %}
 </div>
+<script>
 
+$(document).ready( function() {
+	$('.m-form').on('click', '#refresh', function() {
+		data = { "_xsrf": $("[name='_xsrf']").val() }
+	  $.ajax({
+	    type: 'POST',
+	    url: '/admin/',
+	    data: data,
+	    error: function(error) {
+	        console.debug(JSON.stringify(error));
+		},
+	    beforeSend: function(xhr, settings) {
+	    },
+	    success: function(data) {
+	      console.log(data);
+	      $('#totalCompanies').text(data['totalCompanies']);
+	      $('#totalCompaniesWeb').text(data['totalCompaniesWeb']);
+	      $('#totalCompaniesSurvey').text(data['totalCompaniesSurvey']);
+	    }
+	  });
+	});
+});
+
+
+</script>
 
 {% end %}
