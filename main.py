@@ -192,7 +192,10 @@ class LoginHandler(BaseHandler):
 class MediaHandler(BaseHandler):
     @tornado.web.addslash
     def get(self):
-        self.render("media.html")
+        self.render(
+            "media.html",
+            page_title="Media"
+            )
 
 class ThanksHandler(BaseHandler): 
     @tornado.web.addslash
