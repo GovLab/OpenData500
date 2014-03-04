@@ -141,6 +141,19 @@ class Users(Document):
 	email = StringField()
 	password = StringField()
 
+class States(EmbeddedDocument):
+	name = StringField()
+	abbrev = StringField()
+	count = IntField()
+
+class Stats(Document):
+	lastUpdate = ComplexDateTimeField()
+	totalCompanies = IntField() #total
+	totalCompaniesWeb = IntField() #submitted through web survey
+	totalCompaniesSurvey = IntField() #completed surveys
+	states = ListField(EmbeddedDocumentField(States))
+
+
 
 Dataset.register_delete_rule(Company, "datasets", PULL)
 Dataset.register_delete_rule(Person, "submittedDatasets", PULL)

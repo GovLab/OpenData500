@@ -13,6 +13,7 @@
 		<th>Company Name</th>
 		<th>Edit URL</th>
 		<th>Contact Email</th>
+		<th>Date Submitted</th>
 		<th>Via Web?</th>
 		<th>Displayed?</th>
 	</tr>
@@ -21,6 +22,7 @@
 			<td><strong>{{ company.companyName }}</strong></a></td>
 			<td><a href="/admin/edit/{{ company.id }}">Edit</a></td>
 			<td>{%try%}{% if (company.contact) %} {{ company.contact.email }} {% end %}{%except%}{%end%}</td>
+			<td>{{company.ts}}</td>
 			<td>{%if company.submittedThroughWebsite %} √ {%end%}</td>
 			<td>{%if company.display %} √ {%end%}</td>
 		</tr>

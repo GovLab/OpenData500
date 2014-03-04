@@ -47,7 +47,7 @@
 		{% end %}
 		</div>
 		<div class="m-form-line"><label for="">Founding Year:</label><input type="text" name="yearFounded" id="yearFounded" parsley-type="number" parsley-trigger="change" parsley-range="[1000, 2014]" {% if company.yearFounded and company.yearFounded != 9999 %} value="{{ company.yearFounded }}" {%end%}></div>
-		<div class="m-form-line"><label for="">Number of FTE's:</label><input type="text" name="fte" id="fte" parsley-trigger="change" parsley-type="number" {% if company.fte %} value="{{ company.fte }}" {%end%}></div>
+		<div class="m-form-line"><label for="">Number of full-time employees:</label><input type="text" name="fte" id="fte" parsley-trigger="change" parsley-type="number" {% if company.fte %} value="{{ company.fte }}" {%end%}></div>
 	</fieldset>
 	
 	<fieldset class="m-form-half">
@@ -91,6 +91,7 @@
 	<fieldset class="m-form-half">
 		<h3>From approximately how many sources (i.e. agencies, subagencies, local and state governments) does your company use data? *</h3>
 		<div class="source-count-buttons">
+			{{ company.sourceCount }}
 			<input type="radio" name="sourceCount" id="count1" value="1-10" {% if company.sourceCount == '1-10' %}checked{%end%}><label for="count1">1-10</label>
 			<input type="radio" name="sourceCount" id="count2" value="10-50" {% if company.sourceCount == '10-50' %}checked{%end%}><label for="count2">10-50</label>
 			<input type="radio" name="sourceCount" id="count3" value="50-100" {% if company.sourceCount == '50-100' %}checked{%end%}><label for="count3">50-100</label>
