@@ -312,7 +312,7 @@ class CandidateHandler(BaseHandler):
         self.render(
             "candidates.html",
             page_title='Open Data 500',
-            page_heading='Candidates for the OD500',
+            page_heading='OD500 Companies',
             companies = companies,
             stats = stats,
             #recentlySubmitted=recentlySubmitted,

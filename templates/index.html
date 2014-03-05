@@ -23,13 +23,14 @@
 <section class="m-homepage-explore">
 	<div>
 		<h2>Review the Companies List</h2>
-		<p class="intro" style="letter-spacing: -0.3px;">Explore the full preliminary list of 500 candidate companies that meet the criteria.</p>
+		<div class="map">
+            <!--<h4 class="map-title">OD500 Company Locations</h4>!-->
+            <a href="/candidates/"><img src="{{ static_url("img/companies-map.png") }}" alt=""></a>
+        </div>
+        <p class="intro" style="letter-spacing: -0.3px;">Explore the preliminary list of 500 candidate companies that meet the criteria.</p>
 		<a href="/candidates/" class="m-button">Full List</a>
 	</div>
-	<div class="map">
-        <h4 class="map-title">Candidates for the OD500</h4>
-		<img src="{{ static_url("img/companies-map.png") }}" alt="">
-	</div>
+	
 </section>
 <section class="m-homepage-participate m-homepage-box">
 
@@ -55,11 +56,6 @@
 </div>
 </section>
 
-<section class="m-homepage-press">
-    <a href="http://fedscoop.com/open-data-500-intersection-open-data-economy/" target="_blank"><img id="fedscoop-logo" src="{{ static_url("img/fedscoop-logo.png") }}" alt="FedScoop"></a>
-    <a href="http://www.informationweek.com/government/open-government/open-government-data-companies-cash-in/d/d-id/1113143" target="_blank"><img id="informationweek-logo" src="{{ static_url("img/informationweek-logo.png") }}" alt="InformationWeek"></a>
-    <a href="http://www.forbes.com/sites/bethsimonenoveck/2014/01/08/from-faith-based-to-evidence-based-the-open-data-500-and-understanding-how-open-data-helps-the-american-economy/" target="_blank"><img id="forbes-logo" src="{{ static_url("img/forbes-logo.png") }}" alt="Forbes"></a>
-</section>
 
 <script type="text/javascript">
 var fnames = new Array();var ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';
