@@ -47,15 +47,15 @@
 .m-candidates-item {
 	list-style-type: none;
 	padding:15px;
-	background-color: $light_gray_alpha;
-	width: 150px / 960px * 100%;
-	height: 150px;
+	background-color: $super_light_gray;
+	width: 198px / 960px * 100%;
+	height: 165px;
 	float: left;
 	margin: 5px;
 	color: $black;
 	overflow: hidden;
 	cursor: pointer;
-	border: 1px solid transparent;
+	border: 1px solid #ccc;
 
 
 	h3 {
@@ -70,11 +70,16 @@
 		line-height: 1.3em;
 	}
 
+	p {
+		margin-top: 0;
+	}
+
 	.m-homepage-list-desc {
-		width: 152px;
+		width: 195px;
 		height: 80px;
 		overflow: hidden;
 		color: $black;
+		margin-top: 5px;
 	}
 
 	em {
@@ -92,9 +97,8 @@
 }
 
 .m-candidates-item.survey-company {
-	background-color: $dark_gray_alpha;
+	background-color: $super_light_purple;
 	h3, .m-homepage-list-desc, em {
-		color: $white;
 	}
 }
 
@@ -124,9 +128,10 @@
 
 .legend {
 	text-align: center;
-	border: 1px solid $light_gray;
+	border: 1px solid $super_light_gray;
 	margin-bottom: 20px;
 	padding: 5px;
+	font-weight: 300;
 
 
 	.color {
@@ -135,19 +140,39 @@
 		padding: 4px 10px;
 		color: $white;
 		letter-spacing: .4px;
+		border: 1px solid #ccc;
+		color: $dark_gray_alpha;
+
 	}
 
 
 	.color.candidate {
-		background-color: $light_gray_alpha;
-		color: $dark_gray_alpha;
+		background-color: $super_light_gray;
 	}
 
 	.color.survey {
-		background-color: $dark_gray_alpha;
+		background-color: $super_light_purple;
 	}
 
 	.color.preview {
 		background-color: $purple_alpha;
 	}
 }
+
+#chart svg {
+	opacity: .7;
+}
+
+#filters {
+	button {
+		-webkit-border-radius: 0;
+		-moz-border-radius: 0;
+		border-radius: 0;
+		border: 1px solid $light_gray;
+		background-color: $white_alpha;
+		border-left: 4px solid $purple;
+		color: $black;
+		padding: 3px 9px 3px 6px;
+	}
+}
+
