@@ -198,7 +198,7 @@ a:hover {
 
 .warning {
   padding: 10px;
-  background-color: #dddddd;
+  background-color: rgba(0, 0, 0, 0.05);
   -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3);
   -moz-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3);
   box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3); }
@@ -288,7 +288,7 @@ a:hover {
     position: absolute;
     width: 178px;
     padding: 10px;
-    background-color: #dddddd !important;
+    background-color: rgba(0, 0, 0, 0.15) !important;
     border: 1px solid #d61111;
     top: 89px;
     color: #d61111 !important;
@@ -339,7 +339,7 @@ a:hover {
     border-color: #472b74;
     color: #472b74; }
 .m-homepage .m-homepage-press {
-  background-color: #dddddd;
+  background-color: rgba(0, 0, 0, 0.15);
   padding: 10px;
   text-align: center;
   margin-top: 20px;
@@ -537,7 +537,7 @@ a:hover {
 .m-candidates .m-filter-menu {
   width: 200px;
   float: right;
-  border-left: 1px solid #dddddd;
+  border-left: 1px solid rgba(0, 0, 0, 0.15);
   padding-left: 75px; }
   .m-candidates .m-filter-menu h3 {
     margin-bottom: 10px;
@@ -565,15 +565,15 @@ a:hover {
 .m-candidates-item {
   list-style-type: none;
   padding: 15px;
-  background-color: rgba(0, 0, 0, 0.2);
-  width: 15.625%;
-  height: 150px;
+  background-color: rgba(0, 0, 0, 0.05);
+  width: 20.625%;
+  height: 165px;
   float: left;
   margin: 5px;
   color: #444444;
   overflow: hidden;
   cursor: pointer;
-  border: 1px solid transparent; }
+  border: 1px solid #ccc; }
   .m-candidates-item h3 {
     color: #472b74;
     margin-top: 0;
@@ -584,11 +584,14 @@ a:hover {
     text-overflow: ellipsis;
     width: 150px;
     line-height: 1.3em; }
+  .m-candidates-item p {
+    margin-top: 0; }
   .m-candidates-item .m-homepage-list-desc {
-    width: 152px;
+    width: 195px;
     height: 80px;
     overflow: hidden;
-    color: #444444; }
+    color: #444444;
+    margin-top: 5px; }
   .m-candidates-item em {
     color: #444444;
     display: block;
@@ -601,9 +604,7 @@ a:hover {
     width: 150px; }
 
 .m-candidates-item.survey-company {
-  background-color: rgba(0, 0, 0, 0.6); }
-  .m-candidates-item.survey-company h3, .m-candidates-item.survey-company .m-homepage-list-desc, .m-candidates-item.survey-company em {
-    color: white; }
+  background-color: rgba(71, 43, 116, 0.1); }
 
 .m-candidates-item.preview-company {
   background-color: rgba(71, 43, 116, 0.9); }
@@ -621,22 +622,37 @@ a:hover {
 
 .legend {
   text-align: center;
-  border: 1px solid #aaaaaa;
+  border: 1px solid rgba(0, 0, 0, 0.05);
   margin-bottom: 20px;
-  padding: 5px; }
+  padding: 5px;
+  font-weight: 300; }
   .legend .color {
     display: inline-block;
     margin: 0 3px;
     padding: 4px 10px;
     color: white;
-    letter-spacing: .4px; }
-  .legend .color.candidate {
-    background-color: rgba(0, 0, 0, 0.2);
+    letter-spacing: .4px;
+    border: 1px solid #ccc;
     color: rgba(0, 0, 0, 0.6); }
+  .legend .color.candidate {
+    background-color: rgba(0, 0, 0, 0.05); }
   .legend .color.survey {
-    background-color: rgba(0, 0, 0, 0.6); }
+    background-color: rgba(71, 43, 116, 0.1); }
   .legend .color.preview {
     background-color: rgba(71, 43, 116, 0.9); }
+
+#chart svg {
+  opacity: .7; }
+
+#filters button {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  border: 1px solid #aaaaaa;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-left: 4px solid #472b74;
+  color: #444444;
+  padding: 3px 9px 3px 6px; }
 
 .m-download {
   text-align: center;
@@ -701,7 +717,7 @@ a:hover {
     .resource-panel ul li {
       list-style: none;
       margin-bottom: 5px;
-      border-bottom: 1px solid #dddddd;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.15);
       padding-bottom: 5px;
       padding-left: 15px;
       position: relative; }
@@ -719,7 +735,7 @@ a:hover {
 .resource-logo {
   text-align: center;
   display: block;
-  border-bottom: 1px solid #dddddd;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
   padding-bottom: 10px;
   margin-bottom: 20px; }
 
