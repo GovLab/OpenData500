@@ -211,8 +211,12 @@ a:hover {
     width: 200px; }
 
 .m-homepage h1 {
+  margin: 0 0 10px 0;
+  font-size: 4em; }
+.m-homepage .pre-launch {
   margin: 0 0 60px 0;
   font-size: 4em; }
+
 .m-homepage .separator-title {
   margin-top: 20px;
   border-top: 1px solid #8977a7;

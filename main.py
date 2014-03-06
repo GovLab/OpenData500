@@ -986,9 +986,9 @@ class DownloadHandler(BaseHandler):
     #@tornado.web.authenticated
     def get(self):
         self.render(
-            "download.html",
-            page_title='Download Data',
-            page_heading='Download Data',
+            "comingSoon.html",
+            page_title='Coming Soon',
+            page_heading='Coming Soon',
         )
 
 class LoadEverythingNewHandler(BaseHandler):
