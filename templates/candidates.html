@@ -43,13 +43,7 @@
 	</div>
 </div>
 
-<div id="hidden" style="display:none;"><[{% for s in stats.states %}
-    {% if s.abbrev == "PR" %}
-        {"abbrev": "{{s.abbrev}}","STATE":"{{s.name}}","VALUE":"{{s.count}}"}
-    {%else%}
-        {"abbrev": "{{s.abbrev}}","STATE":"{{s.name}}","VALUE":"{{s.count}}"},
-    {%end%}
-    {%end%}]></[{%for s in stats.states %}{% if s.abbrev == "PR" %}{"abbrev": "{{s.abbrev}}","STATE":"{{s.name}}","VALUE":"{{s.count}}"}{%else%}{"abbrev": "{{s.abbrev}}","STATE":"{{s.name}}","VALUE":"{{s.count}}"},{%end%}{%end%}]></div>
+<div id="hidden" style="display:none;"><[{% for s in stats.states %}{% if s.abbrev == "PR" %}{"abbrev": "{{s.abbrev}}","STATE":"{{s.name}}","VALUE":"{{s.count}}"}{%else%}{"abbrev": "{{s.abbrev}}","STATE":"{{s.name}}","VALUE":"{{s.count}}"},{%end%}{%end%}]></[{%for s in stats.states %}{% if s.abbrev == "PR" %}{"abbrev": "{{s.abbrev}}","STATE":"{{s.name}}","VALUE":"{{s.count}}"}{%else%}{"abbrev": "{{s.abbrev}}","STATE":"{{s.name}}","VALUE":"{{s.count}}"},{%end%}{%end%}]></div>
 
 
 <script src="{{ static_url("js/d3.v3.min.js") }}"></script>
@@ -160,7 +154,7 @@
         this.BackgroundColor = 'transparent';
         //States
         this.StateBaseColor = '#eeeeee';
-        this.StateMaxColor = '#472b74';
+        this.StateMaxColor = '#4a2f76';
         this.Range = 40;
         this.LineThickness = .6;
         this.LineColor = '#888';
@@ -231,7 +225,7 @@
                 
             var bkgdColor = document.getElementsByTagName("body")[0];
             bkgdColor.setAttribute("style","background-color:" + backgroundColor + ";margin:0px;");
-            
+
             var elem = document.getElementById("chart");
             elem.setAttribute("style","width:" + w + "; height:" + h + "; ");
             

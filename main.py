@@ -70,7 +70,7 @@ class Application(tornado.web.Application):
             (r"/admin/edit/([a-zA-Z0-9]{24})/?", AdminEditCompanyHandler),
             (r"/about/?", AboutHandler),
             (r"/resources/?", ResourcesHandler),
-            #(r"/generateFiles/?", GenerateFilesHandler),
+            (r"/generateFiles/?", GenerateFilesHandler),
             (r"/download/?", DownloadHandler),
             (r'/download/(.*)/?',tornado.web.StaticFileHandler, {'path':os.path.join(os.path.dirname(__file__), 'static')}),
             #(r"/upload50/?", Upload50Handler),
@@ -368,7 +368,7 @@ class ValidateHandler(BaseHandler):
         #check if companyName exists:
         companyName = self.get_argument("companyName", None)
         try: 
-            c = models.Company2.objects.get(companyName=companyName)
+            c = models.Company2.objects.get(prettyName=re.sub(r'([^\s\w])+', '', companyName).replace(" ", "-").title())
             self.write('{ "error": "This company has already been submitted. Email opendata500@thegovlab.org for questions." }')
         except:
             self.write('true')
@@ -1192,180 +1192,101 @@ class EverythingHandler(BaseHandler):
 
         
 
+
 class GenerateFilesHandler(BaseHandler):
     @tornado.web.addslash
     @tornado.web.authenticated
     def get(self):
-        #Get published companies, turn each one into an array and put into CSV file
-        companies = models.Company.objects()
-        #make a csv for states info
-        statesCount = []
-        for c in companies:
-            statesCount.append(c.state)
-        count = [(i, statesCount.count(i)) for i in set(statesCount)]
-        csvwriter = csv.writer(open(os.path.join(os.path.dirname(__file__), 'static') + "/states.csv", "w"))
-        csvwriter.writerow(['abbrev','state','value'])
-        for s in states:
-            abbrev = s
-            stateName = states[s]
-            value = 0
-            for c in count:
-                if c[0] == abbrev:
-                    value = c[1]
-            newrow = [abbrev, stateName, value]
-            for i in range(len(newrow)):  # For every value in our newrow
-                    if hasattr(newrow[i], 'encode'):
-                        newrow[i] = newrow[i].encode('utf8')
-            csvwriter.writerow(newrow)
-        #CSV of List of 50
-        companies = models.Company.objects(Q(vetted=True) & Q(vettedByCompany=True))
-        csvwriter = csv.writer(open(os.path.join(os.path.dirname(__file__), 'static') + "/Preview50_Companies.csv", "w"))
+        #---CSV OF ALL COMPANIES----
+        companies = models.Company2.objects(display=True)
+        csvwriter = csv.writer(open(os.path.join(os.path.dirname(__file__), 'static') + "/companies.csv", "w"))
         csvwriter.writerow([
+            'company_name_id',
             'CompanyName',
-            'URL',
+            'url',
             'city',
-            'STATE',
-            'abbrev',
+            'state',
             'zipCode',
             'ceoFirstName',
             'ceoLastName',
-            'companyPreviousName',
             'yearFounded',
-            'FTE',
+            'fte',
             'companyType',
             'companyCategory',
-            'companyFunction',
-            'sectors',
             'revenueSource',
-            'descriptionLong',
+            'description',
             'descriptionShort',
-            'socialImpact',
-            'financialInfo',
-            'criticalDataTypes',
-            'datasetName',
-            'datasetURL',
-            'agencyOrDatasetSource',
-            'DATASETS'
+            'financialInfo'
             ])
-        logging.info(len(companies))
         for c in companies:
-            if len(c.datasets):
-                try: 
-                    state = states[str(c.state).replace(" ","")] #I think this is actually the abbreviation
-                except: 
-                    state = ''
-                for d in c.datasets:
-                    newrow = [
-                        c.companyName,
-                        c.url,
-                        c.city,
-                        state,
-                        c.state,
-                        c.zipCode,
-                        c.ceo.firstName,
-                        c.ceo.lastName,
-                        c.previousName,
-                        c.yearFounded,
-                        c.fte,
-                        c.companyType,
-                        c.companyCategory,
-                        c.companyFunction,
-                        ', '.join(c.sector),
-                        ', '.join(c.revenueSource),
-                        c.descriptionLong,
-                        c.descriptionShort,
-                        c.socialImpact,
-                        c.financialInfo,
-                        ', '.join(c.criticalDataTypes),
-                        d.datasetName,
-                        d.datasetURL,
-                        d.agency,
-                        len(c.datasets)
-                    ]
-                    for i in range(len(newrow)):  # For every value in our newrow
-                        if hasattr(newrow[i], 'encode'):
-                            newrow[i] = newrow[i].encode('utf8')
-                    csvwriter.writerow(newrow)
-            else: 
-                try: 
-                    stateAbbrev = states[str(c.state).replace(" ","")] #This might the full name, and not the abbrev.
-                except: 
-                    stateAbbrev = ''
-                newrow = [
-                        c.companyName,
-                        c.url,
-                        c.city,
-                        stateAbbrev,
-                        c.state,
-                        c.zipCode,
-                        c.ceo.firstName,
-                        c.ceo.lastName,
-                        c.previousName,
-                        c.yearFounded,
-                        c.fte,
-                        c.companyType,
-                        c.companyCategory,
-                        c.companyFunction,
-                        ', '.join(c.sector),
-                        ', '.join(c.revenueSource),
-                        c.descriptionLong,
-                        c.descriptionShort,
-                        c.socialImpact,
-                        c.financialInfo,
-                        ', '.join(c.criticalDataTypes),
-                        '',
-                        '',
-                        '',
-                        len(c.datasets)
-                    ]
-                for i in range(len(newrow)):  # For every value in our newrow
-                    if hasattr(newrow[i], 'encode'):
-                        newrow[i] = newrow[i].encode('utf8')
-                csvwriter.writerow(newrow)
-        #Do that shit again for the 500. 
-        companies = models.Company.objects()
-        csvwriter = csv.writer(open(os.path.join(os.path.dirname(__file__), 'static') + "/500_Companies.csv", "w"))
-        csvwriter.writerow([
-            'CompanyName',
-            'URL',
-            'city',
-            'STATE',
-            'abbrev',
-            'companyCategory',
-            'descriptionShort',
-            ])
-        for c in companies: 
-            try: 
-                stateAbbrev = states[str(c.state).replace(" ","")] #This might the full name, and not the abbrev.
-            except: 
-                stateAbbrev = ''
             newrow = [
-            c.companyName,
-            c.url,
-            c.city,
-            stateAbbrev,
-            c.state,
-            c.companyCategory,
-            c.descriptionShort
+                c.prettyName,
+                c.companyName,
+                c.url,
+                c.city,
+                c.state,
+                c.zipCode,
+                c.ceo.firstName,
+                c.ceo.lastName,
+                c.yearFounded,
+                c.fte,
+                c.companyType,
+                c.companyCategory,
+                ', '.join(c.revenueSource),
+                c.description,
+                c.descriptionShort,
+                c.financialInfo,
             ]
             for i in range(len(newrow)):  # For every value in our newrow
                 if hasattr(newrow[i], 'encode'):
                     newrow[i] = newrow[i].encode('utf8')
             csvwriter.writerow(newrow)
-        #Get companies, turn into objects, and then dump into JSON File
-        companies = models.Company.objects(Q(vetted=True) & Q(vettedByCompany=True))
+        #------COMPANIES JSON---------
+        companies = models.Company2.objects(display=True)
         companiesJSON = []
         for c in companies:
-            datasetIDs = []
-            for d in c.datasets:
-                i = str(d.id)
-                j, k, l, m = i[:len(i)/4], i[len(i)/4:2*len(i)/4], i[2*len(i)/4:3*len(i)/4], i[3*len(i)/4:]
-                datasetIDs.append(l + m + k + j)
-            i = str(c.id)
-            j, k, l, m = i[:len(i)/4], i[len(i)/4:2*len(i)/4], i[2*len(i)/4:3*len(i)/4], i[3*len(i)/4:]
-            companyID = l + m + k + j
+            agencies = []
+            for a in c.agencies:
+                datasets_agency = []
+                for d in a.datasets:
+                    if c == d.usedBy:
+                        ds = {
+                            "datasetName":d.datasetName,
+                            "datasetURL":d.datasetURL,
+                            "rating":d.rating
+                        }
+                        datasets_agency.append(ds)
+                subagencies = []
+                for s in a.subagencies:
+                    if c in s.usedBy:
+                        datasets_subagency = []
+                        for d in s.datasets:
+                            if c == d.usedBy:
+                                ds = {
+                                    "datasetName":d.datasetName,
+                                    "datasetURL":d.datasetURL,
+                                    "rating":d.rating
+                                }
+                                datasets_subagency.append(ds)
+                        sub = {
+                            "name":s.name,
+                            "abbrev":s.abbrev,
+                            "url":s.url,
+                            "datasets":datasets_subagency
+                        }
+                        subagencies.append(sub)
+                ag = {
+                    "name": a.name,
+                    "abbrev":a.abbrev,
+                    "prettyName":a.prettyName,
+                    "url": a.url,
+                    "type":a.dataType,
+                    "datasets":datasets_agency,
+                    "subagencies":subagencies
+                }
+                agencies.append(ag)
             company = {
-                "companyID": companyID,
+                "company_name_id": c.prettyName,
                 "companyName": c.companyName,
                 "url": c.url,
                 "city": c.city,
@@ -1373,47 +1294,61 @@ class GenerateFilesHandler(BaseHandler):
                 "zipCode": c.zipCode,
                 "ceoFirstName": c.ceo.firstName,
                 "ceoLastName": c.ceo.lastName,
-                "previousName": c.previousName,
                 "yearFounded": c.yearFounded,
                 "fte": c.fte,
                 "companyType": c.companyType,
                 "companyCategory": c.companyCategory,
-                "companyFunction": c.companyFunction,
-                "sector": c.sector,
                 "revenueSource": c.revenueSource,
-                "descriptionLong": c.descriptionLong,
+                "description": c.description,
                 "descriptionShort": c.descriptionShort,
-                "socialImpact": c.socialImpact,
-                "socialInfo": c.financialInfo,
-                "criticalDataTypes": c.criticalDataTypes,
-                "datasets": datasetIDs
+                "agencies":agencies,
+                "subagencies":subagencies
             }
+            logging.info(company)
             companiesJSON.append(company)
         with open(os.path.join(os.path.dirname(__file__), 'static') + '/OD500_Companies.json', 'w') as outfile:
             json.dump(companiesJSON, outfile)
-        #Get Datasets, turn into objects, and then dump into JSON file
-        datasets = models.Dataset.objects()
-        datasetsJSON = []
-        for d in datasets:
-            companyIDs = []
-            for c in d.usedBy:
-                i = str(c.id)
-                j, k, l, m = i[:len(i)/4], i[len(i)/4:2*len(i)/4], i[2*len(i)/4:3*len(i)/4], i[3*len(i)/4:]
-                companyIDs.append(l + m + k + j)
-            i = str(d.id)
-            j, k, l, m = i[:len(i)/4], i[len(i)/4:2*len(i)/4], i[2*len(i)/4:3*len(i)/4], i[3*len(i)/4:]
-            datasetID = l + m + k + j
-            dataset = {
-                "datasetID": datasetID,
-                "datasetName": d.datasetName,
-                "datasetURL": d.datasetURL,
-                "source": d.agency,
-                "usedByCompany": companyIDs
+        #--------------JSON OF DATASETS------------
+        agencies = models.Agency.objects(source="dataGov")
+        ags = []
+        for a in c.agencies:
+            datasets_agency = []
+            for d in a.datasets:
+                ds = {
+                    "datasetName":d.datasetName,
+                    "datasetURL":d.datasetURL,
+                    "rating":d.rating
+                }
+                datasets_agency.append(ds)
+            subagencies = []
+            for s in a.subagencies:
+                datasets_subagency = []
+                for d in s.datasets:
+                    ds = {
+                        "datasetName":d.datasetName,
+                        "datasetURL":d.datasetURL,
+                        "rating":d.rating
+                    }
+                    datasets_subagency.append(ds)
+                sub = {
+                    "name":s.name,
+                    "abbrev":s.abbrev,
+                    "url":s.url,
+                    "datasets":datasets_subagency
+                }
+                subagencies.append(sub)
+            ag = {
+                "name": a.name,
+                "abbrev":a.abbrev,
+                "prettyName":a.prettyName,
+                "url": a.url,
+                "type":a.dataType,
+                "datasets":datasets_agency,
+                "subagencies":subagencies
             }
-            datasetsJSON.append(dataset)
-        with open(os.path.join(os.path.dirname(__file__), 'static') + '/OD500_Datasets.json', 'w') as outfile:
-            json.dump(datasetsJSON, outfile)
-        self.redirect('/admin/')
+            ags.append(ag)
+
+        self.write('success')
 
 
 class CompanyModule(tornado.web.UIModule):
