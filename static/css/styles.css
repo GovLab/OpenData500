@@ -608,7 +608,7 @@ a:hover {
     width: 150px; }
 
 .m-candidates-item.survey-company {
-  background-color: rgba(71, 43, 116, 0.4); }
+  background-color: rgba(71, 43, 116, 0.3); }
 
 .m-candidates-item.preview-company {
   background-color: rgba(71, 43, 116, 0.9); }
@@ -641,7 +641,7 @@ a:hover {
   .legend .color.candidate {
     background-color: rgba(0, 0, 0, 0.05); }
   .legend .color.survey {
-    background-color: rgba(71, 43, 116, 0.4); }
+    background-color: rgba(71, 43, 116, 0.3); }
   .legend .color.preview {
     background-color: rgba(71, 43, 116, 0.9); }
 
@@ -663,7 +663,7 @@ a:hover {
   -moz-border-radius: 0;
   border-radius: 0;
   border: 1px solid #aaaaaa;
-  background-color: #472b74;
+  background-color: rgba(71, 43, 116, 0.6);
   border-left: 4px solid #472b74;
   color: white;
   padding: 3px 9px 3px 6px; }
@@ -672,7 +672,7 @@ a:hover {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
   border-radius: 0;
-  border: 1px solid #aaaaaa;
+  border: 1px solid #472b74;
   background-color: #472b74;
   border-left: 4px solid #472b74;
   color: white;
