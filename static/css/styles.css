@@ -991,8 +991,12 @@ h2.disclaimer-text {
   font-size: 12px;
 }
 
-.m-form-box h3 {
-  font-size: 1em;
+.data-text {
+  font-size: 1.2em;
+  font-weight: 300;
+}
+.m-form-half h3 {
+  font-size: 1.2em;
 }
 
 .submitCompanyForm, .saveCompanyForm, .saveCompanyForm-new {
