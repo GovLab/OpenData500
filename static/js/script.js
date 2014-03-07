@@ -397,7 +397,7 @@ $(document).ready(function() {
 
   //----------------------------------SUBMIT FORM--------------------------------------
   $('.submitCompanyForm').on('click', '#companySubmit', function() {
-    if ($('.companyForm').parsley('validate')) {
+    if ($('.companyForm').parsley('validate') && $('#dataComments').parsley('validate')) {
       console.log('valid');
       $('.savingMessage_companyEdit').show();
       var companyID = $('.companyID').val();
@@ -416,6 +416,8 @@ $(document).ready(function() {
           $(event.target).attr('disabled', 'disabled'); },
         success: function(success) {
           console.log(success);
+          $('.savingMessage_companyEdit').hide();
+          $('.savedMessage_companyEdit').show();
           document.location.href = '/thanks/';
         }
       });
