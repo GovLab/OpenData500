@@ -97,14 +97,20 @@
 							{% end %}{% end %} <!-- END OF SUBAGENCIES !-->
 						</div>
 					</div>
-				{% end %}
+				{% end %}<!-- END OF AGENCIES !-->
 			</div><br>
 		</div>
+		<form method="post" class="m-form data-comment-form">
+			<fieldset class="m-form-half right">
+				<h3>Please give your comments, good or bad, about the usefulness of all these data sources and datasets and what would make them more useful. <br><em>[100 words or less]</em></h3>
+				<textarea rows="10" cols="59" name="dataComments" id="dataComments" parsley-trigger="keyup" parsley-maxwords="100">{%if company.dataComments %}{{ company.dataComments }}{% end %}</textarea><br>
+			</fieldset>
+		</form>
 	</div>
 <!--------------------------------------------END DATASETS--------------------------------------!-->
 
 <div class="finish-data-submit">	
-	<a href="/thanks/"><input type="button" class="l-button" value="Save And Finish"></a>
+	<input type="button" class="l-button data-submit-button" value="Save And Finish">
 </div>
 
 

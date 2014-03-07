@@ -509,6 +509,12 @@ class SubmitDataHandler(BaseHandler):
         agencyName = self.get_argument("agency", None)
         subagencyName = self.get_argument("subagency", None)
         action = self.get_argument("action", None)
+        #------------------------------------JUST SAVE DATA COMMENT QUESTION------------------------
+        if action == "dataComments":
+            logging.info("saving " + self.get_argument('dataComments', None))
+            company.dataComments = self.get_argument('dataComments', None)
+            company.save()
+            self.write("success")
         #------------------------------------ADDING AGENCY/SUBAGENCY------------------------
         if action == "add agency":
             #Existing AGENCY
@@ -742,6 +748,7 @@ class EditCompanyHandler(BaseHandler):
         company.financialInfo = self.get_argument('financialInfo', None)
         company.datasetWishList = self.get_argument('datasetWishList', None)
         company.sourceCount = self.get_argument('sourceCount', None) 
+        company.dataComments = self.get_argument("dataComments", None)
         company.datasetComments = self.get_argument('datasetComments', None)
         company.submittedSurvey = True
         company.vettedByCompany = True

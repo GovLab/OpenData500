@@ -369,6 +369,32 @@ $(document).ready(function() {
       $(this).find('.toolbar').hide();
     }
   }, '.agency, .subagency');
+  //----------------------------------SUBMIT DATASET QUESTION--------------------------------------
+  $('.finish-data-submit').on('click', '.data-submit-button', function() {
+    console.log("sdsdfsdf")
+    if( $('.data-comment-form').parsley('validate')) {
+      var companyID = $('.companyID').val();
+      //console.log(companyID);
+      var data = { "dataComments": $('#dataComments').val(), "action":"dataComments", "_xsrf": $("[name='_xsrf']").val() };
+      $.ajax({
+        type: 'POST',
+        url: '/addData/' + companyID,
+        data: data,
+        error: function(error) {
+            console.debug(JSON.stringify(error));
+        },
+        beforeSend: function(xhr, settings) {
+          $(event.target).attr('disabled', 'disabled'); },
+        success: function(success) {
+          console.log(success);
+          document.location.href = '/thanks/';
+        }
+      });
+    } else {
+      console.log("form not valid");
+    }
+  })
+
   //----------------------------------SUBMIT FORM--------------------------------------
   $('.submitCompanyForm').on('click', '#companySubmit', function() {
     if ($('.companyForm').parsley('validate')) {
@@ -376,6 +402,8 @@ $(document).ready(function() {
       $('.savingMessage_companyEdit').show();
       var companyID = $('.companyID').val();
       var data = $('.companyForm').serializeArray();
+      data.push({ "name": "dataComments", "value": $('#dataComments').val() });
+      //console.log(data);
       $.ajax({
         type: 'POST',
         url: '/edit/' + companyID,
@@ -388,7 +416,7 @@ $(document).ready(function() {
           $(event.target).attr('disabled', 'disabled'); },
         success: function(success) {
           console.log(success);
-          document.location.href = '/thanks/';
+          //document.location.href = '/thanks/';
         }
       });
     } else {

@@ -198,6 +198,10 @@
 			{% end %}
 		</div><br>
 	</div>
+	<fieldset class="m-form-half right">
+		<h3>Please give your comments, good or bad, about the usefulness of all these data sources and datasets and what would make them more useful. <br><em>[100 words or less]</em></h3>
+		<textarea rows="10" cols="59" name="dataComments" id="dataComments" parsley-trigger="keyup" parsley-maxwords="100">{%if company.dataComments %}{{ company.dataComments }}{% end %}</textarea><br>
+	</fieldset>
 </div>
 <!--------------------------------------------END DATASETS--------------------------------------!-->
 <h2 class="disclaimer-text">Your responses will become part of a public database of information on Open Data companies. By submitting this form you are agreeing that, other than personal contact information, this information will be part of a publicly available database.</h2><br>
