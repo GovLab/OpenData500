@@ -416,7 +416,7 @@ $(document).ready(function() {
           $(event.target).attr('disabled', 'disabled'); },
         success: function(success) {
           console.log(success);
-          //document.location.href = '/thanks/';
+          document.location.href = '/thanks/';
         }
       });
     } else {
