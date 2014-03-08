@@ -993,9 +993,9 @@ class DownloadHandler(BaseHandler):
     #@tornado.web.authenticated
     def get(self):
         self.render(
-            "comingSoon.html",
-            page_title='Coming Soon',
-            page_heading='Coming Soon',
+            "download.html",
+            page_title='Download the Open Data 500',
+            page_heading='Download the Open Data 500'
         )
 
 class LoadEverythingNewHandler(BaseHandler):
@@ -1311,39 +1311,51 @@ class GenerateFilesHandler(BaseHandler):
                 "agencies":agencies,
                 "subagencies":subagencies
             }
-            logging.info(company)
             companiesJSON.append(company)
         with open(os.path.join(os.path.dirname(__file__), 'static') + '/OD500_Companies.json', 'w') as outfile:
             json.dump(companiesJSON, outfile)
-        #--------------JSON OF DATASETS------------
+        #--------------JSON OF AGENCIES------------
         agencies = models.Agency.objects(source="dataGov")
-        ags = []
-        for a in c.agencies:
+        agenciesJSON = []
+        for a in agencies:
+            #--------DATASETS AT AGENCY LEVEL------
             datasets_agency = []
             for d in a.datasets:
                 ds = {
                     "datasetName":d.datasetName,
                     "datasetURL":d.datasetURL,
-                    "rating":d.rating
+                    "rating":d.rating,
+                    "usedBy":d.usedBy.prettyName
                 }
                 datasets_agency.append(ds)
+            #--------SUBAGENCIES------
             subagencies = []
             for s in a.subagencies:
                 datasets_subagency = []
                 for d in s.datasets:
+                    logging.info(d.datasetName)
                     ds = {
                         "datasetName":d.datasetName,
                         "datasetURL":d.datasetURL,
-                        "rating":d.rating
+                        "rating":d.rating,
+                        "usedBy": d.usedBy.prettyName
                     }
                     datasets_subagency.append(ds)
+                usedBy = []
+                for u in s.usedBy:
+                    usedBy.append(u.prettyName)
                 sub = {
                     "name":s.name,
                     "abbrev":s.abbrev,
                     "url":s.url,
-                    "datasets":datasets_subagency
+                    "datasets":datasets_subagency,
+                    "usedBy":usedBy
                 }
                 subagencies.append(sub)
+            #--------SUBAGENCIES------
+            usedBy = []
+            for u in a.usedBy:
+                usedBy.append(u.prettyName)
             ag = {
                 "name": a.name,
                 "abbrev":a.abbrev,
@@ -1351,10 +1363,12 @@ class GenerateFilesHandler(BaseHandler):
                 "url": a.url,
                 "type":a.dataType,
                 "datasets":datasets_agency,
-                "subagencies":subagencies
+                "subagencies":subagencies,
+                "usedBy":usedBy
             }
-            ags.append(ag)
-
+            agenciesJSON.append(ag)
+        with open(os.path.join(os.path.dirname(__file__), 'static') + '/OD500_Agencies.json', 'w') as outfile:
+            json.dump(agenciesJSON, outfile)
         self.write('success')
 
 
