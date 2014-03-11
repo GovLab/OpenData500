@@ -13,7 +13,7 @@
 		<h3>Personal Information</h3>
 		<div class="m-form-line"><label for="">First Name: *</label><input type="text" name="firstName" id="firstName" parsley-required="true" {% if (company.contact) %} value="{{ company.contact.firstName }}" {% end %}></div>
 		<div class="m-form-line"><label for="">Last Name: *</label><input type="text" name="lastName" id="lastName" parsley-required="true" {% if (company.contact) %} value="{{ company.contact.lastName }}" {% end %}></div>
-		<div class="m-form-line"><label for="">Title:</label><input type="text" name="title" id="title" {% if (company.contact) %} value="{{ company.contact.title }}" {% end %}></div>
+		<div class="m-form-line"><label for="">Title: *</label><input type="text" name="title" id="title" parsley-required="true" {% if (company.contact) %} value="{{ company.contact.title }}" {% end %}></div>
 		<div class="m-form-line"><label for="">Email: *</label><input type="text" name="email" id="email" parsley-trigger="change" parsley-type="email" parsley-required="true" {% if (company.contact) %} value="{{ company.contact.email }}" {% end %}></div>
 		<div class="m-form-line"><label for="">Phone:</label><input type="text" name="phone" id="phone" parsley-trigger="change" parsley-type="phone" {% if (company.contact) %} value="{{ company.contact.phone }}" {% end %}></div>
 		<div class="m-form-box contacted-box"><label for="contacted"><input type="checkbox" name="contacted" id="contacted" value="contacted" {% if (company.contact) %}{% if company.contact.contacted %} checked {% end %}{% end %}>Please check here if you would be willing to be contacted for further information about your company.</label></div>
@@ -23,8 +23,8 @@
 		<div class="m-form-line"><label for="url">Company URL: *</label><input type='text' name="url" id='url' parsley-trigger="change" parsley-type="url" parsley-required="true" value="{{ company.url }}"></div>
 		<div class="m-form-line"><label for="city">In which city is this company located?</label><input type="text" name="city" id="city" {% if company.city %} value="{{ company.city }}" {% end %}></div>
 		<div class="m-form-line">
-			<label for="state">State:</label>
-			<select name='state' id="state" >
+			<label for="state">State: *</label>
+			<select name='state' id="state" parsley-required="true">
 				{% for i in range(0, 53) %}
 					<option name="state" value="{{stateListAbbrev[i]}}" {%try%}{%if company.state.replace(' ','') == stateListAbbrev[i] %} selected="selected" {%end%}{%except%}{%end%}>{{ stateList[i] }}</option>
 				{%end%}
@@ -45,8 +45,8 @@
 			<input type="text" name="otherCompanyType" id="otherCompanyType" data-trigger="change" data-group="companyType" data-mincheck="1"></label>
 		{% end %}
 		</div>
-		<div class="m-form-line"><label for="">Founding Year:</label><input type="text" name="yearFounded" id="yearFounded" parsley-type="number" parsley-trigger="change" parsley-range="[1000, 2014]" {% if company.yearFounded and company.yearFounded != 9999 %} value="{{ company.yearFounded }}" {%end%}></div>
-		<div class="m-form-line"><label for="">Number of FTE's:</label><input type="text" name="fte" id="fte" parsley-trigger="change" parsley-type="number" {% if company.fte %} value="{{ company.fte }}" {%end%}></div>
+		<div class="m-form-line"><label for="">Founding Year: *</label><input type="text" name="yearFounded" id="yearFounded" parsley-type="number" parsley-trigger="change" parsley-required="true" parsley-range="[1000, 2014]" {% if company.yearFounded and company.yearFounded != 9999 %} value="{{ company.yearFounded }}" {%end%}></div>
+		<div class="m-form-line"><label for="">Number of full-time employees: *</label><input type="text" name="fte" id="fte" parsley-trigger="change" parsley-type="number" parsley-required="true" {% if company.fte %} value="{{ company.fte }}" {%end%}></div>
 	</fieldset>
 	
 	<fieldset class="m-form-half">

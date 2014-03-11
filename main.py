@@ -1206,7 +1206,7 @@ class GenerateFilesHandler(BaseHandler):
     def get(self):
         #---CSV OF ALL COMPANIES----
         companies = models.Company2.objects(display=True)
-        csvwriter = csv.writer(open(os.path.join(os.path.dirname(__file__), 'static') + "/companies.csv", "w"))
+        csvwriter = csv.writer(open(os.path.join(os.path.dirname(__file__), 'static') + "/OD500_companies.csv", "w"))
         csvwriter.writerow([
             'company_name_id',
             'CompanyName',
