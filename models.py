@@ -108,6 +108,7 @@ class Company2(Document):
 	vetted = BooleanField() #vetted by us
 	vettedByCompany = BooleanField() #vetted by them
 	submittedThroughWebsite = BooleanField() #submitted through website
+	locked = BooleanField() #Locked from public editing
 
 
 

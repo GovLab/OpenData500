@@ -27,6 +27,7 @@ import json
 import re
 import bcrypt
 from datetime import datetime
+from utils import *
 
 # import and define tornado-y things
 from tornado.options import define
@@ -35,24 +36,11 @@ define("port", default=5000, help="run on the given port", type=int)
 #Connect to mongo
 connect('db', host=os.environ.get('MONGOLAB_URI'))
 
-#Just some global varbs. 
-favicon_path = '/static/img/favicon.ico'
-companyType = ['Public', 'Private', 'Nonprofit']
-companyFunction = ['Consumer Research and/or Marketing', 'Consumer Services', 'Data Management and Analysis', 'Financial/Investment Services', 'Information for Consumers']
-criticalDataTypes = ['Federal Open Data', 'State Open Data', 'City/Local Open Data', 'Private/Proprietary Data Sources']
-revenueSource = ['Advertising', 'Data Management and Analytic Services', 'Database Licensing', 'Lead Generation To Other Businesses', 'Philanthropy', 'Software Licensing', 'Subscriptions', 'User Fees for Web or Mobile Access']
-sectors = ['Agriculture', 'Arts, Entertainment and Recreation' 'Crime', 'Education', 'Energy', 'Environmental', 'Finance', 'Geospatial data/mapping', 'Health and Healthcare', 'Housing/Real Estate', 'Manufacturing', 'Nutrition', 'Scientific Research', 'Social Assistance', 'Trade', 'Transportation', 'Telecom', 'Weather']
-datatypes = ['Federal Open Data', 'State Open Data', 'City/Local Open Data']
-categories = ['Business & Legal Services', 'Data/Technology', 'Education', 'Energy', 'Environment & Weather', 'Finance & Investment', 'Food & Agriculture', 'Geospatial/Mapping', 'Governance', 'Healthcare', 'Housing/Real Estate', 'Insurance', 'Lifestyle & Consumer', 'Research & Consulting', 'Scientific Research', 'Transportation']
-states ={ "AL": "Alabama", "AK": "Alaska", "AZ": "Arizona", "AR": "Arkansas", "CA": "California", "CO": "Colorado", "CT": "Connecticut", "DE": "Delaware", "DC": "District of Columbia", "FL": "Florida", "GA": "Georgia", "HI": "Hawaii", "ID": "Idaho", "IL": "Illinois", "IN": "Indiana", "IA": "Iowa", "KA": "Kansas", "KY": "Kentucky", "LA": "Louisiana", "ME": "Maine", "MD": "Maryland", "MA": "Massachusetts", "MI": "Michigan", "MN": "Minnesota", "MS": "Mississippi", "MO": "Missouri", "MT": "Montana", "NE": "Nebraska", "NV": "Nevada", "NH": "New Hampshire", "NJ": "New Jersey", "NM": "New Mexico", "NY": "New York", "NC": "North Carolina", "ND": "North Dakota", "OH": "Ohio", "OK": "Oklahoma", "OR": "Oregon", "PA": "Pennsylvania", "RI": "Rhode Island", "SC": "South Carolina", "SD": "South Dakota", "TN": "Tennessee", "TX": "Texas", "UT": "Utah", "VT": "Vermont", "VA": "Virginia", "WA": "Washington", "WV": "West Virginia", "WI": "Wisconsin", "WY": "Wyoming", "PR": "Puerto Rico"}
-stateListAbbrev = [ "", "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KA", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY", "PR"]
-stateList = ["(Select State)", "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "District of Columbia", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming", "Puerto Rico"]
-
-
 # application settings and handle mapping info
 class Application(tornado.web.Application):
     def __init__(self):
         self.stats = StatsGenerator()
+        self.files = FileGenerator()
         handlers = [
             (r'/(favicon.ico)', tornado.web.StaticFileHandler, {"path": ""}),
             (r"/", MainHandler),
@@ -60,30 +48,22 @@ class Application(tornado.web.Application):
             (r"/validate/?", ValidateHandler),
             (r"/edit/([a-zA-Z0-9]{24})/?", EditCompanyHandler),
             (r"/addData/([a-zA-Z0-9]{24})/?", SubmitDataHandler),
-            #(r"/editData/([a-zA-Z0-9]{24})/?", EditDataHandler),
-            (r"/view/([a-zA-Z0-9]{24})/?", ViewHandler),
             (r"/media/?", MediaHandler),
             (r"/delete/([a-zA-Z0-9]{24})/?", DeleteCompanyHandler),
             (r"/deleteData/([a-zA-Z0-9]{24})/?", DeleteDatasetHandler),
-            #(r"/recommendCompany/?", RecommendCompanyHandler),
             (r"/admin/?", AdminHandler),
             (r"/admin/edit/([a-zA-Z0-9]{24})/?", AdminEditCompanyHandler),
             (r"/about/?", AboutHandler),
             (r"/resources/?", ResourcesHandler),
-            (r"/generateFiles/?", GenerateFilesHandler),
+            #(r"/files/?", FilesHandler),
             (r"/download/?", DownloadHandler),
             (r'/download/(.*)/?',tornado.web.StaticFileHandler, {'path':os.path.join(os.path.dirname(__file__), 'static')}),
-            #(r"/upload50/?", Upload50Handler),
-            #(r"/upload500/?", Upload500Handler),
-            #(r"/uploadAll/?", LoadEverythingNewHandler),
-            #(r"/uploadAgencies/?", UploadAgencies),
             (r"/candidates/?", CandidateHandler),
             (r"/preview/?", PreviewHandler),
             (r'/thanks/?', ThanksHandler),
             (r'/login/?', LoginHandler),
             (r'/logout/?', LogoutHandler),
             (r'/register/?', RegisterHandler),
-            #(r'/dump/?', EverythingHandler),
             (r"/media/?", MediaHandler),
             (r"/([^/]+)/?", CompanyHandler)
         ]
@@ -97,64 +77,6 @@ class Application(tornado.web.Application):
             login_url="/login"
         )
         tornado.web.Application.__init__(self, handlers, **settings)
-
-class StatsGenerator(object):
-    def get_total_companies(self):
-        return models.Stats.objects().first().totalCompanies
-    
-    def get_total_companies_web(self):
-        return models.Stats.objects().first().totalCompaniesWeb
-    
-    def get_total_companies_surveys(self):
-        return models.Stats.objects().first().totalCompaniesSurvey
-
-    def update_totals_companies(self):
-        s = models.Stats.objects().first()
-        s.totalCompanies = models.Company2.objects().count()
-        s.totalCompaniesWeb = models.Company2.objects(submittedThroughWebsite = True).count()
-        s.totalCompaniesSurvey = models.Company2.objects(submittedSurvey = True).count()
-    
-    def increase_individual_state_count(self, state):
-        stats = models.Stats.object().first()
-        for s in stats.states:
-            if s.name == state:
-                s.count = s.count + 1
-        stats.save()
-
-    def update_all_state_counts(self):
-        stats = models.Stats.objects().first()
-        companies  = models.Company2.objects(display=True)
-        stateCount = []
-        for c in companies:
-            stateCount.append(c.state)
-        stats.states = []
-        for i in range(1, 53):
-            s = models.States(
-                name = stateList[i],
-                abbrev = stateListAbbrev[i],
-                count = stateCount.count(stateListAbbrev[i]))
-            stats.states.append(s)
-        stats.save()
-
-    def refresh_stats(self):
-        stats = models.Stats.objects().first()
-        stats.totalCompanies = models.Company2.objects().count()
-        stats.totalCompaniesWeb = models.Company2.objects(submittedThroughWebsite = True).count()
-        stats.totalCompaniesSurvey = models.Company2.objects(submittedSurvey = True).count()
-        companies  = models.Company2.objects(display=True)
-        stateCount = []
-        for c in companies:
-            stateCount.append(c.state)
-        stats.states = []
-        for i in range(1, 53):
-            s = models.States(
-                name = stateList[i],
-                abbrev = stateListAbbrev[i],
-                count = stateCount.count(stateListAbbrev[i]))
-            stats.states.append(s)
-        stats.lastUpdate = datetime.now()
-        stats.save()
-
 
 class BaseHandler(tornado.web.RequestHandler): 
     def get_login_url(self):
@@ -177,7 +99,6 @@ class MainHandler(BaseHandler):
             page_title='Open Data500',
             page_heading='Welcome to the Open Data 500 Pre-Launch',
         )
-
 
 class LoginHandler(BaseHandler): 
     @tornado.web.addslash
@@ -287,6 +208,7 @@ class CompanyHandler(BaseHandler):
                 "404.html",
                 page_title='404 - Open Data500',
                 page_heading='Hmm...',
+                error = '404 - Not Found'
             )
         
 
@@ -679,21 +601,28 @@ class EditCompanyHandler(BaseHandler):
             self.render("404.html", 
                 page_title = "That ain't even a thing.",
                 page_heading = "Check yo'self",
+                error = "404 - Not Found",
                 message=id)
-        self.render("editCompany.html",
-            page_title = page_title,
-            page_heading = page_heading,
-            company = company,
-            companyType = companyType,
-            companyFunction = companyFunction,
-            criticalDataTypes = criticalDataTypes,
-            revenueSource = revenueSource,
-            categories=categories,
-            datatypes = datatypes,
-            stateList = stateList,
-            stateListAbbrev=stateListAbbrev,
-            id = str(company.id)
-        )
+        if company.locked:
+            self.render("404.html",
+                page_title = "Can't Edit This Company",
+                page_heading = "This company is locked from editing",
+                error = "locked")
+        else:
+            self.render("editCompany.html",
+                page_title = page_title,
+                page_heading = page_heading,
+                company = company,
+                companyType = companyType,
+                companyFunction = companyFunction,
+                criticalDataTypes = criticalDataTypes,
+                revenueSource = revenueSource,
+                categories=categories,
+                datatypes = datatypes,
+                stateList = stateList,
+                stateListAbbrev=stateListAbbrev,
+                id = str(company.id)
+            )
 
     def post(self, id):
         #get the company you will be editing
@@ -752,14 +681,11 @@ class EditCompanyHandler(BaseHandler):
         company.datasetComments = self.get_argument('datasetComments', None)
         company.submittedSurvey = True
         company.vettedByCompany = True
+        if company.display: #only if company is displayed
+            self.application.stats.update_all_state_counts()
         company.save()
-        self.application.stats.update_all_state_counts()
+        #self.application.stats.update_all_state_counts()
         self.write('success')
-        #self.redirect('/thanks/')
-        # if self.get_argument('submit', None) == 'Save and Submit':
-        #     self.redirect('/')
-        # if self.get_argument('submit', None) == 'Save And Continue Editing':
-        #     self.redirect('/edit/'+id)
 
 #Editing section for Admins
 class AdminEditCompanyHandler(BaseHandler):
@@ -770,7 +696,11 @@ class AdminEditCompanyHandler(BaseHandler):
         page_heading = "Editing " + company.companyName + ' (Admin)'
         page_title = "Editing " + company.companyName + ' (Admin)'
         if company is None:
-            self.render("404.html", message=id)
+            self.render("404.html",
+                page_heading = page_heading,
+                page_title = page_title,
+                error = "404 - Not Found",
+                message=id)
         self.render("adminEditCompany.html",
             page_title = page_title,
             page_heading = page_heading,
@@ -857,6 +787,10 @@ class AdminEditCompanyHandler(BaseHandler):
             company.display = True
         else: 
             company.display = False
+        if self.get_argument("locked", None) == "locked":
+            company.locked = True
+        else: 
+            company.locked = False
         company.save()
         self.application.stats.update_all_state_counts()
         self.write('success')
@@ -926,6 +860,7 @@ class DeleteCompanyHandler(BaseHandler):
                 "404.html",
                 page_title='404 - Open Data500',
                 page_heading='Oh no...',
+                error = "404 - Not Found"
             )
         #-----REMOVE FROM ALL AGENCIES-----
         agencies = models.Agency.objects(usedBy__in=[str(company.id)])
@@ -953,41 +888,6 @@ class DeleteCompanyHandler(BaseHandler):
         company.delete()
         self.redirect('/admin/')
 
-
-class ViewHandler(BaseHandler):
-    @tornado.web.authenticated
-    def get(self, id):
-        c = models.Company.objects.get(id=bson.objectid.ObjectId(id))
-        obj = {
-            "_id": {
-                "$oid": str(c.id)
-            },
-            "companyName": c.companyName,
-            "url": c.url,
-            "submitter": {
-                "firstName": c.submitter.firstName,
-                "lastName": c.submitter.lastName,
-                "personType": c.submitter.personType,
-                "email": c.submitter.email,
-                "title": c.submitter.title,
-                "phone": c.submitter.phone,
-                "org": c.submitter.org,
-                "otherInfo": c.submitter.otherInfo,
-                "contacted": c.submitter.contacted,
-                "conferenceRec": c.submitter.conferenceRec
-            },
-            "contact": {
-                "firstName": c.contact.firstName,
-                "lastName": c.contact.lastName,
-                "email": c.contact.email,
-                "type": c.contact.personType
-            },
-            "reasonForRecommending": c.reasonForRecommending,
-            "vetted": c.vetted,
-            "ts": str(c.ts),
-        }
-        self.write(json_encode(obj))
-
 class DownloadHandler(BaseHandler):
     @tornado.web.addslash
     #@tornado.web.authenticated
@@ -997,380 +897,6 @@ class DownloadHandler(BaseHandler):
             page_title='Download the Open Data 500',
             page_heading='Download the Open Data 500'
         )
-
-class LoadEverythingNewHandler(BaseHandler):
-    def get(self):
-        file = open("AllCompanies.json", "r")
-        companies = []
-        for line in file:
-            companies.append(json.loads(line))
-        companies = companies[0]
-        for c in companies:
-            contact = models.Person2(
-                firstName = c['contact']['firstName'],
-                lastName = c['contact']['lastName'],
-                title = c['contact']['title'],
-                email = c['contact']['email'],
-                phone = c['contact']['phone'],
-                org = c['contact']['org'],
-                contacted = c['contact']['contacted'],
-            )
-            ceo = models.Person2(
-                firstName = c['ceo']['firstName'],
-                lastName = c['ceo']['lastName']
-            )
-            company = models.Company2(
-                    companyName = c['companyName'],
-                    prettyName = c['prettyName'],
-                    url = c['url'],
-                    contact = contact,
-                    ceo = ceo,
-                    yearFounded = c['yearFounded'],
-                    previousName = c['previousName'],
-                    city = c['city'],
-                    state = c['state'],
-                    zipCode = c['zipCode'],
-                    fte = c['fte'],
-                    companyType = c['companyType'],
-                    companyCategory = c['companyCategory'],
-                    revenueSource = c['revenueSource'].split(','),
-                    description = c['descriptionLong'],
-                    descriptionShort = c['descriptionShort'],
-                    financialInfo = c['financialInfo'],
-                    datasetWishList = c['contact']['datasetWishList'],
-                    confidentiality =c['confidentiality'],
-                    ts = json.loads(c['ts'], object_hook=json_util.object_hook),
-                    display = c['display'],
-                    submittedSurvey = c['submittedSurvey'],
-                    vetted = c['vetted'],
-                    vettedByCompany = c['vettedByCompany'],
-                    submittedThroughWebsite = c['submittedThroughWebsite'],
-                    agencies = []
-                )
-            company.save()
-            try:
-                for d in c['datasets']:
-                    dataset = models.Dataset2(
-                            datasetName = d['datasetName'],
-                            datasetURL = d['datasetURL'],
-                            rating = d['ratings']['rating'],
-                            reason = d['ratings']['reason'],
-                            usedBy = str(company.id)
-                        )
-                    agency = models.Agency(
-                            name = d['agency'],
-                            dataType = ','.join(d['dataType']),
-                            ts = json.loads(d['ts'], object_hook=json_util.object_hook),
-                            datasets = []
-                        )
-                    agency.datasets.append(dataset)
-                    agency.save()
-                    company.agencies.append(agency)
-                    company.save()
-            except:
-                continue
-
-
-class EverythingHandler(BaseHandler):
-    @tornado.web.addslash
-    @tornado.web.authenticated
-    def get(self):
-        companies = models.Company.objects()
-        companyList = []
-        for c in companies:
-            company = {
-                "companyName": c.companyName,
-                "prettyName": c.prettyName,
-                "url": c.url,
-                "yearFounded": c.yearFounded,
-                "previousName": c.previousName,
-                "city": c.city,
-                "state": c.state,
-                "zipCode": c.zipCode,
-                "fte": c.fte,
-                "companyType": c.companyType,
-                "companyCategory": c.companyCategory,
-                "companyFunction": c.companyFunction,
-                "criticalDataTypes": ','.join(c.criticalDataTypes),
-                "revenueSource": ','.join(c.revenueSource),
-                "sector": ','.join(c.sector),
-                "descriptionLong": c.descriptionLong,
-                "descriptionShort": c.descriptionShort,
-                "socialImpact": c.socialImpact,
-                "financialInfo": c.financialInfo,
-                "confidentiality": c.confidentiality,
-                #"contact": c.contact,
-                #"recommendedBy": c.recommendedBy,
-                "recommended": c.recommended,
-                "reasonForRecommending": c.reasonForRecommending,
-                #"datasets": c.datasets,
-                "ts": json.dumps(c.ts, default=json_util.default),
-                "preview50": c.preview50,
-                "display": c.display,
-                "submittedSurvey": c.submittedSurvey,
-                "vetted": c.vetted,
-                "vettedByCompany": c.vettedByCompany,
-                "submittedThroughWebsite": c.submittedThroughWebsite
-            }
-            if c.contact:
-                company['contact'] = {
-                    "firstName": c.contact.firstName,
-                    "lastName": c.contact.lastName,
-                    "title": c.contact.title,
-                    "personType": c.contact.personType,
-                    "email": c.contact.email,
-                    "phone": c.contact.phone,
-                    "org": c.contact.org,
-                    "contacted": c.contact.contacted,
-                    "otherInfo": ','.join(c.contact.otherInfo),
-                    "datasetWishList": c.contact.datasetWishList,
-                    "companyRec": c.contact.companyRec,
-                    "conferenceRec": c.contact.conferenceRec,
-                    #"submittedCompany": c.contact.submittedCompany.id,
-                    #"submittedDatasets": c.contact.submittedDatasets
-                }
-                if c.contact.submittedCompany:
-                    company['contact']['submittedCompany'] = str(c.contact.submittedCompany.id)
-                if c.contact.submittedDatasets:
-                    company['contact']['submittedDatasets'] = []
-                    for d in c.contact.submittedDatasets:
-                        company['contact']['submittedDatasets'].append(str(d.id))
-            if c.ceo:
-                company['ceo'] = {
-                    "firstName": c.ceo.firstName,
-                    "lastName": c.ceo.lastName,
-                    "email": c.ceo.email
-                }
-            if c.datasets:
-                company['datasets'] = []
-                for d in c.datasets:
-                    dataset = {
-                        "ts": json.dumps(d.ts, default=json_util.default),
-                        "datasetName": d.datasetName,
-                        "datasetURL": d.datasetURL,
-                        "agency": d.agency,
-                        "ratings": {
-                            "rating": d.ratings[0].rating,
-                            "reason": d.ratings[0].reason
-                        },
-                        "dataType": d.dataType,
-                        "usedBy": str(d.usedBy[0].id)
-                    }
-                    company['datasets'].append(dataset)
-            companyList.append(company)
-        with open(os.path.join(os.path.dirname(__file__), 'static') + '/AllCompanies.json', 'w') as outfile:
-            json.dump(companyList, outfile)
-
-# class UploadAgencies(BaseHandler):
-#     @tornado.web.addslash
-#     @tornado.web.authenticated
-#     def get(self):
-#         with open('agenciesFormatted.csv', 'rb') as csvfile:
-#             csvreader = csv.reader(csvfile, delimiter=',')
-#             previousAgency = ''
-#             a = models.Agency()
-#             for row in csvreader:
-#                 if row[0] != 'agency':
-#                     try: #check if Agency exists
-#                         a = models.Agency.objects.get(name=row[0])
-#                     except: #make a new one.
-#                         a = models.Agency(
-#                             name = row[0],
-#                             abbrev = row[1],
-#                             prettyName = row[6],
-#                             url = row[8],
-#                             dataType = row[9],
-#                             source = "dataGov",
-#                             subagencies = [],
-#                             usedBy = [],
-#                             datasets = []
-#                         )
-#                         a.save()
-#                     if row[3]: #if there is a subagency
-#                         s = models.Subagency(
-#                             name = row[3],
-#                             abbrev = row[4],
-#                             url = row[8],
-#                             usedBy = [],
-#                             datasets = []
-#                         )
-#                         a.subagencies.append(s)
-#                         a.save()
-
-        
-
-
-class GenerateFilesHandler(BaseHandler):
-    @tornado.web.addslash
-    @tornado.web.authenticated
-    def get(self):
-        #---CSV OF ALL COMPANIES----
-        companies = models.Company2.objects(display=True)
-        csvwriter = csv.writer(open(os.path.join(os.path.dirname(__file__), 'static') + "/OD500_companies.csv", "w"))
-        csvwriter.writerow([
-            'company_name_id',
-            'CompanyName',
-            'url',
-            'city',
-            'state',
-            'zipCode',
-            'ceoFirstName',
-            'ceoLastName',
-            'yearFounded',
-            'fte',
-            'companyType',
-            'companyCategory',
-            'revenueSource',
-            'description',
-            'descriptionShort',
-            'financialInfo'
-            ])
-        for c in companies:
-            newrow = [
-                c.prettyName,
-                c.companyName,
-                c.url,
-                c.city,
-                c.state,
-                c.zipCode,
-                c.ceo.firstName,
-                c.ceo.lastName,
-                c.yearFounded,
-                c.fte,
-                c.companyType,
-                c.companyCategory,
-                ', '.join(c.revenueSource),
-                c.description,
-                c.descriptionShort,
-                c.financialInfo,
-            ]
-            for i in range(len(newrow)):  # For every value in our newrow
-                if hasattr(newrow[i], 'encode'):
-                    newrow[i] = newrow[i].encode('utf8')
-            csvwriter.writerow(newrow)
-        #------COMPANIES JSON---------
-        companies = models.Company2.objects(display=True)
-        companiesJSON = []
-        for c in companies:
-            agencies = []
-            for a in c.agencies:
-                datasets_agency = []
-                for d in a.datasets:
-                    if c == d.usedBy:
-                        ds = {
-                            "datasetName":d.datasetName,
-                            "datasetURL":d.datasetURL,
-                            "rating":d.rating
-                        }
-                        datasets_agency.append(ds)
-                subagencies = []
-                for s in a.subagencies:
-                    if c in s.usedBy:
-                        datasets_subagency = []
-                        for d in s.datasets:
-                            if c == d.usedBy:
-                                ds = {
-                                    "datasetName":d.datasetName,
-                                    "datasetURL":d.datasetURL,
-                                    "rating":d.rating
-                                }
-                                datasets_subagency.append(ds)
-                        sub = {
-                            "name":s.name,
-                            "abbrev":s.abbrev,
-                            "url":s.url,
-                            "datasets":datasets_subagency
-                        }
-                        subagencies.append(sub)
-                ag = {
-                    "name": a.name,
-                    "abbrev":a.abbrev,
-                    "prettyName":a.prettyName,
-                    "url": a.url,
-                    "type":a.dataType,
-                    "datasets":datasets_agency,
-                    "subagencies":subagencies
-                }
-                agencies.append(ag)
-            company = {
-                "company_name_id": c.prettyName,
-                "companyName": c.companyName,
-                "url": c.url,
-                "city": c.city,
-                "state": c.state,
-                "zipCode": c.zipCode,
-                "ceoFirstName": c.ceo.firstName,
-                "ceoLastName": c.ceo.lastName,
-                "yearFounded": c.yearFounded,
-                "fte": c.fte,
-                "companyType": c.companyType,
-                "companyCategory": c.companyCategory,
-                "revenueSource": c.revenueSource,
-                "description": c.description,
-                "descriptionShort": c.descriptionShort,
-                "agencies":agencies,
-                "subagencies":subagencies
-            }
-            companiesJSON.append(company)
-        with open(os.path.join(os.path.dirname(__file__), 'static') + '/OD500_Companies.json', 'w') as outfile:
-            json.dump(companiesJSON, outfile)
-        #--------------JSON OF AGENCIES------------
-        agencies = models.Agency.objects(source="dataGov")
-        agenciesJSON = []
-        for a in agencies:
-            #--------DATASETS AT AGENCY LEVEL------
-            datasets_agency = []
-            for d in a.datasets:
-                ds = {
-                    "datasetName":d.datasetName,
-                    "datasetURL":d.datasetURL,
-                    "rating":d.rating,
-                    "usedBy":d.usedBy.prettyName
-                }
-                datasets_agency.append(ds)
-            #--------SUBAGENCIES------
-            subagencies = []
-            for s in a.subagencies:
-                datasets_subagency = []
-                for d in s.datasets:
-                    logging.info(d.datasetName)
-                    ds = {
-                        "datasetName":d.datasetName,
-                        "datasetURL":d.datasetURL,
-                        "rating":d.rating,
-                        "usedBy": d.usedBy.prettyName
-                    }
-                    datasets_subagency.append(ds)
-                usedBy = []
-                for u in s.usedBy:
-                    usedBy.append(u.prettyName)
-                sub = {
-                    "name":s.name,
-                    "abbrev":s.abbrev,
-                    "url":s.url,
-                    "datasets":datasets_subagency,
-                    "usedBy":usedBy
-                }
-                subagencies.append(sub)
-            #--------SUBAGENCIES------
-            usedBy = []
-            for u in a.usedBy:
-                usedBy.append(u.prettyName)
-            ag = {
-                "name": a.name,
-                "abbrev":a.abbrev,
-                "prettyName":a.prettyName,
-                "url": a.url,
-                "type":a.dataType,
-                "datasets":datasets_agency,
-                "subagencies":subagencies,
-                "usedBy":usedBy
-            }
-            agenciesJSON.append(ag)
-        with open(os.path.join(os.path.dirname(__file__), 'static') + '/OD500_Agencies.json', 'w') as outfile:
-            json.dump(agenciesJSON, outfile)
-        self.write('success')
-
 
 class CompanyModule(tornado.web.UIModule):
     def render(self, company):

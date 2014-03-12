@@ -116,6 +116,10 @@
 			<h3>Has {{company.companyName}} submitted their survey?</h3>
 				<label for="submittedSurvey"><input type="checkbox" name="submittedSurvey" id="submittedSurvey" value="submittedSurvey" {%if company.submittedSurvey %}checked{%end%}>Submitted Survey</label>
 		</fieldset>
+		<fieldset class="m-form-half">
+			<h3>Prevent editing on this company (only admin can edit)?</h3>
+				<label for="locked"><input type="checkbox" name="locked" id="locked" value="locked" {%if company.locked %}checked{%end%}>Lock</label>
+		</fieldset>
 	</fieldset>
 	{% raw xsrf_form_html() %}
 </form>
