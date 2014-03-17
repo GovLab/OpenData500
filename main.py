@@ -268,7 +268,7 @@ class AdminHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self):
         surveySubmitted = models.Company2.objects(Q(submittedSurvey=True) & Q(display=True) & Q(vetted=True) & Q(vettedByCompany=True) & Q(submittedThroughWebsite=False)).order_by('prettyName')
-        sendSurveys = models.Company2.objects(Q(vetted=False) & Q(vettedByCompany=False)).order_by('prettyName')
+        sendSurveys = models.Company2.objects(Q(submittedSurvey=False)).order_by('prettyName')
         needVetting = models.Company2.objects(Q(submittedSurvey=True) & Q(vetted=False) & Q(vettedByCompany=True)).order_by('ts')
         stats = models.Stats.objects().first()
         self.render(
