@@ -281,7 +281,7 @@ class AdminHandler(BaseHandler):
         sendSurveys = models.Company2.objects(Q(submittedSurvey=False))
         start = datetime(2014, 3, 18, 21, 5)
         needVetting_byUpdate = models.Company2.objects(Q(submittedSurvey=True) & Q(vetted=False) & Q(vettedByCompany=True) & Q(lastUpdated__gte=start)).order_by('-lastUpdated')
-        needVetting_byName = models.Company2.objects(Q(submittedSurvey=True) & Q(vetted=False) & Q(vettedByCompany=True)).order_by('-ts', 'prettyName')
+        needVetting_byName = models.Company2.objects(Q(submittedSurvey=True) & Q(vetted=False) & Q(vettedByCompany=True) & Q(lastUpdated__lte=start)).order_by('-ts', 'prettyName')
         stats = models.Stats.objects().first()
         self.render(
             "admin.html",
