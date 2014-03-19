@@ -103,12 +103,17 @@ class Company2(Document):
 	confidentiality = StringField() #What info does the contact want to hide?
 	agencies = ListField(ReferenceField('Agency'))
 	ts = ComplexDateTimeField(default=datetime.now())
+	lastUpdated = ComplexDateTimeField()
 	display = BooleanField() #Display on site
 	submittedSurvey = BooleanField()
 	vetted = BooleanField() #vetted by us
 	vettedByCompany = BooleanField() #vetted by them
 	submittedThroughWebsite = BooleanField() #submitted through website
 	locked = BooleanField() #Locked from public editing
+
+	@queryset_manager
+	def objects(doc_cls, queryset):
+		return queryset.order_by('prettyName')
 
 
 

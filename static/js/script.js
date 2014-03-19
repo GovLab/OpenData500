@@ -67,9 +67,10 @@ $(document).ready(function() {
   //----------------------------------DELETE AGENCIES AND SUBAGENCIES--------------------------------------
   $('#accordionAgency, #accordionSubAgency').on('click', '.toolbar', function(e){
     agency = $(this).attr('agency').replace("delete", "").replace(/-/g, " ");
+    a_id = $(this).attr('a_id');
     subagency = $(this).attr('subagency').replace("delete", "").replace(/-/g, " ");
     //console.log(agency + subagency);
-    data = { "agency": agency, "subagency": subagency, "action": "delete agency", "_xsrf": $("[name='_xsrf']").val() };
+    data = { "agency": agency, "subagency": subagency, "a_id":a_id, "action": "delete agency", "_xsrf": $("[name='_xsrf']").val() };
     //console.log($(this).closest('h3'));
     $(this).parent().next().remove();
     $(this).closest('h3').remove();
@@ -667,6 +668,7 @@ $(document).ready(function() {
     {"label": "Department of Energy (DOE) - Office of Scientific and Technical Information (OSTI)", "a":"Department of Energy", "aa":"DOE", "s":"Office of Scientific and Technical Information", "sa": "OSTI"},
     {"label": "Department of Health and Human Services (HHS) - Centers for Medicare and Medicaid Services (CMS)", "a":"Department of Health and Human Services", "aa":"HHS", "s":"Centers for Medicare and Medicaid Services", "sa": "CMS"},
     {"label": "Department of Health and Human Services (HHS)", "a":"Department of Health and Human Services", "aa":"HHS", "s":"", "sa": ""},
+    {"label": "Department of Health and Human Services (HHS) - Food and Drug Administration (FDA)", "a":"Department of Health and Human Services", "aa":"HHS", "s":"Food and Drug Administration", "sa": "FDA"},
     {"label": "Department of Health and Human Services (HHS) - National Institutes of Health (NIH)", "a":"Department of Health and Human Services", "aa":"HHS", "s":"National Institutes of Health", "sa": "NIH"},
     {"label": "Department of Health and Human Services (HHS) - Substance Abuse and Mental Health Services Administration (SAMHSA)", "a":"Department of Health and Human Services", "aa":"HHS", "s":"Substance Abuse and Mental Health Services Administration", "sa": "SAMHSA"},
     {"label": "Department of Homeland Security (DHS) - U.S. Coast Guard", "a":"Department of Homeland Security", "aa":"DHS", "s":"U.S. Coast Guard", "sa": ""},

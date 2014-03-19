@@ -91,7 +91,6 @@
 	<fieldset class="m-form-half">
 		<h3>From approximately how many sources (i.e. agencies, subagencies, local and state governments) does your company use data? *</h3>
 		<div class="source-count-buttons">
-			{{ company.sourceCount }}
 			<input type="radio" name="sourceCount" id="count1" value="1-10" {% if company.sourceCount == '1-10' %}checked{%end%}><label for="count1">1-10</label>
 			<input type="radio" name="sourceCount" id="count2" value="10-50" {% if company.sourceCount == '10-50' %}checked{%end%}><label for="count2">10-50</label>
 			<input type="radio" name="sourceCount" id="count3" value="50-100" {% if company.sourceCount == '50-100' %}checked{%end%}><label for="count3">50-100</label>
@@ -147,7 +146,7 @@
 		<div id="accordionAgency">
 			{% for agency in company.agencies %}
 				<h3 class="agency" name='{{agency.name.replace(" ", "-") }}'><a href="#">{{agency.name}}</a>
-					<span style="float:right; display: none;" class="toolbar ui-corner-all ui-icon ui-icon-circle-close red" subagency="" agency="{{agency.name.replace(" ","-")}}"></span>
+					<span style="float:right; display: none;" class="toolbar ui-corner-all ui-icon ui-icon-circle-close red" subagency="" agency="{{agency.name.replace(" ","-")}}" a_id="{{agency.id}}"></span>
 				</h3>
 				<div id="{{agency.name.replace(" ","-")}}Accordion">
 					<br><h3>Agency Level Datasets</h3><br>
@@ -159,7 +158,7 @@
 							<th class="table-header-buttons"></th>
 						</tr>
 						{% for d in agency.datasets %}{% if company == d.usedBy %}
-							<tr class="dataset-row" name="{{d.datasetName}}" subagency="" agency="{{agency.name.replace(" ","-")}}">
+							<tr class="dataset-row" name="{{d.datasetName}}" subagency="" agency="{{agency.name.replace(" ","-")}}" a_id="{{agency.id}}">
 								<td><input type="text" name="datasetName" id="datasetName" {% if (d.datasetName) %} value="{{d.datasetName}}" {% end %}></td>
 								<td><input type="text" name="datasetURL" id="datasetURL" {% if (d.datasetURL) %} value="{{d.datasetURL}}" {% end %}></td>
 								<td><input type="text" name="rating" id="rating" size="3" {% if (d.rating) %} value="{{d.rating}}" {% end %}></td>
@@ -168,7 +167,7 @@
 									<span class="message-dataset" style="display:none"></span></td>
 							</tr>
 						{% end %}{% end %}
-						<tr class="dataset-row" subagency="" agency="{{agency.name.replace(" ","-")}}">
+						<tr class="dataset-row" subagency="" agency="{{agency.name.replace(" ","-")}}" a_id="{{agency.id}}">
 							<td><input type="text" name="datasetName" id="datasetName" placeholder="Agency-Level Dataset..."value=""></td>
 							<td><input type="text" name="datasetURL" id="datasetURL" value=""></td>
 							<td><input type="text" name="rating" id="rating" size="3" value=""></td>
@@ -182,7 +181,7 @@
 					<div id="accordionSubAgency" class="{{agency.name.replace(" ", "-") }}Subagencies">
 						{% for sub in agency.subagencies %}{% if company in sub.usedBy %}
 							<h3 class="subagency" name="{{sub.name.replace(" ", "-") }}"><a href="#">{{sub.name}}</a>
-								<span style="float:right; display: none;" class="toolbar ui-corner-all ui-icon ui-icon-circle-close red" subagency="{{sub.name.replace(" ","-")}}" agency="{{agency.name.replace(" ","-")}}"></span>
+								<span style="float:right; display: none;" class="toolbar ui-corner-all ui-icon ui-icon-circle-close red" subagency="{{sub.name.replace(" ","-")}}" agency="{{agency.name.replace(" ","-")}}" a_id="{{agency.id}}"></span>
 							</h3>
 							<div class="{{ sub.name.replace(" ", "-") }}">
 								<table class="subagencyDatasetTable">
@@ -193,7 +192,7 @@
 										<th class="table-header-buttons"></th>
 									</tr>
 									{% for d in sub.datasets %}{%if company == d.usedBy %}
-										<tr class="dataset-row" name="{{d.datasetName}}" subagency="{{ sub.name.replace(" ", "-") }}" agency="{{agency.name.replace(" ","-")}}">
+										<tr class="dataset-row" name="{{d.datasetName}}" subagency="{{ sub.name.replace(" ", "-") }}" agency="{{agency.name.replace(" ","-")}}" a_id="{{agency.id}}">
 											<td><input type="text" name="datasetName" id="datasetName" {% if (d.datasetName) %} value="{{d.datasetName}}" {% end %}></td>
 											<td><input type="text" name="datasetURL" id="datasetURL" {% if (d.datasetURL) %} value="{{d.datasetURL}}" {% end %}></td>
 											<td><input type="text" name="rating" id="rating" size="3" {% if (d.rating) %} value="{{d.rating}}" {% end %}></td>
@@ -202,7 +201,7 @@
 												<span class="message-dataset" style="display:none"></span></td>
 										</tr>
 									{% end %}{% end %}
-									<tr class="dataset-row" subagency="{{ sub.name.replace(" ", "-") }}" agency="{{agency.name.replace(" ","-")}}">
+									<tr class="dataset-row" subagency="{{ sub.name.replace(" ", "-") }}" agency="{{agency.name.replace(" ","-")}}" a_id="{{agency.id}}">
 										<td><input type="text" name="datasetName" id="datasetName" placeholder="Subagency-Level Dataset" value=""></td>
 										<td><input type="text" name="datasetURL" id="datasetURL" value=""></td>
 										<td><input type="text" name="rating" id="rating" size="3" value=""></td>

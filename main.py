@@ -70,7 +70,9 @@ class Application(tornado.web.Application):
         settings = dict(
             template_path=os.path.join(os.path.dirname(__file__), "templates"),
             static_path=os.path.join(os.path.dirname(__file__), "static"),
-            ui_modules={"Company": CompanyModule},
+            ui_modules={
+                "Company": CompanyModule,
+                "datetime": datetime},
             debug=True,
             cookie_secret=os.environ.get('COOKIE_SECRET'),
             xsrf_cookies=True,
@@ -136,6 +138,7 @@ class MediaHandler(BaseHandler):
     def get(self):
         self.render(
             "media.html",
+            user=self.current_user,
             page_title="Media"
             )
 
@@ -144,6 +147,7 @@ class ThanksHandler(BaseHandler):
     def get(self):
         self.render(
             "thankyou.html", 
+            user=self.current_user,
             page_title="OD500 - Thanks!",
             page_heading="Thank you for participating in the Open Data 500!" 
             )
@@ -199,6 +203,7 @@ class CompanyHandler(BaseHandler):
             self.render(
             "company.html",
             page_title='Open Data500',
+            user=self.current_user,
             page_heading=company.companyName,
             company = company,
         )
@@ -207,6 +212,7 @@ class CompanyHandler(BaseHandler):
             self.render(
                 "404.html",
                 page_title='404 - Open Data500',
+                user=self.current_user,
                 page_heading='Hmm...',
                 error = '404 - Not Found'
             )
@@ -223,6 +229,7 @@ class PreviewHandler(BaseHandler):
             page_title='Open Data500',
             page_heading='Preview of the Open Data 500',
             companies = companies,
+            user=self.current_user
         )
 
 class CandidateHandler(BaseHandler):
@@ -239,7 +246,8 @@ class CandidateHandler(BaseHandler):
             stats = stats,
             #recentlySubmitted=recentlySubmitted,
             states=states,
-            categories = categories
+            categories = categories,
+            user=self.current_user,
             #stateInfo=stateInfo
         )
 
@@ -250,7 +258,8 @@ class AboutHandler(BaseHandler):
         self.render(
             "about.html",
             page_title='About the OpenData500',
-            page_heading='About the OpenData 500'
+            page_heading='About the OpenData 500',
+            user=self.current_user
         )
 
 class ResourcesHandler(BaseHandler):
@@ -260,6 +269,7 @@ class ResourcesHandler(BaseHandler):
         self.render(
             "resources.html",
             page_title='Open Data Resources',
+            user=self.current_user,
             page_heading='Open Data Resources'
         )
 
@@ -268,15 +278,19 @@ class AdminHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self):
         surveySubmitted = models.Company2.objects(Q(submittedSurvey=True) & Q(display=True) & Q(vetted=True) & Q(vettedByCompany=True) & Q(submittedThroughWebsite=False)).order_by('prettyName')
-        sendSurveys = models.Company2.objects(Q(submittedSurvey=False)).order_by('prettyName')
-        needVetting = models.Company2.objects(Q(submittedSurvey=True) & Q(vetted=False) & Q(vettedByCompany=True)).order_by('ts')
+        sendSurveys = models.Company2.objects(Q(submittedSurvey=False))
+        start = datetime(2014, 3, 18, 21, 5)
+        needVetting_byUpdate = models.Company2.objects(Q(submittedSurvey=True) & Q(vetted=False) & Q(vettedByCompany=True) & Q(lastUpdated__gte=start)).order_by('-lastUpdated')
+        needVetting_byName = models.Company2.objects(Q(submittedSurvey=True) & Q(vetted=False) & Q(vettedByCompany=True)).order_by('-ts', 'prettyName')
         stats = models.Stats.objects().first()
         self.render(
             "admin.html",
             page_title='OpenData500',
             page_heading='Welcome to the OpenData 500',
             surveySubmitted = surveySubmitted,
-            needVetting = needVetting,
+            needVetting_byUpdate = needVetting_byUpdate,
+            needVetting_byName = needVetting_byName,
+            user=self.current_user,
             sendSurveys = sendSurveys,
             stats = stats
         )
@@ -289,10 +303,14 @@ class ValidateHandler(BaseHandler):
     def post(self):
         #check if companyName exists:
         companyName = self.get_argument("companyName", None)
+        prettyName = re.sub(r'([^\s\w])+', '', companyName).replace(" ", "-").title()
+        logging.info(prettyName)
         try: 
-            c = models.Company2.objects.get(prettyName=re.sub(r'([^\s\w])+', '', companyName).replace(" ", "-").title())
+            c = models.Company2.objects.get(prettyName=prettyName)
+            logging.info('company exists.')
             self.write('{ "error": "This company has already been submitted. Email opendata500@thegovlab.org for questions." }')
         except:
+            logging.info('company does not exist. Carry on.')
             self.write('true')
 
 
@@ -311,6 +329,7 @@ class SubmitCompanyHandler(BaseHandler):
             categories=categories,
             datatypes = datatypes,
             stateList = stateList,
+            user=self.current_user,
             stateListAbbrev=stateListAbbrev
         )
 
@@ -419,22 +438,26 @@ class SubmitDataHandler(BaseHandler):
         self.render("submitData.html",
             page_title = "Submit Data Sets For Company",
             page_heading = page_heading,
-            company = company
+            company = company,
+            user=self.current_user
         )
 
     #@tornado.web.authenticated
     def post(self, id):
         try:
             company = models.Company2.objects.get(id=bson.objectid.ObjectId(id))
-        except:
+        except Exception, e:
+            logging.info("Could not get company: " + str(e))
             self.set_status(400)
         agencyName = self.get_argument("agency", None)
+        a_id = self.get_argument("a_id", None)
         subagencyName = self.get_argument("subagency", None)
         action = self.get_argument("action", None)
         #------------------------------------JUST SAVE DATA COMMENT QUESTION------------------------
         if action == "dataComments":
             logging.info("saving " + self.get_argument('dataComments', None))
             company.dataComments = self.get_argument('dataComments', None)
+            company.lastUpdated = datetime.now()
             company.save()
             self.write("success")
         #------------------------------------ADDING AGENCY/SUBAGENCY------------------------
@@ -450,20 +473,25 @@ class SubmitDataHandler(BaseHandler):
                         s.usedBy.append(company)
             agency.save()
             if company not in agency.usedBy: #only add if it's not already there.
-                logging.info(agencyName + " is used by" + company.companyName)
                 agency.usedBy.append(company)
                 agency.save()
             if agency not in company.agencies: #only add if it's not already there.
-                logging.info(company.companyName + " is used by" + agencyName)
                 company.agencies.append(agency)
                 company.save()
+            company.lastUpdated = datetime.now() #Update Company's Time of Last Edit
+            company.save()
             self.write("success")
         #------------------------------------DELETING AGENCY/SUBAGENCY------------------------
         if action == "delete agency":
             try: 
-                agency = models.Agency.objects.get(name=agencyName)
-            except:
-                self.set_status(400)
+                agency = models.Agency.objects.get(id=bson.objectid.ObjectId(a_id))
+            except Exception, e:
+                logging.info("Can't Delete Agency(search by ID): " + str(e))
+                try:
+                    agency = models.Agency.objects.get(name=agencyName)
+                except Exception, e:
+                    logging.info("Can't Delete Agency(Search by name): "+str(e))
+                    self.set_status(400)
             if subagencyName == '': #delete from agency and subagency
                 #remove datasets from agency:
                 temp = []
@@ -500,20 +528,23 @@ class SubmitDataHandler(BaseHandler):
                                 temp.append(d)
                         s.datasets = temp
                         #s.usedBy.remove(company)
-                        logging.info(temp)
                 #remove company from specific subagency
                 for s in agency.subagencies:
                     if company in s.usedBy and s.name == subagencyName:
                         s.usedBy.remove(company)
             agency.save()
+            company.lastUpdated = datetime.now() #Update Company's Time of Last Edit
             company.save()
             self.write("deleted")
         #------------------------------------ADDING DATASET------------------------
         if action == "add dataset":
             try:
-                agency = models.Agency.objects.get(name=agencyName)
-            except:
-                self.set_status(400)
+                agency = models.Agency.objects.get(name = agencyName)
+                logging.info(agency.name)
+            except Exception, e:
+                logging.info(str(e))
+                logging.info("Agency Id: " + agencyName)
+                self.set_status(500)
             datasetName = self.get_argument("datasetName", None)
             datasetURL = self.get_argument("datasetURL", None)
             try: 
@@ -535,6 +566,8 @@ class SubmitDataHandler(BaseHandler):
                     if subagencyName == s.name:
                         s.datasets.append(dataset)
             agency.save()
+            company.lastUpdated = datetime.now() #Update Company's Time of Last Edit
+            company.save()
             self.write("success")
         #------------------------------------EDITING DATASET------------------------
         if action == "edit dataset":
@@ -566,6 +599,8 @@ class SubmitDataHandler(BaseHandler):
                                 d.datasetURL = datasetURL
                                 d.rating = rating
             agency.save()
+            company.lastUpdated = datetime.now() #Update Company's Time of Last Edit
+            company.save()
             self.write("success")
         #------------------------------------DELETING DATASET------------------------
         if action == "delete dataset":
@@ -587,6 +622,8 @@ class SubmitDataHandler(BaseHandler):
                             if d.datasetName == datasetName:
                                 s.datasets.remove(d)
             agency.save()
+            company.lastUpdated = datetime.now() #Update Company's Time of Last Edit
+            company.save()
             self.write("success")
 
 class EditCompanyHandler(BaseHandler):
@@ -602,6 +639,7 @@ class EditCompanyHandler(BaseHandler):
                 page_title = "That ain't even a thing.",
                 page_heading = "Check yo'self",
                 error = "404 - Not Found",
+                user=self.current_user,
                 message=id)
         if company.locked:
             self.render("404.html",
@@ -621,6 +659,7 @@ class EditCompanyHandler(BaseHandler):
                 datatypes = datatypes,
                 stateList = stateList,
                 stateListAbbrev=stateListAbbrev,
+                user=self.current_user,
                 id = str(company.id)
             )
 
@@ -681,6 +720,7 @@ class EditCompanyHandler(BaseHandler):
         company.datasetComments = self.get_argument('datasetComments', None)
         company.submittedSurvey = True
         company.vettedByCompany = True
+        company.lastUpdated = datetime.now()
         if company.display: #only if company is displayed
             self.application.stats.update_all_state_counts()
         company.save()
@@ -700,6 +740,7 @@ class AdminEditCompanyHandler(BaseHandler):
                 page_heading = page_heading,
                 page_title = page_title,
                 error = "404 - Not Found",
+                user=self.current_user,
                 message=id)
         self.render("adminEditCompany.html",
             page_title = page_title,
@@ -713,6 +754,7 @@ class AdminEditCompanyHandler(BaseHandler):
             datatypes = datatypes,
             stateList = stateList,
             stateListAbbrev=stateListAbbrev,
+            user=self.current_user,
             id = str(company.id)
         )
 
@@ -791,6 +833,7 @@ class AdminEditCompanyHandler(BaseHandler):
             company.locked = True
         else: 
             company.locked = False
+        company.lastUpdated = datetime.now()
         company.save()
         self.application.stats.update_all_state_counts()
         self.write('success')
@@ -810,7 +853,8 @@ class EditDataHandler(BaseHandler):
             page_title = "Editing Dataset",
             page_heading = "Edit Datasets",
             datatypes = datatypes,
-            dataset = dataset
+            dataset = dataset,
+            user=self.current_user
         )
 
     @tornado.web.authenticated
@@ -895,6 +939,7 @@ class DownloadHandler(BaseHandler):
         self.render(
             "download.html",
             page_title='Download the Open Data 500',
+            user=self.current_user,
             page_heading='Download the Open Data 500'
         )
 

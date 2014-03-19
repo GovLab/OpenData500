@@ -2,6 +2,7 @@
 {% extends "main.html" %}
 {% autoescape None %}
 
+
 {% block body %}
 
 <h1>{{ page_heading }}</h1>
@@ -20,21 +21,31 @@
 </fieldset>
 <br>
 <h2>Need Vetting</h2>
-<table style="width:100%; text-align:left;">
+<table style="width:100%; text-align:left; border:1px;">
 	<tr>
 		<th>Company Name</th>
 		<th>Edit URL</th>
 		<th>Contact Email</th>
-		<th>Date Submitted</th>
+		<th>Date Submitted/Updated</th>
 		<th>Via Web?</th>
 		<th>Displayed?</th>
 	</tr>
-	{% for company in needVetting %}
+	{% for company in needVetting_byUpdate %}
 		<tr>
 			<td><strong>{{ company.companyName }}</strong></a></td>
 			<td><a href="/admin/edit/{{ company.id }}">Edit</a></td>
 			<td>{%try%}{% if (company.contact) %} {{ company.contact.email }} {% end %}{%except%}{%end%}</td>
-			<td>{{company.ts}}</td>
+			<td>{% if company.lastUpdated %}Updated: {%set d = company.lastUpdated %}{{ d.strftime("%b, %d '%y @%I:%M %p") }} {%end%}</td>
+			<td>{%if company.submittedThroughWebsite %} √ {%end%}</td>
+			<td>{%if company.display %} √ {%end%}</td>
+		</tr>
+	{% end %}
+	{% for company in needVetting_byName %}
+		<tr>
+			<td><strong>{{ company.companyName }}</strong></a></td>
+			<td><a href="/admin/edit/{{ company.id }}">Edit</a></td>
+			<td>{%try%}{% if (company.contact) %} {{ company.contact.email }} {% end %}{%except%}{%end%}</td>
+			<td>Created: {%set d = company.ts %}{{ d.strftime("%b, %d '%y @%I:%M %p") }}</td>
 			<td>{%if company.submittedThroughWebsite %} √ {%end%}</td>
 			<td>{%if company.display %} √ {%end%}</td>
 		</tr>
