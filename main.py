@@ -279,17 +279,14 @@ class AdminHandler(BaseHandler):
     def get(self):
         surveySubmitted = models.Company2.objects(Q(submittedSurvey=True) & Q(display=True) & Q(vetted=True) & Q(vettedByCompany=True) & Q(submittedThroughWebsite=False)).order_by('prettyName')
         sendSurveys = models.Company2.objects(Q(submittedSurvey=False))
-        start = datetime(2014, 3, 18, 21, 5)
-        needVetting_byUpdate = models.Company2.objects(Q(submittedSurvey=True) & Q(vetted=False) & Q(vettedByCompany=True) & Q(lastUpdated__gte=start)).order_by('-lastUpdated')
-        needVetting_byName = models.Company2.objects(Q(submittedSurvey=True) & Q(vetted=False) & Q(vettedByCompany=True) & Q(lastUpdated__lte=start)).order_by('-ts', 'prettyName')
+        needVetting = models.Company2.objects(Q(submittedSurvey=True) & Q(vetted=False) & Q(vettedByCompany=True)).order_by('-lastUpdated', 'prettyName')
         stats = models.Stats.objects().first()
         self.render(
             "admin.html",
             page_title='OpenData500',
             page_heading='Welcome to the OpenData 500',
             surveySubmitted = surveySubmitted,
-            needVetting_byUpdate = needVetting_byUpdate,
-            needVetting_byName = needVetting_byName,
+            needVetting = needVetting,
             user=self.current_user,
             sendSurveys = sendSurveys,
             stats = stats
@@ -415,11 +412,13 @@ class SubmitCompanyHandler(BaseHandler):
             datasetWishList = datasetWishList,
             sourceCount = sourceCount,
             contact = contact,
+            lastUpdated = datetime.now(),
             display = False, 
             submittedSurvey = True,
             vetted = False, 
             vettedByCompany = True,
-            submittedThroughWebsite = True
+            submittedThroughWebsite = True,
+            locked=False
         )
         company.save()
         self.application.stats.update_all_state_counts()

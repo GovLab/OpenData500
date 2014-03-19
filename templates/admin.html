@@ -30,22 +30,12 @@
 		<th>Via Web?</th>
 		<th>Displayed?</th>
 	</tr>
-	{% for company in needVetting_byUpdate %}
+	{% for company in needVetting %}
 		<tr>
 			<td><strong>{{ company.companyName }}</strong></a></td>
 			<td><a href="/admin/edit/{{ company.id }}">Edit</a></td>
 			<td>{%try%}{% if (company.contact) %} {{ company.contact.email }} {% end %}{%except%}{%end%}</td>
-			<td>{% if company.lastUpdated %}Updated: {%set d = company.lastUpdated %}{{ d.strftime("%b, %d '%y @%I:%M %p") }} {%end%}</td>
-			<td>{%if company.submittedThroughWebsite %} √ {%end%}</td>
-			<td>{%if company.display %} √ {%end%}</td>
-		</tr>
-	{% end %}
-	{% for company in needVetting_byName %}
-		<tr>
-			<td><strong>{{ company.companyName }}</strong></a></td>
-			<td><a href="/admin/edit/{{ company.id }}">Edit</a></td>
-			<td>{%try%}{% if (company.contact) %} {{ company.contact.email }} {% end %}{%except%}{%end%}</td>
-			<td>Created: {%set d = company.ts %}{{ d.strftime("%b, %d '%y @%I:%M %p") }}</td>
+			<td>{{ company.lastUpdated.strftime("%b, %d '%y @%I:%M %p") }}</td>
 			<td>{%if company.submittedThroughWebsite %} √ {%end%}</td>
 			<td>{%if company.display %} √ {%end%}</td>
 		</tr>
