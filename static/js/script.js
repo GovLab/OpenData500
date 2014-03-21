@@ -398,7 +398,9 @@ $(document).ready(function() {
 
   //----------------------------------SUBMIT FORM--------------------------------------
   $('.submitCompanyForm').on('click', '#companySubmit', function() {
-    if ($('.companyForm').parsley('validate') && $('#dataComments').parsley('validate')) {
+    console.log($('#dataComments').parsley('validate'));
+    //weird parsley thing evaluates empty field to null.
+    if ($('.companyForm').parsley('validate') && ($('#dataComments').parsley('validate') || $('#dataComments').parsley('validate') == null)) {
       console.log('valid');
       $('.savingMessage_companyEdit').show();
       var companyID = $('.companyID').val();
