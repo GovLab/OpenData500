@@ -832,7 +832,7 @@ class AdminEditCompanyHandler(BaseHandler):
             company.locked = True
         else: 
             company.locked = False
-        company.lastUpdated = datetime.now()
+        #company.lastUpdated = datetime.now()
         company.save()
         self.application.stats.update_all_state_counts()
         self.write('success')
