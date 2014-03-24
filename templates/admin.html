@@ -16,7 +16,9 @@
 	</fieldset>
 	<fieldset class="m-form-half">
 		{% raw xsrf_form_html() %}
-		<input type="button" class="l-button" id="refresh" name="refresh" value="Refresh">
+		<input type="button" class="l-button admin_utils" id="refresh" name="refresh" value="Refresh">
+		<input type="button" class="l-button admin_utils" id="files" name="files" value="Generate Files">
+		<span class="message"></span>
 	</fieldset>
 </fieldset>
 <br>
@@ -74,22 +76,35 @@
 <script>
 
 $(document).ready( function() {
-	$('.m-form').on('click', '#refresh', function() {
-		data = { "_xsrf": $("[name='_xsrf']").val() }
+	$('.m-form').on('click', '.admin_utils', function() {
+		action = this.id;
+		if (action == "files") {
+			$('.message').text("Hold on, this one takes a bit...").show();
+		} else {
+			$('.message').text("Hold up...").show();
+		}
+		data = { "action":action, "_xsrf": $("[name='_xsrf']").val() }
 	  $.ajax({
 	    type: 'POST',
 	    url: '/admin/',
 	    data: data,
 	    error: function(error) {
 	        console.debug(JSON.stringify(error));
+	        $('.message').text("That didn't work...").show().delay(5000).fadeOut();;
 		},
 	    beforeSend: function(xhr, settings) {
 	    },
 	    success: function(data) {
-	      console.log(data);
-	      $('#totalCompanies').text(data['totalCompanies']);
-	      $('#totalCompaniesWeb').text(data['totalCompaniesWeb']);
-	      $('#totalCompaniesSurvey').text(data['totalCompaniesSurvey']);
+	    	if (action == "refresh") {
+				console.log(data);
+				$('#totalCompanies').text(data['totalCompanies']);
+				$('#totalCompaniesWeb').text(data['totalCompaniesWeb']);
+				$('#totalCompaniesSurvey').text(data['totalCompaniesSurvey']);
+				$('.message').text("Aight, I'm done.").show().delay(5000).fadeOut();
+			}
+			if (action == "files") {
+				$('.message').text("Aight, I'm done.").show().delay(5000).fadeOut();
+			}
 	    }
 	  });
 	});

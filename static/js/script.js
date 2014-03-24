@@ -583,6 +583,8 @@ $(document).ready(function() {
   }
   //----------------------------------AUTCOMPLETE SEARCH BAR--------------------------------------
   var agencies= [
+    {"label": "Administrative Office of the United States Courts (AO)", "a":"Administrative Office of the United States Courts", "aa":"AO", "s":"", "sa": ""},
+    {"label": "Alabama (AL)", "a":"Alabama", "aa":"AL", "s":"", "sa": ""},
     {"label": "Alabama (AL)", "a":"Alabama", "aa":"AL", "s":"", "sa": ""},
     {"label": "Alaska (AK)", "a":"Alaska", "aa":"AK", "s":"", "sa": ""},
     {"label": "Albuquerque (ABQ)", "a":"Albuquerque", "aa":"ABQ", "s":"", "sa": ""},
@@ -602,7 +604,8 @@ $(document).ready(function() {
     {"label": "Broadcasting Board of Governors (BBG)", "a":"Broadcasting Board of Governors", "aa":"BBG", "s":"", "sa": ""},
     {"label": "California (CA)", "a":"California", "aa":"CA", "s":"", "sa": ""},
     {"label": "California (CA) - California Environmental Health Tracking Program (CEHTP)", "a":"California", "aa":"CA", "s":"California Environmental Health Tracking Program", "sa": "CEHTP"},
-    {"label": "California (CA) - California Department of Resources (CDR)", "a":"California", "aa":"CA", "s":"California Department of Resources", "sa": "CDR"},
+    {"label": "California (CA) - Department of Resources (CDR)", "a":"California", "aa":"CA", "s":"Department of Resources", "sa": "CDR"},
+    {"label": "California (CA) - Department of Education (DOE)", "a":"California", "aa":"CA", "s":"Department of Education", "sa": "DOE"},
     {"label": "Champaign", "a":"Champaign", "aa":"", "s":"", "sa": ""},
     {"label": "Chicago (CHI)", "a":"Chicago", "aa":"CHI", "s":"", "sa": ""},
     {"label": "City of Orem", "a":"City of Orem", "aa":"", "s":"", "sa": ""},
@@ -673,6 +676,7 @@ $(document).ready(function() {
     {"label": "Department of Health and Human Services (HHS) - Food and Drug Administration (FDA)", "a":"Department of Health and Human Services", "aa":"HHS", "s":"Food and Drug Administration", "sa": "FDA"},
     {"label": "Department of Health and Human Services (HHS) - National Institutes of Health (NIH)", "a":"Department of Health and Human Services", "aa":"HHS", "s":"National Institutes of Health", "sa": "NIH"},
     {"label": "Department of Health and Human Services (HHS) - Substance Abuse and Mental Health Services Administration (SAMHSA)", "a":"Department of Health and Human Services", "aa":"HHS", "s":"Substance Abuse and Mental Health Services Administration", "sa": "SAMHSA"},
+    {"label": "Department of Health and Human Services (HHS) - Centers for Disease Control and Prevention (CDC)", "a":"Department of Health and Human Services", "aa":"HHS", "s":"Centers for Disease Control and Prevention", "sa": "CDC"},
     {"label": "Department of Homeland Security (DHS) - U.S. Coast Guard", "a":"Department of Homeland Security", "aa":"DHS", "s":"U.S. Coast Guard", "sa": ""},
     {"label": "Department of Homeland Security (DHS)", "a":"Department of Homeland Security", "aa":"DHS", "s":"", "sa": ""},
     {"label": "Department of Homeland Security (DHS) - Federal Emergency Management Agency (FEMA)", "a":"Department of Homeland Security", "aa":"DHS", "s":"Federal Emergency Management Agency", "sa": "FEMA"},
@@ -874,8 +878,7 @@ $(document).ready(function() {
     {"label": "Tennessee (TN)", "a":"Tennessee", "aa":"TN", "s":"", "sa": ""},
     {"label": "Texas (TX)", "a":"Texas", "aa":"TX", "s":"", "sa": ""},
     {"label": "Texas (TX) - Texas Transparency", "a":"Texas", "aa":"TX", "s":"Texas Transparency", "sa": ""},
-    {"label": "U.S. Department of Health & Human Services (HHS)", "a":"U.S. Department of Health & Human Services", "aa":"HHS", "s":"", "sa": ""},
-    {"label": "U.S. Environmental Protection Agency (EPA)", "a":"U.S. Environmental Protection Agency", "aa":"EPA", "s":"", "sa": ""},
+    {"label": "Environmental Protection Agency (EPA)", "a":"Environmental Protection Agency", "aa":"EPA", "s":"", "sa": ""},
     {"label": "Univ of South Carolina (SC) - Baruch Institute for Marine and Coastal Sciences", "a":"Univ of South Carolina", "aa":"SC", "s":"Baruch Institute for Marine and Coastal Sciences", "sa": ""},
     {"label": "University of Alaska (UA) - Geographic Information Network of Alaska - University of Alaska (GINA)", "a":"University of Alaska", "aa":"UA", "s":"Geographic Information Network of Alaska - University of Alaska", "sa": "GINA"},
     {"label": "University of Arizona (UA)", "a":"University of Arizona", "aa":"UA", "s":"", "sa": ""},

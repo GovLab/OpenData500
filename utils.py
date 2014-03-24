@@ -2,6 +2,10 @@
 
 import models
 from datetime import datetime
+import logging
+import os
+import json
+import csv
 
 
 #Just some global varbs. 
@@ -132,6 +136,11 @@ class FileGenerator(object):
                     "subagencies":subagencies
                 }
                 agencies.append(ag)
+            try:
+                subagencies
+            except Exception, e:
+                logging.info("No Subagencies: " + str(e))
+                subagencies = []
             company = {
                 "company_name_id": c.prettyName,
                 "companyName": c.companyName,
@@ -174,7 +183,7 @@ class FileGenerator(object):
             for s in a.subagencies:
                 datasets_subagency = []
                 for d in s.datasets:
-                    logging.info(d.datasetName)
+                    #logging.info(d.datasetName)
                     ds = {
                         "datasetName":d.datasetName,
                         "datasetURL":d.datasetURL,
@@ -214,24 +223,24 @@ class FileGenerator(object):
     def generate_company_csv(self):
         #---CSV OF ALL COMPANIES----
         companies = models.Company2.objects(display=True)
-        csvwriter = csv.writer(open(os.path.join(os.path.dirname(__file__), 'static') + "/OD500_companies.csv", "w"))
+        csvwriter = csv.writer(open(os.path.join(os.path.dirname(__file__), 'static') + "/OD500_Companies.csv", "w"))
         csvwriter.writerow([
             'company_name_id',
-            'CompanyName',
+            'company_name',
             'url',
             'city',
             'state',
-            'zipCode',
-            'ceoFirstName',
-            'ceoLastName',
-            'yearFounded',
-            'fte',
-            'companyType',
-            'companyCategory',
-            'revenueSource',
+            'zip_code',
+            'ceo_first_name',
+            'ceo_last_name',
+            'year_founded',
+            'full_time_employees',
+            'company_type',
+            'company_category',
+            'revenue_source',
             'description',
-            'descriptionShort',
-            'financialInfo'
+            'description_short',
+            'financial_info'
             ])
         for c in companies:
             newrow = [
@@ -256,3 +265,112 @@ class FileGenerator(object):
                 if hasattr(newrow[i], 'encode'):
                     newrow[i] = newrow[i].encode('utf8')
             csvwriter.writerow(newrow)
+    def generate_agency_csv(self):
+        #--------CSV OF AGENCIES------
+        agencies = models.Agency.objects()
+        companies = models.Company2.objects(display=True)
+        csvwriter = csv.writer(open(os.path.join(os.path.dirname(__file__), 'static') + "/OD500_Agencies.csv", "w"))
+        csvwriter.writerow([
+            'agency_name',
+            'agency_abbrev',
+            'agency_type',
+            'subagency_name',
+            'subagency_abbrev',
+            'url',
+            'used_by',
+            'dataset_name',
+            'dataset_url'
+            ])
+        for c in companies:
+            if c.agencies: #if the company actually uses any agency info
+                for a in c.agencies:
+                    justAgency = True
+                    agency_name = a.name
+                    agency_abbrev = a.abbrev
+                    agency_type = a.dataType
+                    if a.datasets: #if there agency level datasets, make a row for those
+                        for d in a.datasets:
+                            if d.usedBy == c:
+                                subagency_name = 'General'
+                                subagency_abbrev = ''
+                                url = a.url
+                                used_by = c.companyName
+                                dataset_name = d.datasetName
+                                dataset_url = d.datasetURL
+                                newrow = [agency_name, agency_abbrev, agency_type, subagency_name, subagency_abbrev, url, used_by, dataset_name, dataset_url]
+                                for i in range(len(newrow)):  # For every value in our newrow
+                                    if hasattr(newrow[i], 'encode'):
+                                        newrow[i] = newrow[i].encode('utf8')
+                                csvwriter.writerow(newrow)
+                                justAgency = False
+                    if a.subagencies: #if there are subagencies, make a row for those subagencies used by the company
+                        for s in a.subagencies:
+                            if c in s.usedBy:
+                                subagency_name = s.name
+                                subagency_abbrev = s.abbrev
+                                url = s.url
+                                if s.datasets: #if there are datasets in the subagency, make a row for those datasets used by the company:
+                                    for d in s.datasets:
+                                        if d.usedBy == c:
+                                            used_by = c.companyName
+                                            dataset_name = d.datasetName
+                                            dataset_url = d.datasetURL
+                                            newrow = [agency_name, agency_abbrev, agency_type, subagency_name, subagency_abbrev, url, used_by, dataset_name, dataset_url]
+                                            for i in range(len(newrow)):  # For every value in our newrow
+                                                if hasattr(newrow[i], 'encode'):
+                                                    newrow[i] = newrow[i].encode('utf8')
+                                            csvwriter.writerow(newrow)
+                                            justAgency = False
+                                else: #there are no datasets, just make a row with subagency and no datasets.
+                                    used_by = c.companyName
+                                    dataset_name = ''
+                                    dataset_url = ''
+                                    newrow = [agency_name, agency_abbrev, agency_type, subagency_name, subagency_abbrev, url, used_by, dataset_name, dataset_url]
+                                    for i in range(len(newrow)):  # For every value in our newrow
+                                        if hasattr(newrow[i], 'encode'):
+                                            newrow[i] = newrow[i].encode('utf8')
+                                    csvwriter.writerow(newrow)
+                                    justAgency = False
+                    if justAgency: #if company uses agency, but no specific dataset or subagency, then add row
+                        subagency_name = 'General'
+                        subagency_abbrev = ''
+                        url = a.url
+                        used_by = c.companyName
+                        dataset_name = ''
+                        dataset_url = ''
+                        newrow = [agency_name, agency_abbrev, agency_type, subagency_name, subagency_abbrev, url, used_by, dataset_name, dataset_url]
+                        for i in range(len(newrow)):  # For every value in our newrow
+                            if hasattr(newrow[i], 'encode'):
+                                newrow[i] = newrow[i].encode('utf8')
+                        csvwriter.writerow(newrow)
+
+
+
+
+        # for a in agencies:
+        #     agency_name = a.name
+        #     agency_abbrev = a.abbrev
+        #     agency_type = a.dataType
+        #     if a.datasets: #If there are any general level datasets, make a row with that
+        #         for d in a.datasets:
+        #             subagency_name = 'General'
+        #             subagency_abbrev = ''
+        #             url = a.url
+        #             used_by = d.usedBy.companyName
+        #             dataset_url = d.url
+        #             newrow = [agency_name, agency_abbrev, agency_type, subagency_name, subagency_abbrev, url, used_by, dataset_name, dataset_url].encode('utf8')
+        #             csvwriter.writerow(newrow)
+        #     if subagencies: #if there are subagencies make rows with them
+
+
+
+
+
+
+
+
+
+
+
+
+
