@@ -279,7 +279,7 @@ class AdminHandler(BaseHandler):
     def get(self):
         surveySubmitted = models.Company2.objects(Q(submittedSurvey=True) & Q(display=True) & Q(vetted=True) & Q(vettedByCompany=True) & Q(submittedThroughWebsite=False)).order_by('prettyName')
         sendSurveys = models.Company2.objects(Q(submittedSurvey=False))
-        needVetting = models.Company2.objects(Q(submittedSurvey=True) & Q(vetted=False) & Q(vettedByCompany=True)).order_by('-lastUpdated', 'prettyName')
+        needVetting = models.Company2.objects(Q(submittedSurvey=True) & Q(vetted=False)).order_by('-lastUpdated', 'prettyName')
         stats = models.Stats.objects().first()
         self.render(
             "admin.html",
