@@ -32,6 +32,7 @@
 		<th>Date Submitted/Updated</th>
 		<th>Via Web?</th>
 		<th>Displayed?</th>
+		<th>Notes</th>
 	</tr>
 	{% for company in needVetting %}
 		<tr>
@@ -41,6 +42,7 @@
 			<td>{{ company.lastUpdated.strftime("%b, %d '%y @%I:%M %p") }}</td>
 			<td>{%if company.submittedThroughWebsite %} √ {%end%}</td>
 			<td><input type="checkbox" name="display" id="display" value="display" c_id="{{company.id}}" {%if company.display %}checked{%end%}></td>
+			<td><p>{% if company.notes %}{{company.notes}}{%end%}</p></td>
 		</tr>
 	{% end %}
 </table>
