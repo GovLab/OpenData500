@@ -307,6 +307,17 @@ class AdminHandler(BaseHandler):
         elif action == "sankey":
             self.application.files.generate_sankey_json()
             self.write("success")
+        elif action == 'display':
+            try:
+                id = self.get_argument("id", None)
+                c = models.Company2.objects.get(id=bson.objectid.ObjectId(id))
+            except Exception, e:
+                logging.info("Error: " + str(e))
+                self.write(str(e))
+            c.display = not c.display
+            c.save()
+            self.application.stats.update_all_state_counts()
+            self.write("success")
 
 class ValidateHandler(BaseHandler):
     def post(self):

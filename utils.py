@@ -50,10 +50,17 @@ class StatsGenerator(object):
         s.totalCompaniesSurvey = models.Company2.objects(submittedSurvey = True).count()
     
     def increase_individual_state_count(self, state):
-        stats = models.Stats.object().first()
+        stats = models.Stats.objects().first()
         for s in stats.states:
-            if s.name == state:
+            if s.abbrev == state:
                 s.count = s.count + 1
+        stats.save()
+
+    def decrease_individual_state_count(self, state):
+        stats = models.Stats.objects().first()
+        for s in stats.states:
+            if s.abbrev == state:
+                s.count = s.count - 1
         stats.save()
 
     def update_all_state_counts(self):

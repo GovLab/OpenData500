@@ -24,7 +24,7 @@
 </fieldset>
 <br>
 <h2>Need Vetting</h2>
-<table style="width:100%; text-align:left; border:1px;">
+<table class="needVetting" style="width:100%; text-align:left; border:1px;">
 	<tr>
 		<th>Company Name</th>
 		<th>Edit URL</th>
@@ -40,7 +40,7 @@
 			<td>{%try%}{% if (company.contact) %} {{ company.contact.email }} {% end %}{%except%}{%end%}</td>
 			<td>{{ company.lastUpdated.strftime("%b, %d '%y @%I:%M %p") }}</td>
 			<td>{%if company.submittedThroughWebsite %} √ {%end%}</td>
-			<td><input type="checkbox" name="display" id="display" value="display" {%if company.display %}checked{%end%}></td>
+			<td><input type="checkbox" name="display" id="display" value="display" c_id="{{company.id}}" {%if company.display %}checked{%end%}></td>
 		</tr>
 	{% end %}
 </table>
@@ -115,6 +115,24 @@ $(document).ready( function() {
 			}
 	    }
 	  });
+	});
+	$('.needVetting').on('click', '#display', function() {
+		id = this.attributes['c_id'].value
+		p = this;
+		data = { "action":"display", "id":id, "_xsrf": $("[name='_xsrf']").val() }
+		$.ajax({
+		    type: 'POST',
+		    url: '/admin/',
+		    data: data,
+		    error: function(error) {
+		        console.debug(JSON.stringify(error));
+			},
+		    beforeSend: function(xhr, settings) {
+		    },
+		    success: function(data) {
+		    	console.log('success!');
+		    }
+		});
 	});
 });
 
