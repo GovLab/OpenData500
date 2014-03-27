@@ -14,17 +14,16 @@ Department of Defense,DOD,Federal,General,,http://catalog.data.gov/organization/
 Department of Commerce,USDC,Federal,US Census Bureau,Census,http://catalog.data.gov/organization/census-gov,Appallicious,US Census Bureau,http://www.census.gov
 San Francisco,SF,City/County,General,,http://www.datasf.org/,Appallicious,San Francisco Department of Public Health,https://data.sfgov.org/
 San Francisco,SF,City/County,General,,http://www.datasf.org/,Appallicious,San Francisco Parks & Recreation Info Department Dataset,https://data.sfgov.org/Parks-and-Recreation/Recreation-Park-Department-Park-Info-Dataset/z76i-7s65
-Centers for Disease Control and Prevention (CDC) ,,,General,,,Archimedes Inc.,National Health and Nutrition Examination Survey (NHANES),http://www.cdc.gov/nchs/nhanes.htm
-Centers for Disease Control and Prevention (CDC),,,General,,,Archimedes Inc.,National Ambulatory Medical Care Survey (NAMCS),http://www.cdc.gov/nchs/ahcd.htm
-Centers for Disease Control and Prevention (CDC),,,General,,,Archimedes Inc.,National Hospital Discharge Survey (NHDS),http://www.cdc.gov/nchs/nhds.htm
-Centers for Disease Control and Prevention (CDC),,,General,,,Archimedes Inc.,Compressed Mortality File (CMF),http://www.cdc.gov/nchs/data_access/cmf.htm
+Department of Health and Human Services,HHS,Federal,Centers for Disease Control and Prevention,CDC,http://www.cdc.gov/,Archimedes Inc.,National Health and Nutrition Examination Survey (NHANES),http://www.cdc.gov/nchs/nhanes.htm
+Department of Health and Human Services,HHS,Federal,Centers for Disease Control and Prevention,CDC,http://www.cdc.gov/,Archimedes Inc.,National Ambulatory Medical Care Survey (NAMCS),http://www.cdc.gov/nchs/ahcd.htm
+Department of Health and Human Services,HHS,Federal,Centers for Disease Control and Prevention,CDC,http://www.cdc.gov/,Archimedes Inc.,National Hospital Discharge Survey (NHDS),http://www.cdc.gov/nchs/nhds.htm
+Department of Health and Human Services,HHS,Federal,Centers for Disease Control and Prevention,CDC,http://www.cdc.gov/,Archimedes Inc.,Compressed Mortality File (CMF),http://www.cdc.gov/nchs/data_access/cmf.htm
 Social Security Administration,SSA,Federal,General,,http://catalog.data.gov/organization/ssa-gov,"Aunt Bertha, Inc.",Benefits.gov,www.benefits.gov
 Department of the Treasury,,Federal,Internal Revenue Service,IRS,http://catalog.data.gov/organization/irs-gov,"Aunt Bertha, Inc.",Internal Revenue Service (IRS) SOI Tax Stats - Exempt Organizations Business Master File Extract (EO BMF),http://www.irs.gov/uac/SOI-Tax-Stats-Exempt-Organizations-Business-Master-File-Extract-(EO-BMF)
 Department of Commerce,USDC,Federal,US Census Bureau,Census,http://catalog.data.gov/organization/census-gov,Azavea,American Community Survey (ACS),http://www.census.gov/acs/www/data_documentation/summary_file/
 Department of the Interior,DOI,Federal,U.S. Geological Survey,USGS,http://catalog.data.gov/dataset?q=organization:usgs-gov,Azavea,National Elevation Dataset (NED),http://ned.usgs.gov/
 Consumer Financial Protection Bureau,CFPB,Federal,General,,http://catalog.data.gov/organization/cfpb-gov,BillGuard,CFPB Credit Card Complaint Database,https://data.consumerfinance.gov/dataset/Credit-card-complaint-responses-by-issue/3jqb-9gp3
 Department of Labor,,Federal,General,,http://catalog.data.gov/dataset?q=organization:((ecab-dol-gov)+OR+(whd-dol-gov)+OR+(esba-dol-gov)+OR+(ojc-dol-gov)+OR+(eta-dol-gov)+OR+(osha-dol-gov)+OR+(oalj-dol-gov)+OR+(oasp-dol-gov)+OR+(msha-dol-gov)+OR+(bls-gov)+OR+(brb-dol-gov)),Brightscope,Retirement Plan Data,http://www.dol.gov/dol/topic/retirement/typesofplans.htm
-Securities and Exchange Commission,SEC,Federal,General,,http://catalog.data.gov/organization/sec-gov,Brightscope,Investment Advisor Data,http://www.sec.gov/
 Securities and Exchange Commission,SEC,Federal,General,,http://catalog.data.gov/organization/sec-gov,Brightscope,Investment Advisor Data,http://www.sec.gov/
 San Francisco,SF,City/County,General,,http://www.datasf.org/,BuildZoom,State Contractor License Data,
 San Francisco,SF,City/County,General,,http://www.datasf.org/,BuildZoom,City Permit Data,
@@ -35,10 +34,11 @@ California,CA,State,General,,http://data.ca.gov/,Captricity,California Fair Poli
 Department of the Treasury,,Federal,Internal Revenue Service,IRS,http://catalog.data.gov/organization/irs-gov,Captricity,IRS Form 990 Return of Organization Exempt From Income Tax,"http://www.irs.gov/uac/Form-990,-Return-of-Organization-Exempt-From-Income-Tax-"
 U.S. House of Representatives,,Federal Open Data,General,,,Civic Impulse LLC,Congressional votes (URL is for House votes),http://clerk.house.gov/legislative/legvotes.aspx
 U.S. House of Representatives,,Federal Open Data,General,,,Civic Impulse LLC,Upcoming bills in the House,http://docs.house.gov/
-List of Registered Voters,,,General,,,Civinomics,,
 Department of Commerce,USDC,Federal,US Census Bureau,Census,http://catalog.data.gov/organization/census-gov,Civinomics,United States Census 2010,http://www.census.gov/2010census/
 Department of Commerce,USDC,Federal,National Oceanic and Atmospheric Administration,NOAA,http://catalog.data.gov/organization/noaa-gov,Climate Corporation,Multi-sensor Radar Derived Daily Precipitation,www.ncep.noaa.gov
 Department of the Interior,DOI,Federal,U.S. Geological Survey,USGS,http://catalog.data.gov/dataset?q=organization:usgs-gov,Climate Corporation,High Resolution Soil Dataset,http://www.usgs.gov/
+Department of Agriculture,USDA,Federal,Natural Resources Conservation Service,NRCS,http://catalog.data.gov/organization/nrcs-usda-gov,Climate Corporation,,
+National Aeronautics and Space Administration,NASA,Federal,General,,http://catalog.data.gov/organization/jpl-nasa-gov,Climate Corporation,,
 Chicago,CHI,City/County,General,,http://data.cityofchicago.org/,Code for America,,
 Austin,AUS,City/County,General,,http://data.austintexas.gov/,Code for America,,
 Department of Education,ED / DOED,Federal,General,,http://catalog.data.gov/organization/ed-gov,College Abacus,IPEDS,http://nces.ed.gov/ipeds/datacenter/
@@ -76,7 +76,7 @@ Department of Energy,DOE,Federal,Energy Information Administration,EIA,http://ca
 ,,,General,,,GovTribe,USA Spending,http://www.usaspending.gov
 Department of Health and Human Services,HHS,Federal,Food and Drug Administration,FDA,http://www.fda.gov/,"Govzilla, Inc.",US Food and Drug Administration (FDA),http://www.fda.gov/
 Department of Education,ED / DOED,Federal,National Center for Education Statistics,NCES,http://catalog.data.gov/organization/nces-ed-gov,GreatSchools,Common Core of Data (CCD),http://nces.ed.gov/ccd/
-California,CA,State,General,,http://data.ca.gov/,GreatSchools,California Department of Education - 2013 STAR Test Results,http://star.cde.ca.gov/star2013/ResearchFileList.aspx
+California,CA,State,Department of Education,DOE,http://www.cde.ca.gov/ds/,GreatSchools,2013 STAR Test Results,http://star.cde.ca.gov/star2013/ResearchFileList.aspx
 District of Columbia,DC,State,General,,http://data.dc.gov/,"HDScores, Inc",Washington DC Health Department,http://washington.dc.gegov.com/webadmin/dhd_431/web/?a=Inspections
 Maryland,MD,State,General,,https://data.maryland.gov/,"HDScores, Inc",Montgomery County Health Department,https://data.montgomerycountymd.gov/Community/Food-Inspection/5pue-gfbe
 Virginia,VA,State,General,,http://datapoint.apa.virginia.gov/,"HDScores, Inc",Virginia Health Department,http://www.healthspace.com/Clients/VDH/vdh_website.nsf
@@ -91,17 +91,18 @@ Consumer Financial Protection Bureau,CFPB,Federal,General,,http://catalog.data.g
 U.S. Environmental Protection Agency,EPA,Federal,General,,http://catalog.data.gov/organization/epa-gov,ideas42,US Environmental Protection Agency (EPA) Fuel Economy,http://www.fueleconomy.gov/feg/download.shtml
 ,,,General,,,IPHIX,Recovery.gov,www.recovery.gov
 Securities and Exchange Commission,SEC,Federal,General,,http://catalog.data.gov/organization/sec-gov,IPHIX,US Securities and Exchange Commission,www.sec.gov
-Centers for Disease Control and Prevention (CDC) ,,,General,,,iTriage,National Ambulatory Medical Care Survey (NAMCS) and National Hospital Ambulatory Medical Care Survey (NHAMCS),www.cdc.gov
 Department of Health and Human Services,HHS,Federal,General,,http://catalog.data.gov/organization/cms-hhs-gov,iTriage,Community Health Clinics,www.hrsa.gov
 Department of Health and Human Services,HHS,Federal,General,,http://catalog.data.gov/organization/cms-hhs-gov,iTriage,TXT4Tots,http://www.hhs.gov/digitalstrategy/open-data/txt4tots.html
 Department of Health and Human Services,HHS,Federal,Centers for Medicare and Medicaid Services,CMS,http://catalog.data.gov/organization/cms-hhs-gov,iTriage,Home Health Facilities,www.cms.gov
 Department of Health and Human Services,HHS,Federal,Centers for Medicare and Medicaid Services,CMS,http://catalog.data.gov/organization/cms-hhs-gov,iTriage,National Provider Identifier Standard,http://www.cms.gov/Regulations-and-Guidance/HIPAA-Administrative-Simplification/NationalProvIdentStand/DataDissemination.html
 Department of Health and Human Services,HHS,Federal,Substance Abuse and Mental Health Services Administration,SAMHSA,http://catalog.data.gov/organization/samhsa-hhs-gov,iTriage,Mental Health & Substance Abuse Clinics,www.samhsa.gov
+Department of Health and Human Services,HHS,Federal,Centers for Disease Control and Prevention,CDC,http://www.cdc.gov/,iTriage,National Ambulatory Medical Care Survey (NAMCS) and National Hospital Ambulatory Medical Care Survey (NHAMCS),www.cdc.gov
+Department of Health and Human Services,HHS,Federal,Centers for Disease Control and Prevention,CDC,http://www.cdc.gov/,iTriage,National Hospital Ambulatory Medical Care Survey (NHAMCS),www.cdc.gov
 Palo Alto,PA,City/County,General,,http://data.cityofpaloalto.org/,Junar,City of Palo Alto Development Center Permits,http://bit.ly/YG1mm4
 California,CA,State,General,,http://data.ca.gov/,Junar,Finance Data City of Cupertino,http://bit.ly/13Gii8P
 ,,,General,,,Junyo,,
-Public Access to Court Electronic Records (PACER),,,General,,,Lawdragon,,http://www.pacer.gov/
 California,CA,State,General,,http://data.ca.gov/,Lawdragon,Databases of Licensed Lawyers,http://www.calbar.ca.gov/Public.aspx
+Administrative Office of the United States Courts,AO,Federal,General,,http://www.uscourts.gov/,Lawdragon,Public Access to Court Electronic Records (PACER),http://www.pacer.gov/
 Bills from all 50 states,,,General,,,"LegiNation, Inc.",,
 Department of Commerce,USDC,Federal,National Oceanic and Atmospheric Administration,NOAA,http://catalog.data.gov/organization/noaa-gov,Lucid,NOAA weather data across the U.S.,
 U.S. Environmental Protection Agency,EPA,Federal,General,,http://catalog.data.gov/organization/epa-gov,Lucid,EPA/DOE electricity cost and emissions data by state,
@@ -121,6 +122,7 @@ San Francisco Data,,,General,,,New Media Parents,,https://data.sfgov.org/
 ,,,General,,,NonprofitMetrics,IRS Business Master File (BMF),http://www.irs.gov/uac/SOI-Tax-Stats-Exempt-Organizations-Business-Master-File-Extract-(EO-BMF)
 ,,,General,,,Nuams (New Amsterdam Ideas),US National Foreclosure Statistics January 2012,http://demo.getdkan.com/dataset/us-national-foreclosure-statistics-january-2012/resource/d9ed9373-4371-4f94-a17d
 Department of Health and Human Services,HHS,Federal,General,,http://catalog.data.gov/organization/cms-hhs-gov,Numedii,,
+Securities and Exchange Commission,SEC,Federal,General,,http://catalog.data.gov/organization/sec-gov,OTC Markets,,
 New York City Open Data Portal,,,General,,,"Ontodia, Inc",,data.cityofnewyork.us
 New York State Open Data Portal,,,General,,,"Ontodia, Inc",,data.ny.gov
 ,,,General,,,OpenCounter,,
@@ -170,19 +172,19 @@ Department of Commerce,USDC,Federal,National Oceanic and Atmospheric Administrat
 Department of Commerce,USDC,Federal,National Weather Service,NWS,http://catalog.data.gov/organization/nws-doc-gov,Stormpulse,NWS Public Alerts,http://alerts.weather.gov/
 Local Police and Court Records,,,General,,,"StreetCred Software, Inc",,
 ,,,General,,,SumAll,Twitter API ,https://dev.twitter.com/
-,,,General,,,SumAll,NYC Open Data,www.pediacities.com
-,,,General,,,Symcat,National Ambulatory Medical Care Survey,http://www.cdc.gov/nchs/ahcd/ahcd_questionnaires.htm
-,,,General,,,Symcat,Unified Medical Language System,http://www.nlm.nih.gov/research/umls/
+Department of Health and Human Services,HHS,Federal,National Institutes of Health,NIH,http://catalog.data.gov/organization/nih-hhs-gov,Symcat,Unified Medical Language System,http://www.nlm.nih.gov/research/umls/
+Department of Health and Human Services,HHS,Federal,Centers for Disease Control and Prevention,CDC,http://www.cdc.gov/,Symcat,National Ambulatory Medical Care Survey,http://www.cdc.gov/nchs/ahcd/ahcd_questionnaires.htm
 ,,,General,,,Synthicity,"parcels, buildings, and zoning",
 ,,,General,,,Synthicity,openstreetmap and gtfs,
 US Securities and Exchange Commission (SEC),,,General,,,TagniFi,,http://xbrl.sec.gov/
 ,,,General,,,"Tax Processing Systems, Inc.",Tax Returns,
 ,,,General,,,The DocGraph Journal,DocGraph,http://docgraph.org
 ,,,General,,,The DocGraph Journal,National Plan & Provider Enumeration System (NPPES),https://nppes.cms.hhs.gov/NPPES/Welcome.do
-,,,General,,,The Schork Report,US Energy Information Administration (EIA),www.eia.gov
-,,,General,,,The Schork Report,National Weather Service National Oceanic and Atmospheric Administration (NOAA),www.weather.gov
+Department of Health and Human Services,HHS,Federal,Centers for Medicare and Medicaid Services,CMS,http://catalog.data.gov/organization/cms-hhs-gov,The DocGraph Journal,National Plan & Provider Enumeration System (NPPES),https://nppes.cms.hhs.gov/NPPES/Welcome.do
+Department of Commerce,USDC,Federal,National Weather Service,NWS,http://catalog.data.gov/organization/nws-doc-gov,The Schork Report,National Weather Service National Oceanic and Atmospheric Administration (NOAA),www.weather.gov
+Department of Energy,DOE,Federal,Energy Information Administration,EIA,http://catalog.data.gov/organization/eia-doe-gov,The Schork Report,US Energy Information Administration (EIA),www.eia.gov
 ,,,General,,,Think Computer Corporation,Public Access to Court Electronic Records (PACER) via RECAP The Law,http://www.recapthelaw.org
-,,,General,,,Think Computer Corporation,Google and US Patent and Trademark Office (USPTO),http://www.google.com/googlebooks/uspto.html
+Department of Commerce,USDC,Federal,US Patent and Trademark Office,USPTO,http://catalog.data.gov/dataset?q=organization:uspto-gov,Think Computer Corporation,Google and US Patent and Trademark Office (USPTO),http://www.google.com/googlebooks/uspto.html
 Department of Health and Human Services,HHS,Federal,General,,http://catalog.data.gov/organization/cms-hhs-gov,TrialX,Clinicaltrials,http://clinicaltrials.gov
 Department of Health and Human Services,HHS,Federal,General,,http://catalog.data.gov/organization/cms-hhs-gov,TrialX,health data dot gov,http://healthdata.gov
 US Geological Survey (USGS),,,General,,,Trulia,Earthquake Map,http://www.nationalatlas.gov/mld/seihazp.html
@@ -190,23 +192,21 @@ Federal Emergency Management Agency (FEMA) ,,,General,,,Trulia,Flood Map,http://
 National Oceanic and Atmospheric Administration (NOAA) - Storm Prediction Center (SPC) ,,,General,,,Trulia,Tornado Map,http://www.spc.noaa.gov/gis/svrgis/
 National Oceanic and Atmospheric Administration (NOAA) ,,,General,,,Trulia,Hurricane Research Division Hurricane Map,http://www.aoml.noaa.gov/hrd/hurdat/Data_Storm.html
 US Department of Agriculture ,,,General,,,Trulia,Forest Service Wildfire Map,http://www.firelab.org/fmi/data-products/229-wildland-fire-potential-wfp
-,,,General,,,TuvaLabs,,
 ,,,General,,,"Urban Mapping, Inc",Neighborhood Boundaries,http://www.urbanmapping.com/neighborhood-boundaries.html
 ,,,General,,,"Urban Mapping, Inc",Airport Noise Contours,http://www.urbanmapping.com/case-study-noise-contours.html
-,,,General,,,Vizzuality,OpenStreetMap,openstreetmap.org
-,,,General,,,Vizzuality,US Census Bureau,http://www.census.gov/
+Department of Commerce,USDC,Federal,General,,http://catalog.data.gov/organization/doc-gov,Vizzuality,Open Street Map,http://www.openstreetmap.org
+Department of Commerce,USDC,Federal,US Census Bureau,Census,http://catalog.data.gov/organization/census-gov,Vizzuality,US Census Bureau,http://www.census.gov/
 "US Census, USGS and City Government Data",,,General,,,Walk Score,,
-,,,General,,,Way Better Patents,USPTO Bulk Patent Downloads,http://www.google.com/googlebooks/uspto-patents.html
-,,,General,,,Way Better Patents,NSF R&D Data,http://www.nsf.gov/statistics/showpub.cfm?TopID=8
-,,,General,,,Way Better Patents,Federal Procurement Data System,https://www.fpds.gov/fpdsng_cms/index.php/en/
 Department of Commerce,USDC,Federal,US Patent and Trademark Office,USPTO,http://catalog.data.gov/dataset?q=organization:uspto-gov,Way Better Patents,USPTO Bulk Patent Downloads,http://www.google.com/googlebooks/uspto-patents.html
 National Science Foundation,NSF,Federal,General,,http://catalog.data.gov/organization/nsf-gov,Way Better Patents,NSF R&D Data,http://www.nsf.gov/statistics/showpub.cfm?TopID=8
-,,,General,,,Webitects,Chicago Lobbyist Information,data.cityofchicago.org
-,,,General,,,Webitects,Various Chicago Public School Data Sets,
+General Services Administration,GSA,Federal,General,,http://catalog.data.gov/organization/gsa-gov,Way Better Patents,Federal Procurement Data System,https://www.fpds.gov/fpdsng_cms/index.php/en/
+Chicago,CHI,City/County,General,,http://data.cityofchicago.org/,Webitects,Chicago Lobbyist Information,data.cityofchicago.org
+Chicago,CHI,City/County,General,,http://data.cityofchicago.org/,Webitects,Various Chicago Public School Data Sets,
 ,,,General,,,Xcential,Office of the Law Revision Council United States Code,http://uscode.house.gov/
 ,,,General,,,YEI Healthcare,System for Award Management Exclusions Data,www.sam.gov
-,,,General,,,YEI Healthcare,US Department of Health and Human Services (HHS) Office of Inspector General List of Excluded Individuals/Entities (LEIE) Database,http://oig.hhs.gov/exclusions/index.asp
-,,,General,,,YEI Healthcare,US Department of Health and Human Services (HHS) National Drug Code Directory,http://www.fda.gov/Drugs/InformationOnDrugs/ucm142438.htm
-,,,General,,,YEI Healthcare,Centers for Medicare & Medicaid Services (CMS) National Plan and Provider Enumeration System (NPPES),http://www.cms.gov/Regulations-and-Guidance/HIPAA-Administrative-Simplification/NationalProvIdentStand/DataDissemination.html
-,,,General,,,YEI Healthcare,US Food and Drug Administration (FDA) Establishment Registration and Medical Device Listing Files,http://www.fda.gov/MedicalDevices/DeviceRegulationandGuidance/HowtoMarketYourDevice/RegistrationandListing/ucm134495.htm
+Department of Health and Human Services,HHS,Federal,General,,http://catalog.data.gov/organization/cms-hhs-gov,YEI Healthcare,US Department of Health and Human Services (HHS) Office of Inspector General List of Excluded Individuals/Entities (LEIE) Database,http://oig.hhs.gov/exclusions/index.asp
+Department of Health and Human Services,HHS,Federal,General,,http://catalog.data.gov/organization/cms-hhs-gov,YEI Healthcare,US Department of Health and Human Services (HHS) National Drug Code Directory,http://www.fda.gov/Drugs/InformationOnDrugs/ucm142438.htm
+Department of Health and Human Services,HHS,Federal,Centers for Medicare and Medicaid Services,CMS,http://catalog.data.gov/organization/cms-hhs-gov,YEI Healthcare,Centers for Medicare & Medicaid Services (CMS) National Plan and Provider Enumeration System (NPPES),http://www.cms.gov/Regulations-and-Guidance/HIPAA-Administrative-Simplification/NationalProvIdentStand/DataDissemination.html
+Department of Health and Human Services,HHS,Federal,Food and Drug Administration,FDA,http://www.fda.gov/,YEI Healthcare,US Food and Drug Administration (FDA) Establishment Registration and Medical Device Listing Files,http://www.fda.gov/MedicalDevices/DeviceRegulationandGuidance/HowtoMarketYourDevice/RegistrationandListing/ucm134495.htm
+Department of Health and Human Services,HHS,Federal,Food and Drug Administration,FDA,http://www.fda.gov/,YEI Healthcare,US Department of Health and Human Services (HHS) National Drug Code Directory,http://www.fda.gov/Drugs/InformationOnDrugs/ucm142438.htm
 Zonerapp,,,General,,,Zonerapp.com,PLUTO,www.zonerapp.com

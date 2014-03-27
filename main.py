@@ -301,7 +301,11 @@ class AdminHandler(BaseHandler):
             self.application.files.generate_company_json()
             self.application.files.generate_agency_json()
             self.application.files.generate_company_csv()
+            self.application.files.generate_company_all_csv()
             self.application.files.generate_agency_csv()
+            self.write("success")
+        elif action == "sankey":
+            self.application.files.generate_sankey_json()
             self.write("success")
 
 class ValidateHandler(BaseHandler):
@@ -841,6 +845,7 @@ class AdminEditCompanyHandler(BaseHandler):
         else: 
             company.locked = False
         #company.lastUpdated = datetime.now()
+        company.notes = self.get_argument("notes", None)
         company.save()
         self.application.stats.update_all_state_counts()
         self.write('success')

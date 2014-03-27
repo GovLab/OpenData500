@@ -18,6 +18,7 @@
 		{% raw xsrf_form_html() %}
 		<input type="button" class="l-button admin_utils" id="refresh" name="refresh" value="Refresh">
 		<input type="button" class="l-button admin_utils" id="files" name="files" value="Generate Files">
+		<input type="button" class="l-button admin_utils" id="sankey" name="sankey" value="Generate Vizz File">
 		<span class="message"></span>
 	</fieldset>
 </fieldset>
@@ -39,7 +40,7 @@
 			<td>{%try%}{% if (company.contact) %} {{ company.contact.email }} {% end %}{%except%}{%end%}</td>
 			<td>{{ company.lastUpdated.strftime("%b, %d '%y @%I:%M %p") }}</td>
 			<td>{%if company.submittedThroughWebsite %} √ {%end%}</td>
-			<td>{%if company.display %} √ {%end%}</td>
+			<td><input type="checkbox" name="display" id="display" value="display" {%if company.display %}checked{%end%}></td>
 		</tr>
 	{% end %}
 </table>
@@ -51,14 +52,16 @@
 		<th>Edit URL</th>
 		<th>Contact Email</th>
 		<th>Admin Edit</th>
+		<th>Notes</th>
 
 	</tr>
 	{% for company in sendSurveys %}
 		<tr>
 			<td><strong>{{ company.companyName }}</strong></a></td>
-			<td><a href="/edit/{{ company.id }}">www.opendata500.com/edit/{{company.id}}</a></td>
+			<td><a href="/edit/{{ company.id }}">Edit</a></td>
 			<td>{%try%}{% if (company.contact) %} {{ company.contact.email }} {% end %}{%except%}{%end%}</td>
 			<td><a href="/admin/edit/{{ company.id }}">Edit</a></td>
+			<td><p>{% if company.notes %}{{company.notes}}{%end%}</p></td>
 		</tr>
 	{% end %}
 </table>
@@ -69,6 +72,7 @@
 {% for company in surveySubmitted %}
 	<h3><strong>{{ company.companyName }}</strong> Submitted: {{company.ts}}</h3> 
 	<div>
+		<p>{% if company.notes %}{{company.notes}}{%end%}</p>
 		<p><a href="/admin/edit/{{ company.id }}">Edit</a></p>
 	</div>
 {% end %}
@@ -78,6 +82,7 @@
 $(document).ready( function() {
 	$('.m-form').on('click', '.admin_utils', function() {
 		action = this.id;
+		console.log(action)
 		if (action == "files") {
 			$('.message').text("Hold on, this one takes a bit...").show();
 		} else {
@@ -103,6 +108,9 @@ $(document).ready( function() {
 				$('.message').text("Aight, I'm done.").show().delay(5000).fadeOut();
 			}
 			if (action == "files") {
+				$('.message').text("Aight, I'm done.").show().delay(5000).fadeOut();
+			}
+			if (action == "sankey") {
 				$('.message').text("Aight, I'm done.").show().delay(5000).fadeOut();
 			}
 	    }

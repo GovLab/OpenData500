@@ -110,6 +110,7 @@ class Company2(Document):
 	vettedByCompany = BooleanField() #vetted by them
 	submittedThroughWebsite = BooleanField() #submitted through website
 	locked = BooleanField() #Locked from public editing
+	notes = StringField() #notes by admin
 
 	@queryset_manager
 	def objects(doc_cls, queryset):

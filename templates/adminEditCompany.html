@@ -119,6 +119,10 @@
 			<h3>Prevent editing on this company (only admin can edit)?</h3>
 				<label for="locked"><input type="checkbox" name="locked" id="locked" value="locked" {%if company.locked %}checked{%end%}>Lock</label>
 		</fieldset>
+		<fieldset class="m-form-half">
+			<h3>Notes</h3>
+				<textarea rows="10" cols="59" name="notes" id="notes" parsley-trigger="keyup" parsley-maxwords="1000">{%if company.notes %}{{company.notes}}{%end%}</textarea>
+		</fieldset>
 	</fieldset>
 	{% raw xsrf_form_html() %}
 </form>

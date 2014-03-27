@@ -1,11 +1,12 @@
 
-
+from mongoengine import *
 import models
 from datetime import datetime
 import logging
 import os
 import json
 import csv
+from collections import Counter
 
 
 #Just some global varbs. 
@@ -240,7 +241,8 @@ class FileGenerator(object):
             'revenue_source',
             'description',
             'description_short',
-            'financial_info'
+            'financial_info',
+            'sourceCount'
             ])
         for c in companies:
             newrow = [
@@ -260,6 +262,62 @@ class FileGenerator(object):
                 c.description,
                 c.descriptionShort,
                 c.financialInfo,
+                c.sourceCount 
+            ]
+            for i in range(len(newrow)):  # For every value in our newrow
+                if hasattr(newrow[i], 'encode'):
+                    newrow[i] = newrow[i].encode('utf8')
+            csvwriter.writerow(newrow)
+    def generate_company_all_csv(self):
+        #---CSV OF ALL COMPANIES----
+        companies = models.Company2.objects(display=True)
+        csvwriter = csv.writer(open(os.path.join(os.path.dirname(__file__), 'static') + "/OD500_Companies_All.csv", "w"))
+        csvwriter.writerow([
+            'company_name_id',
+            'company_name',
+            'url',
+            'city',
+            'state',
+            'zip_code',
+            'ceo_first_name',
+            'ceo_last_name',
+            'year_founded',
+            'full_time_employees',
+            'company_type',
+            'company_category',
+            'revenue_source',
+            'description',
+            'description_short',
+            'financial_info',
+            'source_count',
+            'data_comments',
+            'dataset_wishlist',
+            'confidentiality',
+            'survey_submitted'
+            ])
+        for c in companies:
+            newrow = [
+                c.prettyName,
+                c.companyName,
+                c.url,
+                c.city,
+                c.state,
+                c.zipCode,
+                c.ceo.firstName,
+                c.ceo.lastName,
+                c.yearFounded,
+                c.fte,
+                c.companyType,
+                c.companyCategory,
+                ', '.join(c.revenueSource),
+                c.description,
+                c.descriptionShort,
+                c.financialInfo,
+                c.sourceCount,
+                c.dataComments,
+                c.datasetWishList,
+                c.confidentiality,
+                c.submittedSurvey
             ]
             for i in range(len(newrow)):  # For every value in our newrow
                 if hasattr(newrow[i], 'encode'):
@@ -344,23 +402,57 @@ class FileGenerator(object):
                                 newrow[i] = newrow[i].encode('utf8')
                         csvwriter.writerow(newrow)
 
+    def generate_sankey_json(self):
+        agencies = models.Agency.objects(Q(usedBy__not__size=0) & Q(source__not__exact="web") & Q(dataType="Federal")) #federal agencies from official list that are used by a company
+        cat_v_agencies = {"nodes": [], "links": []}
+        for c in categories:
+            cat_v_agencies['nodes'].append({"name":c})
+        for a in agencies:
+            if a.usedBy:
+                cat_v_agencies['nodes'].append({"name":a.name})
+        for cat in range(0, len(categories)):
+            link = {"source":cat, "value":0}
+            for a in agencies:
+                for c in a.usedBy:
+                    if cat_v_agencies['nodes'][cat]['name'] == c.companyCategory:
+                        link['value'] = link['value'] + 1
+        #goal is x# of tech companies use EPA
+        #loop through each agency
+        for a in agencies:
+            #loop through each usedBy in agency
+            cats = []
+            for c in a.usedBy:
+                #make a list of all the categories.
+                cats.append(c.companyCategory)
+            #do a Counter(z)
+            counted_cats = dict(Counter(cats).most_common())
+            #I'll have number of categories that this specific agency
+            #loop through Counter(z)
+            #first, find target number
+            target = 0
+            for n in range(0, len(cat_v_agencies['nodes'])):
+                if cat_v_agencies['nodes'][n]['name'] == a.name:
+                    target = n
+            link = {'source':'', 'target':target, 'value':0}
+            for key, value in counted_cats.iteritems():
+                #make a {target:current cat, source:a, value: z[cat]}
+                #first find source number:
+                source = 0
+                for n in range(0, len(cat_v_agencies['nodes'])):
+                    if cat_v_agencies['nodes'][n]['name'] == key:
+                        source = n
+                link = {"source":source, "target":target, "value":value}
+            #append to cat_v_agencies[links]
+            cat_v_agencies['links'].append(link)
+        with open(os.path.join(os.path.dirname(__file__), 'static') + '/sankey.json', 'w') as outfile:
+            json.dump(cat_v_agencies, outfile)
 
 
 
-        # for a in agencies:
-        #     agency_name = a.name
-        #     agency_abbrev = a.abbrev
-        #     agency_type = a.dataType
-        #     if a.datasets: #If there are any general level datasets, make a row with that
-        #         for d in a.datasets:
-        #             subagency_name = 'General'
-        #             subagency_abbrev = ''
-        #             url = a.url
-        #             used_by = d.usedBy.companyName
-        #             dataset_url = d.url
-        #             newrow = [agency_name, agency_abbrev, agency_type, subagency_name, subagency_abbrev, url, used_by, dataset_name, dataset_url].encode('utf8')
-        #             csvwriter.writerow(newrow)
-        #     if subagencies: #if there are subagencies make rows with them
+
+
+
+
 
 
 
