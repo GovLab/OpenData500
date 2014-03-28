@@ -8,20 +8,21 @@
 <h1>{{ page_heading }}</h1>
 
 <h2>Stats</h2>
-<fieldset class="m-form">
+<form class="m-form">
 	<fieldset class="m-form-half">
 		<h3>Total Companies: </h3><p id="totalCompanies">{{stats.totalCompanies}}</p>
 		<h3>Total Companies Submitted Via Web: </h3><p id="totalCompaniesWeb">{{stats.totalCompaniesWeb}}</p>
 		<h3>Total Companies With Complete Surveys: </h3><p id="totalCompaniesSurvey">{{stats.totalCompaniesSurvey}}</p>
 	</fieldset>
-	<fieldset class="m-form-half">
+	<fieldset class="m-form-half right">
 		{% raw xsrf_form_html() %}
-		<input type="button" class="l-button admin_utils" id="refresh" name="refresh" value="Refresh">
-		<input type="button" class="l-button admin_utils" id="files" name="files" value="Generate Files">
-		<input type="button" class="l-button admin_utils" id="sankey" name="sankey" value="Generate Vizz File">
+		<input type="button" class="l-button admin_utils" id="refresh" name="refresh" value="Refresh"><br>
+		<input type="button" class="l-button admin_utils" id="files" name="files" value="Generate All Files"><br>
+		<input type="button" class="l-button admin_utils" id="agency_csv" name="files" value="Generate Agency CSV"><br>
+		<input type="button" class="l-button admin_utils" id="sankey" name="sankey" value="Generate Vizz File"><br>
 		<span class="message"></span>
 	</fieldset>
-</fieldset>
+</form>
 <br>
 <h2>Need Vetting</h2>
 <table class="needVetting" style="width:100%; text-align:left; border:1px;">
@@ -108,11 +109,7 @@ $(document).ready( function() {
 				$('#totalCompaniesWeb').text(data['totalCompaniesWeb']);
 				$('#totalCompaniesSurvey').text(data['totalCompaniesSurvey']);
 				$('.message').text("Aight, I'm done.").show().delay(5000).fadeOut();
-			}
-			if (action == "files") {
-				$('.message').text("Aight, I'm done.").show().delay(5000).fadeOut();
-			}
-			if (action == "sankey") {
+			} else {
 				$('.message').text("Aight, I'm done.").show().delay(5000).fadeOut();
 			}
 	    }

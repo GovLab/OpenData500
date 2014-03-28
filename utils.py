@@ -343,6 +343,7 @@ class FileGenerator(object):
             'subagency_abbrev',
             'url',
             'used_by',
+            'used_by_category',
             'dataset_name',
             'dataset_url'
             ])
@@ -360,9 +361,10 @@ class FileGenerator(object):
                                 subagency_abbrev = ''
                                 url = a.url
                                 used_by = c.companyName
+                                used_by_category = c.companyCategory
                                 dataset_name = d.datasetName
                                 dataset_url = d.datasetURL
-                                newrow = [agency_name, agency_abbrev, agency_type, subagency_name, subagency_abbrev, url, used_by, dataset_name, dataset_url]
+                                newrow = [agency_name, agency_abbrev, agency_type, subagency_name, subagency_abbrev, url, used_by, used_by_category, dataset_name, dataset_url]
                                 for i in range(len(newrow)):  # For every value in our newrow
                                     if hasattr(newrow[i], 'encode'):
                                         newrow[i] = newrow[i].encode('utf8')
@@ -378,9 +380,10 @@ class FileGenerator(object):
                                     for d in s.datasets:
                                         if d.usedBy == c:
                                             used_by = c.companyName
+                                            used_by_category = c.companyCategory
                                             dataset_name = d.datasetName
                                             dataset_url = d.datasetURL
-                                            newrow = [agency_name, agency_abbrev, agency_type, subagency_name, subagency_abbrev, url, used_by, dataset_name, dataset_url]
+                                            newrow = [agency_name, agency_abbrev, agency_type, subagency_name, subagency_abbrev, url, used_by, used_by_category, dataset_name, dataset_url]
                                             for i in range(len(newrow)):  # For every value in our newrow
                                                 if hasattr(newrow[i], 'encode'):
                                                     newrow[i] = newrow[i].encode('utf8')
@@ -388,9 +391,10 @@ class FileGenerator(object):
                                             justAgency = False
                                 else: #there are no datasets, just make a row with subagency and no datasets.
                                     used_by = c.companyName
+                                    used_by_category = c.companyCategory
                                     dataset_name = ''
                                     dataset_url = ''
-                                    newrow = [agency_name, agency_abbrev, agency_type, subagency_name, subagency_abbrev, url, used_by, dataset_name, dataset_url]
+                                    newrow = [agency_name, agency_abbrev, agency_type, subagency_name, subagency_abbrev, url, used_by, used_by_category, dataset_name, dataset_url]
                                     for i in range(len(newrow)):  # For every value in our newrow
                                         if hasattr(newrow[i], 'encode'):
                                             newrow[i] = newrow[i].encode('utf8')
@@ -401,56 +405,43 @@ class FileGenerator(object):
                         subagency_abbrev = ''
                         url = a.url
                         used_by = c.companyName
+                        used_by_category = c.companyCategory
                         dataset_name = ''
                         dataset_url = ''
-                        newrow = [agency_name, agency_abbrev, agency_type, subagency_name, subagency_abbrev, url, used_by, dataset_name, dataset_url]
+                        newrow = [agency_name, agency_abbrev, agency_type, subagency_name, subagency_abbrev, url, used_by, used_by_category, dataset_name, dataset_url]
                         for i in range(len(newrow)):  # For every value in our newrow
                             if hasattr(newrow[i], 'encode'):
                                 newrow[i] = newrow[i].encode('utf8')
                         csvwriter.writerow(newrow)
 
     def generate_sankey_json(self):
+        #get qualifying agencies
         agencies = models.Agency.objects(Q(usedBy__not__size=0) & Q(source__not__exact="web") & Q(dataType="Federal")) #federal agencies from official list that are used by a company
-        cat_v_agencies = {"nodes": [], "links": []}
-        for c in categories:
-            cat_v_agencies['nodes'].append({"name":c})
+        #going to just make a list of all the category-agency combos
+        cats = [] #list of used categories
+        cats_agency_combo = []
         for a in agencies:
-            if a.usedBy:
-                cat_v_agencies['nodes'].append({"name":a.name})
-        for cat in range(0, len(categories)):
-            link = {"source":cat, "value":0}
-            for a in agencies:
-                for c in a.usedBy:
-                    if cat_v_agencies['nodes'][cat]['name'] == c.companyCategory:
-                        link['value'] = link['value'] + 1
-        #goal is x# of tech companies use EPA
-        #loop through each agency
-        for a in agencies:
-            #loop through each usedBy in agency
-            cats = []
             for c in a.usedBy:
-                #make a list of all the categories.
+                cats_agency_combo.append(c.companyCategory+"|"+a.name)
                 cats.append(c.companyCategory)
-            #do a Counter(z)
-            counted_cats = dict(Counter(cats).most_common())
-            #I'll have number of categories that this specific agency
-            #loop through Counter(z)
-            #first, find target number
-            target = 0
-            for n in range(0, len(cat_v_agencies['nodes'])):
-                if cat_v_agencies['nodes'][n]['name'] == a.name:
-                    target = n
-            link = {'source':'', 'target':target, 'value':0}
-            for key, value in counted_cats.iteritems():
-                #make a {target:current cat, source:a, value: z[cat]}
-                #first find source number:
-                source = 0
-                for n in range(0, len(cat_v_agencies['nodes'])):
-                    if cat_v_agencies['nodes'][n]['name'] == key:
-                        source = n
-                link = {"source":source, "target":target, "value":value}
-            #append to cat_v_agencies[links]
+        count = list(Counter(cats_agency_combo).items()) #count repeat combos
+        #make dictionary
+        cat_v_agencies = {"nodes": [], "links": []}
+        #make node list
+        cat_agency_list = [] #keep track of category agency list, we're going to need their indeces. 
+        for c in categories: #Add categories to node list
+            if c in cats: #only add category if used
+                cat_v_agencies['nodes'].append({"name":c})
+                cat_agency_list.append(c)
+        for a in agencies: #add agency names to node list
+            cat_v_agencies['nodes'].append({"name":a.name})
+            cat_agency_list.append(a.name)
+        #make the links
+        for c in count:
+            link = {"source":cat_agency_list.index(c[0].split('|')[0]), "target":cat_agency_list.index(c[0].split('|')[1]), "value":c[1]} #make a link
             cat_v_agencies['links'].append(link)
+        for n in cat_v_agencies['nodes']: #Abbreviate Department
+            n['name'] = n['name'].replace('Department', 'Dept.')
         with open(os.path.join(os.path.dirname(__file__), 'static') + '/sankey.json', 'w') as outfile:
             json.dump(cat_v_agencies, outfile)
 
