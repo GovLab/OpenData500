@@ -26,7 +26,7 @@ $(document).ready(function() {
 
   var companyID = $('.companyID').val();
   //----------------------------------UNCHECK OTHER BOX IF INPUT EMPTY--------------------------------------
-  $('.m-form-half').on('focusout', '#otherRevenueSource', function() {
+  $('.m-form-half').on('focusout', '#otherRevenueSource', function(event) {
     if ($('#otherRevenueSource').val() == '') {
       $('input[name="revenueSource"][value="Other"').prop('checked', false);
     }
@@ -65,7 +65,7 @@ $(document).ready(function() {
     heightStyle: "content"
   });
   //----------------------------------DELETE AGENCIES AND SUBAGENCIES--------------------------------------
-  $('#accordionAgency, #accordionSubAgency').on('click', '.toolbar', function(e){
+  $('#accordionAgency, #accordionSubAgency').on('click', '.toolbar', function(event){
     agency = $(this).attr('agency').replace("delete", "").replace(/-/g, " ");
     a_id = $(this).attr('a_id');
     subagency = $(this).attr('subagency').replace("delete", "").replace(/-/g, " ");
@@ -106,7 +106,7 @@ $(document).ready(function() {
     });
   });
   //----------------------------------SAVE NEW DATASET AND ADD NEW EMPTY FORM--------------------------------------
-  $('.agencyList').on('click', '#saveDataset', function() {
+  $('.agencyList').on('click', '#saveDataset', function(event) {
     currentDatasetForm = $(this).parent().parent();
     //--CHECK IF EDITING OR SAVING NEW DATASET--
     if (currentDatasetForm.parent().find('tr').last().find('#datasetName').val() == '') {
@@ -186,7 +186,7 @@ $(document).ready(function() {
     }
   });
   //----------------------------------DELETE DATASET--------------------------------------
-  $('.agencyList').on('click', '#deleteDataset', function() {
+  $('.agencyList').on('click', '#deleteDataset', function(event) {
     currentDatasetForm = $(this).parent().parent();
     datasetName = currentDatasetForm.find('#datasetName').val();
     agency = currentDatasetForm.attr('agency').replace(/-/g, " ");
@@ -215,7 +215,7 @@ $(document).ready(function() {
     }
   });
   //----------------------------------ADD AGENCY FROM SEARCH BAR--------------------------------------
-  $('body').on('click', '#addSearchResult', function () {
+  $('body').on('click', '#addSearchResult', function(event) {
     //console.log("clicked to add");
     a = $('#searchval').val().trim().split(" - ");
     if (a == 0) {
@@ -371,7 +371,7 @@ $(document).ready(function() {
     }
   }, '.agency, .subagency');
   //----------------------------------SUBMIT DATASET QUESTION--------------------------------------
-  $('.finish-data-submit').on('click', '.data-submit-button', function() {
+  $('.finish-data-submit').on('click', '.data-submit-button', function(event) {
     console.log("sdsdfsdf")
     if( $('.data-comment-form').parsley('validate')) {
       var companyID = $('.companyID').val();
@@ -397,7 +397,7 @@ $(document).ready(function() {
   })
 
   //----------------------------------SUBMIT FORM--------------------------------------
-  $('.submitCompanyForm').on('click', '#companySubmit', function() {
+  $('.submitCompanyForm').on('click', '#companySubmit', function(event) {
     console.log($('#dataComments').parsley('validate'));
     //weird parsley thing evaluates empty field to null.
     if ($('.companyForm').parsley('validate') && ($('#dataComments').parsley('validate') || $('#dataComments').parsley('validate') == null)) {
@@ -431,7 +431,7 @@ $(document).ready(function() {
     }
   });
   //----------------------------------SAVE FORM--------------------------------------
-  $('.saveCompanyForm').on('click', '#companySave', function() {
+  $('.saveCompanyForm').on('click', '#companySave', function(event) {
     if ($('.companyForm').parsley('validate')) {
       console.log('valid');
       $('.message-form').text('Saving...');
@@ -492,7 +492,7 @@ $(document).ready(function() {
                                   '<span class="message-form" style="display:none"></span>'+
                                   '<span class="error-form" style="display:none"></span>'+
                                 '</div>';
-  $('body').on('click', '#companySave-new', function() {
+  $('body').on('click', '#companySave-new', function(event) {
     if ($('.companyForm').parsley('validate')) {
       console.log('valid');
       $('.message-form').text('Saving...');

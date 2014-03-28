@@ -422,8 +422,9 @@ class FileGenerator(object):
         cats_agency_combo = []
         for a in agencies:
             for c in a.usedBy:
-                cats_agency_combo.append(c.companyCategory+"|"+a.name)
-                cats.append(c.companyCategory)
+                if c.companyCategory in categories and c.display: #exclude "Other" Categories, and only displayed companies
+                    cats_agency_combo.append(c.companyCategory+"|"+a.name)
+                    cats.append(c.companyCategory)
         count = list(Counter(cats_agency_combo).items()) #count repeat combos
         #make dictionary
         cat_v_agencies = {"nodes": [], "links": []}
