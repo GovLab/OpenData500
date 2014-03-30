@@ -416,15 +416,16 @@ class FileGenerator(object):
 
     def generate_sankey_json(self):
         #get qualifying agencies
-        agencies = models.Agency.objects(Q(usedBy__not__size=0) & Q(source__not__exact="web") & Q(dataType="Federal")) #federal agencies from official list that are used by a company
+        agencies = models.Agency.objects(Q(usedBy__not__size=0) & Q(source__not__exact="web") & Q(dataType="Federal")).order_by('name') #federal agencies from official list that are used by a company
         #going to just make a list of all the category-agency combos
         cats = [] #list of used categories
         cats_agency_combo = []
         for a in agencies:
             for c in a.usedBy:
-                if c.companyCategory in categories and c.display: #exclude "Other" Categories, and only displayed companies
-                    cats_agency_combo.append(c.companyCategory+"|"+a.name)
-                    cats.append(c.companyCategory)
+                if c.display:
+                    if c.companyCategory in categories: #exclude "Other" Categories, and only displayed companies
+                        cats_agency_combo.append(c.companyCategory+"|"+a.name)
+                        cats.append(c.companyCategory)
         count = list(Counter(cats_agency_combo).items()) #count repeat combos
         #make dictionary
         cat_v_agencies = {"nodes": [], "links": []}
@@ -435,14 +436,22 @@ class FileGenerator(object):
                 cat_v_agencies['nodes'].append({"name":c})
                 cat_agency_list.append(c)
         for a in agencies: #add agency names to node list
-            cat_v_agencies['nodes'].append({"name":a.name})
-            cat_agency_list.append(a.name)
+            used = False
+            for c in a.usedBy:
+                if c.display:
+                    used = True
+            if used:
+                cat_v_agencies['nodes'].append({"name":a.name})
+                cat_agency_list.append(a.name)
         #make the links
         for c in count:
             link = {"source":cat_agency_list.index(c[0].split('|')[0]), "target":cat_agency_list.index(c[0].split('|')[1]), "value":c[1]} #make a link
             cat_v_agencies['links'].append(link)
         for n in cat_v_agencies['nodes']: #Abbreviate Department
             n['name'] = n['name'].replace('Department', 'Dept.')
+            n['name'] = n['name'].replace('Administration', 'Admin.')
+            n['name'] = n['name'].replace('United States', 'US')
+            n['name'] = n['name'].replace('National', "Nat'l")
         with open(os.path.join(os.path.dirname(__file__), 'static') + '/sankey.json', 'w') as outfile:
             json.dump(cat_v_agencies, outfile)
 

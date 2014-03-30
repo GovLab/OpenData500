@@ -44,6 +44,7 @@ class Application(tornado.web.Application):
         handlers = [
             (r'/(favicon.ico)', tornado.web.StaticFileHandler, {"path": ""}),
             (r"/", MainHandler),
+            (r"/2/?", TestHandler),
             (r"/submitCompany/?", SubmitCompanyHandler),
             (r"/validate/?", ValidateHandler),
             (r"/edit/([a-zA-Z0-9]{24})/?", EditCompanyHandler),
@@ -97,6 +98,17 @@ class MainHandler(BaseHandler):
     def get(self):
         self.render(
             "index.html",
+            user=self.current_user,
+            page_title='Open Data500',
+            page_heading='Welcome to the Open Data 500 Pre-Launch',
+        )
+
+class TestHandler(BaseHandler):
+    @tornado.web.addslash
+    @tornado.web.authenticated
+    def get(self):
+        self.render(
+            "index2.html",
             user=self.current_user,
             page_title='Open Data500',
             page_heading='Welcome to the Open Data 500 Pre-Launch',
@@ -758,13 +770,15 @@ class AdminEditCompanyHandler(BaseHandler):
     @tornado.web.addslash
     @tornado.web.authenticated
     def get(self, id):
-        company = models.Company2.objects.get(id=bson.objectid.ObjectId(id))
-        page_heading = "Editing " + company.companyName + ' (Admin)'
-        page_title = "Editing " + company.companyName + ' (Admin)'
-        if company is None:
+        try: 
+            company = models.Company2.objects.get(id=bson.objectid.ObjectId(id))
+            page_heading = "Editing " + company.companyName + ' (Admin)'
+            page_title = "Editing " + company.companyName + ' (Admin)'
+        except Exception, e:
+            logging.info('Error: ' + str(e))
             self.render("404.html",
-                page_heading = page_heading,
-                page_title = page_title,
+                page_heading = '404 - Company Not Found',
+                page_title = '404 - Not Found',
                 error = "404 - Not Found",
                 user=self.current_user,
                 message=id)

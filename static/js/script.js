@@ -899,7 +899,11 @@ $(document).ready(function() {
     {"label": "Wake County", "a":"Wake County", "aa":"", "s":"", "sa": ""},
     {"label": "Washington (WA)", "a":"Washington", "aa":"WA", "s":"", "sa": ""},
     {"label": "Weatherford (WF)", "a":"Weatherford", "aa":"WF", "s":"", "sa": ""},
-    {"label": "Wellington (WEF)", "a":"Wellington", "aa":"WEF", "s":"", "sa": ""}
+    {"label": "Wellington (WEF)", "a":"Wellington", "aa":"WEF", "s":"", "sa": ""},
+    {"label": "Multiple government open data sources", "a":"Multiple government open data sources", "aa":"", "s":"", "sa": ""},
+    {"label": "Multiple city and local data sources", "a":"Multiple city and local data sources", "aa":"", "s":"", "sa": ""},
+    {"label": "Multiple state data sources", "a":"Multiple state data sources", "aa":"", "s":"", "sa": ""},
+    {"label": "Multiple federal data sources", "a":"Multiple federal data sources", "aa":"", "s":"", "sa": ""}
   ]
   try {
     $( "#agencyTags" ).autocomplete({

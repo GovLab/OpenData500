@@ -209,7 +209,9 @@ a:hover {
   margin-bottom: 20px; }
   .logo img {
     width: 200px; }
-
+.m-homepage {
+  text-align: center; 
+}
 .m-homepage h1 {
   margin: 0 0 10px 0;
   font-size: 4em; }
@@ -224,6 +226,8 @@ a:hover {
   margin-bottom: 10px; }
 .m-homepage .m-homepage-box {
   width: 20.83333%;
+  /*width: 15%;*/
+  text-align: left;
   display: inline-block;
   vertical-align: top;
   border: 1px solid #472b74;
@@ -241,7 +245,7 @@ a:hover {
   .m-homepage .m-homepage-participate form {
     position: relative; }
     .m-homepage .m-homepage-participate form input[type="email"] {
-      width: 138px;
+      width: 120px;
       -webkit-border-radius: 4px 0 0 4px;
       -moz-border-radius: 4px 0 0 4px;
       border-radius: 4px 0 0 4px;
@@ -821,6 +825,11 @@ header {
   max-width: 960px;
   margin: 0 auto; }
 
+.m-centered {
+  width: 100%;
+  max-width: 1260px;
+  margin: 0 auto; }
+
 #container {
   min-height: 460px;
   margin-top: 100px; }
@@ -1044,6 +1053,31 @@ h2.disclaimer-text {
   background-color: #472b74;
   border: 1px solid #fff;
   color: #fff;
+}
+
+#chart_sankey {
+  height: 500px;
+}
+
+.node rect {
+  cursor: move;
+  fill-opacity: .9;
+  shape-rendering: crispEdges;
+}
+
+.node text {
+  pointer-events: none;
+  text-shadow: 0 1px 0 #fff;
+}
+
+.link {
+  fill: none;
+  stroke: #000;
+  stroke-opacity: .2;
+}
+
+.link:hover {
+  stroke-opacity: .5;
 }
 
 
