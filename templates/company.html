@@ -29,20 +29,22 @@
 		{% if company.agencies %}
 			{%for a in company.agencies %}
 				<div class="company-view-agency-list">
-					<h3><a href="{{a.url}}">{{a.name}}</a></h3>
-					<div class="company-view-agency-name">
-						{% for d in a.datasets %} 
-							{% if d.usedBy == company %}
-								<ul>
-									{% if d.datasetURL %}
-										<li><a href="{{d.datasetURL}}"><strong>{{ d.datasetName }}</strong></a></li>
-									{% else %}
-										<li><strong>{{ d.datasetName }}</strong></li>
-									{% end %}
-								</ul>
-							{%end%}
-						{% end %}
-					</div>
+					<ul>
+						<li><h3><a href="{{a.url}}">{{a.name}}</a></h3></li>
+						<div class="company-view-agency-name">
+							{% for d in a.datasets %} 
+								{% if d.usedBy == company %}
+									<ul>
+										{% if d.datasetURL %}
+											<li><a href="{{d.datasetURL}}"><strong>{{ d.datasetName }}</strong></a></li>
+										{% else %}
+											<li><strong>{{ d.datasetName }}</strong></li>
+										{% end %}
+									</ul>
+								{%end%}
+							{% end %}
+						</div>
+					</ul>
 				</div>
 			{% end %}
 		{%else%}

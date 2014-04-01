@@ -1056,6 +1056,12 @@ h2.disclaimer-text {
   color: #fff;
 }
 
+.company-view-agency-list {
+  padding-top: 10px;
+}
+
+
+/*----------------SANKEY CHART----------*/
 #chart_sankey {
   height: 500px;
 }
@@ -1080,5 +1086,7 @@ h2.disclaimer-text {
 .link:hover {
   stroke-opacity: .5;
 }
+
+
 
 
