@@ -170,9 +170,9 @@ Person.register_delete_rule(Company, "contact", NULLIFY)
 Person.register_delete_rule(Company, "ceo", NULLIFY)
 
 Agency.register_delete_rule(Company2, "agencies", PULL)
+# Company2.register_delete_rule(Dataset2, 'usedBy', NULLIFY)
+# Company2.register_delete_rule(Subagency, 'usedBy', PULL)
 Company2.register_delete_rule(Agency, 'usedBy', PULL)
-
-
 
 
 

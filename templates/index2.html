@@ -23,7 +23,7 @@
 </section>
 
 <section class="m-homepage-explore">
-    <h3>What types of companies use which agencies?</h3>
+     <h2 style="font-size: 2.7em">What types of companies use which agencies?</h2>
 	<p id="chart_sankey">	
 </section>
 <section class="m-homepage-participate m-homepage-box" id="scrolling_div">
@@ -59,13 +59,13 @@ $('.m-homepage-box').css('width', "15%");
 $('.m-homepage-box').css('margin-right', 0 );
 $('.m-homepage-box').css('margin-left', 0 );
 $('.m-homepage-explore').css('width', "55%");
-var $scrolling_div = $("#scrolling_div");
+var $boxes = $('.m-homepage-box');
 var padding_top = 230;
 $(window).scroll(function(){
-    if (window.pageYOffset > padding_top && window.pageYOffset < $('.m-homepage-box').position()['top'] + $('.m-homepage-box').height()) {
-        $('.m-homepage-box').css('margin-top', function() {return window.pageYOffset - padding_top})
+    if (window.pageYOffset > padding_top && window.pageYOffset < $boxes.position()['top'] + $boxes.height()) {
+        $boxes.css('margin-top', function() {return window.pageYOffset - padding_top})
     } else if (window.pageYOffset < padding_top) {
-        $('.m-homepage-box').css('margin-top', 0)
+        $boxes.css('margin-top', 0)
     }
 });
 
@@ -148,7 +148,14 @@ d3.json("{{ static_url("sankey.json") }}", function(energy) {
                     hide_tags.push(d.target.name);
                 }
             });
-    })
+    });
+
+    svg.on('click', function() {
+        d3.selectAll('.link')
+            .each(function(d, i) {
+                d3.select(this).style('visibility', 'hidden');
+            });
+    });
 
   node.append("rect")
       .attr("height", function(d) { return d.dy; })

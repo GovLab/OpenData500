@@ -277,7 +277,7 @@ class FileGenerator(object):
             csvwriter.writerow(newrow)
     def generate_company_all_csv(self):
         #---CSV OF ALL COMPANIES----
-        companies = models.Company2.objects(display=True)
+        companies = models.Company2.objects()
         csvwriter = csv.writer(open(os.path.join(os.path.dirname(__file__), 'static') + "/OD500_Companies_All.csv", "w"))
         csvwriter.writerow([
             'company_name_id',
@@ -300,7 +300,8 @@ class FileGenerator(object):
             'data_comments',
             'dataset_wishlist',
             'confidentiality',
-            'survey_submitted'
+            'survey_submitted',
+            'vetted'
             ])
         for c in companies:
             newrow = [
@@ -324,7 +325,8 @@ class FileGenerator(object):
                 c.dataComments,
                 c.datasetWishList,
                 c.confidentiality,
-                c.submittedSurvey
+                c.submittedSurvey,
+                c.vetted
             ]
             for i in range(len(newrow)):  # For every value in our newrow
                 if hasattr(newrow[i], 'encode'):

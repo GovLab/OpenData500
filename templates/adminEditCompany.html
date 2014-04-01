@@ -78,7 +78,7 @@
 	</fieldset>
 	<fieldset class="m-form-half left">
 		<h3>Please give us a short public statement describing your company’s mission and work. You can take this material from your website or other publications if you choose to. <br><em>[200 words or less]</em> *</h3>
-		<textarea rows="10" cols="59" name="description" id="description" parsley-trigger="keyup" parsley-maxwords="200">{{ company.description }}</textarea><br><br>
+		<textarea rows="10" cols="59" name="description" id="description" parsley-trigger="keyup">{{ company.description }}</textarea><br><br>
 		<h3>As a summary, please provide a one sentence description of your company. <br><em>[25 words or less]</em> *</h3>
 		<textarea rows="10" cols="59" name="descriptionShort" id="descriptionShort" parsley-trigger="keyup" parsley-maxwords="25">{{ company.descriptionShort }}</textarea><br>
 	</fieldset>
@@ -95,6 +95,7 @@
 			<input type="radio" name="sourceCount" id="count2" value="10-50" {% if company.sourceCount == '10-50' %}checked{%end%}><label for="count2">10-50</label>
 			<input type="radio" name="sourceCount" id="count3" value="50-100" {% if company.sourceCount == '50-100' %}checked{%end%}><label for="count3">50-100</label>
 			<input type="radio" name="sourceCount" id="count4" value="100+" {% if company.sourceCount == '100+' %}checked{%end%}><label for="count4">100+</label>
+			<input type="radio" name="sourceCount" id="count5" value="NA" {% if company.sourceCount == 'NA' %}checked{%end%}><label for="count5">NA</label>
 		</div>
 	</fieldset>
 	<h2>Admin Settings</h2><br>

@@ -947,22 +947,28 @@ class DeleteCompanyHandler(BaseHandler):
                 page_heading='Oh no...',
                 error = "404 - Not Found"
             )
-        #-----REMOVE FROM ALL AGENCIES-----
+        # #-----REMOVE FROM ALL AGENCIES-----
         agencies = models.Agency.objects(usedBy__in=[str(company.id)])
         for a in agencies:
             #-----REMOVE DATASETS (AGENCY)-----
             temp = []
+            temp_print = []
             for d in a.datasets:
                 if d.usedBy != company:
                     temp.append(d)
+                    temp_print.append(d.usedBy.companyName)
             a.datasets = temp
+            logging.info(temp_print)
             #---REMOVE DATASETS (SUBAGENCY)---
             for s in a.subagencies:
                 temp = []
+                temp_print = []
                 for d in s.datasets:
                     if company != d.usedBy:
                         temp.append(d)
+                        temp_print.append(d.usedBy.companyName)
                 s.datasets = temp
+                logging.info(temp_print)
                 #--REMOVE FROM SUBAGENCIES--
                 if company in s.usedBy:
                     s.usedBy.remove(company)
