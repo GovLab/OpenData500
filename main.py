@@ -289,7 +289,7 @@ class AdminHandler(BaseHandler):
     @tornado.web.addslash
     @tornado.web.authenticated
     def get(self):
-        surveySubmitted = models.Company2.objects(Q(submittedSurvey=True) & Q(display=True) & Q(vetted=True) & Q(vettedByCompany=True) & Q(submittedThroughWebsite=False)).order_by('prettyName')
+        surveySubmitted = models.Company2.objects(Q(submittedSurvey=True) & Q(vetted=True)).order_by('prettyName')
         sendSurveys = models.Company2.objects(Q(submittedSurvey=False))
         needVetting = models.Company2.objects(Q(submittedSurvey=True) & Q(vetted=False)).order_by('-lastUpdated', 'prettyName')
         stats = models.Stats.objects().first()
@@ -404,8 +404,6 @@ class SubmitCompanyHandler(BaseHandler):
         prettyName = re.sub(r'([^\s\w])+', '', companyName).replace(" ", "-").title()
         city = self.get_argument("city", None)
         zipCode = self.get_argument("zipCode", None)
-        if not zipCode:
-            zipCode = 0
         state = self.get_argument('state', None)
         companyType = self.get_argument("companyType", None)
         if companyType == 'other':
@@ -725,10 +723,7 @@ class EditCompanyHandler(BaseHandler):
         company.url = self.get_argument('url', None)
         company.city = self.get_argument('city', None)
         company.state = self.get_argument('state', None)
-        try: 
-            company.zipCode = int(self.get_argument('zipCode', None))
-        except:
-            company.zipCode = 0
+        company.zipCode = self.get_argument('zipCode', None)
         company.companyType = self.get_argument("companyType", None)
         if company.companyType == 'other': #if user entered custom option for Type
             company.companyType = self.get_argument('otherCompanyType', None)
@@ -823,10 +818,7 @@ class AdminEditCompanyHandler(BaseHandler):
         company.url = self.get_argument('url', None)
         company.city = self.get_argument('city', None)
         company.state = self.get_argument('state', None)
-        try: 
-            company.zipCode = int(self.get_argument('zipCode', None))
-        except:
-            company.zipCode = 0
+        company.zipCode = self.get_argument('zipCode', None)
         company.companyType = self.get_argument("companyType", None)
         if company.companyType == 'other': #if user entered custom option for Type
             company.companyType = self.get_argument('otherCompanyType', None)

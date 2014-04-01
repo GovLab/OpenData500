@@ -89,7 +89,7 @@ class Company2(Document):
 	previousName = StringField()
 	city = StringField()
 	state = StringField()
-	zipCode = IntField()
+	zipCode = StringField()
 	fte = IntField()
 	companyType = StringField() #Public, Private, etc
 	companyCategory = StringField() #Categories

@@ -30,7 +30,7 @@
 				{%end%}
 			</select>
 		</div>
-		<div class="m-form-line"><label for="zipCode">Zip Code:</label><input type="text" name="zipCode" id="zipCode" parsley-trigger="change" parsley-regexp="(^\d{5}$)|(^\d{5}-\d{4}$)" {% if company.zipCode & company.zipCode != 99999 & company.zipCode != 0 %}value="{{ company.zipCode }}" {% end %}></div>
+		<div class="m-form-line"><label for="zipCode">Zip Code:</label><input type="text" name="zipCode" id="zipCode" parsley-trigger="change" parsley-regexp="(^\d{5}$)|(^\d{5}-\d{4}$)" {% if company.zipCode %}value="{{ company.zipCode }}" {% end %}></div>
 		<div class="m-form-line"><label for="ceoFirstName">First Name of CEO:</label><input type="text" name="ceoFirstName" id="ceoFirstName" value="{{ company.ceo.firstName}}"></div>
 		<div class="m-form-line"><label for="ceoLastName">Last Name of CEO:</label><input type="text" name="ceoLastName" id="ceoLastName" value="{{ company.ceo.lastName }}"></div>
 		<div class="m-form-box">Type of Company: *<br>

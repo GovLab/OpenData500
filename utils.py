@@ -300,8 +300,13 @@ class FileGenerator(object):
             'data_comments',
             'dataset_wishlist',
             'confidentiality',
+            'ts',
             'survey_submitted',
-            'vetted'
+            'vetted',
+            'locked',
+            'vettedByCompany',
+            'display',
+            'notes'
             ])
         for c in companies:
             newrow = [
@@ -325,8 +330,13 @@ class FileGenerator(object):
                 c.dataComments,
                 c.datasetWishList,
                 c.confidentiality,
+                c.ts,
                 c.submittedSurvey,
-                c.vetted
+                c.vetted,
+                c.locked,
+                c.vettedByCompany,
+                c.display,
+                c.notes
             ]
             for i in range(len(newrow)):  # For every value in our newrow
                 if hasattr(newrow[i], 'encode'):

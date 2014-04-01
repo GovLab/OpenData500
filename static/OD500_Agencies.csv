@@ -7,16 +7,22 @@ U.S. Environmental Protection Agency,EPA,Federal,General,,http://catalog.data.go
 Department of Health and Human Services,HHS,Federal,Centers for Medicare and Medicaid Services,CMS,http://catalog.data.gov/organization/cms-hhs-gov,Abt Associates,Research & Consulting,Medicare Nursing Home Compare,http://www.medicare.gov/nursinghomecompare/search.html
 Department of Transportation,DOT,Federal,Pipeline and Hazardous Materials Safety Administration,PHMSA,http://catalog.data.gov/organization/phmsa-dot-gov,Abt Associates,Research & Consulting,US Department of Transportation Pipeline and Hazardous Materials Safety Administration (PHMSA) Office of Hazardous Materials Dietary Supplement Labeling Database,https://hazmatonline.phmsa.dot.gov/IncidentReportsSearch/search.aspx
 Department of Labor,,Federal,Employee Benefits Security Administration,EBSA,http://catalog.data.gov/organization/esba-dol-gov,Abt Associates,Research & Consulting,US Department of Labor Employee Benefits Security Administration (EBSA) Enforcement Data,http://ogesdw.dol.gov/views/data_catalogs.php
+Multiple city and local data sources,,City/County,General,,,Accela,Governance,,
+Department of Health and Human Services,HHS,Federal,General,,http://catalog.data.gov/organization/cms-hhs-gov,Accenture,Data/Technology,"Accenture consults to national governments re: public data (e.g. EU, Canada)",
 Department of Commerce,USDC,Federal,General,,http://catalog.data.gov/organization/doc-gov,AccuWeather,Environment & Weather,,
+Multiple government open data sources,,Other,General,,,Acxiom,Data/Technology,,
+Multiple government open data sources,,Other,General,,,Adobe Digital Government,Data/Technology,,
 Department of Health and Human Services,HHS,Federal,General,,http://catalog.data.gov/organization/cms-hhs-gov,Aidin,Healthcare,Home Health Compare,http://healthdata.gov/data/dataset/home-health-compare-0
 Department of Health and Human Services,HHS,Federal,General,,http://catalog.data.gov/organization/cms-hhs-gov,Aidin,Healthcare,Nursing Home Compare,http://healthdata.gov/data/dataset/nursing-home-compare
-Department of Commerce,USDC,Federal,General,,http://catalog.data.gov/organization/doc-gov,Allied Van Lines,Transportation,,
+Multiple government open data sources,,Other,General,,,Allianz,Finance & Investment,,
+Department of Commerce,USDC,Federal,US Census Bureau,Census,http://catalog.data.gov/organization/census-gov,Allied Van Lines,Transportation,zipcode data,
 Department of Education,ED / DOED,Federal,General,,http://catalog.data.gov/organization/ed-gov,Alltuition,Education,,
+Securities and Exchange Commission,SEC,Federal,General,,http://catalog.data.gov/organization/sec-gov,Altova,Data/Technology,,
 Department of Health and Human Services,HHS,Federal,General,,http://catalog.data.gov/organization/cms-hhs-gov,Amazon Web Services,Data/Technology,,
 Department of Commerce,USDC,Federal,General,,http://catalog.data.gov/organization/doc-gov,Amazon Web Services,Data/Technology,,
 Department of Labor,,Federal,General,,http://catalog.data.gov/dataset?q=organization:((ecab-dol-gov)+OR+(whd-dol-gov)+OR+(esba-dol-gov)+OR+(ojc-dol-gov)+OR+(eta-dol-gov)+OR+(osha-dol-gov)+OR+(oalj-dol-gov)+OR+(oasp-dol-gov)+OR+(msha-dol-gov)+OR+(bls-gov)+OR+(brb-dol-gov)),Amazon Web Services,Data/Technology,,
 Department of Transportation,DOT,Federal,General,,http://catalog.data.gov/organization/nhtsa-dot-gov,Amazon Web Services,Data/Technology,,
-Department of Commerce,USDC,Federal,General,,http://catalog.data.gov/organization/doc-gov,American Red Ball Movers,Transportation,,
+Department of Commerce,USDC,Federal,US Census Bureau,Census,http://catalog.data.gov/organization/census-gov,American Red Ball Movers,Transportation,zipcode data,
 US Agency for International Development,USAID,Federal,General,,http://catalog.data.gov/organization/usaid-gov,Apextech LLC,Data/Technology,Grants Financial Data Maintained by NGOs,
 US Agency for International Development,USAID,Federal,General,,http://catalog.data.gov/organization/usaid-gov,Apextech LLC,Data/Technology,US Agency for International Development (USAID) Grants Financial Data Maintained by NGOs,
 Department of Defense,DOD,Federal,General,,http://catalog.data.gov/organization/usace-army-mil,Apextech LLC,Data/Technology,Accounting and Budgeting Data,
@@ -28,27 +34,50 @@ Department of Health and Human Services,HHS,Federal,Centers for Disease Control 
 Department of Health and Human Services,HHS,Federal,Centers for Disease Control and Prevention,CDC,http://www.cdc.gov/,Archimedes Inc.,Healthcare,National Ambulatory Medical Care Survey (NAMCS),http://www.cdc.gov/nchs/ahcd.htm
 Department of Health and Human Services,HHS,Federal,Centers for Disease Control and Prevention,CDC,http://www.cdc.gov/,Archimedes Inc.,Healthcare,National Hospital Discharge Survey (NHDS),http://www.cdc.gov/nchs/nhds.htm
 Department of Health and Human Services,HHS,Federal,Centers for Disease Control and Prevention,CDC,http://www.cdc.gov/,Archimedes Inc.,Healthcare,Compressed Mortality File (CMF),http://www.cdc.gov/nchs/data_access/cmf.htm
-Department of Commerce,USDC,Federal,General,,http://catalog.data.gov/organization/doc-gov,Arpin Van Lines,Transportation,,
+Department of Commerce,USDC,Federal,US Census Bureau,Census,http://catalog.data.gov/organization/census-gov,Arpin Van Lines,Transportation,zipcode data,
+Multiple city and local data sources,,City/County,General,,,Arrive Labs,Transportation,,
+Multiple federal data sources,,Federal,General,,,ASC Partners,Data/Technology,ASC works with Congressional Quarterly to bring the text of government efforts to address the financial crisis.,
+Multiple government open data sources,,Other,General,,,Asset4,Finance & Investment,,
 Social Security Administration,SSA,Federal,General,,http://catalog.data.gov/organization/ssa-gov,"Aunt Bertha, Inc.",Governance,Benefits.gov,www.benefits.gov
 Department of the Treasury,,Federal,Internal Revenue Service,IRS,http://catalog.data.gov/organization/irs-gov,"Aunt Bertha, Inc.",Governance,Internal Revenue Service (IRS) SOI Tax Stats - Exempt Organizations Business Master File Extract (EO BMF),http://www.irs.gov/uac/SOI-Tax-Stats-Exempt-Organizations-Business-Master-File-Extract-(EO-BMF)
-Department of Health and Human Services,HHS,Federal,General,,http://catalog.data.gov/organization/cms-hhs-gov,Aureus Sciences,Scientific Research,,
+Department of Health and Human Services,HHS,Federal,Food and Drug Administration,FDA,http://www.fda.gov/,Aureus Sciences,Scientific Research,FDA approval packages,http://www.accessdata.fda.gov/scripts/cder/drugsatfda
 Department of Commerce,USDC,Federal,General,,http://catalog.data.gov/organization/doc-gov,AutoGrid Systems,Energy,,
+Multiple state data sources,,State,General,,,Avalara,Finance & Investment,,
+Multiple city and local data sources,,City/County,General,,,Avalara,Finance & Investment,,
+Multiple government open data sources,,Other,General,,,Avvo,Business & Legal Services,,
 Department of Commerce,USDC,Federal,US Census Bureau,Census,http://catalog.data.gov/organization/census-gov,Azavea,Geospatial/Mapping,American Community Survey (ACS),http://www.census.gov/acs/www/data_documentation/summary_file/
 Department of the Interior,DOI,Federal,U.S. Geological Survey,USGS,http://catalog.data.gov/dataset?q=organization:usgs-gov,Azavea,Geospatial/Mapping,National Elevation Dataset (NED),http://ned.usgs.gov/
 Department of Commerce,USDC,Federal,General,,http://catalog.data.gov/organization/doc-gov,Bekins,Transportation,,
+Multiple government open data sources,,Other,General,,,Berkery Noyes MandAsoft,Finance & Investment,"Data from the Healthcare, Education, Financial and Technology sectors",
 Securities and Exchange Commission,SEC,Federal,General,,http://catalog.data.gov/organization/sec-gov,Berkshire Hathaway,Insurance,,
 Department of the Treasury,,Federal,General,,http://catalog.data.gov/organization/treasury-gov,Berkshire Hathaway,Insurance,,
+Multiple government open data sources,,Other,General,,,BetterLesson,Education,,
 Consumer Financial Protection Bureau,CFPB,Federal,General,,http://catalog.data.gov/organization/cfpb-gov,BillGuard,Finance & Investment,CFPB Credit Card Complaint Database,https://data.consumerfinance.gov/dataset/Credit-card-complaint-responses-by-issue/3jqb-9gp3
-Department of Health and Human Services,HHS,Federal,General,,http://catalog.data.gov/organization/cms-hhs-gov,Bing,Data/Technology,,
+Department of Health and Human Services,HHS,Federal,General,,http://catalog.data.gov/organization/cms-hhs-gov,Bing,Data/Technology,Uses data from HHS and the Institute of Medicine for visualization on Bing maps.,
 Multiple government open data sources,,Other,General,,,BizVizz,Governance,,
+Securities and Exchange Commission,SEC,Federal,General,,http://catalog.data.gov/organization/sec-gov,Black Rock,Finance & Investment,,
+Multiple government open data sources,,Other,General,,,Bloomberg,Finance & Investment,,
+Department of Defense,DOD,Federal,General,,http://catalog.data.gov/organization/usace-army-mil,Booz Allen Hamilton,Research & Consulting,,
+Department of Homeland Security,DHS,Federal,General,,http://catalog.data.gov/organization/uscg-mil,Booz Allen Hamilton,Research & Consulting,,
+Multiple government open data sources,,Other,General,,,Boston Consulting Group,Research & Consulting,,
+Department of Labor,,Federal,Bureau of Labor Statistics,BLS,http://catalog.data.gov/organization/bls-gov,Bridgewater,Finance & Investment,Data on inflation,
+Federal Reserve Board,FED,Federal,General,,http://catalog.data.gov/organization/frb-gov,Bridgewater,Finance & Investment,Data on currency exchange rates,
+Department of Commerce,USDC,Federal,Bureau of Economic Analysis,BEA,http://catalog.data.gov/organization/bea-gov,Bridgewater,Finance & Investment,Data on U.S. gross domestic product,
 Department of Labor,,Federal,General,,http://catalog.data.gov/dataset?q=organization:((ecab-dol-gov)+OR+(whd-dol-gov)+OR+(esba-dol-gov)+OR+(ojc-dol-gov)+OR+(eta-dol-gov)+OR+(osha-dol-gov)+OR+(oalj-dol-gov)+OR+(oasp-dol-gov)+OR+(msha-dol-gov)+OR+(bls-gov)+OR+(brb-dol-gov)),Brightscope,Finance & Investment,Retirement Plan Data,http://www.dol.gov/dol/topic/retirement/typesofplans.htm
 Securities and Exchange Commission,SEC,Federal,General,,http://catalog.data.gov/organization/sec-gov,Brightscope,Finance & Investment,Investment Advisor Data,http://www.sec.gov/
+Multiple city and local data sources,,City/County,General,,,Buildingeye,Housing/Real Estate,,
 San Francisco,SF,City/County,General,,http://www.datasf.org/,BuildZoom,Housing/Real Estate,State Contractor License Data,
 San Francisco,SF,City/County,General,,http://www.datasf.org/,BuildZoom,Housing/Real Estate,City Permit Data,
+Department of Labor,,Federal,General,,http://catalog.data.gov/dataset?q=organization:((ecab-dol-gov)+OR+(whd-dol-gov)+OR+(esba-dol-gov)+OR+(ojc-dol-gov)+OR+(eta-dol-gov)+OR+(osha-dol-gov)+OR+(oalj-dol-gov)+OR+(oasp-dol-gov)+OR+(msha-dol-gov)+OR+(bls-gov)+OR+(brb-dol-gov)),Business and Legal Resources,Business & Legal Services,,
+US Equal Employment Opportunity Commission,EEOC,Federal,General,,http://catalog.data.gov/organization/eeoc-gov,Business and Legal Resources,Business & Legal Services,,
 Securities and Exchange Commission,SEC,Federal,General,,http://catalog.data.gov/organization/sec-gov,"Calcbench, Inc.",Finance & Investment,Securities and Exchange Commission,http://www.sec.gov/
-Department of Commerce,USDC,Federal,General,,http://catalog.data.gov/organization/doc-gov,Cambridge Semantics,Data/Technology,,
+Department of State,DOS,Federal,General,,http://catalog.data.gov/organization/state-gov,Cambridge Information Group,Finance & Investment,Congressional Research Service reports (CRS) and issue briefs,http://fpc.state.gov/c18185.htm
+Multiple government open data sources,,Other,General,,,Cambridge Semantics,Data/Technology,,
 Department of Commerce,USDC,Federal,General,,http://catalog.data.gov/organization/doc-gov,CAN Capital,Finance & Investment,,
 Department of State,DOS,Federal,General,,http://catalog.data.gov/organization/state-gov,CAN Capital,Finance & Investment,,
+Multiple government open data sources,,Other,General,,,Canon,Data/Technology,,
+Securities and Exchange Commission,SEC,Federal,General,,http://catalog.data.gov/organization/sec-gov,Capital Cube,Finance & Investment,,
+Securities and Exchange Commission,SEC,Federal,General,,http://catalog.data.gov/organization/sec-gov,Capital IQ,Finance & Investment,"Data on public companies, public offerings, filings, screening tools, macroeconomic data",
 California,CA,State,General,,http://data.ca.gov/,Captricity,Data/Technology,California Fair Political Practices Commission (FPPC),http://www.fppc.ca.gov/
 Department of the Treasury,,Federal,Internal Revenue Service,IRS,http://catalog.data.gov/organization/irs-gov,Captricity,Data/Technology,IRS Form 990 Return of Organization Exempt From Income Tax,"http://www.irs.gov/uac/Form-990,-Return-of-Organization-Exempt-From-Income-Tax-"
 Department of Health and Human Services,HHS,Federal,General,,http://catalog.data.gov/organization/cms-hhs-gov,Castle Biosciences,Scientific Research,,
@@ -204,7 +233,9 @@ Department of Agriculture,USDA,Federal,General,,http://catalog.data.gov/organiza
 ,,,General,,,"Urban Mapping, Inc",Geospatial/Mapping,Airport Noise Contours,http://www.urbanmapping.com/case-study-noise-contours.html
 Department of Commerce,USDC,Federal,General,,http://catalog.data.gov/organization/doc-gov,Vizzuality,Geospatial/Mapping,Open Street Map,http://www.openstreetmap.org
 Department of Commerce,USDC,Federal,US Census Bureau,Census,http://catalog.data.gov/organization/census-gov,Vizzuality,Geospatial/Mapping,US Census Bureau,http://www.census.gov/
-"US Census, USGS and City Government Data",,,General,,,Walk Score,Lifestyle & Consumer,,
+Department of Commerce,USDC,Federal,General,,http://catalog.data.gov/organization/doc-gov,Walk Score,Lifestyle & Consumer,,
+Department of the Interior,DOI,Federal,General,,http://catalog.data.gov/organization/doi-gov,Walk Score,Lifestyle & Consumer,,
+Multiple city and local data sources,,City/County,General,,,Walk Score,Lifestyle & Consumer,,
 Department of Commerce,USDC,Federal,US Patent and Trademark Office,USPTO,http://catalog.data.gov/dataset?q=organization:uspto-gov,Way Better Patents,Business & Legal Services,USPTO Bulk Patent Downloads,http://www.google.com/googlebooks/uspto-patents.html
 National Science Foundation,NSF,Federal,General,,http://catalog.data.gov/organization/nsf-gov,Way Better Patents,Business & Legal Services,NSF R&D Data,http://www.nsf.gov/statistics/showpub.cfm?TopID=8
 General Services Administration,GSA,Federal,General,,http://catalog.data.gov/organization/gsa-gov,Way Better Patents,Business & Legal Services,Federal Procurement Data System,https://www.fpds.gov/fpdsng_cms/index.php/en/

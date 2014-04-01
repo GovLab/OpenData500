@@ -6,50 +6,47 @@
 <h1><a href="{% if 'http' in company.url %}{{company.url}}{%else%}http://{{company.url}}{%end%}">{{ page_heading }}</a></h1>
 
 <div class="m-list-company-full">
-	{% if not company.vetted %}
 		<div class="m-half">
 			<h3>Company Information</h3>
-			<p><strong>Location:</strong>{{company.state}}</p>
+			<p><strong>URL: </strong>{% if company.url %}<a href="{% if 'http' in company.url %}{{company.url}}{%else%}http://{{company.url}}{%end%}">{{company.url}}{%else%}Not Available{%end%}</a></p>
+			<p><strong>Year Founded: </strong> {% if company.yearFounded %}{{company.yearFounded}}{%else%}Not Available{%end%}</p>
+			<p><strong>Location: </strong>{%if company.city %} {{company.city}}, {{company.state}}{%else%}{{company.state}}{%end%}</p>
+			<p><strong>Zip Code: </strong> {%if company.zipCode %}{{company.yearFounded}}{%else%}Not Available{%end%}</p>
+			<p><strong>Full-Time Employees: </strong> {% if company.fte %} {{company.fte}}{%else%}Not Available{%end%}</p>
+			<p><strong>Type of Company: </strong> {% if company.companyType %} {{company.companyType}}{%else%}Not Available{%end%}</p>
 			<p><strong>Category: </strong> {{company.companyCategory}}</p>
-			<p><strong>Short Description: </strong> {{company.descriptionShort}}</p>
-		</div>
-	{% end %}
-	{% if company.vetted %}
-		<div class="m-half">
-			<h3>Company Information</h3>
-			<p><strong>Year Founded:</strong> {{company.yearFounded}}</p>
-			<p><strong>Location:</strong> {{company.city}}, {{company.state}}</p>
-			<p><strong>FTE:</strong> {% if company.fte == 0 %}Not Available{%else%}{{company.fte}}{%end%}</p>
-			<p><strong>Type of Company:</strong> {{company.companyType}}</p>
-			<p><strong>Category:</strong> {{company.companyCategory}}</p>
-			<p><strong>Source of Revenue:</strong> {{ ", ".join(company.revenueSource) }}</p>
+			<p><strong>Sources of Revenue: </strong>{% if len(company.revenueSource) > 0 %}{% if company.revenueSource[0] %}{{ ", ".join(company.revenueSource) }}{%else%}Not Available{%end%}{%else%}Not Available{%end%}</p>
+			<p><strong>Approximate sources of government open data: </strong>{% if company.sourceCount %}{{company.sourceCount}} Agencies/Local Governments/Organizations{%else%}Not Available{%end%}</p>
 		</div>
 		<div class="m-half">
 			<h3>Description:</h3>
-			<p>{{company.description}}</p>
+			<p>{% if company.description %}{{company.description}}{%else%}Not Available{%end%}</p>
 			<h3>Financial Info:</h3>
-			<p>{{company.financialInfo}}</p>
+			<p>{% if company.financialInfo %}{{company.financialInfo}}{%else%}Not Available{%end%}</p>
 		</div>
-	{% end %}
 	<div class="m-full datasets">
 		<h3>Agency and Data Information</h3>
-		{%for a in company.agencies %}
-			<div class="company-view-agency-list">
-				<h3><a href="{{a.url}}">{{a.name}}</a></h3>
-				<div class="company-view-agency-name">
-					{% for d in a.datasets %} 
-						{% if d.usedBy == company %}
-							<ul>
-								{% if d.datasetURL %}
-									<li><a href="{{d.datasetURL}}"><strong>{{ d.datasetName }}</strong></a></li>
-								{% else %}
-									<li><strong>{{ d.datasetName }}</strong></li>
-								{% end %}
-							</ul>
-						{%end%}
-					{% end %}
+		{% if company.agencies %}
+			{%for a in company.agencies %}
+				<div class="company-view-agency-list">
+					<h3><a href="{{a.url}}">{{a.name}}</a></h3>
+					<div class="company-view-agency-name">
+						{% for d in a.datasets %} 
+							{% if d.usedBy == company %}
+								<ul>
+									{% if d.datasetURL %}
+										<li><a href="{{d.datasetURL}}"><strong>{{ d.datasetName }}</strong></a></li>
+									{% else %}
+										<li><strong>{{ d.datasetName }}</strong></li>
+									{% end %}
+								</ul>
+							{%end%}
+						{% end %}
+					</div>
 				</div>
-			</div>
+			{% end %}
+		{%else%}
+			<p>None Available</p>
 		{% end %}
 	</div>
 </div>	

@@ -746,7 +746,6 @@ $(document).ready(function() {
     {"label": "Department of Veterans Affairs (VA)", "a":"Department of Veterans Affairs", "aa":"VA", "s":"", "sa": ""},
     {"label": "Department of Veterans Affairs (VA) - Veterans Benefits Administration (VBA)", "a":"Department of Veterans Affairs", "aa":"VA", "s":"Veterans Benefits Administration", "sa": "VBA"},
     {"label": "Department of Veterans Affairs (VA) - Veterans Health Administration (VHA)", "a":"Department of Veterans Affairs", "aa":"VA", "s":"Veterans Health Administration", "sa": "VHA"},
-    {"label": "Department of Veterans Affairs (VA) - Environmental Protection Agency (EPA)", "a":"Department of Veterans Affairs", "aa":"VA", "s":"Environmental Protection Agency", "sa": "EPA"},
     {"label": "District of Columbia (DC)", "a":"District of Columbia", "aa":"DC", "s":"", "sa": ""},
     {"label": "Election Assistance Commission (EAC)", "a":"Election Assistance Commission", "aa":"EAC", "s":"", "sa": ""},
     {"label": "Executive Office of the President (EOP) - Networking and Information Technology Research and Development (NITRD)", "a":"Executive Office of the President", "aa":"EOP", "s":"Networking and Information Technology Research and Development", "sa": "NITRD"},
