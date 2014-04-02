@@ -27,7 +27,7 @@
         <span>Filter by:  </span>
     	<button class="color survey" data-filter=".survey-company">Submitted Survey</button>
     	<button class="color candidate" data-filter=":not(.survey-company)">No Survey Submitted</button>
-    	<button class="color all" data-filter="*">Show all</button>
+    	<button class="color all" data-filter="*">Clear Filter</button>
     </div>
 	<div class="m-candidates isotopes-container" data-isotope-options='{ "layoutMode": "fitColumns" }'>
 		{% for company in companies %}
@@ -81,6 +81,8 @@
                 filters.splice(i, 1)
             }
         });
+        $('#legend button').removeClass('s-active');
+        $(this).addClass('s-active');
         filters.push(filtr);
         console.log(filters.join(''))
 	  $container.isotope({ filter: filters.join('') });
@@ -271,17 +273,12 @@
                     })
                     .on("mouseout", function(d) { if (hoverStates == true) hover.style("left", -100).style("top", -100).transition().duration(100).style("opacity", 0); })
                     .on("mousemove", function(d, i) { if (hoverStates == true)hover.style("left", (d3.event.pageX) + 20 + "px").style("top", (d3.event.pageY) + "px"); })
-                    // .on('click', function(d) { 
-                    //     var filtr = "." + d.abbrev; 
-                    //     $container.isotope({ filter: filtr }); 
-                    //     console.log(d.abbrev); 
-                    //     //$("#filters button").removeClass('s-active');
-                    // });
-
-                    group.selectAll('.states')
-                        .on('click', function(d, i) {
-                            console.log(d.abbrev);
-                        });
+                    .on('click', function(d) { 
+                        var filtr = "." + d.abbrev; 
+                        $container.isotope({ filter: filtr }); 
+                        console.log(d.abbrev); 
+                        $("#filters button").removeClass('s-active');
+                    });
                     
                 if (chartTitleXLoc == "Left") { var cxpos = margin.left; var ctextanchor = "start"; };
                 if (chartTitleXLoc == "Center") { var cxpos = (w - margin.right - margin.left)/2 + margin.left; var ctextanchor = "middle"; };

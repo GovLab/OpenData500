@@ -650,6 +650,16 @@ a:hover {
   .legend .color.preview {
     background-color: rgba(71, 43, 116, 0.9); }
 
+.legend .color.survey.s-active {
+  background-color: rgba(71, 43, 116, 0.9);
+  color: white;
+}
+
+.legend .color.candidate.s-active {
+  background-color: rgba(71, 43, 116, 0.9);
+  color: white;
+}
+
 #chart svg {
   opacity: .7; }
 
