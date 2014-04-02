@@ -56,6 +56,7 @@ class Application(tornado.web.Application):
             (r"/admin/edit/([a-zA-Z0-9]{24})/?", AdminEditCompanyHandler),
             (r"/about/?", AboutHandler),
             (r"/resources/?", ResourcesHandler),
+            (r"/findings/?", FindingsHandler),
             #(r"/files/?", FilesHandler),
             (r"/download/?", DownloadHandler),
             (r'/download/(.*)/?',tornado.web.StaticFileHandler, {'path':os.path.join(os.path.dirname(__file__), 'static')}),
@@ -152,6 +153,15 @@ class MediaHandler(BaseHandler):
             "media.html",
             user=self.current_user,
             page_title="Media"
+            )
+
+class FindingsHandler(BaseHandler):
+    @tornado.web.addslash
+    def get(self):
+        self.render(
+            "findings.html",
+            user=self.current_user,
+            page_title="Findings"
             )
 
 class ThanksHandler(BaseHandler): 
