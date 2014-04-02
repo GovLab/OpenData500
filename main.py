@@ -509,9 +509,11 @@ class SubmitDataHandler(BaseHandler):
         #------------------------------------ADDING AGENCY/SUBAGENCY------------------------
         if action == "add agency":
             #Existing AGENCY
+            logging.info("Trying to get: " + agencyName)
             try:
                 agency = models.Agency.objects.get(name=agencyName)
-            except:
+            except Exception, e:
+                logging.info("Error: " + str(e))
                 self.set_status(400)
             for s in agency.subagencies:
                 if s.name == subagencyName:

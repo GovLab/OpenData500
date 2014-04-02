@@ -14,7 +14,7 @@
     
     <div class="m-filter-menu">
         <h3>Filter by Category</h3>
-        <div id="filters" class="m-candidates-buttons button-group" data-toggle="buttons-checkbox">
+        <div id="filters" class="m-candidates-buttons button-group" data-toggle="buttons-checkbox" data-filter-group="category">
             <button data-filter="*">Show All</button>
             {% for category in categories %}
                 <button data-filter=".{{category.strip().replace(" ", "-").replace("/","").replace("&", "")}}">{{category}}</button>
@@ -23,11 +23,11 @@
     </div>
 
     <div id="chart"></div>
-    <div class="legend" id="legend">
-    	<span>Filter by:  </span>
-    	<span class="color survey" data-filter=".survey-company">Submitted Survey</span>
-    	<span class="color candidate" data-filter=":not(.survey-company)">No Survey Submitted</span>
-    	<span class="color all" data-filter="*">Show all</span>
+    <div class="button-group legend" id="legend" data-filter-group="survey">
+        <span>Filter by:  </span>
+    	<button class="color survey" data-filter=".survey-company">Submitted Survey</button>
+    	<button class="color candidate" data-filter=":not(.survey-company)">No Survey Submitted</button>
+    	<button class="color all" data-filter="*">Show all</button>
     </div>
 	<div class="m-candidates isotopes-container" data-isotope-options='{ "layoutMode": "fitColumns" }'>
 		{% for company in companies %}
@@ -53,18 +53,37 @@
 		layoutMode: 'fitRows',
 		resizesContainer : false,
 	});
+    var filters = [];
+    var filtr = '';
 	// filter items on button click
 	$('#filters').on( 'click', 'button', function( event ) {
-	  var filtr = $(this).attr('data-filter');
-      $("#filters button").removeClass('s-active');
-      $(this).addClass('s-active');
-	  $container.isotope({ filter: filtr });
+        filtr = $(this).attr('data-filter');
+        $("#filters button").each(function() { //remove all previous filters of the kind
+            var i = filters.indexOf($(this).attr('data-filter'));
+            if( i > -1) {
+                filters.splice(i, 1)
+            } 
+        });
+        filters.push(filtr);
+        console.log(filters.join(''));
+        //re-draw isotopes
+        $("#filters button").removeClass('s-active');
+        $(this).addClass('s-active');
+        $container.isotope({ filter: filters.join('') });
 	});
 
 	// filter items by survey type
-	$('#legend').on( 'click', 'span', function( event ) {
-	  var filtr = $(this).attr('data-filter');
-	  $container.isotope({ filter: filtr });
+	$('#legend').on( 'click', 'button', function( event ) {
+        var filtr = $(this).attr('data-filter');
+        $('#legend button').each(function() {
+            var i = filters.indexOf($(this).attr('data-filter'));
+            if( i > -1) {
+                filters.splice(i, 1)
+            }
+        });
+        filters.push(filtr);
+        console.log(filters.join(''))
+	  $container.isotope({ filter: filters.join('') });
 	});
 
 	// $('.states').on('click', 'path', function(event) {
@@ -80,7 +99,6 @@
 	});
             
     var userData = document.getElementById('hidden').textContent.replace('<','').replace('>','');
-    console.log(userData);
     userData = JSON.parse(userData)
     data = userData
     
@@ -253,12 +271,17 @@
                     })
                     .on("mouseout", function(d) { if (hoverStates == true) hover.style("left", -100).style("top", -100).transition().duration(100).style("opacity", 0); })
                     .on("mousemove", function(d, i) { if (hoverStates == true)hover.style("left", (d3.event.pageX) + 20 + "px").style("top", (d3.event.pageY) + "px"); })
-                    .on('click', function(d) { 
-                        var filtr = "." + d.abbrev; 
-                        $container.isotope({ filter: filtr }); 
-                        console.log(filtr); 
-                        $("#filters button").removeClass('s-active');
-                    });
+                    // .on('click', function(d) { 
+                    //     var filtr = "." + d.abbrev; 
+                    //     $container.isotope({ filter: filtr }); 
+                    //     console.log(d.abbrev); 
+                    //     //$("#filters button").removeClass('s-active');
+                    // });
+
+                    group.selectAll('.states')
+                        .on('click', function(d, i) {
+                            console.log(d.abbrev);
+                        });
                     
                 if (chartTitleXLoc == "Left") { var cxpos = margin.left; var ctextanchor = "start"; };
                 if (chartTitleXLoc == "Center") { var cxpos = (w - margin.right - margin.left)/2 + margin.left; var ctextanchor = "middle"; };

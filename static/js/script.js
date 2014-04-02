@@ -877,7 +877,7 @@ $(document).ready(function() {
     {"label": "Tennessee (TN)", "a":"Tennessee", "aa":"TN", "s":"", "sa": ""},
     {"label": "Texas (TX)", "a":"Texas", "aa":"TX", "s":"", "sa": ""},
     {"label": "Texas (TX) - Texas Transparency", "a":"Texas", "aa":"TX", "s":"Texas Transparency", "sa": ""},
-    {"label": "Environmental Protection Agency (EPA)", "a":"Environmental Protection Agency", "aa":"EPA", "s":"", "sa": ""},
+    {"label": "U.S. Environmental Protection Agency (EPA)", "a":"U.S. Environmental Protection Agency", "aa":"EPA", "s":"", "sa": ""},
     {"label": "Univ of South Carolina (SC) - Baruch Institute for Marine and Coastal Sciences", "a":"Univ of South Carolina", "aa":"SC", "s":"Baruch Institute for Marine and Coastal Sciences", "sa": ""},
     {"label": "University of Alaska (UA) - Geographic Information Network of Alaska - University of Alaska (GINA)", "a":"University of Alaska", "aa":"UA", "s":"Geographic Information Network of Alaska - University of Alaska", "sa": "GINA"},
     {"label": "University of Arizona (UA)", "a":"University of Arizona", "aa":"UA", "s":"", "sa": ""},
