@@ -381,6 +381,9 @@ class SubmitCompanyHandler(BaseHandler):
 
     #@tornado.web.authenticated
     def post(self):
+        #print all arguments to log:
+        logging.info("Submitting New Company")
+        logging.info(self.request.arguments)
         #-------------------CONTACT INFO---------------
         firstName = self.get_argument("firstName", None)
         lastName = self.get_argument("lastName", None)
@@ -490,6 +493,8 @@ class SubmitDataHandler(BaseHandler):
 
     #@tornado.web.authenticated
     def post(self, id):
+        logging.info("Submitting Data: "+ self.get_argument("action", None))
+        logging.info(self.request.arguments)
         try:
             company = models.Company2.objects.get(id=bson.objectid.ObjectId(id))
         except Exception, e:
@@ -712,6 +717,9 @@ class EditCompanyHandler(BaseHandler):
             )
 
     def post(self, id):
+        #save all data to log:
+        logging.info("Editing company:")
+        logging.info(self.request.arguments)
         #get the company you will be editing
         company = models.Company2.objects.get(id=bson.objectid.ObjectId(id))
         #------------------CONTACT INFO-------------------
@@ -807,7 +815,10 @@ class AdminEditCompanyHandler(BaseHandler):
 
     @tornado.web.authenticated
     def post(self, id):
-                #get the company you will be editing
+        #print all arguments to log:
+        logging.info("Admin Editing Company")
+        logging.info(self.request.arguments)
+        #get the company you will be editing
         company = models.Company2.objects.get(id=bson.objectid.ObjectId(id))
         #------------------CONTACT INFO-------------------
         company.contact.firstName = self.get_argument("firstName", None)
