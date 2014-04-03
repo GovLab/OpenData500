@@ -44,7 +44,8 @@ class Application(tornado.web.Application):
         handlers = [
             (r'/(favicon.ico)', tornado.web.StaticFileHandler, {"path": ""}),
             (r"/", MainHandler),
-            (r"/2/?", TestHandler),
+            (r"/2/?", SankeeyChartHandler),
+            (r"/3/?", ChordDiagramHandler),
             (r"/submitCompany/?", SubmitCompanyHandler),
             (r"/validate/?", ValidateHandler),
             (r"/edit/([a-zA-Z0-9]{24})/?", EditCompanyHandler),
@@ -104,12 +105,23 @@ class MainHandler(BaseHandler):
             page_heading='Welcome to the Open Data 500 Pre-Launch',
         )
 
-class TestHandler(BaseHandler):
+class SankeeyChartHandler(BaseHandler):
     @tornado.web.addslash
     @tornado.web.authenticated
     def get(self):
         self.render(
             "index2.html",
+            user=self.current_user,
+            page_title='Open Data500',
+            page_heading='Welcome to the Open Data 500 Pre-Launch',
+        )
+
+class ChordDiagramHandler(BaseHandler):
+    @tornado.web.addslash
+    @tornado.web.authenticated
+    def get(self):
+        self.render(
+            "index3.html",
             user=self.current_user,
             page_title='Open Data500',
             page_heading='Welcome to the Open Data 500 Pre-Launch',

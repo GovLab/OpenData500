@@ -467,6 +467,21 @@ class FileGenerator(object):
         with open(os.path.join(os.path.dirname(__file__), 'static') + '/sankey.json', 'w') as outfile:
             json.dump(cat_v_agencies, outfile)
 
+    def generate_chord_chart_files(self):
+        agencies = models.Agency.objects(Q(usedBy__not__size=0) & Q(source__not__exact="web") & Q(dataType="Federal")).order_by('name')
+        matrix = [[]]
+        name_key = {}
+        for i, cat in enumerate(categories):
+            name_key[cat] = i
+        agencies_used = [] #For some reason, some agencies that are used by 0 companies are being returned by query.
+        for a in agencies:
+            if len(a.usedBy) !=0:
+                agencies_used.append(a)
+        l = len(name_key)
+        for i, a in enumerate(agencies_used):
+            name_key[str(a.name)] = i + l
+
+
 
 
 
