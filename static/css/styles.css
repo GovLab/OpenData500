@@ -660,6 +660,11 @@ a:hover {
   color: white;
 }
 
+.state .s-active {
+  stroke: black;
+  stroke-width: 2px;
+}
+
 #chart svg {
   opacity: .7; }
 

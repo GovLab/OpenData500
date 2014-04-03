@@ -15,7 +15,7 @@
     <div class="m-filter-menu">
         <h3>Filter by Category</h3>
         <div id="filters" class="m-candidates-buttons button-group" data-toggle="buttons-checkbox" data-filter-group="category">
-            <button data-filter="*">Show All</button>
+            <button data-filter="*">Clear All Categories</button>
             {% for category in categories %}
                 <button data-filter=".{{category.strip().replace(" ", "-").replace("/","").replace("&", "")}}">{{category}}</button>
             {%end%}
@@ -58,33 +58,43 @@
 	// filter items on button click
 	$('#filters').on( 'click', 'button', function( event ) {
         filtr = $(this).attr('data-filter');
-        $("#filters button").each(function() { //remove all previous filters of the kind
-            var i = filters.indexOf($(this).attr('data-filter'));
-            if( i > -1) {
-                filters.splice(i, 1)
-            } 
-        });
-        filters.push(filtr);
-        console.log(filters.join(''));
-        //re-draw isotopes
-        $("#filters button").removeClass('s-active');
-        $(this).addClass('s-active');
+        if ($(this).hasClass('s-active')) { //already active, deactivate
+            $(this).removeClass('s-active');
+            filters.splice(filters.indexOf($(this).attr('data-filter')), 1)
+        } else { //not active, activate it
+            $("#filters button").each(function() { //remove all previous filters of the kind
+                var i = filters.indexOf($(this).attr('data-filter'));
+                if( i > -1) {
+                    filters.splice(i, 1)
+                } 
+            });
+            filters.push(filtr);
+            console.log(filters.join(''));
+            //re-draw isotopes
+            $("#filters button").removeClass('s-active');
+            $(this).addClass('s-active');
+        }
         $container.isotope({ filter: filters.join('') });
 	});
 
 	// filter items by survey type
 	$('#legend').on( 'click', 'button', function( event ) {
         var filtr = $(this).attr('data-filter');
-        $('#legend button').each(function() {
-            var i = filters.indexOf($(this).attr('data-filter'));
-            if( i > -1) {
-                filters.splice(i, 1)
-            }
-        });
-        $('#legend button').removeClass('s-active');
-        $(this).addClass('s-active');
-        filters.push(filtr);
-        console.log(filters.join(''))
+        if ($(this).hasClass('s-active')) {
+            $(this).removeClass('s-active');
+            filters.splice(filters.indexOf($(this).attr('data-filter')), 1)
+        } else {
+            $('#legend button').each(function() {
+                var i = filters.indexOf($(this).attr('data-filter'));
+                if( i > -1) {
+                    filters.splice(i, 1)
+                }
+            });
+            $('#legend button').removeClass('s-active');
+            $(this).addClass('s-active');
+            filters.push(filtr);
+            console.log(filters.join(''))
+        }
 	  $container.isotope({ filter: filters.join('') });
 	});
 
@@ -250,9 +260,10 @@
                     .style('stroke', lineColor)
                     .style('stroke-width', lineThickness/size);
                     
-                group.selectAll('.states')
+                var states = group.selectAll('.states')
                     .data(data)
                     .style('fill', function(d){return color( total/d.VALUE )})
+                    .attr('name', function(d) { return d.abbrev; })
                     .on("mouseover", function(d, i) {   
                         if (hoverStates == true) {
                                 hover.transition().duration(100).style("opacity", 1)
@@ -272,14 +283,33 @@
                         }
                     })
                     .on("mouseout", function(d) { if (hoverStates == true) hover.style("left", -100).style("top", -100).transition().duration(100).style("opacity", 0); })
-                    .on("mousemove", function(d, i) { if (hoverStates == true)hover.style("left", (d3.event.pageX) + 20 + "px").style("top", (d3.event.pageY) + "px"); })
-                    .on('click', function(d) { 
-                        var filtr = "." + d.abbrev; 
-                        $container.isotope({ filter: filtr }); 
-                        console.log(d.abbrev); 
-                        $("#filters button").removeClass('s-active');
-                    });
-                    
+                    .on("mousemove", function(d, i) { if (hoverStates == true)hover.style("left", (d3.event.pageX) + 20 + "px").style("top", (d3.event.pageY) + "px"); });
+                    // .on('click', function(d) { 
+                    //     var filtr = "." + d.abbrev;
+                    //     $container.isotope({ filter: filtr }); 
+                    //     console.log(d.abbrev); 
+                    //     $("#filters button").removeClass('s-active');
+                    // });
+                
+                states.on('click', function(d) {
+                    var filtr = '.' + this.getAttribute('name');
+                    d3.selectAll('.states')
+                        .each(function(d) { 
+                            var i = filters.indexOf('.'+d.abbrev)
+                            if (i > -1) { //remove all states in filter array
+                                filters.splice(i, 1);
+                                console.log('removed: ' +d.abbrev)
+                            }
+                            //d3.select(this).classed('s-active', false)
+                        });
+
+                    //this.setAttribute('class', 's-active')
+                    filters.push(filtr);
+                    console.log(filters);
+                    $container.isotope({ filter: filters.join('') });
+                });
+
+
                 if (chartTitleXLoc == "Left") { var cxpos = margin.left; var ctextanchor = "start"; };
                 if (chartTitleXLoc == "Center") { var cxpos = (w - margin.right - margin.left)/2 + margin.left; var ctextanchor = "middle"; };
                 if (chartTitleXLoc == "Right") { var cxpos = (w - margin.right - margin.left) + margin.left; var ctextanchor = "end"; };
