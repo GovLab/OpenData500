@@ -43,6 +43,13 @@
 									</ul>
 								{%end%}
 							{% end %}
+							<ul>
+								{% for s in a.subagencies %}
+									{% if company in s.usedBy %}
+										<li><h3><a href="{{s.url}}">{{s.name}}</a></h3></li>
+									{%end%}
+								{%end%}
+							</ul>
 						</div>
 					</ul>
 				</div>
