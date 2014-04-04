@@ -1104,6 +1104,9 @@ h2.disclaimer-text {
 
 
 /*----------------------------CHORD DIAGRAM-----------------*/
+#chart {
+  text-align: left;
+}
 #circle circle {
   fill: none;
   pointer-events: all;

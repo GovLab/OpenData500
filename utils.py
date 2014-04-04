@@ -7,6 +7,7 @@ import os
 import json
 import csv
 from collections import Counter
+import numpy as np
 
 
 #Just some global varbs. 
@@ -469,18 +470,56 @@ class FileGenerator(object):
 
     def generate_chord_chart_files(self):
         agencies = models.Agency.objects(Q(usedBy__not__size=0) & Q(source__not__exact="web") & Q(dataType="Federal")).order_by('name')
-        matrix = [[]]
-        name_key = {}
-        for i, cat in enumerate(categories):
-            name_key[cat] = i
-        agencies_used = [] #For some reason, some agencies that are used by 0 companies are being returned by query.
+        #get agencies that are used
+        used_agencies_categories = []
         for a in agencies:
-            if len(a.usedBy) !=0:
-                agencies_used.append(a)
+            if a.usedBy and a.source == "dataGov":
+                used_agencies_categories.append(a.name)
+        #Keep track of # of categories
+        num_agencies = len(used_agencies_categories)
+        #get categories that are actually used from agencies that are used
+        for a in agencies:
+            if a.usedBy and a.source == "dataGov":
+                for c in a.usedBy:
+                    if c.companyCategory in categories and c.companyCategory not in used_agencies_categories:
+                        used_agencies_categories.append(c.companyCategory)
+        logging.info(used_agencies_categories)
+        name_key = {}
+        key_name = {}
+        for i, name in enumerate(used_agencies_categories):
+            name_key[name] = i
+            key_name[str(i)] = name
+        #Make matrix
         l = len(name_key)
-        for i, a in enumerate(agencies_used):
-            name_key[str(a.name)] = i + l
-
+        matrix = np.matrix([[0]*l]*l)
+        #populate matrix
+        for a in agencies:
+            if a.source == "dataGov":
+                for c in a.usedBy:
+                    if c.companyCategory in categories: 
+                        matrix[name_key[c.companyCategory], name_key[a.name]] += 1
+                        matrix[name_key[a.name], name_key[c.companyCategory]] += 1
+        #make json
+        matrix = matrix.tolist()
+        data = {"matrix":matrix, "names":key_name, "num_agencies":num_agencies}
+        #abbreviate some stuff
+        for key in data['names']:
+            data['names'][key] = data['names'][key].replace('Department', 'Dept.')
+            data['names'][key] = data['names'][key].replace('Administration', 'Admin.')
+            data['names'][key] = data['names'][key].replace('United States', 'US')
+            data['names'][key] = data['names'][key].replace('U.S.', 'US')
+            data['names'][key] = data['names'][key].replace('National', "Nat'l")
+            data['names'][key] = data['names'][key].replace('Federal', "Fed.")
+            data['names'][key] = data['names'][key].replace('Commission', "Com.")
+            data['names'][key] = data['names'][key].replace('International', "Int'l")
+            data['names'][key] = data['names'][key].replace('Development', "Dev.")
+            data['names'][key] = data['names'][key].replace('Corporation', "Corp.")
+            data['names'][key] = data['names'][key].replace('Institute', "Inst.")
+            data['names'][key] = data['names'][key].replace('Administrative', "Admin.")
+            data['names'][key] = data['names'][key].replace('and', "&")
+        #save to file
+        with open(os.path.join(os.path.dirname(__file__), 'static') + '/matrix.json', 'w') as outfile:
+            json.dump(data, outfile)
 
 
 

@@ -340,6 +340,7 @@ class AdminHandler(BaseHandler):
             self.write("success")
         elif action == "sankey":
             self.application.files.generate_sankey_json()
+            self.application.files.generate_chord_chart_files()
             self.write("success")
         elif action == 'display':
             try:
