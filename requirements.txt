@@ -2,3 +2,4 @@ Tornado==3.0.2
 Mongoengine
 unidecode
 py-bcrypt
+numpy
