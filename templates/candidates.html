@@ -10,8 +10,16 @@
 	<p class="warning"><strong>Please Note:</strong> We expect to that this list may change as we learn more about how each company operates – that’s part of our open process. Many of these companies have not yet responded to our survey, so information about them may change as we receive more input from them and from others.</p>
 </section>
 
-<div class="m-candidates">
-    
+<div class="m-candidates">        
+    <div class="m-filter-menu">
+        <h3>Filter by Agency</h3>
+        <div id="filters" class="m-candidates-buttons button-group" data-toggle="buttons-checkbox" data-filter-group="category">
+            <button data-filter="*">Clear All Categories</button>
+            {% for category in categories %}
+                <button data-filter=".{{category.strip().replace(" ", "-").replace("/","").replace("&", "")}}">{{category}}</button>
+            {%end%}
+        </div>
+    </div>
     <div class="m-filter-menu">
         <h3>Filter by Category</h3>
         <div id="filters" class="m-candidates-buttons button-group" data-toggle="buttons-checkbox" data-filter-group="category">
@@ -21,7 +29,6 @@
             {%end%}
         </div>
     </div>
-
     <div id="chart"></div>
     <div class="button-group legend" id="legend" data-filter-group="survey">
         <span>Filter by:  </span>
@@ -121,9 +128,9 @@
         this.Title = '500 Companies';
         this.Size = 600;
         this.MarginTop = 60;
-        this.MarginRight = 40;
+        this.MarginRight = 0;
         this.MarginBottom = 40;
-        this.MarginLeft = 40;
+        this.MarginLeft = -61;
         this.Guide = false;
         this.DataType = 'Number';
         this.BackgroundColor = 'transparent';
@@ -202,7 +209,7 @@
             bkgdColor.setAttribute("style","background-color:" + backgroundColor + ";margin:0px;");
 
             var elem = document.getElementById("chart");
-            elem.setAttribute("style","width:" + w + "; height:" + h + "; ");
+            elem.setAttribute("style","width:40% height:" + h + "px; margin: 0px;");
             
             var graph = d3.select('#chart').append('svg')
                 .attr('width', w)
@@ -294,16 +301,15 @@
                 states.on('click', function(d) {
                     var filtr = '.' + this.getAttribute('name');
                     d3.selectAll('.states')
+                        .style("fill", function(d){return color( total/d.VALUE )})
                         .each(function(d) { 
                             var i = filters.indexOf('.'+d.abbrev)
                             if (i > -1) { //remove all states in filter array
                                 filters.splice(i, 1);
                                 console.log('removed: ' +d.abbrev)
                             }
-                            //d3.select(this).classed('s-active', false)
-                        });
-
-                    //this.setAttribute('class', 's-active')
+                        }).classed("s-active", function(p) { return p == d});
+                    d3.select(".s-active").style("fill", "red")
                     filters.push(filtr);
                     console.log(filters);
                     $container.isotope({ filter: filters.join('') });
