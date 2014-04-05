@@ -519,7 +519,8 @@ a:hover {
 .m-candidates .m-filter-menu {
   width: 200px;
   float: right;
-  padding-left: 9px; }
+  border-left: 1px solid rgba(0, 0, 0, 0.15);
+  padding-left: 75px; }
   .m-candidates .m-filter-menu h3 {
     margin-bottom: 10px;
     font-weight: normal; }
@@ -621,21 +622,6 @@ a:hover {
     background-color: rgba(71, 43, 116, 0.1); }
   .legend .color.preview {
     background-color: rgba(71, 43, 116, 0.9); }
-
-.legend .color.survey.s-active {
-  background-color: rgba(71, 43, 116, 0.9);
-  color: white;
-}
-
-.legend .color.candidate.s-active {
-  background-color: rgba(71, 43, 116, 0.9);
-  color: white;
-}
-
-.states.s-active {
-  stroke: black;
-  stroke-width: 2px;
-}
 
 #chart svg {
   opacity: .7; }
@@ -1014,180 +1000,8 @@ footer {
       float: left;
       margin-right: 10px; }
 
-#chart {
-
-}
-
-.no-flexbox #chart {
-  width:180; 
-  height:447.36842105263156;
-}
 
 
-/* Why you always gotta be messing with Luis' STYLEZZ? */
-.ui-autocomplete-input {
-  width: 500px;
-}
-.ui-autocomplete {
-    max-height: 200px;
-    overflow-y: auto;
-    /* prevent horizontal scrollbar */
-    overflow-x: hidden;
-}
-
-.error-agency-search {
-  display:block;
-  color: red;
-  width: 400px;
-  margin-right: auto;
-  margin-left: auto;
-  text-align: center;
-}
-
-.error-dataset {
-  color: red;
-  padding-left: 5px;
-}
-
-.l-button {
-  padding: 5px 14px 4px 14px;
-  border: 1px solid #8977a7;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  border-radius: 4px;
-  color: #472b74;
-  font-family: "Exo", sans-serif;
-  text-transform: uppercase;
-  font-size: 14px;
-  font-weight: 14px;
-  letter-spacing: .6px;
-  cursor: pointer;
-  background-color: white; }
-
-.l-button:hover {
-  background-color: #472b74;
-  border: 1px solid #fff;
-  color: #fff; }
-
-table {
-  width: 100%;
-}
-th.table-header-name, th.table-header-url {
-  width: 15%;
-}
-th.table-header-buttons {
-  width: 60%;
-}
-th.table-header-rating {
-  width: 5%; /* Not necessary, since only 70% width remains */
-}
-
-h2.disclaimer-text {
-  font-family: "Exo", sans-serif;
-  font-size: 1.5em;
-  font-weight: 350;
-  margin-bottom: 20px;
-  margin-top: 20px;
-}
-
-.savingMessage_companyEdit, .savedMessage_companyEdit, .errorMessage_companyEdit {
-  color: #472b74;
-}
-
-.error-form {
-  color: red;
-  padding-left: 5px;
-}
-
-.message-form {
-  color: black;
-  padding-left: 5px;
-  font-size: 12px;
-}
-
-.data-text {
-  font-size: 1.2em;
-  font-weight: 300;
-}
-.m-form-half h3 {
-  font-size: 1.2em;
-}
-
-.submitCompanyForm, .saveCompanyForm, .saveCompanyForm-new {
-  margin-bottom: 20px;
-  margin-top: 20px;
-  width: 100%;
-  text-align: center;
-}
-
-.dialog-example {
-  display: none;
-}
-
-.ui-dialog-titlebar-close {
-  visibility: hidden;
-}
-
-.source-count-buttons input[type="radio"] {
-    display:none; 
-}
-
-.source-count-buttons label {
-  padding: 5px 14px 4px 14px;
-  border: 1px solid #8977a7;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  border-radius: 4px;
-  color: #472b74;
-  font-family: "Exo", sans-serif;
-  text-transform: uppercase;
-  font-size: 14px;
-  font-weight: 14px;
-  letter-spacing: .6px;
-  cursor: pointer;
-  background-color: white;
-}
-
-.source-count-buttons input[type="radio"]:checked + label { 
-  background-color: #472b74;
-  border: 1px solid #fff;
-  color: #fff;
-}
-
-.company-view-agency-list {
-  padding-top: 10px;
-}
-
-.all-filters {
-  text-align: center;
-}
-
-
-/*----------------SANKEY CHART----------*/
-#chart_sankey {
-  height: 500px;
-}
-
-.node rect {
-  cursor: move;
-  fill-opacity: .9;
-  shape-rendering: crispEdges;
-}
-
-.node text {
-  pointer-events: none;
-  text-shadow: 0 1px 0 #fff;
-}
-
-.link {
-  fill: none;
-  stroke: #000;
-  stroke-opacity: .2;
-}
-
-.link:hover {
-  stroke-opacity: .5;
-}
 
 
 /*----------------------------CHORD DIAGRAM-----------------*/
