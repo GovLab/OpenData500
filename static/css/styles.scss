@@ -30,8 +30,6 @@ h1 {
 }
 
 
-
-
 // Header Module
 
 header {
@@ -65,18 +63,38 @@ header {
 		display: inline-block;
 		border-right: 2px solid $light_purple;
 	}
+	
+	a:hover {
+		background-color: $light_purple;
+		color: #fff;
+	}
+	
+	a:last-child {
+		border-right: 0;
+	}
+
+	.logo {
+		border: 0;
+		float: left;
+		margin-top: -5px;
+		padding: 0;
+
+		img {
+			width: 109px;
+		}
+	}
+
+	.logo:hover {
+		background-color: transparent;
+	}
 }
 
-.m-main-menu a:hover {
-	background-color: $light_purple;
-	color: #fff;
+// Title
+.m-page-title {
+	font-size: 2.3em;
+	margin-bottom: 35px;
+	font-weight: 100;
 }
-
-.m-main-menu a:last-child {
-	border-right: 0;
-}
-
-
 
 // Background
 
@@ -109,6 +127,175 @@ header {
 	background: url(../img/bg-element-1.png) no-repeat center;
 	z-index: -1;
 }
+
+
+// Subscribe 
+#mc_embed_signup {
+	position: fixed;
+	border: 1px solid $light_purple;
+	background-color: $super_light_purple;
+	padding: 10px 15px 10px 20px;
+	z-index: 10;
+	right: -1px;
+	width: 200px;
+	top: 200px;
+	@include transition;
+
+	.m-page-title {
+		margin-bottom: 5px;
+		font-size: 1.5em;
+		font-weight: 400;
+	}
+
+	p {
+		margin: 3px;
+		font-size: 14px;
+	}
+
+	.signup-handle {
+		width: 0;
+		height: 0;
+		border-top: 8px solid transparent;
+		border-bottom: 8px solid transparent;
+		border-left: 8px solid $purple;
+		position: absolute;
+		left: 4px;
+		top: 40px;
+		cursor: pointer;
+	}
+
+	.signup-handle:hover {
+		border-left-color: $red;
+	}
+
+	
+
+	form {
+		position: relative;
+
+		input[type="email"] {
+			width: 112px;
+			-webkit-border-radius: 4px 0 0 4px;
+			-moz-border-radius: 4px 0 0 4px;
+			border-radius: 4px 0 0 4px;
+			border-right: 0;
+			padding: 6px 10px 5px;
+			border-color: $light_purple;
+			background-color: $white_alpha_50;
+		}
+
+		input[type="email"]:focus {
+			background-color: $white;
+		}
+
+		.m-button {
+			width: 40px;
+			display: inline-block;
+			padding: 5px 5px 4px;
+			margin-top: 1px;
+			font-family: $regular_type;
+			font-size: 12px;
+			background-color: $white_alpha_50;
+			color: $purple;
+			border-color: $light_purple;
+			margin-left: 0;
+			-webkit-border-radius: 0 4px 4px 0;
+			-moz-border-radius: 0 4px 4px 0;
+			border-radius: 0 4px 4px 0;
+		}
+
+		.m-button:hover {
+			background-color: $purple;
+			color: $white;
+			border-color: $purple;
+		}
+	}
+
+	#mce-responses {
+
+		.response {
+			position: absolute;
+			width: 175px;
+			padding: 10px;
+			background-color: $light_purple;
+			border: 1px solid $purple;
+			top: 89px;
+			color: $purple;
+			@inlcude rounded;
+			@include drop-shadow;
+		}
+
+		.response:after {
+			content: "";
+			width: 0;
+			height: 0;
+			position: absolute;
+			border-bottom: 8px solid $purple;
+			border-left: 8px solid transparent;
+			border-right: 8px solid transparent;
+			top: -8px;
+			left: 48%;
+			
+		}
+	}
+
+	input.mce_inline_error {
+		border-color: $red !important;
+	}
+
+	div.mce_inline_error {
+		position: absolute;
+		left: -31px;
+		width: 200px;
+		padding: 10px;
+		background-color: $lighter_gray !important;
+		border: 1px solid $red;
+		top: 124px;
+		color: $red !important;
+		@inlcude rounded;
+		@include drop-shadow;
+	}
+
+	div.mce_inline_error:after {
+		content: "";
+		width: 0;
+		height: 0;
+		position: absolute;
+		border-bottom: 8px solid $red;
+		border-left: 8px solid transparent;
+		border-right: 8px solid transparent;
+		top: -8px;
+		left: 48%;
+	}
+}
+
+#mc_embed_signup.s-disabled {
+	right: -236px;
+	@include transition;
+
+	.signup-handle:before {
+		content:"Subscribe";
+		background-color: $light_purple;
+		position: absolute;
+		border: 1px solid $purple;
+		left: -78px;
+		top: -13px;
+		width: 88px;
+		padding: 5px;
+		font-family: $fancy_type;
+		font-weight: 400;
+		text-align: center;
+		font-size: 18px;
+		color: $purple;
+		-webkit-transform: rotate(-90deg);
+		-moz-transform: rotate(-90deg);
+		-ms-transform: rotate(-90deg);
+		-o-transform: rotate(-90deg);
+		transform: rotate(-90deg);
+	}
+}
+
+
 
 
 // Footer 

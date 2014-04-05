@@ -1,240 +1,72 @@
-.logo {
-	text-align: center;
-	margin-top: 30px;
-	margin-bottom: 20px;
-
-	img {
-		width: 200px;
-	}
-}
-
 .m-homepage {
 	
 	h1 {
-		margin: 0 0 60px 0;
-		font-size: 4em;
-
+		margin: 15px 0 50px 0;
+		font-size: 3.8em;
 	}
 
-	.separator-title {
-		margin-top: 20px;
-		border-top: 1px solid $light_purple;
-		padding-top: 15px;
-		margin-bottom: 10px;
+	.first-title {
+		margin: 65px 0 60px 0;
+		font-size: 6.3em;
 	}
-	
+
+	section {
+		padding-bottom: 24px;
+		border-bottom: 1px solid $purple;
+		margin-bottom: 25px;
+	}
+
+	#chord-chart-container {
+		text-align: center;
+	}
+}
+
+.m-homepage-about {
+	.more {
+		text-align: right;
+	}
+}
+
+
+.m-homepage-participate {
+	overflow: hidden;
+
 	.m-homepage-box {
-		width: 200px / 960px * 100%;
-		display: inline-block;
-		vertical-align: top;
-		border: 1px solid $purple;
-		padding: 16px 20px 10px;
-		background-color: $white_alpha;
-
-
-		h2 {
-			font-size: 2em;
-		}
-
-		.m-button {
-			display: block;
-			text-align: center;
-		}
-	}
-
-	.m-homepage-about {
-		margin-right: 30px/ 960px * 100%;
-	}
-
-	.m-homepage-participate {
-		margin-left: 30px/ 960px * 100%;
-
-		
-
-		form {
-			position: relative;
-
-			input[type="email"] {
-				width: 138px;
-				-webkit-border-radius: 4px 0 0 4px;
-				-moz-border-radius: 4px 0 0 4px;
-				border-radius: 4px 0 0 4px;
-				border-right: 0;
-				padding: 6px 10px 5px;
-				border-color: $light_gray;
-			}
-
-			.m-button {
-				width: 40px;
-				display: inline-block;
-				padding: 5px 5px 4px;
-				margin-top: 1px;
-				font-family: $regular_type;
-				font-size: 12px;
-				background-color: $white;
-				color: $purple;
-				border-color: $light_gray;
-				margin-left: 0;
-				-webkit-border-radius: 0 4px 4px 0;
-				-moz-border-radius: 0 4px 4px 0;
-				border-radius: 0 4px 4px 0;
-			}
-
-			.m-button:hover {
-				background-color: $purple;
-				color: $white;
-				border-color: $purple;
-			}
-		}
-
-		#mce-responses {
-
-			.response {
-				position: absolute;
-				width: 175px;
-				padding: 10px;
-				background-color: $light_purple;
-				border: 1px solid $purple;
-				top: 89px;
-				color: $purple;
-				@inlcude rounded;
-				@include drop-shadow;
-			}
-
-			.response:after {
-				content: "";
-				width: 0;
-				height: 0;
-				position: absolute;
-				border-bottom: 8px solid $purple;
-				border-left: 8px solid transparent;
-				border-right: 8px solid transparent;
-				top: -8px;
-				left: 48%;
-				
-			}
-		}
-
-		input.mce_inline_error {
-			border-color: $red !important;
-		}
-
-		div.mce_inline_error {
-			position: absolute;
-			width: 178px;
-			padding: 10px;
-			background-color: $lighter_gray !important;
-			border: 1px solid $red;
-			top: 89px;
-			color: $red !important;
-			@inlcude rounded;
-			@include drop-shadow;
-			
-		}
-
-		div.mce_inline_error:after {
-			content: "";
-			width: 0;
-			height: 0;
-			position: absolute;
-			border-bottom: 8px solid $red;
-			border-left: 8px solid transparent;
-			border-right: 8px solid transparent;
-			top: -8px;
-			left: 48%;
-		}
-	}
-
-	.m-homepage-explore {
-		display: inline-block;
-		width: 408px / 960px * 100%;
-		text-align: center;
-		// margin-top: 46px;
-
-		> div {
-			padding-bottom: 24px;
-			border-bottom: 1px solid $purple;
-			margin-bottom: 25px;
-		}
-		
-		h2, p {
-			margin-bottom: 10px;
-		}
-
-		h2 {
-			color: $purple;
-			font-size: 2.8em;
-		}
-
-		.map-title {
-			font-family: $fancy_type;
-			font-weight: 100;
-			font-size: 22px;
-			font-style: italic;
-		}
-
-		.map {
-
-		}
-
-		.map img {
-			width: 450px;
-			position: relative;
-			left: -30px;
-			top: 0;
-		}
-
-		.m-button {
-			display: block;
-			margin-top: 20px;
-			padding: 20px;
-			font-size: 1.6em;
-			background-color: $purple;
-			border-color: $light_purple;
-			color: $white;
-		}
-
-		.m-button:hover {
-			background-color: $light_purple;
-			border-color: $purple;
-			color: $purple;	
-		}
-	}
-
-	.m-homepage-press {
-		background-color: $lighter_gray;
+		float: left;
+		width: 280px;
+		margin-right: 26px;
+		font-family: $fancy_type;
+		border: 1px solid $light_purple;
 		padding: 10px;
-		text-align: center;
-		margin-top: 20px;
-		@include rounded;
 		
 		h2 {
-			font-size: 18px;
-			font-style: italic;
+			text-align: center;
+			font-size: 36px;
+			vertical-align: middle;
+			font-weight: 100;
+			color: $light_purple;
+			padding: 7px 4px 2px 6px;
+			width: 40px;
+			height: 40px;
+			margin: -35px auto 0;
+			background-color: $purple;
+			@include circle;
+		}
+
+		h3 {
+			margin-top: 15px;
+			font-weight: 400;		
+		}
+
+		p {
+			font-size: 16px;
+			font-family: $regular_type;
+			line-height: 1.5em;
 			font-weight: 300;
-			color: $dark_gray;
-			margin-bottom: 10px;
-		}
-
-		img {
-			margin-right: 20px;
-			opacity: .4;
-		}
-
-		a:hover img {
-			opacity: .7;
-		}
-
-		#fedscoop-logo {
-
-		}
-
-		#informationweek-logo {
-			position: relative;
-			top: -6px;
-			height: 26px;
-
 		}
 	}
+}
+.m-homepage-box:last-of-type {
+	margin-right: 0;
 }
 
