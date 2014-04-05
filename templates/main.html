@@ -35,12 +35,12 @@
     <div class="parallax-bg" id="background-3" data-stellar-ratio="-0.02"></div>   -->
     <header>
         <div id="mainMenu" class="l-centered m-main-menu">
-            <a href="/">Home</a>
+            <a class="logo" href="/"><img src="{{ static_url("img/od500-logo.png") }}" alt=""></a>
             <a href="/about/">About</a>
             <a href="/candidates/">Full List</a>
             <a href="/submitCompany/">Survey</a>
+            <!-- <a href="/findings/">Findings</a> -->
             <a href="/resources/">Resources</a>
-            <a href="/media/">Media</a>
             <a href="/download/">Download</a> 
             {%try%} {% if user %} <a href="/admin/">Admin</a>{% end %}{%except%}{%end%}
             {%try%} {% if user %} <a href="/logout/">Logout</a>{% end %}{%except%}{%end%}
@@ -52,6 +52,23 @@
             {% block body %}{% end %}
         </div><!-- end container -->
     </div><!-- end main -->
+    
+    <!-- Mailchimp Subscribe -->
+    <div id="mc_embed_signup" class="s-disabled">
+        <span class="signup-handle"></span>
+        <form action="http://openinggovernment.us6.list-manage.com/subscribe/post?u=1a990feb5c&amp;id=691b1fcbc9" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+            <h2 class="m-page-title">Subscribe</h2>
+            <p>Subscribe for email updates</p>
+            <div class="mc-field-group">
+                <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL" placeholder="Email"><input type="submit" value="OK" name="subscribe" id="mc-embedded-subscribe" class="m-button">
+            </div>
+            <div style="position: absolute; left: -5000px;"><input type="text" name="b_1a990feb5c_691b1fcbc9" value=""></div>
+            <div id="mce-responses">
+                <div class="response" id="mce-error-response" style="display:none"></div>
+                <div class="response" id="mce-success-response" style="display:none"></div>
+            </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+        </form>
+    </div>
 
     <footer>
         <div class="l-centered">

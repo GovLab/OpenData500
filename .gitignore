@@ -22,3 +22,6 @@ ninja*
 notes.txt
 uploadScript.py
 companies.csv
+
+# Ignoring Sass Cache files
+static/css/.sass-cache
