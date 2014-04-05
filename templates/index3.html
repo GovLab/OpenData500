@@ -79,7 +79,6 @@ d3.json("{{ static_url('matrix.json') }}", function(error, json) {
 })
 
 function draw_diagram() {
-    // From http://mkweb.bcgsc.ca/circos/guide/tables/
     var chord = d3.layout.chord()
         .padding(0.01)
         .sortSubgroups(d3.descending)
@@ -137,7 +136,9 @@ function draw_diagram() {
         .attr("dy", ".35em")
         .attr("transform", function(d) { return d.angle > Math.PI ? "rotate(180)translate(-16)" : null; })
         .style("text-anchor", function(d) { return d.angle > Math.PI ? "end" : null; })
-        .text(function(d) { return d.label; });
+        .text(function(d) { return d.label; })
+        .filter(function(d, i) { return d[i].angle - d[i-1].angle < .2 })
+        .remove();
 
     //var chord = svg.append("g")
     var chord = svg.selectAll(".chord")
