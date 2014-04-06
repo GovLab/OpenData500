@@ -517,6 +517,9 @@ class FileGenerator(object):
             data['names'][key] = data['names'][key].replace('Institute', "Inst.")
             data['names'][key] = data['names'][key].replace('Administrative', "Admin.")
             data['names'][key] = data['names'][key].replace(' and ', " & ")
+            data['names'][key] = data['names'][key].replace('Financial', "Fin.")
+            data['names'][key] = data['names'][key].replace('Protection', "Prot.")
+            data['names'][key] = data['names'][key].replace('Environmental', "Env.")
         #save to file
         with open(os.path.join(os.path.dirname(__file__), 'static') + '/matrix.json', 'w') as outfile:
             json.dump(data, outfile)
