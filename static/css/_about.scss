@@ -72,7 +72,7 @@
 		}
 
 		h3 {
-			margin-bottom: 20px;
+			margin: 20px 0;
 			font-size: 42px;
 			font-family: $fancy_type;
 			font-weight: 100;
@@ -86,12 +86,12 @@
 		}
 
 		.m-team-bios {
-		max-height: 0;
-		height: 0;
-		width: 860px;
-		margin: 0 auto;
-
-		@include transition;
+			max-height: 0;
+			height: 0;
+			width: 860px;
+			margin: 0 auto;
+			@include transition;
+			position:relative;
 
 		> div {
 			opacity: 0;
@@ -102,7 +102,8 @@
 			border-right: 0;
 			border-left: 0;
 			max-height: 0;
-			pointer-events: none;
+			visibility: hidden;
+			// pointer-events: none;
 			@include inner_shadow;
 			@include transition_alpha;
 		}
@@ -111,8 +112,26 @@
 			opacity: 1;
 			height: auto;
 			max-height: 2000px;
-			pointer-events: all;
+			// pointer-events: all;
+			visibility: visible;
 			@include transition_alpha;
+		}
+
+		> div:hover:before {
+			content:"\f00d";
+			display: inline-block;
+			z-index: 10;
+			font-family: FontAwesome;
+			font-style: normal;
+			font-weight: normal;
+			line-height: 1;
+			-webkit-font-smoothing: antialiased;
+			-moz-osx-font-smoothing: grayscale;
+			cursor: pointer;
+			font-size: 1.4em;
+			position: absolute;
+			right: 15px;
+			top: 10px;
 		}
 
 		h3 {

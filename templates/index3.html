@@ -83,10 +83,10 @@ function draw_diagram() {
         .sortSubgroups(d3.descending)
         .matrix(data.matrix);
 
-    var width = 960,
+    var width = 730,
         height = 750,
         innerRadius = Math.min(width, height) * .25,
-        outerRadius = innerRadius * 1.1;
+        outerRadius = innerRadius * 1.14;
 
     var maxColor = '#4a2f76'
     var baseColor = '#eeeeee';
@@ -102,7 +102,8 @@ function draw_diagram() {
         .attr("height", height)
         .attr("id", "circle")
       .append("g")
-        .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+        .attr("transform", "translate(335, 375)");
+        // .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
     
     var circle = svg.append("circle")
         .attr("r", outerRadius);
@@ -146,16 +147,18 @@ function draw_diagram() {
       .enter().append("path")
         .attr("class", "chord")
         .attr("d", d3.svg.chord().radius(innerRadius))
-        .style("fill", function(d) { 
-            return fill_agencies(d.target.index); 
-        })
+        .style("fill", "rgba(0,0,0,0.2)"); 
+        // .style("fill", function(d) { 
+        //     return fill_agencies(d.target.index); 
+        // });
 
     chord.on("mouseover", function(d) {
-        d3.select(this).style("fill", '#a9db6c');
+        d3.select(this).style("fill", "rgba(0,0,0,0.4)");
     }).on("mouseout", function(d) {
-        d3.select(this).style("fill", function(d) {
-            return fill_agencies(d.target.index);
-        });
+        d3.select(this).style("fill", "rgba(0,0,0,0.1)");
+        // d3.select(this).style("fill", function(d) {
+        //     return fill_agencies(d.target.index);
+        // });
     });
 
     chord.append("title")
