@@ -161,6 +161,9 @@ function draw_diagram() {
     chord.append("title")
         .text(function(d) { return data.names[d.source.index] + "->" + data.names[d.target.index] + "\n" + d.target.value + " companies"});
 
+    // nodes.append("title")
+    //     .text(function(d) { return data.names[d.index] + "\n" + d.value + " companies"});
+
     function groupTicks(d) {
       var k = (d.endAngle - d.startAngle) / d.value;
       return d3.range(0, d.value, 1000).map(function(v, i) {
