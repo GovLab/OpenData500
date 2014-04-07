@@ -17,8 +17,8 @@
 	<fieldset class="m-form-half right">
 		{% raw xsrf_form_html() %}
 		<input type="button" class="l-button admin_utils" id="refresh" name="refresh" value="Refresh"><br>
-		<input type="button" class="l-button admin_utils" id="files" name="files" value="Generate All Files"><br>
-		<input type="button" class="l-button admin_utils" id="agency_csv" name="files" value="Generate Agency CSV"><br>
+		{% if user == "luis" %}<input type="button" class="l-button admin_utils" id="files" name="files" value="Generate All Files"><br>
+		<input type="button" class="l-button admin_utils" id="agency_csv" name="files" value="Generate Agency CSV"><br>{%end%}
 		<input type="button" class="l-button admin_utils" id="sankey" name="sankey" value="Generate Vizz File"><br>
 		<span class="message"></span>
 	</fieldset>
