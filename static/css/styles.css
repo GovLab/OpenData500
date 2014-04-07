@@ -214,7 +214,35 @@ a:hover {
   border-bottom: 1px solid #472b74;
   margin-bottom: 25px; }
 .m-homepage #chord-chart-container {
-  text-align: center; }
+  text-align: center;
+  position: relative; }
+  .m-homepage #chord-chart-container h3 {
+    font-weight: 100;
+    font-family: "Exo", sans-serif;
+    font-size: 2em;
+    margin-top: 15px; }
+  .m-homepage #chord-chart-container .chord-legend {
+    font-weight: 400;
+    font-family: "Exo", sans-serif;
+    font-size: 18px;
+    position: absolute;
+    color: #472b74;
+    top: 440px; }
+  .m-homepage #chord-chart-container .chord-legend.companies {
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+    left: -30px;
+    color: #8eab6f; }
+  .m-homepage #chord-chart-container .chord-legend.agencies {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    transform: rotate(90deg);
+    right: -30px; }
 
 .m-homepage-about .more {
   text-align: right; }

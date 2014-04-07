@@ -18,7 +18,36 @@
 
 	#chord-chart-container {
 		text-align: center;
+		position: relative;
+
+		h3 {
+			font-weight: 100;
+			font-family: $fancy_type;
+			font-size: 2em;
+			margin-top: 15px;
+		}
+
+		.chord-legend {
+			font-weight: 400;
+			font-family: $fancy_type;
+			font-size: 18px;
+			position: absolute;
+			color: $purple;
+			top: 440px;
+		}
+
+		.chord-legend.companies {
+			@include rotate(-90deg);
+			left: -30px;
+			color: #8eab6f;
+		}
+
+		.chord-legend.agencies {
+			@include rotate(90deg);
+			right: -30px;
+		}
 	}
+
 }
 
 .m-homepage-about {

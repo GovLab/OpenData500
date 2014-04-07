@@ -60,3 +60,11 @@ $regular_type: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", 
 	-moz-transition: opacity 0.4s ease;
 	transition: opacity 0.4s ease;
 }
+
+@mixin rotate($angle) {
+	-webkit-transform: rotate($angle);
+	-moz-transform: rotate($angle);
+	-ms-transform: rotate($angle);
+	-o-transform: rotate($angle);
+	transform: rotate($angle);
+}
