@@ -12,9 +12,15 @@ path.chord {
 
 }*/
 
+#circle:hover path {
+  pointer-events: all;
+  fill-opacity: 1;
+  -webkit-transition: fill-opacity .2s ease;
+  -moz-transition: fill-opacity .2s ease;
+  -ms-transition: fill-opacity .2s ease;
+  -o-transition: fill-opacity .2s ease;
+  transition: fill-opacity .2s ease;
 
-#circle:hover path.fade {
-  display: none;
 }
 
 #circle circle {
@@ -31,7 +37,14 @@ path.chord {
 }
 
 #circle:hover path.fade {
-  display: none;
+  /*display: none;*/
+  pointer-events: none;
+  fill-opacity: 0;
+  -webkit-transition: fill-opacity .2s ease;
+  -moz-transition: fill-opacity .2s ease;
+  -ms-transition: fill-opacity .2s ease;
+  -o-transition: fill-opacity .2s ease;
+  transition: fill-opacity .2s ease;
 }
 
 
