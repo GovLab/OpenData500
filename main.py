@@ -98,12 +98,20 @@ class MainHandler(BaseHandler):
     @tornado.web.addslash
     #@tornado.web.authenticated
     def get(self):
-        self.render(
-            "index.html",
-            user=self.current_user,
-            page_title='Open Data500',
-            page_heading='Welcome to the Open Data 500 Pre-Launch',
-        )
+        if self.current_user == "press" or self.current_user == "alex" or self.current_user == "Elizabeth":
+            self.render(
+                "index3.html",
+                user=self.current_user,
+                page_title='Open Data500',
+                page_heading='Welcome to the Open Data 500 Pre-Launch'
+            )
+        else:
+            self.render(
+                "index.html",
+                user=self.current_user,
+                page_title='Open Data500',
+                page_heading='Welcome to the Open Data 500 Pre-Launch'
+            )
 
 
 class ChordDiagramHandler(BaseHandler):
@@ -180,12 +188,19 @@ class RegisterHandler(LoginHandler):
     @tornado.web.addslash
     @tornado.web.authenticated
     def get(self):
-        self.render(
-            "register.html", 
-            next=self.get_argument("next","/"),
-            page_title="Register",
-            page_heading="Register for OD500"
-            )
+        if self.current_user == "luis":
+            self.render(
+                "register.html", 
+                next=self.get_argument("next","/"),
+                page_title="Register",
+                page_heading="Register for OD500"
+                )
+        else:
+            self.render('404.html',
+                page_heading="I'm afraid I can't let you do that.",
+                user=self.current_user,
+                page_title="Forbidden",
+                error="Not Enough Priviliges")
 
     @tornado.web.authenticated
     def post(self):
@@ -303,16 +318,18 @@ class AdminHandler(BaseHandler):
     @tornado.web.addslash
     @tornado.web.authenticated
     def get(self):
-        surveySubmitted = models.Company2.objects(Q(submittedSurvey=True) & Q(vetted=True)).order_by('prettyName')
-        sendSurveys = models.Company2.objects(Q(submittedSurvey=False))
-        needVetting = models.Company2.objects(Q(submittedSurvey=True) & Q(vetted=False)).order_by('-lastUpdated', 'prettyName')
-        stats = models.Stats.objects().first()
-        if self.current_user == 'alex' or self.current_user == 'Elizabeth':
+        logging.info(self.current_user)
+        if self.current_user != 'luis' and self.current_user != 'govlab':
             self.render('404.html',
                 page_heading="I'm afraid I can't let you do that.",
+                user=self.current_user,
                 page_title="Forbidden",
                 error="Not Enough Priviliges")
         else:
+            surveySubmitted = models.Company2.objects(Q(submittedSurvey=True) & Q(vetted=True)).order_by('prettyName')
+            sendSurveys = models.Company2.objects(Q(submittedSurvey=False))
+            needVetting = models.Company2.objects(Q(submittedSurvey=True) & Q(vetted=False)).order_by('-lastUpdated', 'prettyName')
+            stats = models.Stats.objects().first()
             self.render(
                 "admin.html",
                 page_title='OpenData500',
