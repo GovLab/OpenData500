@@ -2,14 +2,35 @@
 {% autoescape None %}
 
 {% block body %}
+<div class="findings-page">
+    <h1>Findings</h1>
+    <p>The Open Data 500 is a living study which the GovLab will maintain and update it on an ongoing basis. We welcome inquiries, input, and comments on our work and findings. Please write to us at <a href="mailto:opendata500@thegovlab.org">OpenData500@thegovlab.org</a> or tweet at @OpenData500 and #OD500.</p>
+    <p>Major patterns of open data companies:</p>
+    <div class="download-report">
+        <h2>Report</h2>
+        <p>For a full report on the findings of the Open Data 500 to date, please download the PDF of our report.</p>
+        <p><a class="m-button" href="#">Download the report</a></p>
+    </div>
+    <ul>
+        <li>Open government data is a key business resource for hundreds of U.S.-based companies. Previous studies have estimated the broad economic value of open government data, but the Open Data 500 is the first to take a more granular, empirical approach that looks at individual companies in depth. Our results confirm that a variety of government open data is being used by a large number of companies of all kinds.</li>
+        <li>Open Data companies operate in a large number of sectors and use very diverse sources of open government data. We found Open Data companies large and small, across the country, in all sectors. Many companies use more than 100 different data sources from a range of government agencies. Conversely, individual agencies not only provide data to a large number of companies, they often serve companies in very different sectors of the economy.</li>
+        <li>Open Data companies generate value through a wide variety of operating models. These companies earn revenue from a range of sources, including advertising, sales of services, referrals to other businesses, etc.</li>
+    </ul>
+    <section>
+        <div class="findings-chart">
+            <h2>Types of Companies</h2>
+        </div>
+        <div class="findings-chart">
+            <h2>Number of Companies Using Each Agency</h2>
+        </div>
+    </section>
 
-<h1>Findings</h1>
-
-
-<div id="chart"></div>
 
 
 
+    <div id="chart"></div>
+    <div id="agency-bar-chart"></div>
+</div>
 
 <script src="http://d3js.org/d3.v3.min.js"></script>
 
@@ -32,7 +53,7 @@ var create_category_chart = function(){
     
     //General chart
     this.Title = 'My chart';
-    this.Width = 800;
+    this.Width = 700;
     this.Height = 500;
     this.MaxValue = 120;
     this.MinValue = 0;
@@ -209,10 +230,10 @@ var create_category_chart = function(){
             height = h - margin.top - margin.bottom;
             
         var bkgdColor = document.getElementsByTagName("body")[0];
-            bkgdColor.setAttribute("style","background-color:" + backgroundColor + ";margin:0px;");
+            // bkgdColor.setAttribute("style","background-color:" + backgroundColor + ";margin:0px;");
             
         var elem = document.getElementById("chart");
-        elem.setAttribute("style","width:" + w + "; height:" + h + "; ");
+        // elem.setAttribute("style","width:" + w + "; height:" + h + "; ");
         
         var numberFormat = d3.format("0,000");
         var percentFormat = function(d) { return numberFormat(d) + "%"; };
@@ -240,20 +261,20 @@ var create_category_chart = function(){
             .style("position", "absolute")
             .style("z-index", "1000")
             .style("padding", "5px")
-            .style("font-family", hoverLabelFont)
-            .style("font-size", hoverLabelSize)
+            // .style("font-family", hoverLabelFont)
+            // .style("font-size", hoverLabelSize)
             .style("color", hoverLabelColor);
             
         var graph = d3.select("#chart").append("svg")
-            .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom)
+            // .attr("width", width + margin.left + margin.right)
+            // .attr("height", height + margin.top + margin.bottom)
         .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
             
-        //Background Color
+        // Background Color
         graph.append("svg:rect")
             .attr("width", w)
-            .attr("height", h)
+            // .attr("height", h)
             .attr("transform", "translate(" + -margin.left + "," + -margin.top + ")")
             .style("fill", backgroundColor);
             
@@ -295,8 +316,8 @@ var create_category_chart = function(){
                 if (xLabelTextAlign == 'Left') return'Start';
                 if (xLabelTextAlign == 'Center') return 'Middle';
                 if (xLabelTextAlign == 'Right') return 'End';
-            })
-            .style({ 'font-family': xLabelFont, 'font-size': xLabelSize, 'fill': xLabelColor });
+            });
+            // .style({ 'font-family': xLabelFont, 'font-size': xLabelSize, 'fill': xLabelColor });
             
         var rules = graph.selectAll("g.rule")
             .data(y.ticks(numberTicks))
@@ -383,21 +404,22 @@ var create_category_chart = function(){
         if (chartTitle == true) {
         graph.append("text")
             .attr("transform", "translate(" + cxpos + "," + (chartTitleYLoc - 10) + ")")
-            .style({ 'text-anchor': ctextanchor, 'font-family': chartTitleFont, 'font-size': chartTitleSize, 'fill': chartTitleColor})
+            // .style({ 'text-anchor': ctextanchor, 'font-family': chartTitleFont, 'font-size': chartTitleSize, 'fill': chartTitleColor})
             .text(chartTitleText);
         }
         
         if (yTitle == true) {
         graph.append("text")
             .attr("transform", "rotate(-90), translate(" + yypos + "," + (yTitleXLoc - 30) + ")")
-            .style({ 'text-anchor': ytextanchor, 'font-family': yTitleFont, 'font-size': yTitleSize, 'fill': yTitleColor})
+            .style({ 'text-anchor': ytextanchor})
+            // .style({ 'text-anchor': ytextanchor, 'font-family': yTitleFont, 'font-size': yTitleSize, 'fill': yTitleColor})
             .text(yTitleText);
         }
         
         if (xTitle == true) {
         graph.append("text")
             .attr("transform", "translate(" + xxpos + "," + (height + xTitleYLoc + 30) + ")")
-            .style({ 'text-anchor': xtextanchor, 'font-family': xTitleFont, 'font-size': xTitleSize, 'fill': xTitleColor})
+            // .style({ 'text-anchor': xtextanchor, 'font-family': xTitleFont, 'font-size': xTitleSize, 'fill': xTitleColor})
             .text(xTitleText);
         }
         
@@ -738,8 +760,8 @@ var create_agency_chart = function(){
                 if (xLabelTextAlign == 'Left') return'Start';
                 if (xLabelTextAlign == 'Center') return 'Middle';
                 if (xLabelTextAlign == 'Right') return 'End';
-            })
-            .style({ 'font-family': xLabelFont, 'font-size': xLabelSize, 'fill': xLabelColor });
+            });
+            // .style({ 'font-family': xLabelFont, 'font-size': xLabelSize, 'fill': xLabelColor });
             
         var rules = graph.selectAll("g.rule")
             .data(y.ticks(numberTicks))

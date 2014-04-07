@@ -1,0 +1,52 @@
+.findings-page {
+	font-size: 14px;
+	line-height: 20px;
+
+	.findings-chart {
+		margin: 20px auto 30px;
+		width: 700px;
+		height: 500px;
+		border: 1px solid $lighter_gray;
+		padding: 20px;
+
+		h2 {
+			font-weight: 100;
+			font-size: 24px;
+			text-align: center;
+			margin-bottom: 20px;
+		}
+	}
+
+	.download-report {
+		// text-align: center;
+		float: right;
+		margin: 0 0 30px 20px;
+		width: 210px;
+		height: 174px;
+		border: 1px solid $lighter_gray;
+		padding: 20px;
+		background-color: rgba(255,255,255,0.3);
+
+		.m-button {
+			margin-top: 10px;
+		}
+
+		p {
+			margin-bottom: 30px;
+		}
+
+		h2 {
+			font-weight: 100;
+			font-size: 36px;
+			text-align: center;
+			margin-bottom: 10px;
+		}
+	}
+
+	#chart {
+		.xaxis text {
+			font-size: 12px;
+			font-weight: 400;
+		}
+	}
+}
