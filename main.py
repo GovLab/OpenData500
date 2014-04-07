@@ -139,14 +139,19 @@ class LoginHandler(BaseHandler):
     def post(self):
         email = self.get_argument("email", "")
         password = self.get_argument("password", "").encode('utf-8')
-        user = models.Users.objects.get(email=email)
+        try: 
+            user = models.Users.objects.get(email=email)
+        except Exception, e:
+            logging.info('unsuccessful login')
+            error_msg = u"?error=" + tornado.escape.url_escape("User does not exist")
+            self.redirect(u"/login" + error_msg)
         if user and user.password and bcrypt.hashpw(password, user.password.encode('utf-8')) == user.password:
             logging.info('successful login for '+email)
             self.set_current_user(email)
             self.redirect("/")
         else: 
             logging.info('unsuccessful login')
-            error_msg = u"?error=" + tornado.escape.url_escape("Login incorrect.")
+            error_msg = u"?error=" + tornado.escape.url_escape("Incorrect Password")
             self.redirect(u"/login" + error_msg)
 
     def set_current_user(self, user):
