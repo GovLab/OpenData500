@@ -13,7 +13,7 @@
 
 <div class="m-candidates">        
     <div class="m-filter-menu">
-        <h3>Filter by Agency</h3>
+        <h3>Uses Agency</h3>
         <div id="filters-agency" class="m-candidates-buttons button-group" data-toggle="buttons-checkbox" data-filter-group="category">
             <button data-filter="*">Clear Filter</button>
             {% for agency in agencies %}
@@ -26,7 +26,7 @@
         </div>
     </div>
     <div class="m-filter-menu">
-        <h3>Filter by Category</h3>
+        <h3>Category</h3>
         <div id="filters-category" class="m-candidates-buttons button-group" data-toggle="buttons-checkbox" data-filter-group="category">
             <button data-filter="*">Clear Filter</button>
             {% for category in categories %}
@@ -45,7 +45,7 @@
     <div id="spinner"></div>
 	<div class="m-candidates isotopes-container" data-isotope-options='{ "layoutMode": "fitColumns" }'>
 		{% for company in companies %}
-            <div class="m-candidates-item {%try%} {{company.companyCategory.strip().replace(" ", "-").replace("/","").replace("&", "")}} {%except%}None{%end%} {{ company.state }} {% if company.submittedSurvey %} survey-company{%end%} {%for a in agencies %}{%if a in company.agencies%}{{a.name.strip().replace(" ", "-").replace("/","").replace("&", "").replace(".", "")}} {%end%}{%end%}">
+            <div class="m-candidates-item {%try%} {{company.companyCategory.strip().replace(" ", "-").replace("/","").replace("&", "")}} {%except%}None{%end%} {{ company.state }} {% if company.submittedSurvey %} survey-company{%end%} {%for a in company.agencies %}{%if a in agencies%}{{a.name.strip().replace(" ", "-").replace("/","").replace("&", "").replace(".", "")}} {%end%}{%end%}">
                 <a href="/{{company.prettyName}}"><h3><strong>{{ company.companyName }}</strong></h3></a>
                 <p class="m-homepage-list-location"> {%try%}{{ states[company.state] }}{%except%}{%end%}</p>
                 <em> {{ company.companyCategory }}</em>
@@ -122,7 +122,15 @@
     //filter by agency
     $('#filters-agency').on( 'click', 'button', function( event ) {
         filtr = $(this).attr('data-filter');
-        if ($(this).hasClass('s-active')) { //already active, deactivate
+        if (filtr == "*") {
+            $("#filters-agency button").each(function() { //remove all previous filters of the kind
+                var i = filters.indexOf($(this).attr('data-filter'));
+                if( i > -1) {
+                    filters.splice(i, 1)
+                }
+                $(this).removeClass('s-active'); 
+            });
+        } else if ($(this).hasClass('s-active')) { //already active, deactivate
             $(this).removeClass('s-active');
             filters.splice(filters.indexOf($(this).attr('data-filter')), 1)
         } else { //not active, activate it
