@@ -323,7 +323,6 @@ class AdminHandler(BaseHandler):
     @tornado.web.addslash
     @tornado.web.authenticated
     def get(self):
-        logging.info(self.current_user)
         if self.current_user != 'luis' and self.current_user != 'govlab':
             self.render('404.html',
                 page_heading="I'm afraid I can't let you do that.",
@@ -352,8 +351,8 @@ class AdminHandler(BaseHandler):
             stats = models.Stats.objects().first()
             self.write({"totalCompanies": stats.totalCompanies, "totalCompaniesWeb":stats.totalCompaniesWeb, "totalCompaniesSurvey":stats.totalCompaniesSurvey})
         elif action == "files":
-            #self.application.files.generate_company_json()
-            #self.application.files.generate_agency_json()
+            self.application.files.generate_company_json()
+            self.application.files.generate_agency_json()
             self.application.files.generate_company_csv()
             self.application.files.generate_company_all_csv()
             self.application.files.generate_agency_csv()
