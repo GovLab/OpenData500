@@ -356,7 +356,7 @@ class AdminHandler(BaseHandler):
             #self.application.files.generate_agency_json()
             self.application.files.generate_company_csv()
             self.application.files.generate_company_all_csv()
-            #self.application.files.generate_agency_csv()
+            self.application.files.generate_agency_csv()
             self.write("success")
         elif action == "sankey":
             #self.application.files.generate_sankey_json()
