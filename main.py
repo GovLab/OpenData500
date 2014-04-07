@@ -44,7 +44,7 @@ class Application(tornado.web.Application):
         handlers = [
             (r'/(favicon.ico)', tornado.web.StaticFileHandler, {"path": ""}),
             (r"/", MainHandler),
-            (r"/2/?", SankeeyChartHandler),
+            # (r"/2/?", SankeeyChartHandler),
             (r"/3/?", ChordDiagramHandler),
             (r"/submitCompany/?", SubmitCompanyHandler),
             (r"/validate/?", ValidateHandler),
@@ -105,16 +105,6 @@ class MainHandler(BaseHandler):
             page_heading='Welcome to the Open Data 500 Pre-Launch',
         )
 
-class SankeeyChartHandler(BaseHandler):
-    @tornado.web.addslash
-    @tornado.web.authenticated
-    def get(self):
-        self.render(
-            "index2.html",
-            user=self.current_user,
-            page_title='Open Data500',
-            page_heading='Welcome to the Open Data 500 Pre-Launch',
-        )
 
 class ChordDiagramHandler(BaseHandler):
     @tornado.web.addslash
@@ -271,6 +261,7 @@ class CandidateHandler(BaseHandler):
     #@tornado.web.authenticated
     def get(self):
         companies = models.Company2.objects(display=True).order_by('prettyName')
+        agencies = models.Agency.objects(Q(usedBy__not__size=0) & Q(source="dataGov") & Q(dataType="Federal")).order_by("-usedBy_count").only("name", "abbrev")[0:16]
         stats = models.Stats.objects().first()
         self.render(
             "candidates.html",
@@ -280,6 +271,7 @@ class CandidateHandler(BaseHandler):
             stats = stats,
             #recentlySubmitted=recentlySubmitted,
             states=states,
+            agencies = agencies,
             categories = categories,
             user=self.current_user,
             #stateInfo=stateInfo
@@ -315,16 +307,19 @@ class AdminHandler(BaseHandler):
         sendSurveys = models.Company2.objects(Q(submittedSurvey=False))
         needVetting = models.Company2.objects(Q(submittedSurvey=True) & Q(vetted=False)).order_by('-lastUpdated', 'prettyName')
         stats = models.Stats.objects().first()
-        self.render(
-            "admin.html",
-            page_title='OpenData500',
-            page_heading='Welcome to the OpenData 500',
-            surveySubmitted = surveySubmitted,
-            needVetting = needVetting,
-            user=self.current_user,
-            sendSurveys = sendSurveys,
-            stats = stats
-        )
+        if self.current_user == 'alex':
+            self.redirect('/login')
+        else:
+            self.render(
+                "admin.html",
+                page_title='OpenData500',
+                page_heading='Welcome to the OpenData 500',
+                surveySubmitted = surveySubmitted,
+                needVetting = needVetting,
+                user=self.current_user,
+                sendSurveys = sendSurveys,
+                stats = stats
+            )
     def post(self):
         action = self.get_argument("action", None)
         if action == "refresh":
@@ -540,6 +535,7 @@ class SubmitDataHandler(BaseHandler):
             agency.save()
             if company not in agency.usedBy: #only add if it's not already there.
                 agency.usedBy.append(company)
+                agency.usedBy_count = len(agency.usedBy)
                 agency.save()
             if agency not in company.agencies: #only add if it's not already there.
                 company.agencies.append(agency)
@@ -598,6 +594,7 @@ class SubmitDataHandler(BaseHandler):
                 for s in agency.subagencies:
                     if company in s.usedBy and s.name == subagencyName:
                         s.usedBy.remove(company)
+            agency.usedBy_count = len(agency.usedBy)
             agency.save()
             company.lastUpdated = datetime.now() #Update Company's Time of Last Edit
             company.save()
@@ -912,48 +909,48 @@ class AdminEditCompanyHandler(BaseHandler):
         # if self.get_argument('submit', None) == 'Save And Continue Editing':
         #     self.redirect('/edit/'+id)
 
-class EditDataHandler(BaseHandler):
-    @tornado.web.addslash
-    @tornado.web.authenticated
-    def get(self, id):
-        #Are we adding a new dataset? or are we editing an existing dataset?
-        dataset = models.Dataset.objects.get(id=bson.objectid.ObjectId(id))
-        self.render("editData.html",
-            page_title = "Editing Dataset",
-            page_heading = "Edit Datasets",
-            datatypes = datatypes,
-            dataset = dataset,
-            user=self.current_user
-        )
+# class EditDataHandler(BaseHandler):
+#     @tornado.web.addslash
+#     @tornado.web.authenticated
+#     def get(self, id):
+#         #Are we adding a new dataset? or are we editing an existing dataset?
+#         dataset = models.Dataset.objects.get(id=bson.objectid.ObjectId(id))
+#         self.render("editData.html",
+#             page_title = "Editing Dataset",
+#             page_heading = "Edit Datasets",
+#             datatypes = datatypes,
+#             dataset = dataset,
+#             user=self.current_user
+#         )
 
-    @tornado.web.authenticated
-    def post(self, id):
-        #get company
-        #company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
-        #get dataset
-        datasetID = self.get_argument('datasetID')
-        dataset = models.Dataset.objects.get(id=bson.objectid.ObjectId(id))
-        #get values
-        datasetName = self.get_argument('datasetName', None)
-        datasetURL = self.get_argument('datasetURL', None)
-        agency = self.get_argument('agency', None)
-        dataType = self.request.arguments['typeOfDataset']
-        #logging.info(dataType)
-        if 'Other' in dataType:
-            del dataType[dataType.index('Other')]
-            dataType.append(self.get_argument('otherTypeOfDataset', None))
-        rating = self.get_argument('rating', None)
-        reason = self.get_argument('reason', None)
-        #try: #to find existing dataset
-        #dataset = models.Dataset.objects.get(id=bson.objectid.ObjectId(id))
-        dataset.datasetName = datasetName
-        dataset.datasetURL = datasetURL
-        dataset.dataType = dataType
-        dataset.agency = agency
-        dataset.ratings[0].rating = rating
-        dataset.ratings[0].reason = reason
-        dataset.save()
-        self.write("success")
+#     @tornado.web.authenticated
+#     def post(self, id):
+#         #get company
+#         #company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
+#         #get dataset
+#         datasetID = self.get_argument('datasetID')
+#         dataset = models.Dataset.objects.get(id=bson.objectid.ObjectId(id))
+#         #get values
+#         datasetName = self.get_argument('datasetName', None)
+#         datasetURL = self.get_argument('datasetURL', None)
+#         agency = self.get_argument('agency', None)
+#         dataType = self.request.arguments['typeOfDataset']
+#         #logging.info(dataType)
+#         if 'Other' in dataType:
+#             del dataType[dataType.index('Other')]
+#             dataType.append(self.get_argument('otherTypeOfDataset', None))
+#         rating = self.get_argument('rating', None)
+#         reason = self.get_argument('reason', None)
+#         #try: #to find existing dataset
+#         #dataset = models.Dataset.objects.get(id=bson.objectid.ObjectId(id))
+#         dataset.datasetName = datasetName
+#         dataset.datasetURL = datasetURL
+#         dataset.dataType = dataType
+#         dataset.agency = agency
+#         dataset.ratings[0].rating = rating
+#         dataset.ratings[0].reason = reason
+#         dataset.save()
+#         self.write("success")
 
 class DeleteDatasetHandler(BaseHandler):
     def post(self, id):
@@ -1002,6 +999,7 @@ class DeleteCompanyHandler(BaseHandler):
                     s.usedBy.remove(company)
             #-----REMOVE FROM AGENCY----
             a.usedBy.remove(company)
+            a.usedBy_count = len(agency.usedBy)
             a.save()
         ##----------DELETE COMPANY--------
         company.delete()

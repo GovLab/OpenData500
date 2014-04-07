@@ -1,0 +1,93 @@
+
+
+/*----------------------------CHORD DIAGRAM-----------------*/
+/*#chart {
+  text-align: left;
+}
+#circle circle {
+  fill: none;
+  pointer-events: all;
+}
+path.chord {
+
+}*/
+
+
+#circle:hover path.fade {
+  display: none;
+}
+
+#circle circle {
+  fill: none;
+  pointer-events: all;
+}
+
+.group path {
+  fill-opacity: .5;
+}
+
+path.chord {
+
+}
+
+#circle:hover path.fade {
+  display: none;
+}
+
+
+
+/*hover and active states for filters*/
+
+#filters-category button.s-active, #filters-agency button.s-active {
+    background-color: #472b74;
+    color: white;
+  }
+
+#filters-agency button, #filters-category button {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  border: 1px solid #aaaaaa;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-left: 4px solid #472b74;
+  color: #444444;
+  padding: 3px 9px 3px 6px; }
+
+
+
+  #filters-agency button:hover, #filters-category button:hover {
+    background-color: #472b74;
+    color: white;
+  }
+
+.m-candidates-item.survey-company {
+  background-color: rgba(71, 43, 116, 0.2); }
+
+
+/*
+survey/no survey hover and active states*/
+
+      .legend .color.candidate.s-active {
+    background-color: rgba(0, 0, 0, 0.4); }
+
+    .legend .color.candidate:hover {
+    background-color: #472b74;
+    color: white;  }
+
+  .legend .color.survey {
+    background-color: rgba(71, 43, 116, 0.1); }
+
+    .legend .color.survey.s-active {
+    background-color: rgba(71, 43, 116, 0.5);
+    border: 2px; }
+
+    .legend .color.survey:hover {
+    background-color: #472b74;
+    color: white; }
+
+
+
+
+
+
+

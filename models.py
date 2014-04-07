@@ -129,6 +129,7 @@ class Agency(Document):
 	dataType = StringField() #Federal, State, City/County, Other
 	datasets = ListField(EmbeddedDocumentField('Dataset2'))
 	usedBy = ListField(ReferenceField(Company2))
+	usedBy_count = IntField()
 
 class Subagency(EmbeddedDocument):
 	name = StringField()
