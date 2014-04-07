@@ -307,8 +307,11 @@ class AdminHandler(BaseHandler):
         sendSurveys = models.Company2.objects(Q(submittedSurvey=False))
         needVetting = models.Company2.objects(Q(submittedSurvey=True) & Q(vetted=False)).order_by('-lastUpdated', 'prettyName')
         stats = models.Stats.objects().first()
-        if self.current_user == 'alex':
-            self.redirect('/login')
+        if self.current_user == 'alex' or self.current_user == 'Elizabeth':
+            self.render('404.html',
+                page_heading="I'm afraid I can't let you do that.",
+                page_title="Forbidden",
+                error="Not Enough Priviliges")
         else:
             self.render(
                 "admin.html",
