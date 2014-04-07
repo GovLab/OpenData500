@@ -1042,3 +1042,27 @@ footer {
     footer .creative-commons-license img {
       float: left;
       margin-right: 10px; }
+
+
+
+
+
+.clear-all-filters {
+  display: inline-block;
+  margin-left: 150px;
+  border: 1px solid #ccc;
+  letter-spacing: .4px;
+  padding: 4px 10px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.clear-all-filters:hover {
+  background-color: #472b74;
+  color: white;
+  display: inline-block;
+  margin-left: 150px;
+  border: 1px solid #ccc;
+  letter-spacing: .4px;
+  padding: 4px 10px;
+}
+
