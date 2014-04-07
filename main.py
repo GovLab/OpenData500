@@ -245,12 +245,12 @@ class CompanyHandler(BaseHandler):
                 logging.info("Company: " + companyName + ": " + str(e))
                 company = models.Company2.objects(prettyName=companyName)[0]
             self.render(
-            "company.html",
-            page_title='Open Data500',
-            user=self.current_user,
-            page_heading=company.companyName,
-            company = company,
-        )
+                "company.html",
+                page_title='Open Data500',
+                user=self.current_user,
+                page_heading=company.companyName,
+                company = company,
+            )
         except Exception, e:
             logging.info("Company: " + companyName + ": " + str(e)) 
             self.render(
@@ -261,8 +261,6 @@ class CompanyHandler(BaseHandler):
                 error = '404 - Not Found'
             )
         
-
-      
 class PreviewHandler(BaseHandler):
     @tornado.web.addslash
     #@tornado.web.authenticated
