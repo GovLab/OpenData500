@@ -118,22 +118,22 @@
 			@include transition_alpha;
 		}
 
-		> div:hover:before {
-			content:"\f00d";
-			display: inline-block;
-			z-index: 10;
-			font-family: FontAwesome;
-			font-style: normal;
-			font-weight: normal;
-			line-height: 1;
-			-webkit-font-smoothing: antialiased;
-			-moz-osx-font-smoothing: grayscale;
-			cursor: pointer;
-			font-size: 1.4em;
-			position: absolute;
-			right: 15px;
-			top: 10px;
-		}
+		// > div:hover:before {
+		// 	content:"\f00d";
+		// 	display: inline-block;
+		// 	z-index: 10;
+		// 	font-family: FontAwesome;
+		// 	font-style: normal;
+		// 	font-weight: normal;
+		// 	line-height: 1;
+		// 	-webkit-font-smoothing: antialiased;
+		// 	-moz-osx-font-smoothing: grayscale;
+		// 	cursor: pointer;
+		// 	font-size: 1.4em;
+		// 	position: absolute;
+		// 	right: 15px;
+		// 	top: 10px;
+		// }
 
 		h3 {
 			margin-top: 10px;
