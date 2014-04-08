@@ -40,11 +40,14 @@ $('.m-list-company-summary').click(function() {
 		$(this).addClass('s-active');
 		$(this).parent().addClass('s-active');
 		$('.m-team-bio-' + name).parent().addClass('s-active');
-		$('.m-team-bio-' + name).addClass('s-active');
+        $('.m-team-bio-' + name).addClass('s-active');
+		$('#overlay').addClass('s-active');
 	});
 
-	$('#team h1').click(function() {
-		$('#team').find('*').removeClass('s-active');
+	$('#overlay').click(function() {
+		$('#about-people').find('*').removeClass('s-active');
+        $('#overlay').removeClass('s-active');
+
 	});
 	
 // Signup Hide Function

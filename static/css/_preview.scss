@@ -63,13 +63,16 @@
 
 .datasets {
 	box-shadow: inset 0 0 3px rgba(0,0,0,0.4);
+	padding: 20px;
 	background-color: #f6f6f6;
 	
 	ul {
 		margin: 1em 0;
+		padding-left: 10px;
 	}
 	li {
 		border-bottom: 0;
+		list-style: none;
 	}
 
 	a {
@@ -78,6 +81,18 @@
 
 	a:hover {
 		text-decoration: underline;
+	}
+	
+	> h3 {
+		font-size: 16px;
+		color: $dark_gray;
+	}
+
+	.company-view-agency-list {
+		h3 {
+			font-size: 14px;
+			line-height: 18px;
+		}
 	}
 }
 
@@ -109,6 +124,7 @@
 }
 
 .m-list-company-full {
+	padding-top: 20px;
 	border-top: 1px solid $light_gray;
 	box-shadow: inset 0 3px 3px -3px rgba(0,0,0,0.3);
 }

@@ -158,6 +158,10 @@ select {
   top: -8px;
   left: 30px; }
 
+.saveCompanyForm-new .m-button {
+  float: right;
+  margin-bottom: 30px; }
+
 body {
   color: #444444;
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
@@ -202,6 +206,10 @@ a:hover {
   -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3);
   -moz-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3);
   box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3); }
+
+.disclaimer-text {
+  font-size: 16px;
+  line-height: 20px; }
 
 .m-homepage h1 {
   margin: 15px 0 50px 0;
@@ -323,19 +331,20 @@ a:hover {
       list-style-type: none;
       margin: 8px 0 7px 0;
       text-align: right; }
-  .about-page #team {
-    text-align: center; }
-    .about-page #team h1 {
+  .about-page #about-people {
+    text-align: center;
+    position: relative; }
+    .about-page #about-people h1 {
       margin: 20px; }
-    .about-page #team h3 {
+    .about-page #about-people h3 {
       margin: 20px 0;
       font-size: 42px;
       font-family: "Exo", sans-serif;
       font-weight: 100; }
-    .about-page #team .m-half li {
+    .about-page #about-people .m-half li {
       list-style: none;
       text-align: left; }
-    .about-page #team .m-team-bios {
+    .about-page #about-people .m-team-bios {
       max-height: 0;
       height: 0;
       width: 860px;
@@ -343,39 +352,44 @@ a:hover {
       -webkit-transition: all 0.4s ease;
       -moz-transition: all 0.4s ease;
       transition: all 0.4s ease;
-      position: relative; }
-      .about-page #team .m-team-bios > div {
+      position: relative;
+      z-index: 2; }
+      .about-page #about-people .m-team-bios > div {
         opacity: 0;
         text-align: left;
-        padding: 0 15px;
-        background-color: rgba(0, 0, 0, 0.05);
+        padding: 10px 15px;
+        background-color: #f2f2f2;
         border: 1px solid rgba(71, 43, 116, 0.4);
         border-right: 0;
         border-left: 0;
         max-height: 0;
         visibility: hidden;
+        pointer-events: none;
         box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
         -webkit-transition: opacity 0.4s ease;
         -moz-transition: opacity 0.4s ease;
         transition: opacity 0.4s ease; }
-      .about-page #team .m-team-bios > div.s-active {
+      .about-page #about-people .m-team-bios > div.s-active {
         opacity: 1;
         height: auto;
         max-height: 2000px;
+        pointer-events: all;
         visibility: visible;
         -webkit-transition: opacity 0.4s ease;
         -moz-transition: opacity 0.4s ease;
-        transition: opacity 0.4s ease; }
-      .about-page #team .m-team-bios h3 {
+        transition: opacity 0.4s ease;
+        display: block; }
+      .about-page #about-people .m-team-bios h3 {
         margin-top: 10px;
         font-size: 20px;
         font-style: italic; }
-    .about-page #team .m-team-bios.s-active {
+    .about-page #about-people .m-team-bios.s-active {
       max-height: 2000px;
       height: auto;
       -webkit-transition: all 0.4s ease;
       -moz-transition: all 0.4s ease;
-      transition: all 0.4s ease; }
+      transition: all 0.4s ease;
+      display: block; }
   .about-page .m-team.s-active .m-team-picture {
     opacity: .35;
     -webkit-transition: all 0.4s ease;
@@ -393,7 +407,8 @@ a:hover {
     margin: 10px;
     display: inline-block;
     vertical-align: top;
-    cursor: pointer; }
+    cursor: pointer;
+    position: relative; }
     .about-page .m-team-picture img {
       width: 160px;
       height: 160px;
@@ -417,6 +432,19 @@ a:hover {
     border-color: rgba(0, 0, 0, 0.05); }
   .about-page .m-team-picture.s-active img {
     border-color: rgba(71, 43, 116, 0.4); }
+
+#overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: transparent;
+  z-index: 1;
+  display: none; }
+
+#overlay.s-active {
+  display: block; }
 
 .m-preview h2 {
   font-size: 2em; }
@@ -471,15 +499,24 @@ a:hover {
 
 .datasets {
   box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.4);
+  padding: 20px;
   background-color: #f6f6f6; }
   .datasets ul {
-    margin: 1em 0; }
+    margin: 1em 0;
+    padding-left: 10px; }
   .datasets li {
-    border-bottom: 0; }
+    border-bottom: 0;
+    list-style: none; }
   .datasets a {
     color: #472b74; }
   .datasets a:hover {
     text-decoration: underline; }
+  .datasets > h3 {
+    font-size: 16px;
+    color: #666666; }
+  .datasets .company-view-agency-list h3 {
+    font-size: 14px;
+    line-height: 18px; }
 
 .m-list-head {
   background-color: #472b74; }
@@ -502,6 +539,7 @@ a:hover {
     padding: 5px; }
 
 .m-list-company-full {
+  padding-top: 20px;
   border-top: 1px solid #aaaaaa;
   box-shadow: inset 0 3px 3px -3px rgba(0, 0, 0, 0.3); }
 
@@ -548,7 +586,8 @@ a:hover {
 .m-candidates .m-filter-menu {
   width: 200px;
   float: right;
-  padding-left: 10px; }
+  border-left: 1px solid rgba(0, 0, 0, 0.15);
+  padding-left: 75px; }
   .m-candidates .m-filter-menu h3 {
     margin-bottom: 10px;
     font-weight: normal; }
@@ -625,7 +664,7 @@ a:hover {
   border-color: #472b74; }
 
 .m-candidates-item.s-active {
-  width: 45.6%;
+  width: 35.5%;
   z-index: 1000; }
   .m-candidates-item.s-active em, .m-candidates-item.s-active .m-homepage-list-desc, .m-candidates-item.s-active h3 {
     width: 330px; }
@@ -786,9 +825,8 @@ a:hover {
   .findings-page .findings-chart {
     margin: 20px auto 30px;
     width: 700px;
-    height: 500px;
-/*    border: 1px solid rgba(0, 0, 0, 0.15);
-*/    padding: 20px; }
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    padding: 20px; }
     .findings-page .findings-chart h2 {
       font-weight: 100;
       font-size: 24px;
@@ -1062,27 +1100,3 @@ footer {
     footer .creative-commons-license img {
       float: left;
       margin-right: 10px; }
-
-
-
-
-
-.clear-all-filters {
-  display: inline-block;
-  margin-left: 150px;
-  border: 1px solid #ccc;
-  letter-spacing: .4px;
-  padding: 4px 10px;
-  color: rgba(0, 0, 0, 0.6);
-}
-
-.clear-all-filters:hover {
-  background-color: #472b74;
-  color: white;
-  display: inline-block;
-  margin-left: 150px;
-  border: 1px solid #ccc;
-  letter-spacing: .4px;
-  padding: 4px 10px;
-}
-

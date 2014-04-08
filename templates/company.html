@@ -36,9 +36,9 @@
 								{% if d.usedBy == company %}
 									<ul>
 										{% if d.datasetURL %}
-											<li><a href="{{d.datasetURL}}"><strong>{{ d.datasetName }}</strong></a></li>
+											<li><a href="{{d.datasetURL}}">{{ d.datasetName }}</a></li>
 										{% else %}
-											<li><strong>{{ d.datasetName }}</strong></li>
+											<li>{{ d.datasetName }}</li>
 										{% end %}
 									</ul>
 								{%end%}
