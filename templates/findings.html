@@ -129,6 +129,7 @@
 							{name:"General Services Administration ", value:3},
 							{name:"Federal Deposit Insurance Corporation ", value:3}]
 
+//------------------------------------------------------------------------------------CATEGORY CHART----------------------------------------------------------------------
 			function make_category_chart() {
       		//Width and height
 			var margin = {top: 10, right: 20, bottom: 170, left: 50},
@@ -230,6 +231,7 @@
 			}
 		}
 
+//------------------------------------------------------------------------------------AGENCIES CHART----------------------------------------------------------------------
 	function make_agency_chart() {
       		//Width and height
 			var margin = {top: 10, right: 20, bottom: 310, left: 70},
@@ -330,6 +332,7 @@
 					.style("top", (d3.event.pageY - 28) + "px")
 			}
 		}
+
 
 make_category_chart();
 make_agency_chart();
