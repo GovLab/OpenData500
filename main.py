@@ -341,11 +341,11 @@ class AdminHandler(BaseHandler):
             stats = models.Stats.objects().first()
             self.write({"totalCompanies": stats.totalCompanies, "totalCompaniesWeb":stats.totalCompaniesWeb, "totalCompaniesSurvey":stats.totalCompaniesSurvey})
         elif action == "files":
-            self.application.files.generate_company_json()
-            self.application.files.generate_agency_json()
+            #self.application.files.generate_company_json()
+            #self.application.files.generate_agency_json()
             self.application.files.generate_company_csv()
-            self.application.files.generate_company_all_csv()
-            self.application.files.generate_agency_csv()
+            #self.application.files.generate_company_all_csv()
+            #self.application.files.generate_agency_csv()
             self.write("success")
         elif action == "sankey":
             #self.application.files.generate_sankey_json()
