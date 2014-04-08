@@ -57,7 +57,7 @@ class Application(tornado.web.Application):
             (r"/admin/edit/([a-zA-Z0-9]{24})/?", AdminEditCompanyHandler),
             (r"/about/?", AboutHandler),
             (r"/resources/?", ResourcesHandler),
-            (r"/findings/?", FindingsHandler),
+            (r"/stats/?", FindingsHandler),
             #(r"/files/?", FilesHandler),
             (r"/download/?", DownloadHandler),
             (r'/download/(.*)/?',tornado.web.StaticFileHandler, {'path':os.path.join(os.path.dirname(__file__), 'static')}),
@@ -98,12 +98,20 @@ class MainHandler(BaseHandler):
     @tornado.web.addslash
     #@tornado.web.authenticated
     def get(self):
-        self.render(
-            "index.html",
-            user=self.current_user,
-            page_title='Open Data500',
-            page_heading='Welcome to the Open Data 500 Pre-Launch',
-        )
+        if self.current_user == "press" or self.current_user == "alex" or self.current_user == "Elizabeth":
+            self.render(
+                "index3.html",
+                user=self.current_user,
+                page_title='Open Data500',
+                page_heading='Welcome to the Open Data 500 Pre-Launch'
+            )
+        else:
+            self.render(
+                "index.html",
+                user=self.current_user,
+                page_title='Open Data500',
+                page_heading='Welcome to the Open Data 500 Pre-Launch'
+            )
 
 
 class ChordDiagramHandler(BaseHandler):
@@ -131,14 +139,19 @@ class LoginHandler(BaseHandler):
     def post(self):
         email = self.get_argument("email", "")
         password = self.get_argument("password", "").encode('utf-8')
-        user = models.Users.objects.get(email=email)
+        try: 
+            user = models.Users.objects.get(email=email)
+        except Exception, e:
+            logging.info('unsuccessful login')
+            error_msg = u"?error=" + tornado.escape.url_escape("User does not exist")
+            self.redirect(u"/login" + error_msg)
         if user and user.password and bcrypt.hashpw(password, user.password.encode('utf-8')) == user.password:
             logging.info('successful login for '+email)
             self.set_current_user(email)
             self.redirect("/")
         else: 
             logging.info('unsuccessful login')
-            error_msg = u"?error=" + tornado.escape.url_escape("Login incorrect.")
+            error_msg = u"?error=" + tornado.escape.url_escape("Incorrect Password")
             self.redirect(u"/login" + error_msg)
 
     def set_current_user(self, user):
@@ -180,12 +193,19 @@ class RegisterHandler(LoginHandler):
     @tornado.web.addslash
     @tornado.web.authenticated
     def get(self):
-        self.render(
-            "register.html", 
-            next=self.get_argument("next","/"),
-            page_title="Register",
-            page_heading="Register for OD500"
-            )
+        if self.current_user == "luis":
+            self.render(
+                "register.html", 
+                next=self.get_argument("next","/"),
+                page_title="Register",
+                page_heading="Register for OD500"
+                )
+        else:
+            self.render('404.html',
+                page_heading="I'm afraid I can't let you do that.",
+                user=self.current_user,
+                page_title="Forbidden",
+                error="Not Enough Priviliges")
 
     @tornado.web.authenticated
     def post(self):
@@ -225,12 +245,12 @@ class CompanyHandler(BaseHandler):
                 logging.info("Company: " + companyName + ": " + str(e))
                 company = models.Company2.objects(prettyName=companyName)[0]
             self.render(
-            "company.html",
-            page_title='Open Data500',
-            user=self.current_user,
-            page_heading=company.companyName,
-            company = company,
-        )
+                "company.html",
+                page_title='Open Data500',
+                user=self.current_user,
+                page_heading=company.companyName,
+                company = company,
+            )
         except Exception, e:
             logging.info("Company: " + companyName + ": " + str(e)) 
             self.render(
@@ -241,8 +261,6 @@ class CompanyHandler(BaseHandler):
                 error = '404 - Not Found'
             )
         
-
-      
 class PreviewHandler(BaseHandler):
     @tornado.web.addslash
     #@tornado.web.authenticated
@@ -303,16 +321,17 @@ class AdminHandler(BaseHandler):
     @tornado.web.addslash
     @tornado.web.authenticated
     def get(self):
-        surveySubmitted = models.Company2.objects(Q(submittedSurvey=True) & Q(vetted=True)).order_by('prettyName')
-        sendSurveys = models.Company2.objects(Q(submittedSurvey=False))
-        needVetting = models.Company2.objects(Q(submittedSurvey=True) & Q(vetted=False)).order_by('-lastUpdated', 'prettyName')
-        stats = models.Stats.objects().first()
-        if self.current_user == 'alex' or self.current_user == 'Elizabeth':
+        if self.current_user != 'luis' and self.current_user != 'govlab':
             self.render('404.html',
                 page_heading="I'm afraid I can't let you do that.",
+                user=self.current_user,
                 page_title="Forbidden",
                 error="Not Enough Priviliges")
         else:
+            surveySubmitted = models.Company2.objects(Q(submittedSurvey=True) & Q(vetted=True)).order_by('prettyName')
+            sendSurveys = models.Company2.objects(Q(submittedSurvey=False))
+            needVetting = models.Company2.objects(Q(submittedSurvey=True) & Q(vetted=False)).order_by('-lastUpdated', 'prettyName')
+            stats = models.Stats.objects().first()
             self.render(
                 "admin.html",
                 page_title='OpenData500',
@@ -330,11 +349,11 @@ class AdminHandler(BaseHandler):
             stats = models.Stats.objects().first()
             self.write({"totalCompanies": stats.totalCompanies, "totalCompaniesWeb":stats.totalCompaniesWeb, "totalCompaniesSurvey":stats.totalCompaniesSurvey})
         elif action == "files":
-            #self.application.files.generate_company_json()
-            #self.application.files.generate_agency_json()
+            self.application.files.generate_company_json()
+            self.application.files.generate_agency_json()
             self.application.files.generate_company_csv()
             self.application.files.generate_company_all_csv()
-            #self.application.files.generate_agency_csv()
+            self.application.files.generate_agency_csv()
             self.write("success")
         elif action == "sankey":
             #self.application.files.generate_sankey_json()

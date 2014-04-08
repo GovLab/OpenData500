@@ -548,8 +548,7 @@ a:hover {
 .m-candidates .m-filter-menu {
   width: 200px;
   float: right;
-  border-left: 1px solid rgba(0, 0, 0, 0.15);
-  padding-left: 75px; }
+  padding-left: 10px; }
   .m-candidates .m-filter-menu h3 {
     margin-bottom: 10px;
     font-weight: normal; }
@@ -626,7 +625,7 @@ a:hover {
   border-color: #472b74; }
 
 .m-candidates-item.s-active {
-  width: 35.5%;
+  width: 45.6%;
   z-index: 1000; }
   .m-candidates-item.s-active em, .m-candidates-item.s-active .m-homepage-list-desc, .m-candidates-item.s-active h3 {
     width: 330px; }
@@ -788,8 +787,8 @@ a:hover {
     margin: 20px auto 30px;
     width: 700px;
     height: 500px;
-    border: 1px solid rgba(0, 0, 0, 0.15);
-    padding: 20px; }
+/*    border: 1px solid rgba(0, 0, 0, 0.15);
+*/    padding: 20px; }
     .findings-page .findings-chart h2 {
       font-weight: 100;
       font-size: 24px;
@@ -1063,3 +1062,27 @@ footer {
     footer .creative-commons-license img {
       float: left;
       margin-right: 10px; }
+
+
+
+
+
+.clear-all-filters {
+  display: inline-block;
+  margin-left: 150px;
+  border: 1px solid #ccc;
+  letter-spacing: .4px;
+  padding: 4px 10px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.clear-all-filters:hover {
+  background-color: #472b74;
+  color: white;
+  display: inline-block;
+  margin-left: 150px;
+  border: 1px solid #ccc;
+  letter-spacing: .4px;
+  padding: 4px 10px;
+}
+

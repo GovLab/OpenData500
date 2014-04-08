@@ -16,7 +16,9 @@
 			<p><strong>Type of Company: </strong> {% if company.companyType %} {{company.companyType}}{%else%}Not Available{%end%}</p>
 			<p><strong>Category: </strong> {{company.companyCategory}}</p>
 			<p><strong>Sources of Revenue: </strong>{% if len(company.revenueSource) > 0 %}{% if company.revenueSource[0] %}{{ ", ".join(company.revenueSource) }}{%else%}Not Available{%end%}{%else%}Not Available{%end%}</p>
-			<p><strong>Approximate sources of government open data: </strong>{% if company.sourceCount %}{{company.sourceCount}} Agencies/Local Governments/Organizations{%else%}Not Available{%end%}</p>
+			{%if company.sourceCount == "NA" %}<p><strong>Approximate number of sources of government open data: </strong>Not Available
+			{% elif company.sourceCount %}<p><strong>Approximate number of sources of government open data: </strong>{{company.sourceCount}} Agencies/Local Governments/Organizations
+			{% else %}<p><strong>Approximate number of sources of government open data: </strong>Not Available{%end%}</p>
 		</div>
 		<div class="m-half">
 			<h3>Description:</h3>
@@ -28,7 +30,7 @@
 			{%for a in company.agencies %}
 				<div class="company-view-agency-list">
 					<ul>
-						<li><h3><a href="{{a.url}}">{{a.name}}</a></h3></li>
+						<li><h3>{%if a.url %}<a href="{{a.url}}">{{a.name}}</a>{%else%}{{a.name}}{%end%}</h3></li>
 						<div class="company-view-agency-name">
 							{% for d in a.datasets %} 
 								{% if d.usedBy == company %}

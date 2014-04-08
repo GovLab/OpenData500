@@ -172,6 +172,7 @@ class FileGenerator(object):
             companiesJSON.append(company)
         with open(os.path.join(os.path.dirname(__file__), 'static') + '/OD500_Companies.json', 'w') as outfile:
             json.dump(companiesJSON, outfile)
+        logging.info("Company JSON File Done!")
     def generate_agency_json(self):
         #--------------JSON OF AGENCIES------------
         agencies = models.Agency.objects(source="dataGov")
@@ -228,7 +229,7 @@ class FileGenerator(object):
             agenciesJSON.append(ag)
         with open(os.path.join(os.path.dirname(__file__), 'static') + '/OD500_Agencies.json', 'w') as outfile:
             json.dump(agenciesJSON, outfile)
-
+        logging.info("Agency JSON File Done!")
     def generate_company_csv(self):
         #---CSV OF ALL COMPANIES----
         companies = models.Company2.objects(display=True)
@@ -276,6 +277,7 @@ class FileGenerator(object):
                 if hasattr(newrow[i], 'encode'):
                     newrow[i] = newrow[i].encode('utf8')
             csvwriter.writerow(newrow)
+        logging.info("Company CSV File Done!")
     def generate_company_all_csv(self):
         #---CSV OF ALL COMPANIES----
         companies = models.Company2.objects()
@@ -343,6 +345,7 @@ class FileGenerator(object):
                 if hasattr(newrow[i], 'encode'):
                     newrow[i] = newrow[i].encode('utf8')
             csvwriter.writerow(newrow)
+        logging.info("All Companies CSV File Done!")
     def generate_agency_csv(self):
         #--------CSV OF AGENCIES------
         agencies = models.Agency.objects()
@@ -426,7 +429,7 @@ class FileGenerator(object):
                             if hasattr(newrow[i], 'encode'):
                                 newrow[i] = newrow[i].encode('utf8')
                         csvwriter.writerow(newrow)
-
+        logging.info("Agency CSV File Done!")
     def generate_sankey_json(self):
         #get qualifying agencies
         agencies = models.Agency.objects(Q(usedBy__not__size=0) & Q(source__not__exact="web") & Q(dataType="Federal")).order_by('name') #federal agencies from official list that are used by a company
