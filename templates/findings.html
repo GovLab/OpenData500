@@ -2,926 +2,284 @@
 {% autoescape None %}
 
 {% block body %}
+		<style type="text/css">
 
-<h1>Findings</h1>
+			rect:hover {
+				fill: orange;
+			}
+			
+			#tooltip {
+				position: absolute;
+				width: 200px;
+				height: auto;
+				padding: 10px;
+				background-color: white;
+				-webkit-border-radius: 10px;
+				-moz-border-radius: 10px;
+				border-radius: 10px;
+				-webkit-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+				-moz-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+				box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+				pointer-events: none;
+			}
+			
+			#tooltip.hidden {
+				display: none;
+			}
+			
+			#tooltip p {
+				margin: 0;
+				font-family: sans-serif;
+				font-size: 16px;
+				line-height: 20px;
+			}
+
+			#category-bar-chart {
+				margin-bottom: 200px;
+			}
 
 
-<div id="chart"></div>
+		</style>
 
 
-
+<div class="findings-page">
+    <h1>Findings</h1>
+    <p>The Open Data 500 is a living study which the GovLab will maintain and update it on an ongoing basis. We welcome inquiries, input, and comments on our work and findings. Please write to us at <a href="mailto:opendata500@thegovlab.org">OpenData500@thegovlab.org</a> or tweet at @OpenData500 and #OD500.</p>
+    <p>Major patterns of open data companies:</p>
+    <div class="download-report">
+        <h2>Report</h2>
+        <p>For a full report on the findings of the Open Data 500 to date, please download the PDF of our report.</p>
+        <p><a class="m-button" href="#">Download the report</a></p>
+    </div>
+    <ul>
+        <li>Open government data is a key business resource for hundreds of U.S.-based companies. Previous studies have estimated the broad economic value of open government data, but the Open Data 500 is the first to take a more granular, empirical approach that looks at individual companies in depth. Our results confirm that a variety of government open data is being used by a large number of companies of all kinds.</li>
+        <li>Open Data companies operate in a large number of sectors and use very diverse sources of open government data. We found Open Data companies large and small, across the country, in all sectors. Many companies use more than 100 different data sources from a range of government agencies. Conversely, individual agencies not only provide data to a large number of companies, they often serve companies in very different sectors of the economy.</li>
+        <li>Open Data companies generate value through a wide variety of operating models. These companies earn revenue from a range of sources, including advertising, sales of services, referrals to other businesses, etc.</li>
+    </ul>
+    <section>
+        <div class="findings-chart">
+            <h2>Types of Companies</h2>
+            <div id="category-bar-chart"></div>
+        </div>
+        <div class="findings-chart">
+            <h2>Number of Companies Using Each Agency</h2>
+            <div id="agency-bar-chart"></div>
+        </div>
+        <div id="tooltip" class="hidden">
+			<p><strong id="tooltip-category-name"></strong></p>
+			<p><span id="value">100</span>%</p>
+		</div>
+    </section>
+    
+</div>
 
 <script src="http://d3js.org/d3.v3.min.js"></script>
 
 <!-- D3 Graphs -->
-<script>(function(){
+<script type="text/javascript">
 
-    var dataLabel = "LABEL"
-      , userLabel_category = "Category"
-      , category_bar_data = [{"Category":"Business & Legal Services","value":"39"},{"Category":"Data/Technology", "value":"120"},{"Category":"Education","value":"19"},{"Category":"Energy","value":"22"},{"Category":"Environment & Weather","value":"13"},{"Category":"Finance & Investment","value":"72"},{"Category":"Food & Agriculture","value":"5"},{"Category":"Geospatial/Mapping","value":"27"},{"Category":"Governance","value":"30"},{"Category":"Healthcare","value":"37"},{"Category":"Housing/Real Estate","value":"19"},{"Category":"Insurance","value":"12"},{"Category":"Lifestyle & Consumer","value":"17"},{"Category":"Research & Consulting","value":"24"},{"Category":"Scientific Research","value":"15"},{"Category":"Transportation","value":"30"}];
+    var category_bar_data = [
+						{name:"Business & Legal Services",value:39},
+						{name:"Data/Technology",value:120},
+						{name:"Education",value:19},
+						{name:"Energy",value:22},
+						{name:"Environment & Weather",value:13},
+						{name:"Finance & Investment",value:72},
+						{name:"Food & Agriculture",value:5},
+						{name:"Geospatial/Mapping",value:27},
+						{name:"Governance",value:30},
+						{name:"Healthcare",value:37},
+						{name:"Housing/Real Estate",value:19},
+						{name:"Insurance",value:12},
+						{name:"Lifestyle & Consumer",value:17},
+						{name:"Research & Consulting",value:24},
+						{name:"Scientific Research",value:15},
+						{name:"Transportation",value:30}]
       
-      var dataLabel = "LABEL"
-      , userLabel_agency = "Agency"
-      , agency_bar_data = [{"Agency":"Administrative Office of the United States Courts ","Number of Companies":"4"},{"Agency":"Commodity Futures Trading Commission","Number of Companies":"1"},{"Agency":"Consumer Financial Protection Bureau ","Number of Companies":"3"},{"Agency":"Corporation for National and Community Service ","Number of Companies":"0"},{"Agency":"Court Services and Offender Supervision Agency ","Number of Companies":"0"},{"Agency":"Department of Agriculture ","Number of Companies":"16"},{"Agency":"Department of Commerce ","Number of Companies":"116"},{"Agency":"Department of Defense ","Number of Companies":"7"},{"Agency":"Department of Education ","Number of Companies":"20"},{"Agency":"Department of Energy ","Number of Companies":"24"},{"Agency":"Department of Health and Human Services ","Number of Companies":"71"},{"Agency":"Department of Homeland Security ","Number of Companies":"9"},{"Agency":"Department of Housing and Urban Development ","Number of Companies":"1"},{"Agency":"Department of Justice ","Number of Companies":"9"},{"Agency":"Department of Labor ","Number of Companies":"27"},{"Agency":"Department of State ","Number of Companies":"2"},{"Agency":"Department of Transportation ","Number of Companies":"15"},{"Agency":"Department of Veterans Affairs ","Number of Companies":"2"},{"Agency":"Department of the Interior ","Number of Companies":"11"},{"Agency":"Department of the Treasury ","Number of Companies":"16"},{"Agency":"Executive Office of the President ","Number of Companies":"1"},{"Agency":"Federal Communications Commission ","Number of Companies":"2"},{"Agency":"Federal Deposit Insurance Corporation ","Number of Companies":"3"},{"Agency":"Federal Election Commission ","Number of Companies":"4"},{"Agency":"Federal Housing Finance Agency ","Number of Companies":"2"},{"Agency":"Federal Reserve Board ","Number of Companies":"8"},{"Agency":"General Services Administration ","Number of Companies":"3"},{"Agency":"Institute of Museum and Library Services ","Number of Companies":"1"},{"Agency":"National Aeronautics and Space Administration ","Number of Companies":"5"},{"Agency":"National Archives and Records Administration ","Number of Companies":"2"},{"Agency":"National Science Foundation ","Number of Companies":"1"},{"Agency":"Securities and Exchange Commission ","Number of Companies":"41"},{"Agency":"Social Security Administration ","Number of Companies":"1"},{"Agency":"US Environmental Protection Agency ","Number of Companies":"19"},{"Agency":"US Agency for International Development ","Number of Companies":"1"},{"Agency":"US Consumer Product Safety Commission ","Number of Companies":"3"},{"Agency":"US Equal Employment Opportunity Commission ","Number of Companies":"2"},{"Agency":"US International Trade Commission ","Number of Companies":"1"}];
-    
-var create_category_chart = function(){
-	data = category_bar_data;
-    if (userLabel_category) dataLabel = userLabel_category
-
-    var hoverDisplay = "Value".replace('&amp;', '&')
-    
-    //General chart
-    this.Title = 'My chart';
-    this.Width = 800;
-    this.Height = 500;
-    this.MaxValue = 120;
-    this.MinValue = 0;
-    this.MarginTop = 40;
-    this.MarginRight = 110;
-    this.MarginBottom = 200;
-    this.MarginLeft = 60;
-    this.Guide = false;
-    this.NumberTicks = 5;
-    this.BarType = 'Bar';
-    this.DataType = 'Number';
-    this.BackgroundColor = '#ffffff';
-    //Bar
-    this.BarThickness = 100;
-    this.BarColor1 = '#8977a7';
-    this.BarColor2 = '#484848';
-    this.BarColor3 = '#707070';
-    this.BarColor4 = '#969696';
-    this.BarColor5 = '#afafaf';
-    this.BarGap = 0;
-    //Lines
-    this.LineColor = '#000000';
-    this.LineWeight = 1;
-    this.XAxisLine = true;
-    this.YAxisLine = true;
-    this.DottedLineColor = '#000000';
-    this.DottedLineWeight = 1;
-    this.DottedLineGap = 2;
-    this.DottedLines = false;
-    //Labels
-    this.ChartTitle = true;
-    this.ChartTitleText = 'Types of Companies';
-    this.ChartTitleXLocation = 'Center';
-    this.ChartTitleYLocation = 0;
-    this.ChartTitleFont = 'Arial';
-    this.ChartTitleSize = 18;
-    this.ChartTitleColor = '#000000';
-    this.BarLabel = false;
-    this.BarLabelLocation = 0;
-    this.BarLabelFont = 'Arial';
-    this.BarLabelSize = 10;
-    this.BarLabelColor = '#000000';
-    this.XTitle = false;
-    this.XTitleText = 'X-Axis';
-    this.XTitleXLocation = 'Left';
-    this.XTitleYLocation = 0;
-    this.XTitleFont = 'Arial';
-    this.XTitleSize = 10;
-    this.XTitleColor = '#000000';
-    this.XLabel = true;
-    this.XLabelTextAlign = 'Right';
-    this.XLabelRotate = 290;
-    this.XLabelLocation = 0.18635855385763023;
-    this.XLabelFont = 'Arial';
-    this.XLabelSize = 14;
-    this.XLabelColor = '#000000';
-    this.YTitle = true;
-    this.YTitleText = 'Number of Companies';
-    this.YTitleXLocation = 0;
-    this.YTitleYLocation = 'Center';
-    this.YTitleFont = 'Arial';
-    this.YTitleSize = 10;
-    this.YTitleColor = '#000000';
-    this.YLabel = true;
-    this.YLabelLocation = 0;
-    this.YLabelFont = 'Arial';
-    this.YLabelSize = 14;
-    this.YLabelColor = '#000000';
-    //Legend
-    this.Legend = false;
-    this.LegendFont = 'Arial';
-    this.LegendFontSize = 10;
-    this.LegendFontColor = '#000000';
-    this.LegendRectSize = 18;
-    this.LegendSpacing = 4;
-    this.LegendXPos = 10;
-    this.LegendYPos = 0;
-    //Hover State
-    this.HoverStates = true;
-    this.HoverDisplay = hoverDisplay;
-    this.HoverLabelFont = 'Arial';
-    this.HoverLabelSize = 10;
-    this.HoverLabelColor = '#FFFFFF';
-    this.HoverValueFont = 'Arial';
-    this.HoverValueSize = 16;
-    this.HoverValueColor = '#FFFFFF';
-    
-    this.mainChart = function() {
-        var w = this.Width,
-            h = this.Height,
-            marginTop = this.MarginTop,
-            marginRight = this.MarginRight,
-            marginBottom = this.MarginBottom,
-            marginLeft = this.MarginLeft,
-            guideOn = this.Guide,
-            maxValue = this.MaxValue,
-            minValue = this.MinValue,
-            barType = this.BarType,
-            dataType = this.DataType,
-            backgroundColor = this.BackgroundColor,
-            barThickness = this.BarThickness,
-            barColor1 = this.BarColor1,
-            barColor2 = this.BarColor2,
-            barColor3 = this.BarColor3,
-            barColor4 = this.BarColor4,
-            barColor5 = this.BarColor5,
-            barGap = this.BarGap,
-            lineColor = this.LineColor,
-            lineWeight = this.LineWeight,
-            xAxisLine = this.XAxisLine,
-            yAxisLine = this.YAxisLine,
-            dottedLineWeight = this.DottedLineWeight,
-            dottedLineColor = this.DottedLineColor,
-            dottedLineGap = this.DottedLineGap,
-            dottedLines = this.DottedLines,
-            numberTicks = this.NumberTicks,
-            chartTitle = this.ChartTitle,
-            chartTitleText = this.ChartTitleText,
-            chartTitleXLoc = this.ChartTitleXLocation,
-            chartTitleYLoc = this.ChartTitleYLocation,
-            chartTitleFont = this.ChartTitleFont,
-            chartTitleSize = this.ChartTitleSize,
-            chartTitleColor = this.ChartTitleColor,
-            barLabel = this.BarLabel,
-            barLabelLoc = this.BarLabelLocation,
-            barLabelFont = this.BarLabelFont,
-            barLabelSize = this.BarLabelSize,
-            barLabelColor = this.BarLabelColor,
-            xTitle = this.XTitle,
-            xTitleText = this.XTitleText,
-            xTitleXLoc = this.XTitleXLocation,
-            xTitleYLoc = this.XTitleYLocation,
-            xTitleFont = this.XTitleFont,
-            xTitleSize = this.XTitleSize,
-            xTitleColor = this.XTitleColor,
-            xLabel = this.XLabel,
-            xLabelTextAlign = this.XLabelTextAlign,
-            xLabelRotate = this.XLabelRotate,
-            xLabelLoc = this.XLabelLocation,
-            xLabelFont = this.XLabelFont,
-            xLabelSize = this.XLabelSize,
-            xLabelColor = this.XLabelColor,
-            yTitle = this.YTitle,
-            yTitleText = this.YTitleText,
-            yTitleXLoc = this.YTitleXLocation,
-            yTitleYLoc = this.YTitleYLocation,
-            yTitleFont = this.YTitleFont,
-            yTitleSize = this.YTitleSize,
-            yTitleColor = this.YTitleColor,
-            yLabel = this.YLabel,
-            yLabelLoc = this.YLabelLocation,
-            yLabelFont = this.YLabelFont,
-            yLabelSize = this.YLabelSize,
-            yLabelColor = this.YLabelColor,
-            legend = this.Legend,
-            legendFont = this.LegendFont,
-            legendFontSize = this.LegendFontSize,
-            legendFontColor = this.LegendFontColor,
-            legendRectSize = this.LegendRectSize,
-            legendSpacing = this.LegendSpacing,
-            legendXPos = this.LegendXPos,
-            legendYPos = this.LegendYPos,
-            hoverStates = this.HoverStates,
-            hoverDisplay = this.HoverDisplay,
-            hoverLabelFont = this.HoverLabelFont,
-            hoverLabelSize = this.HoverLabelSize,
-            hoverLabelColor = this.HoverLabelColor,
-            hoverValueFont = this.HoverValueFont,
-            hoverValueSize = this.HoverValueSize,
-            hoverValueColor = this.HoverValueColor;
-            
-        var margin = {top: marginTop, right: marginRight, bottom: marginBottom, left: marginLeft},
-            width = w - margin.left - margin.right,
-            height = h - margin.top - margin.bottom;
-            
-        var bkgdColor = document.getElementsByTagName("body")[0];
-            bkgdColor.setAttribute("style","background-color:" + backgroundColor + ";margin:0px;");
-            
-        var elem = document.getElementById("chart");
-        elem.setAttribute("style","width:" + w + "; height:" + h + "; ");
-        
-        var numberFormat = d3.format("0,000");
-        var percentFormat = function(d) { return numberFormat(d) + "%"; };
-        var dollarFormat = function(d) { return "$" + numberFormat(d); };
-        
-        var x0 = d3.scale.ordinal().rangeRoundBands([0, width], .1);
-        var x1 = d3.scale.ordinal();
-        var y = d3.scale.linear().range([height, 0]);
-        var x = d3.scale.linear().domain(d3.extent([minValue, maxValue])).range([0, width]);
-        
-        var color = d3.scale.ordinal()
-            .range([barColor1, barColor2, barColor3, barColor4, barColor5]);
-            
-        var xAxis = d3.svg.axis().scale(x0).tickSize(0).orient("bottom");
-        
-        if (dataType == "Number") var yAxis = d3.svg.axis().scale(y).orient("left").tickSize(0).ticks(numberTicks).tickFormat(numberFormat);
-        
-        if (dataType == "Percent") var yAxis = d3.svg.axis().scale(y).orient("left").tickSize(0).ticks(numberTicks).tickFormat(percentFormat);
-        
-        if (dataType == "Dollar") var yAxis = d3.svg.axis().scale(y).orient("left").tickSize(0).ticks(numberTicks).tickFormat(dollarFormat);
-        
-        var hover = d3.select("#chart")
-            .append("div")
-            .attr("class", "tooltip")
-            .style("position", "absolute")
-            .style("z-index", "1000")
-            .style("padding", "5px")
-            .style("font-family", hoverLabelFont)
-            .style("font-size", hoverLabelSize)
-            .style("color", hoverLabelColor);
-            
-        var graph = d3.select("#chart").append("svg")
-            .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-            
-        //Background Color
-        graph.append("svg:rect")
-            .attr("width", w)
-            .attr("height", h)
-            .attr("transform", "translate(" + -margin.left + "," + -margin.top + ")")
-            .style("fill", backgroundColor);
-            
-        var dataValues = d3.keys(data[0]).filter(function(key) { return key !== dataLabel && key !== "values"; });
-        
-        data.forEach(function(d) {
-            d.values = dataValues.map(function(name) { return {name: name, value: +d[name]}; });
-        });
-        
-        x0.domain(data.map(function(d) { return d[dataLabel]; }));
-        x1.domain(dataValues).rangeRoundBands([x0.rangeBand()*(-(barThickness/100)/2), x0.rangeBand()*((barThickness/100)/2)], barGap);
-        y.domain([minValue, maxValue]);
-        x.domain(data.map(function(d) { return d.name; }));
-        
-        if(xLabel == true) {
-        graph.append("g")
-            .attr("class", "xaxis")
-            .attr("transform", "translate(0," + height + ")")
-            .call(xAxis);
-        }
-        
-        if(yLabel == true) {
-        graph.append("g")
-            .attr("class", "yaxis")
-            .call(yAxis);
-        }
-        
-        graph.selectAll('.yaxis line, .yaxis path, .xaxis line, .xaxis path')
-            .style({ 'fill': 'none', 'stroke-width': 0});
-            
-        graph.selectAll('.yaxis text')
-            .attr("transform", "translate(" + yLabelLoc + ",0)")
-            .style({ 'font-family': yLabelFont, 'font-size': yLabelSize, 'fill': yLabelColor});
-            
-        graph.selectAll('.xaxis text')
-            .attr("dy", xLabelSize/5)
-            .attr("transform", "translate(0," + (10 + xLabelLoc) + ")rotate(" + xLabelRotate + ")")
-            .style("text-anchor", function() {
-                if (xLabelTextAlign == 'Left') return'Start';
-                if (xLabelTextAlign == 'Center') return 'Middle';
-                if (xLabelTextAlign == 'Right') return 'End';
-            })
-            .style({ 'font-family': xLabelFont, 'font-size': xLabelSize, 'fill': xLabelColor });
-            
-        var rules = graph.selectAll("g.rule")
-            .data(y.ticks(numberTicks))
-        .enter().append("svg:g")
-            .attr("transform", function(d) { return "translate(0," + (y(d)) + ")"; }); 
-            
-        //Dotted lines
-        if (dottedLines == true) {
-        rules.append("svg:line")      
-            .attr("class", "dotted")
-            .attr("x1", 0)
-            .attr("x2", width)
-            .attr("y1", 0)
-            .attr("y2", 0)
-            .style("stroke", dottedLineColor)
-            .style("stroke-dasharray", (dottedLineGap + "," + dottedLineGap))
-            .style("stroke-width", dottedLineWeight);
-        }
-        
-        var label = graph.selectAll(".label")
-          .data(data)
-        .enter().append("g")
-            .attr("class", "g")
-            .attr("transform", function(d) { return "translate(" + x0(d[dataLabel]) + ",0)"; });
-            
-        label.selectAll("rect")
-          .data(function(d) { return d.values; })
-        .enter().append("rect")
-            .attr("class", function(d) { return d.value < 0 ? "bar negative" : "bar positive"; })
-            .attr("width", x1.rangeBand())
-            .attr("height", function(d) { return Math.abs(y(d.value) - y(0)); })
-            .attr("x", function(d) { return x1(d.name) + x0.rangeBand()/2; })
-            .attr("y", function(d) { return d.value < 0 ? Math.abs(y(d.value)) - Math.abs(y(d.value)) + y(0) : y(Math.min(d.value)); })
-            .style("fill", function(d) { return color(d.name); })
-            .on("mouseover", function(d, i) {   
-            	d3.select(this).style("fill", "#472b74");
-                if (hoverStates == true) {
-                        hover.transition().duration(100).style("opacity", 1)
-                            .style("background-color", color(d.name))
-                            .style("left", (d3.event.pageX) + 20 + "px")
-                            .style("top", (d3.event.pageY) + "px");
-                    if (hoverDisplay == "Value") {
-                        if (dataType == "Number") hover.html("<span style='font-size:" + hoverValueSize + ";font-family:" + hoverValueFont + ";color:" + hoverValueColor + ";'>" + numberFormat(d.value) + "</span>");
-                        if (dataType == "Percent") hover.html("<span style='font-size:" + hoverValueSize + ";font-family:" + hoverValueFont + ";color:" + hoverValueColor + ";'>" + percentFormat(d.value) + "</span>");
-                        if (dataType == "Dollar") hover.html("<span style='font-size:" + hoverValueSize + ";font-family:" + hoverValueFont + ";color:" + hoverValueColor + ";'>" + dollarFormat(d.value) + "</span>");
-                    }
-                }
-            })
-            .on("mouseout", function(d) { 
-            	d3.select(this).style("fill", "#8977a7");
-            	if (hoverStates == true) hover.style("left", -100).style("top", -100).transition().duration(100).style("opacity", 0); 
-            })
-            .on("mousemove", function(d, i) { if (hoverStates == true)hover.style("left", (d3.event.pageX) + 20 + "px").style("top", (d3.event.pageY) + "px"); });
-            
-        label.selectAll(".label")
-          .data(function(d) { return d.values; })
-        .enter().append("text")
-            .attr("x", function(d) { return x1(d.name) + x0.rangeBand()/2 + x1.rangeBand()/2; })
-            .attr("y", function(d) { return y(d.value); })
-            .attr("dy", function(d) { return d.value < 0 ? -barLabelLoc + barLabelSize/1.5 : barLabelLoc })
-            .style("font-family", barLabelFont)
-            .style("font-size", barLabelSize)
-            .style("fill", barLabelColor)
-            .style("text-anchor", "middle")
-            .text(function(d) { if(barLabel == true) {
-                if(dataType == "Number") return numberFormat(d.value); 
-                if(dataType == "Percent") return percentFormat(d.value); 
-                if(dataType == "Dollar") return dollarFormat(d.value); 
-            }
-            });
-            
-        if (chartTitleXLoc == "Left") { var cxpos = 0; var ctextanchor = "start"; };
-        if (chartTitleXLoc == "Center") { var cxpos = width/2; var ctextanchor = "middle"; };
-        if (chartTitleXLoc == "Right") { var cxpos = width; var ctextanchor = "end"; };
-        
-        if (xTitleXLoc == "Left") { var xxpos = 0; var xtextanchor = "start"; };
-        if (xTitleXLoc == "Center") { var xxpos = width/2; var xtextanchor = "middle"; };
-        if (xTitleXLoc == "Right") { var xxpos = width; var xtextanchor = "end"; };
-        
-        if (yTitleYLoc == "Top") { var yypos = 0; var ytextanchor = "end"; };
-        if (yTitleYLoc == "Center") { var yypos = -height/2; var ytextanchor = "middle"; };
-        if (yTitleYLoc == "Bottom") { var yypos = -height; var ytextanchor = "start"; };
-        
-        if (chartTitle == true) {
-        graph.append("text")
-            .attr("transform", "translate(" + cxpos + "," + (chartTitleYLoc - 10) + ")")
-            .style({ 'text-anchor': ctextanchor, 'font-family': chartTitleFont, 'font-size': chartTitleSize, 'fill': chartTitleColor})
-            .text(chartTitleText);
-        }
-        
-        if (yTitle == true) {
-        graph.append("text")
-            .attr("transform", "rotate(-90), translate(" + yypos + "," + (yTitleXLoc - 30) + ")")
-            .style({ 'text-anchor': ytextanchor, 'font-family': yTitleFont, 'font-size': yTitleSize, 'fill': yTitleColor})
-            .text(yTitleText);
-        }
-        
-        if (xTitle == true) {
-        graph.append("text")
-            .attr("transform", "translate(" + xxpos + "," + (height + xTitleYLoc + 30) + ")")
-            .style({ 'text-anchor': xtextanchor, 'font-family': xTitleFont, 'font-size': xTitleSize, 'fill': xTitleColor})
-            .text(xTitleText);
-        }
-        
-        //vertical rule line
-        if (yAxisLine == true) {
-        graph.append("svg:line")
-            .attr("class", "grid_line")
-            .attr("x1", 0)
-            .attr("x2", 0)
-            .attr("y1", 0)
-            .attr("y2", function() { if (xAxisLine == true) { return height + lineWeight/2 } else { return height }; })
-            .style("stroke", lineColor)
-            .style("stroke-width", lineWeight);
-        }
-        
-        //horizontal rule line
-        if (xAxisLine == true) {
-        graph.append("svg:line")      
-            .attr("class", "grid_line")
-            .attr("x1", 0)
-            .attr("x2", width)
-            .attr("y1", y(0))
-            .attr("y2", y(0))
-            .style("stroke", lineColor)
-            .style("stroke-width", lineWeight);
-        }
-        
-        if (legend == true) {
-        var legend = graph.selectAll(".legend")
-          .data(dataValues.slice().reverse())
-        .enter().append("g")
-          .attr("class", "legend")
-          .attr("transform", function(d, i) { return "translate(0," + (i * (legendRectSize + legendSpacing)) + ")"; });
-          
-        legend.append("rect")
-          .attr("x", width + legendXPos)
-          .attr("y", 0 + legendYPos)
-          .attr("width", legendRectSize)
-          .attr("height", legendRectSize)
-          .style("fill", color);
-          
-        legend.append("text")
-          .attr("x", width + legendRectSize + 5 + legendXPos)
-          .attr("y", legendRectSize/2 + legendYPos)
-          .style("font-family", legendFont)
-          .style("font-size", legendFontSize)
-          .style("fill", legendFontColor)
-          .attr("dy", legendFontSize/3)
-          .style("text-anchor", "start")
-          .text(function(d) { return d; });
-        }
-        
-    };
-    
-    this.update = function(_data) {
-        var maxVal = d3.max(data, function(d) { return d3.max(d.values, function(d) { return d.value; }) });
-        var minVal = d3.min(data, function(d) { return d3.min(d.values, function(d) { return d.value; }) });
-        chart.MaxValue = Math.ceil(maxVal/100)*100;
-        chart.MinValue = Math.floor(minVal/100)*100;
-    };
-    
-    this.updateChart = function(){
-        d3.select("svg").remove()
-        this.mainChart()
-    };  
-};
-
-//--------AGENCY CHART------------------------------------------------------------------------------------------------------------
-var create_agency_chart = function(){
-	if (agency_bar_data) data = agency_bar_data;
-    if (userLabel_agency) dataLabel = userLabel_agency
+      // var agency_bar_data = [{"Agency":"Administrative Office of the United States Courts ","value":"4"},{"Agency":"Commodity Futures Trading Commission","value":"1"},{"Agency":"Consumer Financial Protection Bureau ","value":"3"},{"Agency":"Corporation for National and Community Service ","value":"0"},{"Agency":"Court Services and Offender Supervision Agency ","value":"0"},{"Agency":"Department of Agriculture ","value":"16"},{"Agency":"Department of Commerce ","value":"116"},{"Agency":"Department of Defense ","value":"7"},{"Agency":"Department of Education ","value":"20"},{"Agency":"Department of Energy ","value":"24"},{"Agency":"Department of Health and Human Services ","value":"71"},{"Agency":"Department of Homeland Security ","value":"9"},{"Agency":"Department of Housing and Urban Development ","value":"1"},{"Agency":"Department of Justice ","value":"9"},{"Agency":"Department of Labor ","value":"27"},{"Agency":"Department of State ","value":"2"},{"Agency":"Department of Transportation ","value":"15"},{"Agency":"Department of Veterans Affairs ","value":"2"},{"Agency":"Department of the Interior ","value":"11"},{"Agency":"Department of the Treasury ","value":"16"},{"Agency":"Executive Office of the President ","value":"1"},{"Agency":"Federal Communications Commission ","value":"2"},{"Agency":"Federal Deposit Insurance Corporation ","value":"3"},{"Agency":"Federal Election Commission ","value":"4"},{"Agency":"Federal Housing Finance Agency ","value":"2"},{"Agency":"Federal Reserve Board ","value":"8"},{"Agency":"General Services Administration ","value":"3"},{"Agency":"Institute of Museum and Library Services ","value":"1"},{"Agency":"National Aeronautics and Space Administration ","value":"5"},{"Agency":"National Archives and Records Administration ","value":"2"},{"Agency":"National Science Foundation ","value":"1"},{"Agency":"Securities and Exchange Commission ","value":"41"},{"Agency":"Social Security Administration ","value":"1"},{"Agency":"US Environmental Protection Agency ","value":"19"},{"Agency":"US Agency for International Development ","value":"1"},{"Agency":"US Consumer Product Safety Commission ","value":"3"},{"Agency":"US Equal Employment Opportunity Commission ","value":"2"},{"Agency":"US International Trade Commission ","value":"1"}];
 
 
-    var hoverDisplay = "Value".replace('&amp;', '&')
-    
-    //General chart
-    this.Title = 'My chart';
-    this.Width = 800;
-    this.Height = 800;
-    this.MaxValue = 120;
-    this.MinValue = 0;
-    this.MarginTop = 40;
-    this.MarginRight = 110;
-    this.MarginBottom = 350;
-    this.MarginLeft = 100;
-    this.Guide = false;
-    this.NumberTicks = 5;
-    this.BarType = 'Bar';
-    this.DataType = 'Number';
-    this.BackgroundColor = '#ffffff';
-    //Bar
-    this.BarThickness = 100;
-    this.BarColor1 = '#8977a7';
-    this.BarColor2 = '#484848';
-    this.BarColor3 = '#707070';
-    this.BarColor4 = '#969696';
-    this.BarColor5 = '#afafaf';
-    this.BarGap = 0;
-    //Lines
-    this.LineColor = '#000000';
-    this.LineWeight = 1;
-    this.XAxisLine = true;
-    this.YAxisLine = true;
-    this.DottedLineColor = '#000000';
-    this.DottedLineWeight = 1;
-    this.DottedLineGap = 2;
-    this.DottedLines = false;
-    //Labels
-    this.ChartTitle = true;
-    this.ChartTitleText = 'Number of Companies Using Each Agency';
-    this.ChartTitleXLocation = 'Center';
-    this.ChartTitleYLocation = 0;
-    this.ChartTitleFont = 'Arial';
-    this.ChartTitleSize = 18;
-    this.ChartTitleColor = '#000000';
-    this.BarLabel = false;
-    this.BarLabelLocation = 0;
-    this.BarLabelFont = 'Arial';
-    this.BarLabelSize = 10;
-    this.BarLabelColor = '#000000';
-    this.XTitle = false;
-    this.XTitleText = 'X-Axis';
-    this.XTitleXLocation = 'Center';
-    this.XTitleYLocation = 0;
-    this.XTitleFont = 'Arial';
-    this.XTitleSize = 10;
-    this.XTitleColor = '#000000';
-    this.XLabel = true;
-    this.XLabelTextAlign = 'Right';
-    this.XLabelRotate = 290;
-    this.XLabelLocation = 0.18635855385763023;
-    this.XLabelFont = 'Arial';
-    this.XLabelSize = 14;
-    this.XLabelColor = '#000000';
-    this.YTitle = true;
-    this.YTitleText = 'Number of Companies';
-    this.YTitleXLocation = 0;
-    this.YTitleYLocation = 'Center';
-    this.YTitleFont = 'Arial';
-    this.YTitleSize = 10;
-    this.YTitleColor = '#000000';
-    this.YLabel = true;
-    this.YLabelLocation = 0;
-    this.YLabelFont = 'Arial';
-    this.YLabelSize = 14;
-    this.YLabelColor = '#000000';
-    //Legend
-    this.Legend = false;
-    this.LegendFont = 'Arial';
-    this.LegendFontSize = 10;
-    this.LegendFontColor = '#000000';
-    this.LegendRectSize = 18;
-    this.LegendSpacing = 4;
-    this.LegendXPos = 10;
-    this.LegendYPos = 0;
-    //Hover State
-    this.HoverStates = true;
-    this.HoverDisplay = hoverDisplay;
-    this.HoverLabelFont = 'Arial';
-    this.HoverLabelSize = 17.89042117033172;
-    this.HoverLabelColor = '#FFFFFF';
-    this.HoverValueFont = 'Arial';
-    this.HoverValueSize = 16;
-    this.HoverValueColor = '#FFFFFF';
-    
-    this.mainChart = function() {
-        var w = this.Width,
-            h = this.Height,
-            marginTop = this.MarginTop,
-            marginRight = this.MarginRight,
-            marginBottom = this.MarginBottom,
-            marginLeft = this.MarginLeft,
-            guideOn = this.Guide,
-            maxValue = this.MaxValue,
-            minValue = this.MinValue,
-            barType = this.BarType,
-            dataType = this.DataType,
-            backgroundColor = this.BackgroundColor,
-            barThickness = this.BarThickness,
-            barColor1 = this.BarColor1,
-            barColor2 = this.BarColor2,
-            barColor3 = this.BarColor3,
-            barColor4 = this.BarColor4,
-            barColor5 = this.BarColor5,
-            barGap = this.BarGap,
-            lineColor = this.LineColor,
-            lineWeight = this.LineWeight,
-            xAxisLine = this.XAxisLine,
-            yAxisLine = this.YAxisLine,
-            dottedLineWeight = this.DottedLineWeight,
-            dottedLineColor = this.DottedLineColor,
-            dottedLineGap = this.DottedLineGap,
-            dottedLines = this.DottedLines,
-            numberTicks = this.NumberTicks,
-            chartTitle = this.ChartTitle,
-            chartTitleText = this.ChartTitleText,
-            chartTitleXLoc = this.ChartTitleXLocation,
-            chartTitleYLoc = this.ChartTitleYLocation,
-            chartTitleFont = this.ChartTitleFont,
-            chartTitleSize = this.ChartTitleSize,
-            chartTitleColor = this.ChartTitleColor,
-            barLabel = this.BarLabel,
-            barLabelLoc = this.BarLabelLocation,
-            barLabelFont = this.BarLabelFont,
-            barLabelSize = this.BarLabelSize,
-            barLabelColor = this.BarLabelColor,
-            xTitle = this.XTitle,
-            xTitleText = this.XTitleText,
-            xTitleXLoc = this.XTitleXLocation,
-            xTitleYLoc = this.XTitleYLocation,
-            xTitleFont = this.XTitleFont,
-            xTitleSize = this.XTitleSize,
-            xTitleColor = this.XTitleColor,
-            xLabel = this.XLabel,
-            xLabelTextAlign = this.XLabelTextAlign,
-            xLabelRotate = this.XLabelRotate,
-            xLabelLoc = this.XLabelLocation,
-            xLabelFont = this.XLabelFont,
-            xLabelSize = this.XLabelSize,
-            xLabelColor = this.XLabelColor,
-            yTitle = this.YTitle,
-            yTitleText = this.YTitleText,
-            yTitleXLoc = this.YTitleXLocation,
-            yTitleYLoc = this.YTitleYLocation,
-            yTitleFont = this.YTitleFont,
-            yTitleSize = this.YTitleSize,
-            yTitleColor = this.YTitleColor,
-            yLabel = this.YLabel,
-            yLabelLoc = this.YLabelLocation,
-            yLabelFont = this.YLabelFont,
-            yLabelSize = this.YLabelSize,
-            yLabelColor = this.YLabelColor,
-            legend = this.Legend,
-            legendFont = this.LegendFont,
-            legendFontSize = this.LegendFontSize,
-            legendFontColor = this.LegendFontColor,
-            legendRectSize = this.LegendRectSize,
-            legendSpacing = this.LegendSpacing,
-            legendXPos = this.LegendXPos,
-            legendYPos = this.LegendYPos,
-            hoverStates = this.HoverStates,
-            hoverDisplay = this.HoverDisplay,
-            hoverLabelFont = this.HoverLabelFont,
-            hoverLabelSize = this.HoverLabelSize,
-            hoverLabelColor = this.HoverLabelColor,
-            hoverValueFont = this.HoverValueFont,
-            hoverValueSize = this.HoverValueSize,
-            hoverValueColor = this.HoverValueColor;
-            
-        var margin = {top: marginTop, right: marginRight, bottom: marginBottom, left: marginLeft},
-            width = w - margin.left - margin.right,
-            height = h - margin.top - margin.bottom;
-            
-        var bkgdColor = document.getElementsByTagName("body")[0];
-            bkgdColor.setAttribute("style","background-color:" + backgroundColor + ";margin:0px;");
-            
-        var elem = document.getElementById("agency-bar-chart");
-        elem.setAttribute("style","width:" + w + "; height:" + h + "; ");
-        
-        var numberFormat = d3.format("0,000");
-        var percentFormat = function(d) { return numberFormat(d) + "%"; };
-        var dollarFormat = function(d) { return "$" + numberFormat(d); };
-        
-        var x0 = d3.scale.ordinal().rangeRoundBands([0, width], .1);
-        var x1 = d3.scale.ordinal();
-        var y = d3.scale.linear().range([height, 0]);
-        var x = d3.scale.linear().domain(d3.extent([minValue, maxValue])).range([0, width]);
-        
-        var color = d3.scale.ordinal()
-            .range([barColor1, barColor2, barColor3, barColor4, barColor5]);
-            
-        var xAxis = d3.svg.axis().scale(x0).tickSize(0).orient("bottom");
-        
-        if (dataType == "Number") var yAxis = d3.svg.axis().scale(y).orient("left").tickSize(0).ticks(numberTicks).tickFormat(numberFormat);
-        
-        if (dataType == "Percent") var yAxis = d3.svg.axis().scale(y).orient("left").tickSize(0).ticks(numberTicks).tickFormat(percentFormat);
-        
-        if (dataType == "Dollar") var yAxis = d3.svg.axis().scale(y).orient("left").tickSize(0).ticks(numberTicks).tickFormat(dollarFormat);
-        
-        var hover = d3.select("#agency-bar-chart")
-            .append("div")
-            .attr("class", "tooltip")
-            .style("position", "absolute")
-            .style("z-index", "1000")
-            .style("padding", "5px")
-            .style("font-family", hoverLabelFont)
-            .style("font-size", hoverLabelSize)
-            .style("color", hoverLabelColor);
-            
-        var graph = d3.select("#chart").append("svg")
-            .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-            
-        //Background Color
-        graph.append("svg:rect")
-            .attr("width", w)
-            .attr("height", h)
-            .attr("transform", "translate(" + -margin.left + "," + -margin.top + ")")
-            .style("fill", backgroundColor);
-            
-        var dataValues = d3.keys(data[0]).filter(function(key) { return key !== dataLabel && key !== "values"; });
-        
-        data.forEach(function(d) {
-            d.values = dataValues.map(function(name) { return {name: name, value: +d[name]}; });
-        });
-        
-        x0.domain(data.map(function(d) { return d[dataLabel]; }));
-        x1.domain(dataValues).rangeRoundBands([x0.rangeBand()*(-(barThickness/100)/2), x0.rangeBand()*((barThickness/100)/2)], barGap);
-        y.domain([minValue, maxValue]);
-        x.domain(data.map(function(d) { return d.name; }));
-        
-        if(xLabel == true) {
-        graph.append("g")
-            .attr("class", "xaxis")
-            .attr("transform", "translate(0," + height + ")")
-            .call(xAxis);
-        }
-        
-        if(yLabel == true) {
-        graph.append("g")
-            .attr("class", "yaxis")
-            .call(yAxis);
-        }
-        
-        graph.selectAll('.yaxis line, .yaxis path, .xaxis line, .xaxis path')
-            .style({ 'fill': 'none', 'stroke-width': 0});
-            
-        graph.selectAll('.yaxis text')
-            .attr("transform", "translate(" + yLabelLoc + ",0)")
-            .style({ 'font-family': yLabelFont, 'font-size': yLabelSize, 'fill': yLabelColor});
-            
-        graph.selectAll('.xaxis text')
-            .attr("dy", xLabelSize/5)
-            .attr("transform", "translate(0," + (10 + xLabelLoc) + ")rotate(" + xLabelRotate + ")")
-            .style("text-anchor", function() {
-                if (xLabelTextAlign == 'Left') return'Start';
-                if (xLabelTextAlign == 'Center') return 'Middle';
-                if (xLabelTextAlign == 'Right') return 'End';
-            })
-            .style({ 'font-family': xLabelFont, 'font-size': xLabelSize, 'fill': xLabelColor });
-            
-        var rules = graph.selectAll("g.rule")
-            .data(y.ticks(numberTicks))
-        .enter().append("svg:g")
-            .attr("transform", function(d) { return "translate(0," + (y(d)) + ")"; }); 
-            
-        //Dotted lines
-        if (dottedLines == true) {
-        rules.append("svg:line")      
-            .attr("class", "dotted")
-            .attr("x1", 0)
-            .attr("x2", width)
-            .attr("y1", 0)
-            .attr("y2", 0)
-            .style("stroke", dottedLineColor)
-            .style("stroke-dasharray", (dottedLineGap + "," + dottedLineGap))
-            .style("stroke-width", dottedLineWeight);
-        }
-        
-        var label = graph.selectAll(".label")
-          .data(data)
-        .enter().append("g")
-            .attr("class", "g")
-            .attr("transform", function(d) { return "translate(" + x0(d[dataLabel]) + ",0)"; });
-            
-        label.selectAll("rect")
-          .data(function(d) { return d.values; })
-        .enter().append("rect")
-            .attr("class", function(d) { return d.value < 0 ? "bar negative" : "bar positive"; })
-            .attr("width", x1.rangeBand())
-            .attr("height", function(d) { return Math.abs(y(d.value) - y(0)); })
-            .attr("x", function(d) { return x1(d.name) + x0.rangeBand()/2; })
-            .attr("y", function(d) { return d.value < 0 ? Math.abs(y(d.value)) - Math.abs(y(d.value)) + y(0) : y(Math.min(d.value)); })
-            .style("fill", function(d) { return color(d.name); })
-            .on("mouseover", function(d, i) {   
-                if (hoverStates == true) {
-                        hover.transition().duration(100).style("opacity", 1)
-                            .style("background-color", color(d.name))
-                            .style("left", (d3.event.pageX) + 20 + "px")
-                            .style("top", (d3.event.pageY) + "px");
-                if (hoverDisplay == "Label & Value") {
-                        if (dataType == "Number") hover.html(d.name + "<br><span style='font-size:" + hoverValueSize + ";font-family:" + hoverValueFont + ";color:" + hoverValueColor + ";'>" + numberFormat(d.value) + "</span>");
-                        if (dataType == "Percent") hover.html(d.name + "<br><span style='font-size:" + hoverValueSize + ";font-family:" + hoverValueFont + ";color:" + hoverValueColor + ";'>" + percentFormat(d.value) + "</span>");
-                        if (dataType == "Dollar") hover.html(d.name + "<br><span style='font-size:" + hoverValueSize + ";font-family:" + hoverValueFont + ";color:" + hoverValueColor + ";'>" + dollarFormat(d.value) + "</span>");
-                }
-                    if (hoverDisplay == "Value") {
-                        if (dataType == "Number") hover.html("<span style='font-size:" + hoverValueSize + ";font-family:" + hoverValueFont + ";color:" + hoverValueColor + ";'>" + numberFormat(d.value) + "</span>");
-                        if (dataType == "Percent") hover.html("<span style='font-size:" + hoverValueSize + ";font-family:" + hoverValueFont + ";color:" + hoverValueColor + ";'>" + percentFormat(d.value) + "</span>");
-                        if (dataType == "Dollar") hover.html("<span style='font-size:" + hoverValueSize + ";font-family:" + hoverValueFont + ";color:" + hoverValueColor + ";'>" + dollarFormat(d.value) + "</span>");
-                    }
-                }
-            })
-            .on("mouseout", function(d) { if (hoverStates == true) hover.style("left", -100).style("top", -100).transition().duration(100).style("opacity", 0); })
-            .on("mousemove", function(d, i) { if (hoverStates == true)hover.style("left", (d3.event.pageX) + 20 + "px").style("top", (d3.event.pageY) + "px"); });
-            
-        label.selectAll(".label")
-          .data(function(d) { return d.values; })
-        .enter().append("text")
-            .attr("x", function(d) { return x1(d.name) + x0.rangeBand()/2 + x1.rangeBand()/2; })
-            .attr("y", function(d) { return y(d.value); })
-            .attr("dy", function(d) { return d.value < 0 ? -barLabelLoc + barLabelSize/1.5 : barLabelLoc })
-            .style("font-family", barLabelFont)
-            .style("font-size", barLabelSize)
-            .style("fill", barLabelColor)
-            .style("text-anchor", "middle")
-            .text(function(d) { if(barLabel == true) {
-                if(dataType == "Number") return numberFormat(d.value); 
-                if(dataType == "Percent") return percentFormat(d.value); 
-                if(dataType == "Dollar") return dollarFormat(d.value); 
-            }
-            });
-            
-        if (chartTitleXLoc == "Left") { var cxpos = 0; var ctextanchor = "start"; };
-        if (chartTitleXLoc == "Center") { var cxpos = width/2; var ctextanchor = "middle"; };
-        if (chartTitleXLoc == "Right") { var cxpos = width; var ctextanchor = "end"; };
-        
-        if (xTitleXLoc == "Left") { var xxpos = 0; var xtextanchor = "start"; };
-        if (xTitleXLoc == "Center") { var xxpos = width/2; var xtextanchor = "middle"; };
-        if (xTitleXLoc == "Right") { var xxpos = width; var xtextanchor = "end"; };
-        
-        if (yTitleYLoc == "Top") { var yypos = 0; var ytextanchor = "end"; };
-        if (yTitleYLoc == "Center") { var yypos = -height/2; var ytextanchor = "middle"; };
-        if (yTitleYLoc == "Bottom") { var yypos = -height; var ytextanchor = "start"; };
-        
-        if (chartTitle == true) {
-        graph.append("text")
-            .attr("transform", "translate(" + cxpos + "," + (chartTitleYLoc - 10) + ")")
-            .style({ 'text-anchor': ctextanchor, 'font-family': chartTitleFont, 'font-size': chartTitleSize, 'fill': chartTitleColor})
-            .text(chartTitleText);
-        }
-        
-        if (yTitle == true) {
-        graph.append("text")
-            .attr("transform", "rotate(-90), translate(" + yypos + "," + (yTitleXLoc - 30) + ")")
-            .style({ 'text-anchor': ytextanchor, 'font-family': yTitleFont, 'font-size': yTitleSize, 'fill': yTitleColor})
-            .text(yTitleText);
-        }
-        
-        if (xTitle == true) {
-        graph.append("text")
-            .attr("transform", "translate(" + xxpos + "," + (height + xTitleYLoc + 30) + ")")
-            .style({ 'text-anchor': xtextanchor, 'font-family': xTitleFont, 'font-size': xTitleSize, 'fill': xTitleColor})
-            .text(xTitleText);
-        }
-        
-        //vertical rule line
-        if (yAxisLine == true) {
-        graph.append("svg:line")
-            .attr("class", "grid_line")
-            .attr("x1", 0)
-            .attr("x2", 0)
-            .attr("y1", 0)
-            .attr("y2", function() { if (xAxisLine == true) { return height + lineWeight/2 } else { return height }; })
-            .style("stroke", lineColor)
-            .style("stroke-width", lineWeight);
-        }
-        
-        //horizontal rule line
-        if (xAxisLine == true) {
-        graph.append("svg:line")      
-            .attr("class", "grid_line")
-            .attr("x1", 0)
-            .attr("x2", width)
-            .attr("y1", y(0))
-            .attr("y2", y(0))
-            .style("stroke", lineColor)
-            .style("stroke-width", lineWeight);
-        }
-        
-        if (legend == true) {
-        var legend = graph.selectAll(".legend")
-          .data(dataValues.slice().reverse())
-        .enter().append("g")
-          .attr("class", "legend")
-          .attr("transform", function(d, i) { return "translate(0," + (i * (legendRectSize + legendSpacing)) + ")"; });
-          
-        legend.append("rect")
-          .attr("x", width + legendXPos)
-          .attr("y", 0 + legendYPos)
-          .attr("width", legendRectSize)
-          .attr("height", legendRectSize)
-          .style("fill", color);
-          
-        legend.append("text")
-          .attr("x", width + legendRectSize + 5 + legendXPos)
-          .attr("y", legendRectSize/2 + legendYPos)
-          .style("font-family", legendFont)
-          .style("font-size", legendFontSize)
-          .style("fill", legendFontColor)
-          .attr("dy", legendFontSize/3)
-          .style("text-anchor", "start")
-          .text(function(d) { return d; });
-        }
-        
-    };
-    
-    this.update = function(_data) {
-        var maxVal = d3.max(data, function(d) { return d3.max(d.values, function(d) { return d.value; }) });
-        var minVal = d3.min(data, function(d) { return d3.min(d.values, function(d) { return d.value; }) });
-        chart.MaxValue = Math.ceil(maxVal/100)*100;
-        chart.MinValue = Math.floor(minVal/100)*100;
-    };
-    
-    this.updateChart = function(){
-        d3.select("svg").remove()
-        this.mainChart()
-    };  
-};
+      		//Width and height
+			var margin = {top: 20, right: 20, bottom: 30, left: 40},
+			    w = 660 - margin.left - margin.right,
+			    h = 500 - margin.top - margin.bottom;
+			
+			// var dataset = [ { key: 0, value: 5 },		//dataset is now an array of objects.
+			// 				{ key: 1, value: 10 },		//Each object has a 'key' and a 'value'.
+			// 				{ key: 2, value: 13 },
+			// 				{ key: 3, value: 19 },
+			// 				{ key: 4, value: 21 },
+			// 				{ key: 5, value: 25 },
+			// 				{ key: 6, value: 22 },
+			// 				{ key: 7, value: 18 },
+			// 				{ key: 8, value: 15 },
+			// 				{ key: 9, value: 13 },
+			// 				{ key: 10, value: 11 },
+			// 				{ key: 11, value: 12 },
+			// 				{ key: 12, value: 15 },
+			// 				{ key: 13, value: 20 },
+			// 				{ key: 14, value: 18 },
+			// 				{ key: 15, value: 17 },
+			// 				{ key: 16, value: 16 },
+			// 				{ key: 17, value: 18 },
+			// 				{ key: 18, value: 23 },
+			// 				{ key: 19, value: 25 } ];
+			
+			var dataset = category_bar_data;
+			var xScale = d3.scale.ordinal()
+							.rangeRoundBands([0, w], 0.05);
+
+			var yScale = d3.scale.linear()
+							.domain([0, d3.max(dataset, function(d) { return d.value; })])
+							.range([0, h]);
+			
+			var yAxis = d3.svg.axis()
+			    .scale(yScale)
+			    .orient("left")
+			    .ticks(10);
+
+			var xAxis = d3.svg.axis()
+			    .scale(xScale)
+			    .orient("left")
+			    .tickValues(function(d) { return d.name; });
+
+			//Define key function, to be used when binding data
+			var key = function(d) {
+				return d.key;
+			};
+			
+			//Create SVG element
+			var svg = d3.select("#category-bar-chart")
+						.append("svg")
+						.attr("width", w + 100)
+						.attr("height", h + 100);
+
+			//Create bars
+			var rect = svg.selectAll("rect")
+			   .data(dataset)		//Bind data with custom key function
+			   .enter()
+			   .append("rect")
+			   .attr("x", function(d, i) {
+			   		return xScale(i);
+			   })
+			   .attr("y", function(d) {
+			   		return h - yScale(d.value);
+			   })
+			   .attr("width", xScale.rangeBand())
+			   .attr("height", function(d) {
+			   		return yScale(d.value);
+			   })
+			   .attr("fill", function(d) {
+					return "rgb(0, 0, " + (d.value * 10) + ")";
+			   }).on("mouseover", function(d) {
+			   		var coordinates = d3.mouse(this);
+					var xPosition = coordinates[0]; //parseFloat(d3.select(this).attr("x")) + xScale.rangeBand() / 2;
+					var yPosition = coordinates[1]; //parseFloat(d3.select(this).attr("y")) / 2 + h / 2;
+					d3.select("#tooltip")
+						.style("left", xPosition + "px")
+						.style("top", yPosition + "px")						
+						.select("#value")
+						.text(d.value);
+					d3.select("#tooltip")
+						.select("#tooltip-category-name")
+						.text(d.name)
+					d3.select("#tooltip").classed("hidden", false);
+			   })
+			   .on("mousemove", mousemove)
+			   .on("mouseout", function() {
+					d3.select("#tooltip").classed("hidden", true);
+			   });
+			function mousemove(d, i) {
+				var coordinates = d3.mouse(this);
+				var xPosition = coordinates[0]; //parseFloat(d3.select(this).attr("x")) + xScale.rangeBand() / 2;
+				var yPosition = coordinates[1]; //parseFloat(d3.select(this).attr("y")) / 2 + h / 2;
+		   		d3.select("#tooltip")
+		   			.style("left", xPosition + "px")
+					.style("top", yPosition + "px");
+			}
+
+			// var labels = svg.selectAll("text")
+			//    .data(dataset)		//Bind data with custom key function
+			//    .enter()
+			//    .append("text")
+			//    .attr("x", function(d, i) {
+			//    		return xScale(i) + xScale.rangeBand() / 2;
+			//    })
+			//    .text(function(d) {
+			//    		return d.name;
+			//    })
+			//    .attr("text-anchor", "left")
+			//    .attr("y", function(d) {
+			//    		return h + 14;
+			//    })
+			//    //.attr("transform", "rotate(-65)")
+			//    .attr("font-family", "sans-serif")
+			//    .attr("font-size", "11px")
+			//    .attr("fill", "black");
+
+
+			svg.append("g")
+		        .attr("class", "x axis")
+		        .attr("transform", "translate(0," + h + ")")
+		        .call(xAxis)
+		        .selectAll("text")  
+		            .style("text-anchor", "end")
+		            .attr("dx", "-.8em")
+		            .attr("dy", ".15em")
+		            .attr("transform", function(d) {
+		                return "rotate(-65)" 
+		                });
+
+			// //On click, update with new data			
+			// d3.select("p")
+			// 	.on("click", function() {
+
+			// 		//Remove one value from dataset
+			// 		dataset.shift();
+					
+			// 		//Update scale domains
+			// 		xScale.domain(d3.range(dataset.length));
+			// 		yScale.domain([0, d3.max(dataset, function(d) { return d.value; })]);
+
+			// 		//Select…
+			// 		var bars = svg.selectAll("rect")
+			// 			.data(dataset, key);		//Bind data with custom key function
+
+			// 		//Update…
+			// 		bars.transition()
+			// 			.duration(500)
+			// 			.attr("x", function(d, i) {
+			// 				return xScale(i);
+			// 			})
+			// 			.attr("y", function(d) {
+			// 				return h - yScale(d.value);
+			// 			})
+			// 			.attr("width", xScale.rangeBand())
+			// 			.attr("height", function(d) {
+			// 				return yScale(d.value);
+			// 			});
 
 
 
-	//-----------category chart---------------
-    var category_chart = new create_category_chart()           
-    category_chart.mainChart()
+					//Update all labels
+					//
+					//Exercise: Modify this code to remove the correct label each time!
+					//
+					// svg.selectAll("text")
+					//    .data(dataset, key)		//Bind data with custom key function
+					//    .transition()
+					//    .duration(500)
+					//    .text(function(d) {
+					//    		return d.value;
+					//    })
+					//    .attr("x", function(d, i) {
+					// 		return xScale(i) + xScale.rangeBand() / 2;
+					//    })
+					//    .attr("y", function(d) {
+					// 		return h - yScale(d.value) + 14;
+					//    });
 
-    //-----------agency chart---------------
-    var agency_chart = new create_agency_chart()           
-    agency_chart.mainChart()
-
-
-
-})()
+				// });
 </script>
 
 

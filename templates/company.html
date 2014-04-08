@@ -30,7 +30,7 @@
 			{%for a in company.agencies %}
 				<div class="company-view-agency-list">
 					<ul>
-						<li><h3><a href="{{a.url}}">{{a.name}}</a></h3></li>
+						<li><h3>{%if a.url %}<a href="{{a.url}}">{{a.name}}</a>{%else%}{{a.name}}{%end%}</h3></li>
 						<div class="company-view-agency-name">
 							{% for d in a.datasets %} 
 								{% if d.usedBy == company %}

@@ -214,7 +214,35 @@ a:hover {
   border-bottom: 1px solid #472b74;
   margin-bottom: 25px; }
 .m-homepage #chord-chart-container {
-  text-align: center; }
+  text-align: center;
+  position: relative; }
+  .m-homepage #chord-chart-container h3 {
+    font-weight: 100;
+    font-family: "Exo", sans-serif;
+    font-size: 2em;
+    margin-top: 15px; }
+  .m-homepage #chord-chart-container .chord-legend {
+    font-weight: 400;
+    font-family: "Exo", sans-serif;
+    font-size: 18px;
+    position: absolute;
+    color: #472b74;
+    top: 440px; }
+  .m-homepage #chord-chart-container .chord-legend.companies {
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+    left: -30px;
+    color: #8eab6f; }
+  .m-homepage #chord-chart-container .chord-legend.agencies {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    transform: rotate(90deg);
+    right: -30px; }
 
 .m-homepage-about .more {
   text-align: right; }
@@ -280,7 +308,7 @@ a:hover {
     width: calc(50% - 105px); }
   .about-page .about-page-toc {
     float: right;
-    margin: 0 0 30px 20px;
+    margin: 0 0 30px 30px;
     padding: 10px 20px;
     border: 1px solid #aaaaaa; }
     .about-page .about-page-toc h4 {
@@ -293,7 +321,7 @@ a:hover {
       color: #444444; }
     .about-page .about-page-toc li {
       list-style-type: none;
-      margin: 11px 0;
+      margin: 8px 0 7px 0;
       text-align: right; }
   .about-page #team {
     text-align: center; }
@@ -601,7 +629,7 @@ a:hover {
     width: 150px; }
 
 .m-candidates-item.survey-company {
-  background-color: rgba(71, 43, 116, 0.2); }
+  background-color: rgba(71, 43, 116, 0.1); }
 
 .m-candidates-item.preview-company {
   background-color: rgba(71, 43, 116, 0.9); }
@@ -633,35 +661,15 @@ a:hover {
     color: rgba(0, 0, 0, 0.6); }
   .legend .color.candidate {
     background-color: rgba(0, 0, 0, 0.05); }
-
-    .legend .color.candidate.s-active {
-    background-color: rgba(0, 0, 0, 0.4); }
-
-    .legend .color.candidate:hover {
-    background-color: #472b74;
-    color: white;  }
-
   .legend .color.survey {
     background-color: rgba(71, 43, 116, 0.1); }
-
-    .legend .color.survey.s-active {
-    background-color: rgba(71, 43, 116, 0.5);
-    border: 2px; }
-
-    .legend .color.survey:hover {
-    background-color: #472b74;
-    color: white; }
-
+  .legend .color.preview {
+    background-color: rgba(71, 43, 116, 0.9); }
 
 #chart svg {
   opacity: .7; }
 
-#filters-category button.s-active, #filters-agency button.s-active {
-    background-color: #472b74;
-    color: white;
-  }
-
-#filters-agency button, #filters-category button {
+#filters button {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
   border-radius: 0;
@@ -670,14 +678,6 @@ a:hover {
   border-left: 4px solid #472b74;
   color: #444444;
   padding: 3px 9px 3px 6px; }
-
-
-
-  #filters-agency button:hover, #filters-category button:hover {
-    background-color: #472b74;
-    color: white;
-  }
-
 
 .m-download {
   text-align: center;
@@ -794,6 +794,41 @@ a:hover {
   background-color: rgba(71, 43, 116, 0.1); }
   .m-press-item:hover p {
     color: #472b74; }
+
+.findings-page {
+  font-size: 14px;
+  line-height: 20px; }
+  .findings-page .findings-chart {
+    margin: 20px auto 30px;
+    width: 700px;
+    height: 500px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    padding: 20px; }
+    .findings-page .findings-chart h2 {
+      font-weight: 100;
+      font-size: 24px;
+      text-align: center;
+      margin-bottom: 20px; }
+  .findings-page .download-report {
+    float: right;
+    margin: 0 0 30px 20px;
+    width: 210px;
+    height: 174px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.3); }
+    .findings-page .download-report .m-button {
+      margin-top: 10px; }
+    .findings-page .download-report p {
+      margin-bottom: 30px; }
+    .findings-page .download-report h2 {
+      font-weight: 100;
+      font-size: 36px;
+      text-align: center;
+      margin-bottom: 10px; }
+  .findings-page #chart .xaxis text {
+    font-size: 12px;
+    font-weight: 400; }
 
 body {
   margin: 0; }
