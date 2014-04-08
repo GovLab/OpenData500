@@ -45,7 +45,7 @@ class Application(tornado.web.Application):
             (r'/(favicon.ico)', tornado.web.StaticFileHandler, {"path": ""}),
             (r"/", MainHandler),
             # (r"/2/?", SankeeyChartHandler),
-            (r"/3/?", ChordDiagramHandler),
+            # (r"/3/?", ChordDiagramHandler),
             (r"/submitCompany/?", SubmitCompanyHandler),
             (r"/validate/?", ValidateHandler),
             (r"/edit/([a-zA-Z0-9]{24})/?", EditCompanyHandler),
@@ -98,32 +98,24 @@ class MainHandler(BaseHandler):
     @tornado.web.addslash
     #@tornado.web.authenticated
     def get(self):
-        if self.current_user == "press" or self.current_user == "alex" or self.current_user == "Elizabeth":
-            self.render(
-                "index3.html",
-                user=self.current_user,
-                page_title='Open Data500',
-                page_heading='Welcome to the Open Data 500 Pre-Launch'
-            )
-        else:
-            self.render(
-                "index.html",
-                user=self.current_user,
-                page_title='Open Data500',
-                page_heading='Welcome to the Open Data 500 Pre-Launch'
-            )
-
-
-class ChordDiagramHandler(BaseHandler):
-    @tornado.web.addslash
-    @tornado.web.authenticated
-    def get(self):
         self.render(
-            "index3.html",
+            "index.html",
             user=self.current_user,
             page_title='Open Data500',
-            page_heading='Welcome to the Open Data 500 Pre-Launch',
+            page_heading='Welcome to the Open Data 500 Pre-Launch'
         )
+
+
+# class ChordDiagramHandler(BaseHandler):
+#     @tornado.web.addslash
+#     @tornado.web.authenticated
+#     def get(self):
+#         self.render(
+#             "index3.html",
+#             user=self.current_user,
+#             page_title='Open Data500',
+#             page_heading='Welcome to the Open Data 500 Pre-Launch',
+#         )
 
 class LoginHandler(BaseHandler): 
     @tornado.web.addslash

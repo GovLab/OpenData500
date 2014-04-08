@@ -1,0 +1,253 @@
+{% extends "main.html" %}
+{% autoescape None %}
+
+{% block body %}
+
+<link rel="stylesheet" href="{{ static_url("css/styles_backup_luis.css") }}" />
+<style>
+header {
+    height: 30px;
+    text-align: center;
+}
+.m-homepage .m-homepage-box {
+    height: 525px;
+}
+
+</style>
+<h1 class="logo"><img src="{{ static_url("img/od500-logo.png") }}" alt=""></h1>
+
+<div class="m-homepage">
+
+<h1>Welcome to the Open Data 500</h1>
+<h1 class="pre-launch"><strong>Pre-Launch</strong></h1>
+
+<section class="m-homepage-about m-homepage-box">
+
+<h2>About This Project</h2>
+
+<p>The Open Data 500, funded by the <a href="http://www.knightfoundation.org/" target="_blank">Knight Foundation</a> and conducted by <a href="http://thegovlab.org/" target="_blank">the GovLab</a>, is the first comprehensive study of U.S. companies that use open government data to generate new business and develop new products and services.</p>
+<p><a href="/about/" class="m-button">Learn More</a></p>
+<h2 class="separator-title">Pre-Launch</h2>
+<p>This <strong>pre-launch version</strong> of the Open Data 500 presents a working list of companies for public comment. Based on feedback, further research, and company input, the GovLab will publish a final list and analysis of the results in mid-2014.</p>
+<p>For more information about Open Data, check out the resources provided by the GovLab.</p>
+<a href="/resources/" class="m-button">Resources</a>
+</section>
+
+<section class="m-homepage-explore">
+	<div>
+		<h2>Review the Companies List</h2>
+		<div class="map">
+            <!--<h4 class="map-title">OD500 Company Locations</h4>!-->
+            <a href="/candidates/"><img src="{{ static_url("img/companies-map.png") }}" alt=""></a>
+        </div>
+        <p class="intro" style="letter-spacing: -0.3px;">Explore the preliminary list of 500 candidate companies that meet our criteria.</p>
+		<a href="/candidates/" class="m-button">Full List</a>
+	</div>
+	
+</section>
+<section class="m-homepage-participate m-homepage-box">
+
+    <h2>How To Participate</h2>
+
+    <p><strong>1. If you represent an Open Data company:</strong> If your company is not already on our list, please fill out our <a href="/submitCompany/">survey</a> to tell us about your work and the data you use.</p>
+    <p><strong>2. If you have information about a company on our list:</strong> please use the Comment button for that company to tell us about it, or email us at <a href="mailto:opendata500@thegovlab.org">opendata500@thegovlab.org</a>.</p>
+    <p><strong>3. If you have general information to share:</strong> <a href="http://www.opendata500.com/about/#disqus_thread" target="_balnk">Join the Conversation</a>, tweet your comments to #OD500, or email us at <a href="mailto:opendata500@thegovlab.org">opendata500@thegovlab.org</a>.</p>
+
+    
+</section>
+
+
+<script type="text/javascript">
+var fnames = new Array();var ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';
+try {
+    var jqueryLoaded=jQuery;
+    jqueryLoaded=true;
+} catch(err) {
+    var jqueryLoaded=false;
+}
+var head= document.getElementsByTagName('head')[0];
+if (!jqueryLoaded) {
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = '//ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js';
+    head.appendChild(script);
+    if (script.readyState && script.onload!==null){
+        script.onreadystatechange= function () {
+              if (this.readyState == 'complete') mce_preload_check();
+        }    
+    }
+}
+
+var err_style = '';
+try{
+    err_style = mc_custom_error_style;
+} catch(e){
+    err_style = '#mc_embed_signup input.mce_inline_error{border-color:#6B0505;} #mc_embed_signup div.mce_inline_error{margin: 0 0 1em 0; padding: 5px 10px; background-color:#6B0505; font-weight: bold; z-index: 1; color:#fff;}';
+}
+var head= document.getElementsByTagName('head')[0];
+var style= document.createElement('style');
+style.type= 'text/css';
+if (style.styleSheet) {
+  style.styleSheet.cssText = err_style;
+} else {
+  style.appendChild(document.createTextNode(err_style));
+}
+head.appendChild(style);
+setTimeout('mce_preload_check();', 250);
+
+var mce_preload_checks = 0;
+function mce_preload_check(){
+    if (mce_preload_checks>40) return;
+    mce_preload_checks++;
+    try {
+        var jqueryLoaded=jQuery;
+    } catch(err) {
+        setTimeout('mce_preload_check();', 250);
+        return;
+    }
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = 'http://downloads.mailchimp.com/js/jquery.form-n-validate.js';
+    head.appendChild(script);
+    try {
+        var validatorLoaded=jQuery("#fake-form").validate({});
+    } catch(err) {
+        setTimeout('mce_preload_check();', 250);
+        return;
+    }
+    mce_init_form();
+}
+function mce_init_form(){
+    jQuery(document).ready( function($) {
+      var options = { errorClass: 'mce_inline_error', errorElement: 'div', onkeyup: function(){}, onfocusout:function(){}, onblur:function(){}  };
+      var mce_validator = $("#mc-embedded-subscribe-form").validate(options);
+      $("#mc-embedded-subscribe-form").unbind('submit');//remove the validator so we can get into beforeSubmit on the ajaxform, which then calls the validator
+      options = { url: 'http://openinggovernment.us6.list-manage.com/subscribe/post-json?u=1a990feb5c&id=691b1fcbc9&c=?', type: 'GET', dataType: 'json', contentType: "application/json; charset=utf-8",
+                    beforeSubmit: function(){
+                        $('#mce_tmp_error_msg').remove();
+                        $('.datefield','#mc_embed_signup').each(
+                            function(){
+                                var txt = 'filled';
+                                var fields = new Array();
+                                var i = 0;
+                                $(':text', this).each(
+                                    function(){
+                                        fields[i] = this;
+                                        i++;
+                                    });
+                                $(':hidden', this).each(
+                                    function(){
+                                        var bday = false;
+                                        if (fields.length == 2){
+                                            bday = true;
+                                            fields[2] = {'value':1970};//trick birthdays into having years
+                                        }
+                                        if ( fields[0].value=='MM' && fields[1].value=='DD' && (fields[2].value=='YYYY' || (bday && fields[2].value==1970) ) ){
+                                            this.value = '';
+                                        } else if ( fields[0].value=='' && fields[1].value=='' && (fields[2].value=='' || (bday && fields[2].value==1970) ) ){
+                                            this.value = '';
+                                        } else {
+                                            if (/\[day\]/.test(fields[0].name)){
+                                                this.value = fields[1].value+'/'+fields[0].value+'/'+fields[2].value;                                           
+                                            } else {
+                                                this.value = fields[0].value+'/'+fields[1].value+'/'+fields[2].value;
+                                            }
+                                        }
+                                    });
+                            });
+                        $('.phonefield-us','#mc_embed_signup').each(
+                            function(){
+                                var fields = new Array();
+                                var i = 0;
+                                $(':text', this).each(
+                                    function(){
+                                        fields[i] = this;
+                                        i++;
+                                    });
+                                $(':hidden', this).each(
+                                    function(){
+                                        if ( fields[0].value.length != 3 || fields[1].value.length!=3 || fields[2].value.length!=4 ){
+                                            this.value = '';
+                                        } else {
+                                            this.value = 'filled';
+                                        }
+                                    });
+                            });
+                        return mce_validator.form();
+                    }, 
+                    success: mce_success_cb
+                };
+      $('#mc-embedded-subscribe-form').ajaxForm(options);
+      
+      
+    });
+}
+function mce_success_cb(resp){
+    $('#mce-success-response').hide();
+    $('#mce-error-response').hide();
+    if (resp.result=="success"){
+        $('#mce-'+resp.result+'-response').show();
+        $('#mce-'+resp.result+'-response').html(resp.msg);
+        $('#mc-embedded-subscribe-form').each(function(){
+            this.reset();
+        });
+    } else {
+        var index = -1;
+        var msg;
+        try {
+            var parts = resp.msg.split(' - ',2);
+            if (parts[1]==undefined){
+                msg = resp.msg;
+            } else {
+                i = parseInt(parts[0]);
+                if (i.toString() == parts[0]){
+                    index = parts[0];
+                    msg = parts[1];
+                } else {
+                    index = -1;
+                    msg = resp.msg;
+                }
+            }
+        } catch(e){
+            index = -1;
+            msg = resp.msg;
+        }
+        try{
+            if (index== -1){
+                $('#mce-'+resp.result+'-response').show();
+                $('#mce-'+resp.result+'-response').html(msg);            
+            } else {
+                err_id = 'mce_tmp_error_msg';
+                html = '<div id="'+err_id+'" style="'+err_style+'"> '+msg+'</div>';
+                
+                var input_id = '#mc_embed_signup';
+                var f = $(input_id);
+                if (ftypes[index]=='address'){
+                    input_id = '#mce-'+fnames[index]+'-addr1';
+                    f = $(input_id).parent().parent().get(0);
+                } else if (ftypes[index]=='date'){
+                    input_id = '#mce-'+fnames[index]+'-month';
+                    f = $(input_id).parent().parent().get(0);
+                } else {
+                    input_id = '#mce-'+fnames[index];
+                    f = $().parent(input_id).get(0);
+                }
+                if (f){
+                    $(f).append(html);
+                    $(input_id).focus();
+                } else {
+                    $('#mce-'+resp.result+'-response').show();
+                    $('#mce-'+resp.result+'-response').html(msg);
+                }
+            }
+        } catch(e){
+            $('#mce-'+resp.result+'-response').show();
+            $('#mce-'+resp.result+'-response').html(msg);
+        }
+    }
+}
+
+</script>
+<!--End mc_embed_signup-->
+</div>
+{% end %}
