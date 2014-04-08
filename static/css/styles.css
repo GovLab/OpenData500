@@ -802,8 +802,8 @@ a:hover {
     margin: 20px auto 30px;
     width: 700px;
     height: 500px;
-    border: 1px solid rgba(0, 0, 0, 0.15);
-    padding: 20px; }
+/*    border: 1px solid rgba(0, 0, 0, 0.15);
+*/    padding: 20px; }
     .findings-page .findings-chart h2 {
       font-weight: 100;
       font-size: 24px;

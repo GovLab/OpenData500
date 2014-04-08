@@ -57,7 +57,7 @@ class Application(tornado.web.Application):
             (r"/admin/edit/([a-zA-Z0-9]{24})/?", AdminEditCompanyHandler),
             (r"/about/?", AboutHandler),
             (r"/resources/?", ResourcesHandler),
-            (r"/findings/?", FindingsHandler),
+            (r"/stats/?", FindingsHandler),
             #(r"/files/?", FilesHandler),
             (r"/download/?", DownloadHandler),
             (r'/download/(.*)/?',tornado.web.StaticFileHandler, {'path':os.path.join(os.path.dirname(__file__), 'static')}),
