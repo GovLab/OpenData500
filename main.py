@@ -67,7 +67,6 @@ class Application(tornado.web.Application):
             (r'/login/?', LoginHandler),
             (r'/logout/?', LogoutHandler),
             (r'/register/?', RegisterHandler),
-            (r"/media/?", MediaHandler),
             (r"/([^/]+)/?", CompanyHandler)
         ]
         settings = dict(
@@ -156,11 +155,7 @@ class LoginHandler(BaseHandler):
 class MediaHandler(BaseHandler):
     @tornado.web.addslash
     def get(self):
-        self.render(
-            "media.html",
-            user=self.current_user,
-            page_title="Media"
-            )
+        self.redirect('/resources/')
 
 class FindingsHandler(BaseHandler):
     @tornado.web.addslash
