@@ -1105,6 +1105,12 @@ footer {
 
 /*-------ADD THISSSSSSSSSSS----------------*/
 
+
+#container {
+  margin-top: 10px;
+}
+
+
 .dialog-example {
   display: none;
 }
