@@ -111,6 +111,7 @@ class Company2(Document):
 	submittedThroughWebsite = BooleanField() #submitted through website
 	locked = BooleanField() #Locked from public editing
 	notes = StringField() #notes by admin
+	filters = ListField(StringField()) #Filters for the full list page. 
 
 	@queryset_manager
 	def objects(doc_cls, queryset):

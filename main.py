@@ -266,7 +266,7 @@ class CandidateHandler(BaseHandler):
     #@tornado.web.authenticated
     def get(self):
         companies = models.Company2.objects(display=True).order_by('prettyName')
-        agencies = models.Agency.objects(Q(usedBy__not__size=0) & Q(source="dataGov") & Q(dataType="Federal")).order_by("-usedBy_count").only("name", "abbrev")[0:16]
+        agencies = models.Agency.objects(Q(usedBy__not__size=0) & Q(source="dataGov") & Q(dataType="Federal")).order_by("-usedBy_count").only("name", "abbrev", "prettyName")[0:16]
         stats = models.Stats.objects().first()
         self.render(
             "candidates.html",
@@ -459,6 +459,7 @@ class SubmitCompanyHandler(BaseHandler):
         financialInfo = self.get_argument('financialInfo')
         datasetWishList = self.get_argument('datasetWishList', None)
         sourceCount = self.get_argument("sourceCount", None)
+        filters = [companyCategory, state, "survey-company"]
         #--SAVE COMPANY--
         company = models.Company2(
             companyName = companyName,
@@ -485,7 +486,8 @@ class SubmitCompanyHandler(BaseHandler):
             vetted = False, 
             vettedByCompany = True,
             submittedThroughWebsite = True,
-            locked=False
+            locked=False,
+            filters = filters
         )
         company.save()
         self.application.stats.update_all_state_counts()
@@ -548,6 +550,8 @@ class SubmitDataHandler(BaseHandler):
                 agency.save()
             if agency not in company.agencies: #only add if it's not already there.
                 company.agencies.append(agency)
+            if agency.prettyName not in company.filters:
+                company.filters.append(agency.prettyName)
                 company.save()
             company.lastUpdated = datetime.now() #Update Company's Time of Last Edit
             company.save()
@@ -573,6 +577,8 @@ class SubmitDataHandler(BaseHandler):
                 #remove agency from company
                 if agency in company.agencies:
                     company.agencies.remove(agency)
+                if agency.prettyName in company.filters: #remove from list of filters
+                    company.filters.remove(agency.prettyName)
                 #remove company from agency
                 if company in agency.usedBy:
                     agency.usedBy.remove(company)
@@ -793,6 +799,10 @@ class EditCompanyHandler(BaseHandler):
         company.submittedSurvey = True
         company.vettedByCompany = True
         company.lastUpdated = datetime.now()
+        company.filters = [company.companyCategory, company.state, "survey-company"] #re-do filters
+        for a in company.agencies:
+                if a.prettyName:
+                    company.filters.append(a.prettyName)
         if company.display: #only if company is displayed
             self.application.stats.update_all_state_counts()
         company.save()
