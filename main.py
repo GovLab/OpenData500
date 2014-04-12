@@ -286,7 +286,10 @@ class CandidateHandler(BaseHandler):
 class ChartHandler(BaseHandler):
     @tornado.web.addslash
     def get(self):
-        logging.info(self.request.headers.get('Referer'))
+        if self.request.headers.get('Referer'):
+            logging.info("Chart requested from: " + self.request.headers.get('Referer'))
+        else:
+            logging.info("Chart requested from: Cannot get referer")
         self.render("solo_chart.html")
 
 class AboutHandler(BaseHandler):
