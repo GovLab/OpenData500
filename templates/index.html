@@ -2,22 +2,21 @@
 {% autoescape None %}
 
 {% block body %}
-<script src="{{ static_url("js/d3.v3.min.js") }}"></script>
-<script src="{{ static_url("js/sankey.js") }}"></script>
-<!-- <h1 class="logo"><img src="{{ static_url("img/od500-logo.png") }}" alt=""></h1> -->
 
 <div class="m-homepage">
 
     <h1 class="first-title">Welcome to OpenData 500</h1>
 
-    <section id="chord-chart-container">
+    <!-- <section id="chord-chart-container">
         <h2>Open Data Compass</h2>
         <h3>What types of companies use which agencies' data?</h3>
     	<div id="chord-chart">
          <span class="chord-legend companies">Company Categories</span>
          <span class="chord-legend agencies">Federal Agencies</span>
         </div>
-    </section>
+    </section> -->
+
+    <iframe src="/chart/" width="960" height="860" marginwidth="0" marginheight="50" scrolling="no" frameborder="0"></iframe>
 
     <section class="m-homepage-about">
         <h1>About This Project</h1>

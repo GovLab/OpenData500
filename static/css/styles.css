@@ -1110,6 +1110,9 @@ footer {
   margin-top: 10px;
 }
 
+.m-candidates-item.s-active {
+  width: 45.6%;
+}
 
 .dialog-example {
   display: none;

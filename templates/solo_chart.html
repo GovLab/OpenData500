@@ -1,0 +1,210 @@
+<!doctype html> 
+
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]>     <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>     <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+
+
+    <!-- Load jQuery -->
+    <script src="{{ static_url("js/jquery-2.1.0.min.js") }}"></script>
+    <script src="{{ static_url("js/d3.v3.min.js") }}"></script>
+    <link rel="stylesheet" href="{{ static_url("css/styles.css") }}" />
+    <link rel="stylesheet" href="{{ static_url("css/luis.css") }}" />
+    <script src="{{ static_url("js/modernizr.custom.39528.js") }}"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+<style>
+#chord-chart-container {
+  text-align: center;
+  position: relative; }
+#chord-chart-container h3 {
+    font-weight: 100;
+    font-family: "Exo", sans-serif;
+    font-size: 2em;
+    margin-top: 15px; }
+#chord-chart-container .chord-legend {
+    font-weight: 400;
+    font-family: "Exo", sans-serif;
+    font-size: 18px;
+    position: absolute;
+    color: #472b74;
+    top: 440px; }
+#chord-chart-container .chord-legend.companies {
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+    left: -30px;
+    color: #8eab6f; }
+#chord-chart-container .chord-legend.agencies {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    transform: rotate(90deg);
+    right: -30px; }
+
+    #circle:hover path {
+	  pointer-events: all;
+	  fill-opacity: 1;
+	  -webkit-transition: fill-opacity .2s ease;
+	  -moz-transition: fill-opacity .2s ease;
+	  -ms-transition: fill-opacity .2s ease;
+	  -o-transition: fill-opacity .2s ease;
+	  transition: fill-opacity .2s ease;
+
+	}
+
+	#circle circle {
+	  fill: none;
+	  pointer-events: all;
+	}
+
+	.group path {
+	  fill-opacity: .5;
+	}
+
+	path.chord {
+
+	}
+
+	#circle:hover path.fade {
+	  /*display: none;*/
+	  pointer-events: none;
+	  fill-opacity: 0;
+	  -webkit-transition: fill-opacity .2s ease;
+	  -moz-transition: fill-opacity .2s ease;
+	  -ms-transition: fill-opacity .2s ease;
+	  -o-transition: fill-opacity .2s ease;
+	  transition: fill-opacity .2s ease;
+	}
+</style>
+
+	<section id="chord-chart-container">
+        <h2>Open Data Compass</h2>
+        <h3>What types of companies use which agencies' data?</h3>
+    	<div id="chord-chart">
+         <span class="chord-legend companies">Company Categories</span>
+         <span class="chord-legend agencies">Federal Agencies</span>
+        </div>
+    </section>
+	<script type="text/javascript">
+		var data;
+		d3.json("{{ static_url('matrix.json') }}", function(error, json) {
+		    if (error) return console.warn(error);
+		    data = json;
+		    draw_diagram();
+		})
+		function draw_diagram() {
+		    var chord = d3.layout.chord()
+		        .padding(0.01)
+		        .sortSubgroups(d3.descending)
+		        .matrix(data.matrix);
+
+		    var width = 730,
+		        height = 760,
+		        innerRadius = Math.min(width, height) * .25,
+		        outerRadius = innerRadius * 1.14;
+
+		    var maxColor = '#4a2f76'
+		    var baseColor = '#eeeeee';
+		    var baseColor2 = '#a9db6c';
+		    var range = 50;
+		    var maxVal = d3.max(chord.groups, function(d) { return d.value; });
+		    var minVal = d3.min(chord.groups, function(d) { return d.value; });
+		    var fill_agencies = d3.scale.linear().domain([0,range]).range([maxColor, baseColor]);
+		    var fill_categories = d3.scale.linear().domain([0,range]).range([maxColor, baseColor2]);
+
+		    var svg = d3.select("#chord-chart").append("svg")
+		        .attr("width", width)
+		        .attr("height", height)
+		        .attr("id", "circle")
+		      .append("g")
+		        .attr("transform", "translate(335, 375)");
+		        // .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+		    
+		    var circle = svg.append("circle")
+		        .attr("r", outerRadius);
+
+		    var nodes = svg.append("g").selectAll("path")
+		        .data(chord.groups)
+		        .enter().append("path")
+		        .style("fill", function(d) { 
+		            if (data.num_agencies > d.index) {
+		                return fill_agencies(d.index);
+		            } else {
+		                return fill_categories(d.index);
+		            }
+		        })
+		        .attr("d", d3.svg.arc().innerRadius(innerRadius).outerRadius(outerRadius))
+		        .on("mouseover", mouseover);
+
+		    var ticks = svg.append("g").selectAll("g")
+		        .data(chord.groups)
+		        .enter().append("g").selectAll("g")
+		        .data(groupTicks)
+		        .enter().append("g")
+		        .attr("transform", function(d) {
+		          return "rotate(" + (d.angle * 180 / Math.PI - 90) + ")"
+		              + "translate(" + outerRadius + ",0)";
+		        });
+
+		    ticks.append("text")
+		        .attr("x", 8)
+		        .attr("dy", ".35em")
+		        .attr("transform", function(d) { return d.angle > Math.PI ? "rotate(180)translate(-16)" : null; })
+		        .style("text-anchor", function(d) { return d.angle > Math.PI ? "end" : null; })
+		        .text(function(d) { return d.label; })
+		        .filter(function(d, i) { return d.angleDiff < .017 })
+		        .remove();
+
+		    //var chord = svg.append("g")
+		    var chord = svg.selectAll(".chord")
+		      //.selectAll("path")
+		        .data(chord.chords)
+		      .enter().append("path")
+		        .attr("class", "chord")
+		        .attr("d", d3.svg.chord().radius(innerRadius))
+		        .style("fill", "rgba(0,0,0,0.2)"); 
+		        // .style("fill", function(d) { 
+		        //     return fill_agencies(d.target.index); 
+		        // });
+
+		    chord.on("mouseover", function(d) {
+		        d3.select(this).style("fill", "rgba(0,0,0,0.4)");
+		    }).on("mouseout", function(d) {
+		        d3.select(this).style("fill", "rgba(0,0,0,0.1)");
+		        // d3.select(this).style("fill", function(d) {
+		        //     return fill_agencies(d.target.index);
+		        // });
+		    });
+
+		    chord.append("title")
+		        .text(function(d) { return data.names[d.source.index] + "->" + data.names[d.target.index] + "\n" + d.target.value + " companies"});
+
+		    // nodes.append("title")
+		    //     .text(function(d) { return data.names[d.index] + "\n" + d.value + " companies"});
+
+		    function groupTicks(d) {
+		      var k = (d.endAngle - d.startAngle) / d.value;
+		      return d3.range(0, d.value, 1000).map(function(v, i) {
+		        return {
+		          angle: v * k + d.startAngle + (d.endAngle - d.startAngle)/2,
+		          label: data.names[d.index],
+		          angleDiff: d.endAngle - d.startAngle
+		        };
+		      });
+		    }
+
+		    function mouseover(d, i) {
+		      chord.classed("fade", function(p) {
+		        return p.source.index != i
+		            && p.target.index != i;
+		      });
+		    }
+		}
+	</script>

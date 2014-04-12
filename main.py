@@ -58,6 +58,7 @@ class Application(tornado.web.Application):
             (r"/about/?", AboutHandler),
             (r"/resources/?", ResourcesHandler),
             (r"/stats/?", FindingsHandler),
+            (r"/chart/?", ChartHandler),
             #(r"/files/?", FilesHandler),
             (r"/download/?", DownloadHandler),
             (r'/download/(.*)/?',tornado.web.StaticFileHandler, {'path':os.path.join(os.path.dirname(__file__), 'static')}),
@@ -282,6 +283,11 @@ class CandidateHandler(BaseHandler):
             #stateInfo=stateInfo
         )
 
+class ChartHandler(BaseHandler):
+    @tornado.web.addslash
+    def get(self):
+        self.render("solo_chart.html")
+
 class AboutHandler(BaseHandler):
     @tornado.web.addslash
     #@tornado.web.authenticated
@@ -339,7 +345,7 @@ class AdminHandler(BaseHandler):
             #self.application.files.generate_company_json()
             #self.application.files.generate_agency_json()
             self.application.files.generate_company_csv()
-            #self.application.files.generate_company_all_csv()
+            self.application.files.generate_company_all_csv()
             #self.application.files.generate_agency_csv()
             self.write("success")
         elif action == "sankey":
