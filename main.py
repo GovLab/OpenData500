@@ -286,6 +286,7 @@ class CandidateHandler(BaseHandler):
 class ChartHandler(BaseHandler):
     @tornado.web.addslash
     def get(self):
+        logging.info(self.request.headers.get('Referer'))
         self.render("solo_chart.html")
 
 class AboutHandler(BaseHandler):
