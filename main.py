@@ -98,6 +98,21 @@ class MainHandler(BaseHandler):
     @tornado.web.addslash
     #@tornado.web.authenticated
     def get(self):
+        #Record visitor info. Not really to be used for site analytics, but just as experiment.
+        try: 
+            visit = models.Visit()
+            if self.request.headers.get('Referer'):
+                visit.referer = self.request.headers.get('Referer')
+                logging.info("Chart requested from: " + self.request.headers.get('Referer'))
+            else:
+                visit.referer = ''
+                logging.info("Chart requested from: Cannot get referer")
+            visit.page = "/"
+            visit.userAgent = self.request.headers.get('User-Agent')
+            visit.ip = self.request.headers.get('X-Forwarded-For', self.request.headers.get('X-Real-Ip', self.request.remote_ip))
+            visit.save()
+        except Exception, e:
+            logging.info("Could not save visit information: " + str(e))
         self.render(
             "index.html",
             user=self.current_user,
@@ -284,6 +299,7 @@ class CandidateHandler(BaseHandler):
 class ChartHandler(BaseHandler):
     @tornado.web.addslash
     def get(self):
+        #log visit
         try: 
             visit = models.Visit()
             if self.request.headers.get('Referer'):
