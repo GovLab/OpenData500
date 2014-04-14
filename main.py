@@ -284,18 +284,22 @@ class CandidateHandler(BaseHandler):
 class ChartHandler(BaseHandler):
     @tornado.web.addslash
     def get(self):
-        visit = models.Visit()
-        if self.request.headers.get('Referer'):
-            visit.referer = self.request.headers.get('Referer')
-            logging.info("Chart requested from: " + self.request.headers.get('Referer'))
-        else:
-            visit.referer = ''
-            logging.info("Chart requested from: Cannot get referer")
-        visit.page = "/chart/"
-        visit.userAgent = self.request.headers.get('User-Agent')
-        visit.ip = self.request.headers.get('X-Forwarded-For', self.request.headers.get('X-Real-Ip', self.request.remote_ip))
-        visit.save()
-        self.render("solo_chart.html")
+        try: 
+            visit = models.Visit()
+            if self.request.headers.get('Referer'):
+                visit.referer = self.request.headers.get('Referer')
+                logging.info("Chart requested from: " + self.request.headers.get('Referer'))
+            else:
+                visit.referer = ''
+                logging.info("Chart requested from: Cannot get referer")
+            visit.page = "/chart/"
+            visit.userAgent = self.request.headers.get('User-Agent')
+            visit.ip = self.request.headers.get('X-Forwarded-For', self.request.headers.get('X-Real-Ip', self.request.remote_ip))
+            visit.save()
+        except Exception, e:
+            logging.info("Could not save visit information: " + str(e))
+        finally:
+            self.render("solo_chart.html")
 
 class AboutHandler(BaseHandler):
     @tornado.web.addslash
