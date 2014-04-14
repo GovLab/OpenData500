@@ -167,7 +167,6 @@ class Visit(Document):
 	referer = StringField()
 	page = StringField()
 	userAgent = StringField()
-	host = StringField()
 	ip = StringField()
 
 

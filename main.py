@@ -293,7 +293,6 @@ class ChartHandler(BaseHandler):
             logging.info("Chart requested from: Cannot get referer")
         visit.page = "/chart/"
         visit.userAgent = self.request.headers.get('User-Agent')
-        visit.host = self.request.headers.get('Host')
         visit.ip = self.request.headers.get('X-Forwarded-For', self.request.headers.get('X-Real-Ip', self.request.remote_ip))
         visit.save()
         self.render("solo_chart.html")
