@@ -168,6 +168,7 @@ class Visit(Document):
 	page = StringField()
 	userAgent = StringField()
 	host = StringField()
+	ip = StringField()
 
 
 
