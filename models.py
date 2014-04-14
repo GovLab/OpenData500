@@ -162,6 +162,13 @@ class Stats(Document):
 	totalCompaniesSurvey = IntField() #completed surveys
 	states = ListField(EmbeddedDocumentField(States))
 
+class Visit(Document):
+	ts = ComplexDateTimeField(default=datetime.now())
+	referer = StringField()
+	page = StringField()
+	userAgent = StringField()
+	host = StringField()
+
 
 
 Dataset.register_delete_rule(Company, "datasets", PULL)

@@ -275,7 +275,6 @@ class CandidateHandler(BaseHandler):
             page_heading='OD500 Companies',
             companies = companies,
             stats = stats,
-            #recentlySubmitted=recentlySubmitted,
             states=states,
             agencies = agencies,
             categories = categories,
@@ -285,10 +284,17 @@ class CandidateHandler(BaseHandler):
 class ChartHandler(BaseHandler):
     @tornado.web.addslash
     def get(self):
+        visit = models.Visit()
         if self.request.headers.get('Referer'):
+            visit.referer = self.request.headers.get('Referer')
             logging.info("Chart requested from: " + self.request.headers.get('Referer'))
         else:
+            visit.referer = ''
             logging.info("Chart requested from: Cannot get referer")
+        visit.page = "/chart/"
+        visit.userAgent = self.request.headers.get('User-Agent')
+        visit.host = self.request.headers.get('Host')
+        visit.save()
         self.render("solo_chart.html")
 
 class AboutHandler(BaseHandler):

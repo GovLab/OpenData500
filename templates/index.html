@@ -6,17 +6,22 @@
 <div class="m-homepage">
 
     <h1 class="first-title">Welcome to OpenData 500</h1>
-
-    <!-- <section id="chord-chart-container">
+    <script src="{{ static_url("js/d3.v3.min.js") }}"></script>
+    <section id="chord-chart-container">
         <h2>Open Data Compass</h2>
         <h3>What types of companies use which agencies' data?</h3>
     	<div id="chord-chart">
          <span class="chord-legend companies">Company Categories</span>
          <span class="chord-legend agencies">Federal Agencies</span>
         </div>
-    </section> -->
+        <h3 class="data-text"><div class="embed-popup"><a class="m-button"><strong>Embed Chart</strong></a></div></h3><br>
+        <div class="dialog-example">
+            <p>To embed this chart on your website, just copy and paste this code onto your page:</p>
+            <textarea class="embed-code" readonly="readonly"><iframe src="http://www.opendata500.com/chart/" width="960" height="860" marginwidth="0" marginheight="50" scrolling="no" frameborder="0"></iframe></textarea>
+        </div>
+    </section>
 
-    <iframe src="/chart/" width="960" height="860" marginwidth="0" marginheight="50" scrolling="no" frameborder="0"></iframe>
+    <!-- <iframe src="/chart/" width="960" height="860" marginwidth="0" marginheight="50" scrolling="no" frameborder="0"></iframe> -->
 
     <section class="m-homepage-about">
         <h1>About This Project</h1>

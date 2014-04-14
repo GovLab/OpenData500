@@ -1117,3 +1117,16 @@ footer {
 .dialog-example {
   display: none;
 }
+
+.embed-popup {
+  text-align: right;
+}
+
+.embed-code {
+  width: 90%;
+  height: 85px;
+}
+
+
+
+
