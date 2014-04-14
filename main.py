@@ -280,7 +280,6 @@ class CandidateHandler(BaseHandler):
             agencies = agencies,
             categories = categories,
             user=self.current_user,
-            #stateInfo=stateInfo
         )
 
 class ChartHandler(BaseHandler):
