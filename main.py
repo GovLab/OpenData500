@@ -44,7 +44,7 @@ class Application(tornado.web.Application):
         handlers = [
             (r'/(favicon.ico)', tornado.web.StaticFileHandler, {"path": ""}),
             (r"/", MainHandler),
-            # (r"/2/?", SankeeyChartHandler),
+            (r"/sankeyChart/?", SankeyChartHandler),
             # (r"/3/?", ChordDiagramHandler),
             (r"/submitCompany/?", SubmitCompanyHandler),
             (r"/validate/?", ValidateHandler),
@@ -316,6 +316,11 @@ class ChartHandler(BaseHandler):
             logging.info("Could not save visit information: " + str(e))
         finally:
             self.render("solo_chart.html")
+
+class SankeyChartHandler(BaseHandler):
+    @tornado.web.addslash
+    def get(self):
+        self.render("index2.html")
 
 class AboutHandler(BaseHandler):
     @tornado.web.addslash

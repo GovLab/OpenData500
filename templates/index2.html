@@ -1,78 +1,62 @@
-{% extends "main.html" %}
-{% autoescape None %}
-
-{% block body %}
+<script src="{{ static_url("js/jquery-2.1.0.min.js") }}"></script>
 <script src="{{ static_url("js/d3.v3.min.js") }}"></script>
 <script src="{{ static_url("js/sankey.js") }}"></script>
-<h1 class="logo"><img src="{{ static_url("img/od500-logo.png") }}" alt=""></h1>
 
-<div class="m-homepage">
 
-<h1>Welcome to the Open Data 500</h1>
+<style>
+/*----------------SANKEY CHART----------*/
+.chart {
+    text-align: center;
+}
 
-<section class="m-homepage-about m-homepage-box">
+.title {
+    font-size: 2.7em;
+    font-weight: 500;
+    font-family: "Exo", sans-serif;
+}
 
-<h2>About This Project</h2>
+#chart_sankey {
+  height: 500px;
+  margin-left: 250px;
 
-<p>The Open Data 500, funded by the <a href="http://www.knightfoundation.org/" target="_blank">Knight Foundation</a> and conducted by <a href="http://thegovlab.org/" target="_blank">the GovLab</a>, is the first comprehensive study of U.S. companies that use open government data to generate new business and develop new products and services.</p>
-<p><a href="/about/" class="m-button">Learn More</a></p>
-<h2 class="separator-title">Pre-Launch</h2>
-<p>This <strong>pre-launch version</strong> of the Open Data 500 presents a working list of companies for public comment. Based on feedback, further research, and company input, the GovLab will publish a final list and analysis of the results in mid-2014.</p>
-<p>For more information about Open Data, check out the resources provided by the GovLab.</p>
-<a href="/resources/" class="m-button">Resources</a>
-</section>
+}
 
-<section class="m-homepage-explore">
-     <h2 style="font-size: 2.7em">What types of companies use which agencies?</h2>
-	<p id="chart_sankey">	
-</section>
-<section class="m-homepage-participate m-homepage-box" id="scrolling_div">
+.node rect {
+  fill-opacity: .9;
+  shape-rendering: crispEdges;
+}
 
-    <h2>How To Participate</h2>
+.node text {
+  pointer-events: none;
+  text-shadow: 0 1px 0 #fff;
+  font-size: 12px;
+}
 
-    <p><strong>1. If you represent an Open Data company:</strong> If your company is not already on our list, please fill out our <a href="/submitCompany/">survey</a> to tell us about your work and the data you use.</p>
-    <p><strong>2. If you have information about a company on our list:</strong> please use the Comment button for that company to tell us about it, or email us at <a href="mailto:opendata500@thegovlab.org">opendata500@thegovlab.org</a>.</p>
-    <p><strong>3. If you have general information to share:</strong> <a href="http://www.opendata500.com/about/#disqus_thread" target="_balnk">Join the Conversation</a>, tweet your comments to #OD500, or email us at <a href="mailto:opendata500@thegovlab.org">opendata500@thegovlab.org</a>.</p>
+.link {
+  fill: none;
+  stroke: #000;
+  stroke-opacity: .2;
+}
 
-    <div id="mc_embed_signup">
-    <form action="http://openinggovernment.us6.list-manage.com/subscribe/post?u=1a990feb5c&amp;id=691b1fcbc9" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-        <h2 class="separator-title">Subscribe</h2>
-        <p>Subscribe for OD500 Email Alerts.</p>
-        <div class="mc-field-group">
-            <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL" placeholder="Email"><input type="submit" value="OK" name="subscribe" id="mc-embedded-subscribe" class="m-button">
-        </div>
-        <div style="position: absolute; left: -5000px;"><input type="text" name="b_1a990feb5c_691b1fcbc9" value=""></div>
-        <div id="mce-responses">
-            <div class="response" id="mce-error-response" style="display:none"></div>
-            <div class="response" id="mce-success-response" style="display:none"></div>
-        </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-    </form>
+.link:hover {
+  stroke-opacity: .5;
+}
+
+</style>
+
+<div class="chart">
+    <h2 class="title">What types of companies use which agencies' data?</h2>
+    <p id="chart_sankey"></p>	
 </div>
-</section>
 
 <script type="text/javascript">
 
 
-//------------------------------- FIXED SCROLLING FOR SIDE BOXES---------------
-$('.l-centered').css('max-width', 1260);
-$('.m-homepage-box').css('width', "15%");
-$('.m-homepage-box').css('margin-right', 0 );
-$('.m-homepage-box').css('margin-left', 0 );
-$('.m-homepage-explore').css('width', "55%");
-var $boxes = $('.m-homepage-box');
-var padding_top = 230;
-$(window).scroll(function(){
-    if (window.pageYOffset > padding_top && window.pageYOffset < $boxes.position()['top'] + $boxes.height()) {
-        $boxes.css('margin-top', function() {return window.pageYOffset - padding_top})
-    } else if (window.pageYOffset < padding_top) {
-        $boxes.css('margin-top', 0)
-    }
-});
 
 
-var margin = {top: 1, right: 400, bottom: 6, left: 160},
+var margin = {top: 1, right: 400, bottom: 60, left: 160},
     width = 860 - margin.left - margin.right,
-    height = 2000 - margin.top - margin.bottom;
+    height = 2400 - margin.top - margin.bottom;
 
 var formatNumber = d3.format(",.0f"),
     format = function(d) { 
@@ -189,198 +173,3 @@ d3.json("{{ static_url("sankey.json") }}", function(energy) {
 
 
 </script>
-
-<script type="text/javascript">
-var fnames = new Array();var ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';
-try {
-    var jqueryLoaded=jQuery;
-    jqueryLoaded=true;
-} catch(err) {
-    var jqueryLoaded=false;
-}
-var head= document.getElementsByTagName('head')[0];
-if (!jqueryLoaded) {
-    var script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.src = '//ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js';
-    head.appendChild(script);
-    if (script.readyState && script.onload!==null){
-        script.onreadystatechange= function () {
-              if (this.readyState == 'complete') mce_preload_check();
-        }    
-    }
-}
-
-var err_style = '';
-try{
-    err_style = mc_custom_error_style;
-} catch(e){
-    err_style = '#mc_embed_signup input.mce_inline_error{border-color:#6B0505;} #mc_embed_signup div.mce_inline_error{margin: 0 0 1em 0; padding: 5px 10px; background-color:#6B0505; font-weight: bold; z-index: 1; color:#fff;}';
-}
-var head= document.getElementsByTagName('head')[0];
-var style= document.createElement('style');
-style.type= 'text/css';
-if (style.styleSheet) {
-  style.styleSheet.cssText = err_style;
-} else {
-  style.appendChild(document.createTextNode(err_style));
-}
-head.appendChild(style);
-setTimeout('mce_preload_check();', 250);
-
-var mce_preload_checks = 0;
-function mce_preload_check(){
-    if (mce_preload_checks>40) return;
-    mce_preload_checks++;
-    try {
-        var jqueryLoaded=jQuery;
-    } catch(err) {
-        setTimeout('mce_preload_check();', 250);
-        return;
-    }
-    var script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.src = 'http://downloads.mailchimp.com/js/jquery.form-n-validate.js';
-    head.appendChild(script);
-    try {
-        var validatorLoaded=jQuery("#fake-form").validate({});
-    } catch(err) {
-        setTimeout('mce_preload_check();', 250);
-        return;
-    }
-    mce_init_form();
-}
-function mce_init_form(){
-    jQuery(document).ready( function($) {
-      var options = { errorClass: 'mce_inline_error', errorElement: 'div', onkeyup: function(){}, onfocusout:function(){}, onblur:function(){}  };
-      var mce_validator = $("#mc-embedded-subscribe-form").validate(options);
-      $("#mc-embedded-subscribe-form").unbind('submit');//remove the validator so we can get into beforeSubmit on the ajaxform, which then calls the validator
-      options = { url: 'http://openinggovernment.us6.list-manage.com/subscribe/post-json?u=1a990feb5c&id=691b1fcbc9&c=?', type: 'GET', dataType: 'json', contentType: "application/json; charset=utf-8",
-                    beforeSubmit: function(){
-                        $('#mce_tmp_error_msg').remove();
-                        $('.datefield','#mc_embed_signup').each(
-                            function(){
-                                var txt = 'filled';
-                                var fields = new Array();
-                                var i = 0;
-                                $(':text', this).each(
-                                    function(){
-                                        fields[i] = this;
-                                        i++;
-                                    });
-                                $(':hidden', this).each(
-                                    function(){
-                                        var bday = false;
-                                        if (fields.length == 2){
-                                            bday = true;
-                                            fields[2] = {'value':1970};//trick birthdays into having years
-                                        }
-                                        if ( fields[0].value=='MM' && fields[1].value=='DD' && (fields[2].value=='YYYY' || (bday && fields[2].value==1970) ) ){
-                                            this.value = '';
-                                        } else if ( fields[0].value=='' && fields[1].value=='' && (fields[2].value=='' || (bday && fields[2].value==1970) ) ){
-                                            this.value = '';
-                                        } else {
-                                            if (/\[day\]/.test(fields[0].name)){
-                                                this.value = fields[1].value+'/'+fields[0].value+'/'+fields[2].value;                                           
-                                            } else {
-                                                this.value = fields[0].value+'/'+fields[1].value+'/'+fields[2].value;
-                                            }
-                                        }
-                                    });
-                            });
-                        $('.phonefield-us','#mc_embed_signup').each(
-                            function(){
-                                var fields = new Array();
-                                var i = 0;
-                                $(':text', this).each(
-                                    function(){
-                                        fields[i] = this;
-                                        i++;
-                                    });
-                                $(':hidden', this).each(
-                                    function(){
-                                        if ( fields[0].value.length != 3 || fields[1].value.length!=3 || fields[2].value.length!=4 ){
-                                            this.value = '';
-                                        } else {
-                                            this.value = 'filled';
-                                        }
-                                    });
-                            });
-                        return mce_validator.form();
-                    }, 
-                    success: mce_success_cb
-                };
-      $('#mc-embedded-subscribe-form').ajaxForm(options);
-      
-      
-    });
-}
-function mce_success_cb(resp){
-    $('#mce-success-response').hide();
-    $('#mce-error-response').hide();
-    if (resp.result=="success"){
-        $('#mce-'+resp.result+'-response').show();
-        $('#mce-'+resp.result+'-response').html(resp.msg);
-        $('#mc-embedded-subscribe-form').each(function(){
-            this.reset();
-        });
-    } else {
-        var index = -1;
-        var msg;
-        try {
-            var parts = resp.msg.split(' - ',2);
-            if (parts[1]==undefined){
-                msg = resp.msg;
-            } else {
-                i = parseInt(parts[0]);
-                if (i.toString() == parts[0]){
-                    index = parts[0];
-                    msg = parts[1];
-                } else {
-                    index = -1;
-                    msg = resp.msg;
-                }
-            }
-        } catch(e){
-            index = -1;
-            msg = resp.msg;
-        }
-        try{
-            if (index== -1){
-                $('#mce-'+resp.result+'-response').show();
-                $('#mce-'+resp.result+'-response').html(msg);            
-            } else {
-                err_id = 'mce_tmp_error_msg';
-                html = '<div id="'+err_id+'" style="'+err_style+'"> '+msg+'</div>';
-                
-                var input_id = '#mc_embed_signup';
-                var f = $(input_id);
-                if (ftypes[index]=='address'){
-                    input_id = '#mce-'+fnames[index]+'-addr1';
-                    f = $(input_id).parent().parent().get(0);
-                } else if (ftypes[index]=='date'){
-                    input_id = '#mce-'+fnames[index]+'-month';
-                    f = $(input_id).parent().parent().get(0);
-                } else {
-                    input_id = '#mce-'+fnames[index];
-                    f = $().parent(input_id).get(0);
-                }
-                if (f){
-                    $(f).append(html);
-                    $(input_id).focus();
-                } else {
-                    $('#mce-'+resp.result+'-response').show();
-                    $('#mce-'+resp.result+'-response').html(msg);
-                }
-            }
-        } catch(e){
-            $('#mce-'+resp.result+'-response').show();
-            $('#mce-'+resp.result+'-response').html(msg);
-        }
-    }
-}
-
-</script>
-<!--End mc_embed_signup-->
-</div>
-{% end %}
