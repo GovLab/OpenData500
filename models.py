@@ -164,9 +164,9 @@ class Stats(Document):
 
 class Visit(Document):
 	ts = ComplexDateTimeField(default=datetime.now())
-	referer = StringField()
-	page = StringField()
-	userAgent = StringField()
+	r = StringField() #referer
+	p = StringField() #page
+	ua = StringField() #userAgent
 	ip = StringField()
 
 

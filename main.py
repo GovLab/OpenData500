@@ -102,13 +102,13 @@ class MainHandler(BaseHandler):
         try: 
             visit = models.Visit()
             if self.request.headers.get('Referer'):
-                visit.referer = self.request.headers.get('Referer')
+                visit.r = self.request.headers.get('Referer')
                 logging.info("Chart requested from: " + self.request.headers.get('Referer'))
             else:
-                visit.referer = ''
+                visit.r = ''
                 logging.info("Chart requested from: Cannot get referer")
-            visit.page = "/"
-            visit.userAgent = self.request.headers.get('User-Agent')
+            visit.p = "/"
+            visit.ua = self.request.headers.get('User-Agent')
             visit.ip = self.request.headers.get('X-Forwarded-For', self.request.headers.get('X-Real-Ip', self.request.remote_ip))
             visit.save()
         except Exception, e:
@@ -303,13 +303,13 @@ class ChartHandler(BaseHandler):
         try: 
             visit = models.Visit()
             if self.request.headers.get('Referer'):
-                visit.referer = self.request.headers.get('Referer')
+                visit.r = self.request.headers.get('Referer')
                 logging.info("Chart requested from: " + self.request.headers.get('Referer'))
             else:
-                visit.referer = ''
+                visit.r = ''
                 logging.info("Chart requested from: Cannot get referer")
-            visit.page = "/chart/"
-            visit.userAgent = self.request.headers.get('User-Agent')
+            visit.p = "/chart/"
+            visit.ua = self.request.headers.get('User-Agent')
             visit.ip = self.request.headers.get('X-Forwarded-For', self.request.headers.get('X-Real-Ip', self.request.remote_ip))
             visit.save()
         except Exception, e:
