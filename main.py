@@ -400,6 +400,9 @@ class AdminHandler(BaseHandler):
         elif action == 'agency_csv':
             self.application.files.generate_agency_csv()
             self.write("success")
+        elif action == 'company_csv':
+            self.application.files.generate_company_csv()
+            self.write("success")
 
 
 class ValidateHandler(BaseHandler):
