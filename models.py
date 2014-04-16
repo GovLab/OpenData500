@@ -117,8 +117,6 @@ class Company2(Document):
 	def objects(doc_cls, queryset):
 		return queryset.order_by('prettyName')
 
-
-
 class Agency(Document):
 	ts = ComplexDateTimeField(default=datetime.now())
 	name = StringField()
