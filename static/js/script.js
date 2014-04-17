@@ -425,7 +425,6 @@ $(document).ready(function() {
     }, '.agency, .subagency');
     //----------------------------------SUBMIT DATASET QUESTION--------------------------------------
     $('.finish-data-submit').on('click', '.data-submit-button', function(event) {
-        console.log("sdsdfsdf")
         if ($('.data-comment-form').parsley('validate')) {
             var companyID = $('.companyID').val();
             //console.log(companyID);

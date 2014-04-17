@@ -247,18 +247,27 @@ class CompanyHandler(BaseHandler):
             except Exception, e:
                 logging.info("Company: " + companyName + ": " + str(e))
                 company = models.Company2.objects(prettyName=companyName)[0]
-            self.render(
-                "company.html",
-                page_title='Open Data500',
-                user=self.current_user,
-                page_heading=company.companyName,
-                company = company,
-            )
+            if company.display:
+                self.render(
+                    "company.html",
+                    page_title='Open Data500',
+                    user=self.current_user,
+                    page_heading=company.companyName,
+                    company = company,
+                )
+            else:
+                self.render(
+                    "404.html",
+                    page_title='404 - Open Data 500',
+                    user=self.current_user,
+                    page_heading='Shucks...',
+                    error = 'display'
+                )
         except Exception, e:
             logging.info("Company: " + companyName + ": " + str(e)) 
             self.render(
                 "404.html",
-                page_title='404 - Open Data500',
+                page_title='404 - Open Data 500',
                 user=self.current_user,
                 page_heading='Hmm...',
                 error = '404 - Not Found'
@@ -942,7 +951,7 @@ class AdminEditCompanyHandler(BaseHandler):
         company.financialInfo = self.get_argument('financialInfo', None)
         company.datasetWishList = self.get_argument('datasetWishList', None)
         company.sourceCount = self.get_argument('sourceCount', None) 
-        company.datasetComments = self.get_argument('datasetComments', None)
+        company.dataComments = self.get_argument('dataComments', None)
         if self.get_argument("submittedSurvey", None) == "submittedSurvey":
             company.submittedSurvey = True
         else:

@@ -222,6 +222,10 @@
 			{% end %}
 		</div><br>
 	</div>
+	<fieldset class="m-form-half right">
+		<h3>Please give your comments, good or bad, about the usefulness of all these data sources and datasets and what would make them more useful. <br><em>[250 words or less]</em></h3>
+		<textarea rows="10" cols="59" name="dataComments" id="dataComments" parsley-trigger="keyup" parsley-maxwords="250">{%if company.dataComments %}{{ company.dataComments }}{% end %}</textarea><br>
+	</fieldset>
 </div>
 <!--------------------------------------------END DATASETS--------------------------------------!-->
 
@@ -239,12 +243,16 @@
 $(document).ready( function () {
 	//----------------------------------Admin FORM--------------------------------------
   $('.saveCompanyForm').on('click', '#companyAdminSave', function() {
-    if ($('.companyForm').parsley('validate')) {
+    if ($('.companyForm').parsley('validate') && ($('#dataComments').parsley('validate') || $('#dataComments').parsley('validate') == null)) {
       console.log('valid');
       $('.message-form').text('Saving...');
       // $('.message-form').show();
       var companyID = $('.companyID').val();
       var data = $('.companyForm').serializeArray();
+      data.push({
+		    "name": "dataComments",
+		    "value": $('#dataComments').val()
+		});
       $.ajax({
         type: 'POST',
         url: '/admin/edit/' + companyID,

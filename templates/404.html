@@ -7,6 +7,8 @@
 <br>
 {%if error == 'locked' %}
 <h3 style="text-align:center;">If you would like to edit this company, please email us at <a href="mailto:opendata500@thegovlab.org">OpenData500@thegovlab.org</a> and let us know who you are.</h3>
+{% elif error == "display" %}
+<h3 style="text-align:center;">This company is still under review. If you have questions please email us at <a href="mailto:opendata500@thegovlab.org">OpenData500@thegovlab.org</a> and let us know who you are.</h3>
 {% else %}
 <h3 style="text-align:center;">There doesn't seem to be anything here.</h3>
 <br>
