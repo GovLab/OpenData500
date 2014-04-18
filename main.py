@@ -63,7 +63,7 @@ class Application(tornado.web.Application):
             (r"/download/?", DownloadHandler),
             (r'/download/(.*)/?',tornado.web.StaticFileHandler, {'path':os.path.join(os.path.dirname(__file__), 'static')}),
             (r"/candidates/?", CandidateHandler),
-            (r"/preview/?", PreviewHandler),
+            (r"/list/?", ListHandler),
             (r'/thanks/?', ThanksHandler),
             (r'/login/?', LoginHandler),
             (r'/logout/?', LogoutHandler),
@@ -272,21 +272,8 @@ class CompanyHandler(BaseHandler):
                 page_heading='Hmm...',
                 error = '404 - Not Found'
             )
-        
-class PreviewHandler(BaseHandler):
-    @tornado.web.addslash
-    #@tornado.web.authenticated
-    def get(self):
-        companies = models.Company.objects(preview50=True).order_by('prettyName')
-        self.render(
-            "preview.html",
-            page_title='Open Data500',
-            page_heading='Preview of the Open Data 500',
-            companies = companies,
-            user=self.current_user
-        )
 
-class CandidateHandler(BaseHandler):
+class ListHandler(BaseHandler):
     @tornado.web.addslash
     #@tornado.web.authenticated
     def get(self):
@@ -304,6 +291,10 @@ class CandidateHandler(BaseHandler):
             categories = categories,
             user=self.current_user,
         )
+
+class CandidateHandler(BaseHandler):
+    def get(self):
+        self.redirect('/list/')
 
 class ChartHandler(BaseHandler):
     @tornado.web.addslash
