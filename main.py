@@ -292,7 +292,7 @@ class ListHandler(BaseHandler):
             user=self.current_user,
         )
 
-class CandidateHandler(BaseHandler):
+class CandidateHandler(BaseHandler): #redirect to list URL
     def get(self):
         self.redirect('/list/')
 
