@@ -492,7 +492,7 @@ class FileGenerator(object):
                 for c in a.usedBy:
                     if c.companyCategory in categories and c.companyCategory not in used_agencies_categories:
                         used_agencies_categories.append(c.companyCategory)
-        logging.info(used_agencies_categories)
+        #logging.info(used_agencies_categories)
         name_key = {}
         key_name = {}
         for i, name in enumerate(used_agencies_categories):
@@ -532,6 +532,7 @@ class FileGenerator(object):
         #save to file
         with open(os.path.join(os.path.dirname(__file__), 'static') + '/matrix.json', 'w') as outfile:
             json.dump(data, outfile)
+        logging.info("Chord Chart File Done!")
 
 
 
