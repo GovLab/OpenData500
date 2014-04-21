@@ -63,7 +63,6 @@ class Application(tornado.web.Application):
             template_path=os.path.join(os.path.dirname(__file__), "templates"),
             static_path=os.path.join(os.path.dirname(__file__), "static"),
             ui_modules={
-                "Company": CompanyModule,
                 "datetime": datetime},
             debug=True,
             cookie_secret=os.environ.get('COOKIE_SECRET'),
@@ -71,17 +70,6 @@ class Application(tornado.web.Application):
             login_url="/login"
         )
         tornado.web.Application.__init__(self, handlers, **settings)
-
-class CompanyModule(tornado.web.UIModule):
-    def render(self, company):
-        return self.render_string(
-            "modules/company.html",
-            company=company
-        )
-    def css_files(self):
-        return "/static/css/styles.css"
-    def javascript_files(self):
-        return "/static/js/script.js"
 
 def main():
     tornado.options.parse_command_line()
