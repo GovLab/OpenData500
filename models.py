@@ -35,6 +35,8 @@ class Dataset(Document):
 	dataType = ListField(StringField())
 	usedBy = ListField(ReferenceField('Company'))
 
+
+#Eventually Deprecate
 class Company(Document):
 	companyName = StringField()
 	prettyName = StringField()
