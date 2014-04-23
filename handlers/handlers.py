@@ -104,6 +104,7 @@ class ThanksHandler(BaseHandler):
             page_heading="Thank you for participating in the Open Data 500!" 
             )
 
+
 #--------------------------------------------------------REGISTER PAGE------------------------------------------------------------
 class RegisterHandler(LoginHandler):
     @tornado.web.addslash
