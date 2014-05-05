@@ -1231,6 +1231,18 @@ $(document).ready(function() {
         "s": "Centers for Disease Control and Prevention",
         "sa": "CDC"
     }, {
+        "label": "Department of Health and Human Services (HHS) - Office of the National Coordinator for Health IT (ONC)",
+        "a": "Department of Health and Human Services",
+        "aa": "HHS",
+        "s": "Office of the National Coordinator for Health IT",
+        "sa": "ONC"
+    }, {
+        "label": "Department of Health and Human Services (HHS) - Agency for Healthcare Research and Quality (AHRQ)",
+        "a": "Department of Health and Human Services",
+        "aa": "HHS",
+        "s": "Agency for Healthcare Research and Quality",
+        "sa": "AHRQ"
+    }, {
         "label": "Department of Homeland Security (DHS) - U.S. Coast Guard",
         "a": "Department of Homeland Security",
         "aa": "DHS",
@@ -2584,6 +2596,30 @@ $(document).ready(function() {
         "label": "Multiple federal data sources",
         "a": "Multiple federal data sources",
         "aa": "",
+        "s": "",
+        "sa": ""
+    }, {
+        "label": "US Government Printing Office (GPO)",
+        "a": "US Government Printing Office",
+        "aa": "GPO",
+        "s": "",
+        "sa": ""
+    }, {
+        "label": "US Government Printing Office (GPO) - Congressional Committee Prints",
+        "a": "US Government Printing Office",
+        "aa": "GPO",
+        "s": "Congressional Committee Prints",
+        "sa": ""
+    }, {
+        "label": "US Copyright Office",
+        "a": "US Copyright Office",
+        "aa": "",
+        "s": "",
+        "sa": ""
+    }, {
+        "label": "United States Postal Service (USPS)",
+        "a": "United States Postal Service",
+        "aa": "USPS",
         "s": "",
         "sa": ""
     }]
