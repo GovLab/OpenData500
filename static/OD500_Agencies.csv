@@ -2,7 +2,7 @@ agency_name,agency_abbrev,agency_type,subagency_name,subagency_abbrev,url,used_b
 U.S. Environmental Protection Agency,EPA,Federal,General,,http://catalog.data.gov/organization/epa-gov,"3 Round Stones, Inc.",Data/Technology,Toxics Release Inventory (TRI) Programs,http://www2.epa.gov/toxics-release-inventory-tri-program/tri-data-and-tools
 U.S. Environmental Protection Agency,EPA,Federal,General,,http://catalog.data.gov/organization/epa-gov,"3 Round Stones, Inc.",Data/Technology,Facilities Registry Service (FRS),http://www.epa.gov/enviro/html/fii/index.html
 Multiple federal data sources,,Federal,General,,,"3 Round Stones, Inc.",Data/Technology,,
-EPA,,Federal Open Data,General,,,5PSolutions,Data/Technology,EPA,www.epa.gov
+U.S. Environmental Protection Agency,EPA,Federal,General,,http://catalog.data.gov/organization/epa-gov,5PSolutions,Data/Technology,epa,www.epa.gov
 Department of Commerce,USDC,Federal,US Census Bureau,Census,http://catalog.data.gov/organization/census-gov,Abt Associates,Research & Consulting,US Census Bureau,http://www.census.gov/
 U.S. Environmental Protection Agency,EPA,Federal,General,,http://catalog.data.gov/organization/epa-gov,Abt Associates,Research & Consulting,US Environmental Protection Agency (EPA) Integrated Risk Information System (IRIS),http://www.epa.gov/IRIS/
 U.S. Environmental Protection Agency,EPA,Federal,General,,http://catalog.data.gov/organization/epa-gov,Abt Associates,Research & Consulting,US Environmental Protection Agency (EPA) Enforcement and Compliance History Online (ECHO),http://www.epa-echo.gov/echo/
@@ -172,6 +172,9 @@ Department of Commerce,USDC,Federal,National Oceanic and Atmospheric Administrat
 Department of the Interior,DOI,Federal,U.S. Geological Survey,USGS,http://catalog.data.gov/dataset?q=organization:usgs-gov,Climate Corporation,Food & Agriculture,High Resolution Soil Dataset,http://www.usgs.gov/
 Department of Agriculture,USDA,Federal,Natural Resources Conservation Service,NRCS,http://catalog.data.gov/organization/nrcs-usda-gov,Climate Corporation,Food & Agriculture,,
 National Aeronautics and Space Administration,NASA,Federal,General,,http://catalog.data.gov/organization/jpl-nasa-gov,Climate Corporation,Food & Agriculture,,
+Department of Health and Human Services,HHS,Federal,General,,http://catalog.data.gov/organization/cms-hhs-gov,CliniCast,Healthcare,SEER,http://seer.cancer.gov/
+Department of Health and Human Services,HHS,Federal,General,,http://catalog.data.gov/organization/cms-hhs-gov,CliniCast,Healthcare,MEPS,http://meps.ahrq.gov/mepsweb/
+Department of Health and Human Services,HHS,Federal,General,,http://catalog.data.gov/organization/cms-hhs-gov,CliniCast,Healthcare,CMS 5% Dataset,http://www.cms.gov/Research-Statistics-Data-and-Systems/Files-for-Order/IdentifiableDataFiles/StandardAnalyticalFiles.html
 Department of Commerce,USDC,Federal,General,,http://catalog.data.gov/organization/doc-gov,Cloudmade,Geospatial/Mapping,GPS data,
 Multiple government open data sources,,Other,General,,,Cloudmade,Geospatial/Mapping,,
 Department of Labor,,Federal,General,,http://catalog.data.gov/dataset?q=organization:((ecab-dol-gov)+OR+(whd-dol-gov)+OR+(esba-dol-gov)+OR+(ojc-dol-gov)+OR+(eta-dol-gov)+OR+(osha-dol-gov)+OR+(oalj-dol-gov)+OR+(oasp-dol-gov)+OR+(msha-dol-gov)+OR+(bls-gov)+OR+(brb-dol-gov)),Cloudspyre,Lifestyle & Consumer,,
@@ -207,20 +210,20 @@ Department of Commerce,USDC,Federal,US Census Bureau,Census,http://catalog.data.
 Department of Health and Human Services,HHS,Federal,General,,http://catalog.data.gov/organization/cms-hhs-gov,Dabo Health,Healthcare,,
 Department of Commerce,USDC,Federal,General,,http://catalog.data.gov/organization/doc-gov,DataLogix,Data/Technology,,
 Multiple state data sources,,State,General,,,DataLogix,Data/Technology,Uses DMV data from states.,
-City of Chicago,,,General,,,DataMade,Governance,Crimes - 2001 to Present,https://data.cityofchicago.org/Public-Safety/Crimes-2001-to-present/ijzp-q8t2
 Illinois,IL,State,General,,http://data.illinois.gov/,DataMade,Governance,The Open Data Portal for the Cook County Government - Cook County Budget 1993-2011,https://datacatalog.cookcountyil.gov/Finance-Administration/Cook-County-Budget-1993-2011/y39t-8wqx
-,,,General,,,DataMarket,Data/Technology,US Government Priniting Office,www.gpo.gov/
+Chicago,CHI,City/County,General,,http://data.cityofchicago.org/,DataMade,Governance,Crimes - 2001 to Present,https://data.cityofchicago.org/Public-Safety/Crimes-2001-to-present/ijzp-q8t2
 Missouri,MO,State,General,,http://data.mo.gov/,DataMarket,Data/Technology,Federal Reserve Bank of St. Louis,http://www.stlouisfed.org/
+Department of the Treasury,,Federal,Bureau of Engraving and Printing,BEP,http://catalog.data.gov/organization/bep-gov,DataMarket,Data/Technology,US Government Printing Office,www.gpo.gov/
 Department of Homeland Security,DHS,Federal,General,,http://catalog.data.gov/organization/uscg-mil,Datamyne,Business & Legal Services,U.S. Customs and Border Protection,
 Department of Homeland Security,DHS,Federal,General,,http://catalog.data.gov/organization/uscg-mil,Datamyne,Business & Legal Services,Automated Manifest System,
 Department of Homeland Security,DHS,Federal,General,,http://catalog.data.gov/organization/uscg-mil,Datamyne,Business & Legal Services,customs declarations and Import-Export Customs Statistics,
 Multiple government open data sources,,Other,General,,,Deloitte,Research & Consulting,,
 Multiple government open data sources,,Other,General,,,DemystData,Finance & Investment,,
-World Bank,,International Organization,General,,,Development Seed,Governance,World Bank Data,http://data.worldbank.org/
-Open Street Map,,NGO,General,,,Development Seed,Governance,Open Street Map,http://www.openstreetmap.org/
-United Nations Development Program,,International Organization,General,,,Development Seed,Governance,UNDP Open Data,https://data.undp.org/
 Department of Commerce,USDC,Federal,US Census Bureau,Census,http://catalog.data.gov/organization/census-gov,Development Seed,Governance,Census Data,http://www.census.gov/main/www/access.html
 Multiple government open data sources,,Other,General,,,Development Seed,Governance,AITI data,http://aiddata.org/
+Multiple government open data sources,,Other,General,,,Development Seed,Governance,UNDP,https://data.undp.org/
+Multiple government open data sources,,Other,General,,,Development Seed,Governance,World Bank,
+Multiple government open data sources,,Other,General,,,Development Seed,Governance,Open Street Map,http://www.openstreetmap.org/
 Securities and Exchange Commission,SEC,Federal,General,,http://catalog.data.gov/organization/sec-gov,Dow Jones & Co.,Finance & Investment,,
 Department of the Treasury,,Federal,General,,http://catalog.data.gov/organization/treasury-gov,Dow Jones & Co.,Finance & Investment,,
 Securities and Exchange Commission,SEC,Federal,General,,http://catalog.data.gov/organization/sec-gov,Dun & Bradstreet,Business & Legal Services,,
@@ -597,8 +600,8 @@ Multiple government open data sources,,Other,General,,,NERA Economic Consulting,
 Department of Health and Human Services,HHS,Federal,General,,http://catalog.data.gov/organization/cms-hhs-gov,NERA Economic Consulting,Research & Consulting,,
 Department of Health and Human Services,HHS,Federal,Centers for Medicare and Medicaid Services,CMS,http://catalog.data.gov/organization/cms-hhs-gov,NerdWallet,Finance & Investment,CMS,http://www.cms.gov/Research-Statistics-Data-and-Systems/Statistics-Trends-and-Reports/Medicare-Provider-Charge-Data/index.html
 Department of Commerce,USDC,Federal,US Census Bureau,Census,http://catalog.data.gov/organization/census-gov,NerdWallet,Finance & Investment,census,census.gov
-San Francisco Data,,,General,,,New Media Parents,Geospatial/Mapping,San Francisco,https://data.sfgov.org/
 Seattle,SEA,City/County,General,,http://data.seattle.gov/,New Media Parents,Geospatial/Mapping,City of Seattle Parks,https://data.seattle.gov/dataset/City-Of-Seattle-Parks/kxj9-se6t
+San Francisco,SF,City/County,General,,http://www.datasf.org/,New Media Parents,Geospatial/Mapping,San Francisco,https://data.sfgov.org/
 Multiple government open data sources,,Other,General,,,Next Step Living,Energy,"data on local, state and federal government grants and tax breaks, utility rebates and pricing plans, and other financial incentives available for home retrofits in the state",
 Department of Commerce,USDC,Federal,General,,http://catalog.data.gov/organization/doc-gov,NextBus,Transportation,,
 Multiple city and local data sources,,City/County,General,,,NextBus,Transportation,,
@@ -629,7 +632,6 @@ Multiple city and local data sources,,City/County,General,,,OpenCounter,Governan
 Multiple city and local data sources,,City/County,General,,,OpenGov,Governance,,
 Multiple state data sources,,State,General,,,OpenGov,Governance,,
 Multiple city and local data sources,,City/County,General,,,OpenPlans,Governance,,
-Louisville Metro Parcels,,,General,,,"OpportunitySpace, Inc.",Housing/Real Estate,,
 Louisville,LVL,City/County,General,,http://portal.louisvilleky.gov/service/data,"OpportunitySpace, Inc.",Housing/Real Estate,Consolidated Sales Inventory,http://vapstat.louisvilleky.gov/sites/vapstat.louisvilleky.gov/files/documents/Sales%20Inventory/Sales_Inventory_10.03.13.xlsx
 Multiple city and local data sources,,City/County,General,,,"OpportunitySpace, Inc.",Housing/Real Estate,,
 Multiple government open data sources,,Other,General,,,Optensity,Data/Technology,,
@@ -725,7 +727,7 @@ Department of Commerce,USDC,Federal,General,,http://catalog.data.gov/organizatio
 Multiple government open data sources,,Other,General,,,Remi,Governance,,
 Multiple government open data sources,,Other,General,,,ReportLinker,Data/Technology,,
 Department of Energy,DOE,Federal,General,,http://catalog.data.gov/organization/doe-gov,Retroficiency,Energy,,
-,,,General,,,Revelstone,Governance,Municipal performance measures ,
+Multiple city and local data sources,,City/County,General,,,Revelstone,Governance,Municipal performance measures,
 Department of Education,ED / DOED,Federal,General,,http://catalog.data.gov/organization/ed-gov,Rezolve Group,Education,,
 Securities and Exchange Commission,SEC,Federal,General,,http://catalog.data.gov/organization/sec-gov,Rivet Software,Finance & Investment,,
 Multiple city and local data sources,,City/County,General,,,Roadify Transit,Transportation,,
@@ -738,7 +740,7 @@ Department of Health and Human Services,HHS,Federal,General,,http://catalog.data
 Multiple government open data sources,,Other,General,,,Scale Unlimited,Data/Technology,,
 US National Library of Medicine - National Institutes of Health (NIH) ,,,General,,,Science Exchange,Scientific Research,PMC Open Access Subset,http://www.ncbi.nlm.nih.gov/pmc/tools/openftlist/
 Multiple government open data sources,,Other,General,,,Seabourne,Data/Technology,,
-Open 311 Data on Municipal Issues,,,General,,,SeeClickFix,Governance,,seeclickfix.com/open311
+Multiple city and local data sources,,City/County,General,,,SeeClickFix,Governance,311 data,seeclickfix.com/open311
 Securities and Exchange Commission,SEC,Federal,General,,http://catalog.data.gov/organization/sec-gov,SigFig,Finance & Investment,,
 Department of Energy,DOE,Federal,Energy Information Administration,EIA,http://catalog.data.gov/organization/eia-doe-gov,Simple Energy,Energy,EIA 861,http://www.eia.gov/electricity/data/eia861/
 Department of Education,ED / DOED,Federal,General,,http://catalog.data.gov/organization/ed-gov,SimpleTuition,Education,,
