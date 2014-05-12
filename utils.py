@@ -27,7 +27,7 @@ class Validators(object):
 	def check_for_duplicates(self, companyName):
 		#check if companyName exists:
 		try: 
-			c = models.Company2.objects.get(prettyName=re.sub(r'([^\s\w])+', '', companyName).replace(" ", "-").title())
+			c = models.Company.objects.get(prettyName=re.sub(r'([^\s\w])+', '', companyName).replace(" ", "-").title())
 			response = { "error": "This company has already been submitted. Email opendata500@thegovlab.org for questions." }
 		except:
 			response = 'true'
@@ -46,9 +46,9 @@ class StatsGenerator(object):
 
     def update_totals_companies(self):
         s = models.Stats.objects().first()
-        s.totalCompanies = models.Company2.objects().count()
-        s.totalCompaniesWeb = models.Company2.objects(submittedThroughWebsite = True).count()
-        s.totalCompaniesSurvey = models.Company2.objects(submittedSurvey = True).count()
+        s.totalCompanies = models.Company.objects().count()
+        s.totalCompaniesWeb = models.Company.objects(submittedThroughWebsite = True).count()
+        s.totalCompaniesSurvey = models.Company.objects(submittedSurvey = True).count()
     
     def increase_individual_state_count(self, state):
         stats = models.Stats.objects().first()
@@ -66,7 +66,7 @@ class StatsGenerator(object):
 
     def update_all_state_counts(self):
         stats = models.Stats.objects().first()
-        companies  = models.Company2.objects(display=True)
+        companies  = models.Company.objects(display=True)
         stateCount = []
         for c in companies:
             stateCount.append(c.state)
@@ -81,10 +81,10 @@ class StatsGenerator(object):
 
     def refresh_stats(self):
         stats = models.Stats.objects().first()
-        stats.totalCompanies = models.Company2.objects().count()
-        stats.totalCompaniesWeb = models.Company2.objects(submittedThroughWebsite = True).count()
-        stats.totalCompaniesSurvey = models.Company2.objects(submittedSurvey = True).count()
-        companies  = models.Company2.objects(display=True)
+        stats.totalCompanies = models.Company.objects().count()
+        stats.totalCompaniesWeb = models.Company.objects(submittedThroughWebsite = True).count()
+        stats.totalCompaniesSurvey = models.Company.objects(submittedSurvey = True).count()
+        companies  = models.Company.objects(display=True)
         stateCount = []
         for c in companies:
             stateCount.append(c.state)
@@ -102,7 +102,7 @@ class StatsGenerator(object):
 class FileGenerator(object):
     def generate_company_json(self):
         #------COMPANIES JSON---------
-        companies = models.Company2.objects(display=True)
+        companies = models.Company.objects(display=True)
         companiesJSON = []
         for c in companies:
             agencies = []
@@ -232,7 +232,7 @@ class FileGenerator(object):
         logging.info("Agency JSON File Done!")
     def generate_company_csv(self):
         #---CSV OF ALL COMPANIES----
-        companies = models.Company2.objects(display=True)
+        companies = models.Company.objects(display=True)
         csvwriter = csv.writer(open(os.path.join(os.path.dirname(__file__), 'static') + "/OD500_Companies.csv", "w"))
         csvwriter.writerow([
             'company_name_id',
@@ -280,7 +280,7 @@ class FileGenerator(object):
         logging.info("Company CSV File Done!")
     def generate_company_all_csv(self):
         #---CSV OF ALL COMPANIES----
-        companies = models.Company2.objects()
+        companies = models.Company.objects()
         csvwriter = csv.writer(open(os.path.join(os.path.dirname(__file__), 'static') + "/OD500_Companies_All.csv", "w"))
         csvwriter.writerow([
             'company_name_id',
@@ -355,7 +355,7 @@ class FileGenerator(object):
     def generate_agency_csv(self):
         #--------CSV OF AGENCIES------
         agencies = models.Agency.objects()
-        companies = models.Company2.objects(display=True)
+        companies = models.Company.objects(display=True)
         csvwriter = csv.writer(open(os.path.join(os.path.dirname(__file__), 'static') + "/OD500_Agencies.csv", "w"))
         csvwriter.writerow([
             'agency_name',

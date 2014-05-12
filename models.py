@@ -4,73 +4,7 @@ import os, sys
 from mongoengine import *
 from datetime import datetime
 
-class Person(Document):
-	ts = ComplexDateTimeField(default=datetime.now())
-	firstName = StringField()
-	lastName = StringField()
-	title = StringField()
-	personType = StringField()
-	email = StringField()
-	phone = StringField()
-	org = StringField()
-	contacted = BooleanField()
-	otherInfo = ListField(StringField())
-	datasetWishList = StringField() #DEPRECATED
-	companyRec = StringField() #DEPRECATED
-	conferenceRec = StringField() #DEPRECATED
-	submittedCompany = ReferenceField('Company')
-	submittedDatasets = ListField(ReferenceField('Dataset'))
 
-class Rating(EmbeddedDocument):
-	author = ReferenceField(Person)				
-	rating = IntField()
-	reason = StringField()
-
-class Dataset(Document):
-	ts = ComplexDateTimeField(default=datetime.now())
-	datasetName = StringField()
-	datasetURL = StringField()
-	agency = StringField()
-	ratings = ListField(EmbeddedDocumentField('Rating'))
-	dataType = ListField(StringField())
-	usedBy = ListField(ReferenceField('Company'))
-
-
-#Eventually Deprecate
-class Company(Document):
-	companyName = StringField()
-	prettyName = StringField()
-	url = StringField()
-	ceo = ReferenceField(Person)
-	yearFounded = IntField()
-	previousName = StringField()
-	city = StringField()
-	state = StringField()
-	zipCode = IntField()
-	fte = IntField()
-	companyType = StringField()
-	companyCategory = StringField()
-	companyFunction = StringField()
-	criticalDataTypes = ListField(StringField())
-	revenueSource = ListField(StringField())
-	sector = ListField(StringField())
-	descriptionLong = StringField()
-	descriptionShort = StringField()
-	socialImpact = StringField() #DEPRECATED
-	financialInfo = StringField()
-	confidentiality = StringField() #What info does the contact want to hide?
-	contact = ReferenceField(Person)
-	recommendedBy = ReferenceField(Person) #DEPRECATED
-	recommended = BooleanField() #DEPRECATED
-	reasonForRecommending = StringField() #DEPRECATED
-	datasets = ListField(ReferenceField(Dataset))
-	ts = ComplexDateTimeField(default=datetime.now())
-	preview50 = BooleanField() #Soon to be DEPRECATED
-	display = BooleanField() #Changed Name to Display
-	submittedSurvey = BooleanField()
-	vetted = BooleanField() #vetted by us
-	vettedByCompany = BooleanField() #vetted by them
-	submittedThroughWebsite = BooleanField() #submitted through website
 
 class Person2(EmbeddedDocument):
 	firstName = StringField()
@@ -81,7 +15,7 @@ class Person2(EmbeddedDocument):
 	org = StringField()
 	contacted = BooleanField()
 
-class Company2(Document):
+class Company(Document):
 	companyName = StringField()
 	prettyName = StringField()
 	url = StringField()
@@ -128,22 +62,22 @@ class Agency(Document):
 	source = StringField() #DATA.GOV WEBSITE OR USER INPUT
 	subagencies = ListField(EmbeddedDocumentField('Subagency'))
 	dataType = StringField() #Federal, State, City/County, Other
-	datasets = ListField(EmbeddedDocumentField('Dataset2'))
-	usedBy = ListField(ReferenceField(Company2))
+	datasets = ListField(EmbeddedDocumentField('Dataset'))
+	usedBy = ListField(ReferenceField(Company))
 	usedBy_count = IntField()
 
 class Subagency(EmbeddedDocument):
 	name = StringField()
 	abbrev = StringField()
 	url = StringField()
-	datasets = ListField(EmbeddedDocumentField('Dataset2'))
-	usedBy = ListField(ReferenceField(Company2))
+	datasets = ListField(EmbeddedDocumentField('Dataset'))
+	usedBy = ListField(ReferenceField(Company))
 
-class Dataset2(EmbeddedDocument):
+class Dataset(EmbeddedDocument):
 	datasetName = StringField()
 	datasetURL = StringField()
 	rating = IntField()
-	usedBy = ReferenceField(Company2)
+	usedBy = ReferenceField(Company)
 
 class Users(Document):
 	ts = ComplexDateTimeField(default=datetime.now())
@@ -171,17 +105,17 @@ class Visit(Document):
 
 
 
-Dataset.register_delete_rule(Company, "datasets", PULL)
-Dataset.register_delete_rule(Person, "submittedDatasets", PULL)
-Company.register_delete_rule(Dataset, "usedBy", PULL)
-Company.register_delete_rule(Person, "submittedCompany", PULL)
-Person.register_delete_rule(Company, "contact", NULLIFY)
-Person.register_delete_rule(Company, "ceo", NULLIFY)
+# Dataset.register_delete_rule(Company, "datasets", PULL)
+# Dataset.register_delete_rule(Person, "submittedDatasets", PULL)
+# Company.register_delete_rule(Dataset, "usedBy", PULL)
+# Company.register_delete_rule(Person, "submittedCompany", PULL)
+# Person.register_delete_rule(Company, "contact", NULLIFY)
+# Person.register_delete_rule(Company, "ceo", NULLIFY)
 
-Agency.register_delete_rule(Company2, "agencies", PULL)
-# Company2.register_delete_rule(Dataset2, 'usedBy', NULLIFY)
-# Company2.register_delete_rule(Subagency, 'usedBy', PULL)
-Company2.register_delete_rule(Agency, 'usedBy', PULL)
+Agency.register_delete_rule(Company, "agencies", PULL)
+# Company.register_delete_rule(Dataset, 'usedBy', NULLIFY)
+# Company.register_delete_rule(Subagency, 'usedBy', PULL)
+Company.register_delete_rule(Agency, 'usedBy', PULL)
 
 
 

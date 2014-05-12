@@ -158,10 +158,10 @@ class CompanyHandler(BaseHandler):
     def get(self, companyName):
         try:
             try:
-                company = models.Company2.objects.get(prettyName=companyName)
+                company = models.Company.objects.get(prettyName=companyName)
             except Exception, e:
                 logging.info("Company: " + companyName + ": " + str(e))
-                company = models.Company2.objects(prettyName=companyName)[0]
+                company = models.Company.objects(prettyName=companyName)[0]
             if company.display:
                 self.render(
                     "company.html",
@@ -193,7 +193,7 @@ class ListHandler(BaseHandler):
     @tornado.web.addslash
     #@tornado.web.authenticated
     def get(self):
-        companies = models.Company2.objects(display=True).order_by('prettyName')
+        companies = models.Company.objects(display=True).order_by('prettyName')
         agencies = models.Agency.objects(Q(usedBy__not__size=0) & Q(source="dataGov") & Q(dataType="Federal")).order_by("-usedBy_count").only("name", "abbrev", "prettyName")[0:16]
         stats = models.Stats.objects().first()
         self.render(
@@ -267,9 +267,9 @@ class AdminHandler(BaseHandler):
                 page_title="Forbidden",
                 error="Not Enough Priviliges")
         else:
-            surveySubmitted = models.Company2.objects(Q(submittedSurvey=True) & Q(vetted=True)).order_by('prettyName')
-            sendSurveys = models.Company2.objects(Q(submittedSurvey=False))
-            needVetting = models.Company2.objects(Q(submittedSurvey=True) & Q(vetted=False)).order_by('-lastUpdated', 'prettyName')
+            surveySubmitted = models.Company.objects(Q(submittedSurvey=True) & Q(vetted=True)).order_by('prettyName')
+            sendSurveys = models.Company.objects(Q(submittedSurvey=False))
+            needVetting = models.Company.objects(Q(submittedSurvey=True) & Q(vetted=False)).order_by('-lastUpdated', 'prettyName')
             stats = models.Stats.objects().first()
             self.render(
                 "admin.html",
@@ -301,7 +301,7 @@ class AdminHandler(BaseHandler):
         elif action == 'display':
             try:
                 id = self.get_argument("id", None)
-                c = models.Company2.objects.get(id=bson.objectid.ObjectId(id))
+                c = models.Company.objects.get(id=bson.objectid.ObjectId(id))
             except Exception, e:
                 logging.info("Error: " + str(e))
                 self.write(str(e))
@@ -328,7 +328,7 @@ class ValidateHandler(BaseHandler):
         prettyName = re.sub(r'([^\s\w])+', '', companyName).replace(" ", "-").title()
         logging.info(prettyName)
         try: 
-            c = models.Company2.objects.get(prettyName=prettyName)
+            c = models.Company.objects.get(prettyName=prettyName)
             logging.info('company exists.')
             self.write('{ "error": "This company has already been submitted. Email opendata500@thegovlab.org for questions." }')
         except:
@@ -420,7 +420,7 @@ class SubmitCompanyHandler(BaseHandler):
         sourceCount = self.get_argument("sourceCount", None)
         filters = [companyCategory, state, "survey-company"]
         #--SAVE COMPANY--
-        company = models.Company2(
+        company = models.Company(
             companyName = companyName,
             prettyName = prettyName,
             url = url,
@@ -461,7 +461,7 @@ class SubmitDataHandler(BaseHandler):
     def get(self, id):
         #Make not whether we are submitting a Co. and adding a dataset or editing a Co. and adding a dataset
         #get company
-        company = models.Company2.objects.get(id=bson.objectid.ObjectId(id))
+        company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
         page_heading = "Agency and Data Information for " + company.companyName
         self.render("submitData.html",
             page_title = "Submit Data Sets For Company",
@@ -475,7 +475,7 @@ class SubmitDataHandler(BaseHandler):
         logging.info("Submitting Data: "+ self.get_argument("action", None))
         logging.info(self.request.arguments)
         try:
-            company = models.Company2.objects.get(id=bson.objectid.ObjectId(id))
+            company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
         except Exception, e:
             logging.info("Could not get company: " + str(e))
             self.set_status(400)
@@ -589,7 +589,7 @@ class SubmitDataHandler(BaseHandler):
                 rating = int(self.get_argument("rating", None))
             except:
                 rating = 0
-            dataset = models.Dataset2(
+            dataset = models.Dataset(
                 datasetName = datasetName,
                 datasetURL = datasetURL,
                 rating = rating,
@@ -670,7 +670,7 @@ class EditCompanyHandler(BaseHandler):
     @tornado.web.addslash
     def get(self, id):
         try: 
-            company = models.Company2.objects.get(id=bson.objectid.ObjectId(id))
+            company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
             #Datasets by agency, with no subagency
             page_heading = "Editing " + company.companyName
             page_title = "Editing " + company.companyName
@@ -708,7 +708,7 @@ class EditCompanyHandler(BaseHandler):
         logging.info("Editing company:")
         logging.info(self.request.arguments)
         #get the company you will be editing
-        company = models.Company2.objects.get(id=bson.objectid.ObjectId(id))
+        company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
         #------------------CONTACT INFO-------------------
         company.contact.firstName = self.get_argument("firstName", None)
         company.contact.lastName = self.get_argument("lastName", None)
@@ -777,7 +777,7 @@ class AdminEditCompanyHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self, id):
         try: 
-            company = models.Company2.objects.get(id=bson.objectid.ObjectId(id))
+            company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
             page_heading = "Editing " + company.companyName + ' (Admin)'
             page_title = "Editing " + company.companyName + ' (Admin)'
         except Exception, e:
@@ -810,7 +810,7 @@ class AdminEditCompanyHandler(BaseHandler):
         logging.info("Admin Editing Company")
         logging.info(self.request.arguments)
         #get the company you will be editing
-        company = models.Company2.objects.get(id=bson.objectid.ObjectId(id))
+        company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
         #------------------CONTACT INFO-------------------
         company.contact.firstName = self.get_argument("firstName", None)
         company.contact.lastName = self.get_argument("lastName", None)
@@ -897,7 +897,7 @@ class DeleteCompanyHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self, id):
         try:
-            company = models.Company2.objects.get(id=bson.objectid.ObjectId(id)) 
+            company = models.Company.objects.get(id=bson.objectid.ObjectId(id)) 
         except:
             self.render(
                 "404.html",
