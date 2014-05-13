@@ -932,7 +932,7 @@ class DeleteCompanyHandler(BaseHandler):
                     s.usedBy.remove(company)
             #-----REMOVE FROM AGENCY----
             a.usedBy.remove(company)
-            a.usedBy_count = len(agency.usedBy)
+            a.usedBy_count = len(a.usedBy)
             a.save()
         ##----------DELETE COMPANY--------
         company.delete()
