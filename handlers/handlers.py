@@ -1,4 +1,8 @@
 from base import *
+import json
+
+with open("country_settings.json") as json_file:
+    country_settings = json.load(json_file)
 
 #--------------------------------------------------------MAIN PAGE------------------------------------------------------------
 class MainHandler(BaseHandler):
@@ -53,13 +57,21 @@ class LoginHandler(BaseHandler):
 class AboutHandler(BaseHandler):
     @tornado.web.addslash
     #@tornado.web.authenticated
-    def get(self):
-        self.render(
-            "about.html",
-            page_title='About the OpenData500',
-            page_heading='About the OpenData 500',
-            user=self.current_user
-        )
+    def get(self, country=None):
+        if country:
+            self.render(
+                country.lower()+"/about_" + country.lower() + ".html",
+                page_title = country_settings[country]['about']['page_title'],
+                settings = country_settings[country]['about'],
+                user=self.current_user
+            )
+        else:
+            self.render(
+                "about.html",
+                page_title='About the OpenData500',
+                page_heading='About the OpenData 500',
+                user=self.current_user
+            )
 
 #--------------------------------------------------------MEDIA REDIRECT PAGE------------------------------------------------------------
 class MediaHandler(BaseHandler):
@@ -141,6 +153,7 @@ class CompanyHandler(BaseHandler):
     @tornado.web.addslash
     #@tornado.web.authenticated
     def get(self, companyName):
+        logging.info(companyName)
         try:
             try:
                 company = models.Company.objects.get(prettyName=companyName)
@@ -937,7 +950,6 @@ class DownloadHandler(BaseHandler):
             user=self.current_user,
             page_heading='Download the Open Data 500'
         )
-
 
 
 

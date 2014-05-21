@@ -46,6 +46,7 @@ class Application(tornado.web.Application):
             (r"/delete/([a-zA-Z0-9]{24})/?", DeleteCompanyHandler),
             (r"/admin/?", AdminHandler),
             (r"/admin/edit/([a-zA-Z0-9]{24})/?", AdminEditCompanyHandler),
+            (r"/([A-Za-z]{2})/about/?", AboutHandler),
             (r"/about/?", AboutHandler),
             (r"/resources/?", ResourcesHandler),
             (r"/stats/?", FindingsHandler),
