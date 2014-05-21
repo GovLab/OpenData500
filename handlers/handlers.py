@@ -215,7 +215,8 @@ class ChartHandler(BaseHandler):
             visit.p = "/chart/"
             visit.ua = self.request.headers.get('User-Agent')
             visit.ip = self.request.headers.get('X-Forwarded-For', self.request.headers.get('X-Real-Ip', self.request.remote_ip))
-            visit.save()
+            if visit.r != "http://www.opendata500.com/" or visit.r != "http://www.opendata500.com":
+                visit.save()
         except Exception, e:
             logging.info("Could not save visit information: " + str(e))
         finally:
