@@ -39,17 +39,19 @@ class LoginHandler(BaseHandler):
             self.redirect(u"/login" + error_msg)
         if user and user.password and bcrypt.hashpw(password, user.password.encode('utf-8')) == user.password:
             logging.info('successful login for '+email)
-            self.set_current_user(email)
+            country = user.country.abbrev
+            self.set_current_user(email, country)
             self.redirect("/")
         else: 
             logging.info('unsuccessful login')
             error_msg = u"?error=" + tornado.escape.url_escape("Incorrect Password")
             self.redirect(u"/login" + error_msg)
 
-    def set_current_user(self, user):
+    def set_current_user(self, user, country):
         logging.info('setting ' + user)
         if user:
             self.set_secure_cookie("user", tornado.escape.json_encode(user))
+            self.set_secure_cookie("country", str(country))
         else: 
             self.clear_cookie("user")
 
@@ -74,10 +76,10 @@ class AboutHandler(BaseHandler):
             )
 
 #--------------------------------------------------------MEDIA REDIRECT PAGE------------------------------------------------------------
-class MediaHandler(BaseHandler):
-    @tornado.web.addslash
-    def get(self):
-        self.redirect('/resources/')
+# class MediaHandler(BaseHandler):
+#     @tornado.web.addslash
+#     def get(self):
+#         self.redirect('/resources/')
 
 
 #--------------------------------------------------------FINDINGS, NOW STATS PAGE------------------------------------------------------------
@@ -85,9 +87,9 @@ class FindingsHandler(BaseHandler):
     @tornado.web.addslash
     def get(self):
         self.render(
-            "findings.html",
-            user=self.current_user,
-            page_title="Findings"
+                "findings.html",
+                user=self.current_user,
+                page_title="Findings"
             )
 
 #--------------------------------------------------------THANKS PAGE------------------------------------------------------------
@@ -146,6 +148,7 @@ class RegisterHandler(LoginHandler):
 class LogoutHandler(BaseHandler): 
     def get(self):
         self.clear_cookie("user")
+        self.clear_cookie("country")
         self.redirect(u"/login")
 
 #--------------------------------------------------------COMPANY PAGE------------------------------------------------------------
@@ -236,10 +239,10 @@ class ChartHandler(BaseHandler):
             self.render("solo_chart.html")
 
 #--------------------------------------------------------SANKEY-STYLE CHART PAGE------------------------------------------------------------
-class SankeyChartHandler(BaseHandler):
-    @tornado.web.addslash
-    def get(self):
-        self.render("index2.html")
+# class SankeyChartHandler(BaseHandler):
+#     @tornado.web.addslash
+#     def get(self):
+#         self.render("index2.html")
 
 
 #--------------------------------------------------------RESOURCES PAGE------------------------------------------------------------
@@ -259,16 +262,13 @@ class AdminHandler(BaseHandler):
     @tornado.web.addslash
     @tornado.web.authenticated
     def get(self):
-        if self.current_user != 'luis' and self.current_user != 'govlab':
-            self.render('404.html',
-                page_heading="I'm afraid I can't let you do that.",
-                user=self.current_user,
-                page_title="Forbidden",
-                error="Not Enough Priviliges")
-        else:
-            surveySubmitted = models.Company.objects(Q(submittedSurvey=True) & Q(vetted=True)).order_by('prettyName')
-            sendSurveys = models.Company.objects(Q(submittedSurvey=False))
-            needVetting = models.Company.objects(Q(submittedSurvey=True) & Q(vetted=False)).order_by('-lastUpdated', 'prettyName')
+        country = str(self.get_secure_cookie("country"))
+        logging.info("Working in: " + country)
+        #Check if there is a user logged in:
+        if self.current_user:
+            surveySubmitted = models.Company.objects(Q(submittedSurvey=True) & Q(vetted=True) & Q(country__abbrev=country)).order_by('prettyName')
+            sendSurveys = models.Company.objects(Q(submittedSurvey=False) & Q(country__abbrev=country))
+            needVetting = models.Company.objects(Q(submittedSurvey=True) & Q(vetted=False) & Q(country__abbrev=country)).order_by('-lastUpdated', 'prettyName')
             stats = models.Stats.objects().first()
             self.render(
                 "admin.html",
@@ -280,6 +280,13 @@ class AdminHandler(BaseHandler):
                 sendSurveys = sendSurveys,
                 stats = stats
             )
+        else: #if no user is logged in, go to not allowed page
+            self.render('404.html',
+                page_heading="I'm afraid I can't let you do that.",
+                user=self.current_user,
+                page_title="Forbidden",
+                error="Not Enough Priviliges")
+
     def post(self):
         action = self.get_argument("action", None)
         if action == "refresh":
@@ -289,10 +296,10 @@ class AdminHandler(BaseHandler):
             self.write({"totalCompanies": stats.totalCompanies, "totalCompaniesWeb":stats.totalCompaniesWeb, "totalCompaniesSurvey":stats.totalCompaniesSurvey})
         elif action == "files":
             self.application.files.generate_company_json()
-            self.application.files.generate_agency_json()
+            # self.application.files.generate_agency_json()
             self.application.files.generate_company_csv()
             self.application.files.generate_company_all_csv()
-            self.application.files.generate_agency_csv()
+            # self.application.files.generate_agency_csv()
             self.write("success")
         elif action == "vizz":
             #self.application.files.generate_sankey_json()

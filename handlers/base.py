@@ -28,3 +28,9 @@ class BaseHandler(tornado.web.RequestHandler):
             return tornado.escape.json_decode(user_json)
         else:
             return None
+    def get_current_country(self):
+    	country_json = self.get_secure_cookie("country")
+        if country_json:
+            return tornado.escape.json_decode(country_json)
+        else:
+            return None
