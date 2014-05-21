@@ -5,21 +5,6 @@ class MainHandler(BaseHandler):
     @tornado.web.addslash
     #@tornado.web.authenticated
     def get(self):
-        #Record visitor info. Not really to be used for site analytics, but just as experiment.
-        try: 
-            visit = models.Visit()
-            if self.request.headers.get('Referer'):
-                visit.r = self.request.headers.get('Referer')
-                logging.info("Chart requested from: " + self.request.headers.get('Referer'))
-            else:
-                visit.r = ''
-                logging.info("Chart requested from: Cannot get referer")
-            visit.p = "/"
-            visit.ua = self.request.headers.get('User-Agent')
-            visit.ip = self.request.headers.get('X-Forwarded-For', self.request.headers.get('X-Real-Ip', self.request.remote_ip))
-            visit.save()
-        except Exception, e:
-            logging.info("Could not save visit information: " + str(e))
         self.render(
             "index.html",
             user=self.current_user,
@@ -285,6 +270,7 @@ class AdminHandler(BaseHandler):
         action = self.get_argument("action", None)
         if action == "refresh":
             self.application.stats.refresh_stats()
+            self.application.files.generate_visit_csv()
             stats = models.Stats.objects().first()
             self.write({"totalCompanies": stats.totalCompanies, "totalCompaniesWeb":stats.totalCompaniesWeb, "totalCompaniesSurvey":stats.totalCompaniesSurvey})
         elif action == "files":

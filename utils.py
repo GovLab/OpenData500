@@ -534,6 +534,31 @@ class FileGenerator(object):
             json.dump(data, outfile)
         logging.info("Chord Chart File Done!")
 
+    def generate_visit_csv(self):
+        #---CSV OF ALL COMPANIES----
+        visits = models.Visit.objects()
+        csvwriter = csv.writer(open(os.path.join(os.path.dirname(__file__), 'static') + "/OD500_Visits.csv", "w"))
+        csvwriter.writerow([
+            'ts',
+            'referer',
+            'page',
+            'user_agent',
+            'ip'
+            ])
+        for v in visits:
+            newrow = [
+                v.ts,
+                v.r,
+                v.p,
+                v.ua,
+                v.ip
+            ]
+            for i in range(len(newrow)):  # For every value in our newrow
+                if hasattr(newrow[i], 'encode'):
+                    newrow[i] = newrow[i].encode('utf8')
+            csvwriter.writerow(newrow)
+        logging.info("Visit CSV File Done!")
+
 
 
 

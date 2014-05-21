@@ -89,6 +89,10 @@ class States(EmbeddedDocument):
 	abbrev = StringField()
 	count = IntField()
 
+class Country(EmbeddedDocument):
+	name = StringField()
+	abbrev = StringField()
+
 class Stats(Document):
 	lastUpdate = ComplexDateTimeField()
 	totalCompanies = IntField() #total
