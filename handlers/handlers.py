@@ -266,10 +266,11 @@ class AdminHandler(BaseHandler):
         logging.info("Working in: " + country)
         #Check if there is a user logged in:
         if self.current_user:
-            surveySubmitted = models.Company.objects(Q(submittedSurvey=True) & Q(vetted=True) & Q(country__abbrev=country)).order_by('prettyName')
-            sendSurveys = models.Company.objects(Q(submittedSurvey=False) & Q(country__abbrev=country))
-            needVetting = models.Company.objects(Q(submittedSurvey=True) & Q(vetted=False) & Q(country__abbrev=country)).order_by('-lastUpdated', 'prettyName')
+            surveySubmitted = models.Company.objects(Q(submittedSurvey=True) & Q(vetted=True)).order_by('prettyName')
+            sendSurveys = models.Company.objects(Q(submittedSurvey=False))
+            needVetting = models.Company.objects(Q(submittedSurvey=True) & Q(vetted=False)).order_by('-lastUpdated', 'prettyName')
             stats = models.Stats.objects().first()
+            logging.info(len(surveySubmitted))
             self.render(
                 "admin.html",
                 page_title='OpenData500',
@@ -453,7 +454,8 @@ class SubmitCompanyHandler(BaseHandler):
             vettedByCompany = True,
             submittedThroughWebsite = True,
             locked=False,
-            filters = filters
+            filters = filters,
+            country="US"
         )
         company.save()
         self.application.stats.update_all_state_counts()
