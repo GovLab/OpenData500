@@ -402,6 +402,7 @@ class SubmitCompanyHandler(BaseHandler):
         city = self.get_argument("city", None)
         zipCode = self.get_argument("zipCode", None)
         state = self.get_argument('state', None)
+        country = models.Country(name="United States", abbrev="US")
         companyType = self.get_argument("companyType", None)
         if companyType == 'other':
             companyType = self.get_argument('otherCompanyType', None)
@@ -455,7 +456,7 @@ class SubmitCompanyHandler(BaseHandler):
             submittedThroughWebsite = True,
             locked=False,
             filters = filters,
-            country="US"
+            country=country
         )
         company.save()
         self.application.stats.update_all_state_counts()
