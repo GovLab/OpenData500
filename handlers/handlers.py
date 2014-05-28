@@ -869,8 +869,13 @@ class AdminEditCompanyHandler(BaseHandler):
         company.datasetWishList = self.get_argument('datasetWishList', None)
         company.sourceCount = self.get_argument('sourceCount', None) 
         company.dataComments = self.get_argument('dataComments', None)
+        company.filters = [company.companyCategory, company.state] #re-do filters
+        for a in company.agencies:
+                if a.prettyName:
+                    company.filters.append(a.prettyName)
         if self.get_argument("submittedSurvey", None) == "submittedSurvey":
             company.submittedSurvey = True
+            company.filters.append("survey-company")
         else:
             company.submittedSurvey = False
         if self.get_argument("vettedByCompany", None) == "vettedByCompany":
