@@ -18,6 +18,7 @@ Multiple federal data sources,,Federal,General,,,Adaptive,Business & Legal Servi
 Multiple government open data sources,,Other,General,,,Adobe Digital Government,Data/Technology,,
 Department of Health and Human Services,HHS,Federal,General,,http://catalog.data.gov/organization/cms-hhs-gov,Aidin,Healthcare,Home Health Compare,http://healthdata.gov/data/dataset/home-health-compare-0
 Department of Health and Human Services,HHS,Federal,General,,http://catalog.data.gov/organization/cms-hhs-gov,Aidin,Healthcare,Nursing Home Compare,http://healthdata.gov/data/dataset/nursing-home-compare
+Department of Commerce,USDC,Federal,General,,http://catalog.data.gov/organization/doc-gov,Alarm.com,Lifestyle & Consumer,,
 Multiple government open data sources,,Other,General,,,Allianz,Finance & Investment,,
 Department of Commerce,USDC,Federal,US Census Bureau,Census,http://catalog.data.gov/organization/census-gov,Allied Van Lines,Transportation,zipcode data,
 Multiple government open data sources,,Other,General,,,AllState Insurance Group,Insurance,,
@@ -46,6 +47,9 @@ Department of Commerce,USDC,Federal,US Census Bureau,Census,http://catalog.data.
 Multiple city and local data sources,,City/County,General,,,Arrive Labs,Transportation,,
 Multiple federal data sources,,Federal,General,,,ASC Partners,Business & Legal Services,ASC works with Congressional Quarterly to bring the text of government efforts to address the financial crisis.,
 Multiple government open data sources,,Other,General,,,Asset4,Finance & Investment,,
+Multiple government open data sources,,Other,General,,,Atlas Van Lines,Transportation,,
+Department of Commerce,USDC,Federal,General,,http://catalog.data.gov/organization/doc-gov,Atlas Van Lines,Transportation,,
+Department of Energy,DOE,Federal,General,,http://catalog.data.gov/organization/doe-gov,AtSite,Research & Consulting,,
 Social Security Administration,SSA,Federal,General,,http://catalog.data.gov/organization/ssa-gov,"Aunt Bertha, Inc.",Governance,Benefits.gov,www.benefits.gov
 Department of the Treasury,,Federal,Internal Revenue Service,IRS,http://catalog.data.gov/organization/irs-gov,"Aunt Bertha, Inc.",Governance,Internal Revenue Service (IRS) SOI Tax Stats - Exempt Organizations Business Master File Extract (EO BMF),http://www.irs.gov/uac/SOI-Tax-Stats-Exempt-Organizations-Business-Master-File-Extract-(EO-BMF)
 Department of Health and Human Services,HHS,Federal,Food and Drug Administration,FDA,http://www.fda.gov/,Aureus Sciences (*Now part of Elsevier),Scientific Research,FDA approval packages,http://www.accessdata.fda.gov/scripts/cder/drugsatfda
@@ -77,8 +81,8 @@ Multiple city and local data sources,,City/County,General,,,BaleFire Global,Data
 Multiple government open data sources,,Other,General,,,BaleFire Global,Data/Technology,The Territory of Puerto Rico,
 Multiple government open data sources,,Other,General,,,BaleFire Global,Data/Technology,Ireland's National Open Data Portal (has U.S. Companies),
 Multiple government open data sources,,Other,General,,,BaleFire Global,Data/Technology,OpenCorporates International Data (has U.S. Companies),
-Securities and Exchange Commission,SEC,Federal,General,,http://catalog.data.gov/organization/sec-gov,Barchart,Finance & Investment,,
-Multiple government open data sources,,Other,General,,,Barchart,Finance & Investment,,
+Department of Agriculture,USDA,Federal,General,,http://catalog.data.gov/organization/ams-usda-gov,Barchart,Data/Technology,,
+Department of Energy,DOE,Federal,General,,http://catalog.data.gov/organization/doe-gov,Barchart,Data/Technology,,
 Multiple government open data sources,,Other,General,,,Be Informed,Data/Technology,,
 Department of Commerce,USDC,Federal,General,,http://catalog.data.gov/organization/doc-gov,Bekins,Transportation,,
 Multiple government open data sources,,Other,General,,,Berkery Noyes MandAsoft,Finance & Investment,"Data from the Healthcare, Education, Financial and Technology sectors",
@@ -219,6 +223,7 @@ Department of Homeland Security,DHS,Federal,General,,http://catalog.data.gov/org
 Department of Homeland Security,DHS,Federal,General,,http://catalog.data.gov/organization/uscg-mil,Datamyne,Business & Legal Services,customs declarations and Import-Export Customs Statistics,
 Multiple government open data sources,,Other,General,,,Deloitte,Research & Consulting,,
 Multiple government open data sources,,Other,General,,,DemystData,Finance & Investment,,
+Multiple government open data sources,,Other,General,,,Department of Better Technology,Governance,,
 Department of Commerce,USDC,Federal,US Census Bureau,Census,http://catalog.data.gov/organization/census-gov,Development Seed,Governance,Census Data,http://www.census.gov/main/www/access.html
 Multiple government open data sources,,Other,General,,,Development Seed,Governance,AITI data,http://aiddata.org/
 Multiple government open data sources,,Other,General,,,Development Seed,Governance,UNDP,https://data.undp.org/
@@ -228,6 +233,7 @@ Securities and Exchange Commission,SEC,Federal,General,,http://catalog.data.gov/
 Department of the Treasury,,Federal,General,,http://catalog.data.gov/organization/treasury-gov,Dow Jones & Co.,Finance & Investment,,
 Securities and Exchange Commission,SEC,Federal,General,,http://catalog.data.gov/organization/sec-gov,Dun & Bradstreet,Business & Legal Services,,
 Multiple government open data sources,,Other,General,,,Dun & Bradstreet,Business & Legal Services,Uses data from public records,
+Department of Commerce,USDC,Federal,General,,http://catalog.data.gov/organization/doc-gov,Earth Networks,Environment & Weather,,
 Department of the Interior,DOI,Federal,General,,http://catalog.data.gov/organization/doi-gov,EarthObserver App,Geospatial/Mapping,,
 Department of Commerce,USDC,Federal,General,,http://catalog.data.gov/organization/doc-gov,EarthObserver App,Geospatial/Mapping,,
 Department of the Interior,DOI,Federal,U.S. Geological Survey,USGS,http://catalog.data.gov/dataset?q=organization:usgs-gov,Earthquake Alert!,Geospatial/Mapping,Earthquakes,http://earthquake.usgs.gov/earthquakes/
@@ -243,6 +249,7 @@ Multiple government open data sources,,Other,General,,,EMC,Data/Technology,justi
 U.S. Environmental Protection Agency,EPA,Federal,General,,http://catalog.data.gov/organization/epa-gov,"Energy Points, Inc.",Energy,eGRID,http://www.epa.gov/cleanenergy/energy-resources/egrid/index.html
 Department of the Interior,DOI,Federal,U.S. Geological Survey,USGS,http://catalog.data.gov/dataset?q=organization:usgs-gov,"Energy Points, Inc.",Energy,Water Use in the United States 2010,http://water.usgs.gov/watuse/
 National Archives and Records Administration,NARA,Federal,Office of the Federal Register,OFR,http://catalog.data.gov/organization/gpo-gov,Energy Solutions Forum,Energy,Federal Register: The Daily Journal of the United States Government,www.federalregister.gov/learn/developers
+Department of Energy,DOE,Federal,General,,http://catalog.data.gov/organization/doe-gov,Energy Solutions Forum,Energy,,
 Department of Energy,DOE,Federal,General,,http://catalog.data.gov/organization/doe-gov,Enervee Corporation,Energy,,
 U.S. Environmental Protection Agency,EPA,Federal,General,,http://catalog.data.gov/organization/epa-gov,Enervee Corporation,Energy,,
 Department of Agriculture,USDA,Federal,General,,http://catalog.data.gov/organization/ams-usda-gov,Enigma.io,Data/Technology,,
@@ -267,8 +274,10 @@ Department of Labor,,Federal,General,,http://catalog.data.gov/dataset?q=organiza
 Multiple government open data sources,,Other,General,,,Equifax,Finance & Investment,"employment, income and identity data",
 Securities and Exchange Commission,SEC,Federal,General,,http://catalog.data.gov/organization/sec-gov,Equilar,Data/Technology,,
 Multiple government open data sources,,Other,General,,,Ernst & Young LLP,Finance & Investment,,
+Multiple government open data sources,,Other,General,,,eScholar LLC.,Education,,
 Department of Commerce,USDC,Federal,National Oceanic and Atmospheric Administration,NOAA,http://catalog.data.gov/organization/noaa-gov,Esri,Geospatial/Mapping,Federal GPS and Geographic Data,
 Department of Commerce,USDC,Federal,US Census Bureau,Census,http://catalog.data.gov/organization/census-gov,Esri,Geospatial/Mapping,US Census Bureau,http://www.census.gov/
+Multiple government open data sources,,Other,General,,,Estately,Housing/Real Estate,,
 Department of Health and Human Services,HHS,Federal,General,,http://catalog.data.gov/organization/cms-hhs-gov,Everyday Health,Lifestyle & Consumer,,
 Department of Health and Human Services,HHS,Federal,General,,http://catalog.data.gov/organization/cms-hhs-gov,Evidera,Healthcare,,
 Multiple government open data sources,,Other,General,,,Experian,Finance & Investment,"Department of Corrections; Arrest Records; Warrant Records; Administrative Office of the Courts; Patriot Act Records; Sex Offender Records. Records on liens, judgments, bankruptcies, UCC filings. Census",
@@ -377,6 +386,7 @@ Multiple city and local data sources,,City/County,General,,,Google Maps,Geospati
 Department of Commerce,USDC,Federal,General,,http://catalog.data.gov/organization/doc-gov,Google Maps,Geospatial/Mapping,,
 Multiple government open data sources,,Other,General,,,Google Maps,Geospatial/Mapping,,
 Multiple government open data sources,,Other,General,,,Google Public Data Explorer,Data/Technology,,
+Multiple government open data sources,,Other,General,,,Govini,Governance,,
 Multiple government open data sources,,Other,General,,,GovTribe,Governance,USA Spending,http://www.usaspending.gov
 Multiple government open data sources,,Other,General,,,GovTribe,Governance,Federal Business Opportunities (Fed Biz Opps),http://www.fbo.gov
 Department of Health and Human Services,HHS,Federal,Food and Drug Administration,FDA,http://www.fda.gov/,"Govzilla, Inc.",Governance,US Food and Drug Administration (FDA),http://www.fda.gov/
@@ -412,10 +422,14 @@ U.S. Environmental Protection Agency,EPA,Federal,General,,http://catalog.data.go
 Multiple city and local data sources,,City/County,General,,,HopStop,Transportation,,
 Multiple city and local data sources,,City/County,General,,,Housefax,Housing/Real Estate,,
 Department of Education,ED / DOED,Federal,General,,http://catalog.data.gov/organization/ed-gov,How's My Offer?,Education,Integrated Postsecondary Education Data System (IPEDS),http://nces.ed.gov/ipeds/
+Department of Commerce,USDC,Federal,General,,http://catalog.data.gov/organization/doc-gov,IBM,Data/Technology,,
+Multiple government open data sources,,Other,General,,,IBM,Data/Technology,,
 Multiple government open data sources,,Other,General,,,IBM Smarter Cities,Data/Technology,,
 Multiple city and local data sources,,City/County,General,,,IBM Smarter Cities,Data/Technology,,
 Consumer Financial Protection Bureau,CFPB,Federal,General,,http://catalog.data.gov/organization/cfpb-gov,ideas42,Research & Consulting,Consumer Finance Protection Bureau (CFPB) Complaints Database,http://www.consumerfinance.gov/complaintdatabase/
 U.S. Environmental Protection Agency,EPA,Federal,General,,http://catalog.data.gov/organization/epa-gov,ideas42,Research & Consulting,US Environmental Protection Agency (EPA) Fuel Economy,http://www.fueleconomy.gov/feg/download.shtml
+Department of Energy,DOE,Federal,General,,http://catalog.data.gov/organization/doe-gov,iFactor,Research & Consulting,,
+Department of Commerce,USDC,Federal,General,,http://catalog.data.gov/organization/doc-gov,iFactor,Research & Consulting,,
 Department of Health and Human Services,HHS,Federal,General,,http://catalog.data.gov/organization/cms-hhs-gov,iMedicare,Healthcare,,
 Multiple government open data sources,,Other,General,,,Impact Forecasting (Aon),Insurance,,
 Department of Health and Human Services,HHS,Federal,General,,http://catalog.data.gov/organization/cms-hhs-gov,Impaq International,Research & Consulting,,
@@ -544,6 +558,7 @@ Securities and Exchange Commission,SEC,Federal,General,,http://catalog.data.gov/
 Multiple city and local data sources,,City/County,General,,,LoopNet,Housing/Real Estate,,
 Department of Commerce,USDC,Federal,General,,http://catalog.data.gov/organization/doc-gov,"Loqate, Inc.",Geospatial/Mapping,,
 Department of Agriculture,USDA,Federal,General,,http://catalog.data.gov/organization/ams-usda-gov,LoseIt.com,Lifestyle & Consumer,,
+Multiple government open data sources,,Other,General,,,LOVELAND Technologies,Data/Technology,,
 Department of Commerce,USDC,Federal,National Oceanic and Atmospheric Administration,NOAA,http://catalog.data.gov/organization/noaa-gov,Lucid,Energy,NOAA weather data across the U.S.,
 U.S. Environmental Protection Agency,EPA,Federal,General,,http://catalog.data.gov/organization/epa-gov,Lucid,Energy,EPA/DOE electricity cost and emissions data by state,
 Department of Energy,DOE,Federal,General,,http://catalog.data.gov/organization/doe-gov,Lucid,Energy,EIA electricity cost and emissions data by state,http://www.eia.gov/
@@ -612,6 +627,7 @@ Department of Commerce,USDC,Federal,General,,http://catalog.data.gov/organizatio
 Department of Commerce,USDC,Federal,General,,http://catalog.data.gov/organization/doc-gov,Noesis,Energy,,
 Department of the Treasury,,Federal,Internal Revenue Service,IRS,http://catalog.data.gov/organization/irs-gov,NonprofitMetrics,Data/Technology,IRS Business Master File (BMF),http://www.irs.gov/uac/SOI-Tax-Stats-Exempt-Organizations-Business-Master-File-Extract-(EO-BMF)
 Department of Commerce,USDC,Federal,US Census Bureau,Census,http://catalog.data.gov/organization/census-gov,North American Van Lines,Transportation,zipcode data,
+Department of Energy,DOE,Federal,General,,http://catalog.data.gov/organization/doe-gov,Noveda Technologies,Data/Technology,,
 Multiple federal data sources,,Federal,General,,,Nuams (New Amsterdam Ideas),Governance,Open Puerto Rico,http://abrepr.org/es/find-data
 Federal Deposit Insurance Corporation,FDIC,Federal,General,,http://catalog.data.gov/organization/fdic-gov,Nuams (New Amsterdam Ideas),Governance,US National Foreclosure Statistics January 2012,http://demo.getdkan.com/dataset/us-national-foreclosure-statistics-january-2012/resource/d9ed9373-4371-4f94-a17d
 Department of Health and Human Services,HHS,Federal,General,,http://catalog.data.gov/organization/cms-hhs-gov,Numedii,Scientific Research,,
@@ -663,6 +679,7 @@ Multiple government open data sources,,Other,General,,,Paxata,Data/Technology,,
 Department of Labor,,Federal,General,,http://catalog.data.gov/dataset?q=organization:((ecab-dol-gov)+OR+(whd-dol-gov)+OR+(esba-dol-gov)+OR+(ojc-dol-gov)+OR+(eta-dol-gov)+OR+(osha-dol-gov)+OR+(oalj-dol-gov)+OR+(oasp-dol-gov)+OR+(msha-dol-gov)+OR+(bls-gov)+OR+(brb-dol-gov)),"PayScale, Inc.",Business & Legal Services,,
 Department of Health and Human Services,HHS,Federal,General,,http://catalog.data.gov/organization/cms-hhs-gov,PeerJ,Scientific Research,,
 Multiple government open data sources,,Other,General,,,PeerJ,Scientific Research,,
+Department of Energy,DOE,Federal,General,,http://catalog.data.gov/organization/doe-gov,People Power,Data/Technology,,
 Multiple government open data sources,,Other,General,,,Persint,Finance & Investment,,
 Multiple government open data sources,,Other,General,,,Personal Democracy Media,Governance,,
 Department of Education,ED / DOED,Federal,Federal Student Aid,FAFSA,http://catalog.data.gov/organization/fsa-ed-gov,"Personal, Inc.",Lifestyle & Consumer,Free Application for Federal Student Aid (FAFSA),www.fafsa.gov
@@ -697,6 +714,7 @@ Department of Commerce,USDC,Federal,US Census Bureau,Census,http://catalog.data.
 Multiple city and local data sources,,City/County,General,,,Propeller Health,Healthcare,Uses geographical and health data.,
 Multiple government open data sources,,Other,General,,,ProPublica,Governance,,
 Multiple city and local data sources,,City/County,General,,,PublicEngines,Governance,Data from law enforcement agencies,
+Department of Commerce,USDC,Federal,General,,http://catalog.data.gov/organization/doc-gov,"Qado Energy, Inc.",Energy,Average cloudiness sunrise to sunset from manual observations (percent),
 Multiple federal data sources,,Federal,General,,,Quandl,Data/Technology,Uses all 24 US Bureaus and Agencies sources,
 Department of Health and Human Services,HHS,Federal,National Institutes of Health,NIH,http://catalog.data.gov/organization/nih-hhs-gov,Quertle,Data/Technology,TOXNET Toxicology Data Network,http://toxnet.nlm.nih.gov/
 Department of Health and Human Services,HHS,Federal,National Institutes of Health,NIH,http://catalog.data.gov/organization/nih-hhs-gov,Quertle,Data/Technology,PubMed,http://www.ncbi.nlm.nih.gov/pubmed/
@@ -781,6 +799,8 @@ Multiple state data sources,,State,General,,,Social Health Insights,Healthcare,,
 Multiple government open data sources,,Other,General,,,SocialEffort Inc,Lifestyle & Consumer,,
 Multiple state data sources,,State,General,,,Socrata,Data/Technology,,
 Multiple city and local data sources,,City/County,General,,,Socrata,Data/Technology,,
+Department of Energy,DOE,Federal,General,,http://catalog.data.gov/organization/doe-gov,Solar Census,Energy,,
+Department of Commerce,USDC,Federal,General,,http://catalog.data.gov/organization/doc-gov,Solar Census,Energy,,
 Department of Energy,DOE,Federal,General,,http://catalog.data.gov/organization/doe-gov,SolarList,Energy,PVWatts,http://developer.nrel.gov/docs/solar/
 Department of Health and Human Services,HHS,Federal,National Institutes of Health,NIH,http://catalog.data.gov/organization/nih-hhs-gov,Sophic Systems Alliance,Scientific Research,The PubChem Project,http://pubchem.ncbi.nlm.nih.gov/
 Department of Health and Human Services,HHS,Federal,Food and Drug Administration,FDA,http://www.fda.gov/,Sophic Systems Alliance,Scientific Research,FDA Online Label Repository,http://labels.fda.gov
