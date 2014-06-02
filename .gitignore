@@ -26,3 +26,8 @@ static/OD500_Companies_All.csv
 
 # Ignoring Sass Cache files
 static/css/.sass-cache
+
+# static Files
+static/OD500_Visits.csv
+static/OD500_Companies_All.csv
+static/sankey.json
