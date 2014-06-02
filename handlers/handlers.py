@@ -61,10 +61,10 @@ class AboutHandler(BaseHandler):
     #@tornado.web.authenticated
     def get(self, country=None):
         lan = self.get_argument("lan", "")
-        if lan not in country_settings[country].keys():
-            logging.info("Translation not available in this language")
-            lan = country_settings[country]["default_language"]
         if country:
+            if lan not in country_settings[country].keys():
+                logging.info("Translation not available in this language")
+                lan = country_settings[country]["default_language"]
             if lan == "":
                 lan = country_settings[country]["default_language"]
             self.render(
