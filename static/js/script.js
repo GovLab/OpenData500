@@ -426,28 +426,33 @@ $(document).ready(function() {
     //----------------------------------SUBMIT DATASET QUESTION--------------------------------------
     $('.finish-data-submit').on('click', '.data-submit-button', function(event) {
         if ($('.data-comment-form').parsley('validate')) {
-            var companyID = $('.companyID').val();
-            //console.log(companyID);
-            var data = {
-                "dataComments": $('#dataComments').val(),
-                "action": "dataComments",
-                "_xsrf": $("[name='_xsrf']").val()
-            };
-            $.ajax({
-                type: 'POST',
-                url: '/addData/' + companyID,
-                data: data,
-                error: function(error) {
-                    console.debug(JSON.stringify(error));
-                },
-                beforeSend: function(xhr, settings) {
-                    $(event.target).attr('disabled', 'disabled');
-                },
-                success: function(success) {
-                    console.log(success);
-                    document.location.href = '/thanks/';
-                }
-            });
+            if ($(".agency").length > 0) {
+                var companyID = $('.companyID').val();
+                //console.log(companyID);
+                var data = {
+                    "dataComments": $('#dataComments').val(),
+                    "action": "dataComments",
+                    "_xsrf": $("[name='_xsrf']").val()
+                };
+                $.ajax({
+                    type: 'POST',
+                    url: '/addData/' + companyID,
+                    data: data,
+                    error: function(error) {
+                        console.debug(JSON.stringify(error));
+                    },
+                    beforeSend: function(xhr, settings) {
+                        $(event.target).attr('disabled', 'disabled');
+                    },
+                    success: function(success) {
+                        console.log(success);
+                        document.location.href = '/thanks/';
+                    }
+                });
+            } else {
+                console.log("Must enter at least one data source.")
+                $(".noInput").show().delay(5000).fadeOut();
+            }
         } else {
             console.log("form not valid");
         }

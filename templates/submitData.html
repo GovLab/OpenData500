@@ -26,6 +26,7 @@
 				<span class="agenciesExist error-agency-search" style="display:none">Agency or Sub-Agency already on list.</span>
 				<span class="emptyInput error-agency-search" style="display:none">Nothing to add.</span>
 				<span class="invalidInput error-agency-search" style="display:none">Please select an item from the provided list.</span>
+				<span class="noInput error-agency-search" style="display:none">You must enter at least one data source.</span>
 			</div>
 		</div>
 		<div class="agencyList">
@@ -105,8 +106,8 @@
 		</div>
 		<form method="post" class="m-form data-comment-form">
 			<fieldset class="m-form-half right">
-				<h3>Please give your comments about the usefulness of all these data sources and datasets.<br><em>[250 words or less]</em></h3>
-				<textarea rows="10" cols="59" name="dataComments" id="dataComments" parsley-trigger="keyup" parsley-maxwords="250">{%if company.dataComments %}{{ company.dataComments }}{% end %}</textarea><br>
+				<h3>Please give your comments about the usefulness of all these data sources and datasets.<br><em>[250 words or less] * </em></h3>
+				<textarea rows="10" cols="59" name="dataComments" id="dataComments" parsley-trigger="keyup" parsley-maxwords="250" parsley-required="true">{%if company.dataComments %}{{ company.dataComments }}{% end %}</textarea><br>
 			</fieldset>
 		</form>
 	</div>
