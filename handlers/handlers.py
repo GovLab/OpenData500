@@ -60,8 +60,9 @@ class AboutHandler(BaseHandler):
     @tornado.web.addslash
     #@tornado.web.authenticated
     def get(self, country=None):
+        #Determine country and language
         lan = self.get_argument("lan", "")
-        if country:
+        if country in country_settings.keys():
             if lan not in country_settings[country].keys():
                 logging.info("Translation not available in this language")
                 lan = country_settings[country]["default_language"]
@@ -73,6 +74,12 @@ class AboutHandler(BaseHandler):
                 settings = country_settings[country][lan]['about'],
                 user=self.current_user
             )
+        elif country and country not in country_settings.keys():
+            self.render('404.html',
+                page_heading="Stop trying to make " +self.request.uri + " happen. <br><br>It's not going to happen.",
+                user=self.current_user,
+                page_title="404 - Not Found",
+                error="Not found")
         else:
             self.render(
                 "about.html",
