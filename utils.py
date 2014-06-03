@@ -102,9 +102,9 @@ class StatsGenerator(object):
 
 
 class FileGenerator(object):
-    def generate_company_json(self):
+    def generate_company_json(self, country):
         #------COMPANIES JSON---------
-        companies = models.Company.objects(display=True)
+        companies = models.Company.objects(Q(display=True) & Q(country=country))
         companiesJSON = []
         for c in companies:
             agencies = []
@@ -232,9 +232,9 @@ class FileGenerator(object):
         with open(os.path.join(os.path.dirname(__file__), 'static') + '/OD500_Agencies.json', 'w') as outfile:
             json.dump(agenciesJSON, outfile)
         logging.info("Agency JSON File Done!")
-    def generate_company_csv(self):
+    def generate_company_csv(self, country):
         #---CSV OF ALL COMPANIES----
-        companies = models.Company.objects(display=True)
+        companies = models.Company.objects(Q(display=True) & Q(country=country))
         csvwriter = csv.writer(open(os.path.join(os.path.dirname(__file__), 'static') + "/OD500_Companies.csv", "w"))
         csvwriter.writerow([
             'company_name_id',
@@ -280,9 +280,9 @@ class FileGenerator(object):
                     newrow[i] = newrow[i].encode('utf8')
             csvwriter.writerow(newrow)
         logging.info("Company CSV File Done!")
-    def generate_company_all_csv(self):
+    def generate_company_all_csv(self, country):
         #---CSV OF ALL COMPANIES----
-        companies = models.Company.objects()
+        companies = models.Company.objects(country=country)
         csvwriter = csv.writer(open(os.path.join(os.path.dirname(__file__), 'static') + "/OD500_Companies_All.csv", "w"))
         csvwriter.writerow([
             'company_name_id',
@@ -357,7 +357,7 @@ class FileGenerator(object):
     def generate_agency_csv(self):
         #--------CSV OF AGENCIES------
         agencies = models.Agency.objects()
-        companies = models.Company.objects(display=True)
+        companies = models.Company.objects(Q(display=True) & Q(country=country))
         csvwriter = csv.writer(open(os.path.join(os.path.dirname(__file__), 'static') + "/OD500_Agencies.csv", "w"))
         csvwriter.writerow([
             'agency_name',

@@ -21,6 +21,7 @@ import bcrypt
 from datetime import datetime
 from utils import *
 from handlers.handlers import *
+from handlers.admin_handlers import *
 
 # import and define tornado-y things
 from tornado.options import define
@@ -44,7 +45,8 @@ class Application(tornado.web.Application):
             (r"/addData/([a-zA-Z0-9]{24})/?", SubmitDataHandler),
             # (r"/media/?", MediaHandler),
             (r"/delete/([a-zA-Z0-9]{24})/?", DeleteCompanyHandler),
-            (r"/admin/?", AdminHandler),
+            (r"/admin/companies/?", CompanyAdminHandler),
+            (r"/admin/agencies/?", AgencyAdminHandler),
             (r"/admin/edit/([a-zA-Z0-9]{24})/?", AdminEditCompanyHandler),
             (r'/(?:([A-Za-z]{2})/)?about/?', AboutHandler),
             (r"/resources/?", ResourcesHandler),
