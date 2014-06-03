@@ -13,7 +13,7 @@ class MainHandler(BaseHandler):
             "index.html",
             user=self.current_user,
             page_title='Open Data500',
-            page_heading='Welcome to the Open Data 500 Pre-Launch'
+            page_heading='Welcome to the Open Data 500 Pre-Launch',
         )
 
 #--------------------------------------------------------LOGIN PAGE------------------------------------------------------------
@@ -29,29 +29,27 @@ class LoginHandler(BaseHandler):
             )
 
     def post(self):
-        email = self.get_argument("email", "")
+        username = self.get_argument("username", "")
         password = self.get_argument("password", "").encode('utf-8')
         try: 
-            user = models.Users.objects.get(email=email)
+            user = models.Users.objects.get(username=username)
         except Exception, e:
             logging.info('unsuccessful login')
             error_msg = u"?error=" + tornado.escape.url_escape("User does not exist")
             self.redirect(u"/login" + error_msg)
         if user and user.password and bcrypt.hashpw(password, user.password.encode('utf-8')) == user.password:
-            logging.info('successful login for '+email)
-            country = user.country.abbrev
-            self.set_current_user(email, country)
+            logging.info('successful login for '+username)
+            self.set_current_user(username)
             self.redirect("/")
         else: 
             logging.info('unsuccessful login')
             error_msg = u"?error=" + tornado.escape.url_escape("Incorrect Password")
             self.redirect(u"/login" + error_msg)
 
-    def set_current_user(self, user, country):
+    def set_current_user(self, user):
         logging.info('setting ' + user)
         if user:
             self.set_secure_cookie("user", tornado.escape.json_encode(user))
-            self.set_secure_cookie("country", str(country))
         else: 
             self.clear_cookie("user")
 
@@ -138,9 +136,9 @@ class RegisterHandler(LoginHandler):
 
     @tornado.web.authenticated
     def post(self):
-        email = self.get_argument("email", "")
+        username = self.get_argument("username", "")
         try:
-            user = models.Users.objects.get(email=email)
+            user = models.Users.objects.get(username=username)
         except:
             user = ''
         if user:
@@ -149,19 +147,21 @@ class RegisterHandler(LoginHandler):
         else: 
             password = self.get_argument("password", "")
             hashedPassword = bcrypt.hashpw(password, bcrypt.gensalt(8))
+            country = self.get_argument("country", None)
             newUser = models.Users(
-                email=email,
-                password = hashedPassword
+                username=username,
+                password = hashedPassword,
+                country=country
                 )
             newUser.save()
-            self.set_current_user(email)
+            self.set_current_user(username)
             self.redirect("/")
 
 #--------------------------------------------------------LOGOUT HANDLER------------------------------------------------------------
 class LogoutHandler(BaseHandler): 
     def get(self):
         self.clear_cookie("user")
-        self.clear_cookie("country")
+        #self.clear_cookie("country")
         self.redirect(u"/login")
 
 #--------------------------------------------------------COMPANY PAGE------------------------------------------------------------
@@ -275,15 +275,19 @@ class AdminHandler(BaseHandler):
     @tornado.web.addslash
     @tornado.web.authenticated
     def get(self):
-        country = str(self.get_secure_cookie("country"))
+        try:
+            user = models.Users.objects.get(username=self.current_user)
+        except Exception, e:
+            logging.info("Could not get user: " + str(e))
+            self.redirect("/login/")
+        country = user.country
         logging.info("Working in: " + country)
         #Check if there is a user logged in:
         if self.current_user:
-            surveySubmitted = models.Company.objects(Q(submittedSurvey=True) & Q(vetted=True)).order_by('prettyName')
-            sendSurveys = models.Company.objects(Q(submittedSurvey=False))
-            needVetting = models.Company.objects(Q(submittedSurvey=True) & Q(vetted=False)).order_by('-lastUpdated', 'prettyName')
-            stats = models.Stats.objects().first()
-            logging.info(len(surveySubmitted))
+            surveySubmitted = models.Company.objects(Q(submittedSurvey=True) & Q(vetted=True) & Q(country=country)).order_by('prettyName')
+            sendSurveys = models.Company.objects(Q(submittedSurvey=False) & Q(country=country))
+            needVetting = models.Company.objects(Q(submittedSurvey=True) & Q(vetted=False) & Q(country=country)).order_by('-lastUpdated', 'prettyName')
+            stats = models.Stats.objects.get(country=country)
             self.render(
                 "admin.html",
                 page_title='OpenData500',
@@ -415,7 +419,7 @@ class SubmitCompanyHandler(BaseHandler):
         city = self.get_argument("city", None)
         zipCode = self.get_argument("zipCode", None)
         state = self.get_argument('state', None)
-        country = models.Country(name="United States", abbrev="US")
+        country = "us"
         companyType = self.get_argument("companyType", None)
         if companyType == 'other':
             companyType = self.get_argument('otherCompanyType', None)

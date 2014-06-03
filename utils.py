@@ -37,38 +37,38 @@ class Validators(object):
 
 
 class StatsGenerator(object):
-    def get_total_companies(self):
-        return models.Stats.objects().first().totalCompanies
+    def get_total_companies(self, country):
+        return models.Stats.objects.get(country=country).totalCompanies
     
-    def get_total_companies_web(self):
-        return models.Stats.objects().first().totalCompaniesWeb
+    def get_total_companies_web(self, country):
+        return models.Stats.objects.get(country=country).totalCompaniesWeb
     
-    def get_total_companies_surveys(self):
-        return models.Stats.objects().first().totalCompaniesSurvey
+    def get_total_companies_surveys(self, country):
+        return models.Stats.objects.get(country=country).totalCompaniesSurvey
 
-    def update_totals_companies(self):
-        s = models.Stats.objects().first()
-        s.totalCompanies = models.Company.objects().count()
-        s.totalCompaniesWeb = models.Company.objects(submittedThroughWebsite = True).count()
-        s.totalCompaniesSurvey = models.Company.objects(submittedSurvey = True).count()
+    def update_totals_companies(self, country):
+        s = models.Stats.objects.get(country=country)
+        s.totalCompanies = models.Company.objects(country=country).count()
+        s.totalCompaniesWeb = models.Company.objects(Q(submittedThroughWebsite = True) & Q(country=country)).count()
+        s.totalCompaniesSurvey = models.Company.objects(Q(submittedSurvey = True) & Q(country=country)).count()
     
-    def increase_individual_state_count(self, state):
-        stats = models.Stats.objects().first()
+    def increase_individual_state_count(self, state, country):
+        stats = models.Stats.objects.get(country=country)
         for s in stats.states:
             if s.abbrev == state:
                 s.count = s.count + 1
         stats.save()
 
-    def decrease_individual_state_count(self, state):
-        stats = models.Stats.objects().first()
+    def decrease_individual_state_count(self, state, country):
+        stats = models.Stats.objects.get(country=country)
         for s in stats.states:
             if s.abbrev == state:
                 s.count = s.count - 1
         stats.save()
 
-    def update_all_state_counts(self):
-        stats = models.Stats.objects().first()
-        companies  = models.Company.objects(display=True)
+    def update_all_state_counts(self, country):
+        stats = models.Stats.objects.get(country=country)
+        companies  = models.Company.objects(Q(display=True) & Q(country=country))
         stateCount = []
         for c in companies:
             stateCount.append(c.state)
@@ -81,12 +81,12 @@ class StatsGenerator(object):
             stats.states.append(s)
         stats.save()
 
-    def refresh_stats(self):
-        stats = models.Stats.objects().first()
-        stats.totalCompanies = models.Company.objects().count()
-        stats.totalCompaniesWeb = models.Company.objects(submittedThroughWebsite = True).count()
-        stats.totalCompaniesSurvey = models.Company.objects(submittedSurvey = True).count()
-        companies  = models.Company.objects(display=True)
+    def refresh_stats(self, country):
+        stats = models.Stats.objects.get(country=country)
+        stats.totalCompanies = models.Company.objects(country=country).count()
+        stats.totalCompaniesWeb = models.Company.objects(Q(submittedThroughWebsite = True) & Q(country=country)).count()
+        stats.totalCompaniesSurvey = models.Company.objects(Q(submittedSurvey = True) & Q(country=country)).count()
+        companies  = models.Company.objects(Q(display=True) & Q(country=country))
         stateCount = []
         for c in companies:
             stateCount.append(c.state)

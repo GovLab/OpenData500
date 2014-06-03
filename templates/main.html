@@ -52,7 +52,7 @@
             <a href="/stats/">Stats</a>
             <a href="/resources/">Resources</a>
             <a href="/download/">Download</a> 
-            {%try%} {% if user == "luis" or user == "govlab" %} <a href="/admin/">Admin</a>{% end %}{%except%}{%end%}
+            {%try%} {% if user %} <a href="/admin/">Admin</a>{% end %}{%except%}{%end%}
             {%try%} {% if user %} <a href="/logout/">Logout</a>{% end %}{%except%}{%end%}
         </div>
     </header><!-- end header -->

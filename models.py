@@ -5,10 +5,6 @@ from mongoengine import *
 from datetime import datetime
 
 
-class Country(EmbeddedDocument):
-	name = StringField()
-	abbrev = StringField()
-
 class Person2(EmbeddedDocument):
 	firstName = StringField()
 	lastName = StringField()
@@ -28,7 +24,7 @@ class Company(Document):
 	previousName = StringField()
 	city = StringField()
 	state = StringField()
-	country = EmbeddedDocumentField('Country')
+	country = StringField()
 	zipCode = StringField()
 	fte = IntField()
 	companyType = StringField() #Public, Private, etc
@@ -67,7 +63,7 @@ class Agency(Document):
 	subagencies = ListField(EmbeddedDocumentField('Subagency'))
 	dataType = StringField() #Federal, State, City/County, Other
 	datasets = ListField(EmbeddedDocumentField('Dataset'))
-	country = EmbeddedDocumentField('Country')
+	country = StringField()
 	usedBy = ListField(ReferenceField(Company))
 	usedBy_count = IntField()
 
@@ -86,9 +82,9 @@ class Dataset(EmbeddedDocument):
 
 class Users(Document):
 	ts = ComplexDateTimeField(default=datetime.now())
-	email = StringField()
+	username = StringField()
 	password = StringField()
-	country = EmbeddedDocumentField('Country')
+	country = StringField()
 
 class States(EmbeddedDocument):
 	name = StringField()
@@ -101,6 +97,7 @@ class Stats(Document):
 	totalCompaniesWeb = IntField() #submitted through web survey
 	totalCompaniesSurvey = IntField() #completed surveys
 	states = ListField(EmbeddedDocumentField(States))
+	country = StringField()
 
 class Visit(Document):
 	ts = ComplexDateTimeField(default=datetime.now())
