@@ -16,7 +16,17 @@ class MainHandler(BaseHandler):
             page_heading='Welcome to the Open Data 500 Pre-Launch',
         )
 
-
+#--------------------------------------------------------TEST PAGE------------------------------------------------------------
+class MainHandler2(BaseHandler):
+    @tornado.web.addslash
+    #@tornado.web.authenticated
+    def get(self):
+        self.render(
+            "index_2.html",
+            user=self.current_user,
+            page_title='Open Data500',
+            page_heading='Welcome to the Open Data 500 Pre-Launch',
+        )
 
 #--------------------------------------------------------ABOUT PAGE------------------------------------------------------------
 class AboutHandler(BaseHandler):

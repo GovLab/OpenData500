@@ -38,6 +38,7 @@ class Application(tornado.web.Application):
         handlers = [
             (r'/(favicon.ico)', tornado.web.StaticFileHandler, {"path": ""}),
             (r"/", MainHandler),
+            (r"/2", MainHandler2),
             # (r"/sankeyChart/?", SankeyChartHandler),
             (r"/submitCompany/?", SubmitCompanyHandler),
             (r"/validate/?", ValidateHandler),

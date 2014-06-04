@@ -175,7 +175,28 @@ class AgencyAdminHandler(BaseHandler):
     @tornado.web.addslash
     @tornado.web.authenticated
     def get(self):
-        logging.info("temp")
+        try:
+            user = models.Users.objects.get(username=self.current_user)
+        except Exception, e:
+            logging.info("Could not get user: " + str(e))
+            self.redirect("/login/")
+        country = user.country
+        logging.info("Working in: " + country)
+        if self.current_user:
+            stats = models.Stats.objects.get(country=country)
+            self.render(
+                "admin_agencies.html",
+                page_title='OpenData500',
+                page_heading='Admin - ' + country.upper(),
+                user=self.current_user,
+                stats = stats
+            )
+        else: #if no user is logged in, go to not allowed page
+            self.render('404.html',
+                page_heading="I'm afraid I can't let you do that.",
+                user=self.current_user,
+                page_title="Forbidden",
+                error="Not Enough Priviliges")
 
 
 
