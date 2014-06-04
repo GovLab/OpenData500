@@ -1,20 +1,44 @@
 from base import *
 import json
 
-with open("country_settings.json") as json_file:
-    country_settings = json.load(json_file)
 
 #--------------------------------------------------------MAIN PAGE------------------------------------------------------------
 class MainHandler(BaseHandler):
     @tornado.web.addslash
     #@tornado.web.authenticated
-    def get(self):
-        self.render(
-            "index.html",
-            user=self.current_user,
-            page_title='Open Data500',
-            page_heading='Welcome to the Open Data 500 Pre-Launch',
-        )
+    def get(self, country=None):
+        #--------------------Determine country and language
+        lan = self.get_argument("lan", "")
+        if country in available_countries:
+            with open("templates/"+country+"/settings.json") as json_file:
+                settings = json.load(json_file)
+            if lan not in settings[country].keys():
+                logging.info("Translation not available in this language")
+                lan = settings[country]["default_language"]
+            if lan == "":
+                lan = settings[country]["default_language"]
+            self.render(
+                country.lower()+"/index.html",
+                page_title = settings[country][lan]['index']['page_title'],
+                settings = settings[country][lan]['index'],
+                user=self.current_user,
+                country=country
+            )
+        elif country and country not in available_countries:
+            self.render('404.html',
+                page_heading="Stop trying to make " +self.request.uri + " happen. <br><br>It's not going to happen.",
+                user=self.current_user,
+                page_title="404 - Not Found",
+                error="Not found",
+                country="")
+        else:
+            self.render(
+                "index.html",
+                user=self.current_user,
+                page_title='Open Data500',
+                page_heading='Welcome to the Open Data 500 Pre-Launch',
+                country=""
+            )
 
 #--------------------------------------------------------TEST PAGE------------------------------------------------------------
 class MainHandler2(BaseHandler):
@@ -33,32 +57,37 @@ class AboutHandler(BaseHandler):
     @tornado.web.addslash
     #@tornado.web.authenticated
     def get(self, country=None):
-        #Determine country and language
+        #--------------------Determine country and language
         lan = self.get_argument("lan", "")
-        if country in country_settings.keys():
-            if lan not in country_settings[country].keys():
+        if country in available_countries:
+            with open("templates/"+country+"/settings.json") as json_file:
+                settings = json.load(json_file)
+            if lan not in settings[country].keys():
                 logging.info("Translation not available in this language")
-                lan = country_settings[country]["default_language"]
+                lan = settings[country]["default_language"]
             if lan == "":
-                lan = country_settings[country]["default_language"]
+                lan = settings[country]["default_language"]
             self.render(
-                country.lower()+"/about_" + country.lower() + ".html",
-                page_title = country_settings[country][lan]['about']['page_title'],
-                settings = country_settings[country][lan]['about'],
-                user=self.current_user
+                country.lower()+"/about.html",
+                page_title = settings[country][lan]['about']['page_title'],
+                settings = settings[country][lan]['about'],
+                user=self.current_user,
+                country=country
             )
-        elif country and country not in country_settings.keys():
+        elif country and country not in available_countries:
             self.render('404.html',
                 page_heading="Stop trying to make " +self.request.uri + " happen. <br><br>It's not going to happen.",
                 user=self.current_user,
                 page_title="404 - Not Found",
-                error="Not found")
+                error="Not found",
+                country="")
         else:
             self.render(
                 "about.html",
                 page_title='About the OpenData500',
                 page_heading='About the OpenData 500',
-                user=self.current_user
+                user=self.current_user,
+                country=""
             )
 
 #--------------------------------------------------------MEDIA REDIRECT PAGE------------------------------------------------------------

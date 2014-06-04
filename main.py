@@ -37,7 +37,7 @@ class Application(tornado.web.Application):
         self.files = FileGenerator()
         handlers = [
             (r'/(favicon.ico)', tornado.web.StaticFileHandler, {"path": ""}),
-            (r"/", MainHandler),
+            (r"/(?:([A-Za-z]{2})/)?", MainHandler),
             (r"/2/?", MainHandler2),
             # (r"/sankeyChart/?", SankeyChartHandler),
             (r"/submitCompany/?", SubmitCompanyHandler),

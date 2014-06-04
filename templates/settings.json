@@ -1,0 +1,11 @@
+{
+    "int": {
+        "default_language": "english",
+        "english": {
+            "index": {
+                "page_title": "About the Open Data 500",
+                "page_heading": "About the Open Data 500"
+            }
+        }
+    }
+}

@@ -44,9 +44,8 @@
     <div class="parallax-bg" id="background-3" data-stellar-ratio="-0.02"></div>   -->
     <header>
         <div id="mainMenu" class="l-centered m-main-menu">
-            <a class="logo" href="/"><img src="{{ static_url("img/od500-logo.png") }}" alt=""></a>
-            <!-- <a href="/">Home</a> -->
-            <a href="/about/">About</a>
+            <a class="logo" href="/{%try%}{%if country %}{{country}}/{%end%}{%except%}{%end%}"><img src="{{ static_url("img/od500-logo.png") }}" alt=""></a>
+            <a href="/{%try%}{%if country %}{{country}}/{%end%}{%except%}{%end%}about/">About</a>
             <a href="/list/">Full List</a>
             <a href="/submitCompany/">Survey</a>
             <a href="/stats/">Stats</a>
