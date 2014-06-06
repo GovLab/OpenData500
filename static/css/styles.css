@@ -290,6 +290,22 @@ a:hover {
 .m-homepage-box:last-of-type {
   margin-right: 0; }
 
+#consortium-landing-page header {
+  height: 30px;
+  text-align: center; }
+#consortium-landing-page .l-centered {
+  text-align: center; }
+#consortium-landing-page img {
+  max-width: 600px;
+  margin-top: -20px; }
+#consortium-landing-page .box {
+  font-size: 16px;
+  line-height: 20px;
+  border: 1px solid #472b74;
+  padding: 10px;
+  width: 600px !important;
+  margin-top: -35px; }
+
 .about-page {
   font-size: 14px;
   line-height: 20px; }
@@ -586,8 +602,8 @@ a:hover {
 .m-candidates .m-filter-menu {
   width: 200px;
   float: right;
-/*  border-left: 1px solid rgba(0, 0, 0, 0.15);
-*/  padding-left: 10px; }
+  border-left: 1px solid rgba(0, 0, 0, 0.15);
+  padding-left: 75px; }
   .m-candidates .m-filter-menu h3 {
     margin-bottom: 10px;
     font-weight: normal; }
@@ -1100,33 +1116,3 @@ footer {
     footer .creative-commons-license img {
       float: left;
       margin-right: 10px; }
-
-
-
-/*-------ADD THISSSSSSSSSSS----------------*/
-
-
-#container {
-  margin-top: 10px;
-}
-
-.m-candidates-item.s-active {
-  width: 45.6%;
-}
-
-.dialog-example {
-  display: none;
-}
-
-.embed-popup {
-  text-align: right;
-}
-
-.embed-code {
-  width: 90%;
-  height: 85px;
-}
-
-
-
-
