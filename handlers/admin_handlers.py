@@ -239,6 +239,14 @@ class AdminEditCompanyHandler(BaseHandler):
         #print all arguments to log:
         logging.info("Admin Editing Company")
         logging.info(self.request.arguments)
+        #get user editing and set country
+        try:
+            user = models.Users.objects.get(username=self.current_user)
+        except Exception, e:
+            logging.info("Could not get user: " + str(e))
+            self.redirect("/login/")
+        country = user.country
+        logging.info("Working in: " + country)
         #get the company you will be editing
         company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
         #------------------CONTACT INFO-------------------
@@ -317,7 +325,7 @@ class AdminEditCompanyHandler(BaseHandler):
         #company.lastUpdated = datetime.now()
         company.notes = self.get_argument("notes", None)
         company.save()
-        self.application.stats.update_all_state_counts()
+        self.application.stats.update_all_state_counts(country)
         self.write('success')
         #self.redirect('/thanks/')
         # if self.get_argument('submit', None) == 'Save and Submit':
