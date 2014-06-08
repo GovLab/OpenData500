@@ -99,3 +99,31 @@
 	margin-right: 0;
 }
 
+// Consortium Landing Page 
+
+#consortium-landing-page {
+	header {
+	    height: 30px;
+	    text-align: center;
+	}
+	.l-centered {
+	    text-align: center;
+	}
+
+	img {
+		max-width: 600px;
+		margin-top: -20px;
+	}
+
+	.box {
+	    font-size: 16px;
+	    line-height: 20px;
+	    border: 1px solid $purple;
+	    padding: 10px;
+	    width: 600px !important;
+	}
+
+}
+
+
+
