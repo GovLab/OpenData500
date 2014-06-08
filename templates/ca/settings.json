@@ -1,25 +1,23 @@
 {
-    "ca": {
-        "default_language": "french",
-        "french": {
-            "about": {
-                "page_title": "À propos du Canada 500 Open Data",
-                "page_heading": "À propos du Canada 500 Open Data"
-            },
-            "index": {
-                "page_title": "Bienvenue sur les Open Data 500",
-                "page_heading": "Bienvenue sur les Open Data 500"
-            }
+    "default_language": "french",
+    "french": {
+        "about": {
+            "page_title": "À propos du Canada 500 Open Data",
+            "page_heading": "À propos du Canada 500 Open Data"
         },
-        "english": {
-            "about": {
-                "page_title": "About the Canada Open Data 500",
-                "page_heading": "About the Canada Open Data 500"
-            },
-            "index": {
-                "page_title": "Welcome to the Open Data 500",
-                "page_heading": "Welcome to the Open Data 500"
-            }
+        "index": {
+            "page_title": "Bienvenue sur les Open Data 500",
+            "page_heading": "Bienvenue sur les Open Data 500"
+        }
+    },
+    "english": {
+        "about": {
+            "page_title": "About the Canada Open Data 500",
+            "page_heading": "About the Canada Open Data 500"
+        },
+        "index": {
+            "page_title": "Welcome to the Open Data 500",
+            "page_heading": "Welcome to the Open Data 500"
         }
     }
 }

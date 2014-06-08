@@ -7,36 +7,28 @@ class MainHandler(BaseHandler):
     @tornado.web.addslash
     #@tornado.web.authenticated
     def get(self, country=None):
-        #--------------------Determine country and language
+        if not country:
+            country = "int"
         lan = self.get_argument("lan", "")
         if country in available_countries:
             with open("templates/"+country+"/settings.json") as json_file:
                 settings = json.load(json_file)
-            if lan not in settings[country].keys():
-                logging.info("Translation not available in this language")
-                lan = settings[country]["default_language"]
-            if lan == "":
-                lan = settings[country]["default_language"]
+            if lan not in settings.keys():
+                logging.info("No translation selected or translation not available in this language")
+                lan = settings["default_language"]
             self.render(
                 country.lower()+"/index.html",
-                page_title = settings[country][lan]['index']['page_title'],
-                settings = settings[country][lan]['index'],
+                page_title = settings[lan]['index']['page_title'],
+                settings = settings[lan]['index'],
                 user=self.current_user,
                 country=country
             )
-        elif country and country not in available_countries:
+        else:
             self.render('404.html',
                 page_heading="Stop trying to make " +self.request.uri + " happen. <br><br>It's not going to happen.",
                 user=self.current_user,
                 page_title="404 - Not Found",
                 error="Not found",
-                country="")
-        else:
-            self.render(
-                "index.html",
-                user=self.current_user,
-                page_title='Open Data500',
-                page_heading='Welcome to the Open Data 500 Pre-Launch',
                 country=""
             )
 
@@ -57,36 +49,28 @@ class AboutHandler(BaseHandler):
     @tornado.web.addslash
     #@tornado.web.authenticated
     def get(self, country=None):
-        #--------------------Determine country and language
+        if not country:
+            country = "int"
         lan = self.get_argument("lan", "")
         if country in available_countries:
             with open("templates/"+country+"/settings.json") as json_file:
                 settings = json.load(json_file)
-            if lan not in settings[country].keys():
-                logging.info("Translation not available in this language")
-                lan = settings[country]["default_language"]
-            if lan == "":
-                lan = settings[country]["default_language"]
+            if lan not in settings.keys():
+                logging.info("No translation selected or translation not available in this language")
+                lan = settings["default_language"]
             self.render(
                 country.lower()+"/about.html",
-                page_title = settings[country][lan]['about']['page_title'],
-                settings = settings[country][lan]['about'],
+                page_title = settings[lan]['about']['page_title'],
+                settings = settings[lan]['about'],
                 user=self.current_user,
                 country=country
             )
-        elif country and country not in available_countries:
+        else:
             self.render('404.html',
                 page_heading="Stop trying to make " +self.request.uri + " happen. <br><br>It's not going to happen.",
                 user=self.current_user,
                 page_title="404 - Not Found",
                 error="Not found",
-                country="")
-        else:
-            self.render(
-                "about.html",
-                page_title='About the OpenData500',
-                page_heading='About the OpenData 500',
-                user=self.current_user,
                 country=""
             )
 
