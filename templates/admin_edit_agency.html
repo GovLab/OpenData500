@@ -1,0 +1,71 @@
+
+{% extends "main.html" %}
+{% autoescape None %}
+
+
+{% block body %}
+
+<h1>{{ page_heading }}</h1>
+
+<form method="post" id="edit-agency-form" class="m-form agency-form">
+	<fieldset class="m-form-half">
+		<h3>Agency Information</h3>
+		<div class="m-form-line"><label for="">Name: </label><input type="text" name="name" id="name" {% if (agency.name) %} value="{{ agency.name }}" {% end %}></div>
+		<div class="m-form-line"><label for="">Abbreviation: </label><input type="text" name="abbrev" id="abbrev" {% if (agency.abbrev) %} value="{{ agency.abbrev }}" {% end %}></div>
+		<div class="m-form-line"><label for="">URL: </label><input type="text" name="url" id="url" {% if (agency.url) %} value="{{ agency.url }}" {% end %}></div>
+		<div class="m-form-line"><label for="">Source:</label><input type="text" name="source" id="source" {% if (agency.source) %} value="{{ agency.source }}" {% end %}></div>
+		<h3>Agency Datasets</h3>
+		<div class="agency-datasets-list">
+			<table class="agency-dataset-table">
+				<tr>
+					<th>Dataset Name</th>
+					<th>Used By</th>
+					<th>Rating</th>
+				</tr>
+				{%for d in agency.datasets %}
+					<tr>
+						<td>{%if d.datasetURL %}<a href="d.datasetURL">{{d.datasetURL}}</a>{%else%}<p>{{d.datasetName}}</p>{%end%}</td>
+						<td>{%if d.usedBy %}{{d.usedBy.companyName}}{%else%}None{%end%}</td>
+					</tr>
+				{%end%}
+			</table>
+		</div>
+	</fieldset>
+	<fieldset class="m-form-half left">
+		<h3>Subagencies</h3>
+		{% for s in agency.subagencies %}
+			<h3>{{s.name}}</h3>
+			<div class="m-form-line"><label for="">Name: </label><input type="text" name="subagency-name" id="subagency-name" {% if (s.name) %} value="{{ s.name }}" {% end %}></div>
+			<div class="m-form-line"><label for="">Abbreviation: </label><input type="text" name="subagency-abbrev" id="subagency-abbrev" {% if (s.abbrev) %} value="{{ s.abbrev }}" {% end %}></div>
+			<div class="m-form-line"><label for="">URL: </label><input type="text" name="subagency-url" id="subagency-url" {% if (s.url) %} value="{{ s.url }}" {% end %}></div>
+			{% if s.datasets %}
+				<div class="subagency-datasets-list">
+					<table class="agency-dataset-table">
+						<tr>
+							<th>Dataset Name</th>
+							<th>Used By</th>
+							<th>Rating</th>
+						</tr>
+						{%for d in s.datasets %}
+							<tr>
+								<td>{%if d.datasetURL %}<a href="d.datasetURL">{{d.datasetURL}}</a>{%else%}<p>{{d.datasetName}}</p>{%end%}</td>
+								<td>{%if d.usedBy %}{{d.usedBy.companyName}}{%else%}None{%end%}</td>
+							</tr>
+						{%end%}
+					</table>
+				</div>
+			{%end%}
+			<hr>
+		{%end%}
+	</fieldset>
+	<fieldset class="m-form-half">
+		<h3>Notes</h3>
+			<textarea rows="10" cols="59" name="notes" id="notes" parsley-trigger="keyup" parsley-maxwords="1000">{%if agency.notes %}{{agency.notes}}{%end%}</textarea>
+	</fieldset>
+</form>
+
+
+
+
+
+{% end %}

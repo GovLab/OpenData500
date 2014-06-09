@@ -182,21 +182,16 @@ class AgencyAdminHandler(BaseHandler):
             self.redirect("/login/")
         country = user.country
         logging.info("Working in: " + country)
-        if self.current_user:
-            stats = models.Stats.objects.get(country=country)
-            self.render(
-                "admin_agencies.html",
-                page_title='OpenData500',
-                page_heading='Admin - ' + country.upper(),
-                user=self.current_user,
-                stats = stats
-            )
-        else: #if no user is logged in, go to not allowed page
-            self.render('404.html',
-                page_heading="I'm afraid I can't let you do that.",
-                user=self.current_user,
-                page_title="Forbidden",
-                error="Not Enough Priviliges")
+        agencies = models.Agency.objects(country=country).order_by('name')
+        stats = models.Stats.objects.get(country=country)
+        self.render(
+            "admin_agencies.html",
+            page_title='OpenData500',
+            page_heading='Admin - ' + country.upper(),
+            user=self.current_user,
+            stats = stats,
+            agencies=agencies
+        )
 
 
 
@@ -211,14 +206,9 @@ class AdminEditCompanyHandler(BaseHandler):
             page_heading = "Editing " + company.companyName + ' (Admin)'
             page_title = "Editing " + company.companyName + ' (Admin)'
         except Exception, e:
-            logging.info('Error: ' + str(e))
-            self.render("404.html",
-                page_heading = '404 - Company Not Found',
-                page_title = '404 - Not Found',
-                error = "404 - Not Found",
-                user=self.current_user,
-                message=id)
-        self.render("adminEditCompany.html",
+            logging.info('Could not get company: ' + str(e))
+            self.redirect('/404/')
+        self.render("admin_edit_company.html",
             page_title = page_title,
             page_heading = page_heading,
             company = company,
@@ -239,6 +229,14 @@ class AdminEditCompanyHandler(BaseHandler):
         #print all arguments to log:
         logging.info("Admin Editing Company")
         logging.info(self.request.arguments)
+        #get user editing and set country
+        try:
+            user = models.Users.objects.get(username=self.current_user)
+        except Exception, e:
+            logging.info("Could not get user: " + str(e))
+            self.redirect("/login/")
+        country = user.country
+        logging.info("Working in: " + country)
         #get the company you will be editing
         company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
         #------------------CONTACT INFO-------------------
@@ -317,7 +315,7 @@ class AdminEditCompanyHandler(BaseHandler):
         #company.lastUpdated = datetime.now()
         company.notes = self.get_argument("notes", None)
         company.save()
-        self.application.stats.update_all_state_counts()
+        self.application.stats.update_all_state_counts(country)
         self.write('success')
         #self.redirect('/thanks/')
         # if self.get_argument('submit', None) == 'Save and Submit':
@@ -327,6 +325,26 @@ class AdminEditCompanyHandler(BaseHandler):
 
 
 
+class AdminEditAgencyHandler(BaseHandler):
+    @tornado.web.addslash
+    @tornado.web.authenticated
+    def get(self, id):
+        try:
+            user = models.Users.objects.get(username=self.current_user)
+        except Exception, e:
+            logging.info("Could not get user: " + str(e))
+            self.redirect("/login/")
+        country = user.country
+        logging.info("Working in: " + country)
+        try:
+            agency = models.Agency.objects.get(id=bson.objectid.ObjectId(id))
+        except Exception, e:
+            logging.info("Could not get agency: " + str(e))
+            self.redirect('/404/')
+        self.render('admin_edit_agency.html',
+            page_heading="Editing " + agency.name,
+            page_title="Editing " + agency.name,
+            agency=agency)
 
 #--------------------------------------------------------DELETE COMPANY------------------------------------------------------------
 class DeleteCompanyHandler(BaseHandler):

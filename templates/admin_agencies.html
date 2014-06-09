@@ -10,7 +10,26 @@
 <a href="/admin/companies/">Manage Companies</a><br>
 
 
-
+<table class="list-of-agencies" style="width:100%; text-align:left; border:1px;">
+	<tr>
+		<th>Agency Name</th>
+		<th>Edit URL</th>
+		<th>Date Submitted</th>
+		<th>No. Subagencies</th>
+		<th>Used By:</th>
+		<th>Notes</th>
+	</tr>
+	{% for a in agencies %}
+		<tr>
+			<td><strong>{%if a.name %}{{ a.name }}{% else %}No Name{%end%}</strong></a></td>
+			<td><a href="/admin/agency-edit/{{ a.id }}">Edit</a></td>
+			<td>{{ a.ts.strftime("%b, %d '%y @%I:%M %p") }}</td>
+			<td>{{ len(a.subagencies) }}</td>
+			<td>{{ a.usedBy_count }}</td>
+			<td><p>{% if a.notes %}{{a.notes}}{%end%}</p></td>
+		</tr>
+	{% end %}
+</table>
 
 
 

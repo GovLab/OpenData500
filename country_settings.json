@@ -1,0 +1,26 @@
+{
+    "us": {
+        "default_language": "english",
+        "english": {
+            "about": {
+                "page_title": "About the US Open Data 500",
+                "page_heading": "About the US Open Data 500"
+            }
+        }
+    },
+    "ca": {
+        "default_language": "french",
+        "french": {
+            "about": {
+                "page_title": "À propos du Canada 500 Open Data",
+                "page_heading": "À propos du Canada 500 Open Data"
+            }
+        },
+        "english": {
+            "about": {
+                "page_title": "About the Canada Open Data 500",
+                "page_heading": "About the Canada Open Data 500"
+            }
+        }
+    }
+}
