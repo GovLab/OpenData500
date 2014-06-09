@@ -66,6 +66,7 @@ class Agency(Document):
 	country = StringField()
 	usedBy = ListField(ReferenceField(Company))
 	usedBy_count = IntField()
+	notes = StringField()
 
 class Subagency(EmbeddedDocument):
 	name = StringField()

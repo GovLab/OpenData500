@@ -8,6 +8,10 @@
         "index": {
             "page_title": "Welcome to the Open Data 500",
             "page_heading": "Welcome to the Open Data 500"
+        },
+        "findings": {
+            "page_title": "OD500 By The Numbers",
+            "page_heading": "OD500 Stats"
         }
     }
 }

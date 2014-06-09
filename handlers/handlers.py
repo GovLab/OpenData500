@@ -84,11 +84,30 @@ class AboutHandler(BaseHandler):
 #--------------------------------------------------------FINDINGS, NOW STATS PAGE------------------------------------------------------------
 class FindingsHandler(BaseHandler):
     @tornado.web.addslash
-    def get(self):
-        self.render(
-                "findings.html",
+    def get(self, country=None):
+        if not country:
+            country = "int"
+        lan = self.get_argument("lan", "")
+        if country in available_countries:
+            with open("templates/"+country+"/settings.json") as json_file:
+                settings = json.load(json_file)
+            if lan not in settings.keys():
+                logging.info("No translation selected or translation not available in this language")
+                lan = settings["default_language"]
+            self.render(
+                country.lower()+"/findings.html",
+                #page_title = settings[lan]['findings']['page_title'],
+                settings = settings[lan]['findings'],
                 user=self.current_user,
-                page_title="Findings"
+                country=country
+            )
+        else:
+            self.render('404.html',
+                page_heading="Stop trying to make " +self.request.uri + " happen. <br><br>It's not going to happen.",
+                user=self.current_user,
+                page_title="404 - Not Found",
+                error="Not found",
+                country=""
             )
 
 #--------------------------------------------------------THANKS PAGE------------------------------------------------------------
