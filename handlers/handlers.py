@@ -360,7 +360,7 @@ class SubmitCompanyHandler(BaseHandler):
             country=country
         )
         company.save()
-        self.application.stats.update_all_state_counts()
+        self.application.stats.update_all_state_counts(country)
         id = str(company.id)
         self.write({"id": id})
 

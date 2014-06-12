@@ -31,40 +31,118 @@
 			</table>
 		</div>
 	</fieldset>
-	<fieldset class="m-form-half left">
-		<h3>Subagencies</h3>
-		{% for s in agency.subagencies %}
-			<h3>{{s.name}}</h3>
-			<div class="m-form-line"><label for="">Name: </label><input type="text" name="subagency-name" id="subagency-name" {% if (s.name) %} value="{{ s.name }}" {% end %}></div>
-			<div class="m-form-line"><label for="">Abbreviation: </label><input type="text" name="subagency-abbrev" id="subagency-abbrev" {% if (s.abbrev) %} value="{{ s.abbrev }}" {% end %}></div>
-			<div class="m-form-line"><label for="">URL: </label><input type="text" name="subagency-url" id="subagency-url" {% if (s.url) %} value="{{ s.url }}" {% end %}></div>
-			{% if s.datasets %}
-				<div class="subagency-datasets-list">
-					<table class="agency-dataset-table">
-						<tr>
-							<th>Dataset Name</th>
-							<th>Used By</th>
-							<th>Rating</th>
-						</tr>
-						{%for d in s.datasets %}
-							<tr>
-								<td>{%if d.datasetURL %}<a href="d.datasetURL">{{d.datasetURL}}</a>{%else%}<p>{{d.datasetName}}</p>{%end%}</td>
-								<td>{%if d.usedBy %}{{d.usedBy.companyName}}{%else%}None{%end%}</td>
-							</tr>
+	<h3>Subagencies</h3>
+	<fieldset class="m-form-three-quarters">
+		<div class="subagency-list">
+			{% if agency.subagencies %}
+				{% for s in agency.subagencies %}
+					<div class="subagency-item">
+						<h3>{{s.name}}</h3>
+						<div class="m-form-line"><label for="">Name: </label><input type="text" name="subagency-name" id="subagency-name" {% if (s.name) %} value="{{ s.name }}" {% end %}></div>
+						<div class="m-form-line"><label for="">Abbreviation: </label><input type="text" name="subagency-abbrev" id="subagency-abbrev" {% if (s.abbrev) %} value="{{ s.abbrev }}" {% end %}></div>
+						<div class="m-form-line"><label for="">URL: </label><input type="text" name="subagency-url" id="subagency-url" {% if (s.url) %} value="{{ s.url }}" {% end %}></div>
+						<div class="m-form-line">Used by: <br>{% if s.usedBy %}{%for c in s.usedBy%}<a href="/admin/company-edit/{{c.id}}/">{{c.companyName}}</a><br> {%end%}{%else%}None{%end%}</div><br>
+						{% if s.datasets %}
+							<div class="subagency-datasets-list">
+								<h3>Datasets</h3>
+								<table class="agency-dataset-table">
+									<tr>
+										<th>Dataset Name</th>
+										<th>Used By</th>
+										<th>Rating</th>
+									</tr>
+									{%for d in s.datasets %}
+										<tr>
+											<td>{%if d.datasetURL %}<a href="d.datasetURL">{{d.datasetName}}</a>{%else%}<p>{{d.datasetName}}</p>{%end%}</td>
+											<td>{%if d.usedBy %}{{d.usedBy.companyName}}{%else%}None{%end%}</td>
+										</tr>
+									{%end%}
+								</table>
+							</div>
 						{%end%}
-					</table>
-				</div>
+						<div class="subagency-list-buttons">
+							<input type="button" class="l-button" id="edit-subagency-button" name="delete-subagency-button" value="Save Edits">
+							<input type="button" class="l-button" id="delete-subagency-button" name="delete-subagency-button" value="Delete This Subagency"><br>
+							<div class="confirm-delete-subagency" style="display:none">
+								<p>Are you sure?
+								<input type="button" class="l-button" id="confirm-delete-subagency-button" value="Yes">
+								<input type="button" class="l-button" id="cancel-delete-subagency-button" value="No"></p>
+							</div>
+						</div>
+					</div>
+				{%end%}
+			{%else%}
+				<p>No Subagencies</p>
 			{%end%}
-			<hr>
-		{%end%}
+		</div>
 	</fieldset>
 	<fieldset class="m-form-half">
 		<h3>Notes</h3>
 			<textarea rows="10" cols="59" name="notes" id="notes" parsley-trigger="keyup" parsley-maxwords="1000">{%if agency.notes %}{{agency.notes}}{%end%}</textarea>
 	</fieldset>
+	<input type="hidden" id="agency-id" value="{{agency.id}}">
+	{% raw xsrf_form_html() %}
 </form>
 
+<div class="delete-agency">
+	<input type="button" class="l-button" id="delete-agency-button" name="delete-agency-button" value="Delete This Agency"><br>
+	<div class="confirm-delete-agency" style="display:none">
+		<p>Are you sure?</p>
+		<input type="button" class="l-button" id="confirm-delete-agency-button" value="Yes"><br>
+		<input type="button" class="l-button" id="cancel-delete-agency-button" value="No"><br>
+	</div>
+	<span class="delete-agency-warning">Note: You can only delete this agency if it is not in use by a company.</span><br>
+	<span class="delete-agency-error"></span>
+</div>
 
+<script type="text/javascript">
+
+$(document).ready( function() {
+	//----------------------------------------DELETE AGENCY--------------------------------------------------
+	$(".delete-agency").on("click", "#delete-agency-button", function() {
+		$('.confirm-delete-agency').show();
+		$('.confirm-delete-agency').on("click", "#confirm-delete-agency-button", function() {
+			id = $("#agency-id").val();
+			$.ajax({
+			    type: 'DELETE',
+			    url: '/admin/agency-delete/' + id + "/",
+			    error: function(error) {
+			        console.debug(JSON.stringify(error));
+				},
+			    beforeSend: function(xhr, settings) {
+			    	xhr.setRequestHeader("X-Xsrftoken", $("[name='_xsrf']").val());
+			    },
+			    success: function(data) {
+			    	console.log(data);
+			    	if (data["message"] == "success") {
+			    		document.location.href = '/admin/agencies/';
+			    	} else {
+			    		$(".delete-agency-error").text(data["message"]).show().delay(5000).fadeOut();
+			    	}
+			    }
+			});
+		});
+		$('.confirm-delete-agency').on("click", "#cancel-delete-agency-button", function() {
+			$('.confirm-delete-agency').hide();
+		});
+	});
+	//----------------------------------------DELETE SUBAGENCY--------------------------------------------------
+	$(".subagency-list-buttons").on("click", "#delete-subagency-button", function() {
+		var current_options = $(this).parent().find(".confirm-delete-subagency")
+		current_options.show();
+		current_options.on("click", "#confirm-delete-subagency-button", function(event) {
+			console.log("deleteting subagecy")
+			event.stopPropagation();
+		});
+		current_options.on("click", "#cancel-delete-subagency-button", function(event) {
+			current_options.hide();
+			event.stopPropagation();
+		});
+	})
+
+});
+
+</script>
 
 
 

@@ -143,3 +143,43 @@ survey/no survey hover and active states*/
   display: none;
 }
 
+.delete-agency-error {
+  color: red;
+}
+
+.subagency-list {
+  padding: 20px;
+  border: 1px solid;
+  background-color: #F5F5DC;
+}
+
+.subagency-list-buttons {
+  text-align: right;
+  padding-top: 10px;
+}
+
+.subagency-item {
+  padding-top: 10px;
+}
+
+.m-form-three-quarters {
+  display: inline-block;
+  width: 70.5%;
+  vertical-align: top;
+  margin-right: 40px;
+  border: 0px;
+  padding: 0px;
+}
+.m-form-three-quarters .m-form-line {
+  text-align: left;
+}
+.m-form-three-quarters .m-form-line input {
+  width: 300px;
+}
+
+
+
+
+
+
+

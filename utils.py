@@ -175,9 +175,9 @@ class FileGenerator(object):
         with open(os.path.join(os.path.dirname(__file__), 'static') + '/OD500_Companies.json', 'w') as outfile:
             json.dump(companiesJSON, outfile)
         logging.info("Company JSON File Done!")
-    def generate_agency_json(self):
+    def generate_agency_json(self, country):
         #--------------JSON OF AGENCIES------------
-        agencies = models.Agency.objects(source="dataGov")
+        agencies = models.Agency.objects(Q(source="dataGov") & Q(country=country))
         agenciesJSON = []
         for a in agencies:
             #--------DATASETS AT AGENCY LEVEL------
@@ -354,7 +354,7 @@ class FileGenerator(object):
                     newrow[i] = newrow[i].encode('utf8')
             csvwriter.writerow(newrow)
         logging.info("All Companies CSV File Done!")
-    def generate_agency_csv(self):
+    def generate_agency_csv(self, country):
         #--------CSV OF AGENCIES------
         agencies = models.Agency.objects()
         companies = models.Company.objects(Q(display=True) & Q(country=country))
@@ -480,7 +480,7 @@ class FileGenerator(object):
             json.dump(cat_v_agencies, outfile)
 
     def generate_chord_chart_files(self):
-        agencies = models.Agency.objects(Q(usedBy__not__size=0) & Q(source__not__exact="web") & Q(dataType="Federal")).order_by('name')
+        agencies = models.Agency.objects(Q(usedBy__not__size=0) & Q(source__not__exact="web") & Q(dataType="Federal") & Q(country="us")).order_by('name')
         #get agencies that are used
         used_agencies_categories = []
         for a in agencies:

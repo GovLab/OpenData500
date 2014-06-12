@@ -138,11 +138,11 @@ class CompanyAdminHandler(BaseHandler):
             stats = models.Stats.objects.get(country=country)
             self.write({"totalCompanies": stats.totalCompanies, "totalCompaniesWeb":stats.totalCompaniesWeb, "totalCompaniesSurvey":stats.totalCompaniesSurvey})
         elif action == "files":
-            self.application.files.generate_company_json()
-            # self.application.files.generate_agency_json()
-            self.application.files.generate_company_csv()
-            self.application.files.generate_company_all_csv()
-            # self.application.files.generate_agency_csv()
+            self.application.files.generate_company_json(country)
+            # self.application.files.generate_agency_json(country)
+            self.application.files.generate_company_csv(country)
+            self.application.files.generate_company_all_csv(country)
+            # self.application.files.generate_agency_csv(country)
             self.write("success")
         elif action == "vizz":
             #self.application.files.generate_sankey_json()
@@ -160,13 +160,13 @@ class CompanyAdminHandler(BaseHandler):
             self.application.stats.update_all_state_counts()
             self.write("success")
         elif action == 'agency_csv':
-            self.application.files.generate_agency_csv()
+            self.application.files.generate_agency_csv(country)
             self.write("success")
         elif action == 'company_csv':
-            self.application.files.generate_company_csv()
+            self.application.files.generate_company_csv(country)
             self.write("success")
         elif action == 'company_all_csv':
-            self.application.files.generate_company_all_csv()
+            self.application.files.generate_company_all_csv(country)
             self.write("success")
 
 
@@ -344,6 +344,7 @@ class AdminEditAgencyHandler(BaseHandler):
         self.render('admin_edit_agency.html',
             page_heading="Editing " + agency.name,
             page_title="Editing " + agency.name,
+            user=self.current_user,
             agency=agency)
 
 #--------------------------------------------------------DELETE COMPANY------------------------------------------------------------
@@ -391,6 +392,36 @@ class DeleteCompanyHandler(BaseHandler):
         ##----------DELETE COMPANY--------
         company.delete()
         self.redirect('/admin/')
+
+#--------------------------------------------------------DELETE AGENCY------------------------------------------------------------
+class DeleteAgencyHandler(BaseHandler):
+    @tornado.web.addslash
+    @tornado.web.authenticated
+    def delete(self, id):
+        logging.info(id)
+        try:
+            agency = models.Agency.objects.get(id=bson.objectid.ObjectId(id))
+        except Exception, e:
+            logging.info("Could not get agency: " + str(e))
+            self.write({"message":"Could Not Find Agency"})
+        if agency.subagencies:
+            for s in agency.subagencies:
+                if len(s.usedBy) != 0:
+                    self.write({"message": "Agency has subagency used by a company, cannot delete"})
+                    return
+        if agency.usedBy_count or len(agency.usedBy) !=0:
+            self.write({"message": "Agency is used by a company, cannot delete"})
+            return
+        if agency.usedBy_count == 0 and len(agency.usedBy) == 0:
+            agency.delete()
+            self.write({"message": "success"})
+
+
+
+
+
+
+
 
 
 
