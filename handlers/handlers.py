@@ -677,7 +677,7 @@ class EditCompanyHandler(BaseHandler):
                 if a.prettyName:
                     company.filters.append(a.prettyName)
         if company.display: #only if company is displayed
-            self.application.stats.update_all_state_counts(country)
+            self.application.stats.update_all_state_counts(company.country)
         company.save()
         #self.application.stats.update_all_state_counts()
         self.write('success')
