@@ -391,7 +391,7 @@ class DeleteCompanyHandler(BaseHandler):
             a.save()
         ##----------DELETE COMPANY--------
         company.delete()
-        self.redirect('/admin/')
+        self.redirect('/admin/companies/')
 
 #--------------------------------------------------------DELETE AGENCY------------------------------------------------------------
 class DeleteAgencyHandler(BaseHandler):
