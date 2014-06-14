@@ -186,7 +186,7 @@ class AgencyAdminHandler(BaseHandler):
         stats = models.Stats.objects.get(country=country)
         self.render(
             "admin_agencies.html",
-            page_title='OpenData500',
+            page_title='Admin - Agencies - OpenData500',
             page_heading='Admin - ' + country.upper(),
             user=self.current_user,
             stats = stats,
@@ -324,7 +324,27 @@ class AdminEditCompanyHandler(BaseHandler):
         #     self.redirect('/edit/'+id)
 
 
+#--------------------------------------------------------ADD AGENCY (ADMIN) PAGE------------------------------------------------------------
+class AdminAddAgencyHandler(BaseHandler):
+    @tornado.web.addslash
+    @tornado.web.authenticated
+    def get(self):
+        try:
+            user = models.Users.objects.get(username=self.current_user)
+        except Exception, e:
+            logging.info("Could not get user: " + str(e))
+            self.redirect("/login/")
+        country = user.country
+        logging.info("Working in: " + country)
+        self.render(
+            "admin_add_agency.html",
+            page_title='Admin - Edit Agencies - OpenData500',
+            page_heading='Admin - ' + country.upper(),
+            user=self.current_user,
+            agency_types=agency_types
+        )
 
+#--------------------------------------------------------EDIT AGENCY (ADMIN) PAGE------------------------------------------------------------
 class AdminEditAgencyHandler(BaseHandler):
     @tornado.web.addslash
     @tornado.web.authenticated
@@ -345,7 +365,110 @@ class AdminEditAgencyHandler(BaseHandler):
             page_heading="Editing " + agency.name,
             page_title="Editing " + agency.name,
             user=self.current_user,
-            agency=agency)
+            agency=agency,
+            agency_types=agency_types)
+
+    @tornado.web.authenticated
+    def post(self, id):
+        try:
+            user = models.Users.objects.get(username=self.current_user)
+        except Exception, e:
+            logging.info("Could not get user: " + str(e))
+            self.redirect("/login/")
+        country = user.country
+        try:
+            agency = models.Agency.objects.get(id=bson.objectid.ObjectId(id))
+        except Exception, e:
+            logging.info("Could not get agency: " + str(e))
+            self.redirect('/404/')
+        logging.info(self.request.arguments)
+        subagency_old_name = self.get_argument("subagency_old_name","")
+        subagency_new_name = self.get_argument("subagency_new_name", "")
+        subagency_abbrev = self.get_argument("subagency_abbrev", "")
+        subagency_url = self.get_argument("subagency_url", "")
+        agency_new_name = self.get_argument("agency_new_name", agency.name)
+        agency_old_name = self.get_argument("agency_old_name", agency.name)
+        agency_prettyName = re.sub(r'([^\s\w])+', '', agency_new_name).replace(" ", "-").title()
+        agency_abbrev = self.get_argument("agency_abbrev", agency.abbrev)
+        agency_url = self.get_argument("agency_url", agency.url)
+        agency_type = self.get_argument("agency_type", agency.dataType)
+        agency_source = self.get_argument("agency_source", agency.source)
+        agency_notes = self.get_argument("agency_notes", agency.notes)
+        action = self.get_argument("action", "")
+        #------------------------------------------EDIT SUBAGENCY----------------------------
+        if action =="edit-subagency":
+            for s in agency.subagencies:
+                if s.name.lower() == subagency_new_name.lower() and s.name.lower() != subagency_old_name.lower():
+                    self.write({"error":"Another Subagency already has this name."})
+                    return
+            for s in agency.subagencies:
+                if s.name == subagency_old_name:
+                    s.name = subagency_new_name
+                    s.abbrev = subagency_abbrev
+                    s.url = subagency_url
+                    agency.save()
+                    self.write({"message":"Edit Successful"})
+                    return 
+        #------------------------------------------ADD SUBAGENCY----------------------------
+        if action == "add-subagency":
+            for s in agency.subagencies:
+                if s.name.lower() == subagency_new_name.lower() and s.name.lower() != subagency_old_name.lower():
+                    self.write({"error":"Another Subagency already has this name."})
+                    return
+            s = models.Subagency(
+                name = subagency_new_name,
+                abbrev = subagency_abbrev,
+                url = subagency_url)
+            agency.subagencies.append(s)
+            agency.save()
+            self.write({"message":"Subagency added!", "heading":s.name, "name":s.name, "abbrev":s.abbrev, "url":s.url, "new_action":"edit-subagency", "button":"Save Edits", "delete_button":""})
+            return
+        #------------------------------------------DELETE SUBAGENCY----------------------------
+        if action == "delete-subagency":
+            logging.info("about to delete")
+            for s in agency.subagencies:
+                if s.name == subagency_old_name:
+                    agency.subagencies.remove(s)
+            agency.save()
+            self.write({"message":"Subagency deleted :("})
+            return
+        #------------------------------------------EDIT AGENCY----------------------------
+        if action == "edit-agency":
+            if agency_new_name != agency_old_name:
+                logging.info("name changed")
+                try:
+                    agency_exists = models.Agency.objects.get(name=agency_new_name)
+                except Exception, e:
+                    logging.info("Could not find agency, therefore not duplicate name, carry on: " + str(e))
+                    agency_exists = False
+                if agency_exists:
+                    self.write({"message":"Another agency already has that name, try another."})
+                    return
+            agency.name = agency_new_name
+            agency.prettyName = agency_prettyName
+            agency.abbrev = agency_abbrev
+            agency.url = agency_url
+            agency.dataType = agency_type
+            agency.source = agency_source
+            agency.notes = agency_notes
+            agency.save()
+            self.write({"message":"Edits saved!"})
+            return
+        #------------------------------------------DELETE AGENCY----------------------------
+        if action == "delete-agency":
+            if agency.subagencies:
+                for s in agency.subagencies:
+                    if len(s.usedBy) != 0:
+                        self.write({"message": "Agency has one or more subagencies used by a company or companies; cannot delete."})
+                        return
+            if agency.usedBy_count or len(agency.usedBy) !=0:
+                self.write({"message": "Agency is used by one or more companies; cannot delete."})
+                return
+            if agency.usedBy_count == 0 and len(agency.usedBy) == 0:
+                agency.delete()
+                self.write({"message": "Agency Deleted"})
+                return
+
 
 #--------------------------------------------------------DELETE COMPANY------------------------------------------------------------
 class DeleteCompanyHandler(BaseHandler):
@@ -392,29 +515,6 @@ class DeleteCompanyHandler(BaseHandler):
         ##----------DELETE COMPANY--------
         company.delete()
         self.redirect('/admin/companies/')
-
-#--------------------------------------------------------DELETE AGENCY------------------------------------------------------------
-class DeleteAgencyHandler(BaseHandler):
-    @tornado.web.addslash
-    @tornado.web.authenticated
-    def delete(self, id):
-        logging.info(id)
-        try:
-            agency = models.Agency.objects.get(id=bson.objectid.ObjectId(id))
-        except Exception, e:
-            logging.info("Could not get agency: " + str(e))
-            self.write({"message":"Could Not Find Agency"})
-        if agency.subagencies:
-            for s in agency.subagencies:
-                if len(s.usedBy) != 0:
-                    self.write({"message": "Agency has subagency used by a company, cannot delete"})
-                    return
-        if agency.usedBy_count or len(agency.usedBy) !=0:
-            self.write({"message": "Agency is used by a company, cannot delete"})
-            return
-        if agency.usedBy_count == 0 and len(agency.usedBy) == 0:
-            agency.delete()
-            self.write({"message": "success"})
 
 
 

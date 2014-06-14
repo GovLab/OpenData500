@@ -50,7 +50,7 @@ class Application(tornado.web.Application):
             (r"/admin/agencies/?", AgencyAdminHandler),
             (r"/admin/company-edit/([a-zA-Z0-9]{24})/?", AdminEditCompanyHandler),
             (r"/admin/agency-edit/([a-zA-Z0-9]{24})/?", AdminEditAgencyHandler),
-            (r"/admin/agency-delete/([a-zA-Z0-9]{24})/?", DeleteAgencyHandler),
+            (r"/admin/agency-add/?", AdminAddAgencyHandler),
             (r'/(?:([A-Za-z]{2})/)?about/?', AboutHandler),
             (r"/resources/?", ResourcesHandler),
             (r"/(?:([A-Za-z]{2})/)?stats/?", FindingsHandler),

@@ -177,8 +177,13 @@ survey/no survey hover and active states*/
   width: 300px;
 }
 
+.subagency-message {
+  color: red;
+}
 
-
+.agency-message {
+  color: red;
+}
 
 
 
