@@ -187,7 +187,6 @@ $(document).ready( function() {
 			"action": action,
 			"_xsrf": $("[name='_xsrf']").val(),
 			}
-		console.log(data);
 		$.ajax({
 			type: 'POST',
 			url: '/admin/agency-edit/' + id + "/",

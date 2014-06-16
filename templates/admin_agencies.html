@@ -9,7 +9,15 @@
 
 <a href="/admin/companies/">Manage Companies</a><br>
 
-<a href="/admin/agency-add/"><input type="button" class="l-button" value="New Agency"></a>
+<form class="m-form">
+	<fieldset class="m-form-half">
+		<input type="button" class="l-button admin_utils" id="agency_list" name="files" value="Generate Agency List File"><br>
+		<a href="/admin/agency-add/"><input type="button" class="l-button" value="New Agency"></a><br>
+		<span class="message"></span>
+		{% raw xsrf_form_html() %}
+	</fieldset>
+</form>
+
 <table class="list-of-agencies" style="width:100%; text-align:left; border:1px;">
 	<tr>
 		<th>Agency Name</th>
@@ -31,6 +39,28 @@
 	{% end %}
 </table>
 
+<script type="text/javascript">
 
+$(document).ready( function() {
+	$(".m-form").on("click", ".admin_utils", function() {
+		$.ajax({
+			type: "POST",
+			url: "/admin/agencies/",
+			data: {"action":"agency-list", "_xsrf": $("[name='_xsrf']").val()},
+			error: function(error) {
+		        console.debug(JSON.stringify(error));
+		        $('.message').text("Derp. Something went wrong :/").show().delay(5000).fadeOut();
+			},
+		    beforeSend: function(xhr, settings) {
+		    	$('.message').text("Working on it...").show().delay(5000).fadeOut();
+		    },
+		    success: function(data) {
+		    	$('.message').text(data["message"]).show().delay(5000).fadeOut();
+		    }
+		});
+	});
+});
+
+</script>
 
 {% end %}

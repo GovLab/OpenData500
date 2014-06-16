@@ -134,19 +134,19 @@ class CompanyAdminHandler(BaseHandler):
         country = user.country
         if action == "refresh":
             self.application.stats.refresh_stats(country)
-            self.application.files.generate_visit_csv()
+            self.application.files.generate_visit_csv(country)
             stats = models.Stats.objects.get(country=country)
             self.write({"totalCompanies": stats.totalCompanies, "totalCompaniesWeb":stats.totalCompaniesWeb, "totalCompaniesSurvey":stats.totalCompaniesSurvey})
         elif action == "files":
             self.application.files.generate_company_json(country)
-            # self.application.files.generate_agency_json(country)
+            self.application.files.generate_agency_json(country)
             self.application.files.generate_company_csv(country)
             self.application.files.generate_company_all_csv(country)
-            # self.application.files.generate_agency_csv(country)
+            self.application.files.generate_agency_csv(country)
             self.write("success")
         elif action == "vizz":
             #self.application.files.generate_sankey_json()
-            self.application.files.generate_chord_chart_files()
+            self.application.files.generate_chord_chart_files(country)
             self.write("success")
         elif action == 'display':
             try:
@@ -193,6 +193,19 @@ class AgencyAdminHandler(BaseHandler):
             agencies=agencies
         )
 
+    @tornado.web.addslash
+    @tornado.web.authenticated
+    def post(self):
+        try:
+            user = models.Users.objects.get(username=self.current_user)
+        except Exception, e:
+            logging.info("Could not get user: " + str(e))
+            self.redirect("/login/")
+        country = user.country
+        action = self.get_argument("action", "")
+        if action == "agency-list":
+            self.application.files.generate_agency_list(country)
+            self.write({"message":"All right, I'm done."})
 
 
 
