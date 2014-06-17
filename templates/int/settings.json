@@ -12,6 +12,10 @@
         "findings": {
             "page_title": "OD500 By The Numbers",
             "page_heading": "OD500 Stats"
+        },
+        "download": {
+            "page_title": "Download the Open Data 500",
+            "page_heading": "Download the Open Data 500"
         }
     }
 }

@@ -17,8 +17,8 @@
 	Confirm Password: <input type="password" name="password_confirm" parsley-equalto="#password" parsley-required="true"/><br>
 	Country: <select name="country" id="country" parsley-required="true">
 		<option name="country" value="" style="display:none;"></option>
-		<option name="country" value="Canada/CA">Canada</option>
-		<option name="country" value="United States/US">United States</option>
+		<option name="country" value="ca">Canada</option>
+		<option name="country" value="us">United States</option>
 	</select>
 	{% raw xsrf_form_html() %}
 <input type="submit" value="Register" /> </form>

@@ -53,7 +53,7 @@
 
 $('.m-homepage').css('text-align', 'left' );
 var data;
-d3.json("{{ static_url('matrix.json') }}", function(error, json) {
+d3.json("{{ static_url('files/us_matrix.json') }}", function(error, json) {
     if (error) return console.warn(error);
     data = json;
     draw_diagram();

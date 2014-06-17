@@ -255,7 +255,7 @@ $(document).ready( function () {
 		});
       $.ajax({
         type: 'POST',
-        url: '/admin/edit/' + companyID,
+        url: '/admin/company-edit/' + companyID,
         data: data,
         error: function(error) {
             console.debug(JSON.stringify(error));

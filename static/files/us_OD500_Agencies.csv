@@ -8,7 +8,7 @@ U.S. Environmental Protection Agency,EPA,Federal,General,,http://catalog.data.go
 U.S. Environmental Protection Agency,EPA,Federal,General,,http://catalog.data.gov/organization/epa-gov,Abt Associates,Research & Consulting,US Environmental Protection Agency (EPA) Enforcement and Compliance History Online (ECHO),http://www.epa-echo.gov/echo/
 Department of Health and Human Services,HHS,Federal,Centers for Medicare and Medicaid Services,CMS,http://catalog.data.gov/organization/cms-hhs-gov,Abt Associates,Research & Consulting,Medicare Nursing Home Compare,http://www.medicare.gov/nursinghomecompare/search.html
 Department of Transportation,DOT,Federal,Pipeline and Hazardous Materials Safety Administration,PHMSA,http://catalog.data.gov/organization/phmsa-dot-gov,Abt Associates,Research & Consulting,US Department of Transportation Pipeline and Hazardous Materials Safety Administration (PHMSA) Office of Hazardous Materials Dietary Supplement Labeling Database,https://hazmatonline.phmsa.dot.gov/IncidentReportsSearch/search.aspx
-Department of Labor,,Federal,Employee Benefits Security Administration,EBSA,http://catalog.data.gov/organization/esba-dol-gov,Abt Associates,Research & Consulting,US Department of Labor Employee Benefits Security Administration (EBSA) Enforcement Data,http://ogesdw.dol.gov/views/data_catalogs.php
+Department of Labor,DOL,Federal,Employee Benefits Security Administration,EBSA,http://catalog.data.gov/organization/esba-dol-gov,Abt Associates,Research & Consulting,US Department of Labor Employee Benefits Security Administration (EBSA) Enforcement Data,http://ogesdw.dol.gov/views/data_catalogs.php
 Multiple city and local data sources,,City/County,General,,,Accela,Governance,,
 U.S. Environmental Protection Agency,EPA,Federal,General,,http://catalog.data.gov/organization/epa-gov,Accelrys,Scientific Research,National Center for Computational Toxicology,http://epa.gov/ncct/dsstox/
 Department of Health and Human Services,HHS,Federal,General,,http://catalog.data.gov/organization/cms-hhs-gov,Accenture,Data/Technology,"Accenture consults to national governments re: public data (e.g. EU, Canada)",
@@ -98,17 +98,17 @@ Department of Defense,DOD,Federal,General,,http://catalog.data.gov/organization/
 Department of Homeland Security,DHS,Federal,General,,http://catalog.data.gov/organization/uscg-mil,Booz Allen Hamilton,Research & Consulting,,
 Multiple government open data sources,,Other,General,,,Boston Consulting Group,Research & Consulting,,
 Department of Commerce,USDC,Federal,General,,http://catalog.data.gov/organization/doc-gov,Boundless,Geospatial/Mapping,,
-Department of Labor,,Federal,Bureau of Labor Statistics,BLS,http://catalog.data.gov/organization/bls-gov,Bridgewater,Finance & Investment,Data on inflation,
+Department of Labor,DOL,Federal,Bureau of Labor Statistics,BLS,http://catalog.data.gov/organization/bls-gov,Bridgewater,Finance & Investment,Data on inflation,
 Federal Reserve Board,FED,Federal,General,,http://catalog.data.gov/organization/frb-gov,Bridgewater,Finance & Investment,Data on currency exchange rates,
 Department of Commerce,USDC,Federal,Bureau of Economic Analysis,BEA,http://catalog.data.gov/organization/bea-gov,Bridgewater,Finance & Investment,Data on U.S. gross domestic product,
-Department of Labor,,Federal,General,,http://catalog.data.gov/dataset?q=organization:((ecab-dol-gov)+OR+(whd-dol-gov)+OR+(esba-dol-gov)+OR+(ojc-dol-gov)+OR+(eta-dol-gov)+OR+(osha-dol-gov)+OR+(oalj-dol-gov)+OR+(oasp-dol-gov)+OR+(msha-dol-gov)+OR+(bls-gov)+OR+(brb-dol-gov)),Brightscope,Finance & Investment,Retirement Plan Data,http://www.dol.gov/dol/topic/retirement/typesofplans.htm
+Department of Labor,DOL,Federal,General,,http://catalog.data.gov/dataset?q=organization:((ecab-dol-gov)+OR+(whd-dol-gov)+OR+(esba-dol-gov)+OR+(ojc-dol-gov)+OR+(eta-dol-gov)+OR+(osha-dol-gov)+OR+(oalj-dol-gov)+OR+(oasp-dol-gov)+OR+(msha-dol-gov)+OR+(bls-gov)+OR+(brb-dol-gov)),Brightscope,Finance & Investment,Retirement Plan Data,http://www.dol.gov/dol/topic/retirement/typesofplans.htm
 Securities and Exchange Commission,SEC,Federal,General,,http://catalog.data.gov/organization/sec-gov,Brightscope,Finance & Investment,Investment Advisor Data,http://www.sec.gov/
 Department of Commerce,USDC,Federal,General,,http://catalog.data.gov/organization/doc-gov,BuildFax,Business & Legal Services,,
 Multiple city and local data sources,,City/County,General,,,BuildFax,Business & Legal Services,,
 Multiple city and local data sources,,City/County,General,,,Buildingeye,Housing/Real Estate,,
 San Francisco,SF,City/County,General,,http://www.datasf.org/,BuildZoom,Housing/Real Estate,State Contractor License Data,
 San Francisco,SF,City/County,General,,http://www.datasf.org/,BuildZoom,Housing/Real Estate,City Permit Data,
-Department of Labor,,Federal,General,,http://catalog.data.gov/dataset?q=organization:((ecab-dol-gov)+OR+(whd-dol-gov)+OR+(esba-dol-gov)+OR+(ojc-dol-gov)+OR+(eta-dol-gov)+OR+(osha-dol-gov)+OR+(oalj-dol-gov)+OR+(oasp-dol-gov)+OR+(msha-dol-gov)+OR+(bls-gov)+OR+(brb-dol-gov)),Business and Legal Resources,Business & Legal Services,,
+Department of Labor,DOL,Federal,General,,http://catalog.data.gov/dataset?q=organization:((ecab-dol-gov)+OR+(whd-dol-gov)+OR+(esba-dol-gov)+OR+(ojc-dol-gov)+OR+(eta-dol-gov)+OR+(osha-dol-gov)+OR+(oalj-dol-gov)+OR+(oasp-dol-gov)+OR+(msha-dol-gov)+OR+(bls-gov)+OR+(brb-dol-gov)),Business and Legal Resources,Business & Legal Services,,
 US Equal Employment Opportunity Commission,EEOC,Federal,General,,http://catalog.data.gov/organization/eeoc-gov,Business and Legal Resources,Business & Legal Services,,
 Multiple government open data sources,,Other,General,,,Business Monitor International,Business & Legal Services,,
 Securities and Exchange Commission,SEC,Federal,General,,http://catalog.data.gov/organization/sec-gov,"Calcbench, Inc.",Finance & Investment,Securities and Exchange Commission,http://www.sec.gov/
@@ -181,7 +181,7 @@ Department of Health and Human Services,HHS,Federal,General,,http://catalog.data
 Department of Health and Human Services,HHS,Federal,General,,http://catalog.data.gov/organization/cms-hhs-gov,CliniCast,Healthcare,CMS 5% Dataset,http://www.cms.gov/Research-Statistics-Data-and-Systems/Files-for-Order/IdentifiableDataFiles/StandardAnalyticalFiles.html
 Department of Commerce,USDC,Federal,General,,http://catalog.data.gov/organization/doc-gov,Cloudmade,Geospatial/Mapping,GPS data,
 Multiple government open data sources,,Other,General,,,Cloudmade,Geospatial/Mapping,,
-Department of Labor,,Federal,General,,http://catalog.data.gov/dataset?q=organization:((ecab-dol-gov)+OR+(whd-dol-gov)+OR+(esba-dol-gov)+OR+(ojc-dol-gov)+OR+(eta-dol-gov)+OR+(osha-dol-gov)+OR+(oalj-dol-gov)+OR+(oasp-dol-gov)+OR+(msha-dol-gov)+OR+(bls-gov)+OR+(brb-dol-gov)),Cloudspyre,Lifestyle & Consumer,,
+Department of Labor,DOL,Federal,General,,http://catalog.data.gov/dataset?q=organization:((ecab-dol-gov)+OR+(whd-dol-gov)+OR+(esba-dol-gov)+OR+(ojc-dol-gov)+OR+(eta-dol-gov)+OR+(osha-dol-gov)+OR+(oalj-dol-gov)+OR+(oasp-dol-gov)+OR+(msha-dol-gov)+OR+(bls-gov)+OR+(brb-dol-gov)),Cloudspyre,Lifestyle & Consumer,,
 Chicago,CHI,City/County,General,,http://data.cityofchicago.org/,Code for America,Governance,,
 Austin,AUS,City/County,General,,http://data.austintexas.gov/,Code for America,Governance,,
 Department of Commerce,USDC,Federal,General,,http://catalog.data.gov/organization/doc-gov,Code-N,Data/Technology,,
@@ -237,7 +237,7 @@ Department of Commerce,USDC,Federal,General,,http://catalog.data.gov/organizatio
 Department of the Interior,DOI,Federal,General,,http://catalog.data.gov/organization/doi-gov,EarthObserver App,Geospatial/Mapping,,
 Department of Commerce,USDC,Federal,General,,http://catalog.data.gov/organization/doc-gov,EarthObserver App,Geospatial/Mapping,,
 Department of the Interior,DOI,Federal,U.S. Geological Survey,USGS,http://catalog.data.gov/dataset?q=organization:usgs-gov,Earthquake Alert!,Geospatial/Mapping,Earthquakes,http://earthquake.usgs.gov/earthquakes/
-Department of Labor,,Federal,General,,http://catalog.data.gov/dataset?q=organization:((ecab-dol-gov)+OR+(whd-dol-gov)+OR+(esba-dol-gov)+OR+(ojc-dol-gov)+OR+(eta-dol-gov)+OR+(osha-dol-gov)+OR+(oalj-dol-gov)+OR+(oasp-dol-gov)+OR+(msha-dol-gov)+OR+(bls-gov)+OR+(brb-dol-gov)),Eat Shop Sleep,Lifestyle & Consumer,,
+Department of Labor,DOL,Federal,General,,http://catalog.data.gov/dataset?q=organization:((ecab-dol-gov)+OR+(whd-dol-gov)+OR+(esba-dol-gov)+OR+(ojc-dol-gov)+OR+(eta-dol-gov)+OR+(osha-dol-gov)+OR+(oalj-dol-gov)+OR+(oasp-dol-gov)+OR+(msha-dol-gov)+OR+(bls-gov)+OR+(brb-dol-gov)),Eat Shop Sleep,Lifestyle & Consumer,,
 U.S. Environmental Protection Agency,EPA,Federal,General,,http://catalog.data.gov/organization/epa-gov,Ecodesk,Business & Legal Services,,
 Securities and Exchange Commission,SEC,Federal,General,,http://catalog.data.gov/organization/sec-gov,eInstitutional,Finance & Investment,SEC Edgar,http://www.sec.gov/edgar/searchedgar/webusers.htm#.Uz1UPmdOXIU
 Federal Deposit Insurance Corporation,FDIC,Federal,General,,http://catalog.data.gov/organization/fdic-gov,eInstitutional,Finance & Investment,FDIC Bank & Data Statistics,http://www.fdic.gov/bank/statistical/
@@ -260,7 +260,7 @@ Department of Energy,DOE,Federal,General,,http://catalog.data.gov/organization/d
 Department of Health and Human Services,HHS,Federal,General,,http://catalog.data.gov/organization/cms-hhs-gov,Enigma.io,Data/Technology,,
 Department of Homeland Security,DHS,Federal,General,,http://catalog.data.gov/organization/uscg-mil,Enigma.io,Data/Technology,,
 Department of Justice,DOJ,Federal,General,,http://catalog.data.gov/organization/doj-gov,Enigma.io,Data/Technology,,
-Department of Labor,,Federal,General,,http://catalog.data.gov/dataset?q=organization:((ecab-dol-gov)+OR+(whd-dol-gov)+OR+(esba-dol-gov)+OR+(ojc-dol-gov)+OR+(eta-dol-gov)+OR+(osha-dol-gov)+OR+(oalj-dol-gov)+OR+(oasp-dol-gov)+OR+(msha-dol-gov)+OR+(bls-gov)+OR+(brb-dol-gov)),Enigma.io,Data/Technology,,
+Department of Labor,DOL,Federal,General,,http://catalog.data.gov/dataset?q=organization:((ecab-dol-gov)+OR+(whd-dol-gov)+OR+(esba-dol-gov)+OR+(ojc-dol-gov)+OR+(eta-dol-gov)+OR+(osha-dol-gov)+OR+(oalj-dol-gov)+OR+(oasp-dol-gov)+OR+(msha-dol-gov)+OR+(bls-gov)+OR+(brb-dol-gov)),Enigma.io,Data/Technology,,
 Department of State,DOS,Federal,General,,http://catalog.data.gov/organization/state-gov,Enigma.io,Data/Technology,,
 Department of Transportation,DOT,Federal,General,,http://catalog.data.gov/organization/nhtsa-dot-gov,Enigma.io,Data/Technology,,
 Department of the Interior,DOI,Federal,General,,http://catalog.data.gov/organization/doi-gov,Enigma.io,Data/Technology,,
@@ -270,7 +270,7 @@ Multiple state data sources,,State,General,,,Environmental Data Resources,Enviro
 Multiple city and local data sources,,City/County,General,,,Environmental Data Resources,Environment & Weather,"Uses environmental records, land use information, and bulding permit data from thousands of federal, state, tribal, and local sources",
 U.S. Environmental Protection Agency,EPA,Federal,General,,http://catalog.data.gov/organization/epa-gov,Environmental Data Resources,Environment & Weather,,
 Multiple government open data sources,,Other,General,,,Epsilon,Data/Technology,,
-Department of Labor,,Federal,General,,http://catalog.data.gov/dataset?q=organization:((ecab-dol-gov)+OR+(whd-dol-gov)+OR+(esba-dol-gov)+OR+(ojc-dol-gov)+OR+(eta-dol-gov)+OR+(osha-dol-gov)+OR+(oalj-dol-gov)+OR+(oasp-dol-gov)+OR+(msha-dol-gov)+OR+(bls-gov)+OR+(brb-dol-gov)),Equal Pay for Women,Business & Legal Services,,
+Department of Labor,DOL,Federal,General,,http://catalog.data.gov/dataset?q=organization:((ecab-dol-gov)+OR+(whd-dol-gov)+OR+(esba-dol-gov)+OR+(ojc-dol-gov)+OR+(eta-dol-gov)+OR+(osha-dol-gov)+OR+(oalj-dol-gov)+OR+(oasp-dol-gov)+OR+(msha-dol-gov)+OR+(bls-gov)+OR+(brb-dol-gov)),Equal Pay for Women,Business & Legal Services,,
 Multiple government open data sources,,Other,General,,,Equifax,Finance & Investment,"employment, income and identity data",
 Securities and Exchange Commission,SEC,Federal,General,,http://catalog.data.gov/organization/sec-gov,Equilar,Data/Technology,,
 Multiple government open data sources,,Other,General,,,Ernst & Young LLP,Finance & Investment,,
@@ -288,7 +288,7 @@ Multiple government open data sources,,Other,General,,,Exversion,Data/Technology
 General Services Administration,GSA,Federal,General,,http://catalog.data.gov/organization/gsa-gov,EZGrantFiling,Finance & Investment,Federal grant administrative reports,
 Securities and Exchange Commission,SEC,Federal,General,,http://catalog.data.gov/organization/sec-gov,Ez-XBRL,Finance & Investment,US Securities and Exchange Commision (SEC) Next-Generation EDGAR System,http://www.sec.gov/edgar/searchedgar/webusers.htm
 Department of Commerce,USDC,Federal,General,,http://catalog.data.gov/organization/doc-gov,Factset,Finance & Investment,,
-Department of Labor,,Federal,General,,http://catalog.data.gov/dataset?q=organization:((ecab-dol-gov)+OR+(whd-dol-gov)+OR+(esba-dol-gov)+OR+(ojc-dol-gov)+OR+(eta-dol-gov)+OR+(osha-dol-gov)+OR+(oalj-dol-gov)+OR+(oasp-dol-gov)+OR+(msha-dol-gov)+OR+(bls-gov)+OR+(brb-dol-gov)),Factset,Finance & Investment,,
+Department of Labor,DOL,Federal,General,,http://catalog.data.gov/dataset?q=organization:((ecab-dol-gov)+OR+(whd-dol-gov)+OR+(esba-dol-gov)+OR+(ojc-dol-gov)+OR+(eta-dol-gov)+OR+(osha-dol-gov)+OR+(oalj-dol-gov)+OR+(oasp-dol-gov)+OR+(msha-dol-gov)+OR+(bls-gov)+OR+(brb-dol-gov)),Factset,Finance & Investment,,
 Department of the Treasury,,Federal,General,,http://catalog.data.gov/organization/treasury-gov,Factset,Finance & Investment,,
 Federal Reserve Board,FED,Federal,General,,http://catalog.data.gov/organization/frb-gov,Factset,Finance & Investment,,
 Department of Commerce,USDC,Federal,General,,http://catalog.data.gov/organization/doc-gov,Factual,Data/Technology,,
@@ -319,7 +319,7 @@ Federal Communications Commission,FCC,Federal,General,,http://catalog.data.gov/o
 Federal Deposit Insurance Corporation,FDIC,Federal,General,,http://catalog.data.gov/organization/fdic-gov,FindTheBest.com,Lifestyle & Consumer,,
 Federal Election Commission,FED,Federal,General,,http://catalog.data.gov/organization/fec-gov,FindTheBest.com,Lifestyle & Consumer,,
 General Services Administration,GSA,Federal,General,,http://catalog.data.gov/organization/gsa-gov,FindTheBest.com,Lifestyle & Consumer,,
-Department of Labor,,Federal,Mine Safety and Health Administration,MSHA,http://catalog.data.gov/organization/msha-dol-gov,FindTheBest.com,Lifestyle & Consumer,,
+Department of Labor,DOL,Federal,Mine Safety and Health Administration,MSHA,http://catalog.data.gov/organization/msha-dol-gov,FindTheBest.com,Lifestyle & Consumer,,
 Multiple government open data sources,,Other,General,,,FindTheBest.com,Lifestyle & Consumer,,
 Multiple federal data sources,,Federal,General,,,FindTheBest.com,Lifestyle & Consumer,,
 Multiple state data sources,,State,General,,,FindTheBest.com,Lifestyle & Consumer,,
@@ -341,9 +341,9 @@ Department of Commerce,USDC,Federal,General,,http://catalog.data.gov/organizatio
 Securities and Exchange Commission,SEC,Federal,General,,http://catalog.data.gov/organization/sec-gov,Fujitsu,Data/Technology,,
 Multiple city and local data sources,,City/County,General,,,Funding Circle,Finance & Investment,County Court Judgments and bankruptcies,
 Securities and Exchange Commission,SEC,Federal,General,,http://catalog.data.gov/organization/sec-gov,FutureAdvisor,Finance & Investment,,
-Department of Labor,,Federal,General,,http://catalog.data.gov/dataset?q=organization:((ecab-dol-gov)+OR+(whd-dol-gov)+OR+(esba-dol-gov)+OR+(ojc-dol-gov)+OR+(eta-dol-gov)+OR+(osha-dol-gov)+OR+(oalj-dol-gov)+OR+(oasp-dol-gov)+OR+(msha-dol-gov)+OR+(bls-gov)+OR+(brb-dol-gov)),FutureAdvisor,Finance & Investment,,
-Department of Labor,,Federal,Bureau of Labor Statistics,BLS,http://catalog.data.gov/organization/bls-gov,"Fuzion Apps, Inc.",Lifestyle & Consumer,State,http://www.bls.gov/oes/oes_dl.htm
-Department of Labor,,Federal,Bureau of Labor Statistics,BLS,http://catalog.data.gov/organization/bls-gov,"Fuzion Apps, Inc.",Lifestyle & Consumer,National,http://www.bls.gov/oes/oes_dl.htm
+Department of Labor,DOL,Federal,General,,http://catalog.data.gov/dataset?q=organization:((ecab-dol-gov)+OR+(whd-dol-gov)+OR+(esba-dol-gov)+OR+(ojc-dol-gov)+OR+(eta-dol-gov)+OR+(osha-dol-gov)+OR+(oalj-dol-gov)+OR+(oasp-dol-gov)+OR+(msha-dol-gov)+OR+(bls-gov)+OR+(brb-dol-gov)),FutureAdvisor,Finance & Investment,,
+Department of Labor,DOL,Federal,Bureau of Labor Statistics,BLS,http://catalog.data.gov/organization/bls-gov,"Fuzion Apps, Inc.",Lifestyle & Consumer,State,http://www.bls.gov/oes/oes_dl.htm
+Department of Labor,DOL,Federal,Bureau of Labor Statistics,BLS,http://catalog.data.gov/organization/bls-gov,"Fuzion Apps, Inc.",Lifestyle & Consumer,National,http://www.bls.gov/oes/oes_dl.htm
 Department of Commerce,USDC,Federal,US Census Bureau,Census,http://catalog.data.gov/organization/census-gov,Gallup,Research & Consulting,Uses  demographic characteristics of the adult population,
 Multiple government open data sources,,Other,General,,,Galorath Incorporated,Business & Legal Services,,
 Department of Commerce,USDC,Federal,General,,http://catalog.data.gov/organization/doc-gov,Garmin,Geospatial/Mapping,,
@@ -352,8 +352,8 @@ Department of Health and Human Services,HHS,Federal,General,,http://catalog.data
 Department of Commerce,USDC,Federal,General,,http://catalog.data.gov/organization/doc-gov,Geofeedia,Geospatial/Mapping,,
 Department of Commerce,USDC,Federal,General,,http://catalog.data.gov/organization/doc-gov,Geolytics,Data/Technology,,
 Department of Commerce,USDC,Federal,General,,http://catalog.data.gov/organization/doc-gov,Geoscape,Lifestyle & Consumer,,
-Department of Labor,,Federal,General,,http://catalog.data.gov/dataset?q=organization:((ecab-dol-gov)+OR+(whd-dol-gov)+OR+(esba-dol-gov)+OR+(ojc-dol-gov)+OR+(eta-dol-gov)+OR+(osha-dol-gov)+OR+(oalj-dol-gov)+OR+(oasp-dol-gov)+OR+(msha-dol-gov)+OR+(bls-gov)+OR+(brb-dol-gov)),Geoscape,Lifestyle & Consumer,,
-Department of Labor,,Federal,General,,http://catalog.data.gov/dataset?q=organization:((ecab-dol-gov)+OR+(whd-dol-gov)+OR+(esba-dol-gov)+OR+(ojc-dol-gov)+OR+(eta-dol-gov)+OR+(osha-dol-gov)+OR+(oalj-dol-gov)+OR+(oasp-dol-gov)+OR+(msha-dol-gov)+OR+(bls-gov)+OR+(brb-dol-gov)),GetRaised,Finance & Investment,,
+Department of Labor,DOL,Federal,General,,http://catalog.data.gov/dataset?q=organization:((ecab-dol-gov)+OR+(whd-dol-gov)+OR+(esba-dol-gov)+OR+(ojc-dol-gov)+OR+(eta-dol-gov)+OR+(osha-dol-gov)+OR+(oalj-dol-gov)+OR+(oasp-dol-gov)+OR+(msha-dol-gov)+OR+(bls-gov)+OR+(brb-dol-gov)),Geoscape,Lifestyle & Consumer,,
+Department of Labor,DOL,Federal,General,,http://catalog.data.gov/dataset?q=organization:((ecab-dol-gov)+OR+(whd-dol-gov)+OR+(esba-dol-gov)+OR+(ojc-dol-gov)+OR+(eta-dol-gov)+OR+(osha-dol-gov)+OR+(oalj-dol-gov)+OR+(oasp-dol-gov)+OR+(msha-dol-gov)+OR+(bls-gov)+OR+(brb-dol-gov)),GetRaised,Finance & Investment,,
 Multiple government open data sources,,Other,General,,,GitHub,Data/Technology,,
 Federal Election Commission,FED,Federal,General,,http://catalog.data.gov/organization/fec-gov,Glassy Media,Governance,,
 Department of Health and Human Services,HHS,Federal,General,,http://catalog.data.gov/organization/cms-hhs-gov,Golden Helix,Scientific Research,,
@@ -380,7 +380,7 @@ U.S. Environmental Protection Agency,EPA,Federal,General,,http://catalog.data.go
 U.S. Environmental Protection Agency,EPA,Federal,General,,http://catalog.data.gov/organization/epa-gov,GoodGuide,Lifestyle & Consumer,Green Chemistry Award,
 U.S. Environmental Protection Agency,EPA,Federal,General,,http://catalog.data.gov/organization/epa-gov,GoodGuide,Lifestyle & Consumer,Design for the Environment,
 Department of Energy,DOE,Federal,General,,http://catalog.data.gov/organization/doe-gov,GoodGuide,Lifestyle & Consumer,,
-Department of Labor,,Federal,General,,http://catalog.data.gov/dataset?q=organization:((ecab-dol-gov)+OR+(whd-dol-gov)+OR+(esba-dol-gov)+OR+(ojc-dol-gov)+OR+(eta-dol-gov)+OR+(osha-dol-gov)+OR+(oalj-dol-gov)+OR+(oasp-dol-gov)+OR+(msha-dol-gov)+OR+(bls-gov)+OR+(brb-dol-gov)),GoodGuide,Lifestyle & Consumer,,
+Department of Labor,DOL,Federal,General,,http://catalog.data.gov/dataset?q=organization:((ecab-dol-gov)+OR+(whd-dol-gov)+OR+(esba-dol-gov)+OR+(ojc-dol-gov)+OR+(eta-dol-gov)+OR+(osha-dol-gov)+OR+(oalj-dol-gov)+OR+(oasp-dol-gov)+OR+(msha-dol-gov)+OR+(bls-gov)+OR+(brb-dol-gov)),GoodGuide,Lifestyle & Consumer,,
 Department of Health and Human Services,HHS,Federal,General,,http://catalog.data.gov/organization/cms-hhs-gov,GoodGuide,Lifestyle & Consumer,,
 Multiple city and local data sources,,City/County,General,,,Google Maps,Geospatial/Mapping,,
 Department of Commerce,USDC,Federal,General,,http://catalog.data.gov/organization/doc-gov,Google Maps,Geospatial/Mapping,,
@@ -403,6 +403,7 @@ Department of Education,ED / DOED,Federal,National Center for Education Statisti
 California,CA,State,Department of Education,DOE,http://www.cde.ca.gov/ds/,GreatSchools,Education,2013 STAR Test Results,http://star.cde.ca.gov/star2013/ResearchFileList.aspx
 Department of the Treasury,,Federal,General,,http://catalog.data.gov/organization/treasury-gov,GuideStar,Governance,,
 Department of Health and Human Services,HHS,Federal,General,,http://catalog.data.gov/organization/cms-hhs-gov,H3 Biomedicine,Scientific Research,,
+Department of Commerce,USDC,Federal,General,,http://catalog.data.gov/organization/doc-gov,Harris Corporation,Environment & Weather,,
 District of Columbia,DC,State,General,,http://data.dc.gov/,"HDScores, Inc",Lifestyle & Consumer,Washington DC Health Department,http://washington.dc.gegov.com/webadmin/dhd_431/web/?a=Inspections
 Maryland,MD,State,General,,https://data.maryland.gov/,"HDScores, Inc",Lifestyle & Consumer,Montgomery County Health Department,https://data.montgomerycountymd.gov/Community/Food-Inspection/5pue-gfbe
 Virginia,VA,State,General,,http://datapoint.apa.virginia.gov/,"HDScores, Inc",Lifestyle & Consumer,Virginia Health Department,http://www.healthspace.com/Clients/VDH/vdh_website.nsf
@@ -415,7 +416,7 @@ Department of Health and Human Services,HHS,Federal,General,,http://catalog.data
 Department of Health and Human Services,HHS,Federal,Centers for Medicare and Medicaid Services,CMS,http://catalog.data.gov/organization/cms-hhs-gov,"HealthPocket, Inc.",Healthcare,"Prescription Drug Plan Formulary, Pharmacy Network, and Pricing Information Files",http://www.cms.gov/Research-Statistics-Data-and-Systems/Files-for-Order/NonIdentifiableDataFiles/PrescriptionDrugPlanFormularyPharmacyNetworkandPricingInformationFiles.html
 Department of Commerce,USDC,Federal,US Census Bureau,Census,http://catalog.data.gov/organization/census-gov,HelloWallet,Finance & Investment,Survey of Income and Program Participation,http://www.census.gov/sipp/
 Federal Reserve Board,FED,Federal,General,,http://catalog.data.gov/organization/frb-gov,HelloWallet,Finance & Investment,Survey of Consumer Finances,http://www.federalreserve.gov/econresdata/scf/scfindex.htm
-Department of Labor,,Federal,Bureau of Labor Statistics,BLS,http://catalog.data.gov/organization/bls-gov,HelloWallet,Finance & Investment,Consumer Expenditure Survey,http://www.bls.gov/cex/home.htm
+Department of Labor,DOL,Federal,Bureau of Labor Statistics,BLS,http://catalog.data.gov/organization/bls-gov,HelloWallet,Finance & Investment,Consumer Expenditure Survey,http://www.bls.gov/cex/home.htm
 Department of Commerce,USDC,Federal,General,,http://catalog.data.gov/organization/doc-gov,HERE,Geospatial/Mapping,,
 Department of the Interior,DOI,Federal,General,,http://catalog.data.gov/organization/doi-gov,HERE,Geospatial/Mapping,,
 U.S. Environmental Protection Agency,EPA,Federal,General,,http://catalog.data.gov/organization/epa-gov,Honest Buildings,Housing/Real Estate,,
@@ -424,8 +425,6 @@ Multiple city and local data sources,,City/County,General,,,Housefax,Housing/Rea
 Department of Education,ED / DOED,Federal,General,,http://catalog.data.gov/organization/ed-gov,How's My Offer?,Education,Integrated Postsecondary Education Data System (IPEDS),http://nces.ed.gov/ipeds/
 Department of Commerce,USDC,Federal,General,,http://catalog.data.gov/organization/doc-gov,IBM,Data/Technology,,
 Multiple government open data sources,,Other,General,,,IBM,Data/Technology,,
-Multiple government open data sources,,Other,General,,,IBM Smarter Cities,Data/Technology,,
-Multiple city and local data sources,,City/County,General,,,IBM Smarter Cities,Data/Technology,,
 Consumer Financial Protection Bureau,CFPB,Federal,General,,http://catalog.data.gov/organization/cfpb-gov,ideas42,Research & Consulting,Consumer Finance Protection Bureau (CFPB) Complaints Database,http://www.consumerfinance.gov/complaintdatabase/
 U.S. Environmental Protection Agency,EPA,Federal,General,,http://catalog.data.gov/organization/epa-gov,ideas42,Research & Consulting,US Environmental Protection Agency (EPA) Fuel Economy,http://www.fueleconomy.gov/feg/download.shtml
 Department of Energy,DOE,Federal,General,,http://catalog.data.gov/organization/doe-gov,iFactor,Research & Consulting,,
@@ -451,10 +450,10 @@ Department of Commerce,USDC,Federal,General,,http://catalog.data.gov/organizatio
 Multiple government open data sources,,Other,General,,,Intelius,Business & Legal Services,,
 National Aeronautics and Space Administration,NASA,Federal,General,,http://catalog.data.gov/organization/jpl-nasa-gov,Intermap Technologies,Geospatial/Mapping,"Advanced Spaceborne Thermal Emission and Reflection Radiometer - ASTER (asterweb.jpl.nasa.gov), Shuttle Radar Topography Mission- SRTM (www2.jpl.nasa.gov/srtm/‎), GTOPO30",https://lta.cr.usgs.gov/GTOPO30
 National Aeronautics and Space Administration,NASA,Federal,General,,http://catalog.data.gov/organization/jpl-nasa-gov,Intermap Technologies,Geospatial/Mapping,Advanced Spaceborne Thermal Emission and Reflection Radiometer - ASTER,asterweb.jpl.nasa.gov
-Department of Labor,,Federal,Bureau of Labor Statistics,BLS,http://catalog.data.gov/organization/bls-gov,Investormill,Finance & Investment,CPI,http://www.bls.gov/cpi/data.htm
-Department of Labor,,Federal,Bureau of Labor Statistics,BLS,http://catalog.data.gov/organization/bls-gov,Investormill,Finance & Investment,PPI,http://www.bls.gov/data/#prices
-Department of Labor,,Federal,Bureau of Labor Statistics,BLS,http://catalog.data.gov/organization/bls-gov,Investormill,Finance & Investment,Employment,http://www.bls.gov/data/#employment
-Department of Labor,,Federal,Bureau of Labor Statistics,BLS,http://catalog.data.gov/organization/bls-gov,Investormill,Finance & Investment,Unemployment,http://www.bls.gov/data/#unemployment
+Department of Labor,DOL,Federal,Bureau of Labor Statistics,BLS,http://catalog.data.gov/organization/bls-gov,Investormill,Finance & Investment,CPI,http://www.bls.gov/cpi/data.htm
+Department of Labor,DOL,Federal,Bureau of Labor Statistics,BLS,http://catalog.data.gov/organization/bls-gov,Investormill,Finance & Investment,PPI,http://www.bls.gov/data/#prices
+Department of Labor,DOL,Federal,Bureau of Labor Statistics,BLS,http://catalog.data.gov/organization/bls-gov,Investormill,Finance & Investment,Employment,http://www.bls.gov/data/#employment
+Department of Labor,DOL,Federal,Bureau of Labor Statistics,BLS,http://catalog.data.gov/organization/bls-gov,Investormill,Finance & Investment,Unemployment,http://www.bls.gov/data/#unemployment
 Department of Commerce,USDC,Federal,Bureau of Economic Analysis,BEA,http://catalog.data.gov/organization/bea-gov,Investormill,Finance & Investment,GDP,https://www.bea.gov/national/nipaweb/DownSS2.asp
 Federal Reserve Board,FED,Federal,General,,http://catalog.data.gov/organization/frb-gov,Investormill,Finance & Investment,H.15,http://www.federalreserve.gov/datadownload/Choose.aspx?rel=h15
 Federal Reserve Board,FED,Federal,General,,http://catalog.data.gov/organization/frb-gov,Investormill,Finance & Investment,G.19,http://www.federalreserve.gov/datadownload/Choose.aspx?rel=G19
@@ -479,15 +478,15 @@ Department of Health and Human Services,HHS,Federal,Centers for Disease Control 
 Department of Health and Human Services,HHS,Federal,Centers for Disease Control and Prevention,CDC,http://www.cdc.gov/,iTriage,Healthcare,National Hospital Ambulatory Medical Care Survey (NHAMCS),www.cdc.gov
 SEC,,Federal Open Data,General,,,IVES Group Inc,Data/Technology,EDGAR,http://www.sec.gov/edgar.shtml
 Administrative Office of the United States Courts,AO,Federal,General,,http://www.uscourts.gov/,IVES Group Inc,Data/Technology,Public Access to Court Electronic Records (PACER),http://www.pacer.gov/
-Department of Labor,,Federal,Employee Benefits Security Administration,EBSA,http://catalog.data.gov/organization/esba-dol-gov,IVES Group Inc,Data/Technology,ERISA Forms 5500,http://www.dol.gov/ebsa/5500main.html
+Department of Labor,DOL,Federal,Employee Benefits Security Administration,EBSA,http://catalog.data.gov/organization/esba-dol-gov,IVES Group Inc,Data/Technology,ERISA Forms 5500,http://www.dol.gov/ebsa/5500main.html
 Multiple federal data sources,,Federal,General,,,IVES Group Inc,Data/Technology,Public Company Accounting Oversight Board (PCAOB),http://pcaobus.org/inspections/reports/pages/default.aspx
 Executive Office of the President,EOP,Federal,Office of Management and Budget,OMB,http://catalog.data.gov/organization/omb-eop-gov,IVES Group Inc,Data/Technology,Federal Audit Clearinghouse/Office of Management and Budget (Single Audit Non-Profit Data),
 Department of Commerce,USDC,Federal,US Census Bureau,Census,http://catalog.data.gov/organization/census-gov,IVES Group Inc,Data/Technology,Federal Audit Clearinghouse/Office of Management and Budget (Single Audit Non-Profit Data),
 Department of Homeland Security,DHS,Federal,U.S. Coast Guard,,http://catalog.data.gov/organization/uscg-mil,IW Financial,Finance & Investment,National Response Center's Emergency Response Notification System,
 U.S. Environmental Protection Agency,EPA,Federal,General,,http://catalog.data.gov/organization/epa-gov,IW Financial,Finance & Investment,Toxic Release Inventory,
 U.S. Environmental Protection Agency,EPA,Federal,General,,http://catalog.data.gov/organization/epa-gov,IW Financial,Finance & Investment,EnviroFacts,
-Department of Labor,,Federal,Bureau of Labor Statistics,BLS,http://catalog.data.gov/organization/bls-gov,JJ Keller,Business & Legal Services,injury and illness records,
-Department of Labor,,Federal,Occupational Safety and Health Administration,OSHA,http://catalog.data.gov/organization/osha-dol-gov,JJ Keller,Business & Legal Services,injury and illness records,
+Department of Labor,DOL,Federal,Bureau of Labor Statistics,BLS,http://catalog.data.gov/organization/bls-gov,JJ Keller,Business & Legal Services,injury and illness records,
+Department of Labor,DOL,Federal,Occupational Safety and Health Administration,OSHA,http://catalog.data.gov/organization/osha-dol-gov,JJ Keller,Business & Legal Services,injury and illness records,
 Multiple government open data sources,,Other,General,,,J.P. Morgan Chase,Finance & Investment,Combines federal financial and economic data with credit card and transactional data on their customers to develop insights into consumer trends.,
 Palo Alto,PA,City/County,General,,http://data.cityofpaloalto.org/,"Junar, Inc.",Data/Technology,City of Palo Alto Development Center Permits,http://bit.ly/YG1mm4
 California,CA,State,General,,http://data.ca.gov/,"Junar, Inc.",Data/Technology,Finance Data City of Cupertino,http://bit.ly/13Gii8P
@@ -628,13 +627,13 @@ Department of Commerce,USDC,Federal,General,,http://catalog.data.gov/organizatio
 Department of the Treasury,,Federal,Internal Revenue Service,IRS,http://catalog.data.gov/organization/irs-gov,NonprofitMetrics,Data/Technology,IRS Business Master File (BMF),http://www.irs.gov/uac/SOI-Tax-Stats-Exempt-Organizations-Business-Master-File-Extract-(EO-BMF)
 Department of Commerce,USDC,Federal,US Census Bureau,Census,http://catalog.data.gov/organization/census-gov,North American Van Lines,Transportation,zipcode data,
 Department of Energy,DOE,Federal,General,,http://catalog.data.gov/organization/doe-gov,Noveda Technologies,Data/Technology,,
-Multiple federal data sources,,Federal,General,,,Nuams (New Amsterdam Ideas),Governance,Open Puerto Rico,http://abrepr.org/es/find-data
-Federal Deposit Insurance Corporation,FDIC,Federal,General,,http://catalog.data.gov/organization/fdic-gov,Nuams (New Amsterdam Ideas),Governance,US National Foreclosure Statistics January 2012,http://demo.getdkan.com/dataset/us-national-foreclosure-statistics-january-2012/resource/d9ed9373-4371-4f94-a17d
+Multiple federal data sources,,Federal,General,,,NuCivic,Governance,Open Puerto Rico,http://abrepr.org/es/find-data
+Federal Deposit Insurance Corporation,FDIC,Federal,General,,http://catalog.data.gov/organization/fdic-gov,NuCivic,Governance,US National Foreclosure Statistics January 2012,http://demo.getdkan.com/dataset/us-national-foreclosure-statistics-january-2012/resource/d9ed9373-4371-4f94-a17d
 Department of Health and Human Services,HHS,Federal,General,,http://catalog.data.gov/organization/cms-hhs-gov,Numedii,Scientific Research,,
 Multiple government open data sources,,Other,General,,,Oliver Wyman,Research & Consulting,transit data,
 Department of Health and Human Services,HHS,Federal,General,,http://catalog.data.gov/organization/cms-hhs-gov,Oliver Wyman,Research & Consulting,,
 Department of Commerce,USDC,Federal,General,,http://catalog.data.gov/organization/doc-gov,OnDeck,Finance & Investment,,
-Department of Labor,,Federal,General,,http://catalog.data.gov/dataset?q=organization:((ecab-dol-gov)+OR+(whd-dol-gov)+OR+(esba-dol-gov)+OR+(ojc-dol-gov)+OR+(eta-dol-gov)+OR+(osha-dol-gov)+OR+(oalj-dol-gov)+OR+(oasp-dol-gov)+OR+(msha-dol-gov)+OR+(bls-gov)+OR+(brb-dol-gov)),OnDeck,Finance & Investment,,
+Department of Labor,DOL,Federal,General,,http://catalog.data.gov/dataset?q=organization:((ecab-dol-gov)+OR+(whd-dol-gov)+OR+(esba-dol-gov)+OR+(ojc-dol-gov)+OR+(eta-dol-gov)+OR+(osha-dol-gov)+OR+(oalj-dol-gov)+OR+(oasp-dol-gov)+OR+(msha-dol-gov)+OR+(bls-gov)+OR+(brb-dol-gov)),OnDeck,Finance & Investment,,
 Small Business Administration,SBA,Federal,General,,http://catalog.data.gov/organization/sba-gov,OnDeck,Finance & Investment,,
 Department of the Treasury,,Federal,General,,http://catalog.data.gov/organization/treasury-gov,OnDeck,Finance & Investment,,
 Multiple state data sources,,State,General,,,OnDeck,Finance & Investment,,
@@ -669,14 +668,14 @@ Department of Homeland Security,DHS,Federal,U.S. Citizenship and Immigration Ser
 Department of Health and Human Services,HHS,Federal,General,,http://catalog.data.gov/organization/cms-hhs-gov,PatientsLikeMe,Healthcare,,
 Department of Commerce,USDC,Federal,US Census Bureau,Census,http://catalog.data.gov/organization/census-gov,Pave,Finance & Investment,American Community Survey - Public Use Microdata Sample,http://www.census.gov/acs/www/data_documentation/public_use_microdata_sample/
 Virginia,VA,State,General,,http://datapoint.apa.virginia.gov/,Pave,Finance & Investment,Post-Completion Wages of Graduates,http://research.schev.edu/apps/cms/Post-Completion-Wages-of-Graduates.aspx
-Department of Labor,,Federal,General,,http://catalog.data.gov/dataset?q=organization:((ecab-dol-gov)+OR+(whd-dol-gov)+OR+(esba-dol-gov)+OR+(ojc-dol-gov)+OR+(eta-dol-gov)+OR+(osha-dol-gov)+OR+(oalj-dol-gov)+OR+(oasp-dol-gov)+OR+(msha-dol-gov)+OR+(bls-gov)+OR+(brb-dol-gov)),Pave,Finance & Investment,,
+Department of Labor,DOL,Federal,General,,http://catalog.data.gov/dataset?q=organization:((ecab-dol-gov)+OR+(whd-dol-gov)+OR+(esba-dol-gov)+OR+(ojc-dol-gov)+OR+(eta-dol-gov)+OR+(osha-dol-gov)+OR+(oalj-dol-gov)+OR+(oasp-dol-gov)+OR+(msha-dol-gov)+OR+(bls-gov)+OR+(brb-dol-gov)),Pave,Finance & Investment,,
 Arkansas,AR,State,General,,http://catalog.data.gov/organization/arkansas-gov,Pave,Finance & Investment,Post-Completion Wages of Graduates,
 Tennessee,TN,State,General,,http://www.tn.gov/opengov/,Pave,Finance & Investment,Post-Completion Wages of Graduates,
 Colorado,CO,State,General,,http://www.colorado.gov/data/,Pave,Finance & Investment,Post-Completion Wages of Graduates,
 Texas,TX,State,General,,http://www.texas.gov/en/Connect/Pages/open-data.aspx,Pave,Finance & Investment,Post-Completion Wages of Graduates,
 Florida,FL,State,General,,http://www.floridahasarighttoknow.com/,Pave,Finance & Investment,Post-Completion Wages of Graduates,
 Multiple government open data sources,,Other,General,,,Paxata,Data/Technology,,
-Department of Labor,,Federal,General,,http://catalog.data.gov/dataset?q=organization:((ecab-dol-gov)+OR+(whd-dol-gov)+OR+(esba-dol-gov)+OR+(ojc-dol-gov)+OR+(eta-dol-gov)+OR+(osha-dol-gov)+OR+(oalj-dol-gov)+OR+(oasp-dol-gov)+OR+(msha-dol-gov)+OR+(bls-gov)+OR+(brb-dol-gov)),"PayScale, Inc.",Business & Legal Services,,
+Department of Labor,DOL,Federal,General,,http://catalog.data.gov/dataset?q=organization:((ecab-dol-gov)+OR+(whd-dol-gov)+OR+(esba-dol-gov)+OR+(ojc-dol-gov)+OR+(eta-dol-gov)+OR+(osha-dol-gov)+OR+(oalj-dol-gov)+OR+(oasp-dol-gov)+OR+(msha-dol-gov)+OR+(bls-gov)+OR+(brb-dol-gov)),"PayScale, Inc.",Business & Legal Services,,
 Department of Health and Human Services,HHS,Federal,General,,http://catalog.data.gov/organization/cms-hhs-gov,PeerJ,Scientific Research,,
 Multiple government open data sources,,Other,General,,,PeerJ,Scientific Research,,
 Department of Energy,DOE,Federal,General,,http://catalog.data.gov/organization/doe-gov,People Power,Data/Technology,,
@@ -694,7 +693,7 @@ Department of Energy,DOE,Federal,General,,http://catalog.data.gov/organization/d
 Department of Education,ED / DOED,Federal,General,,http://catalog.data.gov/organization/ed-gov,Plus-U,Education,,
 Department of Commerce,USDC,Federal,US Census Bureau,Census,http://catalog.data.gov/organization/census-gov,PolicyMap,Geospatial/Mapping,Longitudinal Employer-Household Dynamics (LEHD),http://lehd.ces.census.gov/
 Department of Commerce,USDC,Federal,US Census Bureau,Census,http://catalog.data.gov/organization/census-gov,PolicyMap,Geospatial/Mapping,American Community Survey (ACS),https://www.census.gov/acs/www/
-Department of Labor,,Federal,Bureau of Labor Statistics,BLS,http://catalog.data.gov/organization/bls-gov,PolicyMap,Geospatial/Mapping,Local Area Unemployment Statistics (LAUS),http://www.bls.gov/lau/
+Department of Labor,DOL,Federal,Bureau of Labor Statistics,BLS,http://catalog.data.gov/organization/bls-gov,PolicyMap,Geospatial/Mapping,Local Area Unemployment Statistics (LAUS),http://www.bls.gov/lau/
 Multiple government open data sources,,Other,General,,,PolicyMap,Geospatial/Mapping,Federal Financial Institutions Examinations Council (FFIEC): Home Mortgage Disclosure Act (HMDA),http://www.ffiec.gov/hmda/
 Department of Commerce,USDC,Federal,General,,http://catalog.data.gov/organization/doc-gov,Politify,Governance,,
 Department of the Treasury,,Federal,General,,http://catalog.data.gov/organization/treasury-gov,Politify,Governance,,
@@ -735,7 +734,7 @@ Department of Energy,DOE,Federal,General,,http://catalog.data.gov/organization/d
 Department of Health and Human Services,HHS,Federal,General,,http://catalog.data.gov/organization/cms-hhs-gov,ReciPal,Food & Agriculture,National Nutrient Database,http://ndb.nal.usda.gov/ndb/search/list
 Department of Commerce,USDC,Federal,National Oceanic and Atmospheric Administration,NOAA,http://catalog.data.gov/organization/noaa-gov,Redfin,Housing/Real Estate,National Oceanic and Atmospheric Administration,
 Department of Commerce,USDC,Federal,US Census Bureau,Census,http://catalog.data.gov/organization/census-gov,Redfin,Housing/Real Estate,Census 2010,http://www.census.gov/2010census/data/
-Department of Labor,,Federal,Bureau of Labor Statistics,BLS,http://catalog.data.gov/organization/bls-gov,Redfin,Housing/Real Estate,Bureau of Labor Statistics,
+Department of Labor,DOL,Federal,Bureau of Labor Statistics,BLS,http://catalog.data.gov/organization/bls-gov,Redfin,Housing/Real Estate,Bureau of Labor Statistics,
 Multiple city and local data sources,,City/County,General,,,Redfin,Housing/Real Estate,Hundreds of county assessor and recorder offices,
 Department of Commerce,USDC,Federal,National Oceanic and Atmospheric Administration,NOAA,http://catalog.data.gov/organization/noaa-gov,RedLaser,Lifestyle & Consumer,GPS data,
 Multiple government open data sources,,Other,General,,,Reed Elsevier,Business & Legal Services,,
@@ -777,7 +776,7 @@ Department of Commerce,USDC,Federal,US Census Bureau,Census,http://catalog.data.
 Department of Commerce,USDC,Federal,US Census Bureau,Census,http://catalog.data.gov/organization/census-gov,Social Explorer,Data/Technology,County Business Patterns,census.gov
 Department of Commerce,USDC,Federal,US Census Bureau,Census,http://catalog.data.gov/organization/census-gov,Social Explorer,Data/Technology,Current Population Survey,census.gov
 Department of Commerce,USDC,Federal,US Census Bureau,Census,http://catalog.data.gov/organization/census-gov,Social Explorer,Data/Technology,Tiger Files,census.gov
-Department of Labor,,Federal,Bureau of Labor Statistics,BLS,http://catalog.data.gov/organization/bls-gov,Social Explorer,Data/Technology,Employment and Unemployment,bls.gov
+Department of Labor,DOL,Federal,Bureau of Labor Statistics,BLS,http://catalog.data.gov/organization/bls-gov,Social Explorer,Data/Technology,Employment and Unemployment,bls.gov
 Department of Health and Human Services,HHS,Federal,General,,http://catalog.data.gov/organization/cms-hhs-gov,Social Health Insights,Healthcare,Obamacare Qualified Health Plan (QHP) Data,https://data.healthcare.gov
 Department of Health and Human Services,HHS,Federal,Centers for Medicare and Medicaid Services,CMS,http://catalog.data.gov/organization/cms-hhs-gov,Social Health Insights,Healthcare,Hospital Compare,https://data.medicare.gov/Hospital-Compare/Hospital-Readmission-Reduction/9n3s-kdb3
 Department of Health and Human Services,HHS,Federal,Centers for Medicare and Medicaid Services,CMS,http://catalog.data.gov/organization/cms-hhs-gov,Social Health Insights,Healthcare,CMS: Medicare Hospital Compare Data,http://www.medicare.gov/hospitalcompare/search.html
@@ -852,7 +851,7 @@ Department of Commerce,USDC,Federal,National Weather Service,NWS,http://catalog.
 Department of Energy,DOE,Federal,Energy Information Administration,EIA,http://catalog.data.gov/organization/eia-doe-gov,The Schork Report,Energy,US Energy Information Administration (EIA),www.eia.gov
 Federal Reserve Board,FED,Federal,General,,http://catalog.data.gov/organization/frb-gov,The Vanguard Group,Finance & Investment,,
 Department of Commerce,USDC,Federal,General,,http://catalog.data.gov/organization/doc-gov,The Vanguard Group,Finance & Investment,,
-Department of Labor,,Federal,General,,http://catalog.data.gov/dataset?q=organization:((ecab-dol-gov)+OR+(whd-dol-gov)+OR+(esba-dol-gov)+OR+(ojc-dol-gov)+OR+(eta-dol-gov)+OR+(osha-dol-gov)+OR+(oalj-dol-gov)+OR+(oasp-dol-gov)+OR+(msha-dol-gov)+OR+(bls-gov)+OR+(brb-dol-gov)),The Vanguard Group,Finance & Investment,,
+Department of Labor,DOL,Federal,General,,http://catalog.data.gov/dataset?q=organization:((ecab-dol-gov)+OR+(whd-dol-gov)+OR+(esba-dol-gov)+OR+(ojc-dol-gov)+OR+(eta-dol-gov)+OR+(osha-dol-gov)+OR+(oalj-dol-gov)+OR+(oasp-dol-gov)+OR+(msha-dol-gov)+OR+(bls-gov)+OR+(brb-dol-gov)),The Vanguard Group,Finance & Investment,,
 Department of Commerce,USDC,Federal,US Patent and Trademark Office,USPTO,http://catalog.data.gov/dataset?q=organization:uspto-gov,Think Computer Corporation,Business & Legal Services,Google and US Patent and Trademark Office (USPTO),http://www.google.com/googlebooks/uspto.html
 Department of Commerce,USDC,Federal,US Patent and Trademark Office,USPTO,http://catalog.data.gov/dataset?q=organization:uspto-gov,Think Computer Corporation,Business & Legal Services,Patent Applications,
 Department of Commerce,USDC,Federal,US Patent and Trademark Office,USPTO,http://catalog.data.gov/dataset?q=organization:uspto-gov,Think Computer Corporation,Business & Legal Services,Patent Assignments,
@@ -871,7 +870,7 @@ California,CA,State,General,,http://data.ca.gov/,Think Computer Corporation,Busi
 Multiple federal data sources,,Federal,General,,,Think Computer Corporation,Business & Legal Services,United States Supreme Court,
 Multiple federal data sources,,Federal,General,,,Think Computer Corporation,Business & Legal Services,Government Printing Office (GPO),
 Department of Commerce,USDC,Federal,General,,http://catalog.data.gov/organization/doc-gov,Thinknum,Finance & Investment,,
-Department of Labor,,Federal,General,,http://catalog.data.gov/dataset?q=organization:((ecab-dol-gov)+OR+(whd-dol-gov)+OR+(esba-dol-gov)+OR+(ojc-dol-gov)+OR+(eta-dol-gov)+OR+(osha-dol-gov)+OR+(oalj-dol-gov)+OR+(oasp-dol-gov)+OR+(msha-dol-gov)+OR+(bls-gov)+OR+(brb-dol-gov)),Thinknum,Finance & Investment,,
+Department of Labor,DOL,Federal,General,,http://catalog.data.gov/dataset?q=organization:((ecab-dol-gov)+OR+(whd-dol-gov)+OR+(esba-dol-gov)+OR+(ojc-dol-gov)+OR+(eta-dol-gov)+OR+(osha-dol-gov)+OR+(oalj-dol-gov)+OR+(oasp-dol-gov)+OR+(msha-dol-gov)+OR+(bls-gov)+OR+(brb-dol-gov)),Thinknum,Finance & Investment,,
 Federal Reserve Board,FED,Federal,General,,http://catalog.data.gov/organization/frb-gov,Thinknum,Finance & Investment,,
 Federal Housing Finance Agency,FHFA,Federal,General,,http://catalog.data.gov/organization/fhfa-gov,Thinknum,Finance & Investment,,
 Securities and Exchange Commission,SEC,Federal,General,,http://catalog.data.gov/organization/sec-gov,Thinknum,Finance & Investment,,
@@ -949,7 +948,7 @@ Department of Commerce,USDC,Federal,General,,http://catalog.data.gov/organizatio
 Department of Commerce,USDC,Federal,National Oceanic and Atmospheric Administration,NOAA,http://catalog.data.gov/organization/noaa-gov,Whitby Group,Research & Consulting,Quality Controlled Local Climatological Data,http://cdo.ncdc.noaa.gov/qclcd/QCLCD?prior=N
 Department of Commerce,USDC,Federal,US Census Bureau,Census,http://catalog.data.gov/organization/census-gov,Whitby Group,Research & Consulting,TIGER Shapefiles,http://www.census.gov/geo/maps-data/data/tiger-line.html
 Department of Commerce,USDC,Federal,US Census Bureau,Census,http://catalog.data.gov/organization/census-gov,Whitby Group,Research & Consulting,American FactFinder,http://factfinder2.census.gov/faces/nav/jsf/pages/index.xhtml
-Department of Labor,,Federal,Bureau of Labor Statistics,BLS,http://catalog.data.gov/organization/bls-gov,Whitby Group,Research & Consulting,Consumer Price Index,http://www.bls.gov/cpi/data.htm
+Department of Labor,DOL,Federal,Bureau of Labor Statistics,BLS,http://catalog.data.gov/organization/bls-gov,Whitby Group,Research & Consulting,Consumer Price Index,http://www.bls.gov/cpi/data.htm
 Multiple government open data sources,,Other,General,,,Wolfram Research,Data/Technology,,
 Department of the Interior,DOI,Federal,General,,http://catalog.data.gov/organization/doi-gov,Wolfram Research,Data/Technology,,
 Multiple government open data sources,,Other,General,,,Wolters Kluwer,Business & Legal Services,"Uses legal data such as rules, regulations, and other primary law for all 50 states and federal jurisdictions",
@@ -996,7 +995,7 @@ Chicago,CHI,City/County,General,,http://data.cityofchicago.org/,YourMapper,Geosp
 Chicago,CHI,City/County,General,,http://data.cityofchicago.org/,YourMapper,Geospatial/Mapping,Building Permits,
 Chicago,CHI,City/County,General,,http://data.cityofchicago.org/,YourMapper,Geospatial/Mapping,Health Inspections,
 Multiple city and local data sources,,City/County,General,,,YourMapper,Geospatial/Mapping,,
-Department of Labor,,Federal,General,,http://catalog.data.gov/dataset?q=organization:((ecab-dol-gov)+OR+(whd-dol-gov)+OR+(esba-dol-gov)+OR+(ojc-dol-gov)+OR+(eta-dol-gov)+OR+(osha-dol-gov)+OR+(oalj-dol-gov)+OR+(oasp-dol-gov)+OR+(msha-dol-gov)+OR+(bls-gov)+OR+(brb-dol-gov)),Zillow,Housing/Real Estate,,
+Department of Labor,DOL,Federal,General,,http://catalog.data.gov/dataset?q=organization:((ecab-dol-gov)+OR+(whd-dol-gov)+OR+(esba-dol-gov)+OR+(ojc-dol-gov)+OR+(eta-dol-gov)+OR+(osha-dol-gov)+OR+(oalj-dol-gov)+OR+(oasp-dol-gov)+OR+(msha-dol-gov)+OR+(bls-gov)+OR+(brb-dol-gov)),Zillow,Housing/Real Estate,,
 Federal Housing Finance Agency,FHFA,Federal,General,,http://catalog.data.gov/organization/fhfa-gov,Zillow,Housing/Real Estate,,
 Department of Commerce,USDC,Federal,General,,http://catalog.data.gov/organization/doc-gov,Zillow,Housing/Real Estate,,
 Department of Commerce,USDC,Federal,US Census Bureau,Census,http://catalog.data.gov/organization/census-gov,ZocDoc,Healthcare,zipcode data,

@@ -33,12 +33,12 @@ class MainHandler(BaseHandler):
             )
 
 #--------------------------------------------------------TEST PAGE------------------------------------------------------------
-class MainHandler2(BaseHandler):
+class TestHandler(BaseHandler):
     @tornado.web.addslash
     #@tornado.web.authenticated
-    def get(self):
+    def get(self, number):
         self.render(
-            "index_2.html",
+            "index_" + number + ".html",
             user=self.current_user,
             page_title='Open Data500',
             page_heading='Welcome to the Open Data 500 Pre-Launch',
@@ -360,7 +360,7 @@ class SubmitCompanyHandler(BaseHandler):
             country=country
         )
         company.save()
-        self.application.stats.update_all_state_counts()
+        self.application.stats.update_all_state_counts(country)
         id = str(company.id)
         self.write({"id": id})
 
@@ -370,8 +370,6 @@ class SubmitDataHandler(BaseHandler):
     @tornado.web.addslash
     #@tornado.web.authenticated
     def get(self, id):
-        #Make not whether we are submitting a Co. and adding a dataset or editing a Co. and adding a dataset
-        #get company
         company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
         page_heading = "Agency and Data Information for " + company.companyName
         self.render("submitData.html",
@@ -677,7 +675,7 @@ class EditCompanyHandler(BaseHandler):
                 if a.prettyName:
                     company.filters.append(a.prettyName)
         if company.display: #only if company is displayed
-            self.application.stats.update_all_state_counts()
+            self.application.stats.update_all_state_counts(company.country)
         company.save()
         #self.application.stats.update_all_state_counts()
         self.write('success')
@@ -687,13 +685,37 @@ class EditCompanyHandler(BaseHandler):
 class DownloadHandler(BaseHandler):
     @tornado.web.addslash
     #@tornado.web.authenticated
-    def get(self):
-        self.render(
-            "download.html",
-            page_title='Download the Open Data 500',
-            user=self.current_user,
-            page_heading='Download the Open Data 500'
-        )
+    def get(self, country=None):
+        if not country:
+            country = "int"
+        lan = self.get_argument("lan", "")
+        if country in available_countries:
+            with open("templates/"+country+"/settings.json") as json_file:
+                settings = json.load(json_file)
+            if lan not in settings.keys():
+                logging.info("No translation selected or translation not available in this language")
+                lan = settings["default_language"]
+            self.render(
+                country.lower()+"/download.html",
+                page_title = settings[lan]['download']['page_title'],
+                settings = settings[lan]['download'],
+                user=self.current_user,
+                country="us"
+            )
+        else:
+            self.render('404.html',
+                page_heading="Stop trying to make " +self.request.uri + " happen. <br><br>It's not going to happen.",
+                user=self.current_user,
+                page_title="404 - Not Found",
+                error="Not found",
+                country=""
+            )
+        # self.render(
+        #     "download.html",
+        #     page_title='Download the Open Data 500',
+        #     user=self.current_user,
+        #     page_heading='Download the Open Data 500'
+        # )
 
 
 
