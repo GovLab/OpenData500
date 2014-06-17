@@ -1,0 +1,145 @@
+{% extends "main.html" %}
+{% autoescape None %}
+
+{% block body %}
+
+<div class="m-homepage">
+
+
+
+<meta charset='utf-8' />
+    <meta content='width=device-width, initial-scale=1.0' name='viewport' />
+    <meta content='NYU, GovLab, governance' name='description' />
+    <meta content='The Governance Lab @NYU' name='author' />
+
+
+    <link href='/favicon.ico' rel='shortcut icon' />
+    
+    <!-- Bootstrap core CSS -->
+<!--     <link href="{{ static_url("js/govlab/css/bootstrap.min.css") }}" rel="stylesheet">
+    <link href="{{ static_url("js/govlab/css/font-awesome.css") }}" rel="stylesheet"> -->
+
+    <!-- Custom styles for this template -->
+    <link href="{{ static_url("js/govlab/css/custom.css") }}" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link href='http://fonts.googleapis.com/css?family=Exo:100,500,100italic,500italic' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="{{ static_url("js/govlab/js/html5shiv.js") }}"></script>
+      <script src="{{ static_url("js/govlab/js/respond.min.js") }}"></script>
+    <![endif]-->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{{ static_url("js/govlab/js/jquery-1.10.1.min.js") }}"></script>
+    <script src="{{ static_url("js/govlab/canjs.com-2.1.1/can.jquery.js") }}"></script>
+    <script src="{{ static_url("js/govlab/canjs.com-2.1.1/can.stache.js") }}"></script>
+    <script src="{{ static_url("js/govlab/js/bootstrap.min.js") }}"></script>
+    <script src="{{ static_url("js/govlab/js/analytics_lib.js") }}"></script>
+
+    <script src="{{ static_url("js/govlab/js/moment.min.js") }}"></script>
+    <script src="{{ static_url("js/govlab/js/jquery.dataTables.min.js") }}"></script>
+    <script src="{{ static_url("js/govlab/js/jquery.dataTables.sorting.js") }}"></script>
+    <script src="{{ static_url("js/govlab/dataTables.fixedHeader.js") }}"></script>
+    <script src="{{ static_url("js/govlab/js/jquery.address.js") }}"></script>
+    <script src="{{ static_url("js/govlab/js/mustache.js") }}"></script>
+    <script src="{{ static_url("js/govlab/js/spin.min.js") }}"></script>
+    <script src="{{ static_url("js/govlab/js/jquery.spin.js") }}"></script>
+    <script src="{{ static_url("js/govlab/js/jquery.scrollto.js") }}"></script>
+  </head>
+  <body>
+<!--     <header class="od500-top-bar">
+      <div>
+        <img src="imgs/od500-logo.png" alt="">
+      </div>  
+    </header> -->
+    <div class="container">
+      
+
+      <div id='primary-content' class='col-md-10 col-md-offset-1'>
+
+
+<div class='row'>
+
+  <div class='col-md-12'>
+  	<br>
+  	<br>
+  	<br>
+  	<br>
+    <h2 id='list-of-attendees'> People attending:
+      <small id='data-count'></small>
+    </h2>
+    <p>List of people attending the event.</p>
+
+    <table id='open-data-table' class='table table-striped'>
+      <thead>
+        <tr>
+          <th class='api-title'>Who</th>
+          <th>Company</th>
+          <th>Bio</th>
+          <th>Dataset Interest</th>
+	  <th>Expertise</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- THIS IS WHERE YOU CAN CHANGE THE STRUCTURE OF THE TABLE.
+Use the name of the column to get the data.
+--> 
+
+<script type="text/ejs" id="people-table">
+<tr>
+  <td>
+    <h4>{{!Name}} &nbsp; {{!#linkedIn_url}}<a target="__new__" href="{{!linkedIn_url}}"><img src="/static/js/govlab/linkedin-icon-small.jpg"/></a>{{!/linkedIn_url}}</h4>
+    <div><small>{{!Title}}</small></div>
+    <img src={{!picture_url}} alt="Picture for {{!Name}}" width="100" height="100"/>
+  </td>
+  
+  <td>
+    {{!#org_url}}<a href={{!org_url}}>{{!Organization}}</a>{{!/org_url}}{{!^org_url}}{{!Organization}}{{!/org_url}}<br/><small>{{!Type}}<br/>{{!industry}}</small>
+  </td>
+  
+  <td>
+    <p class="small">{{!bio}}</p>
+  </td>
+
+  <td>
+    <p class="small">{{!expertise}}</p>
+  </td>
+
+  <td>
+    <p class="small">{{!dataset_interest}}</p>
+  </td>
+
+</tr>
+</script>
+
+
+<script src="{{ static_url("js/govlab/js/jquery.csv-0.71.min.js") }}"></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-52017168-1', 'sahuguet.com');
+  ga('send', 'pageview');
+
+</script>
+<script src="{{ static_url("js/govlab/lib/resources.js") }}"></script>
+
+
+        <div class="footer">
+          <p class='pull-right'>&copy; The Governance Lab @NYU 2014</p>
+        </div>
+      </div>
+    </div> <!-- /container -->
+
+</div>
+{%end%}
