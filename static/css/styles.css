@@ -869,6 +869,69 @@ a:hover {
     font-size: 12px;
     font-weight: 400; }
 
+.consortium-homepage header {
+  margin-bottom: 15px; }
+  .consortium-homepage header .m-main-menu {
+    width: 400px; }
+    .consortium-homepage header .m-main-menu a {
+      letter-spacing: .5px; }
+.consortium-homepage #consortium-logo {
+  width: 600px; }
+.consortium-homepage .consortium-tagline {
+  width: 350px;
+  float: right;
+  font-size: 20px;
+  font-family: "Exo", sans-serif;
+  font-weight: 100;
+  font-style: italic;
+  text-align: right;
+  line-height: 26px; }
+.consortium-homepage .countries {
+  margin-top: 100px;
+  margin-bottom: 100px;
+  clear: both;
+  text-align: center; }
+.consortium-homepage .country-link-outer {
+  border: 8px solid rgba(71, 43, 116, 0.4);
+  width: 262px;
+  height: 262px;
+  display: inline-block;
+  margin-right: 60px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%; }
+  .consortium-homepage .country-link-outer .country-link {
+    width: 250px;
+    height: 250px;
+    overflow: hidden;
+    text-align: center;
+    border: 6px solid #472b74;
+    cursor: pointer;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%; }
+    .consortium-homepage .country-link-outer .country-link img {
+      opacity: .4;
+      position: relative; }
+  .consortium-homepage .country-link-outer:last-child {
+    margin-right: 0; }
+  .consortium-homepage .country-link-outer.canada img {
+    width: 150%;
+    bottom: -30px;
+    left: -25%; }
+  .consortium-homepage .country-link-outer.mexico img {
+    bottom: -17px;
+    width: 151%;
+    left: -26%; }
+  .consortium-homepage .country-link-outer.us img {
+    width: 190%;
+    left: -25%;
+    bottom: 0px; }
+  .consortium-homepage .country-link-outer:hover .country-link img {
+    opacity: 1; }
+
 body {
   margin: 0; }
 
