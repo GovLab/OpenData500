@@ -54,7 +54,7 @@ class Application(tornado.web.Application):
             (r"/(?:([A-Za-z]{2})/)?stats/?", FindingsHandler),
             (r"/chart/?", ChartHandler),
             (r"/(?:([A-Za-z]{2})/)?download/?", DownloadHandler),
-            (r'/(?:([A-Za-z]{2})/)?download/(.*)/?',tornado.web.StaticFileHandler, {'path':os.path.join(os.path.dirname(__file__), 'static') + "/files/"}),
+            (r'/download/(.*)/?',tornado.web.StaticFileHandler, {'path':os.path.join(os.path.dirname(__file__), 'static')+"/files/"}),
             (r"/candidates/?", CandidateHandler),
             (r"/list/?", ListHandler),
             (r'/thanks/?', ThanksHandler),
