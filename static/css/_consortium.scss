@@ -1,0 +1,104 @@
+.consortium-homepage {
+	header {
+		margin-bottom: 15px;
+
+		.m-main-menu {
+			width: 400px;
+
+			a {
+				letter-spacing: .5px;
+			}
+		}
+	}
+
+	#consortium-logo {
+		width: 600px;
+	}
+
+	.consortium-tagline {
+		width: 350px;
+		float: right;
+		font-size: 20px;
+		font-family: $fancy_type;
+		font-weight: 100;
+		font-style: italic;
+		text-align: right;
+		line-height: 26px;
+	}
+
+	.countries {
+		margin-top: 100px;
+		margin-bottom: 100px;
+		clear: both;
+		text-align: center;
+	}
+
+	.country-link-outer {
+		border: 8px solid $purple_alpha_40;
+		width: 262px;
+		height: 262px;
+		display: inline-block;
+		margin-right: 60px;
+		@include drop_shadow;
+		@include circle;
+
+		.country-link {
+			width: 250px;
+			height: 250px;
+			overflow: hidden;
+			text-align: center;
+			border: 6px solid $purple;
+			cursor: pointer;
+			@include drop_shadow;
+			@include circle;
+
+
+			img {
+				opacity: .4;
+				position: relative;
+			}
+		}
+
+		&:last-child {
+			margin-right: 0;
+		}
+
+		&.canada {
+			img {
+				width: 150%;
+				bottom: -30px;
+				left: -25%;
+			}
+		}
+
+		&.mexico {
+			img {
+				bottom: -17px;
+				width: 151%;
+				left: -26%;
+			}
+		}
+
+		&.us {
+			img {
+				width: 190%;
+				left: -25%;
+				bottom: 0px;
+			}
+		}
+
+		&:hover {
+
+			.country-link {
+				
+
+				img {
+					opacity: 1;
+				}
+			}
+		}
+
+	}
+
+	
+}

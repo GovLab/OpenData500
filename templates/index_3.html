@@ -31,17 +31,42 @@
     <![endif]-->
 
 </head>
-<body id="consortium-landing-page" >
+<body class="consortium-homepage">
     <div class="parallax-bg" id="background" data-stellar-ratio="-0.01"></div>
     <!-- <div class="parallax-bg" id="background-2" data-stellar-ratio="-0.015"></div>  
     <div class="parallax-bg" id="background-3" data-stellar-ratio="-0.02"></div>   -->
+    <header>
+        <div id="mainMenu" class="l-centered m-main-menu">
+            <a href="/{%try%}{%if country and country!="int" %}{{country}}/{%end%}{%except%}{%end%}about/">About</a>
+            <a href="/resources/">Resources</a>
+            <a href="#">Contact</a> 
+            {%try%} {% if user %} <a href="/admin/companies/">Admin</a>{% end %}{%except%}{%end%}
+            {%try%} {% if user %} <a href="/logout/">Logout</a>{% end %}{%except%}{%end%}
+        </div>
+    </header><!-- end header -->
     <div class="l-centered">
-        <img src="{{ static_url("img/consortium-logo.png") }}" alt="">
+        <img id="consortium-logo" src="{{ static_url("img/logo-consortium.png") }}" alt="OpenData500 Consortium">
+        <p class="consortium-tagline">The Open Data 500 Consortium is an international effort to study, facilitate, and improve the use of open government data around the world.</p>
+    </div>
+    <div class="l-centered countries">
+        <div class="country-link-outer canada">
+            <div class="country-link">
+                <img src="{{ static_url("img/canada-flag.png") }}" alt="">
+            </div>
+        </div>
+        <div class="country-link-outer mexico">
+            <div class="country-link">
+                <img src="{{ static_url("img/mexico-flag.png") }}" alt="">
+            </div>
+        </div>
+        <div class="country-link-outer us">
+            <div class="country-link">
+                <img src="{{ static_url("img/us-flag.png") }}" alt="">
+            </div>
+        </div>
     </div>
 
-    <div class="box l-centered">
-        <p>The Open Data 500 Consortium is an international effort to study, facilitate, and improve the use of open government data around the world. It is maintained and coordinated by the GovLab and is based on the U.S.-based Open Data 500.</p>
-        </div>
+    
     <footer>
         <div class="l-centered">
             <div class="m-footer-logos">
