@@ -294,7 +294,7 @@
                 .style("color", hoverLabelColor);
                 
             queue()
-                .defer(d3.json, "{{ static_url("us_states.json") }}")
+                .defer(d3.json, "{{ static_url("files/us_states.json") }}")
                 .await(ready);
                 
             var numberFormat = d3.format("0,000");
