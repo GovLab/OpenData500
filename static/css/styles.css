@@ -215,8 +215,8 @@ a:hover {
   margin: 15px 0 50px 0;
   font-size: 3.8em; }
 .m-homepage .first-title {
-  margin: 65px 0 60px 0;
-  font-size: 6.3em; }
+  margin: 65px 0 30px 0;
+  font-size: 5.5em; }
 .m-homepage section {
   padding-bottom: 24px;
   border-bottom: 1px solid #472b74;
@@ -251,6 +251,13 @@ a:hover {
     -o-transform: rotate(90deg);
     transform: rotate(90deg);
     right: -30px; }
+.m-homepage .m-banner-slider {
+  margin-bottom: 50px;
+  height: 241px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2); }
+  .m-homepage .m-banner-slider img {
+    position: relative;
+    z-index: -1; }
 
 .m-homepage-about .more {
   text-align: right; }
@@ -303,7 +310,8 @@ a:hover {
   line-height: 20px;
   border: 1px solid #472b74;
   padding: 10px;
-  width: 600px !important; }
+  width: 600px !important;
+  margin-top: -35px; }
 
 .about-page {
   font-size: 14px;
@@ -867,6 +875,69 @@ a:hover {
   .findings-page #chart .xaxis text {
     font-size: 12px;
     font-weight: 400; }
+
+.consortium-homepage header {
+  margin-bottom: 15px; }
+  .consortium-homepage header .m-main-menu {
+    width: 400px; }
+    .consortium-homepage header .m-main-menu a {
+      letter-spacing: .5px; }
+.consortium-homepage #consortium-logo {
+  width: 600px; }
+.consortium-homepage .consortium-tagline {
+  width: 350px;
+  float: right;
+  font-size: 20px;
+  font-family: "Exo", sans-serif;
+  font-weight: 100;
+  font-style: italic;
+  text-align: right;
+  line-height: 26px; }
+.consortium-homepage .countries {
+  margin-top: 100px;
+  margin-bottom: 100px;
+  clear: both;
+  text-align: center; }
+.consortium-homepage .country-link-outer {
+  border: 8px solid rgba(71, 43, 116, 0.4);
+  width: 262px;
+  height: 262px;
+  display: inline-block;
+  margin-right: 60px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%; }
+  .consortium-homepage .country-link-outer .country-link {
+    width: 250px;
+    height: 250px;
+    overflow: hidden;
+    text-align: center;
+    border: 6px solid #472b74;
+    cursor: pointer;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%; }
+    .consortium-homepage .country-link-outer .country-link img {
+      opacity: .4;
+      position: relative; }
+  .consortium-homepage .country-link-outer:last-child {
+    margin-right: 0; }
+  .consortium-homepage .country-link-outer.canada img {
+    width: 150%;
+    bottom: -30px;
+    left: -25%; }
+  .consortium-homepage .country-link-outer.mexico img {
+    bottom: -17px;
+    width: 151%;
+    left: -26%; }
+  .consortium-homepage .country-link-outer.us img {
+    width: 190%;
+    left: -25%;
+    bottom: 0px; }
+  .consortium-homepage .country-link-outer:hover .country-link img {
+    opacity: 1; }
 
 body {
   margin: 0; }

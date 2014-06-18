@@ -22,6 +22,7 @@ categories = ['Business & Legal Services', 'Data/Technology', 'Education', 'Ener
 states ={ "AL": "Alabama", "AK": "Alaska", "AZ": "Arizona", "AR": "Arkansas", "CA": "California", "CO": "Colorado", "CT": "Connecticut", "DE": "Delaware", "DC": "District of Columbia", "FL": "Florida", "GA": "Georgia", "HI": "Hawaii", "ID": "Idaho", "IL": "Illinois", "IN": "Indiana", "IA": "Iowa", "KA": "Kansas", "KY": "Kentucky", "LA": "Louisiana", "ME": "Maine", "MD": "Maryland", "MA": "Massachusetts", "MI": "Michigan", "MN": "Minnesota", "MS": "Mississippi", "MO": "Missouri", "MT": "Montana", "NE": "Nebraska", "NV": "Nevada", "NH": "New Hampshire", "NJ": "New Jersey", "NM": "New Mexico", "NY": "New York", "NC": "North Carolina", "ND": "North Dakota", "OH": "Ohio", "OK": "Oklahoma", "OR": "Oregon", "PA": "Pennsylvania", "RI": "Rhode Island", "SC": "South Carolina", "SD": "South Dakota", "TN": "Tennessee", "TX": "Texas", "UT": "Utah", "VT": "Vermont", "VA": "Virginia", "WA": "Washington", "WV": "West Virginia", "WI": "Wisconsin", "WY": "Wyoming", "PR": "Puerto Rico"}
 stateListAbbrev = [ "", "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KA", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY", "PR"]
 stateList = ["(Select State)", "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "District of Columbia", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming", "Puerto Rico"]
+agency_types = ['Federal','State','City/County','University/Institution']
 available_countries = ["int", "us", "ca"]
 
 
@@ -172,12 +173,12 @@ class FileGenerator(object):
                 "subagencies":subagencies
             }
             companiesJSON.append(company)
-        with open(os.path.join(os.path.dirname(__file__), 'static') + '/OD500_Companies.json', 'w') as outfile:
+        with open(os.path.join(os.path.dirname(__file__), 'static') + "/files/" + country + '_OD500_Companies.json', 'w') as outfile:
             json.dump(companiesJSON, outfile)
         logging.info("Company JSON File Done!")
-    def generate_agency_json(self):
+    def generate_agency_json(self, country):
         #--------------JSON OF AGENCIES------------
-        agencies = models.Agency.objects(source="dataGov")
+        agencies = models.Agency.objects(Q(source="dataGov") & Q(country=country))
         agenciesJSON = []
         for a in agencies:
             #--------DATASETS AT AGENCY LEVEL------
@@ -229,13 +230,13 @@ class FileGenerator(object):
                 "usedBy":usedBy
             }
             agenciesJSON.append(ag)
-        with open(os.path.join(os.path.dirname(__file__), 'static') + '/OD500_Agencies.json', 'w') as outfile:
+        with open(os.path.join(os.path.dirname(__file__), 'static') + "/files/" + country + '_OD500_Agencies.json', 'w') as outfile:
             json.dump(agenciesJSON, outfile)
         logging.info("Agency JSON File Done!")
     def generate_company_csv(self, country):
         #---CSV OF ALL COMPANIES----
         companies = models.Company.objects(Q(display=True) & Q(country=country))
-        csvwriter = csv.writer(open(os.path.join(os.path.dirname(__file__), 'static') + "/OD500_Companies.csv", "w"))
+        csvwriter = csv.writer(open(os.path.join(os.path.dirname(__file__), 'static') + "/files/" + country + "_OD500_Companies.csv", "w"))
         csvwriter.writerow([
             'company_name_id',
             'company_name',
@@ -283,7 +284,7 @@ class FileGenerator(object):
     def generate_company_all_csv(self, country):
         #---CSV OF ALL COMPANIES----
         companies = models.Company.objects(country=country)
-        csvwriter = csv.writer(open(os.path.join(os.path.dirname(__file__), 'static') + "/OD500_Companies_All.csv", "w"))
+        csvwriter = csv.writer(open(os.path.join(os.path.dirname(__file__), 'static') + "/files/" + country + "_OD500_Companies_All.csv", "w"))
         csvwriter.writerow([
             'company_name_id',
             'company_name',
@@ -354,11 +355,11 @@ class FileGenerator(object):
                     newrow[i] = newrow[i].encode('utf8')
             csvwriter.writerow(newrow)
         logging.info("All Companies CSV File Done!")
-    def generate_agency_csv(self):
+    def generate_agency_csv(self, country):
         #--------CSV OF AGENCIES------
-        agencies = models.Agency.objects()
+        agencies = models.Agency.objects(source__not="web")
         companies = models.Company.objects(Q(display=True) & Q(country=country))
-        csvwriter = csv.writer(open(os.path.join(os.path.dirname(__file__), 'static') + "/OD500_Agencies.csv", "w"))
+        csvwriter = csv.writer(open(os.path.join(os.path.dirname(__file__), 'static') + "/files/" + country + "_OD500_Agencies.csv", "w"))
         csvwriter.writerow([
             'agency_name',
             'agency_abbrev',
@@ -438,7 +439,7 @@ class FileGenerator(object):
                                 newrow[i] = newrow[i].encode('utf8')
                         csvwriter.writerow(newrow)
         logging.info("Agency CSV File Done!")
-    def generate_sankey_json(self):
+    def generate_sankey_json(self, country):
         #get qualifying agencies
         agencies = models.Agency.objects(Q(usedBy__not__size=0) & Q(source__not__exact="web") & Q(dataType="Federal")).order_by('name') #federal agencies from official list that are used by a company
         #going to just make a list of all the category-agency combos
@@ -476,11 +477,11 @@ class FileGenerator(object):
             n['name'] = n['name'].replace('Administration', 'Admin.')
             n['name'] = n['name'].replace('United States', 'US')
             n['name'] = n['name'].replace('National', "Nat'l")
-        with open(os.path.join(os.path.dirname(__file__), 'static') + '/sankey.json', 'w') as outfile:
+        with open(os.path.join(os.path.dirname(__file__), 'static') + "/files/" + country + '_sankey.json', 'w') as outfile:
             json.dump(cat_v_agencies, outfile)
 
-    def generate_chord_chart_files(self):
-        agencies = models.Agency.objects(Q(usedBy__not__size=0) & Q(source__not__exact="web") & Q(dataType="Federal")).order_by('name')
+    def generate_chord_chart_files(self, country):
+        agencies = models.Agency.objects(Q(usedBy__not__size=0) & Q(source__not__exact="web") & Q(dataType="Federal") & Q(country="us")).order_by('name')
         #get agencies that are used
         used_agencies_categories = []
         for a in agencies:
@@ -532,14 +533,14 @@ class FileGenerator(object):
             data['names'][key] = data['names'][key].replace('Protection', "Prot.")
             data['names'][key] = data['names'][key].replace('Environmental', "Env.")
         #save to file
-        with open(os.path.join(os.path.dirname(__file__), 'static') + '/matrix.json', 'w') as outfile:
+        with open(os.path.join(os.path.dirname(__file__), 'static') + '/files/' + country + '_matrix.json', 'w') as outfile:
             json.dump(data, outfile)
         logging.info("Chord Chart File Done!")
 
-    def generate_visit_csv(self):
+    def generate_visit_csv(self, country):
         #---CSV OF ALL COMPANIES----
         visits = models.Visit.objects()
-        csvwriter = csv.writer(open(os.path.join(os.path.dirname(__file__), 'static') + "/OD500_Visits.csv", "w"))
+        csvwriter = csv.writer(open(os.path.join(os.path.dirname(__file__), 'static') + "/files/" + country + "_OD500_Visits.csv", "w"))
         csvwriter.writerow([
             'ts',
             'referer',
@@ -560,6 +561,34 @@ class FileGenerator(object):
                     newrow[i] = newrow[i].encode('utf8')
             csvwriter.writerow(newrow)
         logging.info("Visit CSV File Done!")
+
+    def generate_agency_list(self, country):
+        agencies = models.Agency.objects(Q(country=country) & Q(source="dataGov"))
+        agency_list = []
+        for a in agencies:
+            label = [a.name, " (", a.abbrev, ")"]
+            agency = {
+                "label": ''.join(filter(None, label)),
+                "a": a.name,
+                "aa": a.abbrev,
+                "s": "",
+                "ss": ""
+            }
+            agency_list.append(agency)
+            if a.subagencies:
+                for s in a.subagencies:
+                    label = [a.name, " (", a.abbrev, ")", " - ", s.name, " (", s.abbrev, ")"]
+                    agency = {
+                        "label": ''.join(filter(None, label)),
+                        "a": a.name,
+                        "aa": a.abbrev,
+                        "s": s.name,
+                        "ss": s.abbrev
+                    }
+                    agency_list.append(agency)
+        with open(os.path.join(os.path.dirname(__file__), 'static') + "/files/" + country + '_Agency_List.json', 'w') as outfile:
+            json.dump(agency_list, outfile)
+        logging.info("Agency List Done!")
 
 
 

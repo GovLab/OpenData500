@@ -5,7 +5,7 @@
 
 <div class="m-homepage">
 
-    <h1 class="first-title">Welcome to OpenData 500</h1>
+    <h1 class="first-title">{{settings["page_heading"]}}</h1>
     <script src="{{ static_url("js/d3.v3.min.js") }}"></script>
     <section id="chord-chart-container">
         <h2>Open Data Compass</h2>
@@ -53,7 +53,7 @@
 
 $('.m-homepage').css('text-align', 'left' );
 var data;
-d3.json("{{ static_url('matrix.json') }}", function(error, json) {
+d3.json("{{ static_url('files/us_matrix.json') }}", function(error, json) {
     if (error) return console.warn(error);
     data = json;
     draw_diagram();

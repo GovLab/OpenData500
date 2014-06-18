@@ -6,8 +6,8 @@
 	}
 
 	.first-title {
-		margin: 65px 0 60px 0;
-		font-size: 6.3em;
+		margin: 65px 0 30px 0;
+		font-size: 5.5em;
 	}
 
 	section {
@@ -45,6 +45,17 @@
 		.chord-legend.agencies {
 			@include rotate(90deg);
 			right: -30px;
+		}
+	}
+
+	.m-banner-slider {
+		margin-bottom: 50px;
+		height: 241px;
+		@include inner_shadow;
+
+		img {
+			position: relative;
+			z-index: -1;
 		}
 	}
 
@@ -121,6 +132,7 @@
 	    border: 1px solid $purple;
 	    padding: 10px;
 	    width: 600px !important;
+	    margin-top: -35px;
 	}
 
 }

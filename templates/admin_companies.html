@@ -47,7 +47,7 @@
 	{% for company in needVetting %}
 		<tr>
 			<td><strong>{{ company.companyName }}</strong></a></td>
-			<td><a href="/admin/edit/{{ company.id }}">Edit</a></td>
+			<td><a href="/admin/company-edit/{{ company.id }}">Edit</a></td>
 			<td>{%try%}{% if (company.contact) %} {{ company.contact.email }} {% end %}{%except%}{%end%}</td>
 			<td>{{ company.lastUpdated.strftime("%b, %d '%y @%I:%M %p") }}</td>
 			<td>{%if company.submittedThroughWebsite %} √ {%end%}</td>
@@ -72,7 +72,7 @@
 			<td><strong>{{ company.companyName }}</strong></a></td>
 			<td><a href="/edit/{{ company.id }}">Edit</a></td>
 			<td>{%try%}{% if (company.contact) %} {{ company.contact.email }} {% end %}{%except%}{%end%}</td>
-			<td><a href="/admin/edit/{{ company.id }}">Edit</a></td>
+			<td><a href="/admin/company-edit/{{ company.id }}">Edit</a></td>
 			<td><p>{% if company.notes %}{{company.notes}}{%end%}</p></td>
 		</tr>
 	{% end %}
@@ -85,7 +85,7 @@
 	<h3><strong>{{ company.companyName }}</strong> Submitted: {{company.ts}}</h3> 
 	<div>
 		<p>{% if company.notes %}{{company.notes}}{%end%}</p>
-		<p><a href="/admin/edit/{{ company.id }}">Edit</a></p>
+		<p><a href="/admin/company-edit/{{ company.id }}">Edit</a></p>
 	</div>
 {% end %}
 </div>
@@ -103,7 +103,7 @@ $(document).ready( function() {
 		data = { "action":action, "_xsrf": $("[name='_xsrf']").val() }
 	  $.ajax({
 	    type: 'POST',
-	    url: '/admin/',
+	    url: '/admin/companies/',
 	    data: data,
 	    error: function(error) {
 	        console.debug(JSON.stringify(error));
