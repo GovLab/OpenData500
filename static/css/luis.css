@@ -185,6 +185,11 @@ survey/no survey hover and active states*/
   color: red;
 }
 
+.m-candidates .m-filter-menu {
+  padding-left: 10px;
+  width: 188px;
+}
 
-
-
+.m-candidates-item.s-active {
+  width: 45.5%
+}
