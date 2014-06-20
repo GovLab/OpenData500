@@ -29,16 +29,52 @@
 		line-height: 22px;
 	}
 
-	blockquote {
+	.in-content-image {
 		float: right;
+		width: 50%;
+		margin-left: 30px;
+		@include drop_shadow;
+	}
+
+	blockquote {
 		font-size: 24px;
 		line-height: 30px;
-		width: 30%;
 		font-family: $fancy-type;
 		font-weight: 100;
 		font-style: italic;
-		text-align: right;
+		text-align: left;
 		color: $purple;
+		background-color: $super_light_gray;
+		padding: 20px 30px;
+		border-left: 3px solid $purple;
+		margin: 0;
+	}
+
+	.roundtables-series-sponsors {
+		text-align: center;
+
+		.sponsor-container {
+			width: 260px;
+			height: 180px;
+			padding: 10px 20px;
+			display: inline-block;	
+			overflow: hidden;
+			margin-right: 30px;
+		}
+
+		img {
+			max-width: 260px;
+			vertical-align: middle;
+			position: relative;
+		}
+
+		#sponsor-aws img {
+			top: 40px;
+		}
+
+		#sponsor-pwc img {
+			top: -20px;
+		}
 	}
 }
 
