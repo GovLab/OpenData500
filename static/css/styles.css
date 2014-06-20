@@ -30,7 +30,7 @@ select {
   font-family: "Exo", sans-serif;
   text-transform: uppercase;
   font-size: 14px;
-  font-weight: 14px;
+  font-weight: 600;
   letter-spacing: .6px;
   cursor: pointer; }
 
@@ -296,6 +296,50 @@ a:hover {
 
 .m-homepage-box:last-of-type {
   margin-right: 0; }
+
+.embed-chart-info {
+  margin-top: 50px;
+  text-align: right; }
+  .embed-chart-info .expand-trigger {
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    color: #472b74;
+    padding: 5px;
+    position: relative; }
+    .embed-chart-info .expand-trigger:hover {
+      text-decoration: underline; }
+    .embed-chart-info .expand-trigger::after {
+      content: "";
+      width: 0;
+      height: 0;
+      border-right: 8px solid #472b74;
+      border-top: 8px solid transparent;
+      border-bottom: 8px solid transparent;
+      border-left: 0;
+      position: absolute;
+      right: -10px; }
+  .embed-chart-info .embed-chart-info-content {
+    display: none; }
+  .embed-chart-info.s-active .expand-trigger::after {
+    border-top: 8px solid #472b74;
+    border-right: 8px solid transparent;
+    border-left: 8px solid transparent;
+    border-bottom: 0;
+    right: -16px;
+    top: 8px; }
+  .embed-chart-info.s-active .embed-chart-info-content {
+    display: block; }
+  .embed-chart-info textarea {
+    max-width: 940px;
+    min-width: 940px;
+    max-height: 20px;
+    min-height: 20px;
+    font-size: 13px;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    border: 1px solid #aaaaaa;
+    border-radius: 0;
+    overflow: hidden; }
 
 #consortium-landing-page header {
   height: 30px;

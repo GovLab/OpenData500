@@ -9,6 +9,12 @@ $('.m-list-company-summary').click(function() {
 	$(this).parent().toggleClass('s-active');
 });
 
+
+// Show and Hide embed code for Compass in homepage
+$('#embed-chart-trigger').click(function() {
+    $('.embed-chart-info').toggleClass('s-active');
+});
+
 // $('.m-candidates-item').click(function() {
 // 	$(this).toggleClass('s-active');
 // });
