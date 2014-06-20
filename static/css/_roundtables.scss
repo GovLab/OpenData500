@@ -1,0 +1,55 @@
+#roundtables {
+
+	.rt-logo {
+		width: 500px;
+		margin: 0 auto 40px;
+		text-align: center;
+		clear: both;
+
+		img {
+			margin-bottom: 40px;
+		}
+
+		.rt-slogan {
+			font-size: 30px;
+			font-weight: 100;
+			line-height: 38px;
+			font-style: italic;
+		}
+	}
+
+	section {
+		padding-bottom: 23px;
+		margin-bottom: 35px;
+		border-bottom: 1px solid $light_gray;
+	}
+
+	p, li {
+		font-size: 16px;
+		line-height: 22px;
+	}
+
+	blockquote {
+		float: right;
+		font-size: 24px;
+		line-height: 30px;
+		width: 30%;
+		font-family: $fancy-type;
+		font-weight: 100;
+		font-style: italic;
+		text-align: right;
+		color: $purple;
+	}
+}
+
+.drop-cap:first-letter {
+	line-height: 86px;
+	float: left;
+	margin: 5px 16px 0 0;
+	font-weight: 200;
+	padding: 5px;
+	font-size: 86px;
+	background-color: $purple;
+	font-family: $fancy-type;
+	color: $white;
+}

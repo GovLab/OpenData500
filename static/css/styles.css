@@ -939,6 +939,47 @@ a:hover {
   .consortium-homepage .country-link-outer:hover .country-link img {
     opacity: 1; }
 
+#roundtables .rt-logo {
+  width: 500px;
+  margin: 0 auto 40px;
+  text-align: center;
+  clear: both; }
+  #roundtables .rt-logo img {
+    margin-bottom: 40px; }
+  #roundtables .rt-logo .rt-slogan {
+    font-size: 30px;
+    font-weight: 100;
+    line-height: 38px;
+    font-style: italic; }
+#roundtables section {
+  padding-bottom: 23px;
+  margin-bottom: 35px;
+  border-bottom: 1px solid #aaaaaa; }
+#roundtables p, #roundtables li {
+  font-size: 16px;
+  line-height: 22px; }
+#roundtables blockquote {
+  float: right;
+  font-size: 24px;
+  line-height: 30px;
+  width: 30%;
+  font-family: "Exo", sans-serif;
+  font-weight: 100;
+  font-style: italic;
+  text-align: right;
+  color: #472b74; }
+
+.drop-cap:first-letter {
+  line-height: 86px;
+  float: left;
+  margin: 5px 16px 0 0;
+  font-weight: 200;
+  padding: 5px;
+  font-size: 86px;
+  background-color: #472b74;
+  font-family: "Exo", sans-serif;
+  color: white; }
+
 body {
   margin: 0; }
 
