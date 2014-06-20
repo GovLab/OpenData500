@@ -30,7 +30,7 @@ select {
   font-family: "Exo", sans-serif;
   text-transform: uppercase;
   font-size: 14px;
-  font-weight: 14px;
+  font-weight: 600;
   letter-spacing: .6px;
   cursor: pointer; }
 
@@ -296,6 +296,50 @@ a:hover {
 
 .m-homepage-box:last-of-type {
   margin-right: 0; }
+
+.embed-chart-info {
+  margin-top: 50px;
+  text-align: right; }
+  .embed-chart-info .expand-trigger {
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    color: #472b74;
+    padding: 5px;
+    position: relative; }
+    .embed-chart-info .expand-trigger:hover {
+      text-decoration: underline; }
+    .embed-chart-info .expand-trigger::after {
+      content: "";
+      width: 0;
+      height: 0;
+      border-right: 8px solid #472b74;
+      border-top: 8px solid transparent;
+      border-bottom: 8px solid transparent;
+      border-left: 0;
+      position: absolute;
+      right: -10px; }
+  .embed-chart-info .embed-chart-info-content {
+    display: none; }
+  .embed-chart-info.s-active .expand-trigger::after {
+    border-top: 8px solid #472b74;
+    border-right: 8px solid transparent;
+    border-left: 8px solid transparent;
+    border-bottom: 0;
+    right: -16px;
+    top: 8px; }
+  .embed-chart-info.s-active .embed-chart-info-content {
+    display: block; }
+  .embed-chart-info textarea {
+    max-width: 940px;
+    min-width: 940px;
+    max-height: 20px;
+    min-height: 20px;
+    font-size: 13px;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    border: 1px solid #aaaaaa;
+    border-radius: 0;
+    overflow: hidden; }
 
 #consortium-landing-page header {
   height: 30px;
@@ -938,6 +982,71 @@ a:hover {
     bottom: 0px; }
   .consortium-homepage .country-link-outer:hover .country-link img {
     opacity: 1; }
+
+#roundtables .rt-logo {
+  width: 500px;
+  margin: 0 auto 40px;
+  text-align: center;
+  clear: both; }
+  #roundtables .rt-logo img {
+    margin-bottom: 40px; }
+  #roundtables .rt-logo .rt-slogan {
+    font-size: 30px;
+    font-weight: 100;
+    line-height: 38px;
+    font-style: italic; }
+#roundtables section {
+  padding-bottom: 23px;
+  margin-bottom: 35px;
+  border-bottom: 1px solid #aaaaaa; }
+#roundtables p, #roundtables li {
+  font-size: 16px;
+  line-height: 22px; }
+#roundtables .in-content-image {
+  float: right;
+  width: 50%;
+  margin-left: 30px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.2); }
+#roundtables blockquote {
+  font-size: 24px;
+  line-height: 30px;
+  font-family: "Exo", sans-serif;
+  font-weight: 100;
+  font-style: italic;
+  text-align: left;
+  color: #472b74;
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 20px 30px;
+  border-left: 3px solid #472b74;
+  margin: 0; }
+#roundtables .roundtables-series-sponsors {
+  text-align: center; }
+  #roundtables .roundtables-series-sponsors .sponsor-container {
+    width: 260px;
+    height: 180px;
+    padding: 10px 20px;
+    display: inline-block;
+    overflow: hidden;
+    margin-right: 30px; }
+  #roundtables .roundtables-series-sponsors img {
+    max-width: 260px;
+    vertical-align: middle;
+    position: relative; }
+  #roundtables .roundtables-series-sponsors #sponsor-aws img {
+    top: 40px; }
+  #roundtables .roundtables-series-sponsors #sponsor-pwc img {
+    top: -20px; }
+
+.drop-cap:first-letter {
+  line-height: 86px;
+  float: left;
+  margin: 5px 16px 0 0;
+  font-weight: 200;
+  padding: 5px;
+  font-size: 86px;
+  background-color: #472b74;
+  font-family: "Exo", sans-serif;
+  color: white; }
 
 body {
   margin: 0; }

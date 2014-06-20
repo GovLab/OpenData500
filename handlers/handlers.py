@@ -700,7 +700,7 @@ class DownloadHandler(BaseHandler):
                 page_title = settings[lan]['download']['page_title'],
                 settings = settings[lan]['download'],
                 user=self.current_user,
-                country="us"
+                country="int"
             )
         else:
             self.render('404.html',
