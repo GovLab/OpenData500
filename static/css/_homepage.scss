@@ -110,6 +110,69 @@
 	margin-right: 0;
 }
 
+.embed-chart-info {
+	margin-top: 50px;
+	text-align: right;
+
+	.expand-trigger {
+		display: inline-block;
+		font-size: 16px;
+		cursor: pointer;
+		color: $purple;
+		padding: 5px;
+		position: relative;
+
+		&:hover {
+			text-decoration: underline;
+		}
+
+		&::after {
+			content: "";
+			width: 0;
+			height: 0;
+			border-right: 8px solid $purple;
+			border-top: 8px solid transparent;
+			border-bottom: 8px solid transparent;
+			border-left: 0;
+			position: absolute;
+			right: -10px;
+		}
+	}
+
+	.embed-chart-info-content {
+		display: none;
+	}
+
+
+
+&.s-active .expand-trigger::after {
+	border-top: 8px solid $purple;
+	border-right: 8px solid transparent;
+	border-left: 8px solid transparent;
+	border-bottom: 0;
+	right: -16px;
+	top: 8px;
+}
+
+&.s-active .embed-chart-info-content {
+	display: block;
+}
+
+
+
+	textarea {
+		max-width: 940px;
+		min-width: 940px;
+		max-height: 20px;
+		min-height: 20px;
+		font-size: 13px;
+		font-family: $regular_type;
+		border: 1px solid $light_gray;
+		border-radius: 0;
+		overflow: hidden;
+	}	
+}
+
 // Consortium Landing Page 
 
 #consortium-landing-page {
