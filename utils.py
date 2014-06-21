@@ -375,7 +375,9 @@ class FileGenerator(object):
         index_of_companies = {}
         for c in companies:
             index_of_companies[str(c.id)] = [c.companyName, c.companyCategory]
-        companies_accounted_for = []
+        AD = []
+        SD = []
+        S = []
         for a in agencies:
             for d in a.datasets:
                 newrow = [
@@ -390,7 +392,7 @@ class FileGenerator(object):
                     d.datasetName,
                     d.datasetURL
                 ]
-                companies_accounted_for.append(d.usedBy)
+                AD.append(d.usedBy)
                 #write csv row here
                 for i in range(len(newrow)):  # For every value in our newrow
                     if hasattr(newrow[i], 'encode'):
@@ -410,14 +412,14 @@ class FileGenerator(object):
                     d.datasetName,
                     d.datasetURL
                 ]
-                companies_accounted_for.append(d.usedBy)
+                SD.append(d.usedBy)
                 #write csv row here
                 for i in range(len(newrow)):  # For every value in our newrow
                     if hasattr(newrow[i], 'encode'):
                         newrow[i] = newrow[i].encode('utf8')
                 csvwriter.writerow(newrow)
                 for c in s.usedBy:
-                    if c not in companies_accounted_for:
+                    if c not in SD:
                         newrow = [
                             a.name, 
                             a.abbrev, 
@@ -425,19 +427,19 @@ class FileGenerator(object):
                             s.name, 
                             s.abbrev, 
                             s.url, 
-                            index_of_companies[str(d.usedBy.id)][0],
-                            index_of_companies[str(d.usedBy.id)][1],
+                            index_of_companies[str(c.id)][0],
+                            index_of_companies[str(c.id)][1],
                             "",
                             ""
                         ]
-                        companies_accounted_for.append(d.usedBy)
+                        S.append(d.usedBy)
                         #write csv row
                         for i in range(len(newrow)):  # For every value in our newrow
                             if hasattr(newrow[i], 'encode'):
                                 newrow[i] = newrow[i].encode('utf8')
                         csvwriter.writerow(newrow)
             for c in a.usedBy:
-                if c not in companies_accounted_for:
+                if c not in SD+AD+S:
                     newrow = [
                             a.name, 
                             a.abbrev, 
@@ -445,12 +447,12 @@ class FileGenerator(object):
                             "General", 
                             "", 
                             a.url, 
-                            index_of_companies[str(d.usedBy.id)][0],
-                            index_of_companies[str(d.usedBy.id)][1],
+                            index_of_companies[str(c.id)][0],
+                            index_of_companies[str(c.id)][1],
                             "",
                             ""
                         ]
-                    companies_accounted_for.append(d.usedBy)
+                    #companies_accounted_for.append(d.usedBy)
                     #write csv row
                     for i in range(len(newrow)):  # For every value in our newrow
                         if hasattr(newrow[i], 'encode'):

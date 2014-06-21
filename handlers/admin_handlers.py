@@ -142,7 +142,7 @@ class CompanyAdminHandler(BaseHandler):
             #self.application.files.generate_agency_json(country)
             #self.application.files.generate_company_csv(country)
             #self.application.files.generate_company_all_csv(country)
-            self.application.files.generate_agency_csv(country)
+            self.application.files.generate_agency_csv_2(country)
             self.write("success")
         elif action == "vizz":
             #self.application.files.generate_sankey_json()
