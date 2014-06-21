@@ -36,6 +36,20 @@
 		@include drop_shadow;
 	}
 
+	.event-title {
+		h1 {
+			margin-bottom: 0;
+		}
+
+		h2 {
+			font-weight: 100;
+			text-align: center;
+			margin-bottom: 50px;
+			font-style: italic;
+			color: $dark_gray;
+		}
+	}
+
 	blockquote {
 		font-size: 24px;
 		line-height: 30px;
@@ -50,7 +64,8 @@
 		margin: 0;
 	}
 
-	.roundtables-series-sponsors {
+	.roundtables-series-sponsors,
+	.roundtables-event-sponsors {
 		text-align: center;
 
 		.sponsor-container {
@@ -76,6 +91,40 @@
 			top: -20px;
 		}
 	}
+
+	.roundtable-attendees {
+		padding-left: 0;
+
+		li {
+			vertical-align: top;
+			display: inline-block;
+			width: 443px;
+			margin: 5px 30px 5px 0;
+			padding: 5px 10px;
+			font-size: 12px;
+			line-height: 16px;
+			font-style: italic;
+			color: $dark_gray;
+			border-top: 1px solid $lighter_gray;
+			background-color: $white_alpha_50;
+
+			span {
+				display: block;
+				font-size: 16px;
+				color: $black;
+				font-style: normal;
+				line-height: 20px;
+
+
+			}	
+		}
+
+		li:nth-child(2n) {
+			margin-right: 0;
+		}
+
+
+	}
 }
 
 .drop-cap:first-letter {
@@ -88,4 +137,59 @@
 	background-color: $purple;
 	font-family: $fancy-type;
 	color: $white;
+	width: 80px;
+	text-align: center;
+}
+
+.event-picture-gallery {
+	float: right;
+}
+
+.event-pictures-viewer {
+	width: 960px;
+	overflow: hidden;
+	height: 213px;
+	margin-bottom: 40px;
+	@include inner_shadow;
+}
+
+.event-pictures-strip {
+	// width: 2100px;
+	position: relative;
+	z-index: -1;
+}
+
+.event-picture-container {
+	width: 320px;
+	margin: 0;
+	float: left;
+	position: relative;
+
+	img {
+		width: 320px;
+
+	}
+
+	figcaption {
+		position: absolute;
+		min-height: 38px;
+		bottom: 4px;
+		left: 0;
+		background-color: $dark_gray_alpha;
+		padding: 5px 10px;
+		color: $white;
+		font-family: $fancy-type;
+		font-weight: 100;
+		width: 300px;
+
+
+		div {
+			font-size: 16px;
+			line-height: 22px;
+		}
+
+		em {
+			color: $white_alpha;
+		}
+	}
 }
