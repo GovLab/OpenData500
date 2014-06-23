@@ -253,7 +253,7 @@ a:hover {
     right: -30px; }
 .m-homepage .m-banner-slider {
   margin-bottom: 50px;
-  height: 241px;
+  height: 347px;
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2); }
   .m-homepage .m-banner-slider img {
     position: relative;
@@ -985,6 +985,9 @@ a:hover {
     font-weight: 100;
     line-height: 38px;
     font-style: italic; }
+#roundtables .host-agency-logo {
+  text-align: center;
+  margin: 30px 0; }
 #roundtables section {
   padding-bottom: 23px;
   margin-bottom: 35px;
@@ -1062,6 +1065,11 @@ a:hover {
       line-height: 20px; }
   #roundtables .roundtable-attendees li:nth-child(2n) {
     margin-right: 0; }
+#roundtables .invitation-disclaimer {
+  font-family: "Exo", sans-serif;
+  font-weight: 100;
+  font-size: 18px;
+  line-height: 25px; }
 
 .drop-cap:first-letter {
   line-height: 86px;
