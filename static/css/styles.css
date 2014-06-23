@@ -1113,6 +1113,9 @@ a:hover {
     .event-picture-container figcaption em {
       color: rgba(255, 255, 255, 0.7); }
 
+#roundtables-first-paragraph {
+  letter-spacing: -0.05px; }
+
 body {
   margin: 0; }
 
