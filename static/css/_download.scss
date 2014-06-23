@@ -1,48 +1,48 @@
-.m-download {
+// .m-download {
 	
-	text-align: center;
-	margin-top: 30px;
-	margin-bottom: 30px;
-	font-size: 1em;
+// 	text-align: center;
+// 	margin-top: 30px;
+// 	margin-bottom: 30px;
+// 	font-size: 1em;
 
-	h1 {
-		margin-bottom: 20px;
-	}
+// 	h1 {
+// 		margin-bottom: 20px;
+// 	}
 	
-	.m-download-item {
-		border: 1px solid $light-gray;
-		padding: 20px;
-		display: inline-block;
-		width: 300px;
-		margin: 7px;
-		@include rounded;
-		font-size: 2.4em;
-		line-height: 1.2em;
-		font-family: $fancy_type;
-		font-weight: 100;
-		vertical-align: top;
-		height: 115px;
+// 	.m-download-item {
+// 		border: 1px solid $light-gray;
+// 		padding: 20px;
+// 		display: inline-block;
+// 		width: 300px;
+// 		margin: 7px;
+// 		@include rounded;
+// 		font-size: 2.4em;
+// 		line-height: 1.2em;
+// 		font-family: $fancy_type;
+// 		font-weight: 100;
+// 		vertical-align: top;
+// 		height: 115px;
 
-		p {
-			height: 40px;
-			vertical-align: middle;
-			margin-top: 0;
-		}
-	}
+// 		p {
+// 			height: 40px;
+// 			vertical-align: middle;
+// 			margin-top: 0;
+// 		}
+// 	}
 	
-	.m-button {
-		display: block;
-		font-weight: 300;
-		background-color: $purple;
-		color: $white;
-	}
+// 	.m-button {
+// 		display: block;
+// 		font-weight: 300;
+// 		background-color: $purple;
+// 		color: $white;
+// 	}
 
-	a:hover {
-		background-color: $light_purple;
-		color: $white;
-		border-color: $purple;
-	}
+// 	a:hover {
+// 		background-color: $light_purple;
+// 		color: $white;
+// 		border-color: $purple;
+// 	}
 
-}
+// }
 
 
