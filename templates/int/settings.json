@@ -16,6 +16,10 @@
         "download": {
             "page_title": "Download the Open Data 500",
             "page_heading": "Download the Open Data 500"
+        },
+        "roundtable": {
+            "page_title": "Open Data Roundtables",
+            "page_heading": "Open Data Roundtables"
         }
     }
 }

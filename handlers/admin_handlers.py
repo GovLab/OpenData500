@@ -157,7 +157,7 @@ class CompanyAdminHandler(BaseHandler):
                 self.write(str(e))
             c.display = not c.display
             c.save()
-            self.application.stats.update_all_state_counts()
+            self.application.stats.update_all_state_counts(country)
             self.write("success")
         elif action == 'agency_csv':
             self.application.files.generate_agency_csv(country)

@@ -130,7 +130,7 @@ $(document).ready( function() {
 		data = { "action":"display", "id":id, "_xsrf": $("[name='_xsrf']").val() }
 		$.ajax({
 		    type: 'POST',
-		    url: '/admin/',
+		    url: '/admin/companies/',
 		    data: data,
 		    error: function(error) {
 		        console.debug(JSON.stringify(error));

@@ -75,6 +75,19 @@ class AboutHandler(BaseHandler):
             )
 
 #--------------------------------------------------------MEDIA REDIRECT PAGE------------------------------------------------------------
+class RoundtableHandler(BaseHandler):
+    @tornado.web.addslash
+    #@tornado.web.authenticated
+    def get(self, rt=None):
+        if not rt:
+            rt="main"
+        self.render(
+            "int/"+rt+"_roundtable.html",
+            page_title = "Open Data Roundtables",
+            page_heading = "Open Data Roundtables",
+        )
+
+#--------------------------------------------------------MEDIA REDIRECT PAGE------------------------------------------------------------
 # class MediaHandler(BaseHandler):
 #     @tornado.web.addslash
 #     def get(self):

@@ -35,6 +35,7 @@ class Application(tornado.web.Application):
     def __init__(self):
         self.stats = StatsGenerator()
         self.files = FileGenerator()
+        self.tools = Tools()
         handlers = [
             (r'/(favicon.ico)', tornado.web.StaticFileHandler, {"path": ""}),
             (r"/(?:([A-Za-z]{2})/)?", MainHandler),
@@ -51,6 +52,7 @@ class Application(tornado.web.Application):
             (r"/admin/agency-add/?", AdminAddAgencyHandler),
             (r'/(?:([A-Za-z]{2})/)?about/?', AboutHandler),
             (r"/resources/?", ResourcesHandler),
+            (r"/roundtables/(?:([A-Za-z]{3})?)/?", RoundtableHandler),
             (r"/(?:([A-Za-z]{2})/)?stats/?", FindingsHandler),
             (r"/chart/?", ChartHandler),
             (r"/(?:([A-Za-z]{2})/)?download/?", DownloadHandler),

@@ -36,6 +36,17 @@ class Validators(object):
 			response = 'true'
 		return response
 
+class Tools(object):
+    def re_do_filters(self, country):
+        companies = models.Company.objects(country=country)
+        for c in companies:
+            cat = prettify(c.companyCategory)
+            state = c.state
+            
+
+    def prettify(self, name):
+        return re.sub(r'([^\s\w])+', '', name).replace(" ", "-").title()
+
 
 class StatsGenerator(object):
     def get_total_companies(self, country):
