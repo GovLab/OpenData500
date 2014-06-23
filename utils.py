@@ -355,6 +355,113 @@ class FileGenerator(object):
                     newrow[i] = newrow[i].encode('utf8')
             csvwriter.writerow(newrow)
         logging.info("All Companies CSV File Done!")
+
+    def generate_agency_csv_2(self, country):
+        companies = models.Company.objects(Q(country=country))
+        agencies = models.Agency.objects(Q(source__not__exact="web") & Q(country=country))
+        csvwriter = csv.writer(open(os.path.join(os.path.dirname(__file__), 'static') + "/files/" + country + "_OD500_Agencies_2.csv", "w"))
+        csvwriter.writerow([
+            'agency_name',
+            'agency_abbrev',
+            'agency_type',
+            'subagency_name',
+            'subagency_abbrev',
+            'url',
+            'used_by',
+            'used_by_category',
+            'dataset_name',
+            'dataset_url'
+            ])
+        index_of_companies = {}
+        for c in companies:
+            index_of_companies[str(c.id)] = [c.companyName, c.companyCategory]
+        AD = []
+        SD = []
+        S = []
+        for a in agencies:
+            for d in a.datasets:
+                newrow = [
+                    a.name, 
+                    a.abbrev, 
+                    a.dataType, 
+                    "General", 
+                    "", 
+                    a.url, 
+                    index_of_companies[str(d.usedBy.id)][0],
+                    index_of_companies[str(d.usedBy.id)][1],
+                    d.datasetName,
+                    d.datasetURL
+                ]
+                AD.append(d.usedBy)
+                #write csv row here
+                for i in range(len(newrow)):  # For every value in our newrow
+                    if hasattr(newrow[i], 'encode'):
+                        newrow[i] = newrow[i].encode('utf8')
+                csvwriter.writerow(newrow)
+            for s in a.subagencies:
+                for d in s.datasets:
+                    newrow = [
+                    a.name, 
+                    a.abbrev, 
+                    a.dataType, 
+                    s.name, 
+                    s.abbrev, 
+                    s.url, 
+                    index_of_companies[str(d.usedBy.id)][0],
+                    index_of_companies[str(d.usedBy.id)][1],
+                    d.datasetName,
+                    d.datasetURL
+                ]
+                SD.append(d.usedBy)
+                #write csv row here
+                for i in range(len(newrow)):  # For every value in our newrow
+                    if hasattr(newrow[i], 'encode'):
+                        newrow[i] = newrow[i].encode('utf8')
+                csvwriter.writerow(newrow)
+                for c in s.usedBy:
+                    if c not in SD:
+                        newrow = [
+                            a.name, 
+                            a.abbrev, 
+                            a.dataType, 
+                            s.name, 
+                            s.abbrev, 
+                            s.url, 
+                            index_of_companies[str(c.id)][0],
+                            index_of_companies[str(c.id)][1],
+                            "",
+                            ""
+                        ]
+                        S.append(d.usedBy)
+                        #write csv row
+                        for i in range(len(newrow)):  # For every value in our newrow
+                            if hasattr(newrow[i], 'encode'):
+                                newrow[i] = newrow[i].encode('utf8')
+                        csvwriter.writerow(newrow)
+            for c in a.usedBy:
+                if c not in SD+AD+S:
+                    newrow = [
+                            a.name, 
+                            a.abbrev, 
+                            a.dataType, 
+                            "General", 
+                            "", 
+                            a.url, 
+                            index_of_companies[str(c.id)][0],
+                            index_of_companies[str(c.id)][1],
+                            "",
+                            ""
+                        ]
+                    #companies_accounted_for.append(d.usedBy)
+                    #write csv row
+                    for i in range(len(newrow)):  # For every value in our newrow
+                        if hasattr(newrow[i], 'encode'):
+                            newrow[i] = newrow[i].encode('utf8')
+                    csvwriter.writerow(newrow)
+        #done, wrap up csv
+        logging.info("Agency CSV File Done!")
+
+
     def generate_agency_csv(self, country):
         #--------CSV OF AGENCIES------
         agencies = models.Agency.objects(source__not="web")
@@ -389,7 +496,16 @@ class FileGenerator(object):
                                 used_by_category = c.companyCategory
                                 dataset_name = d.datasetName
                                 dataset_url = d.datasetURL
-                                newrow = [agency_name, agency_abbrev, agency_type, subagency_name, subagency_abbrev, url, used_by, used_by_category, dataset_name, dataset_url]
+                                newrow = [agency_name, 
+                                    agency_abbrev, 
+                                    agency_type, 
+                                    subagency_name, 
+                                    subagency_abbrev, 
+                                    url, 
+                                    used_by, 
+                                    used_by_category, 
+                                    dataset_name, 
+                                    dataset_url]
                                 for i in range(len(newrow)):  # For every value in our newrow
                                     if hasattr(newrow[i], 'encode'):
                                         newrow[i] = newrow[i].encode('utf8')

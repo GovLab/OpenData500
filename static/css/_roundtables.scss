@@ -88,7 +88,8 @@
 		}
 
 		#sponsor-pwc img {
-			top: -20px;
+			top: 0;
+			width: 180px;
 		}
 	}
 
@@ -192,4 +193,8 @@
 			color: $white_alpha;
 		}
 	}
+}
+
+#roundtables-first-paragraph {
+	letter-spacing: -0.05px;
 }

@@ -1,5 +1,43 @@
 // Candidates Page
 
+
+#candidates-warning {
+	width: 500px;
+	padding: 1px 15px;
+	margin-bottom: 20px;
+}
+
+.m-download-data {
+	float: right;
+	padding: 20px 20px 8px 20px;
+	width: 356px;
+	border: 1px solid $purple;
+	background-color: $super_light_purple;
+	@include inner-shadow;
+
+
+	h2 {
+		font-size: 2em;
+		text-align: center;
+		border-bottom: 1px solid $super_light_purple;
+		padding-bottom: 15px;
+	}
+
+	> div {
+		float: left;
+		width: 50%;
+		text-align: center;
+
+		> p {
+			font-size: 16px;
+		}	
+	}
+
+	.m-button {
+		margin-right: 8px;
+	}
+}
+
 .m-candidates {
 	h1 {
 		font-size: 6.79em;
