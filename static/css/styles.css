@@ -1038,7 +1038,8 @@ a:hover {
     top: 40px; }
   #roundtables .roundtables-series-sponsors #sponsor-pwc img,
   #roundtables .roundtables-event-sponsors #sponsor-pwc img {
-    top: -20px; }
+    top: 0;
+    width: 180px; }
 #roundtables .roundtable-attendees {
   padding-left: 0; }
   #roundtables .roundtable-attendees li {
