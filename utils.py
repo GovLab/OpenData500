@@ -42,6 +42,9 @@ class Tools(object):
         for c in companies:
             cat = prettify(c.companyCategory)
             state = c.state
+            agencies = []
+            for a in c.agencies:
+                agencies.append(a.prettyName)
             
 
     def prettify(self, name):
