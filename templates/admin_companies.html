@@ -7,16 +7,17 @@
 
 <h1>{{ page_heading }}</h1>
 
-<a href="/admin/agencies/">Manage Agencies</a><br>
+<a href="/admin/agencies/"><input type="button" class="l-button" value="Manage Agencies"></a><br>
 
-<h2>Stats</h2>
 <form class="m-form">
 	<fieldset class="m-form-half">
+		<h2>Stats</h2>
 		<h3>Total Companies: </h3><p id="totalCompanies">{{stats.totalCompanies}}</p>
 		<h3>Total Companies Submitted Via Web: </h3><p id="totalCompaniesWeb">{{stats.totalCompaniesWeb}}</p>
 		<h3>Total Companies With Complete Surveys: </h3><p id="totalCompaniesSurvey">{{stats.totalCompaniesSurvey}}</p>
 	</fieldset>
 	<fieldset class="m-form-half right">
+		<h2>Utilities</h2>
 		{% raw xsrf_form_html() %}
 		<input type="button" class="l-button admin_utils" id="refresh" name="refresh" value="Refresh"><br>
 		{% if user == "luis" %}<input type="button" class="l-button admin_utils" id="files" name="files" value="Generate All Files"><br>{%end%}
@@ -24,12 +25,13 @@
 		<input type="button" class="l-button admin_utils" id="company_all_csv" name="files" value="Generate Company CSV (All)"><br>
 		{% if user == "luis" %}<input type="button" class="l-button admin_utils" id="agency_csv" name="files" value="Generate Agency CSV"><br>{%end%}
 		<input type="button" class="l-button admin_utils" id="vizz" name="vizz" value="Generate Vizz File"><br>
+		<input type="button" class="l-button admin_utils" id="redo_filters" name="filters" value="Re-Do Company Filters"><br>
 		<span class="message"></span>
 	</fieldset>
 	<fieldset class="m-form-half">
 		<h3>Links</h3>
-		<a href="/static/OD500_Companies.csv">Companies CSV</a><br />
-		<a href="/static/OD500_Companies_All.csv">Companies (All) CSV</a>
+		<a href="/download/us_OD500_Companies.csv">Companies CSV</a><br />
+		<a href="/download/us_OD500_Companies_All.csv">Companies (All) CSV</a>
 	</fieldset>
 </form>
 <br>

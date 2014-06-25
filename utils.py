@@ -8,7 +8,7 @@ import json
 import csv
 from collections import Counter
 import numpy as np
-
+import re
 
 #Just some global varbs. 
 favicon_path = '/static/img/favicon.ico'
@@ -40,12 +40,16 @@ class Tools(object):
     def re_do_filters(self, country):
         companies = models.Company.objects(country=country)
         for c in companies:
-            cat = prettify(c.companyCategory)
-            state = c.state
-            agencies = []
+            filters = []
+            filters.append(self.prettify(c.companyCategory))
+            filters.append(c.state)
             for a in c.agencies:
-                agencies.append(a.prettyName)
-            
+                filters.append(a.prettyName)
+            if c.submittedSurvey:
+                filters.append("survey-company")
+            c.filters = filters
+            c.save()
+        logging.info("Filters Redone.")
 
     def prettify(self, name):
         return re.sub(r'([^\s\w])+', '', name).replace(" ", "-").title()
@@ -371,8 +375,8 @@ class FileGenerator(object):
         logging.info("All Companies CSV File Done!")
 
     def generate_agency_csv_2(self, country):
-        companies = models.Company.objects(Q(country=country))
-        agencies = models.Agency.objects(Q(source__not__exact="web") & Q(country=country))
+        companies = models.Company.objects(Q(country=country) & Q(display=True))
+        agencies = models.Agency.objects(country=country)
         csvwriter = csv.writer(open(os.path.join(os.path.dirname(__file__), 'static') + "/files/" + country + "_OD500_Agencies_2.csv", "w"))
         csvwriter.writerow([
             'agency_name',
@@ -394,46 +398,49 @@ class FileGenerator(object):
         S = []
         for a in agencies:
             for d in a.datasets:
-                newrow = [
-                    a.name, 
-                    a.abbrev, 
-                    a.dataType, 
-                    "General", 
-                    "", 
-                    a.url, 
-                    index_of_companies[str(d.usedBy.id)][0],
-                    index_of_companies[str(d.usedBy.id)][1],
-                    d.datasetName,
-                    d.datasetURL
-                ]
-                AD.append(d.usedBy)
-                #write csv row here
-                for i in range(len(newrow)):  # For every value in our newrow
-                    if hasattr(newrow[i], 'encode'):
-                        newrow[i] = newrow[i].encode('utf8')
-                csvwriter.writerow(newrow)
+                if d.usedBy.display:
+                    newrow = [
+                        a.name, 
+                        a.abbrev, 
+                        a.dataType, 
+                        "General", 
+                        "", 
+                        a.url, 
+                        index_of_companies[str(d.usedBy.id)][0],
+                        index_of_companies[str(d.usedBy.id)][1],
+                        d.datasetName,
+                        d.datasetURL
+                    ]
+                    AD.append(str(d.usedBy.companyName + "|"+ a.name))
+                    #write csv row here
+                    for i in range(len(newrow)):  # For every value in our newrow
+                        if hasattr(newrow[i], 'encode'):
+                            newrow[i] = newrow[i].encode('utf8')
+                    csvwriter.writerow(newrow)
             for s in a.subagencies:
                 for d in s.datasets:
-                    newrow = [
-                    a.name, 
-                    a.abbrev, 
-                    a.dataType, 
-                    s.name, 
-                    s.abbrev, 
-                    s.url, 
-                    index_of_companies[str(d.usedBy.id)][0],
-                    index_of_companies[str(d.usedBy.id)][1],
-                    d.datasetName,
-                    d.datasetURL
-                ]
-                SD.append(d.usedBy)
-                #write csv row here
-                for i in range(len(newrow)):  # For every value in our newrow
-                    if hasattr(newrow[i], 'encode'):
-                        newrow[i] = newrow[i].encode('utf8')
-                csvwriter.writerow(newrow)
+                    if d.usedBy.display:
+                        newrow = [
+                            a.name, 
+                            a.abbrev, 
+                            a.dataType, 
+                            s.name, 
+                            s.abbrev, 
+                            s.url, 
+                            index_of_companies[str(d.usedBy.id)][0],
+                            index_of_companies[str(d.usedBy.id)][1],
+                            d.datasetName,
+                            d.datasetURL
+                        ]
+                        SD.append(str(d.usedBy.companyName + "|"+ s.name))
+                        SD.append(str(d.usedBy.companyName + "|"+ a.name))
+                        #write csv row here
+                        for i in range(len(newrow)):  # For every value in our newrow
+                            if hasattr(newrow[i], 'encode'):
+                                newrow[i] = newrow[i].encode('utf8')
+                        csvwriter.writerow(newrow)
                 for c in s.usedBy:
-                    if c not in SD:
+                    if str(c.companyName + "|"+s.name) not in SD and c.display:
                         newrow = [
                             a.name, 
                             a.abbrev, 
@@ -446,14 +453,14 @@ class FileGenerator(object):
                             "",
                             ""
                         ]
-                        S.append(d.usedBy)
+                        S.append(str(c.companyName + "|"+a.name))
                         #write csv row
                         for i in range(len(newrow)):  # For every value in our newrow
                             if hasattr(newrow[i], 'encode'):
                                 newrow[i] = newrow[i].encode('utf8')
                         csvwriter.writerow(newrow)
             for c in a.usedBy:
-                if c not in SD+AD+S:
+                if str(c.companyName + "|"+a.name) not in SD+AD+S and c.display:
                     newrow = [
                             a.name, 
                             a.abbrev, 

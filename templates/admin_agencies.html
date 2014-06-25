@@ -7,10 +7,15 @@
 
 <h1>{{ page_heading }}</h1>
 
-<a href="/admin/companies/">Manage Companies</a><br>
+<a href="/admin/companies/"><input type="button" class="l-button" value="Manage Companies"></a><br>
 
 <form class="m-form">
 	<fieldset class="m-form-half">
+		<h2>Stats</h2>
+		<h3>Total Agencies: </h3><p id="totalAgencies"></p>
+	</fieldset>
+	<fieldset class="m-form-half right">
+		<h2>Utilities</h2>
 		<input type="button" class="l-button admin_utils" id="agency_list" name="files" value="Generate Agency List File"><br>
 		<a href="/admin/agency-add/"><input type="button" class="l-button" value="New Agency"></a><br>
 		<span class="message"></span>

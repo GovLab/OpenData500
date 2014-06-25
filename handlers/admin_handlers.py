@@ -168,6 +168,9 @@ class CompanyAdminHandler(BaseHandler):
         elif action == 'company_all_csv':
             self.application.files.generate_company_all_csv(country)
             self.write("success")
+        elif action == "redo_filters":
+            self.application.tools.re_do_filters(country)
+            self.write("success")
 
 
 #--------------------------------------------------------ADMIN AGENCIES PAGE------------------------------------------------------------
