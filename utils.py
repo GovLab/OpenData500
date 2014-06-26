@@ -65,11 +65,20 @@ class StatsGenerator(object):
     def get_total_companies_surveys(self, country):
         return models.Stats.objects.get(country=country).totalCompaniesSurvey
 
+    def get_total_agencies(self, country):
+        return models.Stats.objects.get(country=country).totalAgencies
+
+    def update_total_agencies(self, country):
+        s = models.Stats.objects.get(country=country)
+        s.totalAgencies = models.Agency.objects(country=country).count()
+        s.save()
+
     def update_totals_companies(self, country):
         s = models.Stats.objects.get(country=country)
         s.totalCompanies = models.Company.objects(country=country).count()
         s.totalCompaniesWeb = models.Company.objects(Q(submittedThroughWebsite = True) & Q(country=country)).count()
         s.totalCompaniesSurvey = models.Company.objects(Q(submittedSurvey = True) & Q(country=country)).count()
+        s.save()
     
     def increase_individual_state_count(self, state, country):
         stats = models.Stats.objects.get(country=country)

@@ -12,11 +12,12 @@
 <form class="m-form">
 	<fieldset class="m-form-half">
 		<h2>Stats</h2>
-		<h3>Total Agencies: </h3><p id="totalAgencies"></p>
+		<h3>Total Agencies: </h3><p id="totalAgencies">{{stats.totalAgencies}}</p>
 	</fieldset>
 	<fieldset class="m-form-half right">
 		<h2>Utilities</h2>
-		<input type="button" class="l-button admin_utils" id="agency_list" name="files" value="Generate Agency List File"><br>
+		<input type="button" class="l-button admin_utils" id="refresh" name="refresh" value="Refresh"><br>
+		<input type="button" class="l-button admin_utils" id="agency_list" name="files" value="Update Agency List File"><br>
 		<a href="/admin/agency-add/"><input type="button" class="l-button" value="New Agency"></a><br>
 		<span class="message"></span>
 		{% raw xsrf_form_html() %}
@@ -30,6 +31,7 @@
 		<th>Date Submitted</th>
 		<th>No. Subagencies</th>
 		<th>Used By:</th>
+		<th>Source</th>
 		<th>Notes</th>
 	</tr>
 	{% for a in agencies %}
@@ -39,6 +41,7 @@
 			<td>{{ a.ts.strftime("%b, %d '%y @%I:%M %p") }}</td>
 			<td>{{ len(a.subagencies) }}</td>
 			<td>{{ a.usedBy_count }}</td>
+			<td>{{ a.source }}</td>
 			<td><p>{% if a.notes %}{{a.notes}}{%end%}</p></td>
 		</tr>
 	{% end %}
@@ -48,10 +51,11 @@
 
 $(document).ready( function() {
 	$(".m-form").on("click", ".admin_utils", function() {
+		action = this.id;
 		$.ajax({
 			type: "POST",
 			url: "/admin/agencies/",
-			data: {"action":"agency-list", "_xsrf": $("[name='_xsrf']").val()},
+			data: {"action":action, "_xsrf": $("[name='_xsrf']").val()},
 			error: function(error) {
 		        console.debug(JSON.stringify(error));
 		        $('.message').text("Derp. Something went wrong :/").show().delay(5000).fadeOut();
@@ -61,6 +65,10 @@ $(document).ready( function() {
 		    },
 		    success: function(data) {
 		    	$('.message').text(data["message"]).show().delay(5000).fadeOut();
+		    	console.log(data);
+		    	if (action == "refresh") {
+		    		$("#totalAgencies").text(data['total_agencies'])
+		    	}
 		    }
 		});
 	});

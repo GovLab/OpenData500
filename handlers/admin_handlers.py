@@ -139,9 +139,9 @@ class CompanyAdminHandler(BaseHandler):
             self.write({"totalCompanies": stats.totalCompanies, "totalCompaniesWeb":stats.totalCompaniesWeb, "totalCompaniesSurvey":stats.totalCompaniesSurvey})
         elif action == "files":
             #self.application.files.generate_company_json(country)
-            #self.application.files.generate_agency_json(country)
-            #self.application.files.generate_company_csv(country)
-            #self.application.files.generate_company_all_csv(country)
+            self.application.files.generate_agency_json(country)
+            self.application.files.generate_company_csv(country)
+            self.application.files.generate_company_all_csv(country)
             self.application.files.generate_agency_csv(country)
             self.write("success")
         elif action == "vizz":
@@ -206,9 +206,12 @@ class AgencyAdminHandler(BaseHandler):
             self.redirect("/login/")
         country = user.country
         action = self.get_argument("action", "")
-        if action == "agency-list":
+        if action == "agency_list":
             self.application.files.generate_agency_list(country)
             self.write({"message":"All right, I'm done."})
+        elif action == "refresh":
+            self.application.stats.update_total_agencies(country)
+            self.write({"message":"All right, I'm done.", "total_agencies": self.application.stats.get_total_agencies(country)})
 
 
 
@@ -423,6 +426,7 @@ class AdminEditAgencyHandler(BaseHandler):
                     s.abbrev = subagency_abbrev
                     s.url = subagency_url
                     agency.save()
+                    self.application.files.generate_agency_list(country)
                     self.write({"message":"Edit Successful"})
                     return 
         #------------------------------------------ADD SUBAGENCY----------------------------
@@ -437,6 +441,7 @@ class AdminEditAgencyHandler(BaseHandler):
                 url = subagency_url)
             agency.subagencies.append(s)
             agency.save()
+            self.application.files.generate_agency_list(country)
             self.write({"message":"Subagency added!", "heading":s.name, "name":s.name, "abbrev":s.abbrev, "url":s.url, "new_action":"edit-subagency", "button":"Save Edits", "delete_button":""})
             return
         #------------------------------------------DELETE SUBAGENCY----------------------------
@@ -446,6 +451,7 @@ class AdminEditAgencyHandler(BaseHandler):
                 if s.name == subagency_old_name:
                     agency.subagencies.remove(s)
             agency.save()
+            self.application.files.generate_agency_list(country)
             self.write({"message":"Subagency deleted :("})
             return
         #------------------------------------------EDIT AGENCY----------------------------
@@ -468,6 +474,7 @@ class AdminEditAgencyHandler(BaseHandler):
             agency.source = agency_source
             agency.notes = agency_notes
             agency.save()
+            self.application.files.generate_agency_list(country)
             self.write({"message":"Edits saved!"})
             return
         #------------------------------------------DELETE AGENCY----------------------------
@@ -482,6 +489,7 @@ class AdminEditAgencyHandler(BaseHandler):
                 return
             if agency.usedBy_count == 0 and len(agency.usedBy) == 0:
                 agency.delete()
+                self.application.files.generate_agency_list(country)
                 self.write({"message": "Agency Deleted"})
                 return
 
