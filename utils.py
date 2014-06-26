@@ -374,10 +374,10 @@ class FileGenerator(object):
             csvwriter.writerow(newrow)
         logging.info("All Companies CSV File Done!")
 
-    def generate_agency_csv_2(self, country):
+    def generate_agency_csv(self, country):
         companies = models.Company.objects(Q(country=country) & Q(display=True))
         agencies = models.Agency.objects(country=country)
-        csvwriter = csv.writer(open(os.path.join(os.path.dirname(__file__), 'static') + "/files/" + country + "_OD500_Agencies_2.csv", "w"))
+        csvwriter = csv.writer(open(os.path.join(os.path.dirname(__file__), 'static') + "/files/" + country + "_OD500_Agencies.csv", "w"))
         csvwriter.writerow([
             'agency_name',
             'agency_abbrev',
@@ -483,99 +483,99 @@ class FileGenerator(object):
         logging.info("Agency CSV File Done!")
 
 
-    def generate_agency_csv(self, country):
-        #--------CSV OF AGENCIES------
-        agencies = models.Agency.objects(source__not="web")
-        companies = models.Company.objects(Q(display=True) & Q(country=country))
-        csvwriter = csv.writer(open(os.path.join(os.path.dirname(__file__), 'static') + "/files/" + country + "_OD500_Agencies.csv", "w"))
-        csvwriter.writerow([
-            'agency_name',
-            'agency_abbrev',
-            'agency_type',
-            'subagency_name',
-            'subagency_abbrev',
-            'url',
-            'used_by',
-            'used_by_category',
-            'dataset_name',
-            'dataset_url'
-            ])
-        for c in companies:
-            if c.agencies: #if the company actually uses any agency info
-                for a in c.agencies:
-                    justAgency = True
-                    agency_name = a.name
-                    agency_abbrev = a.abbrev
-                    agency_type = a.dataType
-                    if a.datasets: #if there agency level datasets, make a row for those
-                        for d in a.datasets:
-                            if d.usedBy == c:
-                                subagency_name = 'General'
-                                subagency_abbrev = ''
-                                url = a.url
-                                used_by = c.companyName
-                                used_by_category = c.companyCategory
-                                dataset_name = d.datasetName
-                                dataset_url = d.datasetURL
-                                newrow = [agency_name, 
-                                    agency_abbrev, 
-                                    agency_type, 
-                                    subagency_name, 
-                                    subagency_abbrev, 
-                                    url, 
-                                    used_by, 
-                                    used_by_category, 
-                                    dataset_name, 
-                                    dataset_url]
-                                for i in range(len(newrow)):  # For every value in our newrow
-                                    if hasattr(newrow[i], 'encode'):
-                                        newrow[i] = newrow[i].encode('utf8')
-                                csvwriter.writerow(newrow)
-                                justAgency = False
-                    if a.subagencies: #if there are subagencies, make a row for those subagencies used by the company
-                        for s in a.subagencies:
-                            if c in s.usedBy:
-                                subagency_name = s.name
-                                subagency_abbrev = s.abbrev
-                                url = s.url
-                                if s.datasets: #if there are datasets in the subagency, make a row for those datasets used by the company:
-                                    for d in s.datasets:
-                                        if d.usedBy == c:
-                                            used_by = c.companyName
-                                            used_by_category = c.companyCategory
-                                            dataset_name = d.datasetName
-                                            dataset_url = d.datasetURL
-                                            newrow = [agency_name, agency_abbrev, agency_type, subagency_name, subagency_abbrev, url, used_by, used_by_category, dataset_name, dataset_url]
-                                            for i in range(len(newrow)):  # For every value in our newrow
-                                                if hasattr(newrow[i], 'encode'):
-                                                    newrow[i] = newrow[i].encode('utf8')
-                                            csvwriter.writerow(newrow)
-                                            justAgency = False
-                                else: #there are no datasets, just make a row with subagency and no datasets.
-                                    used_by = c.companyName
-                                    used_by_category = c.companyCategory
-                                    dataset_name = ''
-                                    dataset_url = ''
-                                    newrow = [agency_name, agency_abbrev, agency_type, subagency_name, subagency_abbrev, url, used_by, used_by_category, dataset_name, dataset_url]
-                                    for i in range(len(newrow)):  # For every value in our newrow
-                                        if hasattr(newrow[i], 'encode'):
-                                            newrow[i] = newrow[i].encode('utf8')
-                                    csvwriter.writerow(newrow)
-                                    justAgency = False
-                    if justAgency: #if company uses agency, but no specific dataset or subagency, then add row
-                        subagency_name = 'General'
-                        subagency_abbrev = ''
-                        url = a.url
-                        used_by = c.companyName
-                        used_by_category = c.companyCategory
-                        dataset_name = ''
-                        dataset_url = ''
-                        newrow = [agency_name, agency_abbrev, agency_type, subagency_name, subagency_abbrev, url, used_by, used_by_category, dataset_name, dataset_url]
-                        for i in range(len(newrow)):  # For every value in our newrow
-                            if hasattr(newrow[i], 'encode'):
-                                newrow[i] = newrow[i].encode('utf8')
-                        csvwriter.writerow(newrow)
-        logging.info("Agency CSV File Done!")
+    # def generate_agency_csv(self, country):
+    #     #--------CSV OF AGENCIES------
+    #     agencies = models.Agency.objects(source__not="web")
+    #     companies = models.Company.objects(Q(display=True) & Q(country=country))
+    #     csvwriter = csv.writer(open(os.path.join(os.path.dirname(__file__), 'static') + "/files/" + country + "_OD500_Agencies.csv", "w"))
+    #     csvwriter.writerow([
+    #         'agency_name',
+    #         'agency_abbrev',
+    #         'agency_type',
+    #         'subagency_name',
+    #         'subagency_abbrev',
+    #         'url',
+    #         'used_by',
+    #         'used_by_category',
+    #         'dataset_name',
+    #         'dataset_url'
+    #         ])
+    #     for c in companies:
+    #         if c.agencies: #if the company actually uses any agency info
+    #             for a in c.agencies:
+    #                 justAgency = True
+    #                 agency_name = a.name
+    #                 agency_abbrev = a.abbrev
+    #                 agency_type = a.dataType
+    #                 if a.datasets: #if there agency level datasets, make a row for those
+    #                     for d in a.datasets:
+    #                         if d.usedBy == c:
+    #                             subagency_name = 'General'
+    #                             subagency_abbrev = ''
+    #                             url = a.url
+    #                             used_by = c.companyName
+    #                             used_by_category = c.companyCategory
+    #                             dataset_name = d.datasetName
+    #                             dataset_url = d.datasetURL
+    #                             newrow = [agency_name, 
+    #                                 agency_abbrev, 
+    #                                 agency_type, 
+    #                                 subagency_name, 
+    #                                 subagency_abbrev, 
+    #                                 url, 
+    #                                 used_by, 
+    #                                 used_by_category, 
+    #                                 dataset_name, 
+    #                                 dataset_url]
+    #                             for i in range(len(newrow)):  # For every value in our newrow
+    #                                 if hasattr(newrow[i], 'encode'):
+    #                                     newrow[i] = newrow[i].encode('utf8')
+    #                             csvwriter.writerow(newrow)
+    #                             justAgency = False
+    #                 if a.subagencies: #if there are subagencies, make a row for those subagencies used by the company
+    #                     for s in a.subagencies:
+    #                         if c in s.usedBy:
+    #                             subagency_name = s.name
+    #                             subagency_abbrev = s.abbrev
+    #                             url = s.url
+    #                             if s.datasets: #if there are datasets in the subagency, make a row for those datasets used by the company:
+    #                                 for d in s.datasets:
+    #                                     if d.usedBy == c:
+    #                                         used_by = c.companyName
+    #                                         used_by_category = c.companyCategory
+    #                                         dataset_name = d.datasetName
+    #                                         dataset_url = d.datasetURL
+    #                                         newrow = [agency_name, agency_abbrev, agency_type, subagency_name, subagency_abbrev, url, used_by, used_by_category, dataset_name, dataset_url]
+    #                                         for i in range(len(newrow)):  # For every value in our newrow
+    #                                             if hasattr(newrow[i], 'encode'):
+    #                                                 newrow[i] = newrow[i].encode('utf8')
+    #                                         csvwriter.writerow(newrow)
+    #                                         justAgency = False
+    #                             else: #there are no datasets, just make a row with subagency and no datasets.
+    #                                 used_by = c.companyName
+    #                                 used_by_category = c.companyCategory
+    #                                 dataset_name = ''
+    #                                 dataset_url = ''
+    #                                 newrow = [agency_name, agency_abbrev, agency_type, subagency_name, subagency_abbrev, url, used_by, used_by_category, dataset_name, dataset_url]
+    #                                 for i in range(len(newrow)):  # For every value in our newrow
+    #                                     if hasattr(newrow[i], 'encode'):
+    #                                         newrow[i] = newrow[i].encode('utf8')
+    #                                 csvwriter.writerow(newrow)
+    #                                 justAgency = False
+    #                 if justAgency: #if company uses agency, but no specific dataset or subagency, then add row
+    #                     subagency_name = 'General'
+    #                     subagency_abbrev = ''
+    #                     url = a.url
+    #                     used_by = c.companyName
+    #                     used_by_category = c.companyCategory
+    #                     dataset_name = ''
+    #                     dataset_url = ''
+    #                     newrow = [agency_name, agency_abbrev, agency_type, subagency_name, subagency_abbrev, url, used_by, used_by_category, dataset_name, dataset_url]
+    #                     for i in range(len(newrow)):  # For every value in our newrow
+    #                         if hasattr(newrow[i], 'encode'):
+    #                             newrow[i] = newrow[i].encode('utf8')
+    #                     csvwriter.writerow(newrow)
+    #     logging.info("Agency CSV File Done!")
     def generate_sankey_json(self, country):
         #get qualifying agencies
         agencies = models.Agency.objects(Q(usedBy__not__size=0) & Q(source__not__exact="web") & Q(dataType="Federal")).order_by('name') #federal agencies from official list that are used by a company
