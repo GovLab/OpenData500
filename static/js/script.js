@@ -60,24 +60,6 @@ $(document).ready(function() {
         //$("#dialog").dialog({autoOpen : false, modal : true, show : "blind", hide : "blind"});
     });
 
-    //----------------------------------EMBDED POPUP--------------------------------------
-    var dialogOptions = {
-        autoOpen: false,
-        height: 220,
-        width: 500,
-        modal: true,
-        //close: function(event, ui) { $('.example-popup').dialog('close'); },
-        open: function(event, ui) {
-            $('.ui-widget-overlay').bind('click', function() {
-                $(this).siblings('.ui-dialog').find('.ui-dialog-content').dialog('close');
-            });
-        }
-    };
-    $("#chord-chart-container").on('click', '.embed-popup', function() {
-        $(".dialog-example").dialog(dialogOptions).dialog("open");
-        //$("#dialog").dialog({autoOpen : false, modal : true, show : "blind", hide : "blind"});
-    });
-
     //----------------------------------DATA ACCORDIONS--------------------------------------
     $("#accordionAgency, #accordionSubAgency").accordion({
         active: false,
