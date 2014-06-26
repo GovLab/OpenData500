@@ -1,0 +1,99 @@
+<!doctype html> 
+
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]>     <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>     <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<head>
+    <meta name="description" content="The Open Data 500 is the first comprehensive study of U.S. companies that use open government data to generate new business and develop new products and services.">
+    <meta name="keywords" content="Open Data, Open Data 500, Companies, Government Open Data, Big DAta, US Government Data, Data, Open">
+    <meta name="author" content="NYU Governance Lab">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>{{ page_title }}</title>
+    <!-- Load jQuery -->
+    <script src="{{ static_url("js/jquery-2.1.0.min.js") }}"></script>
+    <script src="{{ static_url("js/jquery-ui-1.10.4.custom.min.js") }}"></script>
+    <script>!window.jQuery && document.write('<script src="{{ static_url("js/jquery-2.1.0.min.js") }}"><\/script>')</script>
+    <link rel="stylesheet" href="{{ static_url("css/style.css") }}" />
+    <link rel="stylesheet" href="{{ static_url("css/styles.css") }}" />
+    <link rel="stylesheet" href="{{ static_url("css/luis.css") }}" />
+    <!-- <link rel="stylesheet" href="{{ static_url("css/bootstrap.css") }}" /> -->
+    <link rel="stylesheet" href="{{ static_url("css/libs/normalize/normalize.css") }}" />
+    <link rel="stylesheet" href="{{ static_url("css/jquery-ui-1.10.4.custom.min.css") }}" />
+    <link href='http://fonts.googleapis.com/css?family=Exo:100,500,100italic,500italic' rel='stylesheet' type='text/css'>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <script src="{{ static_url("js/modernizr.custom.39528.js") }}"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+</head>
+<body class="country-homepage">
+    <!-- <div class="parallax-bg" id="background" data-stellar-ratio="-0.01"></div> -->
+    <!-- <div class="parallax-bg" id="background-2" data-stellar-ratio="-0.015"></div>  
+    <div class="parallax-bg" id="background-3" data-stellar-ratio="-0.02"></div>   -->
+    <header>
+        <div id="mainMenu" class="l-centered m-main-menu">
+            <span class="language"><a href="#">EN</a> | <a href="#">FR</a></span>
+            <a href="/{%try%}{%if country and country!="int" %}{{country}}/{%end%}{%except%}{%end%}about/">About</a>
+            <a href="/resources/">Resources</a>
+            <a href="#">Contact</a> 
+            {%try%} {% if user %} <a href="/admin/companies/">Admin</a>{% end %}{%except%}{%end%}
+            {%try%} {% if user %} <a href="/logout/">Logout</a>{% end %}{%except%}{%end%}
+        </div>
+    </header><!-- end header -->
+    <div class="l-centered">
+        <div class="country-logo">
+            <img id="consortium-logo" src="{{ static_url("img/logo-consortium.png") }}" alt="OpenData500 Consortium">
+            <h2><img class="country-flag" src="{{ static_url("img/canada-flag.png") }}" alt="">Canada</h2>
+        </div>
+    </div>
+    <div class="l-centered">
+        <section>
+            <h2 class="m-page-title">How to Participate</h2>
+            <div class="m-half">
+                <h3>Companies</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt minus ratione tempore molestiae, laborum vero facere facilis, impedit est unde fuga, odio provident sequi voluptatem laboriosam deserunt aliquam. Eveniet, dignissimos? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error et impedit corporis, deleniti enim culpa at nobis animi itaque ea obcaecati blanditiis alias quam, perferendis adipisci officiis odit saepe illum.</p>
+            </div>
+            <div class="m-half">
+                <h3>Datasets</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt minus ratione tempore molestiae, laborum vero facere facilis, impedit est unde fuga, odio provident sequi voluptatem laboriosam deserunt aliquam. Eveniet, dignissimos? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error et impedit corporis, deleniti enim culpa at nobis animi itaque ea obcaecati blanditiis alias quam, perferendis adipisci officiis odit saepe illum.</p>
+            </div>   
+        </section>
+        <section>
+            <h2 class="m-page-title">About</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim cupiditate laboriosam ex quas cum quia repudiandae maiores quaerat suscipit, fugiat, quos, debitis porro a nulla similique eos aspernatur culpa vero.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim cupiditate laboriosam ex quas cum quia repudiandae maiores quaerat suscipit, fugiat, quos, debitis porro a nulla similique eos aspernatur culpa vero. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim cupiditate laboriosam ex quas cum quia repudiandae maiores quaerat suscipit, fugiat, quos, debitis porro a nulla similique eos aspernatur culpa vero.</p>
+            <p class="more"><a href="#" class="m-button">Read More</a></p>
+        </section>
+        <section>
+            <h2 class="m-page-title">Expert Advisors</h2>
+            <div class="m-half">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt minus ratione tempore molestiae, laborum vero facere facilis, impedit est unde fuga, odio provident sequi voluptatem laboriosam deserunt aliquam. Eveniet, dignissimos? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error et impedit corporis, deleniti enim culpa at nobis animi itaque ea obcaecati blanditiis alias quam, perferendis adipisci officiis odit saepe illum.</p>
+            </div>
+            <div class="m-half">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt minus ratione tempore molestiae, laborum vero facere facilis, impedit est unde fuga, odio provident sequi voluptatem laboriosam deserunt aliquam. Eveniet, dignissimos? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error et impedit corporis, deleniti enim culpa at nobis animi itaque ea obcaecati blanditiis alias quam, perferendis adipisci officiis odit saepe illum.</p>
+            </div>   
+        </section>
+    </div>
+
+    
+    <footer>
+        <div class="l-centered">
+            <div class="m-footer-logos">
+                <a href="http://thegovlab.org/"><img id="govlab-logo" src="{{ static_url("img/govlab-logo.png") }}" alt="The GovLab"></a>
+                <a href="http://www.knightfoundation.org/"><img id="knight-logo" src="{{ static_url("img/knight-logo.png") }}" alt="Knight Foundation"></a>
+            </div>
+            <ul>
+                <li class="footer-menu-item"><a href="https://twitter.com/opendata500" target="_blank">Twitter</a></li> 
+                <li class="footer-menu-item"><a href="/about/">About</a></li> 
+                <li class="footer-menu-item last"><a href="mailto:opendata500@thegovlab.org">Contact Us</a></li> 
+            </ul>
+            <p class="creative-commons-license"><a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Dataset" property="dct:title" rel="dct:type">The Open Data 500</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://thegovlab.org/" property="cc:attributionName" rel="cc:attributionURL">The GovLab</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.<br />Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="https://github.com/luisdaniel/OpenData500" rel="dct:source">https://github.com/luisdaniel/OpenData500</a>.</p>
+        </div>
+    </footer><!-- end footer -->
+</body>
+
+</html>
