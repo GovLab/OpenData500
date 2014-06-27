@@ -1,5 +1,5 @@
 
-{% extends "main.html" %}
+{% extends "../main.html" %}
 {% autoescape None %}
 
 
@@ -7,14 +7,25 @@
 
 <h1>{{ page_heading }}</h1>
 
-<form method="post" id="edit-agency-form" class="m-form agency-form">
+<form method="post" id="add-agency-form" class="m-form agency-form">
 	<fieldset class="m-form-half">
 		<h3>Agency Information</h3>
-		<div class="m-form-line"><label for="">Name: </label><input type="text" name="name" id="name" value=""></div>
-		<div class="m-form-line"><label for="">Abbreviation: </label><input type="text" name="abbrev" id="abbrev" value=""></div>
-		<div class="m-form-line"><label for="">URL: </label><input type="text" name="url" id="url" value=""></div>
-		<div class="m-form-line"><label for="">Source:</label><input type="text" name="source" id="source" value=""></div>
-		
+		<div class="m-form-line"><label for="">Name: </label><input type="text" name="" id="agencyName" value=""></div>
+		<div class="m-form-line"><label for="">Abbreviation: </label><input type="text" name="abbrev" id="agencyAbbrev" value="" ></div>
+		<div class="m-form-line"><label for="">URL: </label><input type="text" name="url" id="agencyURL" value="" ></div>
+		<div class="m-form-line"><label for="">Source:</label><input type="text" name="source" id="source" value="" ></div>
+		<div class="m-form-line">
+			<label for="type">Type:</label>
+			<select name='type' id="type">
+				<option selected disabled hidden value=''></option>
+				{% for type in agency_types %}
+					<option name="type" value="{{type}}">{{type}}</option>
+				{%end%}
+			</select>
+		</div>
+		<p>Country: {{ country.upper() }}</p>
+		<input type="button" class="l-button action-button" id="save-agency-button" name="save-agency-button" action="save-agency" value="Add/Save"><br>
+		<span class="response-message"></span><br><br>
 	</fieldset>
 	<h3>Subagencies</h3>
 	<fieldset class="m-form-three-quarters">
@@ -28,7 +39,7 @@
 					<div class="subagency-list-buttons">
 						<input type="button" class="l-button subagency-action-button" id="edit-subagency-button" name="delete-subagency-button" action="add-subagency" value="Add">
 						<input type="button" class="l-button" id="delete-subagency-button" name="delete-subagency-button" style="display:none;" value="Delete This Subagency"><br>
-						<span class="subagency-message"></span>
+						<span class="response-message"></span>
 						<div class="confirm-delete-subagency" style="display:none">
 							<p>Are you sure?
 							<input type="button" class="l-button subagency-action-button" id="confirm-delete-subagency-button" action="delete-subagency" value="Yes">
@@ -63,13 +74,13 @@
 		<div class="m-form-line"><label for="">Abbreviation: </label><input type="text" name="subagency-abbrev" id="subagency-abbrev" value="<%= abbrev %>"></div>
 		<div class="m-form-line"><label for="">URL: </label><input type="text" name="subagency-url" id="subagency-url" value="<%= url %>"></div>
 		<div class="subagency-list-buttons">
-			<input type="button" class="l-button subagency-action-button" id="edit-subagency-button" action="<%= new_action %>" value="<%= button %>">
-			<input type="button" class="l-button" id="delete-subagency-button" <%= delete_button %> value="Delete This Subagency"><br>
-			<span class="subagency-message"><%= message %></span>
-			<div class="confirm-delete-subagency" style="display:none">
+			<input type="button" class="l-button action-button" id="edit-subagency-button" action="<%= new_action %>" value="<%= button %>">
+			<input type="button" class="l-button" id="delete-button" <%= delete_button %> value="Delete This Subagency"><br>
+			<span class="response-message"><%= message %></span>
+			<div class="confirm-delete" style="display:none">
 				<p>Are you sure?
-				<input type="button" class="l-button subagency-action-button" id="confirm-delete-subagency-button" action="delete-subagency" value="Yes">
-				<input type="button" class="l-button" id="cancel-delete-subagency-button" value="No"></p>
+				<input type="button" class="l-button action-button" id="confirm-delete-subagency-button" action="delete-subagency" value="Yes">
+				<input type="button" class="l-button" id="cancel-delete-button" value="No"></p>
 			</div>
 		</div>
 	</div>
@@ -80,36 +91,7 @@
 <script type="text/javascript">
 
 $(document).ready( function() {
-	//----------------------------------------DELETE AGENCY--------------------------------------------------
-	$(".delete-agency").on("click", "#delete-agency-button", function() {
-		$('.confirm-delete-agency').show();
-		$('.confirm-delete-agency').on("click", "#confirm-delete-agency-button", function() {
-			id = $("#agency-id").val();
-			$.ajax({
-			    type: 'DELETE',
-			    url: '/admin/agency-delete/' + id + "/",
-			    error: function(error) {
-			        console.debug(JSON.stringify(error));
-				},
-			    beforeSend: function(xhr, settings) {
-			    	xhr.setRequestHeader("X-Xsrftoken", $("[name='_xsrf']").val());
-			    },
-			    success: function(data) {
-			    	console.log(data);
-			    	if (data["message"] == "success") {
-			    		document.location.href = '/admin/agencies/';
-			    	} else {
-			    		$(".delete-agency-error").text(data["message"]).show().delay(5000).fadeOut();
-			    	}
-			    }
-			});
-		});
-		$('.confirm-delete-agency').on("click", "#cancel-delete-agency-button", function() {
-			$('.confirm-delete-agency').hide();
-		});
-	});
-
-	//----------------------------------------EDIT/NEW/DELETE SUBAGENCY--------------------------------------------------
+	//----------------------------------------ADD/EDIT/NEW/DELETE SUBAGENCY--------------------------------------------------
 	var subagency = _.template($("#template").html());
 	$(".subagency-list").on("click", "#delete-subagency-button", function() {
 		var current_options = $(this).parent().find(".confirm-delete-subagency")
@@ -119,25 +101,37 @@ $(document).ready( function() {
 			event.stopPropagation();
 		});
 	});
-	$(".subagency-list").on("click", ".subagency-action-button", function() {
-		var this_form = $(this).closest(".subagency-item");
+	$(document).on("click", ".action-button", function() {
 		action = $(this).attr("action");
+		if (action == "save-agency") {
+			var this_form = $(".agency-form");
+		} else {
+			var this_form = $(this).closest(".subagency-item");
+		}
 		var id = $("#agency-id").val();
 		var data = {
-			"old_name": this_form.find("#subagency-name").attr("name"),
-			"name": this_form.find("#subagency-name").val(), 
-			"abbrev": this_form.find("#subagency-abbrev").val(), 
-			"url": this_form.find("#subagency-url").val(),
+			"agency_new_name": this_form.find("#agencyName").val(),
+			"agency_old_name": this_form.find("#agencyName").attr("name"),
+			"agency_url": this_form.find("#agencyURL").val(),
+			"agency_abbrev": this_form.find("#agencyAbbrev").val(),
+			"agency_type": this_form.find("#type").val(),
+			"agency_source": this_form.find("#source").val(),
+			"agency_notes": this_form.find("#notes").val(),
+			"subagency_old_name": this_form.find("#subagency-name").attr("name"),
+			"subagency_new_name": this_form.find("#subagency-name").val(), 
+			"subagency_abbrev": this_form.find("#subagency-abbrev").val(), 
+			"subagency_url": this_form.find("#subagency-url").val(),
 			"action": action,
 			"_xsrf": $("[name='_xsrf']").val(),
 			}
+		console.log(data);
 		$.ajax({
 			type: 'POST',
-			url: '/admin/agency-edit/' + id + "/",
+			url: '/admin/agency-add/',
 			data: data,
 			error: function(error) {
 		        console.debug(JSON.stringify(error));
-		        this_form.find(".subagency-message").text("Something went wrong : /");
+		        this_form.find(".response-message").text("Something went wrong : /");
 			},
 		    beforeSend: function(xhr, settings) {
 		    },

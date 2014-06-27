@@ -45,7 +45,7 @@ class RegisterHandler(LoginHandler):
     def get(self):
         if self.current_user == "luis":
             self.render(
-                "register.html", 
+                "admin/register.html", 
                 next=self.get_argument("next","/"),
                 page_title="Register",
                 page_heading="Register for OD500"
@@ -108,7 +108,7 @@ class CompanyAdminHandler(BaseHandler):
             needVetting = models.Company.objects(Q(submittedSurvey=True) & Q(vetted=False) & Q(country=country)).order_by('-lastUpdated', 'prettyName')
             stats = models.Stats.objects.get(country=country)
             self.render(
-                "admin_companies.html",
+                "admin/admin_companies.html",
                 page_title='OpenData500',
                 page_heading='Admin - ' + country.upper(),
                 surveySubmitted = surveySubmitted,
@@ -188,7 +188,7 @@ class AgencyAdminHandler(BaseHandler):
         agencies = models.Agency.objects(country=country).order_by('name')
         stats = models.Stats.objects.get(country=country)
         self.render(
-            "admin_agencies.html",
+            "admin/admin_agencies.html",
             page_title='Admin - Agencies - OpenData500',
             page_heading='Admin - ' + country.upper(),
             user=self.current_user,
@@ -227,7 +227,7 @@ class AdminEditCompanyHandler(BaseHandler):
         except Exception, e:
             logging.info('Could not get company: ' + str(e))
             self.redirect('/404/')
-        self.render("admin_edit_company.html",
+        self.render("admin/admin_edit_company.html",
             page_title = page_title,
             page_heading = page_heading,
             company = company,
@@ -356,10 +356,11 @@ class AdminAddAgencyHandler(BaseHandler):
         country = user.country
         logging.info("Working in: " + country)
         self.render(
-            "admin_add_agency.html",
+            "admin/admin_add_agency.html",
             page_title='Admin - Edit Agencies - OpenData500',
             page_heading='Admin - ' + country.upper(),
             user=self.current_user,
+            country=country,
             agency_types=agency_types
         )
 
@@ -367,7 +368,7 @@ class AdminAddAgencyHandler(BaseHandler):
 class AdminEditAgencyHandler(BaseHandler):
     @tornado.web.addslash
     @tornado.web.authenticated
-    def get(self, id):
+    def get(self, id=None):
         try:
             user = models.Users.objects.get(username=self.current_user)
         except Exception, e:
@@ -375,17 +376,38 @@ class AdminEditAgencyHandler(BaseHandler):
             self.redirect("/login/")
         country = user.country
         logging.info("Working in: " + country)
-        try:
-            agency = models.Agency.objects.get(id=bson.objectid.ObjectId(id))
-        except Exception, e:
-            logging.info("Could not get agency: " + str(e))
-            self.redirect('/404/')
-        self.render('admin_edit_agency.html',
-            page_heading="Editing " + agency.name,
-            page_title="Editing " + agency.name,
+        logging.info(id)
+        if id:
+            try:
+                agency = models.Agency.objects.get(id=bson.objectid.ObjectId(id))
+            except Exception, e:
+                logging.info("Could not get agency: " + str(e))
+                self.redirect('/404/')
+            self.render('admin/admin_edit_agency.html',
+                page_heading="Editing " + agency.name,
+                page_title="Editing " + agency.name,
+                user=self.current_user,
+                agency=agency,
+                agency_types=agency_types)
+        else:
+            blank_agency = models.Agency(name="", 
+                abbrev="", 
+                url="", 
+                source="", 
+                subagencies=[], 
+                datasets=[], 
+                usedBy=[], 
+                notes="", 
+                country=country)
+            self.render(
+            "admin/admin_edit_agency.html",
+            page_title='Admin - Edit Agencies - OpenData500',
+            page_heading='Admin - ' + country.upper(),
             user=self.current_user,
-            agency=agency,
-            agency_types=agency_types)
+            country=country,
+            agency=blank_agency,
+            agency_types=agency_types
+        )
 
     @tornado.web.authenticated
     def post(self, id):
@@ -395,30 +417,52 @@ class AdminEditAgencyHandler(BaseHandler):
             logging.info("Could not get user: " + str(e))
             self.redirect("/login/")
         country = user.country
-        try:
-            agency = models.Agency.objects.get(id=bson.objectid.ObjectId(id))
-        except Exception, e:
-            logging.info("Could not get agency: " + str(e))
-            self.redirect('/404/')
-        logging.info(self.request.arguments)
+        action = self.get_argument("action", "")
+        if action != "add-agency":
+            try:
+                agency = models.Agency.objects.get(id=bson.objectid.ObjectId(id))
+            except Exception, e:
+                logging.info("Could not get agency: " + str(e))
+                self.write({"error":"Agency not found."})
+        #logging.info(self.request.arguments)
         subagency_old_name = self.get_argument("subagency_old_name","")
         subagency_new_name = self.get_argument("subagency_new_name", "")
         subagency_abbrev = self.get_argument("subagency_abbrev", "")
         subagency_url = self.get_argument("subagency_url", "")
-        agency_new_name = self.get_argument("agency_new_name", agency.name)
-        agency_old_name = self.get_argument("agency_old_name", agency.name)
+        agency_new_name = self.get_argument("agency_new_name", "")
+        agency_old_name = self.get_argument("agency_old_name", None)
         agency_prettyName = re.sub(r'([^\s\w])+', '', agency_new_name).replace(" ", "-").title()
-        agency_abbrev = self.get_argument("agency_abbrev", agency.abbrev)
-        agency_url = self.get_argument("agency_url", agency.url)
-        agency_type = self.get_argument("agency_type", agency.dataType)
-        agency_source = self.get_argument("agency_source", agency.source)
-        agency_notes = self.get_argument("agency_notes", agency.notes)
-        action = self.get_argument("action", "")
+        agency_abbrev = self.get_argument("agency_abbrev", None)
+        agency_url = self.get_argument("agency_url", None)
+        agency_type = self.get_argument("agency_type", None)
+        agency_source = self.get_argument("agency_source", None)
+        agency_notes = self.get_argument("agency_notes", None)
+        #------------------------------------------ADD NEW AGENCY----------------------------
+        if action == "add-agency":
+            new_agency = models.Agency()
+            new_agency.name = agency_new_name
+            new_agency.prettyName = agency_prettyName
+            new_agency.abbrev = agency_abbrev
+            new_agency.url = agency_url
+            new_agency.dataType = agency_type
+            new_agency.source = agency_source
+            new_agency.notes = agency_notes
+            new_agency.country = country
+            new_agency.usedBy_count = 0
+            new_agency.usedBy = []
+            try:
+               new_agency.save()
+            except Exception, e:
+                logging.info("Could not save agency: " + str(e))
+                self.write({"error":"Could not save agency"})
+                return
+            self.write({"message":"Save Successful", "id":str(new_agency.id)})
+            return
         #------------------------------------------EDIT SUBAGENCY----------------------------
         if action =="edit-subagency":
             for s in agency.subagencies:
                 if s.name.lower() == subagency_new_name.lower() and s.name.lower() != subagency_old_name.lower():
-                    self.write({"error":"Another Subagency already has this name."})
+                    self.write({"message":"Another Subagency already has this name."})
                     return
             for s in agency.subagencies:
                 if s.name == subagency_old_name:
@@ -433,7 +477,7 @@ class AdminEditAgencyHandler(BaseHandler):
         if action == "add-subagency":
             for s in agency.subagencies:
                 if s.name.lower() == subagency_new_name.lower() and s.name.lower() != subagency_old_name.lower():
-                    self.write({"error":"Another Subagency already has this name."})
+                    self.write({"message":"Another Subagency already has this name.", "error":""})
                     return
             s = models.Subagency(
                 name = subagency_new_name,
@@ -442,7 +486,14 @@ class AdminEditAgencyHandler(BaseHandler):
             agency.subagencies.append(s)
             agency.save()
             self.application.files.generate_agency_list(country)
-            self.write({"message":"Subagency added!", "heading":s.name, "name":s.name, "abbrev":s.abbrev, "url":s.url, "new_action":"edit-subagency", "button":"Save Edits", "delete_button":""})
+            self.write({"message":"Subagency added!", 
+                "heading":s.name, 
+                "name":s.name, 
+                "abbrev":s.abbrev, 
+                "url":s.url, 
+                "new_action":"edit-subagency", 
+                "button":"Save Edits", 
+                "delete_button":""})
             return
         #------------------------------------------DELETE SUBAGENCY----------------------------
         if action == "delete-subagency":

@@ -1,5 +1,5 @@
 
-{% extends "main.html" %}
+{% extends "../main.html" %}
 {% autoescape None %}
 
 
@@ -27,8 +27,8 @@
 		</div>
 		<p>Country: {{agency.country.upper()}}</p>
 		<div class="m-form-line">Used by: <br>{% if agency.usedBy %}{%for c in agency.usedBy%}<a href="/admin/company-edit/{{c.id}}/">{{c.companyName}}</a><br> {%end%}{%else%}None{%end%}</div>
-		<input type="button" class="l-button action-button" id="edit-agency-button" action="edit-agency" value="Save Edits">
-		<span class="agency-message"></span><br><br>
+		<input type="button" class="l-button action-button" id="edit-agency-button" action="add-agency" value="Save Edits">
+		<span class="response-message"></span><br><br>
 		<h3>Agency Datasets</h3>
 		<div class="agency-datasets-list">
 			<table class="agency-dataset-table">
@@ -80,9 +80,9 @@
 							</div>
 						{%end%}
 						<div class="subagency-list-buttons">
-							<input type="button" class="l-button action-button" id="edit-subagency-button" name="delete-subagency-button" action="edit-subagency" value="Save Edits">
+							<input type="button" class="l-button action-button" id="edit-subagency-button" name="edit-subagency-button" action="edit-subagency" value="Save Edits">
 							<input type="button" class="l-button" id="delete-button" name="delete-subagency-button" value="Delete This Subagency"><br>
-							<span class="subagency-message"></span>
+							<span class="response-message"></span>
 							<div class="confirm-delete" style="display:none">
 								<p>Are you sure?
 								<input type="button" class="l-button action-button" id="confirm-delete-subagency-button" action="delete-subagency" value="Yes">
@@ -97,8 +97,8 @@
 					<div class="m-form-line"><label for="">Abbreviation: </label><input type="text" name="subagency-abbrev" id="subagency-abbrev" value=""></div>
 					<div class="m-form-line"><label for="">URL: </label><input type="text" name="subagency-url" id="subagency-url" value="" ></div>
 					<div class="subagency-list-buttons">
-						<input type="button" class="l-button action-button" id="edit-subagency-button" name="delete-subagency-button" action="add-subagency" value="Add"><br>
-						<span class="subagency-message"></span>
+						<input type="button" class="l-button action-button" id="edit-subagency-button" name="edit-subagency-button" action="add-subagency" value="Add"><br>
+						<span class="response-message"></span>
 					</div>
 				</div>
 			{%else%}
@@ -108,8 +108,8 @@
 					<div class="m-form-line"><label for="">Abbreviation: </label><input type="text" name="subagency-abbrev" id="subagency-abbrev" value=""></div>
 					<div class="m-form-line"><label for="">URL: </label><input type="text" name="subagency-url" id="subagency-url" value="" ></div>
 					<div class="subagency-list-buttons">
-						<input type="button" class="l-button action-button" id="edit-subagency-button" name="delete-subagency-button" action="add-subagency" value="Add"><br>
-						<span class="subagency-message"></span>
+						<input type="button" class="l-button action-button" id="add-subagency-button" name="add-subagency-button" action="add-subagency" value="Add"><br>
+						<span class="response-message"></span>
 					</div>
 				</div>
 			{%end%}
@@ -127,7 +127,7 @@
 		<input type="button" class="l-button" id="cancel-delete-button" value="No"><br>
 	</div>
 	<span class="delete-agency-warning">Note: You can only delete this agency if it is not in use by a company.</span><br>
-	<span class="delete-agency-error"></span>
+	<span class="response-message"></span>
 </div>
 
 <script type='text/template' id='template'>
@@ -139,7 +139,7 @@
 		<div class="subagency-list-buttons">
 			<input type="button" class="l-button action-button" id="edit-subagency-button" action="<%= new_action %>" value="<%= button %>">
 			<input type="button" class="l-button" id="delete-button" <%= delete_button %> value="Delete This Subagency"><br>
-			<span class="subagency-message"><%= message %></span>
+			<span class="response-message"><%= message %></span>
 			<div class="confirm-delete" style="display:none">
 				<p>Are you sure?
 				<input type="button" class="l-button action-button" id="confirm-delete-subagency-button" action="delete-subagency" value="Yes">
@@ -166,12 +166,22 @@ $(document).ready( function() {
 	});
 	$(document).on("click", ".action-button", function() {
 		action = $(this).attr("action");
-		if (action == "edit-agency" || action == "delete-agency") {
-			var this_form = $(".agency-form");
-		} else {
-			var this_form = $(this).closest(".subagency-item");
-		}
 		var id = $("#agency-id").val();
+		if (action == "add-agency") {
+			var this_form = $(".agency-form");
+			id = "";
+		} else {
+			if (action == "edit-agency") {
+				var this_form = $(".agency-form");
+			} else if (action == "add-agency") {
+				var this_form = $(".agency-form");
+				id = "";
+			} else if (action == "delete-agency") {
+				var this_form = $(this).closest(".delete-agency");
+			} else if (action == "add-subagency" || action =="delete-subagency" || action == "edit-subagency"){
+				var this_form = $(this).closest(".subagency-item");
+			} 
+		}
 		var data = {
 			"agency_new_name": this_form.find("#agencyName").val(),
 			"agency_old_name": this_form.find("#agencyName").attr("name"),
@@ -189,43 +199,51 @@ $(document).ready( function() {
 			}
 		$.ajax({
 			type: 'POST',
-			url: '/admin/agency-edit/' + id + "/",
+			url: '/admin/agency-edit/' + id,
 			data: data,
 			error: function(error) {
 		        console.debug(JSON.stringify(error));
-		        this_form.find(".subagency-message").text("Something went wrong : /");
+		        this_form.find(".response-message").first().text("Something went wrong : /");
 			},
 		    beforeSend: function(xhr, settings) {
+		    	this_form.find(".response-message").first().text("Working on it...");
 		    },
 		    success: function(data) {
-		    	if ("error" in data) {
-		    		this_form.find(".subagency-message").text(data['error']).show().delay(5000).fadeOut();
-		    	} else {
-			    	if (action =="delete-subagency") {
+		    	if (action =="delete-subagency") {
+		    		this_form.empty();
+		    	}
+		    	if (action =="add-subagency") {
+		    		if (data['error'] == "") {
+		    			this_form.find(".response-message").first().text(data['message']).show().delay(5000).fadeOut();
+		    		} else {
 			    		this_form.empty();
-			    	}
-			    	if (action =="add-subagency") {
-			    		this_form.empty();
-			    		$(".subagency-list").append(subagency(data))
+			    		this_form = $(".subagency-list").append(subagency(data));
+			    		$(".subagency-list").find(".response-message").last().delay(5000).fadeOut();
 			    		$(".subagency-list").append(subagency({"heading":"Add New", "message":"", "name":"", "abbrev":"", "url":"", "button":"Add", "new_action":"add-subagency", "delete_button":"style='display:none;'"}))
 			    	}
-			    	if (action =="edit-subagency") {
-			    		this_form.find(".subagency-message").text(data['message']).show().delay(5000).fadeOut();
+		    	}
+		    	if (action =="edit-subagency") {
+		    		this_form.find(".response-message").text(data['message']).show().delay(5000).fadeOut();
+		    		this_form.find("#subagency-name").attr("name", this_form.find("#subagency-name").val());
+		    	}
+		    	if (action == "edit-agency") {
+		    		this_form.find(".response-message").text(data['message']).show().delay(5000).fadeOut();
+		    		if ( data["message"] == "Edits saved!" ) {
+		    			this_form.find("#agencyName").attr("name", this_form.find("#agencyName").val());
+		    		}
+		    	}
+		    	if (action == "add-agency") {
+		    		this_form.find(".response-message").first().text(data['message']).show().delay(5000).fadeOut();
+		    		this_form.find(".action-button").first().attr("action", "edit-agency");
+		    		$("#agency-id").val(data["id"]);
+		    	}
+		    	if (action == "delete-agency") {
+		    		if (data["message"] == "Agency Deleted") {
+			    		document.location.href = '/admin/agencies/';
+			    	} else {
+			    		$(".delete-agency-error").text(data["message"]).show().delay(5000).fadeOut();
 			    	}
-			    	if (action == "edit-agency") {
-			    		this_form.find(".agency-message").text(data['message']).show().delay(5000).fadeOut();
-			    		if ( data["message"] == "Edits saved!" ) {
-			    			this_form.find("#agencyName").attr("name", this_form.find("#agencyName").val());
-			    		}
-			    	}
-			    	if (action == "delete-agency") {
-			    		if (data["message"] == "Agency Deleted") {
-				    		document.location.href = '/admin/agencies/';
-				    	} else {
-				    		$(".delete-agency-error").text(data["message"]).show().delay(5000).fadeOut();
-				    	}
-			    	}
-			    }
+		    	}
 		    }
 		});
 	});

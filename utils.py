@@ -709,7 +709,7 @@ class FileGenerator(object):
         logging.info("Visit CSV File Done!")
 
     def generate_agency_list(self, country):
-        agencies = models.Agency.objects(Q(country=country) & Q(source="dataGov"))
+        agencies = models.Agency.objects(Q(country=country) & Q(source__not__exact="web"))
         agency_list = []
         for a in agencies:
             label = [a.name, " (", a.abbrev, ")"]
