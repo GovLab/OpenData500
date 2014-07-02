@@ -205,3 +205,7 @@ survey/no survey hover and active states*/
 #about-roundtables {
   padding-bottom: 57px;
 }
+
+#about-next-steps {
+  border-bottom: 0px;
+}
