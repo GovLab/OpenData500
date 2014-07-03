@@ -6,7 +6,7 @@ class LoginHandler(BaseHandler):
     @tornado.web.addslash
     def get(self):
         self.render(
-            "login.html", 
+            "admin/login.html", 
             next=self.get_argument("next","/"), 
             message=self.get_argument("error",""),
             page_title="Please Login",
