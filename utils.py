@@ -52,7 +52,7 @@ class Tools(object):
         logging.info("Filters Redone.")
 
     def prettify(self, name):
-        return re.sub(r'([^\s\w])+', '', name).replace(" ", "-").title()
+        return re.sub(r'([^\s\w])+', '', name).replace(" ", "-")
 
 
 class StatsGenerator(object):
