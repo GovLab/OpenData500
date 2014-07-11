@@ -537,6 +537,7 @@ class AdminEditAgencyHandler(BaseHandler):
             return
         #------------------------------------------DELETE AGENCY----------------------------
         if action == "delete-agency":
+            logging.info(self.request.arguments)
             if agency.subagencies:
                 for s in agency.subagencies:
                     if len(s.usedBy) != 0:

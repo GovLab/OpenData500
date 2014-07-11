@@ -32,7 +32,6 @@
 		<th>No. Subagencies</th>
 		<th>Used By:</th>
 		<th>Source</th>
-		<th>Notes</th>
 	</tr>
 	{% for a in agencies %}
 		<tr>
@@ -42,7 +41,6 @@
 			<td>{{ len(a.subagencies) }}</td>
 			<td>{{ a.usedBy_count }}</td>
 			<td>{{ a.source }}</td>
-			<td><p>{% if a.notes %}{{a.notes}}{%end%}</p></td>
 		</tr>
 	{% end %}
 </table>
