@@ -12,6 +12,25 @@
         "findings": {
             "page_title": "OD500 By The Numbers",
             "page_heading": "OD500 Stats"
+        },
+        "edit_company": {
+            "page_title": "Edit Company",
+            "page_heading": "Editing "
+        },
+        "submit": {
+            "page_title": "Submit A Company To The OD500",
+            "page_heading": "Submit A Company To The OD500"
+        },
+        "list": {
+            "page_title": "OD500 Companies",
+            "page_heading": "OD500 Companies"
+        },
+        "error": {
+            "locked": {
+                "page_title": "Error",
+                "page_heading": "This company is locked from editing",
+                "message": "If you would like to edit this company, please email us at <a href='mailto:opendata500@thegovlab.org'>OpenData500@thegovlab.org</a> and let us know who you are."
+            }
         }
     }
 }

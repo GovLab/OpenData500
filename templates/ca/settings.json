@@ -8,6 +8,14 @@
         "index": {
             "page_title": "Bienvenue sur les Open Data 500",
             "page_heading": "Bienvenue sur les Open Data 500"
+        },
+        "submit": {
+            "page_title": "Soumettre une entreprise à l'OD500 canadienne",
+            "page_heading": "Soumettre une entreprise à l'OD500 canadienne"
+        },
+        "edit_company": {
+            "page_title": "Modifier entreprise",
+            "page_heading": "Modifier "
         }
     },
     "english": {
@@ -18,6 +26,14 @@
         "index": {
             "page_title": "Welcome to the Open Data 500",
             "page_heading": "Welcome to the Open Data 500"
+        },
+        "submit": {
+            "page_title": "Submit A Company To The Canadian OD500",
+            "page_heading": "Submit A Company To The Canadian OD500"
+        },
+        "edit_company": {
+            "page_title": "Edit Company",
+            "page_heading": "Editing "
         }
     }
 }

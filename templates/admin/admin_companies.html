@@ -20,11 +20,11 @@
 		<h2>Utilities</h2>
 		{% raw xsrf_form_html() %}
 		<input type="button" class="l-button admin_utils" id="refresh" name="refresh" value="Refresh Stats"><br>
-		{% if user == "luis" %}<input type="button" class="l-button admin_utils" id="files" name="files" value="Generate All Files"><br>{%end%}
+		<input type="button" class="l-button admin_utils" id="files" name="files" value="Generate All Files"><br>
 		<input type="button" class="l-button admin_utils" id="company_csv" name="files" value="Generate Company CSV (displayed only)"><br>
 		<input type="button" class="l-button admin_utils" id="company_all_csv" name="files" value="Generate Company CSV (All)"><br>
 		{% if user == "luis" %}<input type="button" class="l-button admin_utils" id="agency_csv" name="files" value="Generate Agency CSV"><br>{%end%}
-		<input type="button" class="l-button admin_utils" id="vizz" name="vizz" value="Generate Vizz File"><br>
+		{% if country == "us" %}<input type="button" class="l-button admin_utils" id="vizz" name="vizz" value="Generate Vizz File"><br>{%end%}
 		<input type="button" class="l-button admin_utils" id="redo_filters" name="filters" value="Re-Do Company Filters"><br>
 		<span class="message"></span>
 	</fieldset>
@@ -36,6 +36,7 @@
 	</fieldset>
 </form>
 <br>
+<hr>
 <h2>Need Vetting</h2>
 <table class="needVetting" style="width:100%; text-align:left; border:1px;">
 	<tr>
@@ -60,6 +61,7 @@
 	{% end %}
 </table>
 <br>
+<hr>
 <h2>Need to fill out Surveys</h2>
 <table style="width:100%; text-align:left;">
 	<tr>
@@ -82,6 +84,7 @@
 </table>
 <br>
 <br>
+<hr>
 <h2>Submitted Survey, Vetted, and Displayed</h2>
 <div id="accordionUnvetted">
 {% for company in surveySubmitted %}

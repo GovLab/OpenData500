@@ -114,6 +114,7 @@ class CompanyAdminHandler(BaseHandler):
                 surveySubmitted = surveySubmitted,
                 needVetting = needVetting,
                 user=self.current_user,
+                country = country,
                 sendSurveys = sendSurveys,
                 stats = stats
             )
@@ -240,6 +241,8 @@ class AdminEditCompanyHandler(BaseHandler):
             stateList = stateList,
             stateListAbbrev=stateListAbbrev,
             user=self.current_user,
+            country = company.country,
+            country_keys = country_keys,
             id = str(company.id)
         )
 
@@ -500,7 +503,11 @@ class AdminEditAgencyHandler(BaseHandler):
             logging.info("about to delete")
             for s in agency.subagencies:
                 if s.name == subagency_old_name:
-                    agency.subagencies.remove(s)
+                    if len(s.usedBy) != 0:
+                        self.write({"message": "Subagency is used by a company or companies; cannot delete.", "error":"error"})
+                        return
+                    else:
+                        agency.subagencies.remove(s)
             agency.save()
             self.application.files.generate_agency_list(country)
             self.write({"message":"Subagency deleted :("})

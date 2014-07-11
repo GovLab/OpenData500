@@ -1,5 +1,20 @@
 $(document).ready(function() {
 
+    var country = $('#country').attr('country');
+    if (country == undefined) {
+        var url = document.URL;
+        if (url.indexOf("/submit") != -1) {
+            country = url.substr(url.indexOf('/submit') - 2, 2);
+        } else if (url.indexOf("/add") != -1) {
+            country = url.substr(url.indexOf('/add') - 2, 2);
+        } else if (url.indexOf("/edit") != -1) {
+            country = url.substr(url.indexOf('/edit') - 2, 2);
+        }
+    }
+    if (country == "om" || country == "00") {
+        country = "us";
+    }
+
     var is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
     var is_firefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
     //----------------------------------ADMIN ACCORDIONS--------------------------------------
@@ -100,7 +115,7 @@ $(document).ready(function() {
         }
         $.ajax({
             type: 'POST',
-            url: '/addData/' + companyID,
+            url: '/' + country + '/addData/' + companyID,
             data: data,
             error: function(error) {
                 console.debug(JSON.stringify(error));
@@ -173,7 +188,7 @@ $(document).ready(function() {
             currentDatasetForm.find('.error-dataset').hide();
             $.ajax({
                 type: 'POST',
-                url: '/addData/' + companyID,
+                url: '/' + country + '/addData/' + companyID,
                 data: data,
                 error: function(error) {
                     console.debug(JSON.stringify(error));
@@ -222,7 +237,7 @@ $(document).ready(function() {
         if (datasetName != '') {
             $.ajax({
                 type: 'POST',
-                url: '/addData/' + companyID,
+                url: '/' + country + '/addData/' + companyID,
                 data: data,
                 error: function(error) {
                     console.debug(JSON.stringify(error));
@@ -376,7 +391,7 @@ $(document).ready(function() {
             if (safeToAdd) {
                 $.ajax({
                     type: 'POST',
-                    url: '/addData/' + companyID,
+                    url: '/' + country + '/addData/' + companyID,
                     data: data,
                     error: function(error) {
                         console.debug(JSON.stringify(error));
@@ -418,7 +433,7 @@ $(document).ready(function() {
                 };
                 $.ajax({
                     type: 'POST',
-                    url: '/addData/' + companyID,
+                    url: '/' + country + '/addData/' + companyID,
                     data: data,
                     error: function(error) {
                         console.debug(JSON.stringify(error));
@@ -456,7 +471,7 @@ $(document).ready(function() {
             //console.log(data);
             $.ajax({
                 type: 'POST',
-                url: '/edit/' + companyID,
+                url: '/' + country + '/edit/' + companyID,
                 data: data,
                 error: function(error) {
                     console.debug(JSON.stringify(error));
@@ -551,7 +566,7 @@ $(document).ready(function() {
             var data = $('.companyForm').serializeArray();
             $.ajax({
                 type: 'POST',
-                url: '/submitCompany/',
+                url: '/' + country + '/submitCompany/',
                 data: data,
                 error: function(error) {
                     console.debug(JSON.stringify(error));
@@ -563,7 +578,7 @@ $(document).ready(function() {
                     //$(event.target).attr('disabled', 'disabled'); 
                 },
                 success: function(data) {
-                    document.location.href = '/addData/' + data['id'];
+                    document.location.href = '/' + country + '/addData/' + data['id'];
                     //console.log(success);
                     // $('.error-form').hide();
                     // $('.message-form').text('Saved!')
@@ -653,45 +668,47 @@ $(document).ready(function() {
         return pass;
     }
     //----------------------------------AUTCOMPLETE SEARCH BAR--------------------------------------
-    $.getJSON("/static/files/us_Agency_List.json", function(agencies) {
-        //console.log(agencies);
-        try {
-            $("#agencyTags").autocomplete({
-                minLength: 2,
-                source: agencies,
-                focus: function(event, ui) {
-                    if (ui.item.s == '') {
-                        $('#agencyTags').val(ui.item.a);
-                    } else {
-                        $('#agencyTags').val(ui.item.a + " - " + ui.item.s);
+    if (country != undefined) {
+        $.getJSON("/static/files/" + country + "_Agency_List.json", function(agencies) {
+            //console.log(agencies);
+            try {
+                $("#agencyTags").autocomplete({
+                    minLength: 2,
+                    source: agencies,
+                    focus: function(event, ui) {
+                        if (ui.item.s == '') {
+                            $('#agencyTags').val(ui.item.a);
+                        } else {
+                            $('#agencyTags').val(ui.item.a + " - " + ui.item.s);
+                        }
+                        return false;
+                    },
+                    select: function(event, ui) {
+                        if (ui.item.s == '') {
+                            $("#searchval").val(ui.item.a);
+                            $("#agencyTags").val(ui.item.a);
+                        } else {
+                            $("#searchval").val(ui.item.a + ' - ' + ui.item.s);
+                            $("#agencyTags").val(ui.item.a + ' - ' + ui.item.s);
+                        }
+                        return false;
                     }
-                    return false;
-                },
-                select: function(event, ui) {
-                    if (ui.item.s == '') {
-                        $("#searchval").val(ui.item.a);
-                        $("#agencyTags").val(ui.item.a);
+                }).data("ui-autocomplete")._renderItem = function(ul, item) {
+                    if (item.s == '') {
+                        return $("<li></li>")
+                            .data("ui-autocomplete-item", item)
+                            .append("<a>" + item.a + "</a>")
+                            .appendTo(ul);
                     } else {
-                        $("#searchval").val(ui.item.a + ' - ' + ui.item.s);
-                        $("#agencyTags").val(ui.item.a + ' - ' + ui.item.s);
+                        return $("<li></li>")
+                            .data("ui-autocomplete-item", item)
+                            .append("<a>" + item.a + " - " + item.s + "</a>")
+                            .appendTo(ul);
                     }
-                    return false;
-                }
-            }).data("ui-autocomplete")._renderItem = function(ul, item) {
-                if (item.s == '') {
-                    return $("<li></li>")
-                        .data("ui-autocomplete-item", item)
-                        .append("<a>" + item.a + "</a>")
-                        .appendTo(ul);
-                } else {
-                    return $("<li></li>")
-                        .data("ui-autocomplete-item", item)
-                        .append("<a>" + item.a + " - " + item.s + "</a>")
-                        .appendTo(ul);
-                }
-            };
-        } catch (err) {
-            console.log(err.message);
-        }
-    });
+                };
+            } catch (err) {
+                console.log(err.message);
+            }
+        });
+    }
 });

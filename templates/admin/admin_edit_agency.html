@@ -27,7 +27,11 @@
 		</div>
 		<p>Country: {{agency.country.upper()}}</p>
 		<div class="m-form-line">Used by: <br>{% if agency.usedBy %}{%for c in agency.usedBy%}<a href="/admin/company-edit/{{c.id}}/">{{c.companyName}}</a><br> {%end%}{%else%}None{%end%}</div>
-		<input type="button" class="l-button action-button" id="edit-agency-button" action="add-agency" value="Save Edits">
+		{% if (agency.name) %}
+		<input type="button" class="l-button action-button" id="edit-agency-button" action="edit-agency" value="Save Edits">
+		{%else%}
+		<input type="button" class="l-button action-button" id="edit-agency-button" action="add-agency" value="Add Agency">
+		{%end%}
 		<span class="response-message"></span><br><br>
 		<h3>Agency Datasets</h3>
 		<div class="agency-datasets-list">
@@ -210,7 +214,11 @@ $(document).ready( function() {
 		    },
 		    success: function(data) {
 		    	if (action =="delete-subagency") {
-		    		this_form.empty();
+		    		if ("error" in data) {
+		    			this_form.find(".response-message").text(data["message"]).show().delay(5000).fadeOut();
+		    		} else {
+		    			this_form.empty();
+		    		}
 		    	}
 		    	if (action =="add-subagency") {
 		    		if (data['error'] == "") {
@@ -235,13 +243,14 @@ $(document).ready( function() {
 		    	if (action == "add-agency") {
 		    		this_form.find(".response-message").first().text(data['message']).show().delay(5000).fadeOut();
 		    		this_form.find(".action-button").first().attr("action", "edit-agency");
+		    		this_form.find(".action-button").first().val('Save Edits');
 		    		$("#agency-id").val(data["id"]);
 		    	}
 		    	if (action == "delete-agency") {
 		    		if (data["message"] == "Agency Deleted") {
 			    		document.location.href = '/admin/agencies/';
 			    	} else {
-			    		$(".delete-agency-error").text(data["message"]).show().delay(5000).fadeOut();
+			    		this_form.find(".response-message").text(data["message"]).show().delay(5000).fadeOut();
 			    	}
 		    	}
 		    }

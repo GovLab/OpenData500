@@ -139,14 +139,17 @@ class ThanksHandler(BaseHandler):
 class CompanyHandler(BaseHandler):
     @tornado.web.addslash
     #@tornado.web.authenticated
-    def get(self, companyName):
+    def get(self, country=None, companyName=None):
         logging.info(companyName)
+        if not country:
+            country = 'us'
+            self.redirect('/us/'+companyName)
         try:
             try:
-                company = models.Company.objects.get(prettyName=companyName)
+                company = models.Company.objects.get(Q(prettyName=companyName) & Q(country=country))
             except Exception, e:
                 logging.info("Company: " + companyName + ": " + str(e))
-                company = models.Company.objects(prettyName=companyName)[0]
+                company = models.Company.objects(Q(prettyName=companyName) & Q(country=country))[0]
             if company.display:
                 self.render(
                     "company.html",
@@ -164,7 +167,7 @@ class CompanyHandler(BaseHandler):
                     error = 'display'
                 )
         except Exception, e:
-            logging.info("Company: " + companyName + ": " + str(e)) 
+            logging.info("Company, " + companyName + ": " + str(e)) 
             self.render(
                 "404.html",
                 page_title='404 - Open Data 500',
@@ -177,21 +180,51 @@ class CompanyHandler(BaseHandler):
 class ListHandler(BaseHandler):
     @tornado.web.addslash
     #@tornado.web.authenticated
-    def get(self):
-        companies = models.Company.objects(display=True).order_by('prettyName')
-        agencies = models.Agency.objects(Q(usedBy__not__size=0) & Q(source="dataGov") & Q(dataType="Federal")).order_by("-usedBy_count").only("name", "abbrev", "prettyName")[0:16]
-        stats = models.Stats.objects().first()
-        self.render(
-            "candidates.html",
-            page_title='Open Data 500',
-            page_heading='OD500 Companies',
-            companies = companies,
-            stats = stats,
-            states=states,
-            agencies = agencies,
-            categories = categories,
-            user=self.current_user,
-        )
+    def get(self, country=None):
+        if not country:
+            country = "int"
+        lan = self.get_argument("lan", "")
+        if country in available_countries:
+            with open("templates/"+country+"/settings.json") as json_file:
+                settings = json.load(json_file)
+            if lan not in settings.keys():
+                logging.info("No translation selected or translation not available in this language")
+                lan = settings["default_language"]
+            companies = models.Company.objects(display=True).order_by('prettyName')
+            agencies = models.Agency.objects(Q(usedBy__not__size=0) & Q(source="dataGov") & Q(dataType="Federal")).order_by("-usedBy_count").only("name", "abbrev", "prettyName")[0:16]
+            stats = models.Stats.objects().first()
+            self.render(
+                country.lower()+"/list.html",
+                page_title = settings[lan]['list']['page_title'],
+                settings = settings[lan]['list'],
+                companies = companies,
+                stats = stats,
+                states=states,
+                agencies = agencies,
+                categories = categories,
+                user=self.current_user,
+                country=country
+            )
+        else:
+            self.render('404.html',
+                page_heading="Stop trying to make " +self.request.uri + " happen. <br><br>It's not going to happen.",
+                user=self.current_user,
+                page_title="404 - Not Found",
+                error="Not found",
+                country=""
+            )
+        
+        # self.render(
+        #     "candidates.html",
+        #     page_title='Open Data 500',
+        #     page_heading='OD500 Companies',
+        #     companies = companies,
+        #     stats = stats,
+        #     states=states,
+        #     agencies = agencies,
+        #     categories = categories,
+        #     user=self.current_user,
+        # )
 
 #--------------------------------------------------------CANDIDATE REDIRECT TO FULL LIST PAGE------------------------------------------------------------
 class CandidateHandler(BaseHandler): #redirect to list URL
@@ -246,11 +279,13 @@ class ResourcesHandler(BaseHandler):
 class ValidateHandler(BaseHandler):
     def post(self):
         #check if companyName exists:
+        country = self.get_argument("country", None)
+        if country == "int":
+            country = 'us'
         companyName = self.get_argument("companyName", None)
         prettyName = re.sub(r'([^\s\w])+', '', companyName).replace(" ", "-").title()
-        logging.info(prettyName)
         try: 
-            c = models.Company.objects.get(prettyName=prettyName)
+            c = models.Company.objects.get(Q(country=country) & Q(prettyName=prettyName))
             logging.info('company exists.')
             self.write('{ "error": "This company has already been submitted. Email opendata500@thegovlab.org for questions." }')
         except:
@@ -261,27 +296,40 @@ class ValidateHandler(BaseHandler):
 class SubmitCompanyHandler(BaseHandler):
     @tornado.web.addslash
     #@tornado.web.authenticated
-    def get(self):
-        self.render(
-            "submitCompany.html",
-            page_title = "Submit Your Company",
-            page_heading = "Submit Your Company",
-            companyType = companyType,
-            companyFunction = companyFunction,
-            criticalDataTypes = criticalDataTypes,
-            revenueSource = revenueSource,
-            categories=categories,
-            datatypes = datatypes,
-            stateList = stateList,
-            user=self.current_user,
-            stateListAbbrev=stateListAbbrev
-        )
+    def get(self, country=None):
+        if not country:
+            country = "int"
+        lan = self.get_argument("lan", "")
+        if country in available_countries:
+            with open("templates/"+country+"/settings.json") as json_file:
+                settings = json.load(json_file)
+            if lan not in settings.keys():
+                logging.info("No translation selected or translation not available in this language")
+                lan = settings["default_language"]
+            self.render(
+                country.lower()+"/submitCompany.html",
+                page_title = settings[lan]['submit']['page_title'],
+                settings = settings[lan]['submit'],
+                country=country,
+                country_keys=country_keys,
+                companyType = companyType,
+                companyFunction = companyFunction,
+                criticalDataTypes = criticalDataTypes,
+                revenueSource = revenueSource,
+                categories=categories,
+                datatypes = datatypes,
+                stateList = stateList,
+                user=self.current_user,
+                stateListAbbrev=stateListAbbrev
+            )
 
     #@tornado.web.authenticated
-    def post(self):
+    def post(self, country=None):
         #print all arguments to log:
         logging.info("Submitting New Company")
         logging.info(self.request.arguments)
+        if not country:
+            country = "us"
         #-------------------CONTACT INFO---------------
         firstName = self.get_argument("firstName", None)
         lastName = self.get_argument("lastName", None)
@@ -316,7 +364,6 @@ class SubmitCompanyHandler(BaseHandler):
         city = self.get_argument("city", None)
         zipCode = self.get_argument("zipCode", None)
         state = self.get_argument('state', None)
-        country = "us"
         companyType = self.get_argument("companyType", None)
         if companyType == 'other':
             companyType = self.get_argument('otherCompanyType', None)
@@ -382,7 +429,7 @@ class SubmitCompanyHandler(BaseHandler):
 class SubmitDataHandler(BaseHandler):
     @tornado.web.addslash
     #@tornado.web.authenticated
-    def get(self, id):
+    def get(self, country, id):
         company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
         page_heading = "Agency and Data Information for " + company.companyName
         self.render("submitData.html",
@@ -393,7 +440,7 @@ class SubmitDataHandler(BaseHandler):
         )
 
     #@tornado.web.authenticated
-    def post(self, id):
+    def post(self, country, id):
         logging.info("Submitting Data: "+ self.get_argument("action", None))
         logging.info(self.request.arguments)
         try:
@@ -417,7 +464,7 @@ class SubmitDataHandler(BaseHandler):
             #Existing AGENCY
             logging.info("Trying to get: " + agencyName)
             try:
-                agency = models.Agency.objects.get(name=agencyName)
+                agency = models.Agency.objects.get(Q(name=agencyName) & Q(country=company.country))
             except Exception, e:
                 logging.info("Error: " + str(e))
                 self.set_status(400)
@@ -499,7 +546,7 @@ class SubmitDataHandler(BaseHandler):
         #------------------------------------ADDING DATASET------------------------
         if action == "add dataset":
             try:
-                agency = models.Agency.objects.get(name = agencyName)
+                agency = models.Agency.objects.get(Q(name = agencyName) & Q(country = company.country))
                 logging.info(agency.name)
             except Exception, e:
                 logging.info(str(e))
@@ -532,7 +579,7 @@ class SubmitDataHandler(BaseHandler):
         #------------------------------------EDITING DATASET------------------------
         if action == "edit dataset":
             try:
-                agency = models.Agency.objects.get(name=agencyName)
+                agency = models.Agency.objects.get(Q(name = agencyName) & Q(country = company.country))
             except:
                 self.set_status(400)
             datasetName = self.get_argument("datasetName", None)
@@ -565,7 +612,7 @@ class SubmitDataHandler(BaseHandler):
         #------------------------------------DELETING DATASET------------------------
         if action == "delete dataset":
             try:
-                agency = models.Agency.objects.get(name=agencyName)
+                agency = models.Agency.objects.get(Q(name = agencyName) & Q(country = company.country))
             except:
                 self.set_status(400)
             datasetName = self.get_argument("datasetName", None)
@@ -590,12 +637,9 @@ class SubmitDataHandler(BaseHandler):
 #--------------------------------------------------------EDIT COMPANY PAGE------------------------------------------------------------
 class EditCompanyHandler(BaseHandler):
     @tornado.web.addslash
-    def get(self, id):
+    def get(self, country, id):
         try: 
             company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
-            #Datasets by agency, with no subagency
-            page_heading = "Editing " + company.companyName
-            page_title = "Editing " + company.companyName
         except:
             self.render("404.html", 
                 page_title = "That ain't even a thing.",
@@ -603,15 +647,20 @@ class EditCompanyHandler(BaseHandler):
                 error = "404 - Not Found",
                 user=self.current_user,
                 message=id)
+        if company.country != country:
+            self.redirect(str('/'+company.country+'/edit/'+id))
+        lan = self.get_argument("lan", "")
+        with open("templates/"+company.country+"/settings.json") as json_file:
+            settings = json.load(json_file)
+        if lan not in settings.keys():
+            logging.info("No translation selected or translation not available in this language")
+            lan = settings["default_language"]
         if company.locked:
-            self.render("404.html",
+            self.render(company.country + "/404.html",
                 page_title = "Can't Edit This Company",
-                page_heading = "This company is locked from editing",
-                error = "locked")
+                settings = settings[lan]['error']["locked"])
         else:
-            self.render("editCompany.html",
-                page_title = page_title,
-                page_heading = page_heading,
+            self.render(company.country + "/editCompany.html",
                 company = company,
                 companyType = companyType,
                 companyFunction = companyFunction,
@@ -622,10 +671,13 @@ class EditCompanyHandler(BaseHandler):
                 stateList = stateList,
                 stateListAbbrev=stateListAbbrev,
                 user=self.current_user,
+                country = company.country,
+                country_keys=country_keys,
+                settings = settings[lan]['edit_company'],
                 id = str(company.id)
             )
 
-    def post(self, id):
+    def post(self, country, id):
         #save all data to log:
         logging.info("Editing company:")
         logging.info(self.request.arguments)

@@ -11,31 +11,31 @@
 <br>
 <br>
 <br>
-<h2>{{ page_heading }}</h2>
+<h2>{{ settings['page_heading'] }} {{company.companyName}}</h2>
+
 <form method="post" id="submitCompany" class="m-form companyForm">
 	<fieldset class="m-form-half">
 		<h3>Personal Information</h3>
-		<div class="m-form-line"><label for="">First Name: *</label><input type="text" name="firstName" id="firstName" {% if (company.contact) %} value="{{ company.contact.firstName }}" {% end %}></div>
-		<div class="m-form-line"><label for="">Last Name: *</label><input type="text" name="lastName" id="lastName" {% if (company.contact) %} value="{{ company.contact.lastName }}" {% end %}></div>
-		<div class="m-form-line"><label for="">Title:</label><input type="text" name="title" id="title" {% if (company.contact) %} value="{{ company.contact.title }}" {% end %}></div>
-		<div class="m-form-line"><label for="">Email: *</label><input type="text" name="email" id="email" parsley-trigger="change" parsley-type="email" {% if (company.contact) %} value="{{ company.contact.email }}" {% end %}></div>
+		<div class="m-form-line"><label for="">First Name: *</label><input type="text" name="firstName" id="firstName" parsley-required="true" {% if (company.contact) %} value="{{ company.contact.firstName }}" {% end %}></div>
+		<div class="m-form-line"><label for="">Last Name: *</label><input type="text" name="lastName" id="lastName" parsley-required="true" {% if (company.contact) %} value="{{ company.contact.lastName }}" {% end %}></div>
+		<div class="m-form-line"><label for="">Title: *</label><input type="text" name="title" id="title" parsley-required="true" {% if (company.contact) %} value="{{ company.contact.title }}" {% end %}></div>
+		<div class="m-form-line"><label for="">Email: *</label><input type="text" name="email" id="email" parsley-trigger="change" parsley-type="email" parsley-required="true" {% if (company.contact) %} value="{{ company.contact.email }}" {% end %}></div>
 		<div class="m-form-line"><label for="">Phone:</label><input type="text" name="phone" id="phone" parsley-trigger="change" parsley-type="phone" {% if (company.contact) %} value="{{ company.contact.phone }}" {% end %}></div>
 		<div class="m-form-box contacted-box"><label for="contacted"><input type="checkbox" name="contacted" id="contacted" value="contacted" {% if (company.contact) %}{% if company.contact.contacted %} checked {% end %}{% end %}>Please check here if you would be willing to be contacted for further information about your company.</label></div>
 	</fieldset>
 	<fieldset class="m-form-half right">
 		<h3>Company Information</h3>	
-		<div class="m-form-line"><label for="companyName">Company Name *</label><input type='text' name="companyName" id='companyName' value="{{ company.companyName }}"></div>
-		<div class="m-form-line"><label for="url">Company URL: *</label><input type='text' name="url" id='url' parsley-trigger="change" parsley-type="url" value="{{ company.url }}"></div>
+		<div class="m-form-line"><label for="url">Company URL: *</label><input type='text' name="url" id='url' parsley-trigger="change" parsley-type="url" parsley-required="true" value="{{ company.url }}"></div>
 		<div class="m-form-line"><label for="city">In which city is this company located?</label><input type="text" name="city" id="city" {% if company.city %} value="{{ company.city }}" {% end %}></div>
 		<div class="m-form-line">
-			<label for="state">State:</label>
-			<select name='state' id="state" >
-				{% for i in range(0, len(stateList[country])) %}
+			<label for="state">State: *</label>
+			<select name='state' id="state" parsley-required="true">
+				{% for i in range(0, 53) %}
 					<option name="state" value="{{stateListAbbrev[country][i]}}" {%try%}{%if company.state.replace(' ','') == stateListAbbrev[country][i] %} selected="selected" {%end%}{%except%}{%end%}>{{ stateList[country][i] }}</option>
 				{%end%}
 			</select>
 		</div>
-		<div class="m-form-line"><label for="country">Country:</label><input type="text" id="country" name="country" country="{{country}}" value="{{country_keys[country]}}" disabled="disabled"></div>
+		<div class="m-form-line"><label for="country">Country:</label><input type="text" name="country" value="{{country_keys[country]}}" disabled="disabled"></div>
 		<div class="m-form-line"><label for="zipCode">Zip Code:</label><input type="text" name="zipCode" id="zipCode" parsley-trigger="change" parsley-regexp="(^\d{5}$)|(^\d{5}-\d{4}$)" {% if company.zipCode %}value="{{ company.zipCode }}" {% end %}></div>
 		<div class="m-form-line"><label for="ceoFirstName">First Name of CEO:</label><input type="text" name="ceoFirstName" id="ceoFirstName" value="{{ company.ceo.firstName}}"></div>
 		<div class="m-form-line"><label for="ceoLastName">Last Name of CEO:</label><input type="text" name="ceoLastName" id="ceoLastName" value="{{ company.ceo.lastName }}"></div>
@@ -51,8 +51,8 @@
 			<input type="text" name="otherCompanyType" id="otherCompanyType" data-trigger="change" data-group="companyType" data-mincheck="1"></label>
 		{% end %}
 		</div>
-		<div class="m-form-line"><label for="">Founding Year:</label><input type="text" name="yearFounded" id="yearFounded" parsley-type="number" parsley-trigger="change" parsley-range="[1000, 2014]" {% if company.yearFounded and company.yearFounded != 9999 %} value="{{ company.yearFounded }}" {%end%}></div>
-		<div class="m-form-line"><label for="">Number of full-time employees:</label><input type="text" name="fte" id="fte" parsley-trigger="change" parsley-type="number" {% if company.fte %} value="{{ company.fte }}" {%end%}></div>
+		<div class="m-form-line"><label for="">Founding Year: *</label><input type="text" name="yearFounded" id="yearFounded" parsley-type="number" parsley-trigger="change" parsley-required="true" parsley-range="[1000, 2014]" {% if company.yearFounded and company.yearFounded != 9999 %} value="{{ company.yearFounded }}" {%end%}></div>
+		<div class="m-form-line"><label for="">Number of full-time employees: *</label><input type="text" name="fte" id="fte" parsley-trigger="change" parsley-type="number" parsley-required="true" {% if company.fte %} value="{{ company.fte }}" {%end%}></div>
 	</fieldset>
 	
 	<fieldset class="m-form-half">
@@ -61,10 +61,10 @@
 			<label for=""><input type="checkbox" name="revenueSource" id="revenueSource" data-trigger="change" data-group="revenueSource" data-mincheck="1" value="{{ source }}" {% if source in company.revenueSource %} checked {% end %}>{{ source }}</label><br>
 		{% end %}
 		{% if list(set(company.revenueSource) - set(revenueSource)) %}
-			<label for=""><input type="checkbox" name="revenueSource" id="revenueSource" value="Other" {%if company.revenueSource[0] %}checked{%end%}>Other</label>
+			<label for=""><input type="checkbox" name="revenueSource" id="revenueSource" parsley-required="true" value="Other" {%if company.revenueSource[0] %}checked{%end%}>Other</label>
 			<input type="text" name="otherRevenueSource" id="otherRevenueSource" data-trigger="change" data-group="revenueSource" data-mincheck="1" value="{{ list(set(company.revenueSource) - set(revenueSource))[0] }}"></label>
 		{% else %}
-			<label for=""><input type="checkbox" name="revenueSource" id="revenueSource" value="Other">Other
+			<label for=""><input type="checkbox" name="revenueSource" id="revenueSource" parsley-required="true" value="Other">Other
 			<input type="text" name="otherRevenueSource" id="otherRevenueSource" data-trigger="change" data-group="revenueSource" data-mincheck="1"></label>
 		{% end %}
 	</fieldset>
@@ -74,18 +74,18 @@
 			<label for=""><input type="radio" name="category" id="category" value="{{ category }}" {% if category == company.companyCategory %} checked {% end %}>{{ category }}</label><br>
 		{% end %}
 		{% if company.companyCategory not in categories %}
-			<label for=""><input type="radio" name="category" id="category" value="Other" checked>Other</label>
+			<label for=""><input type="radio" name="category" id="category"  parsley-required="true" value="Other" checked>Other</label>
 			<input type="text" name="otherCategory" id="otherCategory" {% if company.companyCategory %}value="{{ company.companyCategory }}"{%end%}></label>
 		{% else %}
-			<label for=""><input type="radio" name="category" id="category" value="Other">Other</label>
+			<label for=""><input type="radio" name="category" id="category" parsley-required="true" value="Other">Other</label>
 			<input type="text" name="otherCategory" id="otherCategory"></label>
 		{% end %}
 	</fieldset>
 	<fieldset class="m-form-half left">
 		<h3>Please give us a short public statement describing your company’s mission and work. You can take this material from your website or other publications if you choose to. <br><em>[200 words or less]</em> *</h3>
-		<textarea rows="10" cols="59" name="description" id="description" parsley-trigger="keyup">{{ company.description }}</textarea><br><br>
+		<textarea rows="10" cols="59" name="description" id="description" parsley-trigger="keyup" parsley-maxwords="200" parsley-required="true">{{ company.description }}</textarea><br><br>
 		<h3>As a summary, please provide a one sentence description of your company. <br><em>[25 words or less]</em> *</h3>
-		<textarea rows="10" cols="59" name="descriptionShort" id="descriptionShort" parsley-trigger="keyup" parsley-maxwords="25">{{ company.descriptionShort }}</textarea><br>
+		<textarea rows="10" cols="59" name="descriptionShort" id="descriptionShort" parsley-trigger="keyup" parsley-maxwords="25" parsley-required="true">{{ company.descriptionShort }}</textarea><br>
 	</fieldset>
 	<fieldset class="m-form-half right">
 		<h3>Please include any financial or operational information that will help us understand your company. We are interested in specific information like past and projected annual revenues, total outside investment dollars to date, and significant investors or partners. <br><em>[100 words or less]</em></h3>
@@ -99,45 +99,24 @@
 			<input type="radio" name="sourceCount" id="count1" value="1-10" {% if company.sourceCount == '1-10' %}checked{%end%}><label for="count1">1-10</label>
 			<input type="radio" name="sourceCount" id="count2" value="10-50" {% if company.sourceCount == '10-50' %}checked{%end%}><label for="count2">10-50</label>
 			<input type="radio" name="sourceCount" id="count3" value="50-100" {% if company.sourceCount == '50-100' %}checked{%end%}><label for="count3">50-100</label>
-			<input type="radio" name="sourceCount" id="count4" value="100+" {% if company.sourceCount == '100+' %}checked{%end%}><label for="count4">100+</label>
-			<input type="radio" name="sourceCount" id="count5" value="NA" {% if company.sourceCount == 'NA' %}checked{%end%}><label for="count5">NA</label>
+			<input type="radio" name="sourceCount" id="count4" parsley-required="true" value="100+" {% if company.sourceCount == '100+' %}checked{%end%}><label for="count4">100+</label>
 		</div>
+		{% raw xsrf_form_html() %}
 	</fieldset>
-	<h2>Admin Settings</h2><br>
-	<fieldset class="m-form">
-		<fieldset class="m-form-half">
-			<h3>Mark {{company.companyName}} as vetted?</h3>
-				<label for="vetted"><input type="checkbox" name="vetted" id="vetted" value="vetted" {%if company.vetted %}checked{%end%}>Vetted</label>
-		</fieldset>
-		<fieldset class="m-form-half">
-			<h3>Display {{company.companyName}} on the OD500 page?</h3>
-				<label for="display"><input type="checkbox" name="display" id="display" value="display" {%if company.display %}checked{%end%}>Display</label>
-		</fieldset>
-		<fieldset class="m-form-half">
-			<h3>Mark {{company.companyName}} to re-send survey to company?</h3>
-				<label for="vettedByCompany"><input type="checkbox" name="vettedByCompany" id="vettedByCompany" value="vettedByCompany" {%if not company.vettedByCompany %}checked{%end%}>Mark for Survey Re-submission</label>
-		</fieldset>
-		<fieldset class="m-form-half">
-			<h3>Has {{company.companyName}} submitted their survey?</h3>
-				<label for="submittedSurvey"><input type="checkbox" name="submittedSurvey" id="submittedSurvey" value="submittedSurvey" {%if company.submittedSurvey %}checked{%end%}>Submitted Survey</label>
-		</fieldset>
-		<fieldset class="m-form-half">
-			<h3>Prevent editing on this company (only admin can edit)?</h3>
-				<label for="locked"><input type="checkbox" name="locked" id="locked" value="locked" {%if company.locked %}checked{%end%}>Lock</label>
-		</fieldset>
-		<fieldset class="m-form-half">
-			<h3>Notes</h3>
-				<textarea rows="10" cols="59" name="notes" id="notes" parsley-trigger="keyup" parsley-maxwords="1000">{%if company.notes %}{{company.notes}}{%end%}</textarea>
-		</fieldset>
-	</fieldset>
-	{% raw xsrf_form_html() %}
 </form>
-<br>
-
+<div class="saveCompanyForm">	
+	<input type="hidden" class="companyID" name="companyID" value="{{ id }}">
+	<h3><input type="button" class="l-button" id="companySave" name="submit" value="Save Company Info"><br>
+		<span class="message-form">(You can keep editing after saving)</span>
+		<span class="error-form" style="display:none"></span>
+	</h3>
+</div>
 <!--------------------------------------------DATASETS--------------------------------------!-->
 <br><br><h2>Agency and Data Information</h2><br>
 <div class="m-form-box data">
-	<h3>Please tell us more about the data your company uses. Use the search bar to find and select government agencies, subagencies, city and state governments, or government-funded research programs from the pop-up list provided. <div class="example-popup"><a>See Example.</a></div></h3><br>
+	<h3 class="data-text">Please tell us more about the open data sources your company uses.</h3> 
+	<h3 class="data-text">Use the search bar to find and select government agencies, subagencies, city and state governments, or government-funded research programs from the list provided.</h3>
+	<h3 class="data-text"><div class="example-popup"><a>See Example.</a></div></h3><br>
 	<div class="dialog-example" style="display:none">
 		<img src="{{ static_url("img/ExampleData.png") }}">
 	</div>
@@ -156,7 +135,7 @@
 		<div id="accordionAgency">
 			{% for agency in company.agencies %}
 				<h3 class="agency" name='{{agency.name.replace(" ", "-") }}'><a href="#">{{agency.name}}</a>
-					<span style="float:right; display: none;" class="toolbar ui-corner-all ui-icon ui-icon-circle-close red" subagency="" agency="{{agency.name.replace(" ","-")}}" a_id="{{agency.id}}"></span>
+					<span style="float:right; display: none;" class="toolbar ui-corner-all ui-icon ui-icon-circle-close red" subagency="" agency="{{agency.name.replace(" ","-")}}"></span>
 				</h3>
 				<div id="{{agency.name.replace(" ","-")}}Accordion">
 					<br><h3>Agency Level Datasets</h3><br>
@@ -168,7 +147,7 @@
 							<th class="table-header-buttons"></th>
 						</tr>
 						{% for d in agency.datasets %}{% if company == d.usedBy %}
-							<tr class="dataset-row" name="{{d.datasetName}}" subagency="" agency="{{agency.name.replace(" ","-")}}" a_id="{{agency.id}}">
+							<tr class="dataset-row" name="{{d.datasetName}}" subagency="" agency="{{agency.name.replace(" ","-")}}">
 								<td><input type="text" name="datasetName" id="datasetName" {% if (d.datasetName) %} value="{{d.datasetName}}" {% end %}></td>
 								<td><input type="text" name="datasetURL" id="datasetURL" {% if (d.datasetURL) %} value="{{d.datasetURL}}" {% end %}></td>
 								<td><input type="text" name="rating" id="rating" size="3" {% if (d.rating) %} value="{{d.rating}}" {% end %}></td>
@@ -177,7 +156,7 @@
 									<span class="message-dataset" style="display:none"></span></td>
 							</tr>
 						{% end %}{% end %}
-						<tr class="dataset-row" subagency="" agency="{{agency.name.replace(" ","-")}}" a_id="{{agency.id}}">
+						<tr class="dataset-row" subagency="" agency="{{agency.name.replace(" ","-")}}">
 							<td><input type="text" name="datasetName" id="datasetName" placeholder="Agency-Level Dataset..."value=""></td>
 							<td><input type="text" name="datasetURL" id="datasetURL" value=""></td>
 							<td><input type="text" name="rating" id="rating" size="3" value=""></td>
@@ -191,7 +170,7 @@
 					<div id="accordionSubAgency" class="{{agency.name.replace(" ", "-") }}Subagencies">
 						{% for sub in agency.subagencies %}{% if company in sub.usedBy %}
 							<h3 class="subagency" name="{{sub.name.replace(" ", "-") }}"><a href="#">{{sub.name}}</a>
-								<span style="float:right; display: none;" class="toolbar ui-corner-all ui-icon ui-icon-circle-close red" subagency="{{sub.name.replace(" ","-")}}" agency="{{agency.name.replace(" ","-")}}" a_id="{{agency.id}}"></span>
+								<span style="float:right; display: none;" class="toolbar ui-corner-all ui-icon ui-icon-circle-close red" subagency="{{sub.name.replace(" ","-")}}" agency="{{agency.name.replace(" ","-")}}"></span>
 							</h3>
 							<div class="{{ sub.name.replace(" ", "-") }}">
 								<table class="subagencyDatasetTable">
@@ -202,7 +181,7 @@
 										<th class="table-header-buttons"></th>
 									</tr>
 									{% for d in sub.datasets %}{%if company == d.usedBy %}
-										<tr class="dataset-row" name="{{d.datasetName}}" subagency="{{ sub.name.replace(" ", "-") }}" agency="{{agency.name.replace(" ","-")}}" a_id="{{agency.id}}">
+										<tr class="dataset-row" name="{{d.datasetName}}" subagency="{{ sub.name.replace(" ", "-") }}" agency="{{agency.name.replace(" ","-")}}">
 											<td><input type="text" name="datasetName" id="datasetName" {% if (d.datasetName) %} value="{{d.datasetName}}" {% end %}></td>
 											<td><input type="text" name="datasetURL" id="datasetURL" {% if (d.datasetURL) %} value="{{d.datasetURL}}" {% end %}></td>
 											<td><input type="text" name="rating" id="rating" size="3" {% if (d.rating) %} value="{{d.rating}}" {% end %}></td>
@@ -211,7 +190,7 @@
 												<span class="message-dataset" style="display:none"></span></td>
 										</tr>
 									{% end %}{% end %}
-									<tr class="dataset-row" subagency="{{ sub.name.replace(" ", "-") }}" agency="{{agency.name.replace(" ","-")}}" a_id="{{agency.id}}">
+									<tr class="dataset-row" subagency="{{ sub.name.replace(" ", "-") }}" agency="{{agency.name.replace(" ","-")}}">
 										<td><input type="text" name="datasetName" id="datasetName" placeholder="Subagency-Level Dataset" value=""></td>
 										<td><input type="text" name="datasetURL" id="datasetURL" value=""></td>
 										<td><input type="text" name="rating" id="rating" size="3" value=""></td>
@@ -233,68 +212,14 @@
 	</fieldset>
 </div>
 <!--------------------------------------------END DATASETS--------------------------------------!-->
-
-<div class="saveCompanyForm">	
+<h2 class="disclaimer-text">Your responses will become part of a public database of information on Open Data companies. By submitting this form you are agreeing that, other than personal contact information, this information will be part of a publicly available database.</h2><br>
+<!--<h2 class="disclaimer-text">Are you ready to submit this information? You will not be able to come back to this form afterwards. If you wish to make more changes, you will need to contact <a href="mailto:opendata500@thegovlab.org">opendata500@thegovlab.org</a></h2>!-->
+<div class="submitCompanyForm">	
 	<input type="hidden" class="companyID" name="companyID" value="{{ id }}">
-	<h3><input type="button" class="l-button" id="companyAdminSave" name="submit" value="Save Company Info">
-		<span class="message-form" style="display:none"></span>
-		<span class="error-form" style="display:none"></span>
-	</h3>
+	<input type="button" class="l-button" id="companySubmit" name="submit" value="Save and Finish">
+	<span class="savingMessage_companyEdit" style="display:none">Saving...</span>
+	<span class="errorMessage_companyEdit" style="display:none">Oops... Something went wrong.</span>
+	<span class="savedMessage_companyEdit" style="display:none">Saved!</span>
 </div>
-
-
-
-<script>
-$(document).ready( function () {
-	//----------------------------------Admin FORM--------------------------------------
-  $('.saveCompanyForm').on('click', '#companyAdminSave', function() {
-    if ($('.companyForm').parsley('validate') && ($('#dataComments').parsley('validate') || $('#dataComments').parsley('validate') == null)) {
-      console.log('valid');
-      $('.message-form').text('Saving...');
-      // $('.message-form').show();
-      var companyID = $('.companyID').val();
-      var data = $('.companyForm').serializeArray();
-      data.push({
-		    "name": "dataComments",
-		    "value": $('#dataComments').val()
-		});
-      $.ajax({
-        type: 'POST',
-        url: '/admin/company-edit/' + companyID,
-        data: data,
-        error: function(error) {
-            console.debug(JSON.stringify(error));
-            $('.message-form');
-            $('.error-form').text('Oops... Something went wrong :/')
-            $('.error-form').show().delay(5000).fadeOut(); },
-        beforeSend: function(xhr, settings) {
-          //$(event.target).attr('disabled', 'disabled'); 
-        },
-        success: function(success) {
-          //console.log(success);
-          $('.error-form').hide();
-          $('.message-form').text('Saved!')
-          $('.message-form').show().delay(5000).fadeOut();
-          console.log("regular saved!");
-        }
-      });
-    } else {
-      $('.savingMessage_companyEdit').hide();
-      $('.error-form').show().delay(5000).fadeOut();
-      //console.log('not valid');
-    }
-  });
-});
-
-
-
-</script>
-
-
-
-
-
-
-
 
 {% end %}

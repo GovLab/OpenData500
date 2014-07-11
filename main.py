@@ -40,10 +40,10 @@ class Application(tornado.web.Application):
             (r'/(favicon.ico)', tornado.web.StaticFileHandler, {"path": ""}),
             (r"/(?:([A-Za-z]{2})/)?", MainHandler),
             (r"/([0-9]{1})/?", TestHandler),
-            (r"/submitCompany/?", SubmitCompanyHandler),
+            (r"/(?:([A-Za-z]{2})/)?submitCompany/?", SubmitCompanyHandler),
             (r"/validate/?", ValidateHandler),
-            (r"/edit/([a-zA-Z0-9]{24})/?", EditCompanyHandler),
-            (r"/addData/([a-zA-Z0-9]{24})/?", SubmitDataHandler),
+            (r"/(?:([A-Za-z]{2})/)?edit/([a-zA-Z0-9]{24})/?", EditCompanyHandler),
+            (r"/(?:([A-Za-z]{2})/)?addData/([a-zA-Z0-9]{24})/?", SubmitDataHandler),
             (r"/delete/([a-zA-Z0-9]{24})/?", DeleteCompanyHandler),
             (r"/admin/?", CompanyAdminHandler),
             (r"/admin/companies/?", CompanyAdminHandler),
@@ -58,12 +58,12 @@ class Application(tornado.web.Application):
             (r"/(?:([A-Za-z]{2})/)?download/?", DownloadHandler),
             (r'/download/(.*)/?',tornado.web.StaticFileHandler, {'path':os.path.join(os.path.dirname(__file__), 'static')+"/files/"}),
             (r"/candidates/?", CandidateHandler),
-            (r"/list/?", ListHandler),
+            (r"/(?:([A-Za-z]{2})/)?list/?", ListHandler),
             (r'/thanks/?', ThanksHandler),
             (r'/login/?', LoginHandler),
             (r'/logout/?', LogoutHandler),
             (r'/register/?', RegisterHandler),
-            (r"/([^/]+)/?", CompanyHandler)
+            (r"/(?:([A-Za-z]{2})/)?([^/]+)/?", CompanyHandler)
         ]
         settings = dict(
             template_path=os.path.join(os.path.dirname(__file__), "templates"),

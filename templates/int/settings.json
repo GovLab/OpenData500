@@ -20,6 +20,14 @@
         "roundtable": {
             "page_title": "Open Data Roundtables",
             "page_heading": "Open Data Roundtables"
+        },
+        "list": {
+            "page_title": "OD500 Companies",
+            "page_heading": "OD500 Companies"
+        },
+        "submit": {
+            "page_title": "Submit A Company To The OD500",
+            "page_heading": "Submit A Company To The OD500"
         }
     }
 }
