@@ -212,7 +212,7 @@ class FileGenerator(object):
         logging.info("Company JSON File Done!")
     def generate_agency_json(self, country):
         #--------------JSON OF AGENCIES------------
-        agencies = models.Agency.objects(Q(source="dataGov") & Q(country=country))
+        agencies = models.Agency.objects(country=country)
         agenciesJSON = []
         for a in agencies:
             #--------DATASETS AT AGENCY LEVEL------

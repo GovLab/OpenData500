@@ -144,6 +144,7 @@ class CompanyHandler(BaseHandler):
         if not country:
             country = 'us'
             self.redirect('/us/'+companyName)
+            return
         try:
             try:
                 company = models.Company.objects.get(Q(prettyName=companyName) & Q(country=country))
@@ -158,6 +159,7 @@ class CompanyHandler(BaseHandler):
                     page_heading=company.companyName,
                     company = company,
                 )
+                return
             else:
                 self.render(
                     "404.html",
@@ -166,6 +168,7 @@ class CompanyHandler(BaseHandler):
                     page_heading='Shucks...',
                     error = 'display'
                 )
+                return
         except Exception, e:
             logging.info("Company, " + companyName + ": " + str(e)) 
             self.render(
@@ -175,6 +178,7 @@ class CompanyHandler(BaseHandler):
                 page_heading='Hmm...',
                 error = '404 - Not Found'
             )
+            return
 
 #--------------------------------------------------------FULL LIST PAGE------------------------------------------------------------
 class ListHandler(BaseHandler):
