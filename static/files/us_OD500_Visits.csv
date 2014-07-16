@@ -1457,3 +1457,37 @@ ts,referer,page,user_agent,ip
 2014-07-10 02:54:48.722722,,/chart/,Mozilla/4.0,180.153.206.27
 2014-07-10 03:41:59.751821,,/chart/,Mozilla/4.0 (compatible;),203.3.24.22
 2014-07-10 13:14:39.439535,http://www.opendata500.com/,/chart/,Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0),69.191.241.59
+2014-07-10 23:00:19.053800,http://luisdaniel.com/Open-Data-Compass,/chart/,"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.153 Safari/537.36",187.178.151.106
+2014-07-11 00:23:58.399827,,/chart/,Mozilla/5.0  (compatible; MSIE 10.0; Windows NT 6.1; WOW64; Trident/6.0),210.193.176.131
+2014-07-11 02:33:03.570700,,/chart/,MnoGoSearch/3.3.15,"unknown, 86.110.225.213"
+2014-07-11 10:12:57.040324,http://www.opendata500.com/,/chart/,Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; Trident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C; .NET4.0E; InfoPath.3; Tablet PC 2.0),146.184.160.23
+2014-07-11 14:35:01.249826,http://www.opendata500.com/,/chart/,Mozilla/5.0 (Windows NT 6.1; WOW64; rv:24.0) Gecko/20100101 Firefox/24.0,159.53.110.141
+2014-07-11 15:16:09.168675,,/chart/,Mozilla/4.0 (compatible;),205.254.147.8
+2014-07-11 17:03:02.975743,,/chart/,Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1),188.143.232.211
+2014-07-11 21:19:01.348356,http://www.opendata500.com/,/chart/,Mozilla/5.0 (Windows NT 6.1; rv:21.0) Gecko/20100101 Firefox/21.0,178.32.12.113
+2014-07-12 04:17:55.976860,,/chart/,Mozilla/5.0 (compatible; coccoc/1.0; +http://help.coccoc.com/),123.30.175.214
+2014-07-12 23:16:56.086537,http://www.opendata500.com/,/chart/,Mozilla/5.0 (Windows NT 6.1; rv:5.0) Gecko/20100101 Firefox/5.02,173.0.56.207
+2014-07-13 05:02:23.044995,http://luisdaniel.com/Open-Data-Compass,/chart/,"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.153 Safari/537.36",109.66.14.247
+2014-07-13 20:09:47.966166,http://www.opendata500.com/,/chart/,Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; Trident/6.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; CMDTDF; .NET4.0C; InfoPath.2; BRI/2; YTB730; .NET4.0E),202.232.96.90
+2014-07-14 07:00:37.703003,http://www.opendata500.com/,/chart/,"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.112 Safari/535.1",201.221.133.182
+2014-07-14 09:05:52.301189,http://www.opendata500.com/,/chart/,Mozilla/5.0 (compatible; special_archiver/3.1.1 +http://www.archive.org/details/archive.org_bot),207.241.237.208
+2014-07-14 09:37:42.764087,http://www.opendata500.com/,/chart/,"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.112 Safari/535.1",23.27.239.31
+2014-07-14 13:35:51.336884,http://www.opendata500.com/,/chart/,"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.153 Safari/537.36",192.33.240.95
+2014-07-14 16:27:46.268731,,/chart/,Mozilla/5.0 (compatible; MJ12bot/v1.4.5; http://www.majestic12.co.uk/bot.php?+),199.58.86.209
+2014-07-15 10:30:12.057119,http://www.opendata500.com/,/chart/,Mozilla/5.0 (Windows NT 6.1; rv:24.0) Gecko/20140518 Firefox/24.0,194.4.7.132
+2014-07-15 11:36:52.653083,,/chart/,Mozilla/4.0 (compatible;),137.227.196.95
+2014-07-15 11:36:52.836902,http://www.opendata500.com/,/chart/,"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.153 Safari/537.36",137.227.196.95
+2014-07-15 11:38:27.603462,,/chart/,Mozilla/4.0 (compatible;),136.177.62.4
+2014-07-15 12:10:15.256000,,/chart/,Java/1.6.0_04,185.25.49.182
+2014-07-15 12:19:44.747118,,/chart/,Mozilla/4.0 (compatible;),205.254.147.8
+2014-07-15 14:01:52.845565,http://www.opendata500.com/,/chart/,Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; Trident/4.0; chromeframe/32.0.1700.107; openframe/30.0.0.5; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; MS-RTC LM 8; MS-RTC EA 2),216.46.98.249
+2014-07-15 17:19:47.602772,http://www.opendata500.com/,/chart/,"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/534.59.10 (KHTML, like Gecko) Version/5.1.9 Safari/534.59.10",165.224.214.1
+2014-07-15 19:46:32.514450,http://www.opendata500.com,/chart/,"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.110 Safari/537.36",165.231.8.45
+2014-07-16 01:18:18.459282,,/chart/,Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0; Trident/4.0),54.82.222.251
+2014-07-16 05:29:55.327121,,/chart/,Mozilla/4.0 (compatible;),195.212.29.186
+2014-07-16 06:25:23.692066,,/chart/,Mozilla/4.0 (compatible;),158.169.40.7
+2014-07-16 09:24:28.432949,,/chart/,Mozilla/4.0,180.153.206.33
+2014-07-16 11:57:40.986058,http://luisdaniel.com/Open-Data-Compass,/chart/,Mozilla/5.0 (Windows NT 6.1; WOW64; rv:24.0) Gecko/20100101 Firefox/24.0,148.129.71.40
+2014-07-16 11:58:52.744610,http://luisdaniel.com/Open-Data-Compass,/chart/,Mozilla/5.0 (Windows NT 6.1; WOW64; rv:24.0) Gecko/20100101 Firefox/24.0,148.129.71.40
+2014-07-16 12:18:56.775389,http://luisdaniel.com/Open-Data-Compass,/chart/,Mozilla/5.0 (Windows NT 6.1; WOW64; rv:24.0) Gecko/20100101 Firefox/24.0,148.129.71.40
+2014-07-16 12:46:23.926391,http://www.opendata500.com/,/chart/,"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.153 Safari/537.36",165.224.214.1

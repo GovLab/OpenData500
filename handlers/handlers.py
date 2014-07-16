@@ -186,7 +186,7 @@ class ListHandler(BaseHandler):
     #@tornado.web.authenticated
     def get(self, country=None):
         if not country:
-            country = "int"
+            country = "us"
         lan = self.get_argument("lan", "")
         if country in available_countries:
             with open("templates/"+country+"/settings.json") as json_file:
@@ -194,7 +194,7 @@ class ListHandler(BaseHandler):
             if lan not in settings.keys():
                 logging.info("No translation selected or translation not available in this language")
                 lan = settings["default_language"]
-            companies = models.Company.objects(display=True).order_by('prettyName')
+            companies = models.Company.objects(Q(display=True) & Q(country=country)).order_by('prettyName')
             agencies = models.Agency.objects(Q(usedBy__not__size=0) & Q(source="dataGov") & Q(dataType="Federal")).order_by("-usedBy_count").only("name", "abbrev", "prettyName")[0:16]
             stats = models.Stats.objects().first()
             self.render(

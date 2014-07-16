@@ -13,6 +13,7 @@
 	<fieldset class="m-form-half">
 		<h2>Stats</h2>
 		<h3>Total Companies: </h3><p id="totalCompanies">{{stats.totalCompanies}}</p>
+		<h3>Total Companies Displayed: </h3><p id="totalCompaniesDisplayed">{{stats.totalCompaniesDisplayed}}</p>
 		<h3>Total Companies Submitted Via Web: </h3><p id="totalCompaniesWeb">{{stats.totalCompaniesWeb}}</p>
 		<h3>Total Companies With Complete Surveys: </h3><p id="totalCompaniesSurvey">{{stats.totalCompaniesSurvey}}</p>
 	</fieldset>
@@ -123,6 +124,7 @@ $(document).ready( function() {
 				$('#totalCompanies').text(data['totalCompanies']);
 				$('#totalCompaniesWeb').text(data['totalCompaniesWeb']);
 				$('#totalCompaniesSurvey').text(data['totalCompaniesSurvey']);
+				$('#totalCompaniesDisplayed').text(data['totalCompaniesDisplayed']);
 				$('.message').text("Aight, I'm done.").show().delay(5000).fadeOut();
 			} else {
 				$('.message').text("Aight, I'm done.").show().delay(5000).fadeOut();

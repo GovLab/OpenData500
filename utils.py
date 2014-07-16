@@ -72,6 +72,9 @@ class StatsGenerator(object):
     def get_total_companies_surveys(self, country):
         return models.Stats.objects.get(country=country).totalCompaniesSurvey
 
+    def get_total_displayed_companies(self, country):
+        return models.Stats.objects.get(country=country).totalCompaniesDisplayed
+
     def get_total_agencies(self, country):
         return models.Stats.objects.get(country=country).totalAgencies
 
@@ -85,6 +88,7 @@ class StatsGenerator(object):
         s.totalCompanies = models.Company.objects(country=country).count()
         s.totalCompaniesWeb = models.Company.objects(Q(submittedThroughWebsite = True) & Q(country=country)).count()
         s.totalCompaniesSurvey = models.Company.objects(Q(submittedSurvey = True) & Q(country=country)).count()
+        s.totalCompaniesDisplayed = models.Company.objects(Q(displayed=True) & Q(country=country)).count()
         s.save()
     
     def increase_individual_state_count(self, state, country):
@@ -121,6 +125,7 @@ class StatsGenerator(object):
         stats.totalCompanies = models.Company.objects(country=country).count()
         stats.totalCompaniesWeb = models.Company.objects(Q(submittedThroughWebsite = True) & Q(country=country)).count()
         stats.totalCompaniesSurvey = models.Company.objects(Q(submittedSurvey = True) & Q(country=country)).count()
+        stats.totalCompaniesDisplayed = models.Company.objects(Q(display=True) & Q(country=country)).count()
         companies  = models.Company.objects(Q(display=True) & Q(country=country))
         stateCount = []
         for c in companies:

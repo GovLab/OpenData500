@@ -137,7 +137,10 @@ class CompanyAdminHandler(BaseHandler):
             self.application.stats.refresh_stats(country)
             self.application.files.generate_visit_csv(country)
             stats = models.Stats.objects.get(country=country)
-            self.write({"totalCompanies": stats.totalCompanies, "totalCompaniesWeb":stats.totalCompaniesWeb, "totalCompaniesSurvey":stats.totalCompaniesSurvey})
+            self.write({"totalCompanies": stats.totalCompanies, 
+                        "totalCompaniesWeb":stats.totalCompaniesWeb, 
+                        "totalCompaniesSurvey":stats.totalCompaniesSurvey,
+                        "totalCompaniesDisplayed": stats.totalCompaniesDisplayed})
         elif action == "files":
             #self.application.files.generate_company_json(country)
             self.application.files.generate_agency_json(country)

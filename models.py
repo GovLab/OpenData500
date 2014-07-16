@@ -97,6 +97,7 @@ class Stats(Document):
 	totalCompanies = IntField() #total
 	totalCompaniesWeb = IntField() #submitted through web survey
 	totalCompaniesSurvey = IntField() #completed surveys
+	totalCompaniesDisplayed = IntField() #displayed companies
 	totalAgencies = IntField()
 	states = ListField(EmbeddedDocumentField(States))
 	country = StringField()
