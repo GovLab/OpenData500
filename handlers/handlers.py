@@ -44,37 +44,6 @@ class TestHandler(BaseHandler):
             page_heading='Welcome to the Open Data 500 Pre-Launch',
         )
 
-#--------------------------------------------------------ABOUT PAGE------------------------------------------------------------
-# class AboutHandler(BaseHandler):
-#     @tornado.web.addslash
-#     #@tornado.web.authenticated
-#     def get(self, country=None):
-#         if not country:
-#             self.redirect("/us/about/")
-#             return
-#         lan = self.get_argument("lan", "")
-#         if country in available_countries:
-#             with open("templates/"+country+"/settings.json") as json_file:
-#                 settings = json.load(json_file)
-#             if lan not in settings.keys():
-#                 logging.info("No translation selected or translation not available in this language")
-#                 lan = settings["default_language"]
-#             self.render(
-#                 country.lower()+"/about.html",
-#                 page_title = settings[lan]['about']['page_title'],
-#                 settings = settings[lan]['about'],
-#                 user=self.current_user,
-#                 country=country
-#             )
-#         else:
-#             self.render('404.html',
-#                 page_heading="Stop trying to make " +self.request.uri + " happen. <br><br>It's not going to happen.",
-#                 user=self.current_user,
-#                 page_title="404 - Not Found",
-#                 error="Not found",
-#                 country=""
-#             )
-
 #--------------------------------------------------------ROUNDATABLE PAGE------------------------------------------------------------
 class RoundtableHandler(BaseHandler):
     @tornado.web.addslash
@@ -95,35 +64,6 @@ class RoundtableHandler(BaseHandler):
             country=country
         )
 
-#--------------------------------------------------------FINDINGS, NOW STATS PAGE------------------------------------------------------------
-# class FindingsHandler(BaseHandler):
-#     @tornado.web.addslash
-#     def get(self, country=None):
-#         if not country:
-#             self.redirect("/us/stats/")
-#             return
-#         lan = self.get_argument("lan", "")
-#         if country in available_countries:
-#             with open("templates/"+country+"/settings.json") as json_file:
-#                 settings = json.load(json_file)
-#             if lan not in settings.keys():
-#                 logging.info("No translation selected or translation not available in this language")
-#                 lan = settings["default_language"]
-#             self.render(
-#                 country.lower()+"/findings.html",
-#                 #page_title = settings[lan]['findings']['page_title'],
-#                 settings = settings[lan]['findings'],
-#                 user=self.current_user,
-#                 country=country
-#             )
-#         else:
-#             self.render('404.html',
-#                 page_heading="Stop trying to make " +self.request.uri + " happen. <br><br>It's not going to happen.",
-#                 user=self.current_user,
-#                 page_title="404 - Not Found",
-#                 error="Not found",
-#                 country=""
-#             )
 
 #--------------------------------------------------------THANKS PAGE------------------------------------------------------------
 class ThanksHandler(BaseHandler): 
@@ -251,23 +191,6 @@ class ListHandler(BaseHandler):
                 error="Not found",
                 country=""
             )
-        
-        # self.render(
-        #     "candidates.html",
-        #     page_title='Open Data 500',
-        #     page_heading='OD500 Companies',
-        #     companies = companies,
-        #     stats = stats,
-        #     states=states,
-        #     agencies = agencies,
-        #     categories = categories,
-        #     user=self.current_user,
-        # )
-
-#--------------------------------------------------------CANDIDATE REDIRECT TO FULL LIST PAGE------------------------------------------------------------
-# class CandidateHandler(BaseHandler): #redirect to list URL
-#     def get(self):
-#         self.redirect('/list/')
 
 
 #--------------------------------------------------------CHART PAGE------------------------------------------------------------
@@ -294,37 +217,6 @@ class ChartHandler(BaseHandler):
             self.render("solo_chart.html")
 
 
-#--------------------------------------------------------RESOURCES PAGE------------------------------------------------------------
-# class ResourcesHandler(BaseHandler):
-#     @tornado.web.addslash
-#     #@tornado.web.authenticated
-#     def get(self, country=None):
-#         if not country:
-#             self.redirect("/us/resources/")
-#             return
-#         lan = self.get_argument("lan", "")
-#         if country in available_countries:
-#             with open("templates/"+country+"/settings.json") as json_file:
-#                 settings = json.load(json_file)
-#             if lan not in settings.keys():
-#                 logging.info("No translation selected or translation not available in this language")
-#                 lan = settings["default_language"]
-#             self.render(
-#                 country + "/resources.html",
-#                 page_title='Open Data Resources',
-#                 user=self.current_user,
-#                 settings = settings[lan]['resources'],
-#                 page_heading='Open Data Resources'
-#             )
-#         else:
-#             self.render('404.html',
-#                 page_heading="Stop trying to make " +self.request.uri + " happen. <br><br>It's not going to happen.",
-#                 user=self.current_user,
-#                 page_title="404 - Not Found",
-#                 error="Not found",
-#                 country=""
-#             )
-
 #--------------------------------------------------------VALIDATE COMPANY EXISTS PAGE------------------------------------------------------------
 #------SHOULD MOVE TO UTILS-------
 class ValidateHandler(BaseHandler):
@@ -349,7 +241,7 @@ class SubmitCompanyHandler(BaseHandler):
     #@tornado.web.authenticated
     def get(self, country=None):
         if not country:
-            country = "int"
+            country = "us"
         lan = self.get_argument("lan", "")
         if country in available_countries:
             with open("templates/"+country+"/settings.json") as json_file:
@@ -799,43 +691,6 @@ class EditCompanyHandler(BaseHandler):
         company.save()
         #self.application.stats.update_all_state_counts()
         self.write('success')
-
-
-#--------------------------------------------------------DOWNLOAD PAGE------------------------------------------------------------
-# class DownloadHandler(BaseHandler):
-#     @tornado.web.addslash
-#     #@tornado.web.authenticated
-#     def get(self, country=None):
-#         if not country:
-#             country = "int"
-#         lan = self.get_argument("lan", "")
-#         if country in available_countries:
-#             with open("templates/"+country+"/settings.json") as json_file:
-#                 settings = json.load(json_file)
-#             if lan not in settings.keys():
-#                 logging.info("No translation selected or translation not available in this language")
-#                 lan = settings["default_language"]
-#             self.render(
-#                 country.lower()+"/download.html",
-#                 page_title = settings[lan]['download']['page_title'],
-#                 settings = settings[lan]['download'],
-#                 user=self.current_user,
-#                 country="int"
-#             )
-#         else:
-#             self.render('404.html',
-#                 page_heading="Stop trying to make " +self.request.uri + " happen. <br><br>It's not going to happen.",
-#                 user=self.current_user,
-#                 page_title="404 - Not Found",
-#                 error="Not found",
-#                 country=""
-#             )
-        # self.render(
-        #     "download.html",
-        #     page_title='Download the Open Data 500',
-        #     user=self.current_user,
-        #     page_heading='Download the Open Data 500'
-        # )
 
 
 
