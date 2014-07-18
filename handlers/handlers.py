@@ -50,7 +50,8 @@ class AboutHandler(BaseHandler):
     #@tornado.web.authenticated
     def get(self, country=None):
         if not country:
-            country = "int"
+            self.redirect("/us/about/")
+            return
         lan = self.get_argument("lan", "")
         if country in available_countries:
             with open("templates/"+country+"/settings.json") as json_file:
@@ -74,32 +75,33 @@ class AboutHandler(BaseHandler):
                 country=""
             )
 
-#--------------------------------------------------------MEDIA REDIRECT PAGE------------------------------------------------------------
+#--------------------------------------------------------ROUNDATABLE PAGE------------------------------------------------------------
 class RoundtableHandler(BaseHandler):
     @tornado.web.addslash
     #@tornado.web.authenticated
-    def get(self, rt=None):
-        if not rt:
-            rt="main"
+    def get(self, country, rt=None):
+        if self.request.uri == "/roundtables/doc/":
+            self.redirect("/us/roundtables/?rt=doc")
+        if not country:
+            self.redirect("/us/roundtables/")
+            return
+        rt = self.get_argument("rt", "main")
+        logging.info("Country: " + country + " RT: " + rt)
         self.render(
-            "int/"+rt+"_roundtable.html",
+            country + "/"+rt+"_roundtable.html",
             page_title = "Open Data Roundtables",
             page_heading = "Open Data Roundtables",
+            user=self.current_user,
+            country=country
         )
-
-#--------------------------------------------------------MEDIA REDIRECT PAGE------------------------------------------------------------
-# class MediaHandler(BaseHandler):
-#     @tornado.web.addslash
-#     def get(self):
-#         self.redirect('/resources/')
-
 
 #--------------------------------------------------------FINDINGS, NOW STATS PAGE------------------------------------------------------------
 class FindingsHandler(BaseHandler):
     @tornado.web.addslash
     def get(self, country=None):
         if not country:
-            country = "int"
+            self.redirect("/us/stats/")
+            return
         lan = self.get_argument("lan", "")
         if country in available_countries:
             with open("templates/"+country+"/settings.json") as json_file:
@@ -135,56 +137,126 @@ class ThanksHandler(BaseHandler):
             )
 
 
-#--------------------------------------------------------COMPANY PAGE------------------------------------------------------------
-class CompanyHandler(BaseHandler):
+#--------------------------------------------------------STATIC PAGE------------------------------------------------------------
+class StaticPageHandler(BaseHandler):
     @tornado.web.addslash
     #@tornado.web.authenticated
-    def get(self, country=None, companyName=None):
-        logging.info(companyName)
-        if not country:
-            country = 'us'
-            self.redirect('/us/'+companyName)
-            return
+    def get(self, country=None, page=None):
+        #check if company page, get company if so
         try:
-            try:
-                company = models.Company.objects.get(Q(prettyName=companyName) & Q(country=country))
-            except Exception, e:
-                logging.info("Company: " + companyName + ": " + str(e))
-                company = models.Company.objects(Q(prettyName=companyName) & Q(country=country))[0]
-            if company.display:
+            company = models.Company.objects.get(Q(prettyName=page) & Q(display=True))
+            if company.country != country:
+                self.redirect("/" + company.country + "/" + company.prettyName + "/")
+        except DoesNotExist:
+            company = None
+        except MultipleObjectsReturned:
+            company = models.Company.objects(Q(prettyName=page) & Q(country=country) & Q(display=True))[0]
+            if company.country != country:
+                self.redirect("/" + company.country + "/" + company.prettyName + "/")
+        except Exception, e:
+            logging.info("Uncaught Exception: " + str(e))
+            self.render(
+                "500.html",
+                page_title='500 - Server Error',
+                user=self.current_user,
+                page_heading='Uh oh... You broke it.',
+                message = "I'm telling."
+            )
+            return
+        #country, language, settings for page
+        if not country:
+            country = "us"
+        lan = self.get_argument("lan", "")
+        if country in available_countries:
+            with open("templates/"+country+"/settings.json") as json_file:
+                settings = json.load(json_file)
+            if lan not in settings.keys():
+                logging.info("No translation selected or translation not available in this language")
+                lan = settings["default_language"]
+        else: #country not available
+            self.render('404.html',
+                page_heading="Stop trying to make " +self.request.uri + " happen. <br><br>It's not going to happen.",
+                user=self.current_user,
+                page_title="404 - Not Found",
+                error="Not found",
+                country=""
+            )
+            return
+        if company: 
+            self.render(
+                company.country + "/company.html",
+                page_title='Open Data500',
+                user=self.current_user,
+                page_heading=company.companyName,
+                company = company,
+                country=country
+            )
+            return
+        else:
+            if page in settings[lan].keys():
                 self.render(
-                    "company.html",
-                    page_title='Open Data500',
+                    country.lower()+"/" + page +  ".html",
+                    page_title = settings[lan][page]['page_title'],
+                    settings = settings[lan][page],
                     user=self.current_user,
-                    page_heading=company.companyName,
-                    company = company,
+                    country=country
                 )
                 return
             else:
-                self.render(
-                    "404.html",
-                    page_title='404 - Open Data 500',
+                self.render(country + '/404.html',
+                    settings = settings[lan]['error']['404'],
                     user=self.current_user,
-                    page_heading='Shucks...',
-                    error = 'display'
+                    page_title=settings[lan]['error']['404']['page_title'],
                 )
                 return
-        except Exception, e:
-            logging.info("Company, " + companyName + ": " + str(e)) 
-            self.render(
-                "404.html",
-                page_title='404 - Open Data 500',
-                user=self.current_user,
-                page_heading='Hmm...',
-                error = '404 - Not Found'
-            )
-            return
+
+        # if not country:
+        #     self.redirect('/us/'+companyName)
+        #     return
+        # try:
+        #     try:
+        #         company = models.Company.objects.get(Q(prettyName=companyName) & Q(country=country))
+        #     except Exception, e:
+        #         logging.info("Company: " + companyName + ": " + str(e))
+        #         company = models.Company.objects(Q(prettyName=companyName) & Q(country=country))[0]
+        #     if company.display:
+        #         self.render(
+        #             "company.html",
+        #             page_title='Open Data500',
+        #             user=self.current_user,
+        #             page_heading=company.companyName,
+        #             company = company,
+        #             country=country
+        #         )
+        #         return
+        #     else:
+        #         self.render(
+        #             "404.html",
+        #             page_title='404 - Open Data 500',
+        #             user=self.current_user,
+        #             page_heading='Shucks...',
+        #             error = 'display'
+        #         )
+        #         return
+        # except Exception, e:
+        #     logging.info("Company, " + companyName + ": " + str(e)) 
+        #     self.render(
+        #         "404.html",
+        #         page_title='404 - Open Data 500',
+        #         user=self.current_user,
+        #         page_heading='Hmm...',
+        #         error = '404 - Not Found'
+        #     )
+        #     return
 
 #--------------------------------------------------------FULL LIST PAGE------------------------------------------------------------
 class ListHandler(BaseHandler):
     @tornado.web.addslash
     #@tornado.web.authenticated
-    def get(self, country=None):
+    def get(self, country=None, name=None):
+        if name == "candidates":
+            self.redirect("/us/list/")
+            return 
         if not country:
             country = "us"
         lan = self.get_argument("lan", "")
@@ -259,24 +331,37 @@ class ChartHandler(BaseHandler):
         finally:
             self.render("solo_chart.html")
 
-#--------------------------------------------------------SANKEY-STYLE CHART PAGE------------------------------------------------------------
-# class SankeyChartHandler(BaseHandler):
-#     @tornado.web.addslash
-#     def get(self):
-#         self.render("index2.html")
-
 
 #--------------------------------------------------------RESOURCES PAGE------------------------------------------------------------
 class ResourcesHandler(BaseHandler):
     @tornado.web.addslash
     #@tornado.web.authenticated
-    def get(self):
-        self.render(
-            "resources.html",
-            page_title='Open Data Resources',
-            user=self.current_user,
-            page_heading='Open Data Resources'
-        )
+    def get(self, country=None):
+        if not country:
+            self.redirect("/us/resources/")
+            return
+        lan = self.get_argument("lan", "")
+        if country in available_countries:
+            with open("templates/"+country+"/settings.json") as json_file:
+                settings = json.load(json_file)
+            if lan not in settings.keys():
+                logging.info("No translation selected or translation not available in this language")
+                lan = settings["default_language"]
+            self.render(
+                country + "/resources.html",
+                page_title='Open Data Resources',
+                user=self.current_user,
+                settings = settings[lan]['resources'],
+                page_heading='Open Data Resources'
+            )
+        else:
+            self.render('404.html',
+                page_heading="Stop trying to make " +self.request.uri + " happen. <br><br>It's not going to happen.",
+                user=self.current_user,
+                page_title="404 - Not Found",
+                error="Not found",
+                country=""
+            )
 
 #--------------------------------------------------------VALIDATE COMPANY EXISTS PAGE------------------------------------------------------------
 #------SHOULD MOVE TO UTILS-------
@@ -435,8 +520,11 @@ class SubmitDataHandler(BaseHandler):
     #@tornado.web.authenticated
     def get(self, country, id):
         company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
+        if company.country != country:
+            self.redirect(str('/'+company.country+'/addData/'+id))
+            return
         page_heading = "Agency and Data Information for " + company.companyName
-        self.render("submitData.html",
+        self.render(company.country + "/submitData.html",
             page_title = "Submit Data Sets For Company",
             page_heading = page_heading,
             company = company,
@@ -653,6 +741,7 @@ class EditCompanyHandler(BaseHandler):
                 message=id)
         if company.country != country:
             self.redirect(str('/'+company.country+'/edit/'+id))
+            return
         lan = self.get_argument("lan", "")
         with open("templates/"+company.country+"/settings.json") as json_file:
             settings = json.load(json_file)

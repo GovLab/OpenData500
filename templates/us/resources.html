@@ -1,9 +1,9 @@
-{% extends "main.html" %}
+{% extends "../main.html" %}
 {% autoescape None %}
 
 {% block body %}
 <div class="resources-page">
-	<h1>{{ page_heading }}</h1>
+	<h1>{{ settings['page_heading'] }}</h1>
 	<section class="resource-panel">
 		<a class="resource-logo" href='http://www.thegovlabacademy.org/data/opendata/'><img src='{{ static_url("img/govlabacademy-logo.png") }}'></a>
 		<p>The GovLab Academy is an online training community that uses technology and innovation to tackle public problems. A partnership between The GovLab and MIT Media Lab’s Online Learning Initiative, the site offers videos, podcasts, readings and activities designed to enable the purpose-driven learner to deepen his or her practical knowledge.</p>
@@ -107,22 +107,34 @@
 			<p class="m-press-title">GovLab Seeks Open Data Success Stories</p>
 			<p class="m-press-meta">by Wyatt Kash, Information Week: Government, 9/19/2013</p>
 		</a>
+
+		<a class="m-press-item" href="http://www.commerce.gov/blog/2014/06/19/listening-our-data-customers-open-data-roundtable" target="_blank">
+			<p class="m-press-title">Listening to Our Data Customers at the Open Data Roundtable</p>
+			<p class="m-press-meta">by Bruce Andrews, Department of Commerce Blog, 6/19/2014</p>
+		</a>
+
+		<a class="m-press-item" href="http://www.esa.doc.gov/Blog/2014/06/19/big-day-big-data-beginning-our-data-transformation" target="_blank">
+			<p class="m-press-title">A Big Day for Big Data: The Beginning of Our Data Transformation</p>
+			<p class="m-press-meta">by Mark Doms, Economics and Statistics Organization Blog, 6/19/2014</p>
+		</a>
+
+		<a class="m-press-item" href="http://blog.bea.gov/2014/06/20/bea-listens-to-customers-ideas-on-how-to-unleash-data-2" target="_blank">
+			<p class="m-press-title">Listens to Customers’ Ideas on How to Unleash Data</p>
+			<p class="m-press-meta">Bureau of Economic Analysis Blog, 6/20/2014</p>
+		</a>
+
+		<a class="m-press-item" href="http://www.policymap.com/blog/2014/06/policymap-attends-govlabs-open-data-500-roundtable" target="_blank">
+			<p class="m-press-title">PolicyMap Attends GovLab’s Open Data 500 Roundtable</p>
+			<p class="m-press-meta">by Elizabeth Nash, Economics and Statistics Organization Blog, 6/20/2014</p>
+		</a>
+
+		<a class="m-press-item" href="http://gcn.com/blogs/pulse/2014/06/commerce-open-data.aspx" target="_blank">
+			<p class="m-press-title">Commerce secretary pledges full embrace of open data</p>
+			<p class="m-press-meta">Government Computer News, 6/24/2014</p>
+		</a>
 	</div>
 </section>
 
-
-
-	
-
-	
-
-
-
-
-
-	<!-- <footer>
-		<a class="m-button" href="#">Recommend a company</a><a class="m-button" href="http://thegovlab.org/submit-your-company">Submit Your Company</a>
-	</footer> -->
 </div>
 
 {% end %}

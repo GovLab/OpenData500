@@ -1,11 +1,11 @@
-{% extends "main.html" %}
+{% extends "../main.html" %}
 {% autoescape None %}
 
 {% block body %}
 
-<h1 style="text-align:center;">{{ settings[error]['page_heading'] }}</h1>
+<h1 style="text-align:center;">{{ settings['page_heading'] }}</h1>
 <br>
-<h3 style="text-align:center;">{{ settings[error]['message'] }}</h3>
+<h3 style="text-align:center;">{{ settings['message'] }}</h3>
 
 
 {% end %}
