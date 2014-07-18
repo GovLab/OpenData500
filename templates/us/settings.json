@@ -2,12 +2,12 @@
     "default_language": "english",
     "english": {
         "about": {
-            "page_title": "About the US Open Data 500",
-            "page_heading": "About the US Open Data 500"
+            "page_title": "About the Open Data 500",
+            "page_heading": "About the Open Data 500"
         },
         "index": {
-            "page_title": "Welcome to the US Open Data 500",
-            "page_heading": "Welcome to the US Open Data 500"
+            "page_title": "Welcome to the Open Data 500",
+            "page_heading": "Welcome to the Open Data 500"
         },
         "stats": {
             "page_title": "OD500 By The Numbers",
