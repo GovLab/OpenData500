@@ -12,14 +12,10 @@
 
 <h1>{{ page_heading }}</h1>
 <form action="/register/" method="POST" parsley-validate>
-	Username: <input type="text" name="username" parsley-trigger="change" parsley-required="true" /><br>
-	Password: <input type="password" name="password" id="password" parsley-required="true"/><br>
-	Confirm Password: <input type="password" name="password_confirm" parsley-equalto="#password" parsley-required="true"/><br>
-	Country: <select name="country" id="country" parsley-required="true">
-		<option name="country" value="" style="display:none;"></option>
-		<option name="country" value="ca">Canada</option>
-		<option name="country" value="us">United States</option>
-	</select>
+	<label for="username">Username:</label><input type="text" name="username" parsley-trigger="change" parsley-required="true" /><br>
+	<label for="password">Password:</label><input type="password" name="password" id="password" parsley-required="true"/><br>
+	<label for="password_confirm">Confirm Password:</label><input type="password" name="password_confirm" parsley-equalto="#password" parsley-required="true"/><br>
+	<label for="country">Country:</label><input type="text" name="country" value="{{country_keys[country]}}" disabled="disabled"><br>
 	{% raw xsrf_form_html() %}
 <input type="submit" value="Register" /> </form>
 

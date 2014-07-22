@@ -1,0 +1,15 @@
+{% extends "../main.html" %}
+{% autoescape None %}
+
+{% block body %}
+
+
+<div class="findings-page">
+    <h1>{{settings['page_heading']}}</h1>
+	<a href="/ca/stats/?lan=english">English</a> <a href="/ca/stats/?lan=french">French</a>
+
+
+    {{settings['content']}}
+</div>
+
+{% end %}

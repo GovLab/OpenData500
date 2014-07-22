@@ -1,0 +1,143 @@
+{% extends "../main.html" %}
+{% autoescape None %}
+
+{% block body %}
+<div class="resources-page">
+	<h1>{{ settings['page_heading'] }}</h1>
+	<section class="resource-panel">
+		<a class="resource-logo" href='http://www.thegovlabacademy.org/data/opendata/'><img src='{{ static_url("img/govlabacademy-logo.png") }}'></a>
+		<p>En se réveillant un matin après des rêves agités, Gregor Samsa se retrouva, dans son lit, métamorphosé en un monstrueux insecte. Il était sur le dos, un dos aussi dur qu’une carapace, et, en relevant un peu la tête, il vit, bombé, brun, cloisonné par des arceaux plus rigides, son abdomen sur le haut duquel la couverture, prête à glisser tout à fait, ne tenait plus qu’à peine.</p>
+	</section>
+
+	<section class="resource-panel">
+		<a class="resource-logo" href='http://thegovlab.org/blog/'><img src='{{ static_url("img/govlabblog-logo.png") }}'></a>
+		<p>The Governance Lab (The GovLab) at New York University strives to improve people’s lives by changing how we govern. Founded in 2012, with funding from the MacArthur and Knight Foundations, the GovLab designs technology, policy and strategies for fostering more open and collaborative approaches to governance, and tests what works.</p>
+		
+		<ul>
+			<li><a href="http://thegovlab.org/beth-noveck-open-datas-real-value-lies-in-getting-citizens-to-collaborate/">Beth Noveck: ‘Open data’s real value lies in getting citizens to collaborate’</a></li>
+			<li><a href="http://thegovlab.org/a-global-week-for-open-data/">A Global Week for Open Data</a></li>
+			<li><a href="http://thegovlab.org/now-live-blog-from-open-data-summit/">NOW: Live-Blog from Open Data Institute Summit</a></li>
+			<li><a href="http://thegovlab.org/a-chance-to-help-shape-the-global-open-data-movement/">A chance to help shape the global Open Data movement</a></li>
+			<li><a href="http://thegovlab.org/govlab-selected-readings-on-open-data/">The GovLab Selected Readings on Open Data</a></li>
+		</ul>
+		<ul>
+			<li><a href="http://thegovlab.org/the-govlabs-open-governance-twitter-lists/">The GovLab’s Open Governance Twitter Lists</a></li> 
+			<li><a href="http://thegovlab.org/whats-the-value-of-open-data/">What’s The Value of Open Data?</a></li>
+			<li><a href="http://thegovlab.org/data-transparency-2013-an-open-data-benchmark/">Data Transparency 2013: An Open Data Benchmark</a></li>
+			<li><a href="http://thegovlab.org/understanding-open-data-with-joel-gurin/">Understanding Open Data with Joel Gurin</a></li>
+			<li><a href="http://thegovlab.org/re-imagining-how-we-provide-and-govern-health-care-using-open-data/">Re-imagining How We Provide and Govern Health Care Using Open Data</a></li>
+		</ul>
+	</section>
+
+	<section class="m-press">
+	<h1>Press, Media and Blogs</h1>
+
+	<p class="intro">The Open Data 500 has received attention in the press and on blogs that cover business, government, and technology. Here, beginning with the most recent, is a current list of selected coverage.</p>
+		
+		<a class="m-press-item" href="http://www.washingtonpost.com/business/on-it/intel-searches-for-the-value-in-open-data/2014/05/02/197332b8-d140-11e3-9e25-188ebe1fa93b_story.html" target="_blank">
+			<p class="m-press-title">Intel searches for the value in open data</p>
+			<p class="m-press-meta">by Mohana Ravindranath, Washington Post, 5/2/2014</p>
+		</a>
+
+		<a class="m-press-item" href="http://blog.programmableweb.com/2014/04/09/opendata-500-launch-demonstrates-open-data-api-value/" target="_blank">
+			<p class="m-press-title">OpenData 500 Launch Demonstrates Open Data API Value</p>
+			<p class="m-press-meta">by Mark Boyd, ProgrammableWeb, 4/9/2014</p>
+		</a>
+
+		<a class="m-press-item" href="http://www.datainnovation.org/2014/04/event-recap-the-economic-impact-of-open-data/" target="_blank">
+			<p class="m-press-title">Event Recap: The Economic Impact of Open Data</p>
+			<p class="m-press-meta">by Travis Korte, Center for Data Innovation Blog, 4/9/2014</p>
+		</a>
+
+		<a class="m-press-item" href="http://www.informationweek.com/government/open-government/feds-seek-to-expand-open-data/d/d-id/1204315" target="_blank">
+			<p class="m-press-title">Open Government Data: NYU’s GovLab Launches Open Data 500 Study, Website</p>
+			<p class="m-press-meta">by Wyatt Kash, Information Week: Government, 4/9/2014</p>
+		</a>
+
+		<a class="m-press-item" href="http://www.infodocket.com/2014/04/08/open-government-data-nyus-govlab-launches-open-data-500-study-website/" target="_blank">
+			<p class="m-press-title">Open Government Data: NYU’s GovLab Launches Open Data 500 Study, Website</p>
+			<p class="m-press-meta">by Gary Price, InfoDocket, 4/8/2014</p>
+		</a>	
+
+		<a class="m-press-item" href="http://www.commerce.gov/blog/2014/04/08/big-data-big-business-commerce" target="_blank">
+			<p class="m-press-title">Big Data is Big Business for Commerce</p>
+			<p class="m-press-meta">by Mark Doms, The Commerce Blog, 4/8/2014</p>
+		</a>
+		<a class="m-press-item" href="http://www.techrepublic.com/article/open-data-500-proof-that-open-data-fuels-economic-activity/" target="_blank">
+			<p class="m-press-title">Open Data 500: Proof that open data fuels economic activity</p>
+			<p class="m-press-meta">by Alex Howard, Tech Republic, 4/8/2014</p>
+		</a>
+		<a class="m-press-item" href="http://fedscoop.com/commerce-puts-best-foot-forward-open-data/" target="_blank">
+			<p class="m-press-title">Commerce puts best foot forward in open data</p>
+			<p class="m-press-meta">by Colby Hochmuth, FedScoop, 4/8/2014</p>
+		</a>
+		<a class="m-press-item" href="http://www.whitehouse.gov/blog/2014/04/08/impact-open-data" target="_blank">
+			<p class="m-press-title">The Impact of Open Data</p>
+			<p class="m-press-meta">by Erie Meyer, The White House blog, 4/8/2014</p>
+		</a>
+
+		<a class="m-press-item" href="http://www.forbes.com/sites/bethsimonenoveck/2014/01/08/from-faith-based-to-evidence-based-the-open-data-500-and-understanding-how-open-data-helps-the-american-economy/" target="_blank">
+			<p class="m-press-title">From Faith-Based to Evidence-Based: The Open Data 500 and Understanding How Open Data Helps the American Economy</p>
+			<p class="m-press-meta">by Beth Noveck, Forbes.com, 1/8/2014</p>
+		</a>
+
+		<a class="m-press-item" href="http://fedscoop.com/open-data-500-intersection-open-data-economy/" target="_blank">
+			<p class="m-press-title">Open Data 500: <br>Intersection of Open Data and the Economy</p>
+			<p class="m-press-meta">by Colby Hochmuth, FedScoop, 1/1/2014</p>
+		</a>
+
+		<a class="m-press-item" href="http://blog.programmableweb.com/2014/01/01/open-data-now-hottest-contenders-for-2014/" target="_blank">
+			<p class="m-press-title">Open Data Now: <br>Hottest Contenders for 2014</p>
+			<p class="m-press-meta">by Mark Boyd, ProgrammableWeb, 1/1/2014</p>
+		</a>
+		<a class="m-press-item" href="http://www.informationweek.com/government/open-government/open-government-data-companies-cash-in/d/d-id/1113143" target="_blank">
+			<p class="m-press-title">Open Government Data: <br>Companies Cash In</p>
+			<p class="m-press-meta">by Wyatt Kash, Information Week: Government, 12/17/2013</p>
+		</a>
+		<a class="m-press-item" href="http://www.whitehouse.gov/blog/2013/12/17/open-data-action" target="_blank">
+			<p class="m-press-title">Open Data in Action</p>
+			<p class="m-press-meta">by Nick Sinai and Erie Meyer, The White House blog, 12/17/2013</p>
+		</a>
+		<a class="m-press-item" href="http://fedscoop.com/open-data-500-govlab-joel-gurin/" target="_blank">
+			<p class="m-press-title">Open Data 500 Gives Voice to Companies Using Government Data</p>
+			<p class="m-press-meta">by Colby Hochmuth, FedScoop, 9/23/2013</p>
+		</a>
+
+		<a class="m-press-item" href="http://www.informationweek.com/software/information-management/govlab-seeks-open-data-success-stories/d/d-id/1111603?" target="_blank">
+			<p class="m-press-title">GovLab Seeks Open Data Success Stories</p>
+			<p class="m-press-meta">by Wyatt Kash, Information Week: Government, 9/19/2013</p>
+		</a>
+
+		<a class="m-press-item" href="http://www.commerce.gov/blog/2014/06/19/listening-our-data-customers-open-data-roundtable" target="_blank">
+			<p class="m-press-title">Listening to Our Data Customers at the Open Data Roundtable</p>
+			<p class="m-press-meta">by Bruce Andrews, Department of Commerce Blog, 6/19/2014</p>
+		</a>
+
+		<a class="m-press-item" href="http://www.esa.doc.gov/Blog/2014/06/19/big-day-big-data-beginning-our-data-transformation" target="_blank">
+			<p class="m-press-title">A Big Day for Big Data: The Beginning of Our Data Transformation</p>
+			<p class="m-press-meta">by Mark Doms, Economics and Statistics Organization Blog, 6/19/2014</p>
+		</a>
+
+		<a class="m-press-item" href="http://blog.bea.gov/2014/06/20/bea-listens-to-customers-ideas-on-how-to-unleash-data-2" target="_blank">
+			<p class="m-press-title">Listens to Customers’ Ideas on How to Unleash Data</p>
+			<p class="m-press-meta">Bureau of Economic Analysis Blog, 6/20/2014</p>
+		</a>
+
+		<a class="m-press-item" href="http://www.policymap.com/blog/2014/06/policymap-attends-govlabs-open-data-500-roundtable" target="_blank">
+			<p class="m-press-title">PolicyMap Attends GovLab’s Open Data 500 Roundtable</p>
+			<p class="m-press-meta">by Elizabeth Nash, Economics and Statistics Organization Blog, 6/20/2014</p>
+		</a>
+
+		<a class="m-press-item" href="http://gcn.com/blogs/pulse/2014/06/commerce-open-data.aspx" target="_blank">
+			<p class="m-press-title">Commerce secretary pledges full embrace of open data</p>
+			<p class="m-press-meta">Government Computer News, 6/24/2014</p>
+		</a>
+	</div>
+</section>
+
+</div>
+
+{% end %}
+
+
+

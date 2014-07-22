@@ -43,19 +43,21 @@ class RegisterHandler(LoginHandler):
     @tornado.web.addslash
     @tornado.web.authenticated
     def get(self):
-        if self.current_user == "luis":
-            self.render(
+        try:
+            user = models.Users.objects.get(username=self.current_user)
+        except Exception, e:
+            logging.info("Could not get user: " + str(e))
+            self.redirect("/login/")
+        country = user.country
+        self.render(
                 "admin/register.html", 
                 next=self.get_argument("next","/"),
                 page_title="Register",
-                page_heading="Register for OD500"
-                )
-        else:
-            self.render('404.html',
-                page_heading="I'm afraid I can't let you do that.",
+                page_heading="Register for OD500",
                 user=self.current_user,
-                page_title="Forbidden",
-                error="Not Enough Priviliges")
+                country = country,
+                country_keys=country_keys
+            )
 
     @tornado.web.authenticated
     def post(self):

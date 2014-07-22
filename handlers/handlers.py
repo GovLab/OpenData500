@@ -136,7 +136,6 @@ class StaticPageHandler(BaseHandler):
             if page in settings[lan].keys():
                 self.render(
                     country.lower()+"/" + page +  ".html",
-                    page_title = settings[lan][page]['page_title'],
                     settings = settings[lan][page],
                     user=self.current_user,
                     country=country
@@ -147,6 +146,7 @@ class StaticPageHandler(BaseHandler):
                     settings = settings[lan]['error']['404'],
                     user=self.current_user,
                     page_title=settings[lan]['error']['404']['page_title'],
+                    country=country
                 )
                 return
 
@@ -173,7 +173,6 @@ class ListHandler(BaseHandler):
             stats = models.Stats.objects().first()
             self.render(
                 country.lower()+"/list.html",
-                page_title = settings[lan]['list']['page_title'],
                 settings = settings[lan]['list'],
                 companies = companies,
                 stats = stats,
