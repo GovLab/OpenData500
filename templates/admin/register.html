@@ -15,7 +15,11 @@
 	<label for="username">Username:</label><input type="text" name="username" parsley-trigger="change" parsley-required="true" /><br>
 	<label for="password">Password:</label><input type="password" name="password" id="password" parsley-required="true"/><br>
 	<label for="password_confirm">Confirm Password:</label><input type="password" name="password_confirm" parsley-equalto="#password" parsley-required="true"/><br>
+	{% if user == "luis" %}
+	<label for="country">Country:</label><input type="text" name="country" value=""><br>
+	{%else%}
 	<label for="country">Country:</label><input type="text" name="country" value="{{country_keys[country]}}" disabled="disabled"><br>
+	{%end%}
 	{% raw xsrf_form_html() %}
 <input type="submit" value="Register" /> </form>
 

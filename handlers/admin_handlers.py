@@ -103,29 +103,26 @@ class CompanyAdminHandler(BaseHandler):
             self.redirect("/login/")
         country = user.country
         logging.info("Working in: " + country)
-        #Check if there is a user logged in:
-        if self.current_user:
-            surveySubmitted = models.Company.objects(Q(submittedSurvey=True) & Q(vetted=True) & Q(country=country)).order_by('prettyName')
-            sendSurveys = models.Company.objects(Q(submittedSurvey=False) & Q(country=country))
-            needVetting = models.Company.objects(Q(submittedSurvey=True) & Q(vetted=False) & Q(country=country)).order_by('-lastUpdated', 'prettyName')
+        surveySubmitted = models.Company.objects(Q(submittedSurvey=True) & Q(vetted=True) & Q(country=country)).order_by('prettyName')
+        sendSurveys = models.Company.objects(Q(submittedSurvey=False) & Q(country=country))
+        needVetting = models.Company.objects(Q(submittedSurvey=True) & Q(vetted=False) & Q(country=country)).order_by('-lastUpdated', 'prettyName')
+        try: 
             stats = models.Stats.objects.get(country=country)
-            self.render(
-                "admin/admin_companies.html",
-                page_title='OpenData500',
-                page_heading='Admin - ' + country.upper(),
-                surveySubmitted = surveySubmitted,
-                needVetting = needVetting,
-                user=self.current_user,
-                country = country,
-                sendSurveys = sendSurveys,
-                stats = stats
-            )
-        else: #if no user is logged in, go to not allowed page
-            self.render('404.html',
-                page_heading="I'm afraid I can't let you do that.",
-                user=self.current_user,
-                page_title="Forbidden",
-                error="Not Enough Priviliges")
+        except Exception, e:
+            logging.info("Error: " + str(e))
+            self.application.stats.create_new_stats(country)
+            stats = models.Stats.objects.get(country=country)
+        self.render(
+            "admin/admin_companies.html",
+            page_title='OpenData500',
+            page_heading='Admin - ' + country.upper(),
+            surveySubmitted = surveySubmitted,
+            needVetting = needVetting,
+            user=self.current_user,
+            country = country,
+            sendSurveys = sendSurveys,
+            stats = stats
+        )
 
     def post(self):
         try:
