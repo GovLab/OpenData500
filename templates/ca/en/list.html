@@ -1,4 +1,4 @@
-{% extends "../main.html" %}
+{% extends "../../main.html" %}
 {% autoescape None %}
 
 {% block body %}
@@ -6,7 +6,8 @@
 
 
 <section id="candidate-warnings-and-download">
-	<h1>{{ settings['page_heading'] }}</h1>
+	<h1>OD500 Companies</h1>
+    <a href="/ca/list/?lan=english">English</a> <a href="/ca/list/?lan=french">French</a>
     <div id="download-data" class="m-download-data">
         <h2>Download the OD500 Data</h2>
         <div>

@@ -1,12 +1,11 @@
-{% extends "../main.html" %}
+{% extends "../../main.html" %}
 {% autoescape None %}
 
 {% block body %}
 
-
-
 <section class="submitDescription">
-	<h1>Open Data 500 <br>Company Survey</h1>
+	<h1>Envoyer une entreprise à l'OD500</h1>
+    <a href="/ca/submitCompany/?lan=english">English</a> <a href="/ca/submitCompany/?lan=french">French</a>
 	<p>The Open Data 500, funded by the Knight Foundation and conducted by the GovLab, is the first comprehensive study of U.S. companies that use open government data to generate new business and develop new products and services. The goal is to (1) provide a basis for assessing the economic value of government data; (2) encourage the development of new open data companies; and (3) foster a dialogue between government and business on how government data can be made more useful.</p>
 	<p>By participating in this study, your company can become part of a widely used resource for other businesses, investors, and the media to identify companies that are using Open Data in innovative ways. You will also be able to give feedback to government agencies whose data you use, and help us make government data more accessible, usable, and attuned to business needs.</p>
 
@@ -19,7 +18,7 @@
 	<p>If your company meets these criteria, please take a few minutes to fill out this short online form. Thank you again for your participation.</p>
 	<p><em>The fields marked with * are required</em></p>
 </section>
-{% if country == "int" %}{% set c = "us" %}{%else%}{% set c = country %}{%end%}
+
 <form method="post" id="submitCompany" class="m-form companyForm" parsley-validate>
 	<fieldset class="m-form-half">
 		<h3>Personal Information</h3>
@@ -36,10 +35,10 @@
 		<div class="m-form-line"><label for="url">Company URL: *</label><input type='text' name="url" id='url' parsley-trigger="change" parsley-type="url" parsley-required="true"></div>
 		<div class="m-form-line"><label for="city">In which city is this company located?</label><input type="text" name="city" id="city"></div>
 		<div class="m-form-line">
-			<label for="state">State: *</label>
+			<label for="state">Province/Territory: *</label>
 			<select name='state' id="state" parsley-required="true">
-				{% for i in range(0, 53) %}
-					<option name="state" value="{{stateListAbbrev[c][i]}}">{{ stateList[c][i] }}</option>
+				{% for i in range(0, len(stateList[country])) %}
+					<option name="state" value="{{stateListAbbrev[country][i]}}">{{ stateList[country][i] }}</option>
 				{%end%}
 			</select>
 		</div>

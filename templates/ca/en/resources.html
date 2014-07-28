@@ -1,9 +1,10 @@
-{% extends "../main.html" %}
+{% extends "../../main.html" %}
 {% autoescape None %}
 
 {% block body %}
 <div class="resources-page">
-	<h1>{{ settings['page_heading'] }}</h1>
+	<h1>Open Data Resources</h1>
+	<a href="/ca/resources/?lan=english">English</a> <a href="/ca/resources/?lan=french">French</a>
 	<section class="resource-panel">
 		<a class="resource-logo" href='http://www.thegovlabacademy.org/data/opendata/'><img src='{{ static_url("img/govlabacademy-logo.png") }}'></a>
 		<p>En se réveillant un matin après des rêves agités, Gregor Samsa se retrouva, dans son lit, métamorphosé en un monstrueux insecte. Il était sur le dos, un dos aussi dur qu’une carapace, et, en relevant un peu la tête, il vit, bombé, brun, cloisonné par des arceaux plus rigides, son abdomen sur le haut duquel la couverture, prête à glisser tout à fait, ne tenait plus qu’à peine.</p>

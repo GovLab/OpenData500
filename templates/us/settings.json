@@ -1,48 +1,23 @@
 {
-    "default_language": "english",
-    "english": {
-        "about": {
-            "page_title": "About the Open Data 500",
-            "page_heading": "About the Open Data 500"
-        },
-        "index": {
-            "page_title": "Welcome to the Open Data 500",
-            "page_heading": "Welcome to the Open Data 500"
-        },
-        "stats": {
-            "page_title": "OD500 By The Numbers",
-            "page_heading": "OD500 Stats"
-        },
-        "edit_company": {
-            "page_title": "Edit Company",
-            "page_heading": "Editing "
-        },
-        "submit": {
-            "page_title": "Submit A Company To The OD500",
-            "page_heading": "Submit A Company To The OD500"
-        },
-        "list": {
-            "page_title": "OD500 Companies",
-            "page_heading": "OD500 Companies"
-        },
-        "resources": {
-            "page_title": "Open Data Resources",
-            "page_heading": "Open Data Resources"
-        },
-        "chart": {
-            "page_title": "Open Data Compass"
-        },
-        "error": {
-            "locked": {
-                "page_title": "Error",
-                "page_heading": "This company is locked from editing",
-                "message": "If you would like to edit this company, please email us at <a href='mailto:opendata500@thegovlab.org'>OpenData500@thegovlab.org</a> and let us know who you are."
-            },
-            "404": {
-                "page_title": "404 - Not Found",
-                "page_heading": "404 - Not Found",
-                "message": "¬_¬"
-            }
+    "default_language": "en",
+    "available_languages": ["en"],
+    "menu": {
+        "en": {
+            "label": ["About", "Full List", "Survey", "Stats", "Roundtables", "Resources"],
+            "link": ["/about/", "/list/", "/submitCompany/", "/stats/", "/roundtables/", "/resources/"]
+        }
+    },
+    "page_titles": {
+        "en": {
+            "index": "Welcome to the OD500",
+            "about": "About the OD500",
+            "resources": "Open Data Resources - OD500",
+            "list": "Open Data 500 Companies",
+            "submit": "Submit a Company to the OD500",
+            "stats": "OD500 By The Numbers",
+            "roundtables": "Open Data Roundtables",
+            "submitData": "Agency and Data Information",
+            "thanks": "Thank You!"
         }
     }
 }

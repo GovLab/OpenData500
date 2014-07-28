@@ -1,13 +1,13 @@
-{% extends "../main.html" %}
+{% extends "../../main.html" %}
 {% autoescape None %}
 
 {% block body %}
 <div class="about-page">
-<h1>{{ settings['page_heading'] }}</h1>
+<h1>À propos du Canada 500 Open Data</h1>
 
 <a href="/ca/about/?lan=english">English</a> <a href="/ca/about/?lan=french">French</a>
 <ul class="about-page-toc">
-	<li><h4>{{settings['toc']}}</h4></li>
+	<li><h4>Table des Matières</h4></li>
 	<li><a href="#about-goals">Study Goals</a></li>
 	<li><a href="#about-govlab-approach">The Govlab’s Approach</a></li>
 	<li><a href="#about-next-steps">Next Steps</a></li>

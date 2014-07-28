@@ -210,3 +210,13 @@ survey/no survey hover and active states*/
   border-bottom: 0px;
   padding-bottom: 0px;
 }
+
+.m-main-menu .language {
+  float: right;
+}
+
+.m-main-menu .language a {
+  border: 0;
+  padding: 1px 5px;
+  margin: 4px 0;
+}

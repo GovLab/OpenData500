@@ -441,9 +441,9 @@ $(document).ready(function() {
                     beforeSend: function(xhr, settings) {
                         $(event.target).attr('disabled', 'disabled');
                     },
-                    success: function(success) {
-                        console.log(success);
-                        document.location.href = '/thanks/';
+                    success: function(data) {
+                        console.log(data['result']);
+                        document.location.href = data['redirect'];
                     }
                 });
             } else {
@@ -481,8 +481,8 @@ $(document).ready(function() {
                 beforeSend: function(xhr, settings) {
                     $(event.target).attr('disabled', 'disabled');
                 },
-                success: function(success) {
-                    console.log(success);
+                success: function(data) {
+                    console.log(data);
                     $('.savingMessage_companyEdit').hide();
                     $('.savedMessage_companyEdit').show();
                     document.location.href = '/thanks/';

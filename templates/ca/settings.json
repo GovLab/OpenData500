@@ -1,90 +1,38 @@
 {
-    "default_language": "french",
-    "french": {
-        "about": {
-            "page_heading": "À propos du Canada 500 Open Data",
-            "toc": "Table des Matières"
+    "default_language": "fr",
+    "available_languages": ["fr", "en"],
+    "menu": {
+        "en": {
+            "label": ["About", "Full List", "Survey", "Stats", "Resources"],
+            "link": ["/about/", "/list/", "/submitCompany/", "/stats/", "/resources/"]
         },
-        "index": {
-            "page_title": "Bienvenue sur les Open Data 500",
-            "page_heading": "Bienvenue sur les Open Data 500"
-        },
-        "submit": {
-            "page_title": "Soumettre une entreprise à l'OD500 canadienne",
-            "page_heading": "Soumettre une entreprise à l'OD500 canadienne"
-        },
-        "edit_company": {
-            "page_title": "Modifier entreprise",
-            "page_heading": "Modifier "
-        },
-        "resources": {
-            "page_title": "OD500 Ressources",
-            "page_heading": "OD500 Ressources"
-        },
-        "stats": {
-            "page_title": "OD500 Stats",
-            "page_heading": "OD500 Stats",
-            "content": "<p>En se réveillant un matin après des rêves agités, Gregor Samsa se retrouva, dans son lit, métamorphosé en un monstrueux insecte.</p><ul><li>Il était sur le dos, un dos aussi dur qu’une carapace, et, en relevant un peu la tête, il vit, bombé, brun, cloisonné par des arceaux plus rigides, son abdomen sur le haut duquel la couverture, prête à glisser tout à fait, ne tenait plus qu’à peine.</li><li>Ses nombreuses pattes, lamentablement grêles par comparaison avec la corpulence qu’il avait par ailleurs, grouillaient désespérément sous ses yeux.</li><li>Qu’est-ce qui m’est arrivé ? » pensa-t-il. Ce n’était pas un rêve. Sa chambre, une vraie chambre humaine, juste un peu trop petite, était là tranquille entre les quatre murs qu’il connaissait bien.</li></ul>"
-        },
-        "list": {
-            "page_title": "OD500 Entreprises",
-            "page_heading": "OD500 Entreprises"
-        },
-        "error": {
-            "locked": {
-                "page_title": "Erreur",
-                "page_heading": "Cette société est verrouillée de l'édition",
-                "message": "Si vous souhaitez modifier cette société, s'il vous plaît écrivez-nous à <a href='mailto:opendata500@thegovlab.org'>OpenData500@thegovlab.org</a> and let us know who you are."
-            },
-            "404": {
-                "page_title": "404 - Pas Trouvé",
-                "page_heading": "404 - Pas Trouvé",
-                "message": "¬_¬"
-            }
+        "fr": {
+            "label": ["Sur", "Liste Complète", "Enquête", "Statistiques", "Ressources"],
+            "link": ["/about/", "/list/", "/submitCompany/", "/stats/", "/resources/"]
         }
     },
-    "english": {
-        "about": {
-            "page_title": "About the Canada Open Data 500",
-            "page_heading": "About the Canada Open Data 500",
-            "toc": "Table of Contents"
+    "page_titles": {
+        "en": {
+            "index": "Welcome to the OD500",
+            "about": "About the OD500",
+            "resources": "Open Data Resources - OD500",
+            "list": "Open Data 500 Companies",
+            "submit": "Submit a Company to the OD500",
+            "stats": "OD500 By The Numbers",
+            "roundtables": "Open Data Roundtables",
+            "submitData": "Agency and Data Information",
+            "thanks": "Thank You!"
         },
-        "index": {
-            "page_title": "Welcome to the Open Data 500",
-            "page_heading": "Welcome to the Open Data 500"
-        },
-        "submit": {
-            "page_title": "Submit A Company To The Canadian OD500",
-            "page_heading": "Submit A Company To The Canadian OD500"
-        },
-        "edit_company": {
-            "page_title": "Edit Company",
-            "page_heading": "Editing "
-        },
-        "resources": {
-            "page_title": "OD500 Resources",
-            "page_heading": "OD500 Resources"
-        },
-        "list": {
-            "page_title": "OD500 Companies",
-            "page_heading": "OD500 Companies"
-        },
-        "stats": {
-            "page_title": "OD500 Stats",
-            "page_heading": "OD500 Stats",
-            "content": "<p>One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin.</p><p>He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections.</p><ul><li>The bedding was hardly able to cover it and seemed ready to slide off any moment.</li><li>His many legs, pitifully thin compared with the size of the rest of him, waved about helplessly as he looked. </li><li>'What's happened to me?' he thought. It wasn't a dream. His room, a proper human room although a little too small, lay peacefully between its four familiar walls.</li></ul>"
-        },
-        "error": {
-            "locked": {
-                "page_title": "Error",
-                "page_heading": "This company is locked from editing",
-                "message": "If you would like to edit this company, please email us at <a href='mailto:opendata500@thegovlab.org'>OpenData500@thegovlab.org</a> and let us know who you are."
-            },
-            "404": {
-                "page_title": "404 - Not Found",
-                "page_heading": "404 - Not Found",
-                "message": "¬_¬"
-            }
+        "fr": {
+            "index": "Bienvenue sur le OD500",
+            "about": "À propos de l'OD500",
+            "resources": "Open Data Resources - OD500",
+            "list": "Open Data 500 Entreprises",
+            "submit": "Envoyer une entreprise à l'OD500",
+            "stats": "Les chiffres du OD500",
+            "roundtables": "Tables rondes Open Data",
+            "submitData": "Agence et Données",
+            "thanks": "Merci!"
         }
     }
 }

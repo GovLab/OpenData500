@@ -1,4 +1,4 @@
-{% extends "main.html" %}
+{% extends "../../main.html" %}
 {% autoescape None %}
 
 {% block body %}
@@ -10,14 +10,15 @@
 	<div class="m-form-box data">
 		<p>Please tell us more about the open data sources your company uses.</p>
 		<p>Use the search bar to find and select government agencies, subagencies, city and state governments, or government-funded research programs from the list provided.</p>
+		<p>If you can't find your data provider on the list, please fill out the form <a href="/#suggest">below</a> to suggest an agency, subagency, organization, etc.</p>
 		<p><strong>[Optional]:</strong> Please tell us which datasets your company uses from the agencies, city, or state governments you select, and please score each dataset on a scale of 1 to 4 (i.e. 1 = Poor; 4 = Excellent)</p>
 		<p><div class="example-popup"><a>See Example.</a></div></p>
 		<div class="dialog-example" style="display:none">
 			<img src="{{ static_url("img/ExampleData.png") }}">
 		</div>
 		<div class="ui-widget">
-			<label for="tags">Agency/Sub-agency Search: </label>
-			<input id="agencyTags" placeholder="e.g. NYC, Department of Transportation, DARPA, Defense, Texas, Census..." value="" size="68">
+			<label for="tags">Search: </label>
+			<input id="agencyTags" placeholder="e.g. NYC, Department of Transportation, DARPA, Defense, Texas, Census..." value="" size="78">
 			<input type="hidden" id="searchval" />
 			<input type="button" class="l-button" id="addSearchResult" value="Add Agency/Sub-Agency">
 			<input type="hidden" class="companyID" name="companyID" value="{{ company.id }}">

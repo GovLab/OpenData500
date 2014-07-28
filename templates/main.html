@@ -3,14 +3,14 @@
 <!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
 <!--[if IE 7 ]>     <html lang="en" class="no-js ie7"> <![endif]-->
 <!--[if IE 8 ]>     <html lang="en" class="no-js ie8"> <![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html lang="{{lan}}" class="no-js"> <!--<![endif]-->
 <head>
     <meta name="description" content="The Open Data 500 is the first comprehensive study of U.S. companies that use open government data to generate new business and develop new products and services.">
     <meta name="keywords" content="Open Data, Open Data 500, Companies, Government Open Data, Big DAta, US Government Data, Data, Open">
     <meta name="author" content="NYU Governance Lab">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>{%try%} {{ settings["page_title"] }}{%except%}OD500{%end%}</title>
+    <title>{%try%} {{ page_title }}{%except%}Open Data 500{%end%}</title>
     <!-- Load jQuery -->
     <script src="{{ static_url("js/jquery-2.1.0.min.js") }}"></script>
     <script src="{{ static_url("js/jquery-ui-1.10.4.custom.min.js") }}"></script>
@@ -44,16 +44,13 @@
     <div class="parallax-bg" id="background-3" data-stellar-ratio="-0.02"></div>   -->
     <header>
         <div id="mainMenu" class="l-centered m-main-menu">
-            <a class="logo" href="/{%try%}{%if country and country!="int" %}{{country}}/{%end%}{%except%}{%end%}"><img src="{{ static_url("img/od500-logo.png") }}" alt=""></a>
-            <a href="/{%try%}{%if country and country!="int" %}{{country}}/{%end%}{%except%}{%end%}about/">About</a>
-            <a href="/{%try%}{%if country and country!="int" %}{{country}}/{%end%}{%except%}{%end%}list/">Full List</a>
-            <a href="/{%try%}{%if country and country!="int" %}{{country}}/{%end%}{%except%}{%end%}submitCompany/">Survey</a>
-            <a href="/{%try%}{%if country and country!="int" %}{{country}}/{%end%}{%except%}{%end%}stats/">Stats</a>
-            <a href="/{%try%}{%if country and country!="int" %}{{country}}/{%end%}{%except%}{%end%}roundtables/">Roundtables</a>
-            <a href="/{%try%}{%if country and country!="int" %}{{country}}/{%end%}{%except%}{%end%}resources/">Resources</a>
-            <!-- <a href="/download/">Download</a>  -->
+            <a class="logo" href="/{{country}}/"><img src="{{ static_url("img/od500-logo.png") }}" alt=""></a>
+            {% for i in range(0, len(menu['label'])) %}
+                <a href="/{{country}}{{menu['link'][i]}}">{{menu['label'][i]}}</a>
+            {% end %}
             {%try%} {% if user %} <a href="/admin/companies/">Admin</a>{% end %}{%except%}{%end%}
             {%try%} {% if user %} <a href="/logout/">Logout</a>{% end %}{%except%}{%end%}
+            <span class="language"><a href="#" onClick="switchLanguage('en');">EN</a><a href="#" onClick="switchLanguage('fr');">FR</a></span>
         </div>
     </header><!-- end header -->
     
@@ -309,6 +306,22 @@
       ga('create', 'UA-46511610-1', 'opendata500.com');
       ga('send', 'pageview');
 
+    </script>
+
+    <script type="text/javascript">
+        function switchLanguage(lan) {
+            console.log("changing cookie");
+            cookie = document.cookie.split("; ");
+            for (var i = 0; i < cookie.length; i++) {
+                if (cookie[i].split("=")[0] == "lan") {
+                    cookie[i] = "lan=" + lan;
+                }
+            }
+            y = cookie.join("; ");
+            document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+            document.cookie = y;
+            console.log(document.cookie);
+        }
     </script>
     </body>
 </html>

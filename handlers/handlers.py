@@ -9,28 +9,25 @@ class MainHandler(BaseHandler):
     def get(self, country=None):
         if not country:
             country = "us"
+        if country not in available_countries:
+            self.redirect("/404/")
+            return
+        with open("templates/"+country+"/settings.json") as json_file:
+            settings = json.load(json_file)
         lan = self.get_argument("lan", "")
-        if country in available_countries:
-            with open("templates/"+country+"/settings.json") as json_file:
-                settings = json.load(json_file)
-            if lan not in settings.keys():
-                logging.info("No translation selected or translation not available in this language")
-                lan = settings["default_language"]
-            self.render(
-                country.lower()+"/index.html",
-                page_title = settings[lan]['index']['page_title'],
-                settings = settings[lan]['index'],
-                user=self.current_user,
-                country=country
-            )
-        else:
-            self.render('404.html',
-                page_heading="Stop trying to make " +self.request.uri + " happen. <br><br>It's not going to happen.",
-                user=self.current_user,
-                page_title="404 - Not Found",
-                error="Not found",
-                country=""
-            )
+        if not lan:
+            lan = settings['default_language']
+        if lan not in settings["available_languages"]:
+            lan = settings["default_language"]
+        self.set_cookie("lan", lan)
+        self.render(
+            country.lower()+ "/" + lan + "/index.html",
+            settings = settings,
+            menu=settings['menu'][lan],
+            user=self.current_user,
+            lan = lan,
+            country=country
+        )
 
 #--------------------------------------------------------TEST PAGE------------------------------------------------------------
 class TestHandler(BaseHandler):
@@ -57,24 +54,12 @@ class RoundtableHandler(BaseHandler):
         rt = self.get_argument("rt", "main")
         logging.info("Country: " + country + " RT: " + rt)
         self.render(
-            country + "/"+rt+"_roundtable.html",
+            "us/english/"+rt+"_roundtable.html",
             page_title = "Open Data Roundtables",
             page_heading = "Open Data Roundtables",
             user=self.current_user,
             country=country
         )
-
-
-#--------------------------------------------------------THANKS PAGE------------------------------------------------------------
-class ThanksHandler(BaseHandler): 
-    @tornado.web.addslash
-    def get(self):
-        self.render(
-            "thankyou.html", 
-            user=self.current_user,
-            page_title="OD500 - Thanks!",
-            page_heading="Thank you for participating in the Open Data 500!" 
-            )
 
 
 #--------------------------------------------------------STATIC PAGE------------------------------------------------------------
@@ -87,12 +72,14 @@ class StaticPageHandler(BaseHandler):
             company = models.Company.objects.get(Q(prettyName=page) & Q(display=True))
             if company.country != country:
                 self.redirect("/" + company.country + "/" + company.prettyName + "/")
+                return
         except DoesNotExist:
             company = None
         except MultipleObjectsReturned:
             company = models.Company.objects(Q(prettyName=page) & Q(country=country) & Q(display=True))[0]
             if company.country != country:
                 self.redirect("/" + company.country + "/" + company.prettyName + "/")
+                return
         except Exception, e:
             logging.info("Uncaught Exception: " + str(e))
             self.render(
@@ -105,50 +92,50 @@ class StaticPageHandler(BaseHandler):
             return
         #country, language, settings for page
         if not country:
-            country = "us"
-        lan = self.get_argument("lan", "")
-        if country in available_countries:
-            with open("templates/"+country+"/settings.json") as json_file:
-                settings = json.load(json_file)
-            if lan not in settings.keys():
-                logging.info("No translation selected or translation not available in this language")
-                lan = settings["default_language"]
-        else: #country not available
-            self.render('404.html',
-                page_heading="Stop trying to make " +self.request.uri + " happen. <br><br>It's not going to happen.",
-                user=self.current_user,
-                page_title="404 - Not Found",
-                error="Not found",
-                country=""
-            )
+            country = "us" #us default country
+        if country not in available_countries:
+            self.redirect("/404/")
             return
+        with open("templates/"+country+"/settings.json") as json_file:
+            settings = json.load(json_file)
+        lan = self.get_argument("lan", "")
+        if not lan:
+            lan = settings['default_language']
         if company: 
             self.render(
-                company.country + "/company.html",
-                page_title='Open Data500',
+                company.country + "/" + lan + "/company.html",
+                page_title=company.companyName,
                 user=self.current_user,
                 page_heading=company.companyName,
                 company = company,
+                menu=settings['menu'][lan],
                 country=country
             )
             return
         else:
-            if page in settings[lan].keys():
+            try:
+                page_title=settings['page_titles'][lan][page]
+            except:
+                page_title="OD500"
+            try: 
                 self.render(
-                    country.lower()+"/" + page +  ".html",
-                    settings = settings[lan][page],
+                    country + "/" + lan + "/" + page + ".html",
                     user=self.current_user,
-                    country=country
+                    country=country,
+                    menu=settings['menu'][lan],
+                    page_title=page_title
                 )
                 return
-            else:
-                self.render(country + '/404.html',
-                    settings = settings[lan]['error']['404'],
+            except Exception, e:
+                self.render(country + "/" + lan + '/404.html',
                     user=self.current_user,
-                    page_title=settings[lan]['error']['404']['page_title'],
-                    country=country
+                    country=country,
+                    page_title=page_title,
+                    menu=settings['menu'][lan],
+                    error=e
                 )
                 return
+
 
 
 #--------------------------------------------------------FULL LIST PAGE------------------------------------------------------------
@@ -161,36 +148,33 @@ class ListHandler(BaseHandler):
             return 
         if not country:
             country = "us"
-        lan = self.get_argument("lan", "")
-        if country in available_countries:
-            with open("templates/"+country+"/settings.json") as json_file:
+        if country not in available_countries:
+            self.redirect("/404/")
+            return
+        with open("templates/"+country+"/settings.json") as json_file:
                 settings = json.load(json_file)
-            if lan not in settings.keys():
-                logging.info("No translation selected or translation not available in this language")
-                lan = settings["default_language"]
-            companies = models.Company.objects(Q(display=True) & Q(country=country)).order_by('prettyName')
-            agencies = models.Agency.objects(Q(usedBy__not__size=0) & Q(source="dataGov") & Q(dataType="Federal")).order_by("-usedBy_count").only("name", "abbrev", "prettyName")[0:16]
-            stats = models.Stats.objects().first()
-            self.render(
-                country.lower()+"/list.html",
-                settings = settings[lan]['list'],
-                companies = companies,
-                stats = stats,
-                states=states,
-                agencies = agencies,
-                categories = categories,
-                user=self.current_user,
-                country=country
-            )
-        else:
-            self.render('404.html',
-                page_heading="Stop trying to make " +self.request.uri + " happen. <br><br>It's not going to happen.",
-                user=self.current_user,
-                page_title="404 - Not Found",
-                error="Not found",
-                country=""
-            )
-
+        lan = self.get_argument("lan", "")
+        if not lan or lan not in settings["available_languages"]:
+            lan = settings["default_language"]
+        companies = models.Company.objects(Q(display=True) & Q(country=country)).order_by('prettyName')
+        agencies = models.Agency.objects(Q(usedBy__not__size=0) & Q(source="dataGov") & Q(dataType="Federal")).order_by("-usedBy_count").only("name", "abbrev", "prettyName")[0:16]
+        stats = models.Stats.objects().first()
+        try:
+            page_title=settings['page_titles'][lan]["list"]
+        except:
+            page_title="OD500"
+        self.render(
+            country+"/" + lan + "/list.html",
+            companies = companies,
+            stats = stats,
+            states = states,
+            agencies = agencies,
+            categories = categories,
+            user = self.current_user,
+            country = country,
+            menu=settings['menu'][lan],
+            page_title=page_title
+        )
 
 #--------------------------------------------------------CHART PAGE------------------------------------------------------------
 class ChartHandler(BaseHandler):
@@ -241,29 +225,34 @@ class SubmitCompanyHandler(BaseHandler):
     def get(self, country=None):
         if not country:
             country = "us"
-        lan = self.get_argument("lan", "")
-        if country in available_countries:
-            with open("templates/"+country+"/settings.json") as json_file:
+        if country not in available_countries:
+            self.redirect("/404/")
+            return
+        with open("templates/"+country+"/settings.json") as json_file:
                 settings = json.load(json_file)
-            if lan not in settings.keys():
-                logging.info("No translation selected or translation not available in this language")
-                lan = settings["default_language"]
-            self.render(
-                country.lower()+"/submitCompany.html",
-                page_title = settings[lan]['submit']['page_title'],
-                settings = settings[lan]['submit'],
-                country=country,
-                country_keys=country_keys,
-                companyType = companyType,
-                companyFunction = companyFunction,
-                criticalDataTypes = criticalDataTypes,
-                revenueSource = revenueSource,
-                categories=categories,
-                datatypes = datatypes,
-                stateList = stateList,
-                user=self.current_user,
-                stateListAbbrev=stateListAbbrev
-            )
+        lan = self.get_argument("lan", "")
+        if not lan or lan not in settings["available_languages"]:
+            lan = settings["default_language"]
+        try:
+            page_title=settings['page_titles'][lan]["submit"]
+        except:
+            page_title="OD500"
+        self.render(
+            country+ "/" + lan + "/submitCompany.html",
+            page_title = page_title,
+            country=country,
+            country_keys=country_keys,
+            companyType = companyType,
+            companyFunction = companyFunction,
+            criticalDataTypes = criticalDataTypes,
+            revenueSource = revenueSource,
+            categories=categories,
+            datatypes = datatypes,
+            stateList = stateList,
+            user=self.current_user,
+            menu=settings['menu'][lan],
+            stateListAbbrev=stateListAbbrev
+        )
 
     #@tornado.web.authenticated
     def post(self, country=None):
@@ -372,15 +361,29 @@ class SubmitDataHandler(BaseHandler):
     @tornado.web.addslash
     #@tornado.web.authenticated
     def get(self, country, id):
+        if not country:
+            country = "us"
+        if country not in available_countries:
+            self.redirect("/404/")
+            return
+        with open("templates/"+country+"/settings.json") as json_file:
+                settings = json.load(json_file)
+        lan = self.get_argument("lan", "")
+        if not lan or lan not in settings["available_languages"]:
+            lan = settings["default_language"]
         company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
         if company.country != country:
             self.redirect(str('/'+company.country+'/addData/'+id))
             return
-        page_heading = "Agency and Data Information for " + company.companyName
-        self.render(company.country + "/submitData.html",
-            page_title = "Submit Data Sets For Company",
-            page_heading = page_heading,
+        try:
+            page_title=settings['page_titles'][lan]["submitData"]
+        except:
+            page_title="Submit Agency and Data Information"
+        self.render(company.country + "/" + lan + "/submitData.html",
+            page_title = page_title,
+            page_heading = "Agency and Data Information for " + company.companyName,
             company = company,
+            menu=settings['menu'][lan],
             user=self.current_user
         )
 
@@ -393,6 +396,12 @@ class SubmitDataHandler(BaseHandler):
         except Exception, e:
             logging.info("Could not get company: " + str(e))
             self.set_status(400)
+        country = company.country
+        with open("templates/"+country+"/settings.json") as json_file:
+                settings = json.load(json_file)
+        lan = self.get_argument("lan", "")
+        if not lan or lan not in settings["available_languages"]:
+            lan = settings["default_language"]
         agencyName = self.get_argument("agency", None)
         a_id = self.get_argument("a_id", None)
         subagencyName = self.get_argument("subagency", None)
@@ -403,7 +412,7 @@ class SubmitDataHandler(BaseHandler):
             company.dataComments = self.get_argument('dataComments', None)
             company.lastUpdated = datetime.now()
             company.save()
-            self.write("success")
+            self.write({"result":"success", "redirect":"/"+ country + "/thanks/?lan=" + lan})
         #------------------------------------ADDING AGENCY/SUBAGENCY------------------------
         if action == "add agency":
             #Existing AGENCY
@@ -620,6 +629,7 @@ class EditCompanyHandler(BaseHandler):
                 country = company.country,
                 country_keys=country_keys,
                 settings = settings[lan]['edit_company'],
+                menu=settings['menu'][lan],
                 id = str(company.id)
             )
 

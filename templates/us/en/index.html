@@ -1,11 +1,12 @@
-{% extends "../main.html" %}
+{% extends "../../main.html" %}
 {% autoescape None %}
 
 {% block body %}
 
 <div class="m-homepage">
-    <a href="/ca/?lan=french">French</a> <a href="/ca/?lan=english">English</a>
-    <h1 class="first-title">{{settings["page_heading"]}}</h1>
+
+    <h1 class="first-title">Welcome to the Open Data 500</h1>
+    <div class="m-banner-slider"><a href="/roundtables/"><img src="{{ static_url("img/roundtable-banner.jpg") }}"></a></div>
     <script src="{{ static_url("js/d3.v3.min.js") }}"></script>
     <section id="chord-chart-container">
         <h2>Open Data Compass</h2>
@@ -14,11 +15,21 @@
          <span class="chord-legend companies">Company Categories</span>
          <span class="chord-legend agencies">Federal Agencies</span>
         </div>
-        <h3 class="data-text"><div class="embed-popup"><a class="m-button"><strong>Embed Chart</strong></a></div></h3><br>
+        <div class="embed-chart-info">
+            <span id="embed-chart-trigger" class="expand-trigger">Embed Chart</span>
+            <div class="embed-chart-info-content">
+                <p>To embed this chart on your website, just copy and paste this code onto your page:</p>
+                <textarea class="embed-code" readonly="readonly">
+                    <iframe src="http://www.opendata500.com/chart/" width="960" height="860" marginwidth="0" marginheight="50" scrolling="no" frameborder="0"></iframe>
+                </textarea>
+            </div>
+        </div>
+
+        <!-- <h3 class="data-text"><div class="embed-popup"><a class="m-button"><strong>Embed Chart</strong></a></div></h3><br>
         <div class="dialog-example">
             <p>To embed this chart on your website, just copy and paste this code onto your page:</p>
             <textarea class="embed-code" readonly="readonly"><iframe src="http://www.opendata500.com/chart/" width="960" height="860" marginwidth="0" marginheight="50" scrolling="no" frameborder="0"></iframe></textarea>
-        </div>
+        </div> -->
     </section>
 
     <!-- <iframe src="/chart/" width="960" height="860" marginwidth="0" marginheight="50" scrolling="no" frameborder="0"></iframe> -->
@@ -53,7 +64,7 @@
 
 $('.m-homepage').css('text-align', 'left' );
 var data;
-d3.json("{{ static_url('matrix.json') }}", function(error, json) {
+d3.json("{{ static_url('files/us_matrix.json') }}", function(error, json) {
     if (error) return console.warn(error);
     data = json;
     draw_diagram();
