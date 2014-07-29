@@ -50,7 +50,7 @@
             {% end %}
             {%try%} {% if user %} <a href="/admin/companies/">Admin</a>{% end %}{%except%}{%end%}
             {%try%} {% if user %} <a href="/logout/">Logout</a>{% end %}{%except%}{%end%}
-            <span class="language"><a href="#" onClick="switchLanguage('en');">EN</a><a href="#" onClick="switchLanguage('fr');">FR</a></span>
+            {%if len(settings['available_languages']) > 1 %}<span class="language"><a href="." onClick="switchLanguage('en');">EN</a><a href="." onClick="switchLanguage('fr');">FR</a></span>{%end%}
         </div>
     </header><!-- end header -->
     
@@ -310,7 +310,7 @@
 
     <script type="text/javascript">
         function switchLanguage(lan) {
-            console.log("changing cookie");
+            console.log("changing language");
             cookie = document.cookie.split("; ");
             for (var i = 0; i < cookie.length; i++) {
                 if (cookie[i].split("=")[0] == "lan") {
@@ -318,7 +318,6 @@
                 }
             }
             y = cookie.join("; ");
-            document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
             document.cookie = y;
             console.log(document.cookie);
         }

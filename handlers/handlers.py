@@ -14,12 +14,17 @@ class MainHandler(BaseHandler):
             return
         with open("templates/"+country+"/settings.json") as json_file:
             settings = json.load(json_file)
-        lan = self.get_argument("lan", "")
+        # lan = self.get_argument("lan", "")
+        # if lan and lan != self.get_cookie("lan"):
+        #     self.set_cookie("lan", lan)
+        # if not lan:
+        #     lan = self.get_cookie("lan")
+        # if not lan: or lan not in settings["available_languages"]:
+        #     lan = settings['default_language']
+        #     self.set_cookie("lan", lan)
+        lan = self.get_cookie("lan")
         if not lan:
             lan = settings['default_language']
-        if lan not in settings["available_languages"]:
-            lan = settings["default_language"]
-        self.set_cookie("lan", lan)
         self.render(
             country.lower()+ "/" + lan + "/index.html",
             settings = settings,
@@ -52,13 +57,18 @@ class RoundtableHandler(BaseHandler):
             self.redirect("/us/roundtables/")
             return
         rt = self.get_argument("rt", "main")
+        with open("templates/us/settings.json") as json_file:
+            settings = json.load(json_file)
         logging.info("Country: " + country + " RT: " + rt)
         self.render(
-            "us/english/"+rt+"_roundtable.html",
+            "us/en/"+rt+"_roundtable.html",
             page_title = "Open Data Roundtables",
             page_heading = "Open Data Roundtables",
             user=self.current_user,
-            country=country
+            country=country,
+            settings=settings,
+            menu=settings['menu']['en'],
+            lan="en"
         )
 
 
@@ -98,7 +108,7 @@ class StaticPageHandler(BaseHandler):
             return
         with open("templates/"+country+"/settings.json") as json_file:
             settings = json.load(json_file)
-        lan = self.get_argument("lan", "")
+        lan = self.get_cookie("lan")
         if not lan:
             lan = settings['default_language']
         if company: 
@@ -109,7 +119,9 @@ class StaticPageHandler(BaseHandler):
                 page_heading=company.companyName,
                 company = company,
                 menu=settings['menu'][lan],
-                country=country
+                settings=settings,
+                country=country,
+                lan=lan
             )
             return
         else:
@@ -123,7 +135,9 @@ class StaticPageHandler(BaseHandler):
                     user=self.current_user,
                     country=country,
                     menu=settings['menu'][lan],
-                    page_title=page_title
+                    settings=settings,
+                    page_title=page_title,
+                    lan=lan
                 )
                 return
             except Exception, e:
@@ -132,6 +146,8 @@ class StaticPageHandler(BaseHandler):
                     country=country,
                     page_title=page_title,
                     menu=settings['menu'][lan],
+                    settings=settings,
+                    lan=lan,
                     error=e
                 )
                 return
@@ -153,9 +169,9 @@ class ListHandler(BaseHandler):
             return
         with open("templates/"+country+"/settings.json") as json_file:
                 settings = json.load(json_file)
-        lan = self.get_argument("lan", "")
-        if not lan or lan not in settings["available_languages"]:
-            lan = settings["default_language"]
+        lan = self.get_cookie("lan")
+        if not lan:
+            lan = settings['default_language']
         companies = models.Company.objects(Q(display=True) & Q(country=country)).order_by('prettyName')
         agencies = models.Agency.objects(Q(usedBy__not__size=0) & Q(source="dataGov") & Q(dataType="Federal")).order_by("-usedBy_count").only("name", "abbrev", "prettyName")[0:16]
         stats = models.Stats.objects().first()
@@ -173,7 +189,9 @@ class ListHandler(BaseHandler):
             user = self.current_user,
             country = country,
             menu=settings['menu'][lan],
-            page_title=page_title
+            page_title=page_title,
+            settings=settings,
+            lan=lan
         )
 
 #--------------------------------------------------------CHART PAGE------------------------------------------------------------
@@ -230,9 +248,9 @@ class SubmitCompanyHandler(BaseHandler):
             return
         with open("templates/"+country+"/settings.json") as json_file:
                 settings = json.load(json_file)
-        lan = self.get_argument("lan", "")
-        if not lan or lan not in settings["available_languages"]:
-            lan = settings["default_language"]
+        lan = self.get_cookie("lan")
+        if not lan:
+            lan = settings['default_language']
         try:
             page_title=settings['page_titles'][lan]["submit"]
         except:
@@ -251,7 +269,9 @@ class SubmitCompanyHandler(BaseHandler):
             stateList = stateList,
             user=self.current_user,
             menu=settings['menu'][lan],
-            stateListAbbrev=stateListAbbrev
+            stateListAbbrev=stateListAbbrev,
+            settings=settings,
+            lan=lan
         )
 
     #@tornado.web.authenticated
@@ -399,9 +419,9 @@ class SubmitDataHandler(BaseHandler):
         country = company.country
         with open("templates/"+country+"/settings.json") as json_file:
                 settings = json.load(json_file)
-        lan = self.get_argument("lan", "")
-        if not lan or lan not in settings["available_languages"]:
-            lan = settings["default_language"]
+        lan = self.get_cookie("lan")
+        if not lan:
+            lan = settings['default_language']
         agencyName = self.get_argument("agency", None)
         a_id = self.get_argument("a_id", None)
         subagencyName = self.get_argument("subagency", None)
@@ -604,12 +624,11 @@ class EditCompanyHandler(BaseHandler):
         if company.country != country:
             self.redirect(str('/'+company.country+'/edit/'+id))
             return
-        lan = self.get_argument("lan", "")
         with open("templates/"+company.country+"/settings.json") as json_file:
             settings = json.load(json_file)
-        if lan not in settings.keys():
-            logging.info("No translation selected or translation not available in this language")
-            lan = settings["default_language"]
+        lan = self.get_cookie("lan")
+        if not lan:
+            lan = settings['default_language']
         if company.locked:
             self.render(company.country + "/404.html",
                 page_title = "Can't Edit This Company",

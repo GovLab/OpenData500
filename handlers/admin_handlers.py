@@ -103,6 +103,8 @@ class CompanyAdminHandler(BaseHandler):
             self.redirect("/login/")
         country = user.country
         logging.info("Working in: " + country)
+        with open("templates/"+country+"/settings.json") as json_file:
+            settings = json.load(json_file)
         surveySubmitted = models.Company.objects(Q(submittedSurvey=True) & Q(vetted=True) & Q(country=country)).order_by('prettyName')
         sendSurveys = models.Company.objects(Q(submittedSurvey=False) & Q(country=country))
         needVetting = models.Company.objects(Q(submittedSurvey=True) & Q(vetted=False) & Q(country=country)).order_by('-lastUpdated', 'prettyName')
@@ -121,7 +123,10 @@ class CompanyAdminHandler(BaseHandler):
             user=self.current_user,
             country = country,
             sendSurveys = sendSurveys,
-            stats = stats
+            stats = stats,
+            settings=settings,
+            menu=settings['menu']['en'],
+            lan='en'
         )
 
     def post(self):
