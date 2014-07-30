@@ -388,7 +388,7 @@ class SubmitDataHandler(BaseHandler):
             return
         with open("templates/"+country+"/settings.json") as json_file:
                 settings = json.load(json_file)
-        lan = self.get_argument("lan", "")
+        lan = self.get_cookie('lan')
         if not lan or lan not in settings["available_languages"]:
             lan = settings["default_language"]
         company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
@@ -396,15 +396,17 @@ class SubmitDataHandler(BaseHandler):
             self.redirect(str('/'+company.country+'/addData/'+id))
             return
         try:
-            page_title=settings['page_titles'][lan]["submitData"]
+            page_title=settings['page_titles'][lan]['submitData']
         except:
-            page_title="Submit Agency and Data Information"
+            page_title="OD500"
         self.render(company.country + "/" + lan + "/submitData.html",
-            page_title = page_title,
+            page_title=page_title,
             page_heading = "Agency and Data Information for " + company.companyName,
             company = company,
-            menu=settings['menu'][lan],
-            user=self.current_user
+            user=self.current_user,
+            settings=settings,
+            country=country,
+            lan=lan
         )
 
     #@tornado.web.authenticated
@@ -608,117 +610,7 @@ class SubmitDataHandler(BaseHandler):
             self.write("success")
 
 
-#--------------------------------------------------------EDIT COMPANY PAGE------------------------------------------------------------
-class EditCompanyHandler(BaseHandler):
-    @tornado.web.addslash
-    def get(self, country, id):
-        try: 
-            company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
-        except:
-            self.render("404.html", 
-                page_title = "That ain't even a thing.",
-                page_heading = "Check yo'self",
-                error = "404 - Not Found",
-                user=self.current_user,
-                message=id)
-        if company.country != country:
-            self.redirect(str('/'+company.country+'/edit/'+id))
-            return
-        with open("templates/"+company.country+"/settings.json") as json_file:
-            settings = json.load(json_file)
-        lan = self.get_cookie("lan")
-        if not lan:
-            lan = settings['default_language']
-        if company.locked:
-            self.render(company.country + "/404.html",
-                page_title = "Can't Edit This Company",
-                settings = settings[lan]['error']["locked"])
-        else:
-            self.render(company.country + "/editCompany.html",
-                company = company,
-                companyType = companyType,
-                companyFunction = companyFunction,
-                criticalDataTypes = criticalDataTypes,
-                revenueSource = revenueSource,
-                categories=categories,
-                datatypes = datatypes,
-                stateList = stateList,
-                stateListAbbrev=stateListAbbrev,
-                user=self.current_user,
-                country = company.country,
-                country_keys=country_keys,
-                settings = settings[lan]['edit_company'],
-                menu=settings['menu'][lan],
-                id = str(company.id)
-            )
 
-    def post(self, country, id):
-        #save all data to log:
-        logging.info("Editing company:")
-        logging.info(self.request.arguments)
-        #get the company you will be editing
-        company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
-        #------------------CONTACT INFO-------------------
-        company.contact.firstName = self.get_argument("firstName", None)
-        company.contact.lastName = self.get_argument("lastName", None)
-        company.contact.title = self.get_argument("title", None)
-        company.contact.org = self.get_argument("org", None)
-        company.contact.email = self.get_argument("email", None)
-        company.contact.phone = self.get_argument("phone", None)
-        try: 
-            if self.request.arguments['contacted']:
-                company.contact.contacted = True
-        except:
-            company.contact.contacted = False
-        #------------------CEO INFO-------------------
-        company.ceo.firstName = self.get_argument("ceoFirstName", None)
-        company.ceo.lastName = self.get_argument("ceoLastName", None)
-        #------------------COMPANY INFO-------------------
-        #company.companyName = self.get_argument("companyName", None)
-        #company.prettyName = re.sub(r'([^\s\w])+', '', company.companyName).replace(" ", "-").title()
-        company.url = self.get_argument('url', None)
-        company.city = self.get_argument('city', None)
-        company.state = self.get_argument('state', None)
-        company.zipCode = self.get_argument('zipCode', None)
-        company.companyType = self.get_argument("companyType", None)
-        if company.companyType == 'other': #if user entered custom option for Type
-            company.companyType = self.get_argument('otherCompanyType', None)
-        company.yearFounded = self.get_argument("yearFounded", 0)
-        if  not company.yearFounded:
-            company.yearFounded = 0
-        company.fte = self.get_argument("fte", 0)
-        if not company.fte:
-            company.fte = 0
-        company.companyCategory = self.get_argument("category", None)
-        if company.companyCategory == "Other":
-            company.companyCategory = self.get_argument("otherCategory", None)
-        try: #try and get all checked items. 
-            company.revenueSource = self.request.arguments['revenueSource']
-        except: #if no checked items, then make it into an empty array (form validation should prevent this always)
-            company.revenueSource = []
-        if 'Other' in company.revenueSource: #if user entered a custom option for Revenue Source
-            del company.revenueSource[company.revenueSource.index('Other')] #delete 'Other' from list
-            if self.get_argument('otherRevenueSource', None):
-                company.revenueSource.append(self.get_argument('otherRevenueSource', None)) #add custom option to list.
-        company.description = self.get_argument('description', None)
-        company.descriptionShort = self.get_argument('descriptionShort', None)
-        company.financialInfo = self.get_argument('financialInfo', None)
-        company.datasetWishList = self.get_argument('datasetWishList', None)
-        company.sourceCount = self.get_argument('sourceCount', None) 
-        company.dataComments = self.get_argument("dataComments", None)
-        company.datasetComments = self.get_argument('datasetComments', None)
-        company.submittedSurvey = True
-        company.vettedByCompany = True
-        company.lastUpdated = datetime.now()
-        company.filters = [company.companyCategory, company.state, "survey-company"] #re-do filters
-        for a in company.agencies:
-                if a.prettyName:
-                    company.filters.append(a.prettyName)
-        if company.display: #only if company is displayed
-            self.application.stats.update_all_state_counts(company.country)
-        company.save()
-        #self.application.stats.update_all_state_counts()
-        self.write('success')
 
 
 

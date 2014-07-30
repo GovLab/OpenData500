@@ -45,8 +45,8 @@
     <header>
         <div id="mainMenu" class="l-centered m-main-menu">
             <a class="logo" href="/{{country}}/"><img src="{{ static_url("img/od500-logo.png") }}" alt=""></a>
-            {% for i in range(0, len(menu['label'])) %}
-                <a href="/{{country}}{{menu['link'][i]}}">{{menu['label'][i]}}</a>
+            {% for i in range(0, len(settings['menu'][lan]['label'])) %}
+                <a href="/{{country}}{{settings['menu'][lan]['link'][i]}}">{{settings['menu'][lan]['label'][i]}}</a>
             {% end %}
             {%try%} {% if user %} <a href="/admin/companies/">Admin</a>{% end %}{%except%}{%end%}
             {%try%} {% if user %} <a href="/logout/">Logout</a>{% end %}{%except%}{%end%}

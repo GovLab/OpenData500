@@ -5,12 +5,18 @@ import json
 class LoginHandler(BaseHandler): 
     @tornado.web.addslash
     def get(self):
+        with open("templates/us/settings.json") as json_file:
+            settings = json.load(json_file)
         self.render(
             "admin/login.html", 
             next=self.get_argument("next","/"), 
             message=self.get_argument("error",""),
             page_title="Please Login",
-            page_heading="Login to OD500" 
+            page_heading="Login to OD500" ,
+            lan='en',
+            country='us',
+            menu=settings['menu']['en'],
+            settings=settings
             )
 
     def post(self):
@@ -25,7 +31,7 @@ class LoginHandler(BaseHandler):
         if user and user.password and bcrypt.hashpw(password, user.password.encode('utf-8')) == user.password:
             logging.info('successful login for '+username)
             self.set_current_user(username)
-            self.redirect("/")
+            self.redirect("/admin/companies/")
         else: 
             logging.info('unsuccessful login')
             error_msg = u"?error=" + tornado.escape.url_escape("Incorrect Password")
@@ -49,6 +55,9 @@ class RegisterHandler(LoginHandler):
             logging.info("Could not get user: " + str(e))
             self.redirect("/login/")
         country = user.country
+        with open("templates/" + country + "/settings.json") as json_file:
+            settings = json.load(json_file)
+        lan = settings['default_language']
         self.render(
                 "admin/register.html", 
                 next=self.get_argument("next","/"),
@@ -56,7 +65,10 @@ class RegisterHandler(LoginHandler):
                 page_heading="Register for OD500",
                 user=self.current_user,
                 country = country,
-                country_keys=country_keys
+                country_keys=country_keys,
+                menu=settings['menu'][lan],
+                settings=settings,
+                lan=lan
             )
 
     @tornado.web.authenticated
@@ -95,7 +107,10 @@ class LogoutHandler(BaseHandler):
 class CompanyAdminHandler(BaseHandler):
     @tornado.web.addslash
     @tornado.web.authenticated
-    def get(self):
+    def get(self, country=None, page=None):
+        if not page:
+            self.redirect("/admin/companies/")
+            return
         try:
             user = models.Users.objects.get(username=self.current_user)
         except Exception, e:
@@ -103,8 +118,9 @@ class CompanyAdminHandler(BaseHandler):
             self.redirect("/login/")
         country = user.country
         logging.info("Working in: " + country)
-        with open("templates/"+country+"/settings.json") as json_file:
+        with open("templates/"+user.country+"/settings.json") as json_file:
             settings = json.load(json_file)
+        lan = settings['default_language']
         surveySubmitted = models.Company.objects(Q(submittedSurvey=True) & Q(vetted=True) & Q(country=country)).order_by('prettyName')
         sendSurveys = models.Company.objects(Q(submittedSurvey=False) & Q(country=country))
         needVetting = models.Company.objects(Q(submittedSurvey=True) & Q(vetted=False) & Q(country=country)).order_by('-lastUpdated', 'prettyName')
@@ -125,11 +141,10 @@ class CompanyAdminHandler(BaseHandler):
             sendSurveys = sendSurveys,
             stats = stats,
             settings=settings,
-            menu=settings['menu']['en'],
-            lan='en'
+            lan=lan
         )
 
-    def post(self):
+    def post(self, country=None, page=None):
         try:
             user = models.Users.objects.get(username=self.current_user)
         except Exception, e:
@@ -185,13 +200,15 @@ class CompanyAdminHandler(BaseHandler):
 class AgencyAdminHandler(BaseHandler):
     @tornado.web.addslash
     @tornado.web.authenticated
-    def get(self):
+    def get(self, country=None, page=None):
         try:
             user = models.Users.objects.get(username=self.current_user)
         except Exception, e:
             logging.info("Could not get user: " + str(e))
             self.redirect("/login/")
         country = user.country
+        with open("templates/"+user.country+"/settings.json") as json_file:
+            settings = json.load(json_file)
         logging.info("Working in: " + country)
         agencies = models.Agency.objects(country=country).order_by('name')
         stats = models.Stats.objects.get(country=country)
@@ -201,12 +218,15 @@ class AgencyAdminHandler(BaseHandler):
             page_heading='Admin - ' + country.upper(),
             user=self.current_user,
             stats = stats,
-            agencies=agencies
+            agencies=agencies,
+            settings=settings,
+            country=country,
+            lan=settings['default_language']
         )
 
     @tornado.web.addslash
     @tornado.web.authenticated
-    def post(self):
+    def post(self, country=None, page=None):
         try:
             user = models.Users.objects.get(username=self.current_user)
         except Exception, e:
@@ -235,6 +255,10 @@ class AdminEditCompanyHandler(BaseHandler):
         except Exception, e:
             logging.info('Could not get company: ' + str(e))
             self.redirect('/404/')
+        user = models.Users.objects.get(username=self.current_user)
+        country=user.country
+        with open("templates/"+country+"/settings.json") as json_file:
+            settings = json.load(json_file)
         self.render("admin/admin_edit_company.html",
             page_title = page_title,
             page_heading = page_heading,
@@ -250,7 +274,9 @@ class AdminEditCompanyHandler(BaseHandler):
             user=self.current_user,
             country = company.country,
             country_keys = country_keys,
-            id = str(company.id)
+            id = str(company.id),
+            settings = settings,
+            lan = settings['default_language']
         )
 
     @tornado.web.authenticated
@@ -341,38 +367,176 @@ class AdminEditCompanyHandler(BaseHandler):
             company.locked = True
         else: 
             company.locked = False
-        #company.lastUpdated = datetime.now()
+        company.lastUpdated = datetime.now()
         company.notes = self.get_argument("notes", None)
         company.save()
         self.application.stats.update_all_state_counts(country)
         self.write('success')
-        #self.redirect('/thanks/')
-        # if self.get_argument('submit', None) == 'Save and Submit':
-        #     self.redirect('/')
-        # if self.get_argument('submit', None) == 'Save And Continue Editing':
-        #     self.redirect('/edit/'+id)
+
+
+#--------------------------------------------------------EDIT COMPANY PAGE------------------------------------------------------------
+class EditCompanyHandler(BaseHandler):
+    @tornado.web.addslash
+    def get(self, country=None, page=None, id=None):
+        try: 
+            company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
+        except Exception, e:
+            logging.info("Could not get company: " + str(e))
+            self.redirect("/404/")
+            return
+        if company.country != country:
+            self.redirect(str('/'+company.country+'/' + page + '/'+id))
+            return
+        with open("templates/"+company.country+"/settings.json") as json_file:
+            settings = json.load(json_file)
+        lan = self.get_cookie('lan')
+        if not lan:
+            lan = settings['default_language']
+        if page == 'edit':
+            #non-admin edit
+            if not company.locked:
+                self.render(company.country + "/" + lan + "/editCompany.html",
+                    company = company,
+                    companyType = companyType,
+                    companyFunction = companyFunction,
+                    criticalDataTypes = criticalDataTypes,
+                    revenueSource = revenueSource,
+                    categories=categories,
+                    datatypes = datatypes,
+                    stateList = stateList,
+                    stateListAbbrev=stateListAbbrev,
+                    user=self.current_user,
+                    country = company.country,
+                    country_keys=country_keys,
+                    settings = settings,
+                    lan=lan,
+                    id = str(company.id)
+                )
+            else:
+                self.redirect('/' + company.country + '/locked/')
+                return
+        if page == 'admin-edit':
+            try:
+                user = models.Users.objects.get(username=self.current_user)
+            except Exception, e:
+                logging.info("Could not get user: " + str(e))
+                self.redirect("/login/")
+            if user.country != company.country:
+                logging.info("This user does not have access to edit this company")
+                self.redirect('/' + user.country + '/locked/')
+                return
+            self.render("admin/admin_edit_company.html",
+                page_heading = "Editing " + company.companyName + ' (Admin)',
+                company = company,
+                companyType = companyType,
+                companyFunction = companyFunction,
+                criticalDataTypes = criticalDataTypes,
+                revenueSource = revenueSource,
+                categories=categories,
+                datatypes = datatypes,
+                stateList = stateList,
+                stateListAbbrev=stateListAbbrev,
+                user=self.current_user,
+                country = company.country,
+                country_keys = country_keys,
+                id = str(company.id),
+                settings = settings,
+                lan = settings['default_language']
+            )
+
+    def post(self, country=None, page=None, id=None):
+        #save all data to log:
+        logging.info(self.request.arguments)
+        #get the company you will be editing
+        company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
+        #------------------CONTACT INFO-------------------
+        company.contact.firstName = self.get_argument("firstName", None)
+        company.contact.lastName = self.get_argument("lastName", None)
+        company.contact.title = self.get_argument("title", None)
+        company.contact.org = self.get_argument("org", None)
+        company.contact.email = self.get_argument("email", None)
+        company.contact.phone = self.get_argument("phone", None)
+        try: 
+            if self.request.arguments['contacted']:
+                company.contact.contacted = True
+        except:
+            company.contact.contacted = False
+        #------------------CEO INFO-------------------
+        company.ceo.firstName = self.get_argument("ceoFirstName", None)
+        company.ceo.lastName = self.get_argument("ceoLastName", None)
+        #------------------COMPANY INFO-------------------
+        #company.companyName = self.get_argument("companyName", None)
+        #company.prettyName = re.sub(r'([^\s\w])+', '', company.companyName).replace(" ", "-").title()
+        company.url = self.get_argument('url', None)
+        company.city = self.get_argument('city', None)
+        company.state = self.get_argument('state', None)
+        company.zipCode = self.get_argument('zipCode', None)
+        company.companyType = self.get_argument("companyType", None)
+        if company.companyType == 'other': #if user entered custom option for Type
+            company.companyType = self.get_argument('otherCompanyType', None)
+        company.yearFounded = self.get_argument("yearFounded", 0)
+        if  not company.yearFounded:
+            company.yearFounded = 0
+        company.fte = self.get_argument("fte", 0)
+        if not company.fte:
+            company.fte = 0
+        company.companyCategory = self.get_argument("category", None)
+        if company.companyCategory == "Other":
+            company.companyCategory = self.get_argument("otherCategory", None)
+        try: #try and get all checked items. 
+            company.revenueSource = self.request.arguments['revenueSource']
+        except: #if no checked items, then make it into an empty array (form validation should prevent this always)
+            company.revenueSource = []
+        if 'Other' in company.revenueSource: #if user entered a custom option for Revenue Source
+            del company.revenueSource[company.revenueSource.index('Other')] #delete 'Other' from list
+            if self.get_argument('otherRevenueSource', None):
+                company.revenueSource.append(self.get_argument('otherRevenueSource', None)) #add custom option to list.
+        company.description = self.get_argument('description', None)
+        company.descriptionShort = self.get_argument('descriptionShort', None)
+        company.financialInfo = self.get_argument('financialInfo', None)
+        company.datasetWishList = self.get_argument('datasetWishList', None)
+        company.sourceCount = self.get_argument('sourceCount', None) 
+        company.dataComments = self.get_argument("dataComments", None)
+        company.datasetComments = self.get_argument('datasetComments', None)
+        company.submittedSurvey = True
+        company.vettedByCompany = True
+        company.lastUpdated = datetime.now()
+        company.filters = [company.companyCategory, company.state, "survey-company"] #re-do filters
+        for a in company.agencies:
+                if a.prettyName:
+                    company.filters.append(a.prettyName)
+        if company.display: #only if company is displayed
+            self.application.stats.update_all_state_counts(company.country)
+        company.save()
+        #self.application.stats.update_all_state_counts()
+        self.write('success')
+
 
 
 #--------------------------------------------------------ADD AGENCY (ADMIN) PAGE------------------------------------------------------------
-class AdminAddAgencyHandler(BaseHandler):
-    @tornado.web.addslash
-    @tornado.web.authenticated
-    def get(self):
-        try:
-            user = models.Users.objects.get(username=self.current_user)
-        except Exception, e:
-            logging.info("Could not get user: " + str(e))
-            self.redirect("/login/")
-        country = user.country
-        logging.info("Working in: " + country)
-        self.render(
-            "admin/admin_add_agency.html",
-            page_title='Admin - Edit Agencies - OpenData500',
-            page_heading='Admin - ' + country.upper(),
-            user=self.current_user,
-            country=country,
-            agency_types=agency_types
-        )
+# class AdminAddAgencyHandler(BaseHandler):
+#     @tornado.web.addslash
+#     @tornado.web.authenticated
+#     def get(self):
+#         try:
+#             user = models.Users.objects.get(username=self.current_user)
+#         except Exception, e:
+#             logging.info("Could not get user: " + str(e))
+#             self.redirect("/login/")
+#             return
+#         country = user.country
+#         with open("templates/"+country+"/settings.json") as json_file:
+#             settings = json.load(json_file)
+#         self.render(
+#             "admin/admin_add_agency.html",
+#             page_title='Admin - Edit Agencies - OpenData500',
+#             page_heading='Admin - ' + country.upper(),
+#             user=self.current_user,
+#             country=country,
+#             settings=settings,
+#             lan=settings['default_language'],
+#             agency_types=agency_types
+#         )
 
 #--------------------------------------------------------EDIT AGENCY (ADMIN) PAGE------------------------------------------------------------
 class AdminEditAgencyHandler(BaseHandler):
@@ -384,21 +548,27 @@ class AdminEditAgencyHandler(BaseHandler):
         except Exception, e:
             logging.info("Could not get user: " + str(e))
             self.redirect("/login/")
+            return
         country = user.country
-        logging.info("Working in: " + country)
-        logging.info(id)
+        with open("templates/"+country+"/settings.json") as json_file:
+            settings = json.load(json_file)
         if id:
             try:
                 agency = models.Agency.objects.get(id=bson.objectid.ObjectId(id))
             except Exception, e:
                 logging.info("Could not get agency: " + str(e))
                 self.redirect('/404/')
+                return
             self.render('admin/admin_edit_agency.html',
                 page_heading="Editing " + agency.name,
                 page_title="Editing " + agency.name,
                 user=self.current_user,
                 agency=agency,
-                agency_types=agency_types)
+                agency_types=agency_types,
+                country = agency.country,
+                settings=settings,
+                lan=settings['default_language']
+            )
         else:
             blank_agency = models.Agency(name="", 
                 abbrev="", 
@@ -412,11 +582,13 @@ class AdminEditAgencyHandler(BaseHandler):
             self.render(
             "admin/admin_edit_agency.html",
             page_title='Admin - Edit Agencies - OpenData500',
-            page_heading='Admin - ' + country.upper(),
+            page_heading='New Agency',
             user=self.current_user,
             country=country,
             agency=blank_agency,
-            agency_types=agency_types
+            agency_types=agency_types,
+            settings=settings,
+            lan=settings['default_language']
         )
 
     @tornado.web.authenticated

@@ -1491,3 +1491,11 @@ ts,referer,page,user_agent,ip
 2014-07-16 11:58:52.744610,http://luisdaniel.com/Open-Data-Compass,/chart/,Mozilla/5.0 (Windows NT 6.1; WOW64; rv:24.0) Gecko/20100101 Firefox/24.0,148.129.71.40
 2014-07-16 12:18:56.775389,http://luisdaniel.com/Open-Data-Compass,/chart/,Mozilla/5.0 (Windows NT 6.1; WOW64; rv:24.0) Gecko/20100101 Firefox/24.0,148.129.71.40
 2014-07-16 12:46:23.926391,http://www.opendata500.com/,/chart/,"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.153 Safari/537.36",165.224.214.1
+2014-07-16 14:11:51.819698,http://www.opendata500.com/,/chart/,Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko,151.151.109.17
+2014-07-17 01:23:46.291210,,/chart/,Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 2.0.50727; MAXTHON 2.0),119.147.146.189
+2014-07-17 01:48:50.188429,http://www.opendata500.com/,/chart/,Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; WOW64; Trident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C; InfoPath.3),147.237.70.103
+2014-07-17 09:21:37.652107,http://www.opendata500.com/,/chart/,"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.153 Safari/537.36",199.172.169.97
+2014-07-17 09:22:04.016904,,/chart/,Twitterbot/1.0,199.59.148.210
+2014-07-17 13:22:31.886655,,/chart/,Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:14.0; ips-agent) Gecko/20100101 Firefox/14.0.1,69.58.178.57
+2014-07-18 17:53:10.111061,,/chart/,"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.125 Safari/537.36",::1
+2014-07-18 17:56:10.126121,,/chart/,"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.125 Safari/537.36",216.165.95.70

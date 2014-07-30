@@ -260,7 +260,7 @@ $(document).ready( function () {
 		});
       $.ajax({
         type: 'POST',
-        url: '/admin/company-edit/' + companyID,
+        url: '/admin-edit/' + companyID,
         data: data,
         error: function(error) {
             console.debug(JSON.stringify(error));
