@@ -448,6 +448,7 @@ class EditCompanyHandler(BaseHandler):
         #save all data to log:
         logging.info(self.request.arguments)
         #get the company you will be editing
+        company = self.application.form.process_company(self.request.arguments, id)
         company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
         #------------------CONTACT INFO-------------------
         company.contact.firstName = self.get_argument("firstName", None)

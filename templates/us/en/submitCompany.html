@@ -19,27 +19,22 @@
 	<p>If your company meets these criteria, please take a few minutes to fill out this short online form. Thank you again for your participation.</p>
 	<p><em>The fields marked with * are required</em></p>
 </section>
-<form method="post" id="submitCompany" class="m-form companyForm" data-parsley-validate>
+<form method="post" id="submitCompany" class="m-form companyForm" parsley-validate>
 	<fieldset class="m-form-half">
 		<h3>Personal Information</h3>
-		<div class="m-form-line"><label for="">First Name: *</label><input type="text" name="firstName" id="firstName" required></div>
-		<div class="m-form-line"><label for="">Last Name: *</label><input type="text" name="lastName" id="lastName" required></div>
-		<div class="m-form-line"><label for="">Title: *</label><input type="text" name="title" id="title" required></div>
-		<div class="m-form-line"><label for="">Email: *</label><input type="text" name="email" id="email" data-parsley-trigger="change" data-parsley-type="email" required></div>
-		<div class="m-form-line"><label for="">Phone (xxx-xxx-xxxx):</label><input type="text" name="phone" id="phone" 
-			data-parsley-trigger="change" 
-			data-parsley-pattern="^\d{3}-\d{3}-\d{4}$"></div>
+		<div class="m-form-line"><label for="">First Name: *</label><input type="text" name="firstName" id="firstName" parsley-required="true"></div>
+		<div class="m-form-line"><label for="">Last Name: *</label><input type="text" name="lastName" id="lastName" parsley-required="true"></div>
+		<div class="m-form-line"><label for="">Title: *</label><input type="text" name="title" id="title" parsley-required="true"></div>
+		<div class="m-form-line"><label for="">Email: *</label><input type="text" name="email" id="email" parsley-trigger="focusout" parsley-type="email" parsley-required="true"></div>
+		<div class="m-form-line"><label for="">Phone:</label><input type="text" name="phone" id="phone" parsley-trigger="change" parsley-pattern="^\d{3}-\d{3}-\d{4}$"></div>
 		<div class="m-form-box contacted-box"><label for="contacted"><input type="checkbox" name="contacted" id="contacted" value="True">Please check here if you would be willing to be contacted for further information about your company.</label></div>
 	</fieldset>
 	<fieldset class="m-form-half right">
 		<h3>Company Information</h3>
-		<div class="m-form-line"><label for="companyName">Company Name: *</label><input type="text" name="companyName" id="companyName" 
-			data-parsley-trigger="focusout" 
-			data-parsley-remote
-			data-parsley-group="companyName"
-			data-parsley-remote-options='{ "type": "POST" }'
-			data-parsley-remote-validator='validateName'
-			required></div>
+		<div class="m-form-line">
+			<label for="companyName">Company Name: *</label><input type="text" name="companyName" id="companyName" parsley-remote="/validate/?country=us" parsley-remote-method="GET" parsley-required="true">
+			<span class='company-name-error'></span>
+		</div>
 		<div class="m-form-line"><label for="url">Company URL: *</label><input type='text' name="url" id='url' parsley-trigger="change" parsley-type="url" parsley-required="true"></div>
 		<div class="m-form-line"><label for="city">In which city is this company located?</label><input type="text" name="city" id="city"></div>
 		<div class="m-form-line">
@@ -56,9 +51,8 @@
 		<div class="m-form-line"><label for="ceoLastName">Last Name of CEO:</label><input type="text" name="ceoLastName" id="ceoLastName"></div>
 		<div class="m-form-box">Type of Company: *<br>
 			{% for type in companyType %}
-				<label for="{{type}}"><input type="radio" name="companyType" data-trigger="change" id="{{type}}" data-group="companyType" data-mincheck="1" value="{{ type }}" >{{ type }}</label>
+				<label for="{{type}}"><input type="radio" name="companyType" id="{{type}}" value="{{ type }}" parsley-required="true">{{ type }}</label>
 			{% end %}
-			<br><label for="other">Other: <input type="text" name="companyType" id="other-company-type" data-trigger="change" data-group="companyType" data-mincheck="1" parsley-required="true"></label>
 		</div>
 		<div class="m-form-line"><label for="">Founding Year: *</label><input type="text" name="yearFounded" id="yearFounded" parsley-type="number" parsley-trigger="change" parsley-required="true" parsley-range="[1000, 2014]"></div>
 		<div class="m-form-line"><label for="">Number of full-time employees: *</label><input type="text" name="fte" id="fte" parsley-trigger="change" parsley-required="true" parsley-type="number"></div>
@@ -67,16 +61,16 @@
 	<fieldset class="m-form-half">
 		<h3>Which of the following are significant sources of revenue for your company? <br><em>(check all that apply)</em> *</h3>
 		{% for source in revenueSource %}
-			<label for="{{source}}"><input type="checkbox" id="{{source}}" name="revenueSource" data-trigger="change" parsley-multiple="revenueSource" data-mincheck="1" value="{{ source }}">{{ source }}<br></label>
+			<label for="{{source}}"><input type="checkbox" id="{{source}}" name="revenueSource" data-trigger="change" parsley-multiple="revenueSource" data-mincheck="1" value="{{ source }}" parsley-required="true">{{ source }}<br></label>
 		{% end %}
-			<label for="other">Other: <input type="text" name="revenueSource" id="other-revenue-source" data-trigger="change" parsley-multiple="revenueSource" data-mincheck="1" parsley-required="true"></label>
+		<label for""><input type="checkbox" name="revenueSource" value="Other">Other</label><input type="text" name="otherRevenueSource" id="otherRevenueSource" data-trigger="change" data-group="revenueSource" data-mincheck="1"></label>
 	</fieldset>
 	<fieldset class="m-form-half right">
 		<h3>What category best describes your company? *</h3>
 		{% for category in categories %}
 			<label for="{{category}}"><input type="radio" id="{{category}}" name="category" value="{{ category }}">{{ category }}<br>
 		{% end %}
-			<label for="{{category}}"><input type="radio" id="{{category}}" name="category" class="otherCategory" parsley-required="true" value="Other">Other
+			<label for="other-category-radio"><input type="radio" id="other-category-radio" name="category" class="otherCategory" parsley-required="true" value="Other">Other
 			<input type="text" name="otherCategory" id="otherCategory" class="otherCategory"></label>
 	</fieldset>
 	<fieldset class="m-form-half left">
@@ -105,17 +99,17 @@
 		</div>
 		{% raw xsrf_form_html() %}
 	</fieldset>
+
+
+
+	<p class="disclaimer-text warning">Your responses will become part of a public database of information on Open Data companies. By submitting this form you are agreeing that, other than personal contact information, this information will be part of a publicly available database.</p>
+	<div class="saveCompanyForm-new">	
+		<input type="hidden" class="companyID" name="companyID" value="">
+		<input type="button" class="m-button" id="companySave-new" name="submit" value="Next">
+		<span class="message-form" style="display:none"></span>
+		<span class="error-form" style="display:none"></span>
+	</div>
 </form>
-
-
-<p class="disclaimer-text warning">Your responses will become part of a public database of information on Open Data companies. By submitting this form you are agreeing that, other than personal contact information, this information will be part of a publicly available database.</p>
-<div class="saveCompanyForm-new">	
-	<input type="hidden" class="companyID" name="companyID" value="">
-	<input type="button" class="m-button" id="companySave-new" name="submit" value="Next">
-	<span class="message-form" style="display:none"></span>
-	<span class="error-form" style="display:none"></span>
-</div>
-
 <!--------------------------------------------DATASETS--------------------------------------!-->
 <div class="submit-data-information">
 </div>

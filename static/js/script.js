@@ -20,18 +20,62 @@ $(document).ready(function() {
     var is_firefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
 
     //----------------------------------VALIDATE COMPANY NAME--------------------------------------
-    var companyName = $('#companyName').parsley();
-    var _xsrf = $("[name='_xsrf']").val();
-    $('#submitCompany').parsley()
-        .addAsyncValidator('validateName', function(xhr) {
-            window.ParsleyUI.removeError(companyName, 'name-exists');
-            if (xhr.status == '404') {
-                window.ParsleyUI.addError(companyName, 'name-exists', "This company has already been submitted. Email opendata500@thegovlab.org for questions.");
-                return 404;
-            } else if (xhr.status == '200') {
-                return 200;
-            }
-        }, '/validate/?country=' + country + '&_xsrf=' + _xsrf);
+    // var _xsrf = $("[name='_xsrf']").val();
+    // var company_form_valid = true;
+    // $('#submitCompany').on('focusout', '#companyName', function() {
+    //     var data = {
+    //         "companyName": $('#companyName').val(),
+    //         "_xsrf": _xsrf
+    //     }
+    //     $.ajax({
+    //         type: 'POST',
+    //         url: '/validate/',
+    //         data: data,
+    //         error: function(error) {
+    //             console.debug(JSON.stringify(error));
+    //         },
+    //         beforeSend: function(xhr, settings) {},
+    //         success: function(response) {
+    //             if (response['response'] == 'error') {
+    //                 $('.company-name-error').html('This company has already been submitted');
+    //                 $('#companyName').removeClass('parsley-success');
+    //                 $('#companyName').addClass('parsley-error');
+    //                 company_form_valid = false;
+    //             } else {
+    //                 $('.company-name-error').html('');
+    //                 $('#companyName').removeClass('parsley-error');
+    //                 $('#companyName').addClass('parsley-success');
+    //                 company_form_valid = true;
+    //             }
+    //         }
+    //     });
+    // });
+    // var company_form = $('#submitCompany').parsley()
+    // company_form.subscribe('parsley:form:validate', function(formInstance) {
+    //     // if (formInstance.isValid('companyName')) {
+    //     //     console.log('valid!!!!');
+    //     //     return
+    //     // }
+    //     // formInstance.submitEvent.preventDefault();
+    //     //var company_form = $('#submitCompany').parsley()
+    //     // formInstance.addAsyncValidator('validateName', function(xhr) {
+    //     //     window.ParsleyUI.removeError(formInstance, 'name-exists');
+    //     //     if (xhr.status === 404) {
+    //     //         window.ParsleyUI.addError(formInstance, 'name-exists', "Name already exists.");
+    //     //     }
+    //     //     return xhr.status === 200;
+    //     // }, '/validate/?country=' + country + '&_xsrf=' + _xsrf);
+    // });
+    // company_form.addAsyncValidator('validateName', function(xhr) {
+    //     window.ParsleyUI.removeError(company_form, 'name-exists');
+    //     if (xhr.status === 404) {
+    //         window.ParsleyUI.addError(company_form, 'name-exists', "Name already exists.");
+    //     }
+    //     return xhr.status === 200;
+    // }, '/validate/?country=' + country + '&_xsrf=' + _xsrf);
+
+    //var company_form = $('#submitCompany').parsley();
+    //companyName.parsley();
 
     //----------------------------------ADMIN ACCORDIONS--------------------------------------
     $(function() {
@@ -583,8 +627,9 @@ $(document).ready(function() {
         '<span class="error-form" style="display:none"></span>' +
         '</div>';
     $('body').on('click', '#companySave-new', function(event) {
-        console.log(companyName.validate());
-        if ($('.companyForm').parsley().validate() & companyName.validate()) {
+        //console.log(company_form.validate());
+        if ($('.companyForm').parsley('validate')) {
+            console.log('valid');
             $('.message-form').text('Saving...');
             $('.message-form').show();
             //var companyID = $('.companyID').val();
@@ -609,7 +654,7 @@ $(document).ready(function() {
         } else {
             $('.savingMessage_companyEdit').hide();
             $('.error-form').show().delay(5000).fadeOut();
-            //console.log('not valid');
+            console.log('not valid');
         }
     });
 
