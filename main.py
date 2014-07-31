@@ -36,6 +36,7 @@ class Application(tornado.web.Application):
         self.stats = StatsGenerator()
         self.files = FileGenerator()
         self.tools = Tools()
+        self.form = Form()
         handlers = [
             (r'/(favicon.ico)', tornado.web.StaticFileHandler, {"path": ""}),
             (r"/(?:([A-Za-z]{2})/)?", MainHandler),

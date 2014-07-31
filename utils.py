@@ -32,7 +32,7 @@ stateList = {
             }
 agency_types = ['Federal','State','City/County','University/Institution']
 available_countries = ["us", "ca", "mx"]
-country_keys = { "int":"United States", "us":"United States", "ca":"Canada", "United States":"us", "Canada":"ca",  "Mexico":"mx"}
+country_keys = { "int":"United States", "us":"United States", "ca":"Canada", "United States":"us", "Canada":"ca",  "Mexico":"mx", "mx":"Mexico"}
 
 
 class Validators(object):
@@ -62,6 +62,89 @@ class Tools(object):
 
     def prettify(self, name):
         return re.sub(r'([^\s\w])+', '', name).replace(" ", "-")
+
+class Form(object):
+    def process_new_company(self, arguments):
+        #-------------------CONTACT INFO---------------
+        firstName = arguments['firstName']
+        lastName = arguments["lastName"]
+        title = arguments['title']
+        email = arguments['email']
+        phone = arguments['phone']
+        contacted = True if 'contacted' in arguments else False
+        contact = models.Person(
+            firstName = firstName,
+            lastName = lastName,
+            title = title,
+            email = email,
+            phone = phone,
+            contacted = contacted,
+        )
+        #-------------------CEO INFO---------------
+        ceoFirstName = arguments['ceoFirstName']
+        ceoLastName = arguments['ceoLastName']
+        ceo = models.Person(
+                firstName = ceoFirstName,
+                lastName = ceoLastName,
+                title = "CEO"
+            )
+        #-------------------COMPANY INFO---------------
+        url = arguments['url']
+        companyName = arguments['companyName']
+        prettyName = re.sub(r'([^\s\w])+', '', companyName).replace(" ", "-").title()
+        city = arguments['city']
+        zipCode = arguments['zipCode']
+        state = arguments['state']
+        country = country_keys[arguments['country']]
+        companyType = arguments['companyType']
+        logging.info(companyType)
+        yearFounded = 0 if not arguments['yearFounded'] else arguments['yearFounded']
+        fte = 0 if not arguments['fte'] else arguments['fte']
+        revenueSource = [] if not arguments['revenueSource'] else arguments['revenueSource'].split(',')
+        if 'Other' in revenueSource:
+            del revenueSource[revenueSource.index('Other')]
+            revenueSource.append(arguments['otherRevenueSource'])
+        companyCategory = self.get_argument("category", None)
+        if companyCategory == 'Other':
+            companyCategory = self.get_argument('otherCategory', None)
+        description = self.get_argument('description', None)
+        descriptionShort = self.get_argument('descriptionShort', None)
+        financialInfo = self.get_argument('financialInfo')
+        datasetWishList = self.get_argument('datasetWishList', None)
+        sourceCount = self.get_argument("sourceCount", None)
+        filters = [companyCategory, state, "survey-company"]
+        company = models.Company(
+            companyName = companyName,
+            prettyName = prettyName,
+            url = url,
+            ceo = ceo,
+            city = city,
+            zipCode = zipCode,
+            state=state,
+            yearFounded = yearFounded,
+            fte = fte,
+            companyType = companyType,
+            revenueSource = revenueSource,
+            companyCategory = companyCategory,
+            description= description,
+            descriptionShort = descriptionShort,
+            financialInfo = financialInfo,
+            datasetWishList = datasetWishList,
+            sourceCount = sourceCount,
+            contact = contact,
+            lastUpdated = datetime.now(),
+            display = False, 
+            submittedSurvey = True,
+            vetted = False, 
+            vettedByCompany = True,
+            submittedThroughWebsite = True,
+            locked=False,
+            filters = filters,
+            country=country
+        )
+        company.save()
+        return company
+
 
 
 class StatsGenerator(object):

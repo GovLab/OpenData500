@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+
     var country = $('#country').attr('country');
     if (country == undefined) {
         var url = document.URL;
@@ -17,6 +18,21 @@ $(document).ready(function() {
 
     var is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
     var is_firefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+
+    //----------------------------------VALIDATE COMPANY NAME--------------------------------------
+    var companyName = $('#companyName').parsley();
+    var _xsrf = $("[name='_xsrf']").val();
+    $('#submitCompany').parsley()
+        .addAsyncValidator('validateName', function(xhr) {
+            window.ParsleyUI.removeError(companyName, 'name-exists');
+            if (xhr.status == '404') {
+                window.ParsleyUI.addError(companyName, 'name-exists', "This company has already been submitted. Email opendata500@thegovlab.org for questions.");
+                return 404;
+            } else if (xhr.status == '200') {
+                return 200;
+            }
+        }, '/validate/?country=' + country + '&_xsrf=' + _xsrf);
+
     //----------------------------------ADMIN ACCORDIONS--------------------------------------
     $(function() {
         $("#accordionUnvetted").accordion({
@@ -56,6 +72,16 @@ $(document).ready(function() {
             $('input[name="category"][value="Other"').prop('checked', false);
         }
     });
+
+    $('.m-form-half').on('focus', "#other-company-type", function() {
+        $('[name="companyType"]').each(function() {
+            this.checked = false;
+        });
+    });
+    $('.m-form-half').on('change', "input[type='radio'][name='companyType']", function() {
+        $("#other-company-type").val('');
+    });
+
 
     //----------------------------------EXAMPLE POPUP--------------------------------------
     var dialogOptions = {
@@ -460,7 +486,6 @@ $(document).ready(function() {
         console.log($('#dataComments').parsley('validate'));
         //weird parsley thing evaluates empty field to null.
         if ($('.companyForm').parsley('validate') && ($('#dataComments').parsley('validate') || $('#dataComments').parsley('validate') == null)) {
-            console.log('valid');
             $('.savingMessage_companyEdit').show();
             var companyID = $('.companyID').val();
             var data = $('.companyForm').serializeArray();
@@ -530,7 +555,7 @@ $(document).ready(function() {
         }
     });
 
-    //----------------------------------SAVE FORM NEW COMPANY--------------------------------------
+    //----------------------------------SUBMIT NEW COMPANY-------------------------------------- (USED)
     var dataForm = '<br><br><h2>Agency and Data Information</h2><br>' +
         '<div class="m-form-box data">' +
         '<h3>Please tell us more about the data your company uses. First tell us which agencies and/or subagencies provide the data your company uses. Then, optionally, tell us specifically which datasets from those agencies/subagencies does your company use. Use the search bar to find agencies and subagencies and select from the list provided.</h3><br>' +
@@ -558,8 +583,8 @@ $(document).ready(function() {
         '<span class="error-form" style="display:none"></span>' +
         '</div>';
     $('body').on('click', '#companySave-new', function(event) {
-        if ($('.companyForm').parsley('validate')) {
-            console.log('valid');
+        console.log(companyName.validate());
+        if ($('.companyForm').parsley().validate() & companyName.validate()) {
             $('.message-form').text('Saving...');
             $('.message-form').show();
             //var companyID = $('.companyID').val();
@@ -579,30 +604,6 @@ $(document).ready(function() {
                 },
                 success: function(data) {
                     document.location.href = '/' + country + '/addData/' + data['id'];
-                    //console.log(success);
-                    // $('.error-form').hide();
-                    // $('.message-form').text('Saved!')
-                    // $('.message-form').show().delay(5000).fadeOut();
-                    // //------APPEND DATASET AND AGENCY FORMS---------
-                    // $('.companyID').val(data['id']);
-                    // $('.submit-data-information').slideDown().append(dataForm);
-                    // $('.saveCompanyForm-new').attr('class', 'saveCompanyForm');
-                    // $('.companySave-new').attr('id', 'companySave');
-                    // $(submitFormHTML).insertAfter('.submit-data-information');
-                    // $( "#agencyTags" ).autocomplete({
-                    //   minLength: 2,
-                    //   source: agencies,
-                    //   select: function(event, ui) { 
-                    //     $("#searchval").val(ui.item.value); 
-                    //   }
-                    // });
-                    //   $( "#accordionAgency" ).accordion({
-                    //     active: false,
-                    //     collapsible: true,
-                    //     autoHeight: false,
-                    //     heightStyle: "content"
-                    //   });
-                    // console.log("new company added!");
                 }
             });
         } else {

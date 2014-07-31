@@ -224,17 +224,17 @@ class ValidateHandler(BaseHandler):
     def post(self):
         #check if companyName exists:
         country = self.get_argument("country", None)
-        if country == "int":
+        if not country:
             country = 'us'
         companyName = self.get_argument("companyName", None)
         prettyName = re.sub(r'([^\s\w])+', '', companyName).replace(" ", "-").title()
         try: 
             c = models.Company.objects.get(Q(country=country) & Q(prettyName=prettyName))
             logging.info('company exists.')
-            self.write('{ "error": "This company has already been submitted. Email opendata500@thegovlab.org for questions." }')
+            self.set_status(404)
         except:
             logging.info('company does not exist. Carry on.')
-            self.write('true')
+            self.set_status(200)
 
 #--------------------------------------------------------SURVEY PAGE------------------------------------------------------------
 class SubmitCompanyHandler(BaseHandler):
@@ -279,98 +279,8 @@ class SubmitCompanyHandler(BaseHandler):
         #print all arguments to log:
         logging.info("Submitting New Company")
         logging.info(self.request.arguments)
-        if not country:
-            country = "us"
-        #-------------------CONTACT INFO---------------
-        firstName = self.get_argument("firstName", None)
-        lastName = self.get_argument("lastName", None)
-        title = self.get_argument("title", None)
-        email = self.get_argument("email", None)
-        phone = self.get_argument("phone", None)
-        try:
-            if self.request.arguments['contacted']:
-                contacted = True
-        except:
-            contacted = False
-        contact = models.Person2(
-            firstName = firstName,
-            lastName = lastName,
-            title = title,
-            email = email,
-            phone = phone,
-            contacted = contacted,
-        )
-        #-------------------CEO INFO---------------
-        ceoFirstName = self.get_argument("ceoFirstName", None)
-        ceoLastName = self.get_argument("ceoLastName", None)
-        ceo = models.Person2(
-                firstName = ceoFirstName,
-                lastName = ceoLastName,
-                title = "CEO"
-            )
-        #-------------------COMPANY INFO---------------
-        url = self.get_argument('url', None)
-        companyName = self.get_argument("companyName", None)
-        prettyName = re.sub(r'([^\s\w])+', '', companyName).replace(" ", "-").title()
-        city = self.get_argument("city", None)
-        zipCode = self.get_argument("zipCode", None)
-        state = self.get_argument('state', None)
-        companyType = self.get_argument("companyType", None)
-        if companyType == 'other':
-            companyType = self.get_argument('otherCompanyType', None)
-        yearFounded = self.get_argument("yearFounded", None)
-        if not yearFounded:
-            yearFounded = 0
-        fte = self.get_argument("fte", None).replace(",","")
-        if not fte:
-            fte = 0
-        try:
-            revenueSource = self.request.arguments['revenueSource']
-        except:
-            revenueSource = []
-        if 'Other' in revenueSource:
-            del revenueSource[revenueSource.index('Other')]
-            revenueSource.append(self.get_argument('otherRevenueSource', None))
-        companyCategory = self.get_argument("category", None)
-        if companyCategory == 'Other':
-            companyCategory = self.get_argument('otherCategory', None)
-        description = self.get_argument('description', None)
-        descriptionShort = self.get_argument('descriptionShort', None)
-        financialInfo = self.get_argument('financialInfo')
-        datasetWishList = self.get_argument('datasetWishList', None)
-        sourceCount = self.get_argument("sourceCount", None)
-        filters = [companyCategory, state, "survey-company"]
-        #--SAVE COMPANY--
-        company = models.Company(
-            companyName = companyName,
-            prettyName = prettyName,
-            url = url,
-            ceo = ceo,
-            city = city,
-            zipCode = zipCode,
-            state=state,
-            yearFounded = yearFounded,
-            fte = fte,
-            companyType = companyType,
-            revenueSource = revenueSource,
-            companyCategory = companyCategory,
-            description= description,
-            descriptionShort = descriptionShort,
-            financialInfo = financialInfo,
-            datasetWishList = datasetWishList,
-            sourceCount = sourceCount,
-            contact = contact,
-            lastUpdated = datetime.now(),
-            display = False, 
-            submittedSurvey = True,
-            vetted = False, 
-            vettedByCompany = True,
-            submittedThroughWebsite = True,
-            locked=False,
-            filters = filters,
-            country=country
-        )
-        company.save()
+        form_values = {k:','.join(v) for k,v in self.request.arguments.iteritems()}
+        self.application.form.process_new_company(form_values)
         self.application.stats.update_all_state_counts(country)
         id = str(company.id)
         self.write({"id": id})
