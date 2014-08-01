@@ -19,27 +19,83 @@ $(document).ready(function() {
     var is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
     var is_firefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
 
-    //----------------------------------VALIDATE COMPANY NAME--------------------------------------
-    var _xsrf = $("[name='_xsrf']").val();
-    var companyName = $("#companyName").parsley()
-        .addAsyncValidator('validateName', function(xhr) {
-            window.ParsleyUI.removeError(companyName, 'name-exists');
-            if (xhr.status === 404) {
-                window.ParsleyUI.addError(companyName, 'name-exists', "This company has already been submitted. PLease contact opendata500@thegovlab.org if you have any questions.");
+    //----------------------------------VALIDATE AND SUBMIT COMPANY FORM--------------------------------------
+    if ($(location).attr('pathname').indexOf('/submitCompany/') > -1) {
+        var _xsrf = $("[name='_xsrf']").val();
+        var companyName = $("#companyName").parsley()
+            .addAsyncValidator('validateName', function(xhr) {
+                window.ParsleyUI.removeError(companyName, 'name-exists');
+                if (xhr.status === 404) {
+                    window.ParsleyUI.addError(companyName, 'name-exists', "This company has already been submitted. Please contact opendata500@thegovlab.org if you have any questions.");
+                }
+
+                return xhr.status === 200;
+            }, '/validate/?country=' + country + '&_xsrf=' + _xsrf);
+        //var parsley_company_form = $("#submitCompany").parsley();
+        $("#submitCompany").parsley();
+
+        $("#submitCompany").submit(function(event) {
+            $(this).parsley("validate");
+            if ($(this).parsley("isValid")) {
+                $('.message-form').text('Saving...');
+                $('.message-form').show();
+                var data = $('.companyForm').serializeArray();
+                $.ajax({
+                    type: 'POST',
+                    url: '/' + country + '/submitCompany/',
+                    data: data,
+                    error: function(error) {
+                        console.debug(JSON.stringify(error));
+                        $('.message-form').hide();
+                        $('.error-form').text('Oops... Something went wrong :/')
+                        $('.error-form').show().delay(5000).fadeOut();
+                    },
+                    beforeSend: function(xhr, settings) {
+                        //$(event.target).attr('disabled', 'disabled'); 
+                    },
+                    success: function(data) {
+                        document.location.href = '/' + country + '/addData/' + data['id'];
+                    }
+                });
             }
+            event.preventDefault();
+            $('.savingMessage_companyEdit').hide();
+            $('.error-form').show().delay(5000).fadeOut();
+        });
+    }
 
-            return xhr.status === 200;
-        }, 'validate/?country=' + country + '&_xsrf=' + _xsrf);
-    //var parsley_company_form = $("#submitCompany").parsley();
-    $("#submitCompany").parsley();
-
-    $("#submitCompany").submit(function(event) {
-        $(this).parsley("validate");
-        if ($(this).parsley("isValid")) {
-            console.log('valid');
-        }
-        event.preventDefault();
-    });
+    //     $('body').on('click', '#companySave-new', function(event) {
+    //     //console.log(company_form.validate());
+    //     $("#submitCompany").parsley('validate');
+    //     if ($("#submitCompany").parsley('isValid')) {
+    //         console.log('valid');
+    //         $('.message-form').text('Saving...');
+    //         $('.message-form').show();
+    //         //var companyID = $('.companyID').val();
+    //         var data = $('.companyForm').serializeArray();
+    //         $.ajax({
+    //             type: 'POST',
+    //             url: '/' + country + '/submitCompany/',
+    //             data: data,
+    //             error: function(error) {
+    //                 console.debug(JSON.stringify(error));
+    //                 $('.message-form').hide();
+    //                 $('.error-form').text('Oops... Something went wrong :/')
+    //                 $('.error-form').show().delay(5000).fadeOut();
+    //             },
+    //             beforeSend: function(xhr, settings) {
+    //                 //$(event.target).attr('disabled', 'disabled'); 
+    //             },
+    //             success: function(data) {
+    //                 document.location.href = '/' + country + '/addData/' + data['id'];
+    //             }
+    //         });
+    //     } else {
+    //         $('.savingMessage_companyEdit').hide();
+    //         $('.error-form').show().delay(5000).fadeOut();
+    //         console.log('not valid');
+    //     }
+    // });
 
     //----------------------------------ADMIN ACCORDIONS--------------------------------------
     $(function() {
@@ -64,20 +120,24 @@ $(document).ready(function() {
 
     var companyID = $('.companyID').val();
     //----------------------------------UNCHECK OTHER BOX IF INPUT EMPTY--------------------------------------
-    $('.m-form-half').on('focusout', '#otherRevenueSource', function(event) {
-        if ($('#otherRevenueSource').val() == '') {
-            $('input[name="revenueSource"][value="Other"').prop('checked', false);
+    $('.m-form-half').on('focusout', '#other_revenue_text_field', function(event) {
+        if ($('#other_revenue_text_field').val() == '') {
+            $('#other_revenue').prop('checked', false);
         }
     });
-    $('.m-form-half').on('focus', '[type="text"][id="otherRevenueSource"]', function() {
-        $('input[name="revenueSource"][value="Other"').prop('checked', true);
+    $('.m-form-half').on('focus', '#other_revenue_text_field', function() {
+        $('#other_revenue').prop('checked', true);
+        $('#submitCompany').parsley().validate('revenueSource');
+
     });
-    $('.m-form-half').on('focus', '#otherCategory', function() {
+    $('.m-form-half').on('focus', '#other_category_text_field', function() {
         $('input[name="category"][value="Other"').prop('checked', true);
+        $('#submitCompany').parsley().validate('category');
     });
-    $('.m-form-half').on('focusout', '#otherCategory', function() {
-        if ($('#otherCategory').val() == '') {
+    $('.m-form-half').on('focusout', '#other_category_text_field', function() {
+        if ($('#other_category_text_field').val() == '') {
             $('input[name="category"][value="Other"').prop('checked', false);
+            //$('#submitCompany').parsley().validate('category');
         }
     });
 
@@ -590,38 +650,7 @@ $(document).ready(function() {
         '<span class="message-form" style="display:none"></span>' +
         '<span class="error-form" style="display:none"></span>' +
         '</div>';
-    // $('body').on('click', '#companySave-new', function(event) {
-    //     //console.log(company_form.validate());
-    //     $("#submitCompany").parsley('validate');
-    //     if ($("#submitCompany").parsley('isValid')) {
-    //         console.log('valid');
-    //         $('.message-form').text('Saving...');
-    //         $('.message-form').show();
-    //         //var companyID = $('.companyID').val();
-    //         var data = $('.companyForm').serializeArray();
-    //         $.ajax({
-    //             type: 'POST',
-    //             url: '/' + country + '/submitCompany/',
-    //             data: data,
-    //             error: function(error) {
-    //                 console.debug(JSON.stringify(error));
-    //                 $('.message-form').hide();
-    //                 $('.error-form').text('Oops... Something went wrong :/')
-    //                 $('.error-form').show().delay(5000).fadeOut();
-    //             },
-    //             beforeSend: function(xhr, settings) {
-    //                 //$(event.target).attr('disabled', 'disabled'); 
-    //             },
-    //             success: function(data) {
-    //                 document.location.href = '/' + country + '/addData/' + data['id'];
-    //             }
-    //         });
-    //     } else {
-    //         $('.savingMessage_companyEdit').hide();
-    //         $('.error-form').show().delay(5000).fadeOut();
-    //         console.log('not valid');
-    //     }
-    // });
+
 
     function clearForm() {
         $('.dataForm')[0].reset();

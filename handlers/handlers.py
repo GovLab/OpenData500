@@ -221,7 +221,7 @@ class ChartHandler(BaseHandler):
 #--------------------------------------------------------VALIDATE COMPANY EXISTS PAGE------------------------------------------------------------
 #------SHOULD MOVE TO UTILS-------
 class ValidateHandler(BaseHandler):
-    def get(self):
+    def post(self):
         #check if companyName exists:
         country = self.get_argument("country", None)
         if not country:
@@ -231,10 +231,10 @@ class ValidateHandler(BaseHandler):
         try: 
             c = models.Company.objects.get(Q(country=country) & Q(prettyName=prettyName))
             logging.info('company exists.')
-            self.write('{ "error": "This company has already been submitted. Email opendata500@thegovlab.org for questions." }')
+            self.set_status(404)
         except:
             logging.info('company does not exist. Carry on.')
-            self.write('true')
+            self.set_status(200)
 
 #--------------------------------------------------------SURVEY PAGE------------------------------------------------------------
 class SubmitCompanyHandler(BaseHandler):
