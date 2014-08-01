@@ -20,62 +20,26 @@ $(document).ready(function() {
     var is_firefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
 
     //----------------------------------VALIDATE COMPANY NAME--------------------------------------
-    // var _xsrf = $("[name='_xsrf']").val();
-    // var company_form_valid = true;
-    // $('#submitCompany').on('focusout', '#companyName', function() {
-    //     var data = {
-    //         "companyName": $('#companyName').val(),
-    //         "_xsrf": _xsrf
-    //     }
-    //     $.ajax({
-    //         type: 'POST',
-    //         url: '/validate/',
-    //         data: data,
-    //         error: function(error) {
-    //             console.debug(JSON.stringify(error));
-    //         },
-    //         beforeSend: function(xhr, settings) {},
-    //         success: function(response) {
-    //             if (response['response'] == 'error') {
-    //                 $('.company-name-error').html('This company has already been submitted');
-    //                 $('#companyName').removeClass('parsley-success');
-    //                 $('#companyName').addClass('parsley-error');
-    //                 company_form_valid = false;
-    //             } else {
-    //                 $('.company-name-error').html('');
-    //                 $('#companyName').removeClass('parsley-error');
-    //                 $('#companyName').addClass('parsley-success');
-    //                 company_form_valid = true;
-    //             }
-    //         }
-    //     });
-    // });
-    // var company_form = $('#submitCompany').parsley()
-    // company_form.subscribe('parsley:form:validate', function(formInstance) {
-    //     // if (formInstance.isValid('companyName')) {
-    //     //     console.log('valid!!!!');
-    //     //     return
-    //     // }
-    //     // formInstance.submitEvent.preventDefault();
-    //     //var company_form = $('#submitCompany').parsley()
-    //     // formInstance.addAsyncValidator('validateName', function(xhr) {
-    //     //     window.ParsleyUI.removeError(formInstance, 'name-exists');
-    //     //     if (xhr.status === 404) {
-    //     //         window.ParsleyUI.addError(formInstance, 'name-exists', "Name already exists.");
-    //     //     }
-    //     //     return xhr.status === 200;
-    //     // }, '/validate/?country=' + country + '&_xsrf=' + _xsrf);
-    // });
-    // company_form.addAsyncValidator('validateName', function(xhr) {
-    //     window.ParsleyUI.removeError(company_form, 'name-exists');
-    //     if (xhr.status === 404) {
-    //         window.ParsleyUI.addError(company_form, 'name-exists', "Name already exists.");
-    //     }
-    //     return xhr.status === 200;
-    // }, '/validate/?country=' + country + '&_xsrf=' + _xsrf);
+    var _xsrf = $("[name='_xsrf']").val();
+    var companyName = $("#companyName").parsley()
+        .addAsyncValidator('validateName', function(xhr) {
+            window.ParsleyUI.removeError(companyName, 'name-exists');
+            if (xhr.status === 404) {
+                window.ParsleyUI.addError(companyName, 'name-exists', "This company has already been submitted. PLease contact opendata500@thegovlab.org if you have any questions.");
+            }
 
-    //var company_form = $('#submitCompany').parsley();
-    //companyName.parsley();
+            return xhr.status === 200;
+        }, 'validate/?country=' + country + '&_xsrf=' + _xsrf);
+    //var parsley_company_form = $("#submitCompany").parsley();
+    $("#submitCompany").parsley();
+
+    $("#submitCompany").submit(function(event) {
+        $(this).parsley("validate");
+        if ($(this).parsley("isValid")) {
+            console.log('valid');
+        }
+        event.preventDefault();
+    });
 
     //----------------------------------ADMIN ACCORDIONS--------------------------------------
     $(function() {
@@ -105,7 +69,7 @@ $(document).ready(function() {
             $('input[name="revenueSource"][value="Other"').prop('checked', false);
         }
     });
-    $('.m-form-half').on('focus', '#otherRevenueSource', function() {
+    $('.m-form-half').on('focus', '[type="text"][id="otherRevenueSource"]', function() {
         $('input[name="revenueSource"][value="Other"').prop('checked', true);
     });
     $('.m-form-half').on('focus', '#otherCategory', function() {
@@ -626,37 +590,38 @@ $(document).ready(function() {
         '<span class="message-form" style="display:none"></span>' +
         '<span class="error-form" style="display:none"></span>' +
         '</div>';
-    $('body').on('click', '#companySave-new', function(event) {
-        //console.log(company_form.validate());
-        if ($('.companyForm').parsley('validate')) {
-            console.log('valid');
-            $('.message-form').text('Saving...');
-            $('.message-form').show();
-            //var companyID = $('.companyID').val();
-            var data = $('.companyForm').serializeArray();
-            $.ajax({
-                type: 'POST',
-                url: '/' + country + '/submitCompany/',
-                data: data,
-                error: function(error) {
-                    console.debug(JSON.stringify(error));
-                    $('.message-form').hide();
-                    $('.error-form').text('Oops... Something went wrong :/')
-                    $('.error-form').show().delay(5000).fadeOut();
-                },
-                beforeSend: function(xhr, settings) {
-                    //$(event.target).attr('disabled', 'disabled'); 
-                },
-                success: function(data) {
-                    document.location.href = '/' + country + '/addData/' + data['id'];
-                }
-            });
-        } else {
-            $('.savingMessage_companyEdit').hide();
-            $('.error-form').show().delay(5000).fadeOut();
-            console.log('not valid');
-        }
-    });
+    // $('body').on('click', '#companySave-new', function(event) {
+    //     //console.log(company_form.validate());
+    //     $("#submitCompany").parsley('validate');
+    //     if ($("#submitCompany").parsley('isValid')) {
+    //         console.log('valid');
+    //         $('.message-form').text('Saving...');
+    //         $('.message-form').show();
+    //         //var companyID = $('.companyID').val();
+    //         var data = $('.companyForm').serializeArray();
+    //         $.ajax({
+    //             type: 'POST',
+    //             url: '/' + country + '/submitCompany/',
+    //             data: data,
+    //             error: function(error) {
+    //                 console.debug(JSON.stringify(error));
+    //                 $('.message-form').hide();
+    //                 $('.error-form').text('Oops... Something went wrong :/')
+    //                 $('.error-form').show().delay(5000).fadeOut();
+    //             },
+    //             beforeSend: function(xhr, settings) {
+    //                 //$(event.target).attr('disabled', 'disabled'); 
+    //             },
+    //             success: function(data) {
+    //                 document.location.href = '/' + country + '/addData/' + data['id'];
+    //             }
+    //         });
+    //     } else {
+    //         $('.savingMessage_companyEdit').hide();
+    //         $('.error-form').show().delay(5000).fadeOut();
+    //         console.log('not valid');
+    //     }
+    // });
 
     function clearForm() {
         $('.dataForm')[0].reset();
