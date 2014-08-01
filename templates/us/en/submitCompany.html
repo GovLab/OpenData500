@@ -63,7 +63,8 @@
 		{% for source in revenueSource %}
 			<label for="{{source}}"><input type="checkbox" id="{{source}}" name="revenueSource" data-trigger="change" parsley-multiple="revenueSource" data-mincheck="1" value="{{ source }}" parsley-required="true">{{ source }}<br></label>
 		{% end %}
-		<label for""><input type="checkbox" name="revenueSource" value="Other">Other</label><input type="text" name="otherRevenueSource" id="otherRevenueSource" data-trigger="change" data-group="revenueSource" data-mincheck="1"></label>
+		<label for"other_revenue"><input type="checkbox" id="other-other_revenue" name="revenueSource" data-trigger="change" parsley-multiple="revenueSource" data-mincheck="1" value="Other" parsley-required="true"/>Other
+			<input type="text" name="otherRevenueSource" id="otherRevenueSource" /></label>
 	</fieldset>
 	<fieldset class="m-form-half right">
 		<h3>What category best describes your company? *</h3>
