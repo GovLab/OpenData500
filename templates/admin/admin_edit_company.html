@@ -12,47 +12,57 @@
 <br>
 <br>
 <h2>{{ page_heading }}</h2>
-<form method="post" id="submitCompany" class="m-form companyForm">
+<form method="post" id="company_form" class="m-form companyForm" data-parsley-validate>
 	<fieldset class="m-form-half">
 		<h3>Personal Information</h3>
-		<div class="m-form-line"><label for="">First Name: *</label><input type="text" name="firstName" id="firstName" {% if (company.contact) %} value="{{ company.contact.firstName }}" {% end %}></div>
-		<div class="m-form-line"><label for="">Last Name: *</label><input type="text" name="lastName" id="lastName" {% if (company.contact) %} value="{{ company.contact.lastName }}" {% end %}></div>
-		<div class="m-form-line"><label for="">Title:</label><input type="text" name="title" id="title" {% if (company.contact) %} value="{{ company.contact.title }}" {% end %}></div>
-		<div class="m-form-line"><label for="">Email: *</label><input type="text" name="email" id="email" parsley-trigger="change" parsley-type="email" {% if (company.contact) %} value="{{ company.contact.email }}" {% end %}></div>
-		<div class="m-form-line"><label for="">Phone:</label><input type="text" name="phone" id="phone" parsley-trigger="change" parsley-type="phone" {% if (company.contact) %} value="{{ company.contact.phone }}" {% end %}></div>
+		<div class="m-form-line"><label for="">First Name: *</label><input type="text" name="firstName" id="firstName" {% if (company.contact) %} value="{{ company.contact.firstName }}" {% end %} data-parsley-maxlength="50"></div>
+		<div class="m-form-line"><label for="">Last Name: *</label><input type="text" name="lastName" id="lastName" {% if (company.contact) %} value="{{ company.contact.lastName }}" {% end %} data-parsley-maxlength="50"></div>
+		<div class="m-form-line"><label for="">Title:</label><input type="text" name="title" id="title" {% if (company.contact) %} value="{{ company.contact.title }}" {% end %} data-parsley-maxlength="50"></div>
+		<div class="m-form-line"><label for="">Email: *</label><input type="text" name="email" id="email" data-parsley-trigger="change" data-parsley-type="email" {% if (company.contact) %} value="{{ company.contact.email }}" {% end %}></div>
+		<div class="m-form-line"><label for="">Phone:</label><input type="text" name="phone" id="phone" 
+			data-parsley-trigger="keyup" 
+			data-parsley-pattern="(^\d{3}(-|\s)\d{3}(-|\s)\d{4}$)|(^\d{10})"
+			data-parsley-error-message="Phone must be in format: ###-###-####" 
+			{% if (company.contact) %} value="{{ company.contact.phone }}" {% end %}></div>
 		<div class="m-form-box contacted-box"><label for="contacted"><input type="checkbox" name="contacted" id="contacted" value="contacted" {% if (company.contact) %}{% if company.contact.contacted %} checked {% end %}{% end %}>Please check here if you would be willing to be contacted for further information about your company.</label></div>
 	</fieldset>
 	<fieldset class="m-form-half right">
 		<h3>Company Information</h3>	
-		<div class="m-form-line"><label for="companyName">Company Name *</label><input type='text' name="companyName" id='companyName' value="{{ company.companyName }}"></div>
-		<div class="m-form-line"><label for="url">Company URL: *</label><input type='text' name="url" id='url' parsley-trigger="change" parsley-type="url" value="{{ company.url }}"></div>
-		<div class="m-form-line"><label for="city">In which city is this company located?</label><input type="text" name="city" id="city" {% if company.city %} value="{{ company.city }}" {% end %}></div>
+		<div class="m-form-line"><label for="companyName">Company Name *</label><input type='text' name="companyName" id='companyName' value="{{ company.companyName }}" required></div>
+		<div class="m-form-line"><label for="url">Company URL: *</label><input type='text' name="url" id='url' data-parsley-trigger="change" data-parsley-type="url" value="{{ company.url }}"></div>
+		<div class="m-form-line"><label for="city">In which city is this company located?</label><input type="text" name="city" id="city" {% if company.city %} value="{{ company.city }}" {% end %} data-parsley-maxlength="50"></div>
 		<div class="m-form-line">
 			<label for="state">State:</label>
-			<select name='state' id="state" >
+			<select name='state' id="state" required>
 				{% for i in range(0, len(stateList[country])) %}
 					<option name="state" value="{{stateListAbbrev[country][i]}}" {%try%}{%if company.state.replace(' ','') == stateListAbbrev[country][i] %} selected="selected" {%end%}{%except%}{%end%}>{{ stateList[country][i] }}</option>
 				{%end%}
 			</select>
 		</div>
-		<div class="m-form-line"><label for="country">Country:</label><input type="text" id="country" name="country" country="{{country}}" value="{{country_keys[country]}}" disabled="disabled"></div>
-		<div class="m-form-line"><label for="zipCode">Zip Code:</label><input type="text" name="zipCode" id="zipCode" parsley-trigger="change" parsley-regexp="(^\d{5}$)|(^\d{5}-\d{4}$)" {% if company.zipCode %}value="{{ company.zipCode }}" {% end %}></div>
-		<div class="m-form-line"><label for="ceoFirstName">First Name of CEO:</label><input type="text" name="ceoFirstName" id="ceoFirstName" value="{{ company.ceo.firstName}}"></div>
-		<div class="m-form-line"><label for="ceoLastName">Last Name of CEO:</label><input type="text" name="ceoLastName" id="ceoLastName" value="{{ company.ceo.lastName }}"></div>
+		<div class="m-form-line"><label for="country">Country:</label><input type="text" id="country" name="country" country="{{country}}" value="{{country_keys[country]}}" readonly></div>
+		<div class="m-form-line"><label for="zipCode">Zip Code:</label><input type="text" name="zipCode" id="zipCode" data-parsley-trigger="change" data-parsley-pattern="(^\d{5}$)|(^\d{5}-\d{4}$)" {% if company.zipCode %}value="{{ company.zipCode }}" {% end %}></div>
+		<div class="m-form-line"><label for="ceoFirstName">First Name of CEO:</label><input type="text" name="ceoFirstName" id="ceoFirstName" value="{{ company.ceo.firstName}}" data-parsley-maxlength="50"></div>
+		<div class="m-form-line"><label for="ceoLastName">Last Name of CEO:</label><input type="text" name="ceoLastName" id="ceoLastName" value="{{ company.ceo.lastName }}" data-parsley-maxlength="50"></div>
 		<div class="m-form-box">Type of Company: *<br>
-		{% for type in companyType %}
-			<label for=""><input type="radio" name="companyType" data-trigger="change" data-group="companyType" data-mincheck="1" value="{{ type }}" {% if company.companyType == type %} checked {% end %}>{{ type }}</label>
-		{% end %}
-		{%if company.companyType not in companyType %}
-			<label for=""><input type="radio" name="companyType" data-trigger="change" data-group="companyType" data-mincheck="1" value="other" checked>Other
-			<input type="text" name="otherCompanyType" id="otherCompanyType" data-trigger="change" data-group="companyType" data-mincheck="1" value ="{{ company.companyType }}"></label>
-		{% else %}
-			<label for=""><input type="radio" name="companyType" data-trigger="change" data-group="companyType" data-mincheck="1" value="other">Other
-			<input type="text" name="otherCompanyType" id="otherCompanyType" data-trigger="change" data-group="companyType" data-mincheck="1"></label>
-		{% end %}
+			<div class="company-type-field">
+				{% for type in companyType %}
+					<input type="radio" id="{{type}}" name="companyType" data-parsley-group='companyType' value="{{ type }}" {% if company.companyType == type %} checked {% end %}><label for="{{type}}">{{type}}</label><br>
+				{% end %}
+				{% if company.companyType not in companyType %}
+					<input type="radio" id="other_type" name="companyType" value="Other" data-parsley-mincheck="1" data-parsley-group='companyType' data-parsley-trigger="change" checked><label for="other_type">Other</label>
+					<input type="text" id="other_company_type_field" name="otherCompanyType" value ="{{ company.companyType }}">
+				{% else %}
+					<input type="radio" id="other_type" name="companyType" value="Other" data-parsley-mincheck="1" data-parsley-group='companyType' data-parsley-trigger="change"><label for="other_type">Other</label>
+					<input type="text" id="other_company_type_field" name="otherCompanyType">
+				{% end %}
+			</div>
 		</div>
-		<div class="m-form-line"><label for="">Founding Year:</label><input type="text" name="yearFounded" id="yearFounded" parsley-type="number" parsley-trigger="change" parsley-range="[1000, 2014]" {% if company.yearFounded and company.yearFounded != 9999 %} value="{{ company.yearFounded }}" {%end%}></div>
-		<div class="m-form-line"><label for="">Number of full-time employees:</label><input type="text" name="fte" id="fte" parsley-trigger="change" parsley-type="number" {% if company.fte %} value="{{ company.fte }}" {%end%}></div>
+		<div class="m-form-line"><label for="">Founding Year:</label><input type="text" name="yearFounded" id="yearFounded" 
+			data-parsley-type="number" 
+			data-parsley-trigger="focusout" 
+			data-parsley-range="[1000, 2014]"
+			{% if company.yearFounded and company.yearFounded != 9999 %} value="{{ company.yearFounded }}" {%end%}></div>
+		<div class="m-form-line"><label for="">Number of full-time employees:</label><input type="text" name="fte" id="fte" data-parsley-trigger="focusout" data-parsley-type="number" {% if company.fte %} value="{{ company.fte }}" {%end%}></div>
 	</fieldset>
 	
 	<fieldset class="m-form-half">
@@ -83,15 +93,15 @@
 	</fieldset>
 	<fieldset class="m-form-half left">
 		<h3>Please give us a short public statement describing your company’s mission and work. You can take this material from your website or other publications if you choose to. <br><em>[200 words or less]</em> *</h3>
-		<textarea rows="10" cols="59" name="description" id="description" parsley-trigger="keyup">{{ company.description }}</textarea><br><br>
+		<textarea rows="10" cols="59" name="description" id="description" data-parsley-trigger="keyup" data-parsley-maxlength="1200">{{ company.description }}</textarea><br><br>
 		<h3>As a summary, please provide a one sentence description of your company. <br><em>[25 words or less]</em> *</h3>
-		<textarea rows="10" cols="59" name="descriptionShort" id="descriptionShort" parsley-trigger="keyup" parsley-maxwords="25">{{ company.descriptionShort }}</textarea><br>
+		<textarea rows="10" cols="59" name="descriptionShort" id="descriptionShort" data-parsley-trigger="keyup" data-parsley-maxlength="150">{{ company.descriptionShort }}</textarea><br>
 	</fieldset>
 	<fieldset class="m-form-half right">
 		<h3>Please include any financial or operational information that will help us understand your company. We are interested in specific information like past and projected annual revenues, total outside investment dollars to date, and significant investors or partners. <br><em>[100 words or less]</em></h3>
-		<textarea rows="10" cols="59" name="financialInfo" id="financialInfo" parsley-trigger="keyup" parsley-maxwords="100">{{ company.financialInfo }}</textarea><br><br>
+		<textarea rows="10" cols="59" name="financialInfo" id="financialInfo" data-parsley-trigger="keyup" data-parsley-maxlength="600">{{ company.financialInfo }}</textarea><br><br>
 		<h3>What datasets (if any) are not currently available that would be useful for your company to have as government open data?<br><em>[50 words or less]</em></h3>
-		<textarea rows="10" cols="59" name="datasetWishList" id="datasetWishList" parsley-trigger="keyup" parsley-maxwords="50">{% if company.datasetWishList %} {{ company.datasetWishList }}{% end %}</textarea><br>
+		<textarea rows="10" cols="59" name="datasetWishList" id="datasetWishList" data-parsley-trigger="keyup" data-parsley-maxlength="300">{% if company.datasetWishList %} {{ company.datasetWishList }}{% end %}</textarea><br>
 	</fieldset>
 	<fieldset class="m-form-half">
 		<h3>From approximately how many sources (i.e. agencies, subagencies, local and state governments) does your company use data? *</h3>
@@ -127,9 +137,10 @@
 		</fieldset>
 		<fieldset class="m-form-half">
 			<h3>Notes</h3>
-				<textarea rows="10" cols="59" name="notes" id="notes" parsley-trigger="keyup" parsley-maxwords="1000">{%if company.notes %}{{company.notes}}{%end%}</textarea>
+				<textarea rows="10" cols="59" name="notes" id="notes" data-parsley-trigger="keyup" data-parsley-maxlength="3000">{%if company.notes %}{{company.notes}}{%end%}</textarea>
 		</fieldset>
 	</fieldset>
+	<input type="hidden" class="companyID" name="companyID" value="{{ id }}">
 	{% raw xsrf_form_html() %}
 </form>
 <br>
@@ -227,19 +238,18 @@
 			{% end %}
 		</div><br>
 	</div>
-	<fieldset class="m-form-half right">
-		<h3>Please give your comments about the usefulness of all these data sources and datasets. <br><em>[250 words or less]</em></h3>
-		<textarea rows="10" cols="59" name="dataComments" id="dataComments" parsley-trigger="keyup" parsley-maxwords="250">{%if company.dataComments %}{{ company.dataComments }}{% end %}</textarea><br>
-	</fieldset>
+	<form id='data_comments_form'>
+		<fieldset class="m-form-half right">
+			<h3>Please give your comments about the usefulness of all these data sources and datasets. <br><em>[250 words or less]</em></h3>
+			<textarea rows="10" cols="59" name="dataComments" id="dataComments" data-parsley-trigger="keyup" data-parsley-maxlength="1000">{%if company.dataComments %}{{ company.dataComments }}{% end %}</textarea><br>
+		</fieldset>
+	</form>
 </div>
 <!--------------------------------------------END DATASETS--------------------------------------!-->
 
-<div class="saveCompanyForm">	
-	<input type="hidden" class="companyID" name="companyID" value="{{ id }}">
-	<h3><input type="button" class="l-button" id="companyAdminSave" name="submit" value="Save Company Info">
-		<span class="message-form" style="display:none"></span>
-		<span class="error-form" style="display:none"></span>
-	</h3>
+<div class='submit_form'>
+	<input type="submit" class="l-button" id="submit_form_button" name="formSave" value="Save Company Info">
+	<span class="response-message" style="display:none"></span>
 </div>
 
 
@@ -247,44 +257,64 @@
 <script>
 $(document).ready( function () {
 	//----------------------------------Admin FORM--------------------------------------
-  $('.saveCompanyForm').on('click', '#companyAdminSave', function() {
-    if ($('.companyForm').parsley('validate') && ($('#dataComments').parsley('validate') || $('#dataComments').parsley('validate') == null)) {
-      console.log('valid');
-      $('.message-form').text('Saving...');
-      // $('.message-form').show();
-      var companyID = $('.companyID').val();
-      var data = $('.companyForm').serializeArray();
-      data.push({
-		    "name": "dataComments",
-		    "value": $('#dataComments').val()
-		});
-      $.ajax({
-        type: 'POST',
-        url: '/admin-edit/' + companyID,
-        data: data,
-        error: function(error) {
-            console.debug(JSON.stringify(error));
-            $('.message-form');
-            $('.error-form').text('Oops... Something went wrong :/')
-            $('.error-form').show().delay(5000).fadeOut(); },
-        beforeSend: function(xhr, settings) {
-          //$(event.target).attr('disabled', 'disabled'); 
-        },
-        success: function(success) {
-          //console.log(success);
-          $('.error-form').hide();
-          $('.message-form').text('Saved!')
-          $('.message-form').show().delay(5000).fadeOut();
-          console.log("regular saved!");
+    var _xsrf = $("[name='_xsrf']").val();
+    var rm = $('.response-message');
+    var id = $('.companyID');
+    $("#company_form").parsley();
+    $('#data_comments_form').parsley();
+    $('.submit_form').on('click', '#submit_form_button', function() {
+        if ($("#company_form").parsley().validate() && $('#data_comments_form').parsley().validate()) {
+            data = $('#company_form').serializeArray();
+            data['id'] = id;
+
+        } else {
+        	rm.text("You need to fix some errors.");
+        	rm.show().delay(5000).fadeOut();
         }
-      });
-    } else {
-      $('.savingMessage_companyEdit').hide();
-      $('.error-form').show().delay(5000).fadeOut();
-      //console.log('not valid');
-    }
-  });
+        event.preventDefault();
+    });
 });
+
+
+
+//   $('.saveCompanyForm').on('click', '#companyAdminSave', function() {
+//     if ($('.companyForm').parsley('validate') && ($('#dataComments').parsley('validate') || $('#dataComments').parsley('validate') == null)) {
+//       console.log('valid');
+//       $('.message-form').text('Saving...');
+//       // $('.message-form').show();
+//       var companyID = $('.companyID').val();
+//       var data = $('.companyForm').serializeArray();
+//       data.push({
+// 		    "name": "dataComments",
+// 		    "value": $('#dataComments').val()
+// 		});
+//       $.ajax({
+//         type: 'POST',
+//         url: '/admin-edit/' + companyID,
+//         data: data,
+//         error: function(error) {
+//             console.debug(JSON.stringify(error));
+//             $('.message-form');
+//             $('.error-form').text('Oops... Something went wrong :/')
+//             $('.error-form').show().delay(5000).fadeOut(); },
+//         beforeSend: function(xhr, settings) {
+//           //$(event.target).attr('disabled', 'disabled'); 
+//         },
+//         success: function(success) {
+//           //console.log(success);
+//           $('.error-form').hide();
+//           $('.message-form').text('Saved!')
+//           $('.message-form').show().delay(5000).fadeOut();
+//           console.log("regular saved!");
+//         }
+//       });
+//     } else {
+//       $('.savingMessage_companyEdit').hide();
+//       $('.error-form').show().delay(5000).fadeOut();
+//       //console.log('not valid');
+//     }
+//   });
+// });
 
 
 

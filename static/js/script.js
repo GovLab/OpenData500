@@ -31,7 +31,6 @@ $(document).ready(function() {
 
                 return xhr.status === 200;
             }, '/validate/?country=' + country + '&_xsrf=' + _xsrf);
-        //var parsley_company_form = $("#submitCompany").parsley();
         $("#submitCompany").parsley();
 
         $("#submitCompany").submit(function(event) {
@@ -63,39 +62,6 @@ $(document).ready(function() {
             $('.error-form').show().delay(5000).fadeOut();
         });
     }
-
-    //     $('body').on('click', '#companySave-new', function(event) {
-    //     //console.log(company_form.validate());
-    //     $("#submitCompany").parsley('validate');
-    //     if ($("#submitCompany").parsley('isValid')) {
-    //         console.log('valid');
-    //         $('.message-form').text('Saving...');
-    //         $('.message-form').show();
-    //         //var companyID = $('.companyID').val();
-    //         var data = $('.companyForm').serializeArray();
-    //         $.ajax({
-    //             type: 'POST',
-    //             url: '/' + country + '/submitCompany/',
-    //             data: data,
-    //             error: function(error) {
-    //                 console.debug(JSON.stringify(error));
-    //                 $('.message-form').hide();
-    //                 $('.error-form').text('Oops... Something went wrong :/')
-    //                 $('.error-form').show().delay(5000).fadeOut();
-    //             },
-    //             beforeSend: function(xhr, settings) {
-    //                 //$(event.target).attr('disabled', 'disabled'); 
-    //             },
-    //             success: function(data) {
-    //                 document.location.href = '/' + country + '/addData/' + data['id'];
-    //             }
-    //         });
-    //     } else {
-    //         $('.savingMessage_companyEdit').hide();
-    //         $('.error-form').show().delay(5000).fadeOut();
-    //         console.log('not valid');
-    //     }
-    // });
 
     //----------------------------------ADMIN ACCORDIONS--------------------------------------
     $(function() {
@@ -137,17 +103,16 @@ $(document).ready(function() {
     $('.m-form-half').on('focusout', '#other_category_text_field', function() {
         if ($('#other_category_text_field').val() == '') {
             $('input[name="category"][value="Other"').prop('checked', false);
-            //$('#submitCompany').parsley().validate('category');
         }
     });
 
-    $('.m-form-half').on('focus', "#other-company-type", function() {
-        $('[name="companyType"]').each(function() {
-            this.checked = false;
-        });
+    $('.m-form-half').on('focus', "#other_company_type_field", function() {
+        $('input[name="companyType"][value="Other"').prop('checked', true);
     });
-    $('.m-form-half').on('change', "input[type='radio'][name='companyType']", function() {
-        $("#other-company-type").val('');
+    $('.m-form-half').on('focusout', '#other_company_type_field', function() {
+        if ($('#other_company_type_field').val() == '') {
+            $('input[name="companyType"][value="Other"').prop('checked', false);
+        }
     });
 
 

@@ -9,6 +9,7 @@ import csv
 from collections import Counter
 import numpy as np
 import re
+import bson
 
 #Just some global varbs. 
 favicon_path = '/static/img/favicon.ico'
@@ -144,81 +145,47 @@ class Form(object):
 
     def process_company(self, arguments, id):
         #-------------------CONTACT INFO---------------
-        firstName = arguments['firstName']
-        lastName = arguments["lastName"]
-        title = arguments['title']
-        email = arguments['email']
-        phone = arguments['phone']
-        contacted = True if 'contacted' in arguments else False
-        contact = models.Person(
-            firstName = firstName,
-            lastName = lastName,
-            title = title,
-            email = email,
-            phone = phone,
-            contacted = contacted,
-        )
+        try: 
+            c = models.Company.objects.get(id=bson.objectid.ObjectId(id))
+        except Exception, e:
+            logging.info("Error processing company: " + str(e))
+            return
+        #-------------------CONTACT INFO---------------
+        c.contact.firstName = arguments['firstName']
+        c.contact.lastName = arguments["lastName"]
+        c.contact.title = arguments['title']
+        c.contact.email = arguments['email']
+        c.contact.phone = arguments['phone']
+        c.contact.contacted = True if 'contacted' in arguments else False
         #-------------------CEO INFO---------------
-        ceoFirstName = arguments['ceoFirstName']
-        ceoLastName = arguments['ceoLastName']
-        ceo = models.Person(
-                firstName = ceoFirstName,
-                lastName = ceoLastName,
-                title = "CEO"
-            )
+        c.ceo.firstName = arguments['ceoFirstName']
+        c.ceo.lastName = arguments['ceoLastName']
+        c.ceo.title = 'CEO'
         #-------------------COMPANY INFO---------------
-        url = arguments['url']
-        companyName = arguments['companyName']
-        prettyName = re.sub(r'([^\s\w])+', '', companyName).replace(" ", "-").title()
-        city = arguments['city']
-        zipCode = arguments['zipCode']
-        state = arguments['state']
-        country = country_keys[arguments['country']]
-        companyType = arguments['companyType']
-        yearFounded = 0 if not arguments['yearFounded'] else arguments['yearFounded']
-        fte = 0 if not arguments['fte'] else arguments['fte']
-        revenueSource = [] if not arguments['revenueSource'] else arguments['revenueSource'].split(',')
-        if 'Other' in revenueSource:
-            del revenueSource[revenueSource.index('Other')]
-            revenueSource.append(arguments['otherRevenueSource'])
-        companyCategory = arguments['otherCategory'] if arguments['category'] == 'Other' else arguments['category']
-        description = arguments['description']
-        descriptionShort = arguments['descriptionShort']
-        financialInfo = arguments['financialInfo']
-        datasetWishList = arguments['datasetWishList']
-        sourceCount = arguments['sourceCount']
-        filters = [companyCategory, state, "survey-company"]
-        company = models.Company(
-            companyName = companyName,
-            prettyName = prettyName,
-            url = url,
-            ceo = ceo,
-            city = city,
-            zipCode = zipCode,
-            state=state,
-            yearFounded = yearFounded,
-            fte = fte,
-            companyType = companyType,
-            revenueSource = revenueSource,
-            companyCategory = companyCategory,
-            description= description,
-            descriptionShort = descriptionShort,
-            financialInfo = financialInfo,
-            datasetWishList = datasetWishList,
-            sourceCount = sourceCount,
-            contact = contact,
-            lastUpdated = datetime.now(),
-            display = False, 
-            submittedSurvey = True,
-            vetted = False, 
-            vettedByCompany = True,
-            submittedThroughWebsite = True,
-            locked=False,
-            filters = filters,
-            country=country
-        )
+        c.url = arguments['url']
+        c.companyName = arguments['companyName'] if 'companyName' in arguments else c.companyName
+        c.prettyName = re.sub(r'([^\s\w])+', '', c.companyName).replace(" ", "-").title()
+        c.city = arguments['city']
+        c.zipCode = arguments['zipCode']
+        c.state = arguments['state']
+        c.country = country_keys[arguments['country']]
+        c.companyType = arguments['companyType']
+        c.yearFounded = 0 if not arguments['yearFounded'] else arguments['yearFounded']
+        c.fte = 0 if not arguments['fte'] else arguments['fte']
+        c.revenueSource = [] if not arguments['revenueSource'] else arguments['revenueSource'].split(',')
+        if 'Other' in c.revenueSource:
+            del c.revenueSource[c.revenueSource.index('Other')]
+            c.revenueSource.append(arguments['otherRevenueSource'])
+        c.companyCategory = arguments['otherCategory'] if arguments['category'] == 'Other' else arguments['category']
+        c.description = arguments['description']
+        c.descriptionShort = arguments['descriptionShort']
+        c.financialInfo = arguments['financialInfo']
+        c.datasetWishList = arguments['datasetWishList']
+        c.sourceCount = arguments['sourceCount']
+        c.dataComments = arguments['dataComments'] if arguments['dataComments'] else c.dataComments
+        c.filters = [c.companyCategory, state, "survey-company"]
         company.save()
-        return company
+        return
 
 
 class StatsGenerator(object):

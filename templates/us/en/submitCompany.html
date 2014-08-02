@@ -60,9 +60,13 @@
 		<div class="m-form-line"><label for="ceoFirstName">First Name of CEO:</label><input type="text" name="ceoFirstName" id="ceoFirstName" data-parsley-maxlength="50"></div>
 		<div class="m-form-line"><label for="ceoLastName">Last Name of CEO:</label><input type="text" name="ceoLastName" id="ceoLastName" data-parsley-maxlength="50"></div>
 		<div class="m-form-box"><label for="companyType">Type of Company: *</label><br>
-			{% for type in companyType %}
-				<input type="radio" name="companyType" id="{{type}}" value="{{type}}" required /><label for="{{type}}">{{type}} </label>
-			{% end %}
+			<div class="company-type-field">
+				{% for type in companyType %}
+					<input type="radio" id="{{type}}" name="companyType" data-parsley-group='companyType' value="{{ type }}"><label for="{{type}}">{{type}}</label><br>
+				{% end %}
+				<input type="radio" id="other_type" name="companyType" value="Other" data-parsley-mincheck="1" data-parsley-group='companyType' data-parsley-trigger="change" required><label for="other_type">Other</label>
+				<input type="text" id="other_company_type_field" name="otherCompanyType">
+			</div>
 		</div>
 		<div class="m-form-line"><label for="">Founding Year: *</label><input type="text" name="yearFounded" id="yearFounded" 
 			data-parsley-type="number" 
@@ -94,19 +98,19 @@
 	</fieldset>
 	<fieldset class="m-form-half left">
 		<h3>Please give us a short public statement describing your company’s mission and work. You can take this material from your website or other publications if you choose to. <br><em>[~200 words or less]</em> *</h3>
-		<textarea rows="10" cols="59" name="description" id="description" data-parsley-trigger="keyup" data-parsley-maxlength="1000" required></textarea><br><br>
+		<textarea rows="10" cols="59" name="description" id="description" data-parsley-trigger="keyup" data-parsley-maxlength="1200" required></textarea><br><br>
 	</fieldset>
 	<fieldset class="m-form-half right">
 		<h3>As a summary, please provide a one sentence description of your company. <br><em>[~25 words or less]</em> *</h3>
-		<textarea rows="10" cols="59" name="descriptionShort" id="descriptionShort" data-parsley-trigger="keyup" data-parsley-maxlength="100" required></textarea><br>
+		<textarea rows="10" cols="59" name="descriptionShort" id="descriptionShort" data-parsley-trigger="keyup" data-parsley-maxlength="150" required></textarea><br>
 	</fieldset>
 	<fieldset class="m-form-half left">
 		<h3>Please include any financial or operational information that will help us understand your company. We are interested in specific information like past and projected annual revenues, total outside investment dollars to date, and significant investors or partners. <br><em>[~100 words or less]</em></h3>
-		<textarea rows="10" cols="59" name="financialInfo" id="financialInfo" data-parsley-trigger="keyup" data-parsley-maxlength="500"></textarea><br><br>
+		<textarea rows="10" cols="59" name="financialInfo" id="financialInfo" data-parsley-trigger="keyup" data-parsley-maxlength="600"></textarea><br><br>
 	</fieldset>
 	<fieldset class="m-form-half right">
 		<h3>What datasets (if any) are not currently available that would be useful for your company to have as government open data?<br><em>[~50 words or less]</em></h3>
-		<textarea rows="10" cols="59" name="datasetWishList" id="datasetWishList" data-parsley-trigger="keyup" data-parsley-maxlength="250"></textarea><br>
+		<textarea rows="10" cols="59" name="datasetWishList" id="datasetWishList" data-parsley-trigger="keyup" data-parsley-maxlength="300"></textarea><br>
 	</fieldset>
 	<fieldset class="m-form-half">
 		<h3>From approximately how many sources (i.e. agencies, subagencies, local and state governments) does your company use data? *</h3>
@@ -125,7 +129,7 @@
 	<div class="saveCompanyForm-new">	
 		<input type="hidden" class="companyID" name="companyID" value="">
 		<!--<input type="button" class="m-button" id="companySave-new" name="submit" value="Next">!-->
-		<input type="submit" id="formSave" name="formSave" value="Next">
+		<input type="submit" class="m-button" id="formSave" name="formSave" value="Next">
 		<span class="message-form" style="display:none"></span>
 		<span class="error-form" style="display:none"></span>
 	</div>
