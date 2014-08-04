@@ -479,40 +479,71 @@ $(document).ready(function() {
             $(this).find('.toolbar').hide();
         }
     }, '.agency, .subagency');
+
     //----------------------------------SUBMIT DATASET QUESTION--------------------------------------
-    $('.finish-data-submit').on('click', '.data-submit-button', function(event) {
-        if ($('.data-comment-form').parsley('validate')) {
-            if ($(".agency").length > 0) {
-                var companyID = $('.companyID').val();
-                //console.log(companyID);
-                var data = {
-                    "dataComments": $('#dataComments').val(),
-                    "action": "dataComments",
-                    "_xsrf": $("[name='_xsrf']").val()
-                };
-                $.ajax({
-                    type: 'POST',
-                    url: '/' + country + '/addData/' + companyID,
-                    data: data,
-                    error: function(error) {
-                        console.debug(JSON.stringify(error));
-                    },
-                    beforeSend: function(xhr, settings) {
-                        $(event.target).attr('disabled', 'disabled');
-                    },
-                    success: function(data) {
-                        console.log(data['result']);
-                        document.location.href = data['redirect'];
-                    }
-                });
-            } else {
-                console.log("Must enter at least one data source.")
-                $(".noInput").show().delay(5000).fadeOut();
-            }
-        } else {
-            console.log("form not valid");
+    $(".data-comment-form").parsley();
+    $(".data-comment-form").submit(function(event) {
+        console.log('in here');
+        $(this).parsley("validate");
+        if ($(this).parsley("isValid")) {
+            console.log('valid')
+            // $.ajax({
+            //     type: 'POST',
+            //     url: '/' + country + '/submitCompany/',
+            //     data: data,
+            //     error: function(error) {
+            //         console.debug(JSON.stringify(error));
+            //         $('.message-form').hide();
+            //         $('.error-form').text('Oops... Something went wrong :/')
+            //         $('.error-form').show().delay(5000).fadeOut();
+            //     },
+            //     beforeSend: function(xhr, settings) {
+            //         //$(event.target).attr('disabled', 'disabled'); 
+            //     },
+            //     success: function(data) {
+            //         document.location.href = '/' + country + '/addData/' + data['id'];
+            //     }
+            // });
         }
-    })
+        event.preventDefault();
+        console.log('not valid');
+    });
+
+
+
+    // $('.finish-data-submit').on('click', '.data-submit-button', function(event) {
+    //     if ($('.data-comment-form').parsley().validate()) {
+    //         if ($(".agency").length > 0) {
+    //             var companyID = $('.companyID').val();
+    //             //console.log(companyID);
+    //             var data = {
+    //                 "dataComments": $('#dataComments').val(),
+    //                 "action": "dataComments",
+    //                 "_xsrf": $("[name='_xsrf']").val()
+    //             };
+    //             $.ajax({
+    //                 type: 'POST',
+    //                 url: '/' + country + '/addData/' + companyID,
+    //                 data: data,
+    //                 error: function(error) {
+    //                     console.debug(JSON.stringify(error));
+    //                 },
+    //                 beforeSend: function(xhr, settings) {
+    //                     $(event.target).attr('disabled', 'disabled');
+    //                 },
+    //                 success: function(data) {
+    //                     console.log(data['result']);
+    //                     document.location.href = data['redirect'];
+    //                 }
+    //             });
+    //         } else {
+    //             console.log("Must enter at least one data source.")
+    //             $(".noInput").show().delay(5000).fadeOut();
+    //         }
+    //     } else {
+    //         console.log("form not valid");
+    //     }
+    // })
 
     //----------------------------------SUBMIT FORM--------------------------------------
     $('.submitCompanyForm').on('click', '#companySubmit', function(event) {
@@ -634,44 +665,6 @@ $(document).ready(function() {
         }
     }
 
-    function validateForm(form) {
-        var pass = true;
-        var a = $("input[name='datasetName']", form).val();
-        var b = $("input[name='datasetURL']", form).val();
-        var re = /^(https?|s?ftp|git):\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i;
-        var r = new RegExp(re);
-        var c = $("input[name='agency']", form).val();
-        var typeOfDataset = []
-        $("input[name='typeOfDataset']", form).each(function() {
-            if (this.checked) {
-                typeOfDataset.push($(this).val());
-            }
-        });
-        var d = $("input[name='otherTypeOfDataset']", form).val();
-        var e = $("input[name='rating']", form).val();
-        var f = $("input[name='reason']", form).val();
-        if (a == '') {
-            pass = false;
-        } //need a name for dataset
-        if (!r.test(b)) {
-            pass = false;
-        } //need valid URL
-        if (c == '') {
-            pass = false;
-        } // need agency
-        if (!$.inArray('Other', typeOfDataset) > -1) {
-            if (d == '') {
-                pass = false;
-            }
-        } //need to enter 'other' if other checked
-        if (typeOfDataset.length == 0) {
-            pass = false;
-        } //at least 1 value
-        if (!isNaN(e)) {
-            pass = false;
-        } //needs to be a number
-        return pass;
-    }
     //----------------------------------AUTCOMPLETE SEARCH BAR--------------------------------------
     if (country != undefined) {
         $.getJSON("/static/files/" + country + "_Agency_List.json", function(agencies) {

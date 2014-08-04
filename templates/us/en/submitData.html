@@ -6,7 +6,7 @@
 <h1>{{ page_heading }}</h1>
 
 
-<!--------------------------------------------DATASETS--------------------------------------!-->
+	<!--*****************************************************************-AGENCY FORM-***************************************************************** !-->
 	<div class="m-form-box data">
 		<p>Please tell us more about the open data sources your company uses.</p>
 		<p>Use the search bar to find and select government agencies, subagencies, city and state governments, or government-funded research programs from the list provided.</p>
@@ -22,7 +22,6 @@
 			<input type="hidden" id="searchval" />
 			<input type="button" class="l-button" id="addSearchResult" value="Add Agency/Sub-Agency">
 			<input type="hidden" class="companyID" name="companyID" value="{{ company.id }}">
-			{% raw xsrf_form_html() %}
 			<div class="errors-search">
 				<span class="agenciesExist error-agency-search" style="display:none">Agency or Sub-Agency already on list.</span>
 				<span class="emptyInput error-agency-search" style="display:none">Nothing to add.</span>
@@ -105,18 +104,25 @@
 				{% end %}<!-- END OF AGENCIES !-->
 			</div><br>
 		</div>
-		<form method="post" class="m-form data-comment-form">
+
+		<!--*****************************************************************-DATA COMMENTS-***************************************************************** !-->
+		<form method="post" class="m-form data-comment-form" data-parsley-validate>
 			<fieldset class="m-form-half right">
 				<h3>Please give your comments about the usefulness of all these data sources and datasets.<br><em>[250 words or less] * </em></h3>
-				<textarea rows="10" cols="59" name="dataComments" id="dataComments" parsley-trigger="keyup" parsley-maxwords="250" parsley-required="true">{%if company.dataComments %}{{ company.dataComments }}{% end %}</textarea><br>
+				<textarea rows="10" cols="59" name="dataComments" id="dataComments" 
+				parsley-trigger="keyup" 
+				data-parsley-maxwords="250" 
+				required>{%if company.dataComments %}{{ company.dataComments }}{% end %}</textarea><br>
+				{% raw xsrf_form_html() %}
+				<input type="submit" class="m-button" value="Save And Finish">
 			</fieldset>
+			<!-- <input type="button" class="l-button data-submit-button" value="Save And Finish"> -->
+			
 		</form>
 	</div>
-<!--------------------------------------------END DATASETS--------------------------------------!-->
 
-<div class="finish-data-submit">	
-	<input type="button" class="l-button data-submit-button" value="Save And Finish">
-</div>
+<!--*****************************************************************-SUBMIT BUTTON-***************************************************************** !-->
+
 
 
 {% end %}

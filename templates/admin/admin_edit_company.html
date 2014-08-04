@@ -13,6 +13,8 @@
 <br>
 <h2>{{ page_heading }}</h2>
 <form method="post" id="company_form" class="m-form companyForm" data-parsley-validate>
+
+	<!--*****************************************************************-CONTACT INFO-***************************************************************** !-->
 	<fieldset class="m-form-half">
 		<h3>Personal Information</h3>
 		<div class="m-form-line"><label for="">First Name: *</label><input type="text" name="firstName" id="firstName" {% if (company.contact) %} value="{{ company.contact.firstName }}" {% end %} data-parsley-maxlength="50"></div>
@@ -26,6 +28,8 @@
 			{% if (company.contact) %} value="{{ company.contact.phone }}" {% end %}></div>
 		<div class="m-form-box contacted-box"><label for="contacted"><input type="checkbox" name="contacted" id="contacted" value="contacted" {% if (company.contact) %}{% if company.contact.contacted %} checked {% end %}{% end %}>Please check here if you would be willing to be contacted for further information about your company.</label></div>
 	</fieldset>
+
+	<!--*****************************************************************-COMPANY INFO-***************************************************************** !-->
 	<fieldset class="m-form-half right">
 		<h3>Company Information</h3>	
 		<div class="m-form-line"><label for="companyName">Company Name *</label><input type='text' name="companyName" id='companyName' value="{{ company.companyName }}" required></div>
@@ -65,6 +69,7 @@
 		<div class="m-form-line"><label for="">Number of full-time employees:</label><input type="text" name="fte" id="fte" data-parsley-trigger="focusout" data-parsley-type="number" {% if company.fte %} value="{{ company.fte }}" {%end%}></div>
 	</fieldset>
 	
+	<!--*****************************************************************-REVENUE SOURCES-***************************************************************** !-->
 	<fieldset class="m-form-half">
 		<h3>Which of the following are significant sources of revenue for your company? <br><em>(check all that apply)</em> *</h3>
 		{% for source in revenueSource %}
@@ -78,6 +83,8 @@
 			<input type="text" name="otherRevenueSource" id="otherRevenueSource" data-trigger="change" data-group="revenueSource" data-mincheck="1"></label>
 		{% end %}
 	</fieldset>
+
+	<!--*****************************************************************-CATEGORY-***************************************************************** !-->
 	<fieldset class="m-form-half right">
 		<h3>What category best describes your company? *</h3>
 		{% for category in categories %}
@@ -91,18 +98,46 @@
 			<input type="text" name="otherCategory" id="otherCategory"></label>
 		{% end %}
 	</fieldset>
+
+	<!--*****************************************************************-DESCRIPTION-***************************************************************** !-->
 	<fieldset class="m-form-half left">
 		<h3>Please give us a short public statement describing your company’s mission and work. You can take this material from your website or other publications if you choose to. <br><em>[200 words or less]</em> *</h3>
-		<textarea rows="10" cols="59" name="description" id="description" data-parsley-trigger="keyup" data-parsley-maxlength="1200">{{ company.description }}</textarea><br><br>
-		<h3>As a summary, please provide a one sentence description of your company. <br><em>[25 words or less]</em> *</h3>
-		<textarea rows="10" cols="59" name="descriptionShort" id="descriptionShort" data-parsley-trigger="keyup" data-parsley-maxlength="150">{{ company.descriptionShort }}</textarea><br>
+		<textarea rows="10" cols="59" name="description" id="description" 
+		data-parsley-trigger="keyup" 
+		data-parsley-maxwords="200" 
+		data-parsley-error-message="You are over the word limit."
+		required>{{ company.description }}</textarea><br><br>
 	</fieldset>
+
+	<!--*****************************************************************-SHORT DESCRIPTION-***************************************************************** !-->
 	<fieldset class="m-form-half right">
-		<h3>Please include any financial or operational information that will help us understand your company. We are interested in specific information like past and projected annual revenues, total outside investment dollars to date, and significant investors or partners. <br><em>[100 words or less]</em></h3>
-		<textarea rows="10" cols="59" name="financialInfo" id="financialInfo" data-parsley-trigger="keyup" data-parsley-maxlength="600">{{ company.financialInfo }}</textarea><br><br>
-		<h3>What datasets (if any) are not currently available that would be useful for your company to have as government open data?<br><em>[50 words or less]</em></h3>
-		<textarea rows="10" cols="59" name="datasetWishList" id="datasetWishList" data-parsley-trigger="keyup" data-parsley-maxlength="300">{% if company.datasetWishList %} {{ company.datasetWishList }}{% end %}</textarea><br>
+		<h3>As a summary, please provide a one sentence description of your company. <br><em>[25 words or less]</em> *</h3>
+		<textarea rows="10" cols="59" name="descriptionShort" id="descriptionShort" 
+		data-parsley-trigger="keyup" 
+		data-parsley-maxwords="25" 
+		data-parsley-error-message="You are over the word limit." 
+		required>{{ company.descriptionShort }}</textarea><br>
 	</fieldset>
+
+	<!--*****************************************************************-FINANCIAL INFO-***************************************************************** !-->
+	<fieldset class="m-form-half left">
+		<h3>Please include any financial or operational information that will help us understand your company. We are interested in specific information like past and projected annual revenues, total outside investment dollars to date, and significant investors or partners. <br><em>[100 words or less]</em></h3>
+		<textarea rows="10" cols="59" name="financialInfo" id="financialInfo" 
+		data-parsley-trigger="keyup" 
+		data-parsley-maxwords="100" 
+		data-parsley-error-message="You are over the word limit.">{{ company.financialInfo }}</textarea><br><br>
+	</fieldset>
+
+	<!--*****************************************************************-DATASET WISHLIST-***************************************************************** !-->
+	<fieldset class="m-form-half right">
+		<h3>What datasets (if any) are not currently available that would be useful for your company to have as government open data?<br><em>[50 words or less]</em></h3>
+		<textarea rows="10" cols="59" name="datasetWishList" id="datasetWishList" 
+		data-parsley-trigger="keyup" 
+		data-parsley-maxwords="50" 
+		data-parsley-error-message="You are over the word limit.">{{ company.datasetWishlist }}</textarea><br>
+	</fieldset>
+
+	<!--*****************************************************************-DATA SOURCES-***************************************************************** !-->
 	<fieldset class="m-form-half">
 		<h3>From approximately how many sources (i.e. agencies, subagencies, local and state governments) does your company use data? *</h3>
 		<div class="source-count-buttons">
@@ -112,7 +147,10 @@
 			<input type="radio" name="sourceCount" id="count4" value="100+" {% if company.sourceCount == '100+' %}checked{%end%}><label for="count4">100+</label>
 			<input type="radio" name="sourceCount" id="count5" value="NA" {% if company.sourceCount == 'NA' %}checked{%end%}><label for="count5">NA</label>
 		</div>
+		{% raw xsrf_form_html() %}
 	</fieldset>
+
+	<!--*****************************************************************-ADMIN SETTINGS-***************************************************************** !-->
 	<h2>Admin Settings</h2><br>
 	<fieldset class="m-form">
 		<fieldset class="m-form-half">
@@ -145,7 +183,7 @@
 </form>
 <br>
 
-<!--------------------------------------------DATASETS--------------------------------------!-->
+<!--*****************************************************************-AGENCY FORM-***************************************************************** !-->
 <br><br><h2>Agency and Data Information</h2><br>
 <div class="m-form-box data">
 	<h3>Please tell us more about the data your company uses. Use the search bar to find and select government agencies, subagencies, city and state governments, or government-funded research programs from the pop-up list provided. <div class="example-popup"><a>See Example.</a></div></h3><br>
@@ -245,8 +283,8 @@
 		</fieldset>
 	</form>
 </div>
-<!--------------------------------------------END DATASETS--------------------------------------!-->
 
+<!--*****************************************************************-SUBMIT BUTTON-***************************************************************** !-->
 <div class='submit_form'>
 	<input type="submit" class="l-button" id="submit_form_button" name="formSave" value="Save Company Info">
 	<span class="response-message" style="display:none"></span>
