@@ -144,7 +144,6 @@ class Form(object):
         return company
 
     def process_company(self, arguments, id):
-        #-------------------CONTACT INFO---------------
         try: 
             c = models.Company.objects.get(id=bson.objectid.ObjectId(id))
         except Exception, e:
@@ -187,6 +186,136 @@ class Form(object):
         company.save()
         return
 
+    def company_update_one(self, id, dictField, value):
+        return models.Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+dictField:value})
+
+    def company_has_agency(self, company, agency):
+        return company in agency.usedBy
+
+    def company_has_subagency(self, company, agency, subagency_name):
+        for s in agency.subagencies:
+                if s.name == subagency_name:
+                    return company in s.usedBy
+
+    def add_agency_to_company(self, company, agency):
+        if agency not in company.agencies:
+            company.agencies.append(agency)
+            company.lastUpdated = datetime.now()
+            if agency.prettyName not in company.filters:
+                company.filters.append(agency.prettyName)
+        if company not in agency.usedBy:
+            agency.usedBy.append(company)
+            agency.usedBy_count = len(agency.usedBy)
+        agency.save()
+        company.save()
+        return
+
+    def add_subagency_to_company(self, company, agency, subagency_name):
+        if agency not in company.agencies:
+            company.agencies.append(agency)
+        if company not in agency.usedBy:
+            agency.usedBy.append(company)
+        for s in agency.subagencies:
+            if s.name == subagency_name:
+                if company not in s.usedBy:
+                    s.usedBy.append(company)
+        agency.save()
+        company.save()
+
+    def remove_specific_dataset_from_company(self, company, agency, subagency_name, dataset_name):
+        if subagency_name == '':
+            for d in agency.datasets:
+                if d.datasetName == dataset_name:
+                    agency.datasets.remove(d)
+        else:
+            for s in agency.subagencies:
+                if s.name == subagency_name:
+                    for d in s.datasets:
+                        if d.datasetName == dataset_name:
+                            s.datasets.remove(d)
+        agency.save()
+        company.lastUpdated = datetime.now() #Update Company's Time of Last Edit
+        company.save()
+
+    def remove_all_datasets_from_company(self, company, agency):
+        for d in agency.datasets:
+            if company == d.usedBy:
+                self.remove_specific_dataset_from_company(company, agency, '', d.datasetName)
+        for s in agency.subagencies:
+            for d in s.datasets:
+                if company == d.usedBy:
+                    self.remove_specific_dataset_from_company(company, agency, s.name, d.datasetName)
+        company.lastUpdated = datetime.now()
+        company.save()
+        agency.save()
+
+    def remove_subagency_datasets_from_company(self, company, agency, subagency_name):
+        temp = []
+        for s in agency.subagencies:
+            if s.name == subagency_name:
+                for d in s.datasets:
+                    if company != d.usedBy:
+                        temp.append(d)
+                s.datasets = temp
+        agency.save()
+        company.lastUpdated = datetime.now()
+        company.save()
+
+    def remove_subagency_from_company(self, company, agency, subagency_name):
+        self.remove_subagency_datasets_from_company(company, agency, subagency_name)
+        for s in agency.subagencies:
+            if company in s.usedBy and s.name == subagency_name:
+                s.usedBy.remove(company)
+        agency.save()
+        company.lastUpdated = datetime.now()
+        company.save()
+
+    def remove_agency_from_company(self, company, agency):
+        self.remove_all_datasets_from_company(company, agency)
+        for s in agency.subagencies:
+            self.remove_subagency_from_company(company, agency, s.name)
+        if agency in company.agencies:
+            company.agencies.remove(agency)
+        if agency.prettyName in company.filters:
+            company.filters.remove(agency.prettyName)
+        if company in agency.usedBy:
+            agency.usedBy.remove(company)
+            agency.usedBy_count = len(agency.usedBy)
+        agency.save()
+        company.lastUpdated = datetime.now()
+        company.save()
+
+    def edit_dataset(self, agency, subagency_name, dataset_name, previous_dataset_name, dataset_url, rating):
+        logging.info("rating: " + str(rating) + " " + str(type(rating)))
+        if subagency_name:
+            for s in agency.subagencies:
+                if s.name == subagency_name:
+                    for d in s.datasets:
+                        if d.datasetName == previous_dataset_name:
+                            d.datasetName = dataset_name
+                            d.datasetURL = dataset_url
+                            d.rating = rating
+        if subagency_name == '':
+            for d in agency.datasets:
+                if d.datasetName == previous_dataset_name:
+                    d.datasetName = dataset_name
+                    d.datasetURL = dataset_url
+                    d.rating = rating
+        agency.save()
+
+    def add_dataset(self, company, agency, subagency_name, dataset_name, dataset_url, rating):
+        dataset = models.Dataset(
+                datasetName = dataset_name,
+                datasetURL = dataset_url,
+                rating = rating,
+                usedBy = company)
+        if subagency_name == '':
+                agency.datasets.append(dataset)
+        else:
+            for s in agency.subagencies:
+                if subagency_name == s.name:
+                    s.datasets.append(dataset)
+        agency.save()
 
 class StatsGenerator(object):
     def create_new_stats(self, country):

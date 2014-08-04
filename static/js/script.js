@@ -19,7 +19,7 @@ $(document).ready(function() {
     var is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
     var is_firefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
 
-    //----------------------------------VALIDATE AND SUBMIT COMPANY FORM--------------------------------------
+    //--*****************************************************************-VALIDATE & SUBMIT COMPANY FORM-*****************************************************************--//
     if ($(location).attr('pathname').indexOf('/submitCompany/') > -1) {
         var _xsrf = $("[name='_xsrf']").val();
         var companyName = $("#companyName").parsley()
@@ -63,7 +63,7 @@ $(document).ready(function() {
         });
     }
 
-    //----------------------------------ADMIN ACCORDIONS--------------------------------------
+    //--*****************************************************************-ACCORDIONS-*****************************************************************--//
     $(function() {
         $("#accordionUnvetted").accordion({
             collapsible: true,
@@ -85,7 +85,8 @@ $(document).ready(function() {
     });
 
     var companyID = $('.companyID').val();
-    //----------------------------------UNCHECK OTHER BOX IF INPUT EMPTY--------------------------------------
+
+    ///--*****************************************************************-CHECKBOX INTERACTIONS-*****************************************************************--//
     $('.m-form-half').on('focusout', '#other_revenue_text_field', function(event) {
         if ($('#other_revenue_text_field').val() == '') {
             $('#other_revenue').prop('checked', false);
@@ -116,13 +117,12 @@ $(document).ready(function() {
     });
 
 
-    //----------------------------------EXAMPLE POPUP--------------------------------------
+    //--*****************************************************************-EXAMPLE POPUP-*****************************************************************--//
     var dialogOptions = {
         autoOpen: false,
         height: 560,
         width: 730,
         modal: true,
-        //close: function(event, ui) { $('.example-popup').dialog('close'); },
         open: function(event, ui) {
             $('.ui-widget-overlay').bind('click', function() {
                 $(this).siblings('.ui-dialog').find('.ui-dialog-content').dialog('close');
@@ -131,7 +131,6 @@ $(document).ready(function() {
     };
     $(".m-form-box").on('click', '.example-popup', function() {
         $(".dialog-example").dialog(dialogOptions).dialog("open");
-        //$("#dialog").dialog({autoOpen : false, modal : true, show : "blind", hide : "blind"});
     });
 
     //----------------------------------DATA ACCORDIONS--------------------------------------
@@ -143,139 +142,147 @@ $(document).ready(function() {
     });
     //----------------------------------DELETE AGENCIES AND SUBAGENCIES--------------------------------------
     $('#accordionAgency, #accordionSubAgency').on('click', '.toolbar', function(event) {
-        agency = $(this).attr('agency').replace("delete", "").replace(/-/g, " ");
-        a_id = $(this).attr('a_id');
-        subagency = $(this).attr('subagency').replace("delete", "").replace(/-/g, " ");
-        //console.log(agency + subagency);
+        var error_message = $('.agency-search-error-message');
+        var this_form = $(this);
+        var agency = this_form.attr('agency').replace("delete", "").replace(/-/g, " ");
+        var a_id = this_form.attr('a_id');
+        var subagency = this_form.attr('subagency').replace("delete", "").replace(/-/g, " ");
+        var action = subagency == '' ? 'delete agency' : 'delete subagency';
+        this_form.parent().next().remove();
+        this_form.closest('h3').remove();
         data = {
             "agency": agency,
             "subagency": subagency,
             "a_id": a_id,
-            "action": "delete agency",
+            "action": action,
             "_xsrf": $("[name='_xsrf']").val()
         };
-        //console.log($(this).closest('h3'));
-        $(this).parent().next().remove();
-        $(this).closest('h3').remove();
-        if (subagency == '') {
-            $("#accordionAgency").accordion({
-                active: false,
-                collapsible: true,
-                autoHeight: false,
-                heightStyle: "content"
-            });
-        } else {
-            $("#accordionSubAgency").accordion({
-                active: false,
-                collapsible: true,
-                autoHeight: false,
-                heightStyle: "content"
-            });
-        }
         $.ajax({
             type: 'POST',
             url: '/' + country + '/addData/' + companyID,
             data: data,
             error: function(error) {
                 console.debug(JSON.stringify(error));
-                $('.savingMessage_companyEdit').hide();
-                $('.errorMessage_companyEdit').show();
+                error_message.text('Oops... Something went wrong.').css('opacity', 1).delay(5000).animate({
+                    'opacity': 0
+                }, 500);
             },
-            beforeSend: function(xhr, settings) {
-                $(event.target).attr('disabled', 'disabled');
-            },
-            success: function(success) {
-                $('.toolbar').removeAttr('disabled');
-                console.log(success);
+            beforeSend: function(xhr, settings) {},
+            success: function(response) {
+                console.log(response);
+                if (response['agency'] == -1) {
+                    $("#accordionAgency").accordion({
+                        active: false,
+                        collapsible: true,
+                        autoHeight: false,
+                        heightStyle: "content",
+                        disabled: false
+                    });
+                } else if (response['subagency'] == -1) {
+                    $("#accordionSubAgency").accordion({
+                        active: false,
+                        collapsible: true,
+                        autoHeight: false,
+                        heightStyle: "content",
+                        disabled: false
+                    });
+                } else {
+                    error_message.text('Oops... Something went wrong.').css('opacity', 1).delay(5000).animate({
+                        'opacity': 0
+                    }, 500);
+                }
             }
         });
     });
     //----------------------------------SAVE NEW DATASET AND ADD NEW EMPTY FORM--------------------------------------
+    var new_dataset_template = '<tr class="dataset-row" name="" subagency="<%= subagency %>" agency="<%= agency %>">' +
+        '<td><input type="text" name="<%= dataset_name %>" id="datasetName" value=""></td>' +
+        '<td><input type="text" name="datasetURL" id="datasetURL" value=""></td>' +
+        '<td><input type="text" name="rating" id="rating" size="3" value=""></td>' +
+        '<td><input type="button" class="l-button" id="saveDataset" value="Save"><input type="button" class="l-button" id="deleteDataset" value="Delete" style="display:none">' +
+        '<span class="dataset-error-message" style="display:inline-block;"></span></td>' +
+        '</tr>';
     $('.agencyList').on('click', '#saveDataset', function(event) {
-        currentDatasetForm = $(this).parent().parent();
-        //--CHECK IF EDITING OR SAVING NEW DATASET--
+        var currentDatasetForm = $(this).parent().parent();
         if (currentDatasetForm.parent().find('tr').last().find('#datasetName').val() == '') {
-            //console.log("editing!");
             action = "edit dataset";
-            previousDatasetName = currentDatasetForm.attr('name');
+            previous_dataset_name = currentDatasetForm.attr('name');
         } else {
-            //console.log('saving new!');
             action = "add dataset";
-            previousDatasetName = '';
+            previous_dataset_name = '';
         }
-        datasetName = currentDatasetForm.find('#datasetName').val();
-        datasetURL = currentDatasetForm.find('#datasetURL').val();
-        rating = currentDatasetForm.find('#rating').val();
-        agency = currentDatasetForm.attr('agency').replace(/-/g, " ");
-        subagency = currentDatasetForm.attr('subagency').replace(/-/g, " ");
-        var datasetForm = '<tr class="dataset-row" name="" subagency="' + subagency.replace(/ /g, "-") + '" agency="' + agency.replace(/ /g, "-") + '">' +
-            '<td><input type="text" name="datasetName" id="datasetName" value=""></td>' +
-            '<td><input type="text" name="datasetURL" id="datasetURL" value=""></td>' +
-            '<td><input type="text" name="rating" id="rating" size="3" value=""></td>' +
-            '<td><input type="button" class="l-button" id="saveDataset" value="Save"><input type="button" class="l-button" id="deleteDataset" value="Delete" style="display:none">' +
-            '<span class="error-dataset" style="display:none"></span>' +
-            '<span class="message-dataset" style="display:none"></span></td>' +
-            '</tr>';
+        var dataset_name = currentDatasetForm.find('#datasetName').val();
+        var dataset_url = currentDatasetForm.find('#datasetURL').val();
+        var rating = currentDatasetForm.find('#rating').val() == "" ? 0 : currentDatasetForm.find('#rating').val();
+        var agency = currentDatasetForm.attr('agency').replace(/-/g, " ");;
+        var subagency = currentDatasetForm.attr('subagency').replace(/-/g, " ");
+        var error_message = currentDatasetForm.find('.dataset-error-message');
+        var validForm = true;
         data = {
             "agency": agency,
             "subagency": subagency,
-            "datasetName": datasetName,
-            "previousDatasetName": previousDatasetName,
-            "datasetURL": datasetURL,
+            "dataset_name": dataset_name,
+            "previous_dataset_name": previous_dataset_name,
+            "dataset_url": dataset_url,
             "rating": rating,
             "action": action,
             "_xsrf": $("[name='_xsrf']").val()
         }
-        var validForm = true;
-        if (datasetName == '') {
+        if (dataset_name == '') {
             validForm = false;
-            currentDatasetForm.find('.message-dataset').hide();
-            currentDatasetForm.find('.error-dataset').text('Dataset name required')
-            currentDatasetForm.find('.error-dataset').show().delay(5000).fadeOut();
-        } else if (!validURL(datasetURL) && datasetURL != '') {
+            error_message.text('You need to at least enter a dataset name.').css('opacity', 1).delay(5000).animate({
+                'opacity': 0
+            }, 500);
+        } else if (!validURL(dataset_url) && dataset_url != '') {
             validForm = false;
-            currentDatasetForm.find('.message-dataset').hide();
-            currentDatasetForm.find('.error-dataset').text('Invalid URL')
-            currentDatasetForm.find('.error-dataset').show().delay(5000).fadeOut();
+            error_message.text('Please enter a valid URL.').css('opacity', 1).delay(5000).animate({
+                'opacity': 0
+            }, 500);
         } else if (isNaN(rating) || rating > 4 || (rating != '' && rating < 1)) {
             validForm = false;
-            currentDatasetForm.find('.message-dataset').hide();
-            currentDatasetForm.find('.error-dataset').text('Invalid Rating')
-            currentDatasetForm.find('.error-dataset').show().delay(5000).fadeOut();
+            error_message.text('Please enter a rating from 1 and 4').css('opacity', 1).delay(5000).animate({
+                'opacity': 0
+            }, 500);
         }
+        console.log(data);
         if (validForm) {
-            currentDatasetForm.find('.error-dataset').hide();
+            error_message.text('');
             $.ajax({
                 type: 'POST',
                 url: '/' + country + '/addData/' + companyID,
                 data: data,
                 error: function(error) {
                     console.debug(JSON.stringify(error));
-                    currentDatasetForm.find('.message-dataset').hide();
-                    currentDatasetForm.find('.error-dataset').text('Oops... Server Error :/');
-                    currentDatasetForm.find('.error-dataset').show().delay(5000).fadeOut();
+                    error_message.text('Oops... Something went wrong.').css('opacity', 1).delay(5000).animate({
+                        'opacity': 0
+                    }, 500);
                 },
                 beforeSend: function(xhr, settings) {
-                    //$(event.target).attr('disabled', "true"); 
-                    currentDatasetForm.find('.error-dataset').hide();
-                    currentDatasetForm.find('.message-dataset').text('Saving...');
-                    currentDatasetForm.find('.message-dataset').show().delay(5000).fadeOut();
+                    error_message.text('Saving...').css('opacity', 1).delay(5000).animate({
+                        'opacity': 0
+                    }, 500);
                 },
-                success: function(success) {
-                    //$(event.target).removeAttr('disabled');
-                    currentDatasetForm.find('.error-dataset').hide();
-                    currentDatasetForm.find('.message-dataset').text('Saved!');
-                    currentDatasetForm.find('.message-dataset').show().delay(5000).fadeOut();
-                    if (action == "add dataset") {
-                        currentDatasetForm.attr('name', datasetName);
-                        currentDatasetForm.parent().append(datasetForm);
-                        currentDatasetForm.next().find('#datasetName').focus();
-                        currentDatasetForm.find('#deleteDataset').show();
+                success: function(response) {
+                    if (response['message'] == 'error') {
+                        error_message.text('Oops... Something went wrong.').css('opacity', 1).delay(5000).animate({
+                            'opacity': 0
+                        }, 500);
                     } else {
-                        //--EDITING, CHANGE ALL ATTRIBUTES--
-                        currentDatasetForm.attr('name', datasetName);
+                        error_message.text('Saved!').css('opacity', 1).delay(5000).animate({
+                            'opacity': 0
+                        }, 500);
+                        if (action == "add dataset") {
+                            var new_dataset = _.template(new_dataset_template);
+                            currentDatasetForm.parent().append(new_dataset(data));
+                            currentDatasetForm.attr('name', dataset_name);
+                            currentDatasetForm.find('#datasetName').attr('name', dataset_name);
+                            currentDatasetForm.next().find('#datasetName').focus();
+                            currentDatasetForm.find('#deleteDataset').show();
+                        } else {
+                            currentDatasetForm.attr('name', dataset_name);
+                        }
+                        console.log(response);
                     }
-                    console.log(success);
                 }
             });
         }
@@ -316,161 +323,307 @@ $(document).ready(function() {
             });
         }
     });
-    //----------------------------------ADD AGENCY FROM SEARCH BAR--------------------------------------
+
+
+    //--*****************************************************************-TEMPLATES FOR AGENCY/DATA FORM-*****************************************************************--//
+    var new_agency_template = '<h3 class="agency" name="<%= agency_pretty %>"><a href="#"><%= agency %></a>' +
+        '<span style="float:right; display:none;" class="toolbar ui-corner-all ui-icon ui-icon-circle-close red" subagency="" agency="<%= agency_pretty %>"></span>' +
+        '</h3>' +
+        '<div id="<%= agency_pretty %>Accordion">' +
+        '<br><h3>Agency Level Datasets</h3><br>' +
+        '<table class="datasetTable">' +
+        '<tr>' +
+        '<th class="table-header-name">Dataset Name</th>' +
+        '<th class="table-header-url">Dataset URL</th>' +
+        '<th class="table-header-rating">Rating (1-4)</th>' +
+        '<th class="table-header-buttons"></th>' +
+        '</tr>' +
+        '<tr class="dataset-row" name="" subagency="" agency="<%= agency %>">' +
+        '<td><input type="text" name="datasetName" id="datasetName" value="" ></td>' +
+        '<td><input type="text" name="datasetURL" id="datasetURL" value="" ></td>' +
+        '<td><input type="text" name="rating" id="rating" size="3" value="" ></td>' +
+        '<td><input type="button" class="l-button" id="saveDataset" value="Save"><input type="button" class="l-button" id="deleteDataset" value="Delete" style="display:none">' +
+        '<span class="dataset-error-message" style="display:inline-block;"></span></td>' +
+        '</tr>' +
+        '</div>';
+
+    var new_subagency_template = '<h3 class="subagency" name="<%= subagency_pretty %>"><a href="#"><%= subagency %></a>' +
+        '<span style="float:right; display:none;" class="toolbar ui-corner-all ui-icon ui-icon-circle-close red" subagency="<%= subagency_pretty %>" agency="<%= agency_pretty %>"></span>' +
+        '</h3>' +
+        '<div class="<%= subagency_pretty %>Accordion">' +
+        '<table class="subagencyDatasetTable">' +
+        '<tr>' +
+        '<th class="table-header-name">Dataset Name</th>' +
+        '<th class="table-header-url">Dataset URL</th>' +
+        '<th class="table-header-rating">Rating (1-4)</th>' +
+        '<th class="table-header-buttons"></th>' +
+        '</tr>' +
+        '<tr class="dataset-row" name="" subagency="<%= subagency %>" agency="<%= agency %>">' +
+        '<td><input type="text" name="datasetName" id="datasetName" value=""></td>' +
+        '<td><input type="text" name="datasetURL" id="datasetURL" value=""></td>' +
+        '<td><input type="text" name="rating" id="rating" size="3" value=""></td>' +
+        '<td><input type="button" class="l-button" id="saveDataset" value="Save"><input type="button" class="l-button" id="deleteDataset" value="Delete" style="display:none">' +
+        '<span class="dataset-error-message" style="display:inline-block;"></span></td>' +
+        '</tr>' +
+        '</div>';
+
+    //--*****************************************************************-ADD AGENCY FROM SEARCH BAR-*****************************************************************--//
     $('body').on('click', '#addSearchResult', function(event) {
-        //console.log("clicked to add");
-        a = $('#searchval').val().trim().split(" - ");
-        if (a == 0) {
-            $('.invalidInput').show().delay(5000).fadeOut();
+        var error_message = $('.agency-search-error-message');
+        var a = $('#searchval').val().trim().split(" - ");
+        var agency = a[0];
+        var subagency = a[1] != undefined ? a[1] : '';
+        var agency_pretty = agency.replace(/ /g, "-");
+        var subagency_pretty = subagency.replace(/ /g, "-");
+        //var action = subagency == '' ? 'add agency' : 'add subagency';
+        var data = {
+            "agency": agency,
+            "subagency": subagency,
+            "agency_pretty": agency_pretty,
+            "subagency_pretty": subagency_pretty,
+            "action": 'add',
+            "_xsrf": $("[name='_xsrf']").val()
+        };
+        var agency_exists = $('.agency').find('*:contains("' + agency + '")').parent().length != 0;
+        var subagency_exists = $('#' + agency_pretty + 'Accordion').find('*:contains("' + subagency + '")').length != 0;
+        var response = {
+            "message": "",
+            "agency": 0,
+            "subagency": 0
+        };
+        var new_agency = _.template(new_agency_template);
+        var new_subagency = _.template(new_subagency_template);
+        if (agency_exists && subagency_exists) {
+            error_message.text('This item is already on the list.').css('opacity', 1).delay(5000).animate({
+                'opacity': 0
+            }, 500);
+        } else if ($('#searchval').val().trim().split(" - ")[0] == "") {
+            error_message.text('Please select an item from the list.').css('opacity', 1).delay(5000).animate({
+                'opacity': 0
+            }, 500);
         } else {
-            agency = a[0];
-            if (a[1] != undefined) {
-                subagency = a[1];
-            } else {
-                subagency = '';
-            }
-            data = {
-                "agency": agency,
-                "subagency": subagency,
-                "action": "add agency",
-                "_xsrf": $("[name='_xsrf']").val()
-            };
-            var safeToAdd = false;
-            var newAgency = '<h3 class="agency" name="' + agency.replace(/ /g, "-") + '"><a href="#">' + agency + '</a>' +
-                '<span style="float:right; display:none;" class="toolbar ui-corner-all ui-icon ui-icon-circle-close red" subagency="" agency="' + agency.replace(/ /g, "-") + '"></span>' +
-                '</h3>' +
-                '<div id="' + agency.replace(/ /g, "-") + 'Accordion">' +
-                '<br><h3>Agency Level Datasets</h3><br>' +
-                '<table class="datasetTable">' +
-                '<tr>' +
-                '<th class="table-header-name">Dataset Name</th>' +
-                '<th class="table-header-url">Dataset URL</th>' +
-                '<th class="table-header-rating">Rating (1-4)</th>' +
-                '<th class="table-header-buttons"></th>' +
-                '</tr>' +
-                '<tr class="dataset-row" subagency="" agency="' + agency.replace(/ /g, "-") + '">' +
-                '<td><input type="text" name="datasetName" id="datasetName" value=""></td>' +
-                '<td><input type="text" name="datasetURL" id="datasetURL" value=""></td>' +
-                '<td><input type="text" name="rating" id="rating" size="3" value=""></td>' +
-                '<td><input type="button" class="l-button" id="saveDataset" value="Save"><input type="button" class="l-button" id="deleteDataset" value="Delete" style="display:none">' +
-                '<span class="error-dataset" style="display:none"></span>' +
-                '<span class="message-dataset" style="display:none"></span></td>' +
-                '</tr>' +
-                '</table>' +
-                '</div>';
-            var newSubagency = '<h3 class="subagency" name="' + subagency.replace(/ /g, "-") + '"><a href="#">' + subagency + '</a>' +
-                '<span style="float:right; display:none;" class="toolbar ui-corner-all ui-icon ui-icon-circle-close red" subagency="' + subagency.replace(/ /g, "-") + '" agency="' + agency.replace(/ /g, "-") + '"></span>' +
-                '</h3>' +
-                '<div class="' + subagency.replace(/ /g, "-") + 'Accordion">' +
-                '<table class="subagencyDatasetTable">' +
-                '<tr>' +
-                '<th class="table-header-name">Dataset Name</th>' +
-                '<th class="table-header-url">Dataset URL</th>' +
-                '<th class="table-header-rating">Rating (1-4)</th>' +
-                '<th class="table-header-buttons"></th>' +
-                '</tr>' +
-                '<tr class="dataset-row" subagency="' + subagency.replace(/ /g, "-") + '" agency="' + agency.replace(/ /g, "-") + '">' +
-                '<td><input type="text" name="datasetName" id="datasetName" value=""></td>' +
-                '<td><input type="text" name="datasetURL" id="datasetURL" value=""></td>' +
-                '<td><input type="text" name="rating" id="rating" size="3" value=""></td>' +
-                '<td><input type="button" class="l-button" id="saveDataset" value="Save"><input type="button" class="l-button" id="deleteDataset" value="Delete" style="display:none">' +
-                '<span class="error-dataset" style="display:none"></span>' +
-                '<span class="message-dataset" style="display:none"></span></td>' +
-                '</tr>' +
-                '</table>' +
-                '</div>';
-            if ($('.agency').find('*:contains("' + agency + '")').parent().length != 0) {
-                //--AGENCY ALREADY EXISTS, JUST ADD SUBAGENCY--
-                if (a[1] == undefined) {
-                    //no subagency, and agency already exists, nothing to add. Display error, or just go to that agency/subagency
-                    $('.agenciesExist').show().delay(5000).fadeOut();
-                    safeToAdd = false;
-                } else {
-                    // --THERE IS A SUBAGENCY TO ADD, CHECK TO SEE IF ALREADY THERE FIRST:
-                    if ($('#' + agency.replace(/ /g, "-") + 'Accordion').find('*:contains("' + subagency + '")').length != 0) {
-                        //subagency exists, show error. 
-                        $('.agenciesExist').show().delay(5000).fadeOut();
-                        safeToAdd = false;
-                    } else {
-                        //--ADD SUBAGENCY-----IS THIS THE FIRST ONE?----
-                        if ($('#' + agency.replace(/ /g, "-") + 'Accordion').find('#accordionSubAgency').length == 0) {
-                            //first time adding a subagency, add header. 
-                            //console.log("First time adding a subagency");
-                            $('#' + agency.replace(/ /g, "-") + 'Accordion').append('<br><h3>Sub-Agencies</h3><br>');
-                            $('#' + agency.replace(/ /g, "-") + 'Accordion').append('<div id="accordionSubAgency" class="' + agency.replace(/ /g, "-") + 'Subagencies">');
-                            $('#' + agency.replace(/ /g, "-") + 'Accordion').find('#accordionSubAgency').append(newSubagency).accordion({
-                                active: false,
-                                collapsible: true,
-                                autoHeight: false,
-                                heightStyle: "content"
-                            });
-                            safeToAdd = true;
-                        } else {
-                            //--ADD SUBAGENCY-----NOT THE FIRST ONE, APPEND TO ACCORDION----
-                            console.log("adding subagency");
-                            $('.' + agency.replace(/ /g, "-") + 'Subagencies').append(newSubagency).accordion('destroy').accordion({
-                                active: false,
-                                collapsible: true,
-                                autoHeight: false,
-                                heightStyle: "content"
-                            });
-                            safeToAdd = true;
+            $.ajax({
+                type: 'POST',
+                url: '/' + country + '/addData/' + companyID,
+                data: data,
+                error: function(error) {
+                    console.debug(JSON.stringify(error));
+                    error_message.text('Oops... Something went wrong.').css('opacity', 1).delay(5000).animate({
+                        'opacity': 0
+                    }, 500);
+                },
+                beforeSend: function(xhr, settings) {},
+                success: function(_response) {
+                    $('#agencyTags').val('');
+                    response = _response;
+                    console.log(_response);
+                    if (response['agency'] == 1) {
+                        $('#accordionAgency').append(new_agency(data)).accordion('destroy').accordion({
+                            active: false,
+                            collapsible: true,
+                            autoHeight: false,
+                            heightStyle: "content"
+                        });
+                    }
+                    if (response['agency'] == 0 && response['subagency'] == 1) {
+                        if ($('#' + agency_pretty + 'Accordion').find('#accordionSubAgency').length == 0) { //first subagency? then add headers
+                            $('#' + agency_pretty + 'Accordion').append('<br><h3>Sub-Agencies</h3><br>');
+                            $('#' + agency_pretty + 'Accordion').append('<div id="accordionSubAgency" class="' + agency.replace(/ /g, "-") + 'Subagencies">');
                         }
+                        $('.' + agency_pretty + 'Subagencies').append(new_subagency(data)).accordion('destroy').accordion({
+                            active: false,
+                            collapsible: true,
+                            autoHeight: false,
+                            heightStyle: "content"
+                        });
+                    }
+                    if (response['agency'] == 1 && response['subagency'] == 1) {
+                        $('#' + agency_pretty + 'Accordion').append('<br><h3>Sub-Agencies</h3><br>');
+                        $('#' + agency_pretty + 'Accordion').append('<div id="accordionSubAgency" class="' + agency_pretty + 'Subagencies">');
+                        $('.' + agency_pretty + 'Subagencies').append(new_subagency(data)).accordion({
+                            active: false,
+                            collapsible: true,
+                            autoHeight: false,
+                            heightStyle: "content"
+                        });
                     }
                 }
-            } else {
-                //--ADD BOTH AGENCY AND SUBAGENCY TO ACCORDION--
-                if (a[1] == undefined) { //no subagency, just add agency
-                    $('#accordionAgency').append(newAgency).accordion('destroy').accordion({
-                        active: false,
-                        collapsible: true,
-                        autoHeight: false,
-                        heightStyle: "content"
-                    });
-                    safeToAdd = true;
-                } else { //---FIRST ADD THE AGENCY TO THE ACCORDION--
-                    $('#accordionAgency').append(newAgency).accordion('destroy').accordion({
-                        active: false,
-                        collapsible: true,
-                        autoHeight: false,
-                        heightStyle: "content"
-                    });
-                    $('#' + agency.replace(/ /g, "-") + 'Accordion').append('<br><h3>Sub-Agencies</h3><br>');
-                    $('#' + agency.replace(/ /g, "-") + 'Accordion').append('<div id="accordionSubAgency" class="' + agency.replace(/ /g, "-") + 'Subagencies">');
-                    $('#' + agency.replace(/ /g, "-") + 'Accordion').find('#accordionSubAgency').append(newSubagency).accordion({
-                        active: false,
-                        collapsible: true,
-                        autoHeight: false,
-                        heightStyle: "content"
-                    });
-                    safeToAdd = true;
-                }
-            }
-            //---SAVE ADDED AGENCIES TO COMPANY---
-            if (safeToAdd) {
-                $.ajax({
-                    type: 'POST',
-                    url: '/' + country + '/addData/' + companyID,
-                    data: data,
-                    error: function(error) {
-                        console.debug(JSON.stringify(error));
-                        $('.savingMessage_companyEdit').hide();
-                        $('.errorMessage_companyEdit').show();
-                    },
-                    beforeSend: function(xhr, settings) {
-                        $(event.target).attr('disabled', 'disabled');
-                    },
-                    success: function(success) {
-                        $('#addSearchResult').removeAttr('disabled');
-                        $('#agencyTags').val('');
-                        console.log(success);
-                    }
-                });
-            }
+            });
         }
     });
+    // if (agency_exists) {
+    //     if (only_add_agency) {
+    //         error_message.text('This agency has already been added.').show().delay(5000).animate({
+    //             opacity: 0
+    //         });
+    //     } else if (adding_subagency) {
+    //         if (subagency_exists) {
+    //             error_message.text('This subagency has already been added.').show().delay(5000).animate({
+    //                 opacity: 0
+    //             });
+    //         } else {
+    //             new_subagency = _.template(new_subagency_template);
+    //         }
+    //     }
+    // }
+    // var newAgency = '<h3 class="agency" name="' + agency.replace(/ /g, "-") + '"><a href="#">' + agency + '</a>' +
+    //     '<span style="float:right; display:none;" class="toolbar ui-corner-all ui-icon ui-icon-circle-close red" subagency="" agency="' + agency.replace(/ /g, "-") + '"></span>' +
+    //     '</h3>' +
+    //     '<div id="' + agency.replace(/ /g, "-") + 'Accordion">' +
+    //     '<br><h3>Agency Level Datasets</h3><br>' +
+    //     '<table class="datasetTable">' +
+    //     '<tr>' +
+    //     '<th class="table-header-name">Dataset Name</th>' +
+    //     '<th class="table-header-url">Dataset URL</th>' +
+    //     '<th class="table-header-rating">Rating (1-4)</th>' +
+    //     '<th class="table-header-buttons"></th>' +
+    //     '</tr>' +
+    //     '<tr class="dataset-row" subagency="" agency="' + agency.replace(/ /g, "-") + '">' +
+    //     '<td><input type="text" name="datasetName" id="datasetName" value=""></td>' +
+    //     '<td><input type="text" name="datasetURL" id="datasetURL" value=""></td>' +
+    //     '<td><input type="text" name="rating" id="rating" size="3" value=""></td>' +
+    //     '<td><input type="button" class="l-button" id="saveDataset" value="Save"><input type="button" class="l-button" id="deleteDataset" value="Delete" style="display:none">' +
+    //     '<span class="error-dataset" style="display:none"></span>' +
+    //     '<span class="message-dataset" style="display:none"></span></td>' +
+    //     '</tr>' +
+    //     '</table>' +
+    //     '</div>';
+    // var newSubagency = '<h3 class="subagency" name="' + subagency.replace(/ /g, "-") + '"><a href="#">' + subagency + '</a>' +
+    //     '<span style="float:right; display:none;" class="toolbar ui-corner-all ui-icon ui-icon-circle-close red" subagency="' + subagency.replace(/ /g, "-") + '" agency="' + agency.replace(/ /g, "-") + '"></span>' +
+    //     '</h3>' +
+    //     '<div class="' + subagency.replace(/ /g, "-") + 'Accordion">' +
+    //     '<table class="subagencyDatasetTable">' +
+    //     '<tr>' +
+    //     '<th class="table-header-name">Dataset Name</th>' +
+    //     '<th class="table-header-url">Dataset URL</th>' +
+    //     '<th class="table-header-rating">Rating (1-4)</th>' +
+    //     '<th class="table-header-buttons"></th>' +
+    //     '</tr>' +
+    //     '<tr class="dataset-row" subagency="' + subagency.replace(/ /g, "-") + '" agency="' + agency.replace(/ /g, "-") + '">' +
+    //     '<td><input type="text" name="datasetName" id="datasetName" value=""></td>' +
+    //     '<td><input type="text" name="datasetURL" id="datasetURL" value=""></td>' +
+    //     '<td><input type="text" name="rating" id="rating" size="3" value=""></td>' +
+    //     '<td><input type="button" class="l-button" id="saveDataset" value="Save"><input type="button" class="l-button" id="deleteDataset" value="Delete" style="display:none">' +
+    //     '<span class="error-dataset" style="display:none"></span>' +
+    //     '<span class="message-dataset" style="display:none"></span></td>' +
+    //     '</tr>' +
+    //     '</table>' +
+    //     '</div>';
+    //     if ($('.agency').find('*:contains("' + agency + '")').parent().length != 0) {
+    //         //--AGENCY ALREADY EXISTS, JUST ADD SUBAGENCY--
+    //         if (a[1] == undefined) {
+    //             //no subagency, and agency already exists, nothing to add. Display error, or just go to that agency/subagency
+    //             $('.agenciesExist').show().delay(5000).fadeOut();
+    //             safeToAdd = false;
+    //         } else {
+    //             // --THERE IS A SUBAGENCY TO ADD, CHECK TO SEE IF ALREADY THERE FIRST:
+    //             if ($('#' + agency.replace(/ /g, "-") + 'Accordion').find('*:contains("' + subagency + '")').length != 0) {
+    //                 //subagency exists, show error. 
+    //                 $('.agenciesExist').show().delay(5000).fadeOut();
+    //                 safeToAdd = false;
+    //             } else {
+    //                 //--ADD SUBAGENCY-----IS THIS THE FIRST ONE?----
+    //                 if ($('#' + agency.replace(/ /g, "-") + 'Accordion').find('#accordionSubAgency').length == 0) {
+    //                     //first time adding a subagency, add header. 
+    //                     //console.log("First time adding a subagency");
+    //                     $('#' + agency.replace(/ /g, "-") + 'Accordion').append('<br><h3>Sub-Agencies</h3><br>');
+    //                     $('#' + agency.replace(/ /g, "-") + 'Accordion').append('<div id="accordionSubAgency" class="' + agency.replace(/ /g, "-") + 'Subagencies">');
+    //                     $('#' + agency.replace(/ /g, "-") + 'Accordion').find('#accordionSubAgency').append(newSubagency).accordion({
+    //                         active: false,
+    //                         collapsible: true,
+    //                         autoHeight: false,
+    //                         heightStyle: "content"
+    //                     });
+    //                     safeToAdd = true;
+    //                 } else {
+    //                     //--ADD SUBAGENCY-----NOT THE FIRST ONE, APPEND TO ACCORDION----
+    //                     console.log("adding subagency");
+    //                     $('.' + agency.replace(/ /g, "-") + 'Subagencies').append(newSubagency).accordion('destroy').accordion({
+    //                         active: false,
+    //                         collapsible: true,
+    //                         autoHeight: false,
+    //                         heightStyle: "content"
+    //                     });
+    //                     safeToAdd = true;
+    //                 }
+    //             }
+    //         }
+    //     } else {
+    //         //--ADD BOTH AGENCY AND SUBAGENCY TO ACCORDION--
+    //         if (a[1] == undefined) { //no subagency, just add agency
+    //             $('#accordionAgency').append(newAgency).accordion('destroy').accordion({
+    //                 active: false,
+    //                 collapsible: true,
+    //                 autoHeight: false,
+    //                 heightStyle: "content"
+    //             });
+    //             safeToAdd = true;
+    //         } else { //---FIRST ADD THE AGENCY TO THE ACCORDION--
+    //             $('#accordionAgency').append(newAgency).accordion('destroy').accordion({
+    //                 active: false,
+    //                 collapsible: true,
+    //                 autoHeight: false,
+    //                 heightStyle: "content"
+    //             });
+    //             $('#' + agency.replace(/ /g, "-") + 'Accordion').append('<br><h3>Sub-Agencies</h3><br>');
+    //             $('#' + agency.replace(/ /g, "-") + 'Accordion').append('<div id="accordionSubAgency" class="' + agency.replace(/ /g, "-") + 'Subagencies">');
+    //             $('#' + agency.replace(/ /g, "-") + 'Accordion').find('#accordionSubAgency').append(newSubagency).accordion({
+    //                 active: false,
+    //                 collapsible: true,
+    //                 autoHeight: false,
+    //                 heightStyle: "content"
+    //             });
+    //             safeToAdd = true;
+    //         }
+    //     }
+    //     //---SAVE ADDED AGENCIES TO COMPANY---
+    //     if (safeToAdd) {
+    //         $.ajax({
+    //             type: 'POST',
+    //             url: '/' + country + '/addData/' + companyID,
+    //             data: data,
+    //             error: function(error) {
+    //                 console.debug(JSON.stringify(error));
+    //                 $('.savingMessage_companyEdit').hide();
+    //                 $('.errorMessage_companyEdit').show();
+    //             },
+    //             beforeSend: function(xhr, settings) {
+    //                 $(event.target).attr('disabled', 'disabled');
+    //             },
+    //             success: function(success) {
+    //                 $('#addSearchResult').removeAttr('disabled');
+    //                 $('#agencyTags').val('');
+    //                 console.log(success);
+    //             }
+    //         });
+    //     }
+    // } else {
+    //     error_message.text('Please select an item from the provided list.').show().delay(5000).animate({
+    //         opacity: 0
+    //     });
+    // }
+    // if (a == 0) {
+    //     error_message.text('Please select an item from the provided list.').show().delay(5000).animate({
+    //         opacity: 0
+    //     });
+    // } else {
+    //     agency = a[0];
+    //     if (a[1] != undefined) {
+    //         subagency = a[1];
+    //         action = 'add subagency';
+    //     } else {
+    //         subagency = '';
+    //         action = 'add agency';
+    //     }
+    //     data = {
+    //         "agency": agency,
+    //         "subagency": subagency,
+    //         "action": action,
+    //         "_xsrf": $("[name='_xsrf']").val()
+    //     };
+    //});
 
-    //----------------------------------SHOW DELETE ICONS ON HOVER--------------------------------------
+    //--*****************************************************************-SHOW DELETE ICONS ON HOVER-*****************************************************************--//
     $('#accordionAgency, #accordionSubAgency').on({
         mouseenter: function() {
             $(this).find('.toolbar').show();
@@ -480,33 +633,37 @@ $(document).ready(function() {
         }
     }, '.agency, .subagency');
 
-    //----------------------------------SUBMIT DATASET QUESTION--------------------------------------
+    //--*****************************************************************-FINISH ADDING DATA-*****************************************************************--//
+    var rm = $('.response-message');
     $(".data-comment-form").parsley();
     $(".data-comment-form").submit(function(event) {
-        console.log('in here');
         $(this).parsley("validate");
-        if ($(this).parsley("isValid")) {
-            console.log('valid')
-            // $.ajax({
-            //     type: 'POST',
-            //     url: '/' + country + '/submitCompany/',
-            //     data: data,
-            //     error: function(error) {
-            //         console.debug(JSON.stringify(error));
-            //         $('.message-form').hide();
-            //         $('.error-form').text('Oops... Something went wrong :/')
-            //         $('.error-form').show().delay(5000).fadeOut();
-            //     },
-            //     beforeSend: function(xhr, settings) {
-            //         //$(event.target).attr('disabled', 'disabled'); 
-            //     },
-            //     success: function(data) {
-            //         document.location.href = '/' + country + '/addData/' + data['id'];
-            //     }
-            // });
+        if ($(this).parsley("isValid") && $(".agency").length > 0) {
+            var id = $('#companyID').val();
+            var data = {
+                "dataComments": $('#dataComments').val(),
+                "action": "dataComments",
+                "id": id,
+                "_xsrf": $("[name='_xsrf']").val()
+            }
+            $.ajax({
+                type: 'POST',
+                url: '/' + country + '/addData/' + id,
+                data: data,
+                error: function(error) {
+                    console.debug(JSON.stringify(error));
+                    rm.text('Oops... Something went wrong :/')
+                    rm.show().delay(5000).fadeOut();
+                },
+                beforeSend: function(xhr, settings) {},
+                success: function(data) {
+                    document.location.href = '/' + country + '/thanks/';
+                }
+            });
+        } else {
+            rm.text('You need to enter at least one source of data.');
         }
         event.preventDefault();
-        console.log('not valid');
     });
 
 
@@ -546,43 +703,43 @@ $(document).ready(function() {
     // })
 
     //----------------------------------SUBMIT FORM--------------------------------------
-    $('.submitCompanyForm').on('click', '#companySubmit', function(event) {
-        console.log($('#dataComments').parsley('validate'));
-        //weird parsley thing evaluates empty field to null.
-        if ($('.companyForm').parsley('validate') && ($('#dataComments').parsley('validate') || $('#dataComments').parsley('validate') == null)) {
-            $('.savingMessage_companyEdit').show();
-            var companyID = $('.companyID').val();
-            var data = $('.companyForm').serializeArray();
-            data.push({
-                "name": "dataComments",
-                "value": $('#dataComments').val()
-            });
-            //console.log(data);
-            $.ajax({
-                type: 'POST',
-                url: '/' + country + '/edit/' + companyID,
-                data: data,
-                error: function(error) {
-                    console.debug(JSON.stringify(error));
-                    $('.savingMessage_companyEdit').hide();
-                    $('.errorMessage_companyEdit').show().delay(5000).fadeOut();
-                },
-                beforeSend: function(xhr, settings) {
-                    $(event.target).attr('disabled', 'disabled');
-                },
-                success: function(data) {
-                    console.log(data);
-                    $('.savingMessage_companyEdit').hide();
-                    $('.savedMessage_companyEdit').show();
-                    document.location.href = '/thanks/';
-                }
-            });
-        } else {
-            $('.savingMessage_companyEdit').hide();
-            $('.errorMessage_companyEdit').show().delay(5000).fadeOut();
-            //console.log('not valid');
-        }
-    });
+    // $('.submitCompanyForm').on('click', '#companySubmit', function(event) {
+    //     console.log($('#dataComments').parsley('validate'));
+    //     //weird parsley thing evaluates empty field to null.
+    //     if ($('.companyForm').parsley('validate') && ($('#dataComments').parsley('validate') || $('#dataComments').parsley('validate') == null)) {
+    //         $('.savingMessage_companyEdit').show();
+    //         var companyID = $('.companyID').val();
+    //         var data = $('.companyForm').serializeArray();
+    //         data.push({
+    //             "name": "dataComments",
+    //             "value": $('#dataComments').val()
+    //         });
+    //         //console.log(data);
+    //         $.ajax({
+    //             type: 'POST',
+    //             url: '/' + country + '/edit/' + companyID,
+    //             data: data,
+    //             error: function(error) {
+    //                 console.debug(JSON.stringify(error));
+    //                 $('.savingMessage_companyEdit').hide();
+    //                 $('.errorMessage_companyEdit').show().delay(5000).fadeOut();
+    //             },
+    //             beforeSend: function(xhr, settings) {
+    //                 $(event.target).attr('disabled', 'disabled');
+    //             },
+    //             success: function(data) {
+    //                 console.log(data);
+    //                 $('.savingMessage_companyEdit').hide();
+    //                 $('.savedMessage_companyEdit').show();
+    //                 document.location.href = '/thanks/';
+    //             }
+    //         });
+    //     } else {
+    //         $('.savingMessage_companyEdit').hide();
+    //         $('.errorMessage_companyEdit').show().delay(5000).fadeOut();
+    //         //console.log('not valid');
+    //     }
+    // });
     //----------------------------------SAVE FORM--------------------------------------
     $('.saveCompanyForm').on('click', '#companySave', function(event) {
         if ($('.companyForm').parsley('validate')) {
@@ -620,40 +777,40 @@ $(document).ready(function() {
     });
 
     //----------------------------------SUBMIT NEW COMPANY-------------------------------------- (USED)
-    var dataForm = '<br><br><h2>Agency and Data Information</h2><br>' +
-        '<div class="m-form-box data">' +
-        '<h3>Please tell us more about the data your company uses. First tell us which agencies and/or subagencies provide the data your company uses. Then, optionally, tell us specifically which datasets from those agencies/subagencies does your company use. Use the search bar to find agencies and subagencies and select from the list provided.</h3><br>' +
-        '<div class="ui-widget">' +
-        '<label for="tags">Agency/Sub-agency Search: </label>' +
-        '<input id="agencyTags" value="">' +
-        '<input type="hidden" id="searchval" />' +
-        '<input type="button" class="l-button" id="addSearchResult" value="Add Agency/Sub-Agency">' +
-        '<div class="errors-search">' +
-        '<span class="agenciesExist error-agency-search" style="display:none">Agency or Sub-Agency already on list.</span>' +
-        '<span class="emptyInput error-agency-search" style="display:none">Nothing to add.</span>' +
-        '<span class="invalidInput error-agency-search" style="display:none">Please select an item from the provided list.</span>' +
-        '</div>' +
-        '</div>' +
-        '<div class="agencyList">' +
-        '<div id="accordionAgency">' +
-        '</div><br>' +
-        '</div>' +
-        '</div>';
-    var submitFormHTML = '<h2 class="disclaimer-text">Are you ready to submit this information? You will not be able to come back to this form afterwards. If you wish to make more changes, you will need to contact <a href="mailto:opendata500@thegovlab.org">opendata500@thegovlab.org</a></h2>' +
-        '<div class="submitCompanyForm">' +
-        '<input type="hidden" class="companyID" name="companyID" value="{{ id }}">' +
-        '<input type="button" class="l-button" id="companySubmit" name="submit" value="Save and Finish">' +
-        '<span class="message-form" style="display:none"></span>' +
-        '<span class="error-form" style="display:none"></span>' +
-        '</div>';
+    // var dataForm = '<br><br><h2>Agency and Data Information</h2><br>' +
+    //     '<div class="m-form-box data">' +
+    //     '<h3>Please tell us more about the data your company uses. First tell us which agencies and/or subagencies provide the data your company uses. Then, optionally, tell us specifically which datasets from those agencies/subagencies does your company use. Use the search bar to find agencies and subagencies and select from the list provided.</h3><br>' +
+    //     '<div class="ui-widget">' +
+    //     '<label for="tags">Agency/Sub-agency Search: </label>' +
+    //     '<input id="agencyTags" value="">' +
+    //     '<input type="hidden" id="searchval" />' +
+    //     '<input type="button" class="l-button" id="addSearchResult" value="Add Agency/Sub-Agency">' +
+    //     '<div class="errors-search">' +
+    //     '<span class="agenciesExist error-agency-search" style="display:none">Agency or Sub-Agency already on list.</span>' +
+    //     '<span class="emptyInput error-agency-search" style="display:none">Nothing to add.</span>' +
+    //     '<span class="invalidInput error-agency-search" style="display:none">Please select an item from the provided list.</span>' +
+    //     '</div>' +
+    //     '</div>' +
+    //     '<div class="agencyList">' +
+    //     '<div id="accordionAgency">' +
+    //     '</div><br>' +
+    //     '</div>' +
+    //     '</div>';
+    // var submitFormHTML = '<h2 class="disclaimer-text">Are you ready to submit this information? You will not be able to come back to this form afterwards. If you wish to make more changes, you will need to contact <a href="mailto:opendata500@thegovlab.org">opendata500@thegovlab.org</a></h2>' +
+    //     '<div class="submitCompanyForm">' +
+    //     '<input type="hidden" class="companyID" name="companyID" value="{{ id }}">' +
+    //     '<input type="button" class="l-button" id="companySubmit" name="submit" value="Save and Finish">' +
+    //     '<span class="message-form" style="display:none"></span>' +
+    //     '<span class="error-form" style="display:none"></span>' +
+    //     '</div>';
 
 
-    function clearForm() {
-        $('.dataForm')[0].reset();
-        $('.dataForm input:checkbox').removeAttr('checked');
-        $('#datasetID').val('');
-        $('#action').val('');
-    }
+    // function clearForm() {
+    //     $('.dataForm')[0].reset();
+    //     $('.dataForm input:checkbox').removeAttr('checked');
+    //     $('#datasetID').val('');
+    //     $('#action').val('');
+    // }
 
     function validURL(url) {
         var re = /^((https?|s?ftp|git):\/\/)?(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i;

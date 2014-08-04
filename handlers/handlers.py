@@ -276,7 +276,6 @@ class SubmitCompanyHandler(BaseHandler):
 
     #@tornado.web.authenticated
     def post(self, country=None):
-        #print all arguments to log:
         logging.info("Submitting New Company")
         logging.info(self.request.arguments)
         form_values = {k:','.join(v) for k,v in self.request.arguments.iteritems()}
@@ -334,190 +333,91 @@ class SubmitDataHandler(BaseHandler):
         lan = self.get_cookie("lan")
         if not lan:
             lan = settings['default_language']
-        agencyName = self.get_argument("agency", None)
+        #varbs
         a_id = self.get_argument("a_id", None)
-        subagencyName = self.get_argument("subagency", None)
+        agency_name = self.get_argument("agency", None)
+        subagency_name = self.get_argument("subagency", None)
+        dataset_name = self.get_argument("dataset_name", None)
+        previous_dataset_name = self.get_argument('previous_dataset_name', None)
+        dataset_url = self.get_argument("dataset_url", None)
+        try:
+            rating = int(self.get_argument("rating", None))
+        except:
+            rating = 0
         action = self.get_argument("action", None)
-        #------------------------------------JUST SAVE DATA COMMENT QUESTION------------------------
-        if action == "dataComments":
-            logging.info("saving " + self.get_argument('dataComments', None))
-            company.dataComments = self.get_argument('dataComments', None)
-            company.lastUpdated = datetime.now()
-            company.save()
-            self.write({"result":"success", "redirect":"/"+ country + "/thanks/?lan=" + lan})
-        #------------------------------------ADDING AGENCY/SUBAGENCY------------------------
-        if action == "add agency":
-            #Existing AGENCY
-            logging.info("Trying to get: " + agencyName)
+        if action != 'dataComments':
             try:
-                agency = models.Agency.objects.get(Q(name=agencyName) & Q(country=company.country))
+                agency = models.Agency.objects.get(Q(name=agency_name) & Q(country=company.country))
             except Exception, e:
                 logging.info("Error: " + str(e))
                 self.set_status(400)
-            for s in agency.subagencies:
-                if s.name == subagencyName:
-                    if company not in s.usedBy: #only add if it's not already there.
-                        s.usedBy.append(company)
-            agency.save()
-            if company not in agency.usedBy: #only add if it's not already there.
-                agency.usedBy.append(company)
-                agency.usedBy_count = len(agency.usedBy)
-                agency.save()
-            if agency not in company.agencies: #only add if it's not already there.
-                company.agencies.append(agency)
-            if agency.prettyName not in company.filters:
-                company.filters.append(agency.prettyName)
-                company.save()
-            company.lastUpdated = datetime.now() #Update Company's Time of Last Edit
-            company.save()
-            self.write("success")
-        #------------------------------------DELETING AGENCY/SUBAGENCY------------------------
+        response = {"message":"", "agency":0, "subagency":0, "dataset":0}
+        #------------------------------------JUST SAVE DATA COMMENT QUESTION------------------------
+        if action == "dataComments":
+            logging.info("saving " + self.get_argument('dataComments', None))
+            if self.application.form.company_update_one(id, 'dataComments', self.get_argument('dataComments', None)):
+                self.write({"response":"success", "redirect":"/"+ country + "/thanks/?lan=" + lan})
+            else:
+                self.write({"response":"error"})
+        #------------------------------------ADDING AGENCY/SUBAGENCY------------------------
+        if action == 'add':
+            if not self.application.form.company_has_agency(company, agency):
+                self.application.form.add_agency_to_company(company, agency)
+                response["agency"] = 1
+            if subagency_name:
+                if not self.application.form.company_has_subagency(company, agency, subagency_name):
+                    self.application.form.add_subagency_to_company(company, agency, subagency_name)
+                    response['subagency'] = 1
+            self.write(response)                
+        #------------------------------------DELETING AGENCY------------------------
         if action == "delete agency":
             try: 
-                agency = models.Agency.objects.get(id=bson.objectid.ObjectId(a_id))
+                self.application.form.remove_agency_from_company(company, agency)
+                response['agency'] = -1
+                self.write(response)
             except Exception, e:
-                logging.info("Can't Delete Agency(search by ID): " + str(e))
-                try:
-                    agency = models.Agency.objects.get(name=agencyName)
-                except Exception, e:
-                    logging.info("Can't Delete Agency(Search by name): "+str(e))
-                    self.set_status(400)
-            if subagencyName == '': #delete from agency and subagency
-                #remove datasets from agency:
-                temp = []
-                for d in agency.datasets:
-                    if company != d.usedBy:
-                        temp.append(d)
-                    agency.datasets = temp
-                #remove agency from company
-                if agency in company.agencies:
-                    company.agencies.remove(agency)
-                if agency.prettyName in company.filters: #remove from list of filters
-                    company.filters.remove(agency.prettyName)
-                #remove company from agency
-                if company in agency.usedBy:
-                    agency.usedBy.remove(company)
-                #remove datasets from subagencies
-                for s in agency.subagencies:
-                    if company in s.usedBy: #does the company even use this subagency?
-                        temp = []
-                        for d in s.datasets: #loop through all datasets for each subagency
-                            if company != d.usedBy: #to make an array of the datasets not used by company
-                                temp.append(d)
-                        s.datasets = temp #and then set the datasets array equal to the remaining.
-                        s.usedBy.remove(company)
-                #remove from all subagencies
-                for s in agency.subagencies:
-                    if company in s.usedBy and s.name == subagencyName:
-                        s.usedBy.remove(company)
-            if subagencyName: #removing just subagency
-                #remove datasets from subagency:
-                temp = []
-                for s in agency.subagencies:
-                    if s.name == subagencyName:
-                        for d in s.datasets:
-                            if company != d.usedBy:
-                                temp.append(d)
-                        s.datasets = temp
-                        #s.usedBy.remove(company)
-                #remove company from specific subagency
-                for s in agency.subagencies:
-                    if company in s.usedBy and s.name == subagencyName:
-                        s.usedBy.remove(company)
-            agency.usedBy_count = len(agency.usedBy)
-            agency.save()
-            company.lastUpdated = datetime.now() #Update Company's Time of Last Edit
-            company.save()
-            self.write("deleted")
+                logging.info("Could not delete agency: " + str(e))
+                response['message'] = 'error'
+                self.write(response)
+        #------------------------------------DELETING SUBAGENCY------------------------
+        if action == 'delete subagency':
+            try: 
+                self.application.form.remove_subagency_from_company(company, agency, subagency_name)
+                response['subagency'] = -1
+                self.write(response)
+            except Exception, e:
+                logging.info("Could not delete subagency: " + str(e))
+                response['message'] = 'error'
+                self.write(response)
         #------------------------------------ADDING DATASET------------------------
         if action == "add dataset":
             try:
-                agency = models.Agency.objects.get(Q(name = agencyName) & Q(country = company.country))
-                logging.info(agency.name)
+                self.application.form.add_dataset(company, agency, subagency_name, dataset_name, dataset_url, rating)
+                response['dataset'] = 1
+                self.write(response)
             except Exception, e:
-                logging.info(str(e))
-                logging.info("Agency Id: " + agencyName)
-                self.set_status(500)
-            datasetName = self.get_argument("datasetName", None)
-            datasetURL = self.get_argument("datasetURL", None)
-            try: 
-                rating = int(self.get_argument("rating", None))
-            except:
-                rating = 0
-            dataset = models.Dataset(
-                datasetName = datasetName,
-                datasetURL = datasetURL,
-                rating = rating,
-                usedBy = company)
-            #Adding to agency or subagency?
-            if subagencyName == '':
-                #Add to Agency
-                agency.datasets.append(dataset)
-            else:
-                #add to subagency
-                for s in agency.subagencies:
-                    if subagencyName == s.name:
-                        s.datasets.append(dataset)
-            agency.save()
-            company.lastUpdated = datetime.now() #Update Company's Time of Last Edit
-            company.save()
-            self.write("success")
+                logging.info("Could not add dataset: " + str(e))
+                response['message'] = 'error'
+                self.write(response)
         #------------------------------------EDITING DATASET------------------------
         if action == "edit dataset":
-            try:
-                agency = models.Agency.objects.get(Q(name = agencyName) & Q(country = company.country))
-            except:
-                self.set_status(400)
-            datasetName = self.get_argument("datasetName", None)
-            previousDatasetName = self.get_argument("previousDatasetName", None)
-            datasetURL = self.get_argument("datasetURL", None)
             try: 
-                rating = int(self.get_argument("rating", None))
-            except:
-                rating = 0
-            #-- At Agency Level?--
-            if subagencyName == '':
-                #find dataset:
-                for d in agency.datasets:
-                    if d.datasetName == previousDatasetName:
-                        d.datasetName = datasetName
-                        d.datasetURL = datasetURL
-                        d.rating = rating
-            else: #look for dataset in subagencies
-                for s in agency.subagencies:
-                    if s.name == subagencyName:
-                        for d in s.datasets:
-                            if d.datasetName == previousDatasetName:
-                                d.datasetName = datasetName
-                                d.datasetURL = datasetURL
-                                d.rating = rating
-            agency.save()
-            company.lastUpdated = datetime.now() #Update Company's Time of Last Edit
-            company.save()
-            self.write("success")
+                self.application.form.edit_dataset(agency, subagency_name, dataset_name, previous_dataset_name, dataset_url, rating)
+                response['dataset'] = 2
+                self.write(response)
+            except Exception, e:
+                logging.info("Could not modify dataset: " + str(e))
+                response['message'] = 'error'
+                self.write(response)
         #------------------------------------DELETING DATASET------------------------
         if action == "delete dataset":
             try:
-                agency = models.Agency.objects.get(Q(name = agencyName) & Q(country = company.country))
-            except:
-                self.set_status(400)
-            datasetName = self.get_argument("datasetName", None)
-            #Find dataset
-            #--At Agency level?--
-            if subagencyName == '':
-                for d in agency.datasets:
-                    if d.datasetName == datasetName:
-                        agency.datasets.remove(d)
-            else: #--SUBAGENCY LEVEL--
-                for s in agency.subagencies:
-                    if s.name == subagencyName:
-                        for d in s.datasets:
-                            if d.datasetName == datasetName:
-                                s.datasets.remove(d)
-            agency.save()
-            company.lastUpdated = datetime.now() #Update Company's Time of Last Edit
-            company.save()
-            self.write("success")
+                self.application.form.remove_specific_dataset_from_company(company, agency, subagency_name, dataset_name)
+                response['dataset'] = -1
+                self.write(response)
+            except Exception, e:
+                logging.info("Error deleting dataset: " + str(e))
+                self.write(response)
 
 
 

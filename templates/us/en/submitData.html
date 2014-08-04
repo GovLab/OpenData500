@@ -23,10 +23,7 @@
 			<input type="button" class="l-button" id="addSearchResult" value="Add Agency/Sub-Agency">
 			<input type="hidden" class="companyID" name="companyID" value="{{ company.id }}">
 			<div class="errors-search">
-				<span class="agenciesExist error-agency-search" style="display:none">Agency or Sub-Agency already on list.</span>
-				<span class="emptyInput error-agency-search" style="display:none">Nothing to add.</span>
-				<span class="invalidInput error-agency-search" style="display:none">Please select an item from the provided list.</span>
-				<span class="noInput error-agency-search" style="display:none">You must enter at least one data source.</span>
+				<span class="agency-search-error-message" style="display:inline-block;"></span>
 			</div>
 		</div>
 		<div class="agencyList">
@@ -46,21 +43,19 @@
 							</tr>
 							{% for d in agency.datasets %}{% if company == d.usedBy %}
 								<tr class="dataset-row" name="{{d.datasetName}}" subagency="" agency="{{agency.name.replace(" ","-")}}">
-									<td><input type="text" name="datasetName" id="datasetName" {% if (d.datasetName) %} value="{{d.datasetName}}" {% end %}></td>
+									<td><input type="text" name="datasetName" id="datasetName" {% if (d.datasetName) %} value="{{d.datasetName}}" {% end %} ></td>
 									<td><input type="text" name="datasetURL" id="datasetURL" {% if (d.datasetURL) %} value="{{d.datasetURL}}" {% end %}></td>
 									<td><input type="text" name="rating" id="rating" size="3" {% if (d.rating) %} value="{{d.rating}}" {% end %}></td>
 									<td><input type="button" class="l-button" id="saveDataset" value="Save"><input type="button" class="l-button" id="deleteDataset" value="Delete">
-										<span class="error-dataset" style="display:none"></span>
-										<span class="message-dataset" style="display:none"></span></td>
+										<span class="dataset-error-message" style="display:inline-block;"></span></td>
 								</tr>
 							{% end %}{% end %}
-							<tr class="dataset-row" subagency="" agency="{{agency.name.replace(" ","-")}}">
+							<tr class="dataset-row" subagency="" agency="{{agency.name.replace(" ","-")}}" >
 								<td><input type="text" name="datasetName" id="datasetName" placeholder="Agency-Level Dataset" value=""></td>
 								<td><input type="text" name="datasetURL" id="datasetURL" value=""></td>
 								<td><input type="text" name="rating" id="rating" size="3" value=""></td>
 								<td><input type="button" class="l-button" id="saveDataset" value="Save"><input type="button" class="l-button" id="deleteDataset" value="Delete" style="display:none">
-									<span class="error-dataset" style="display:none"></span>
-									<span class="message-dataset" style="display:none"></span></td>
+									<span class="dataset-error-message" style="display:inline-block;"></span></td>
 							</tr>
 						</table>	<!---END DATASETS FROM JUST AGENCY !-->
 						<!-- ROLL THROUGH SUBAGENCIES !-->
@@ -84,8 +79,7 @@
 												<td><input type="text" name="datasetURL" id="datasetURL" {% if (d.datasetURL) %} value="{{d.datasetURL}}" {% end %}></td>
 												<td><input type="text" name="rating" id="rating" size="3" {% if (d.rating) %} value="{{d.rating}}" {% end %}></td>
 												<td><input type="button" class="l-button" id="saveDataset" value="Save"><input type="button" class="l-button" id="deleteDataset" value="Delete">
-													<span class="error-dataset" style="display:none"></span>
-													<span class="message-dataset" style="display:none"></span></td>
+													<span class="dataset-error-message" style="display:inline-block;"></span></td>
 											</tr>
 										{% end %}{% end %}
 										<tr class="dataset-row" subagency="{{ sub.name.replace(" ", "-") }}" agency="{{agency.name.replace(" ","-")}}">
@@ -93,8 +87,7 @@
 											<td><input type="text" name="datasetURL" id="datasetURL" value=""></td>
 											<td><input type="text" name="rating" id="rating" size="3" value=""></td>
 											<td><input type="button" class="l-button" id="saveDataset" value="Save"><input type="button" class="l-button" id="deleteDataset" value="Delete" style="display:none">
-												<span class="error-dataset" style="display:none"></span>
-												<span class="message-dataset" style="display:none"></span></td>
+												<span class="dataset-error-message" style="display:inline-block;"></span></td>
 										</tr>
 									</table>
 								</div>
@@ -113,8 +106,10 @@
 				parsley-trigger="keyup" 
 				data-parsley-maxwords="250" 
 				required>{%if company.dataComments %}{{ company.dataComments }}{% end %}</textarea><br>
+				<input type="hidden" name="id" id="companyID" value="{{company.id}}">
 				{% raw xsrf_form_html() %}
 				<input type="submit" class="m-button" value="Save And Finish">
+				<span class="response-message"></span>
 			</fieldset>
 			<!-- <input type="button" class="l-button data-submit-button" value="Save And Finish"> -->
 			
