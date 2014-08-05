@@ -33,7 +33,7 @@ stateList = {
             }
 agency_types = ['Federal','State','City/County','University/Institution']
 available_countries = ["us", "ca", "mx"]
-country_keys = { "int":"United States", "us":"United States", "ca":"Canada", "United States":"us", "Canada":"ca",  "Mexico":"mx", "mx":"Mexico"}
+country_keys = { "us":"United States", "ca":"Canada", "United States":"us", "Canada":"ca",  "Mexico":"mx", "mx":"Mexico"}
 
 
 class Validators(object):
@@ -182,8 +182,8 @@ class Form(object):
         c.datasetWishList = arguments['datasetWishList']
         c.sourceCount = arguments['sourceCount']
         c.dataComments = arguments['dataComments'] if arguments['dataComments'] else c.dataComments
-        c.filters = [c.companyCategory, state, "survey-company"]
-        company.save()
+        c.filters = [c.companyCategory, c.state, "survey-company"]
+        c.save()
         return
 
     def company_update_one(self, id, dictField, value):

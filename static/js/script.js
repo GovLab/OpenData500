@@ -194,7 +194,7 @@ $(document).ready(function() {
             }
         });
     });
-    //----------------------------------SAVE NEW DATASET AND ADD NEW EMPTY FORM--------------------------------------
+    //--*****************************************************************-ADD/EDIT DATASET-*****************************************************************--//
     var new_dataset_template = '<tr class="dataset-row" name="" subagency="<%= subagency %>" agency="<%= agency %>">' +
         '<td><input type="text" name="<%= dataset_name %>" id="datasetName" value=""></td>' +
         '<td><input type="text" name="datasetURL" id="datasetURL" value=""></td>' +
@@ -289,36 +289,33 @@ $(document).ready(function() {
     });
     //----------------------------------DELETE DATASET--------------------------------------
     $('.agencyList').on('click', '#deleteDataset', function(event) {
-        currentDatasetForm = $(this).parent().parent();
-        datasetName = currentDatasetForm.find('#datasetName').val();
-        agency = currentDatasetForm.attr('agency').replace(/-/g, " ");
-        subagency = currentDatasetForm.attr('subagency').replace(/-/g, " ");
+        var currentDatasetForm = $(this).parent().parent();
+        var dataset_name = currentDatasetForm.find('#datasetName').val();
+        var agency = currentDatasetForm.attr('agency').replace(/-/g, " ");
+        var subagency = currentDatasetForm.attr('subagency').replace(/-/g, " ");
+        var error_message = currentDatasetForm.find('.dataset-error-message');
         data = {
             "agency": agency,
             "subagency": subagency,
-            "datasetName": datasetName,
+            "dataset_name": dataset_name,
             "action": "delete dataset",
             "_xsrf": $("[name='_xsrf']").val()
         };
-        if (datasetName != '') {
+        if (dataset_name != '') {
             $.ajax({
                 type: 'POST',
                 url: '/' + country + '/addData/' + companyID,
                 data: data,
                 error: function(error) {
                     console.debug(JSON.stringify(error));
-                    currentDatasetForm.find('.error-dataset').text('Oops... Server Error :/');
-                    currentDatasetForm.find('.error-dataset').show().delay(5000).fadeOut();
+                    error_message.text('Oops... Something went wrong.').css('opacity', 1).delay(5000).animate({
+                        'opacity': 0
+                    }, 500);
                 },
-                beforeSend: function(xhr, settings) {
-                    //$(event.target).attr('disabled', "true"); 
-                    currentDatasetForm.find('.error-dataset').hide();
-                },
-                success: function(success) {
-                    //$(event.target).removeAttr('disabled');
-                    currentDatasetForm.find('.error-dataset').hide();
+                beforeSend: function(xhr, settings) {},
+                success: function(response) {
                     currentDatasetForm.remove();
-                    console.log(success);
+                    console.log(response);
                 }
             });
         }

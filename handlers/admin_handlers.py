@@ -446,13 +446,7 @@ class EditCompanyHandler(BaseHandler):
 
     def post(self, country=None, page=None, id=None):
         logging.info(self.request.arguments)
-        logging.info(country)
-        logging.info(page)
-        logging.info(id)
-        if not country: 
-            country = 'us'
         form_values = {k:','.join(v) for k,v in self.request.arguments.iteritems()}
-        form_values['country'] = country
         self.application.form.process_company(form_values, id)
         self.write('success')
 
