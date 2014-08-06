@@ -56,7 +56,8 @@ class Application(tornado.web.Application):
             (r'/login/?', LoginHandler),
             (r'/logout/?', LogoutHandler),
             (r'/register/?', RegisterHandler),
-            (r"/(?:([A-Za-z]{2})/)?([^/]+)/?", StaticPageHandler)
+            (r"/(?:([A-Za-z]{2})/)?([^/]+)/?", StaticPageHandler),
+            (r'/.*', NotFoundHandler)
         ]
         settings = dict(
             template_path=os.path.join(os.path.dirname(__file__), "templates"),

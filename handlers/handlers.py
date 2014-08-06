@@ -424,7 +424,11 @@ class SubmitDataHandler(BaseHandler):
                 logging.info("Error deleting dataset: " + str(e))
                 self.write(response)
 
-
+class NotFoundHandler(BaseHandler):
+    def get(self):
+        self.render('404.html',
+            lan='english',
+            country='us')
 
 
 
