@@ -97,20 +97,33 @@ class Form(object):
         zipCode = arguments['zipCode']
         state = arguments['state']
         country = country_keys[arguments['country']]
-        companyType = arguments['otherCompanyType'] if arguments['companyType'] == 'Other' else arguments['companyType']
+        if 'companyType' in arguments:
+            companyType = arguments['otherCompanyType'] if arguments['companyType'] == 'Other' else arguments['companyType']
+        else:
+            companyType = ''
         yearFounded = 0 if not arguments['yearFounded'] else arguments['yearFounded']
         fte = 0 if not arguments['fte'] else arguments['fte']
-        revenueSource = [] if not arguments['revenueSource'] else arguments['revenueSource'].split(',')
-        if 'Other' in revenueSource:
-            del revenueSource[revenueSource.index('Other')]
-            revenueSource.append(arguments['otherRevenueSource'])
-        companyCategory = arguments['otherCategory'] if arguments['category'] == 'Other' else arguments['category']
+        if 'revenueSource' in arguments:
+            revenueSource = [] if not arguments['revenueSource'] else arguments['revenueSource'].split(',')
+            if 'Other' in revenueSource:
+                del revenueSource[revenueSource.index('Other')]
+                revenueSource.append(arguments['otherRevenueSource'])
+        else:
+            revenueSource = []
+        if 'category' in arguments:
+            companyCategory = arguments['otherCategory'] if arguments['category'] == 'Other' else arguments['category']
+            filters = [companyCategory, state, "survey-company"]
+        else:
+            companyCategory = ''
+            filters = []
         description = arguments['description']
         descriptionShort = arguments['descriptionShort']
         financialInfo = arguments['financialInfo']
         datasetWishList = arguments['datasetWishList']
-        sourceCount = arguments['sourceCount']
-        filters = [companyCategory, state, "survey-company"]
+        if 'sourceCount' in arguments:
+            sourceCount = arguments['sourceCount']
+        else:
+            sourceCount = ''
         company = models.Company(
             companyName = companyName,
             prettyName = prettyName,
@@ -168,19 +181,32 @@ class Form(object):
         c.zipCode = arguments['zipCode']
         c.state = arguments['state']
         c.country = country_keys[arguments['country']]
-        c.companyType = arguments['otherCompanyType'] if arguments['companyType'] == 'Other' else arguments['companyType']
+        if 'companyType' in arguments:
+            c.companyType = arguments['otherCompanyType'] if arguments['companyType'] == 'Other' else arguments['companyType']
+        else:
+            c.companyType = ''
         c.yearFounded = 0 if not arguments['yearFounded'] else arguments['yearFounded']
         c.fte = 0 if not arguments['fte'] else arguments['fte']
-        c.revenueSource = [] if not arguments['revenueSource'] else arguments['revenueSource'].split(',')
-        if 'Other' in c.revenueSource:
-            del c.revenueSource[c.revenueSource.index('Other')]
-            c.revenueSource.append(arguments['otherRevenueSource'])
-        c.companyCategory = arguments['otherCategory'] if arguments['category'] == 'Other' else arguments['category']
+        if 'revenueSource' in arguments:
+            c.revenueSource = [] if not arguments['revenueSource'] else arguments['revenueSource'].split(',')
+            if 'Other' in c.revenueSource:
+                del c.revenueSource[c.revenueSource.index('Other')]
+                c.revenueSource.append(arguments['otherRevenueSource'])
+        else:
+            c.revenueSource = []
+        if 'category' in arguments:
+            c.companyCategory = arguments['otherCategory'] if arguments['category'] == 'Other' else arguments['category']
+        else:
+            c.companyCategory = ''
+        c.filters = [c.companyCategory, c.state, "survey-company"]
         c.description = arguments['description']
         c.descriptionShort = arguments['descriptionShort']
         c.financialInfo = arguments['financialInfo']
         c.datasetWishList = arguments['datasetWishList']
-        c.sourceCount = arguments['sourceCount']
+        if 'sourceCount' in arguments:
+            c.sourceCount = arguments['sourceCount']
+        else:
+            c.sourceCount = ''
         c.dataComments = arguments['dataComments'] if arguments['dataComments'] else c.dataComments
         c.vetted = True if 'vetted' in arguments else False
         c.display = True if 'display' in arguments else False
@@ -188,7 +214,6 @@ class Form(object):
         c.submittedSurvey = True if 'submittedSurvey' in arguments else False
         c.vettedByCompany = False if 'vettedByCompany' in arguments else True
         c.locked = True if 'locked' in arguments else False
-        c.filters = [c.companyCategory, c.state, "survey-company"]
         c.lastUpdated = datetime.now()
         c.save()
         return

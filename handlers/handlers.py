@@ -361,14 +361,19 @@ class SubmitDataHandler(BaseHandler):
                 self.write({"response":"error"})
         #------------------------------------ADDING AGENCY/SUBAGENCY------------------------
         if action == 'add':
-            if not self.application.form.company_has_agency(company, agency):
-                self.application.form.add_agency_to_company(company, agency)
-                response["agency"] = 1
-            if subagency_name:
-                if not self.application.form.company_has_subagency(company, agency, subagency_name):
-                    self.application.form.add_subagency_to_company(company, agency, subagency_name)
-                    response['subagency'] = 1
-            self.write(response)                
+            try: 
+                if not self.application.form.company_has_agency(company, agency):
+                    self.application.form.add_agency_to_company(company, agency)
+                    response["agency"] = 1
+                if subagency_name:
+                    if not self.application.form.company_has_subagency(company, agency, subagency_name):
+                        self.application.form.add_subagency_to_company(company, agency, subagency_name)
+                        response['subagency'] = 1
+                self.write(response)
+            except Exception, e:
+                logging.info("Could not add agency/subagency: " + str(e))
+                response['message'] = 'error'
+                self.write(response)
         #------------------------------------DELETING AGENCY------------------------
         if action == "delete agency":
             try: 

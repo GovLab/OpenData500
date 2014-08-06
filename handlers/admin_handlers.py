@@ -396,6 +396,7 @@ class EditCompanyHandler(BaseHandler):
             #non-admin edit
             if not company.locked:
                 self.render(company.country + "/" + lan + "/editCompany.html",
+                    page_heading = "Editing " + company.companyName,
                     company = company,
                     companyType = companyType,
                     companyFunction = companyFunction,

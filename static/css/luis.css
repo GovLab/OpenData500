@@ -177,18 +177,7 @@ survey/no survey hover and active states*/
   width: 300px;
 }
 
-.subagency-message {
-  color: red;
-}
-
-.agency-message {
-  color: red;
-}
-.response-message {
-  color: red;
-}
-
-.error-message {
+.error-message, .dataset-error-message, .agency-search-error-message, .response-message, .agency-message, .subagency-message {
   color: red;
 }
 
