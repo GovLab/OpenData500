@@ -22,13 +22,13 @@ $(document).ready(function() {
     //--*****************************************************************-VALIDATE & SUBMIT COMPANY FORM-*****************************************************************--//
     if ($(location).attr('pathname').indexOf('/submitCompany/') > -1) {
         var _xsrf = $("[name='_xsrf']").val();
+        var error_message = $('.company-form-error-message');
         var companyName = $("#companyName").parsley()
             .addAsyncValidator('validateName', function(xhr) {
                 window.ParsleyUI.removeError(companyName, 'name-exists');
                 if (xhr.status === 404) {
                     window.ParsleyUI.addError(companyName, 'name-exists', "This company has already been submitted. Please contact opendata500@thegovlab.org if you have any questions.");
                 }
-
                 return xhr.status === 200;
             }, '/validate/?country=' + country + '&_xsrf=' + _xsrf);
         $("#submitCompany").parsley();
@@ -45,21 +45,20 @@ $(document).ready(function() {
                     data: data,
                     error: function(error) {
                         console.debug(JSON.stringify(error));
-                        $('.message-form').hide();
-                        $('.error-form').text('Oops... Something went wrong :/')
-                        $('.error-form').show().delay(5000).fadeOut();
+                        error_message.text('Oops... Something went wrong :/').show().delay(5000).fadeOut();
                     },
                     beforeSend: function(xhr, settings) {
                         //$(event.target).attr('disabled', 'disabled'); 
+                        error_message.text('Saving...').show().delay(5000).fadeOut();
                     },
                     success: function(data) {
                         document.location.href = '/' + country + '/addData/' + data['id'];
                     }
                 });
+            } else {
+                error_message.text('You still need to fix some items.').show().delay(5000).fadeOut();
             }
             event.preventDefault();
-            $('.savingMessage_companyEdit').hide();
-            $('.error-form').show().delay(5000).fadeOut();
         });
     }
 
@@ -94,12 +93,12 @@ $(document).ready(function() {
     });
     $('.m-form-half').on('focus', '#other_revenue_text_field', function() {
         $('#other_revenue').prop('checked', true);
-        $('#submitCompany').parsley().validate('revenueSource');
+        $(this).closest('form').parsley().validate('revenueSource');
 
     });
     $('.m-form-half').on('focus', '#other_category_text_field', function() {
         $('input[name="category"][value="Other"').prop('checked', true);
-        $('#submitCompany').parsley().validate('category');
+        $(this).parsley().validate('category');
     });
     $('.m-form-half').on('focusout', '#other_category_text_field', function() {
         if ($('#other_category_text_field').val() == '') {

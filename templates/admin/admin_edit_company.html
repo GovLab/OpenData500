@@ -12,7 +12,7 @@
 <br>
 <br>
 <h2>{{ page_heading }}</h2>
-<form method="post" id="company_form" class="m-form companyForm" data-parsley-validate>
+<form method="post" id="company_form_admin" class="m-form company_form_admin" data-parsley-validate>
 
 	<!--*****************************************************************-CONTACT INFO-***************************************************************** !-->
 	<fieldset class="m-form-half">
@@ -72,32 +72,37 @@
 	<!--*****************************************************************-REVENUE SOURCES-***************************************************************** !-->
 	<fieldset class="m-form-half">
 		<h3>Which of the following are significant sources of revenue for your company? <br><em>(check all that apply)</em> *</h3>
-		{% for source in revenueSource %}
-			<label for=""><input type="checkbox" name="revenueSource" id="revenueSource" data-trigger="change" data-group="revenueSource" data-mincheck="1" value="{{ source }}" {% if source in company.revenueSource %} checked {% end %}>{{ source }}</label><br>
-		{% end %}
-		{% if list(set(company.revenueSource) - set(revenueSource)) %}
-			<label for=""><input type="checkbox" name="revenueSource" id="revenueSource" value="Other" {%if company.revenueSource[0] %}checked{%end%}>Other</label>
-			<input type="text" name="otherRevenueSource" id="otherRevenueSource" data-trigger="change" data-group="revenueSource" data-mincheck="1" value="{{ list(set(company.revenueSource) - set(revenueSource))[0] }}"></label>
-		{% else %}
-			<label for=""><input type="checkbox" name="revenueSource" id="revenueSource" value="Other">Other
-			<input type="text" name="otherRevenueSource" id="otherRevenueSource" data-trigger="change" data-group="revenueSource" data-mincheck="1"></label>
-		{% end %}
+		<div class="revenue-source-field">
+			{% for source in revenueSource %}
+				<input type="checkbox" id="{{source}}" name="revenueSource" value="{{source}}" data-parsley-group="revenueSource" {% if source in company.revenueSource %} checked {% end %}/><label for="{{source}}">{{source}}</label><br>
+			{% end %}
+			{% if list(set(company.revenueSource) - set(revenueSource)) %}
+				<input type="checkbox" id="other_revenue" name="revenueSource" value="Other" {%if company.revenueSource[0] %}checked{%end%} data-parsley-mincheck="1" data-parsley-group='revenueSource' data-parsley-trigger="change"><label for="Other">Other</label>
+				<input type="text" name="otherRevenueSource" id="other_revenue_text_field" value="{{ list(set(company.revenueSource) - set(revenueSource))[0] }}" />
+			{% else %}
+				<input type="checkbox" id="other_revenue" name="revenueSource" value="Other" data-parsley-mincheck="1" data-parsley-group='revenueSource' data-parsley-trigger="change"><label for="Other">Other</label>
+				<input type="text" name="otherRevenueSource" id="other_revenue_text_field" />
+			{% end %}
+		</div>
 	</fieldset>
 
 	<!--*****************************************************************-CATEGORY-***************************************************************** !-->
 	<fieldset class="m-form-half right">
-		<h3>What category best describes your company? *</h3>
-		{% for category in categories %}
-			<label for=""><input type="radio" name="category" id="category" value="{{ category }}" {% if category == company.companyCategory %} checked {% end %}>{{ category }}</label><br>
-		{% end %}
-		{% if company.companyCategory not in categories %}
-			<label for=""><input type="radio" name="category" id="category" value="Other" checked>Other</label>
-			<input type="text" name="otherCategory" id="otherCategory" {% if company.companyCategory %}value="{{ company.companyCategory }}"{%end%}></label>
-		{% else %}
-			<label for=""><input type="radio" name="category" id="category" value="Other">Other</label>
-			<input type="text" name="otherCategory" id="otherCategory"></label>
-		{% end %}
+		<h3>What category best describes your company? * {{company.companyCategory}}</h3>
+		<div class="category-field">
+			{% for category in categories %}
+				<input type="radio" id="{{category}}" name="category" data-parsley-group='category' value="{{ category }}" {% if category == company.companyCategory %} checked {% end %}><label for="{{category}}">{{category}}</label><br>
+			{% end %}
+			{% if company.companyCategory not in categories %}
+				<input type="radio" id="other_category" name="category" value="Other" data-parsley-mincheck="1" data-parsley-group='category' data-parsley-trigger="change" checked><label for="Other">Other</label>
+				<input type="text" id="other_category_text_field" name="otherCategory" {% if company.companyCategory %}value="{{ company.companyCategory }}"{%end%} data-parsley-trigger="focus">
+			{% else %}
+				<input type="radio" id="other_category" name="category" value="Other" data-parsley-mincheck="1" data-parsley-group='category' data-parsley-trigger="change"><label for="Other">Other</label>
+				<input type="text" id="other_category_text_field" name="otherCategory" data-parsley-trigger="focus">
+			{% end %}
+		</div>
 	</fieldset>
+
 
 	<!--*****************************************************************-DESCRIPTION-***************************************************************** !-->
 	<fieldset class="m-form-half left">
@@ -105,8 +110,7 @@
 		<textarea rows="10" cols="59" name="description" id="description" 
 		data-parsley-trigger="keyup" 
 		data-parsley-maxwords="200" 
-		data-parsley-error-message="You are over the word limit."
-		required>{{ company.description }}</textarea><br><br>
+		data-parsley-error-message="You are over the word limit.">{{ company.description }}</textarea><br><br>
 	</fieldset>
 
 	<!--*****************************************************************-SHORT DESCRIPTION-***************************************************************** !-->
@@ -115,8 +119,7 @@
 		<textarea rows="10" cols="59" name="descriptionShort" id="descriptionShort" 
 		data-parsley-trigger="keyup" 
 		data-parsley-maxwords="25" 
-		data-parsley-error-message="You are over the word limit." 
-		required>{{ company.descriptionShort }}</textarea><br>
+		data-parsley-error-message="You are over the word limit.">{{ company.descriptionShort }}</textarea><br>
 	</fieldset>
 
 	<!--*****************************************************************-FINANCIAL INFO-***************************************************************** !-->
@@ -289,7 +292,7 @@
 
 <!--*****************************************************************-SUBMIT BUTTON-***************************************************************** !-->
 <div class='submit_form'>
-	<input type="submit" class="l-button" id="submit_form_button" name="formSave" value="Save Company Info">
+	<input type="submit" class="l-button" id="submit_form_admin_button" name="formSave" value="Save Company Info">
 	<span class="response-message" style="display:none"></span>
 </div>
 
@@ -301,11 +304,11 @@ $(document).ready( function () {
     var _xsrf = $("[name='_xsrf']").val();
     var rm = $('.response-message');
     var id = $('#companyID').val();
-    $("#company_form").parsley();
+    $("#company_form_admin").parsley();
     $('#data_comments_form').parsley();
-    $('.submit_form').on('click', '#submit_form_button', function() {
-        if ($("#company_form").parsley().validate() && $('.data-comment-form').parsley().validate()) {
-            data = $('#company_form').serializeArray();
+    $('.submit_form').on('click', '#submit_form_admin_button', function() {
+        if ($("#company_form_admin").parsley().validate() && $('.data-comment-form').parsley().validate()) {
+            data = $('#company_form_admin').serializeArray();
             data[data.length] = { name: "dataComments", value: $('#dataComments').val() };
             $.ajax({
 		        type: 'POST',
@@ -314,14 +317,14 @@ $(document).ready( function () {
 		        error: function(error) {
 		            console.debug(JSON.stringify(error));
 		            rm.text("Oops... Something went wrong.").show().delay(5000).fadeOut();
-		          	$("#submit_form_button").prop("disabled", false); 
+		          	$("#submit_form_admin_button").prop("disabled", false); 
 		        },
 		        beforeSend: function(xhr, settings) {
-		          $("#submit_form_button").prop("disabled", true); 
+		          $("#submit_form_admin_button").prop("disabled", true); 
 		          rm.text("Saving...").show().delay(5000).fadeOut();
 		        },
 		        success: function(success) {
-		          $("#submit_form_button").prop("disabled", false); 
+		          $("#submit_form_admin_button").prop("disabled", false); 
 		          rm.text("Saved!").show().delay(5000).fadeOut();
 		          console.log("regular saved!");
 		        }

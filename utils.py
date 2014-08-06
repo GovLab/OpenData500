@@ -97,7 +97,7 @@ class Form(object):
         zipCode = arguments['zipCode']
         state = arguments['state']
         country = country_keys[arguments['country']]
-        companyType = arguments['companyType']
+        companyType = arguments['otherCompanyType'] if arguments['companyType'] == 'Other' else arguments['companyType']
         yearFounded = 0 if not arguments['yearFounded'] else arguments['yearFounded']
         fte = 0 if not arguments['fte'] else arguments['fte']
         revenueSource = [] if not arguments['revenueSource'] else arguments['revenueSource'].split(',')
@@ -168,7 +168,7 @@ class Form(object):
         c.zipCode = arguments['zipCode']
         c.state = arguments['state']
         c.country = country_keys[arguments['country']]
-        c.companyType = arguments['companyType']
+        c.companyType = arguments['otherCompanyType'] if arguments['companyType'] == 'Other' else arguments['companyType']
         c.yearFounded = 0 if not arguments['yearFounded'] else arguments['yearFounded']
         c.fte = 0 if not arguments['fte'] else arguments['fte']
         c.revenueSource = [] if not arguments['revenueSource'] else arguments['revenueSource'].split(',')
@@ -182,7 +182,14 @@ class Form(object):
         c.datasetWishList = arguments['datasetWishList']
         c.sourceCount = arguments['sourceCount']
         c.dataComments = arguments['dataComments'] if arguments['dataComments'] else c.dataComments
+        c.vetted = True if 'vetted' in arguments else False
+        c.display = True if 'display' in arguments else False
+        c.vettedByCompany = True if 'vettedByCompany' in arguments else False
+        c.submittedSurvey = True if 'submittedSurvey' in arguments else False
+        c.vettedByCompany = False if 'vettedByCompany' in arguments else True
+        c.locked = True if 'locked' in arguments else False
         c.filters = [c.companyCategory, c.state, "survey-company"]
+        c.lastUpdated = datetime.now()
         c.save()
         return
 

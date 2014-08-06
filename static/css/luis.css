@@ -188,6 +188,10 @@ survey/no survey hover and active states*/
   color: red;
 }
 
+.error-message {
+  color: red;
+}
+
 .m-candidates .m-filter-menu {
   padding-left: 10px;
   width: 188px;

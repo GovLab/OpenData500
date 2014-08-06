@@ -26,7 +26,7 @@
 			</select>
 		</div>
 		<p>Country: {{agency.country.upper()}}</p>
-		<div class="m-form-line">Used by: <br>{% if agency.usedBy %}{%for c in agency.usedBy%}<a href="/admin/company-edit/{{c.id}}/">{{c.companyName}}</a><br> {%end%}{%else%}None{%end%}</div>
+		<div class="m-form-line">Used by: <br>{% if agency.usedBy %}{%for c in agency.usedBy%}<a href="/admin-edit/{{c.id}}/">{{c.companyName}}</a><br> {%end%}{%else%}None{%end%}</div>
 		{% if (agency.name) %}
 		<input type="button" class="l-button action-button" id="edit-agency-button" action="edit-agency" value="Save Edits">
 		{%else%}
@@ -64,7 +64,7 @@
 						<div class="m-form-line"><label for="">Name: </label><input type="text" name="{{s.name}}" id="subagency-name" {% if (s.name) %} value="{{ s.name }}" {% end %}></div>
 						<div class="m-form-line"><label for="">Abbreviation: </label><input type="text" name="subagency-abbrev" id="subagency-abbrev" {% if (s.abbrev) %} value="{{ s.abbrev }}" {% end %}></div>
 						<div class="m-form-line"><label for="">URL: </label><input type="text" name="subagency-url" id="subagency-url" {% if (s.url) %} value="{{ s.url }}" {% end %}></div>
-						<div class="m-form-line">Used by: <br>{% if s.usedBy %}{%for c in s.usedBy%}<a href="/admin/company-edit/{{c.id}}/">{{c.companyName}}</a><br> {%end%}{%else%}None{%end%}</div>
+						<div class="m-form-line">Used by: <br>{% if s.usedBy %}{%for c in s.usedBy%}<a href="/admin-edit/{{c.id}}/">{{c.companyName}}</a><br> {%end%}{%else%}None{%end%}</div>
 						{% if s.datasets %}
 							<div class="subagency-datasets-list">
 								<h3>Datasets</h3>
