@@ -57,39 +57,93 @@ header {
 
 // Main Menu Module
 
+.logo {
+	border: 0;
+	float: left;
+	margin-top: -5px;
+	padding: 0;
+
+	img {
+		width: 109px;
+	}
+}
+
+.logo:hover {
+	background-color: transparent;
+}
+
+
 .m-main-menu {
 	font-size: 0;
-	a {
+	margin-top: 4px;
+
+	.m-main-menu-item {
+		font-size: 12px;
+		padding: 5px 0 4px;
+		color: #fff;
+		text-transform: uppercase;
+		display: inline-block;
+		position: relative;
+		border-right: 2px solid $light_purple;
+	}
+
+	.m-main-menu-item a {
 		font-size: 12px;
 		padding: 5px 20px;
 		color: #fff;
 		text-transform: uppercase;
-		display: inline-block;
-		border-right: 2px solid $light_purple;
 	}
+
+	.m-main-menu-sub-menu {
+		display: none;
+		position: absolute;
+		background-color: $light_purple;
+		margin-top: 4px;
+		top: 21px;
+		left: -2px;
+		width: 161px;
+		padding: 0;
+		cursor: pointer;
+		border: 1px solid $purple;
+		@include drop-shadow;
+
+		li {
+			list-style: none;
+		}
+
+		.m-main-menu-sub-menu-item {
+			font-size: 12px;
+			padding: 7px 20px;
+			color: #fff;
+			text-transform: uppercase;
+			text-align: left;
+			display: block;
+		}
+
+		.m-main-menu-sub-menu-item:hover {
+			background-color: $purple;
+		}
+	}
+
+	#submenu-about {
+		width: 182px;
+	}
+
+
+	.m-main-menu-item:hover .m-main-menu-sub-menu,
+	.m-main-menu-sub-menu:hover {
+		display: block;
+	}
+
+
 	
-	a:hover {
+	.m-main-menu-item a:hover {
 		background-color: $light_purple;
 		color: #fff;
 	}
 	
-	a:last-child {
+	.m-main-menu-item:last-child {
 		border-right: 0;
-	}
-
-	.logo {
-		border: 0;
-		float: left;
-		margin-top: -5px;
-		padding: 0;
-
-		img {
-			width: 109px;
-		}
-	}
-
-	.logo:hover {
-		background-color: transparent;
 	}
 }
 
