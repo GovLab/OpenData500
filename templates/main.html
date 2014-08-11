@@ -45,32 +45,22 @@
     <div class="parallax-bg" id="background-3" data-stellar-ratio="-0.02"></div>   -->
     <header>
         <div class="l-centered">
-            
-<!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////// Merge conflict - have to fix that with Luis /////////////////////////////////////////////// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
-
-            <!-- <div id="mainMenu" class="m-main-menu">
-                <a class="logo" href="/{{country}}/"><img src="{{ static_url("img/od500-logo.png") }}" alt=""></a>
-                {% for i in range(0, len(settings['menu'][lan]['label'])) %}
-                    <a href="/{{country}}{{settings['menu'][lan]['link'][i]}}">{{settings['menu'][lan]['label'][i]}}</a>
-                {% end %}
-                {%try%} {% if user %} <a href="/admin/companies/">Admin</a>{% end %}{%except%}{%end%}
-                {%try%} {% if user %} <a href="/logout/">Logout</a>{% end %}{%except%}{%end%}
-                {%if len(settings['available_languages']) > 1 %}<span class="language"><a href="." onClick="switchLanguage('en');">EN</a><a href="." onClick="switchLanguage('fr');">FR</a></span>{%end%}
-======= -->
         
             <a class="logo" href="/{%try%}{%if country and country!="int" %}{{country}}/{%end%}{%except%}{%end%}"><img src="{{ static_url("img/od500-logo.png") }}" alt=""></a>
-            <div id="mainMenu" class="m-main-menu">            
-                <div class="m-main-menu-item">
-                    <a href="/{%try%}{%if country and country!="int" %}{{country}}/{%end%}{%except%}{%end%}about/">About</a>
-                    <ul id="submenu-about" class="m-main-menu-sub-menu">
-                        <li><a class="m-main-menu-sub-menu-item" href="/about/#about-goals">Goals</a></li>
-                        <li><a class="m-main-menu-sub-menu-item" href="/about/#about-govlab-approach">Approach</a></li>
-                        <li><a class="m-main-menu-sub-menu-item" href="/about/#about-international-studies">International Studies</a></li>
-                        <li><a class="m-main-menu-sub-menu-item" href="/about/#about-people">People</a></li> 
-                    </ul>
-                </div>
-                <div class="m-main-menu-item">
+            <div id="mainMenu" class="m-main-menu">
+                {% for item in settings['menu'][lan] %}        
+                    <div class="m-main-menu-item">
+                        <a href="{{item['link']}}">{{item['item']}}</a>
+                        {% if item['sub-menu'] %}
+                            <ul id="submenu-about" class="m-main-menu-sub-menu">
+                                {% for sub_item in item['sub-menu'] %}
+                                    <li><a class="m-main-menu-sub-menu-item" href="{{sub_item['link']}}">{{sub_item['item']}}</a></li>
+                                {%end%}
+                            </ul>
+                        {%end%}
+                    </div>
+                {%end%}
+                <!-- <div class="m-main-menu-item">
                     <a href="/list/">Full List</a>
                 </div>
                 <div class="m-main-menu-item">
@@ -94,7 +84,7 @@
                         <li><a class="m-main-menu-sub-menu-item" href="/resources/#resources-academy">GovLab Academy</a></li>
                         <li><a class="m-main-menu-sub-menu-item" href="/resources/#resources-blog">GovLab Blog</a></li>
                     </ul>
-                </div>
+                </div> -->
                 <!-- <a href="/download/">Download</a>  -->
                 {%try%} {% if user %} <div class="m-main-menu-item"><a href="/admin/companies/">Admin</a>{% end %}{%except%}{%end%}</div>
                 {%try%} {% if user %} <div class="m-main-menu-item"><a href="/logout/">Logout</a>{% end %}{%except%}{%end%}</div>

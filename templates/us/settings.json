@@ -2,10 +2,57 @@
     "default_language": "en",
     "available_languages": ["en"],
     "menu": {
-        "en": {
-            "label": ["About", "Full List", "Survey", "Stats", "Roundtables", "Resources"],
-            "link": ["/about/", "/list/", "/submitCompany/", "/stats/", "/roundtables/", "/resources/"]
-        }
+        "en": [{
+            "item": "About",
+            "link": "/us/about/",
+            "sub-menu": [{
+                "item": "Goals",
+                "link": "/us/about/#about-goals"
+            }, {
+                "item": "Approach",
+                "link": "/us/about/#about-govlab-approach"
+            }, {
+                "item": "International Studies",
+                "link": "/us/about/#about-international-studies"
+            }, {
+                "item": "People",
+                "link": "/us/about/#about-people"
+            }]
+        }, {
+            "item": "Full List",
+            "link": "/us/list/",
+            "sub-menu": []
+        }, {
+            "item": "Survey",
+            "link": "/us/submitCompany/",
+            "sub-menu": []
+        }, {
+            "item": "Roundtables",
+            "link": "/us/roundtables",
+            "sub-menu": [{
+                "item": "About",
+                "link": "/us/roundtables/"
+            }, {
+                "item": "Dept. of Commerce",
+                "link": "/us/roundtables/?rt=doc"
+            }, {
+                "item": "USDA",
+                "link": "/us/roundtables/?rt=usda"
+            }]
+        }, {
+            "item": "Resources",
+            "link": "/us/resources/",
+            "sub-menu": [{
+                "item": "Press",
+                "link": "/us/resources/#resources-press"
+            }, {
+                "item": "GovLab Academy",
+                "link": "/us/resources/#resources-academy"
+            }, {
+                "item": "GovLab Blog",
+                "link": "/us/resources/#resources-blog"
+            }]
+        }]
     },
     "page_titles": {
         "en": {
