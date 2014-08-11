@@ -4,8 +4,7 @@ import os, sys
 from mongoengine import *
 from datetime import datetime
 
-
-class Person2(EmbeddedDocument):
+class Person(EmbeddedDocument):
 	firstName = StringField()
 	lastName = StringField()
 	title = StringField()
@@ -18,8 +17,8 @@ class Company(Document):
 	companyName = StringField()
 	prettyName = StringField()
 	url = StringField()
-	contact = EmbeddedDocumentField(Person2)
-	ceo = EmbeddedDocumentField(Person2)
+	contact = EmbeddedDocumentField(Person)
+	ceo = EmbeddedDocumentField(Person)
 	yearFounded = IntField()
 	previousName = StringField()
 	city = StringField()
@@ -97,6 +96,8 @@ class Stats(Document):
 	totalCompanies = IntField() #total
 	totalCompaniesWeb = IntField() #submitted through web survey
 	totalCompaniesSurvey = IntField() #completed surveys
+	totalCompaniesDisplayed = IntField() #displayed companies
+	totalAgencies = IntField()
 	states = ListField(EmbeddedDocumentField(States))
 	country = StringField()
 

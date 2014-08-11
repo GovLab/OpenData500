@@ -1,0 +1,30 @@
+
+
+{% extends "../main.html" %}
+{% autoescape None %}
+
+{% block body %}
+<style>
+
+.login-error-message {
+	margin-left: 20px;
+	color: red;
+}
+
+</style>
+<h1>{{ page_heading }}</h1>
+
+<form class="login-form" action="/login" method="POST">
+	<div class="m-form-line"><label for="">Username:</label><input type="text" name="username" /></div>
+	<div class="m-form-line"><label for="">Password:</label><input type="password" name="password" /></div>
+	{% raw xsrf_form_html() %}
+	<div class="m-form-line submit"><input class="m-button" type="submit" value="Log In" /></div>
+	{% try %}
+		{% if message %}
+			<div class="login-error-message"><p>{{message}}</p></div>
+		{%end%}
+	{%except%}
+	{%end%}
+</form>
+
+{% end %}

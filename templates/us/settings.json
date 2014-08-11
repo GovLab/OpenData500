@@ -1,17 +1,23 @@
 {
-    "default_language": "english",
-    "english": {
-        "about": {
-            "page_title": "About the US Open Data 500",
-            "page_heading": "About the US Open Data 500"
-        },
-        "index": {
-            "page_title": "Welcome to the US Open Data 500",
-            "page_heading": "Welcome to the US Open Data 500"
-        },
-        "findings": {
-            "page_title": "OD500 By The Numbers",
-            "page_heading": "OD500 Stats"
+    "default_language": "en",
+    "available_languages": ["en"],
+    "menu": {
+        "en": {
+            "label": ["About", "Full List", "Survey", "Stats", "Roundtables", "Resources"],
+            "link": ["/about/", "/list/", "/submitCompany/", "/stats/", "/roundtables/", "/resources/"]
+        }
+    },
+    "page_titles": {
+        "en": {
+            "index": "Welcome to the OD500",
+            "about": "About the OD500",
+            "resources": "Open Data Resources - OD500",
+            "list": "Open Data 500 Companies",
+            "submit": "Submit a Company to the OD500",
+            "stats": "OD500 By The Numbers",
+            "roundtables": "Open Data Roundtables",
+            "submitData": "Submit Agency and Data Information",
+            "thanks": "Thank You!"
         }
     }
 }

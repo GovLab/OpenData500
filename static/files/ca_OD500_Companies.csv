@@ -1,0 +1,4 @@
+company_name_id,company_name,url,city,state,zip_code,ceo_first_name,ceo_last_name,year_founded,full_time_employees,company_type,company_category,revenue_source,description,description_short,financial_info,sourceCount
+Canadian-Company,canadian company,asd.com,,NT,,,,2012,12,Private,Finance & Investment,Data Management and Analytic Services,asdqef,wefwef,,50-100
+Canadian-Company-Change,canadian company change,sfdgoij.com,,MB,,,,2012,12,Private,Food & Agriculture,Lead Generation To Other Businesses,sdfg,wg,,50-100
+Test-Company,test company,asdf.com,,NB,,,,2012,12,Private,Housing/Real Estate,Software Licensing,wfwef,wefwe,,50-100

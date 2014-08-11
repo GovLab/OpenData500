@@ -1,4 +1,4 @@
-
+#coding: utf8 
 from mongoengine import *
 import models
 from datetime import datetime
@@ -8,7 +8,8 @@ import json
 import csv
 from collections import Counter
 import numpy as np
-
+import re
+import bson
 
 #Just some global varbs. 
 favicon_path = '/static/img/favicon.ico'
@@ -20,10 +21,19 @@ sectors = ['Agriculture', 'Arts, Entertainment and Recreation' 'Crime', 'Educati
 datatypes = ['Federal Open Data', 'State Open Data', 'City/Local Open Data']
 categories = ['Business & Legal Services', 'Data/Technology', 'Education', 'Energy', 'Environment & Weather', 'Finance & Investment', 'Food & Agriculture', 'Geospatial/Mapping', 'Governance', 'Healthcare', 'Housing/Real Estate', 'Insurance', 'Lifestyle & Consumer', 'Research & Consulting', 'Scientific Research', 'Transportation']
 states ={ "AL": "Alabama", "AK": "Alaska", "AZ": "Arizona", "AR": "Arkansas", "CA": "California", "CO": "Colorado", "CT": "Connecticut", "DE": "Delaware", "DC": "District of Columbia", "FL": "Florida", "GA": "Georgia", "HI": "Hawaii", "ID": "Idaho", "IL": "Illinois", "IN": "Indiana", "IA": "Iowa", "KA": "Kansas", "KY": "Kentucky", "LA": "Louisiana", "ME": "Maine", "MD": "Maryland", "MA": "Massachusetts", "MI": "Michigan", "MN": "Minnesota", "MS": "Mississippi", "MO": "Missouri", "MT": "Montana", "NE": "Nebraska", "NV": "Nevada", "NH": "New Hampshire", "NJ": "New Jersey", "NM": "New Mexico", "NY": "New York", "NC": "North Carolina", "ND": "North Dakota", "OH": "Ohio", "OK": "Oklahoma", "OR": "Oregon", "PA": "Pennsylvania", "RI": "Rhode Island", "SC": "South Carolina", "SD": "South Dakota", "TN": "Tennessee", "TX": "Texas", "UT": "Utah", "VT": "Vermont", "VA": "Virginia", "WA": "Washington", "WV": "West Virginia", "WI": "Wisconsin", "WY": "Wyoming", "PR": "Puerto Rico"}
-stateListAbbrev = [ "", "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KA", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY", "PR"]
-stateList = ["(Select State)", "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "District of Columbia", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming", "Puerto Rico"]
+stateListAbbrev = { 
+            "us": [ "", "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KA", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY", "PR"],
+            "ca": ["", "AB", "BC", "MB", "NB", "NL", "NT", "NS", "NU", "ON", "PE", "QC", "SK", "YT"],
+            "mx": ["", "AS", "BC", "BS", "CC", "CS", "CH", "CL", "CM", "DF", "DG", "GT", "GR", "HG", "JC", "MC", "MN", "MS", "NT", "NL", "OC", "PL", "QT", "QR", "SP", "SL", "SR", "TC", "TS", "TL", "VZ", "YN", "ZS"]
+            }
+stateList = {
+            "us": ["(Select State)", "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "District of Columbia", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming", "Puerto Rico"],
+            "ca": ["(Select Province/Territory)", "Alberta", "British Columbia", "Manitoba", "New Brunswick", "Newfoundland and Labrador", "Northwest Territories", "Nova Scotia", "Nunavut", "Ontario", "Prince Edward Island", "Quebec", "Saskatchewan", "Yukon"],
+            "mx": ["(Seleccione un Estado)", "Aguascalientes", "Baja California", "Baja California Sur", "Campeche", "Chiapas", "Chihuahua", "Coahuila", "Colima", "Distrito Federal", "Durango", "Guanajuato", "Guerrero", "Hidalgo", "Jalisco", "México", "Michoacán", "Morelos", "Nayarit", "Nuevo León", "Oaxaca", "Puebla", "Querétaro", "Quintana Roo", "San Luis Potosí", "Sinaloa", "Sonora", "Tabasco", "Tamaulipas", "Tlaxcala", "Veracruz", "Yucatán", "Zacatecas"]
+            }
 agency_types = ['Federal','State','City/County','University/Institution']
-available_countries = ["int", "us", "ca"]
+available_countries = ["us", "ca", "mx"]
+country_keys = { "us":"United States", "ca":"Canada", "United States":"us", "Canada":"ca",  "Mexico":"mx", "mx":"Mexico"}
 
 
 class Validators(object):
@@ -36,8 +46,322 @@ class Validators(object):
 			response = 'true'
 		return response
 
+class Tools(object):
+    def re_do_filters(self, country):
+        companies = models.Company.objects(country=country)
+        for c in companies:
+            filters = []
+            filters.append(self.prettify(c.companyCategory))
+            filters.append(c.state)
+            for a in c.agencies:
+                filters.append(a.prettyName)
+            if c.submittedSurvey:
+                filters.append("survey-company")
+            c.filters = filters
+            c.save()
+        logging.info("Filters Redone.")
+
+    def prettify(self, name):
+        return re.sub(r'([^\s\w])+', '', name).replace(" ", "-")
+
+class Form(object):
+    def process_new_company(self, arguments):
+        #-------------------CONTACT INFO---------------
+        firstName = arguments['firstName']
+        lastName = arguments["lastName"]
+        title = arguments['title']
+        email = arguments['email']
+        phone = arguments['phone']
+        contacted = True if 'contacted' in arguments else False
+        contact = models.Person(
+            firstName = firstName,
+            lastName = lastName,
+            title = title,
+            email = email,
+            phone = phone,
+            contacted = contacted,
+        )
+        #-------------------CEO INFO---------------
+        ceoFirstName = arguments['ceoFirstName']
+        ceoLastName = arguments['ceoLastName']
+        ceo = models.Person(
+                firstName = ceoFirstName,
+                lastName = ceoLastName,
+                title = "CEO"
+            )
+        #-------------------COMPANY INFO---------------
+        url = arguments['url']
+        companyName = arguments['companyName']
+        prettyName = re.sub(r'([^\s\w])+', '', companyName).replace(" ", "-").title()
+        city = arguments['city']
+        zipCode = arguments['zipCode']
+        state = arguments['state']
+        country = country_keys[arguments['country']]
+        if 'companyType' in arguments:
+            companyType = arguments['otherCompanyType'] if arguments['companyType'] == 'Other' else arguments['companyType']
+        else:
+            companyType = ''
+        yearFounded = 0 if not arguments['yearFounded'] else arguments['yearFounded']
+        fte = 0 if not arguments['fte'] else arguments['fte']
+        if 'revenueSource' in arguments:
+            revenueSource = [] if not arguments['revenueSource'] else arguments['revenueSource'].split(',')
+            if 'Other' in revenueSource:
+                del revenueSource[revenueSource.index('Other')]
+                revenueSource.append(arguments['otherRevenueSource'])
+        else:
+            revenueSource = []
+        if 'category' in arguments:
+            companyCategory = arguments['otherCategory'] if arguments['category'] == 'Other' else arguments['category']
+            filters = [companyCategory, state, "survey-company"]
+        else:
+            companyCategory = ''
+            filters = []
+        description = arguments['description']
+        descriptionShort = arguments['descriptionShort']
+        financialInfo = arguments['financialInfo']
+        datasetWishList = arguments['datasetWishList']
+        if 'sourceCount' in arguments:
+            sourceCount = arguments['sourceCount']
+        else:
+            sourceCount = ''
+        company = models.Company(
+            companyName = companyName,
+            prettyName = prettyName,
+            url = url,
+            ceo = ceo,
+            city = city,
+            zipCode = zipCode,
+            state=state,
+            yearFounded = yearFounded,
+            fte = fte,
+            companyType = companyType,
+            revenueSource = revenueSource,
+            companyCategory = companyCategory,
+            description= description,
+            descriptionShort = descriptionShort,
+            financialInfo = financialInfo,
+            datasetWishList = datasetWishList,
+            sourceCount = sourceCount,
+            contact = contact,
+            lastUpdated = datetime.now(),
+            display = False, 
+            submittedSurvey = True,
+            vetted = False, 
+            vettedByCompany = True,
+            submittedThroughWebsite = True,
+            locked=False,
+            filters = filters,
+            country=country
+        )
+        company.save()
+        return company
+
+    def process_company(self, arguments, id):
+        try: 
+            c = models.Company.objects.get(id=bson.objectid.ObjectId(id))
+        except Exception, e:
+            logging.info("Error processing company: " + str(e))
+            return
+        #-------------------CONTACT INFO---------------
+        c.contact.firstName = arguments['firstName']
+        c.contact.lastName = arguments["lastName"]
+        c.contact.title = arguments['title']
+        c.contact.email = arguments['email']
+        c.contact.phone = arguments['phone']
+        c.contact.contacted = True if 'contacted' in arguments else False
+        #-------------------CEO INFO---------------
+        c.ceo.firstName = arguments['ceoFirstName']
+        c.ceo.lastName = arguments['ceoLastName']
+        c.ceo.title = 'CEO'
+        #-------------------COMPANY INFO---------------
+        c.url = arguments['url']
+        c.companyName = arguments['companyName'] if 'companyName' in arguments else c.companyName
+        c.prettyName = re.sub(r'([^\s\w])+', '', c.companyName).replace(" ", "-").title()
+        c.city = arguments['city']
+        c.zipCode = arguments['zipCode']
+        c.state = arguments['state']
+        c.country = country_keys[arguments['country']]
+        if 'companyType' in arguments:
+            c.companyType = arguments['otherCompanyType'] if arguments['companyType'] == 'Other' else arguments['companyType']
+        else:
+            c.companyType = ''
+        c.yearFounded = 0 if not arguments['yearFounded'] else arguments['yearFounded']
+        c.fte = 0 if not arguments['fte'] else arguments['fte']
+        if 'revenueSource' in arguments:
+            c.revenueSource = [] if not arguments['revenueSource'] else arguments['revenueSource'].split(',')
+            if 'Other' in c.revenueSource:
+                del c.revenueSource[c.revenueSource.index('Other')]
+                c.revenueSource.append(arguments['otherRevenueSource'])
+        else:
+            c.revenueSource = []
+        if 'category' in arguments:
+            c.companyCategory = arguments['otherCategory'] if arguments['category'] == 'Other' else arguments['category']
+        else:
+            c.companyCategory = ''
+        c.filters = [c.companyCategory, c.state, "survey-company"]
+        c.description = arguments['description']
+        c.descriptionShort = arguments['descriptionShort']
+        c.financialInfo = arguments['financialInfo']
+        c.datasetWishList = arguments['datasetWishList']
+        if 'sourceCount' in arguments:
+            c.sourceCount = arguments['sourceCount']
+        else:
+            c.sourceCount = ''
+        c.dataComments = arguments['dataComments'] if arguments['dataComments'] else c.dataComments
+        c.vetted = True if 'vetted' in arguments else False
+        c.display = True if 'display' in arguments else False
+        c.vettedByCompany = True if 'vettedByCompany' in arguments else False
+        c.submittedSurvey = True if 'submittedSurvey' in arguments else False
+        c.vettedByCompany = False if 'vettedByCompany' in arguments else True
+        c.locked = True if 'locked' in arguments else False
+        c.lastUpdated = datetime.now()
+        c.save()
+        return
+
+    def company_update_one(self, id, dictField, value):
+        return models.Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+dictField:value})
+
+    def company_has_agency(self, company, agency):
+        return company in agency.usedBy
+
+    def company_has_subagency(self, company, agency, subagency_name):
+        for s in agency.subagencies:
+                if s.name == subagency_name:
+                    return company in s.usedBy
+
+    def add_agency_to_company(self, company, agency):
+        if agency not in company.agencies:
+            company.agencies.append(agency)
+            company.lastUpdated = datetime.now()
+            if agency.prettyName not in company.filters:
+                company.filters.append(agency.prettyName)
+        if company not in agency.usedBy:
+            agency.usedBy.append(company)
+            agency.usedBy_count = len(agency.usedBy)
+        agency.save()
+        company.save()
+        return
+
+    def add_subagency_to_company(self, company, agency, subagency_name):
+        if agency not in company.agencies:
+            company.agencies.append(agency)
+        if company not in agency.usedBy:
+            agency.usedBy.append(company)
+        for s in agency.subagencies:
+            if s.name == subagency_name:
+                if company not in s.usedBy:
+                    s.usedBy.append(company)
+        agency.save()
+        company.save()
+
+    def remove_specific_dataset_from_company(self, company, agency, subagency_name, dataset_name):
+        if subagency_name == '':
+            for d in agency.datasets:
+                if d.datasetName == dataset_name:
+                    agency.datasets.remove(d)
+        else:
+            for s in agency.subagencies:
+                if s.name == subagency_name:
+                    for d in s.datasets:
+                        if d.datasetName == dataset_name:
+                            s.datasets.remove(d)
+        agency.save()
+        company.lastUpdated = datetime.now() #Update Company's Time of Last Edit
+        company.save()
+
+    def remove_all_datasets_from_company(self, company, agency):
+        for d in agency.datasets:
+            if company == d.usedBy:
+                self.remove_specific_dataset_from_company(company, agency, '', d.datasetName)
+        for s in agency.subagencies:
+            for d in s.datasets:
+                if company == d.usedBy:
+                    self.remove_specific_dataset_from_company(company, agency, s.name, d.datasetName)
+        company.lastUpdated = datetime.now()
+        company.save()
+        agency.save()
+
+    def remove_subagency_datasets_from_company(self, company, agency, subagency_name):
+        temp = []
+        for s in agency.subagencies:
+            if s.name == subagency_name:
+                for d in s.datasets:
+                    if company != d.usedBy:
+                        temp.append(d)
+                s.datasets = temp
+        agency.save()
+        company.lastUpdated = datetime.now()
+        company.save()
+
+    def remove_subagency_from_company(self, company, agency, subagency_name):
+        self.remove_subagency_datasets_from_company(company, agency, subagency_name)
+        for s in agency.subagencies:
+            if company in s.usedBy and s.name == subagency_name:
+                s.usedBy.remove(company)
+        agency.save()
+        company.lastUpdated = datetime.now()
+        company.save()
+
+    def remove_agency_from_company(self, company, agency):
+        self.remove_all_datasets_from_company(company, agency)
+        for s in agency.subagencies:
+            self.remove_subagency_from_company(company, agency, s.name)
+        if agency in company.agencies:
+            company.agencies.remove(agency)
+        if agency.prettyName in company.filters:
+            company.filters.remove(agency.prettyName)
+        if company in agency.usedBy:
+            agency.usedBy.remove(company)
+            agency.usedBy_count = len(agency.usedBy)
+        agency.save()
+        company.lastUpdated = datetime.now()
+        company.save()
+
+    def edit_dataset(self, agency, subagency_name, dataset_name, previous_dataset_name, dataset_url, rating):
+        logging.info("rating: " + str(rating) + " " + str(type(rating)))
+        if subagency_name:
+            for s in agency.subagencies:
+                if s.name == subagency_name:
+                    for d in s.datasets:
+                        if d.datasetName == previous_dataset_name:
+                            d.datasetName = dataset_name
+                            d.datasetURL = dataset_url
+                            d.rating = rating
+        if subagency_name == '':
+            for d in agency.datasets:
+                if d.datasetName == previous_dataset_name:
+                    d.datasetName = dataset_name
+                    d.datasetURL = dataset_url
+                    d.rating = rating
+        agency.save()
+
+    def add_dataset(self, company, agency, subagency_name, dataset_name, dataset_url, rating):
+        dataset = models.Dataset(
+                datasetName = dataset_name,
+                datasetURL = dataset_url,
+                rating = rating,
+                usedBy = company)
+        if subagency_name == '':
+                agency.datasets.append(dataset)
+        else:
+            for s in agency.subagencies:
+                if subagency_name == s.name:
+                    s.datasets.append(dataset)
+        agency.save()
 
 class StatsGenerator(object):
+    def create_new_stats(self, country):
+        stats = models.Stats()
+        stats.country = country
+        stats.lastUpdate = datetime.now()
+        stats.totalCompanies = 0
+        stats.totalCompaniesWeb = 0
+        stats.totalCompaniesSurvey = 0
+        stats.totalCompaniesDisplayed = 0
+        stats.totalAgencies = 0
+        stats.save()
+        self.update_all_state_counts(country)
+
     def get_total_companies(self, country):
         return models.Stats.objects.get(country=country).totalCompanies
     
@@ -47,11 +371,24 @@ class StatsGenerator(object):
     def get_total_companies_surveys(self, country):
         return models.Stats.objects.get(country=country).totalCompaniesSurvey
 
+    def get_total_displayed_companies(self, country):
+        return models.Stats.objects.get(country=country).totalCompaniesDisplayed
+
+    def get_total_agencies(self, country):
+        return models.Stats.objects.get(country=country).totalAgencies
+
+    def update_total_agencies(self, country):
+        s = models.Stats.objects.get(country=country)
+        s.totalAgencies = models.Agency.objects(country=country).count()
+        s.save()
+
     def update_totals_companies(self, country):
         s = models.Stats.objects.get(country=country)
         s.totalCompanies = models.Company.objects(country=country).count()
         s.totalCompaniesWeb = models.Company.objects(Q(submittedThroughWebsite = True) & Q(country=country)).count()
         s.totalCompaniesSurvey = models.Company.objects(Q(submittedSurvey = True) & Q(country=country)).count()
+        s.totalCompaniesDisplayed = models.Company.objects(Q(displayed=True) & Q(country=country)).count()
+        s.save()
     
     def increase_individual_state_count(self, state, country):
         stats = models.Stats.objects.get(country=country)
@@ -74,11 +411,11 @@ class StatsGenerator(object):
         for c in companies:
             stateCount.append(c.state)
         stats.states = []
-        for i in range(1, 53):
+        for i in range(1, len(stateList[country])):
             s = models.States(
-                name = stateList[i],
-                abbrev = stateListAbbrev[i],
-                count = stateCount.count(stateListAbbrev[i]))
+                name = stateList[country][i],
+                abbrev = stateListAbbrev[country][i],
+                count = stateCount.count(stateListAbbrev[country][i]))
             stats.states.append(s)
         stats.save()
 
@@ -87,16 +424,17 @@ class StatsGenerator(object):
         stats.totalCompanies = models.Company.objects(country=country).count()
         stats.totalCompaniesWeb = models.Company.objects(Q(submittedThroughWebsite = True) & Q(country=country)).count()
         stats.totalCompaniesSurvey = models.Company.objects(Q(submittedSurvey = True) & Q(country=country)).count()
+        stats.totalCompaniesDisplayed = models.Company.objects(Q(display=True) & Q(country=country)).count()
         companies  = models.Company.objects(Q(display=True) & Q(country=country))
         stateCount = []
         for c in companies:
             stateCount.append(c.state)
         stats.states = []
-        for i in range(1, 53):
+        for i in range(1, len(stateList[country])):
             s = models.States(
-                name = stateList[i],
-                abbrev = stateListAbbrev[i],
-                count = stateCount.count(stateListAbbrev[i]))
+                name = stateList[country][i],
+                abbrev = stateListAbbrev[country][i],
+                count = stateCount.count(stateListAbbrev[country][i]))
             stats.states.append(s)
         stats.lastUpdate = datetime.now()
         stats.save()
@@ -178,7 +516,7 @@ class FileGenerator(object):
         logging.info("Company JSON File Done!")
     def generate_agency_json(self, country):
         #--------------JSON OF AGENCIES------------
-        agencies = models.Agency.objects(Q(source="dataGov") & Q(country=country))
+        agencies = models.Agency.objects(country=country)
         agenciesJSON = []
         for a in agencies:
             #--------DATASETS AT AGENCY LEVEL------
@@ -356,10 +694,10 @@ class FileGenerator(object):
             csvwriter.writerow(newrow)
         logging.info("All Companies CSV File Done!")
 
-    def generate_agency_csv_2(self, country):
-        companies = models.Company.objects(Q(country=country))
-        agencies = models.Agency.objects(Q(source__not__exact="web") & Q(country=country))
-        csvwriter = csv.writer(open(os.path.join(os.path.dirname(__file__), 'static') + "/files/" + country + "_OD500_Agencies_2.csv", "w"))
+    def generate_agency_csv(self, country):
+        companies = models.Company.objects(Q(country=country) & Q(display=True))
+        agencies = models.Agency.objects(country=country)
+        csvwriter = csv.writer(open(os.path.join(os.path.dirname(__file__), 'static') + "/files/" + country + "_OD500_Agencies.csv", "w"))
         csvwriter.writerow([
             'agency_name',
             'agency_abbrev',
@@ -380,46 +718,49 @@ class FileGenerator(object):
         S = []
         for a in agencies:
             for d in a.datasets:
-                newrow = [
-                    a.name, 
-                    a.abbrev, 
-                    a.dataType, 
-                    "General", 
-                    "", 
-                    a.url, 
-                    index_of_companies[str(d.usedBy.id)][0],
-                    index_of_companies[str(d.usedBy.id)][1],
-                    d.datasetName,
-                    d.datasetURL
-                ]
-                AD.append(d.usedBy)
-                #write csv row here
-                for i in range(len(newrow)):  # For every value in our newrow
-                    if hasattr(newrow[i], 'encode'):
-                        newrow[i] = newrow[i].encode('utf8')
-                csvwriter.writerow(newrow)
+                if d.usedBy.display:
+                    newrow = [
+                        a.name, 
+                        a.abbrev, 
+                        a.dataType, 
+                        "General", 
+                        "", 
+                        a.url, 
+                        index_of_companies[str(d.usedBy.id)][0],
+                        index_of_companies[str(d.usedBy.id)][1],
+                        d.datasetName,
+                        d.datasetURL
+                    ]
+                    AD.append(str(d.usedBy.companyName + "|"+ a.name))
+                    #write csv row here
+                    for i in range(len(newrow)):  # For every value in our newrow
+                        if hasattr(newrow[i], 'encode'):
+                            newrow[i] = newrow[i].encode('utf8')
+                    csvwriter.writerow(newrow)
             for s in a.subagencies:
                 for d in s.datasets:
-                    newrow = [
-                    a.name, 
-                    a.abbrev, 
-                    a.dataType, 
-                    s.name, 
-                    s.abbrev, 
-                    s.url, 
-                    index_of_companies[str(d.usedBy.id)][0],
-                    index_of_companies[str(d.usedBy.id)][1],
-                    d.datasetName,
-                    d.datasetURL
-                ]
-                SD.append(d.usedBy)
-                #write csv row here
-                for i in range(len(newrow)):  # For every value in our newrow
-                    if hasattr(newrow[i], 'encode'):
-                        newrow[i] = newrow[i].encode('utf8')
-                csvwriter.writerow(newrow)
+                    if d.usedBy.display:
+                        newrow = [
+                            a.name, 
+                            a.abbrev, 
+                            a.dataType, 
+                            s.name, 
+                            s.abbrev, 
+                            s.url, 
+                            index_of_companies[str(d.usedBy.id)][0],
+                            index_of_companies[str(d.usedBy.id)][1],
+                            d.datasetName,
+                            d.datasetURL
+                        ]
+                        SD.append(str(d.usedBy.companyName + "|"+ s.name))
+                        SD.append(str(d.usedBy.companyName + "|"+ a.name))
+                        #write csv row here
+                        for i in range(len(newrow)):  # For every value in our newrow
+                            if hasattr(newrow[i], 'encode'):
+                                newrow[i] = newrow[i].encode('utf8')
+                        csvwriter.writerow(newrow)
                 for c in s.usedBy:
-                    if c not in SD:
+                    if str(c.companyName + "|"+s.name) not in SD and c.display:
                         newrow = [
                             a.name, 
                             a.abbrev, 
@@ -432,14 +773,14 @@ class FileGenerator(object):
                             "",
                             ""
                         ]
-                        S.append(d.usedBy)
+                        S.append(str(c.companyName + "|"+a.name))
                         #write csv row
                         for i in range(len(newrow)):  # For every value in our newrow
                             if hasattr(newrow[i], 'encode'):
                                 newrow[i] = newrow[i].encode('utf8')
                         csvwriter.writerow(newrow)
             for c in a.usedBy:
-                if c not in SD+AD+S:
+                if str(c.companyName + "|"+a.name) not in SD+AD+S and c.display:
                     newrow = [
                             a.name, 
                             a.abbrev, 
@@ -462,99 +803,6 @@ class FileGenerator(object):
         logging.info("Agency CSV File Done!")
 
 
-    def generate_agency_csv(self, country):
-        #--------CSV OF AGENCIES------
-        agencies = models.Agency.objects(source__not="web")
-        companies = models.Company.objects(Q(display=True) & Q(country=country))
-        csvwriter = csv.writer(open(os.path.join(os.path.dirname(__file__), 'static') + "/files/" + country + "_OD500_Agencies.csv", "w"))
-        csvwriter.writerow([
-            'agency_name',
-            'agency_abbrev',
-            'agency_type',
-            'subagency_name',
-            'subagency_abbrev',
-            'url',
-            'used_by',
-            'used_by_category',
-            'dataset_name',
-            'dataset_url'
-            ])
-        for c in companies:
-            if c.agencies: #if the company actually uses any agency info
-                for a in c.agencies:
-                    justAgency = True
-                    agency_name = a.name
-                    agency_abbrev = a.abbrev
-                    agency_type = a.dataType
-                    if a.datasets: #if there agency level datasets, make a row for those
-                        for d in a.datasets:
-                            if d.usedBy == c:
-                                subagency_name = 'General'
-                                subagency_abbrev = ''
-                                url = a.url
-                                used_by = c.companyName
-                                used_by_category = c.companyCategory
-                                dataset_name = d.datasetName
-                                dataset_url = d.datasetURL
-                                newrow = [agency_name, 
-                                    agency_abbrev, 
-                                    agency_type, 
-                                    subagency_name, 
-                                    subagency_abbrev, 
-                                    url, 
-                                    used_by, 
-                                    used_by_category, 
-                                    dataset_name, 
-                                    dataset_url]
-                                for i in range(len(newrow)):  # For every value in our newrow
-                                    if hasattr(newrow[i], 'encode'):
-                                        newrow[i] = newrow[i].encode('utf8')
-                                csvwriter.writerow(newrow)
-                                justAgency = False
-                    if a.subagencies: #if there are subagencies, make a row for those subagencies used by the company
-                        for s in a.subagencies:
-                            if c in s.usedBy:
-                                subagency_name = s.name
-                                subagency_abbrev = s.abbrev
-                                url = s.url
-                                if s.datasets: #if there are datasets in the subagency, make a row for those datasets used by the company:
-                                    for d in s.datasets:
-                                        if d.usedBy == c:
-                                            used_by = c.companyName
-                                            used_by_category = c.companyCategory
-                                            dataset_name = d.datasetName
-                                            dataset_url = d.datasetURL
-                                            newrow = [agency_name, agency_abbrev, agency_type, subagency_name, subagency_abbrev, url, used_by, used_by_category, dataset_name, dataset_url]
-                                            for i in range(len(newrow)):  # For every value in our newrow
-                                                if hasattr(newrow[i], 'encode'):
-                                                    newrow[i] = newrow[i].encode('utf8')
-                                            csvwriter.writerow(newrow)
-                                            justAgency = False
-                                else: #there are no datasets, just make a row with subagency and no datasets.
-                                    used_by = c.companyName
-                                    used_by_category = c.companyCategory
-                                    dataset_name = ''
-                                    dataset_url = ''
-                                    newrow = [agency_name, agency_abbrev, agency_type, subagency_name, subagency_abbrev, url, used_by, used_by_category, dataset_name, dataset_url]
-                                    for i in range(len(newrow)):  # For every value in our newrow
-                                        if hasattr(newrow[i], 'encode'):
-                                            newrow[i] = newrow[i].encode('utf8')
-                                    csvwriter.writerow(newrow)
-                                    justAgency = False
-                    if justAgency: #if company uses agency, but no specific dataset or subagency, then add row
-                        subagency_name = 'General'
-                        subagency_abbrev = ''
-                        url = a.url
-                        used_by = c.companyName
-                        used_by_category = c.companyCategory
-                        dataset_name = ''
-                        dataset_url = ''
-                        newrow = [agency_name, agency_abbrev, agency_type, subagency_name, subagency_abbrev, url, used_by, used_by_category, dataset_name, dataset_url]
-                        for i in range(len(newrow)):  # For every value in our newrow
-                            if hasattr(newrow[i], 'encode'):
-                                newrow[i] = newrow[i].encode('utf8')
-                        csvwriter.writerow(newrow)
-        logging.info("Agency CSV File Done!")
     def generate_sankey_json(self, country):
         #get qualifying agencies
         agencies = models.Agency.objects(Q(usedBy__not__size=0) & Q(source__not__exact="web") & Q(dataType="Federal")).order_by('name') #federal agencies from official list that are used by a company
@@ -679,7 +927,7 @@ class FileGenerator(object):
         logging.info("Visit CSV File Done!")
 
     def generate_agency_list(self, country):
-        agencies = models.Agency.objects(Q(country=country) & Q(source="dataGov"))
+        agencies = models.Agency.objects(Q(country=country) & Q(source__not__exact="web"))
         agency_list = []
         for a in agencies:
             label = [a.name, " (", a.abbrev, ")"]

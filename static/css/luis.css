@@ -177,11 +177,7 @@ survey/no survey hover and active states*/
   width: 300px;
 }
 
-.subagency-message {
-  color: red;
-}
-
-.agency-message {
+.error-message, .dataset-error-message, .agency-search-error-message, .response-message, .agency-message, .subagency-message {
   color: red;
 }
 
@@ -192,4 +188,28 @@ survey/no survey hover and active states*/
 
 .m-candidates-item.s-active {
   width: 45.5%
+}
+
+.m-homepage .m-banner-slider img {
+  z-index: 0;
+}
+
+
+#about-roundtables {
+  padding-bottom: 37px;
+}
+
+#about-next-steps {
+  border-bottom: 0px;
+  padding-bottom: 0px;
+}
+
+.m-main-menu .language {
+  float: right;
+}
+
+.m-main-menu .language a {
+  border: 0;
+  padding: 1px 5px;
+  margin: 4px 0;
 }

@@ -1,0 +1,428 @@
+{% extends "../../main.html" %}
+{% autoescape None %}
+
+{% block body %}
+
+
+
+<section id="candidate-warnings-and-download">
+	<h1>Open Data 500 Entreprises</h1>
+    <a href="/ca/list/?lan=english">English</a> <a href="/ca/list/?lan=french">French</a>
+    <div id="download-data" class="m-download-data">
+        <h2>Download the OD500 Data</h2>
+        <div>
+            <p>All Companies</p>
+            <p><a href="/download/us_OD500_Companies.json">JSON</a> | <a href="/download/us_OD500_Companies.csv">CSV</a></p>
+        </div>
+        <div><p>Agencies and Datasets</p>
+            <p><a href="/download/us_OD500_Agencies.json">JSON</a> | <a href="/download/us_OD500_Agencies.csv">CSV</a></p>
+        </div>
+    </div>
+	<div id="candidates-warning" class="warning">
+        <p><strong>How to use this page:</strong> Click on a square to expand it and read the brief company description. Click on a company's name to view more information and for a space to comment. Filter by state, company category and/or federal agency data usage.</p>
+    	<p><strong>Please Note:</strong> We expect to that this list may change as we learn more about how each company operates – that’s part of our open process. Many of these companies have not yet responded to our survey, so information about them may change as we receive more input from them and from others.</p>
+    </div>
+</section>
+
+<div class="m-candidates">        
+    <div class="m-filter-menu">
+        <h3>Federal Agency</h3>
+        <div id="filters-agency" class="m-candidates-buttons button-group" data-toggle="buttons-checkbox" data-filter-group="category">
+            <button data-filter="*">Clear Filter</button>
+            {% for agency in agencies %}
+                {% if len(agency.name.replace("Department", "Dept.").replace("Development", "Dev.")) > 32 and agency.abbrev %}
+                    <button data-filter=".{{agency.prettyName}}">{{agency.abbrev}}</button>
+                {%else%}
+                    <button data-filter=".{{agency.prettyName}}">{{agency.name.replace("Department", "Dept.").replace("Development", "Dev.").replace(" and ", " & ").replace(".", "")}}</button>
+                {%end%}
+            {%end%}
+        </div>
+    </div>
+
+    <div class="m-filter-menu">
+        <h3>Category</h3>
+        <div id="filters-category" class="m-candidates-buttons button-group" data-toggle="buttons-checkbox" data-filter-group="category">
+            <button data-filter="*">Clear Filter</button>
+            {% for category in categories %}
+                <button data-filter=".{{category.strip().replace(" ", "-").replace("/","").replace("&", "")}}">{{category}}</button>
+            {%end%}
+        </div>
+    </div>
+    <div id="chart"></div>
+    <div class="button-group legend" id="legend" data-filter-group="survey">
+        <span>Filter by:  </span>
+    	<button class="color survey" data-filter=".survey-company">Submitted Survey</button>
+    	<button class="color candidate" data-filter=":not(.survey-company)">No Survey Submitted</button>
+    	<button class="color all" data-filter="*">Clear Filter</button>
+        <button class="clear-all-filters">Clear All Filters</button>
+    </div>
+
+    <div id="spinner"></div>
+	<div class="m-candidates isotopes-container" data-isotope-options='{ "layoutMode": "fitColumns" }'>
+		{% for company in companies %}
+            <div class="m-candidates-item{%for f in company.filters %} {{f}}{%end%}">
+                <a href="/{{company.country}}/{{company.prettyName}}"><h3><strong>{{ company.companyName }}</strong></h3></a>
+                <p class="m-homepage-list-location"> {%try%}{{ states[company.state] }}{%except%}{%end%}</p>
+                <em> {{ company.companyCategory }}</em>
+                <p class="m-homepage-list-desc">{{ company.descriptionShort }}</p>
+			</div>
+		{%end%}
+	</div>
+</div>
+
+<div id="hidden" style="display:none;"><[{% for s in stats.states %}{% if s.abbrev == "PR" %}{"abbrev": "{{s.abbrev}}","STATE":"{{s.name}}","VALUE":"{{s.count}}"}{%else%}{"abbrev": "{{s.abbrev}}","STATE":"{{s.name}}","VALUE":"{{s.count}}"},{%end%}{%end%}]></[{%for s in stats.states %}{% if s.abbrev == "PR" %}{"abbrev": "{{s.abbrev}}","STATE":"{{s.name}}","VALUE":"{{s.count}}"}{%else%}{"abbrev": "{{s.abbrev}}","STATE":"{{s.name}}","VALUE":"{{s.count}}"},{%end%}{%end%}]></div>
+
+
+<script src="{{ static_url("js/d3.v3.min.js") }}"></script>
+<script src="{{ static_url("js/queue.v1.min.js") }}"></script>
+<script src="{{ static_url("js/isotope.pkgd.min.js") }}"></script>
+<script src="{{ static_url("js/spin.min.js") }}"></script>
+
+<script>
+(function(){
+    //--------FIGURE THIS OUT LATER
+    // var opts = {
+    //     lines: 13, // The number of lines to draw
+    //     length: 17, // The length of each line
+    //     width: 10, // The line thickness
+    //     radius: 33, // The radius of the inner circle
+    //     corners: 1, // Corner roundness (0..1)
+    //     rotate: 0, // The rotation offset
+    //     direction: 1, // 1: clockwise, -1: counterclockwise
+    //     color: '#000', // #rgb or #rrggbb or array of colors
+    //     speed: 1, // Rounds per second
+    //     trail: 60, // Afterglow percentage
+    //     shadow: false, // Whether to render a shadow
+    //     hwaccel: false, // Whether to use hardware acceleration
+    //     className: 'spinner', // The CSS class to assign to the spinner
+    //     zIndex: 2e9, // The z-index (defaults to 2000000000)
+    //     top: 'auto', // Top position relative to parent in px
+    //     left: '50%' // Left position relative to parent in px
+    // };
+    // var target = document.getElementById('spinner');
+    // var spinner = new Spinner(opts).spin();
+
+
+	var $container = $('.isotopes-container').isotope({
+		layoutMode: 'fitRows',
+		resizesContainer : false,
+	});
+    var filters = [];
+    var filtr = '';
+
+
+	// filter items on button click
+	$('#filters-category').on( 'click', 'button', function( event ) {
+        filtr = $(this).attr('data-filter');
+        if ($(this).hasClass('s-active')) { //already active, deactivate
+            $(this).removeClass('s-active');
+            filters.splice(filters.indexOf($(this).attr('data-filter')), 1)
+        } else { //not active, activate it
+            $("#filters-category button").each(function() { //remove all previous filters of the kind
+                var i = filters.indexOf($(this).attr('data-filter'));
+                if( i > -1) {
+                    filters.splice(i, 1)
+                } 
+            });
+            filters.push(filtr);
+            console.log(filters.join(''));
+            //re-draw isotopes
+            $("#filters-category button").removeClass('s-active');
+            $(this).addClass('s-active');
+        }
+        $container.isotope({ filter: filters.join('') });
+	});
+
+
+    //filter by agency
+    $('#filters-agency').on( 'click', 'button', function( event ) {
+        filtr = $(this).attr('data-filter');
+        if (filtr == "*") {
+            $("#filters-agency button").each(function() { //remove all previous filters of the kind
+                var i = filters.indexOf($(this).attr('data-filter'));
+                if( i > -1) {
+                    filters.splice(i, 1)
+                }
+                $(this).removeClass('s-active'); 
+            });
+        } else if ($(this).hasClass('s-active')) { //already active, deactivate
+            $(this).removeClass('s-active');
+            filters.splice(filters.indexOf($(this).attr('data-filter')), 1)
+        } else { //not active, activate it
+            filters.push(filtr);
+            console.log(filters.join(''));
+            //re-draw isotopes
+            //$("#filters-category button").removeClass('s-active');
+            $(this).addClass('s-active');
+        }
+        $container.isotope({ filter: filters.join('') });
+    });
+
+	// filter items by survey type
+	$('#legend').on( 'click', 'button', function( event ) {
+        var filtr = $(this).attr('data-filter');
+        if ($(this).hasClass('s-active')) {
+            $(this).removeClass('s-active');
+            filters.splice(filters.indexOf($(this).attr('data-filter')), 1)
+        } else {
+            $('#legend button').each(function() {
+                var i = filters.indexOf($(this).attr('data-filter'));
+                if( i > -1) {
+                    filters.splice(i, 1)
+                }
+            });
+            $('#legend button').removeClass('s-active');
+            $(this).addClass('s-active');
+            filters.push(filtr);
+            console.log(filters.join(''))
+        }
+	  $container.isotope({ filter: filters.join('') });
+	});
+
+	// $('.states').on('click', 'path', function(event) {
+	// 	var filtr = $(this).attr('class').split(' ')[1];
+	// 	//$container.isotope({ filter: filtr });
+	// 	console.log(filtr);
+	// });
+
+	$container.delegate( '.m-candidates-item', 'click', function(){
+			//$('.m-candidates-item.large').removeClass('large');
+	        $(this).toggleClass('s-active');
+	        $container.isotope();
+	});
+            
+    var userData = document.getElementById('hidden').textContent.replace('<','').replace('>','');
+    userData = JSON.parse(userData)
+    data = userData
+    
+    createChart = function(){
+        var hoverDisplay = "State &amp; Value".replace('&amp;', '&')
+        
+        //General chart
+        this.Title = '500 Companies';
+        this.Size = 600;
+        this.MarginTop = 60;
+        this.MarginRight = 0;
+        this.MarginBottom = 40;
+        this.MarginLeft = -61;
+        this.Guide = false;
+        this.DataType = 'Number';
+        this.BackgroundColor = 'transparent';
+        //States
+        this.StateBaseColor = '#eeeeee';
+        this.StateMaxColor = '#4a2f76';
+        this.Range = 10;
+        this.LineThickness = .6;
+        this.LineColor = '#888';
+        //Labels
+        this.ChartTitle = true;
+        this.ChartTitleText = 'Filter By State';
+        this.ChartTitleXLocation = 'Center';
+        this.ChartTitleYLocation = 0;
+        this.ChartTitleFont = 'Arial';
+        this.ChartTitleSize = 24;
+        this.ChartTitleColor = '#472b74';
+        this.PointLabel = true;
+        this.PointLabelLocation = -10;
+        this.PointLabelFont = 'Arial';
+        this.PointLabelSize = 14;
+        this.PointLabelColor = '#000000';
+        //Hover State
+        this.HoverStates = true;
+        this.HoverDisplay = hoverDisplay;
+        this.HoverLabelFont = 'Arial';
+        this.HoverLabelSize = 10;
+        this.HoverLabelColor = '#000000';
+        this.HoverValueFont = 'Arial';
+        this.HoverValueSize = 16;
+        this.HoverValueColor = '#000000';
+        
+        this.mainChart = function() {
+        
+            var height = 550;
+            var width = 950;
+            
+            var size = this.Size/width,
+                marginTop = this.MarginTop,
+                marginRight = this.MarginRight,
+                marginBottom = this.MarginBottom,
+                marginLeft = this.MarginLeft,
+                guideOn = this.Guide,
+                dataType = this.DataType,
+                backgroundColor = this.BackgroundColor,
+                stateBaseColor = this.StateBaseColor,
+                stateMaxColor = this.StateMaxColor,
+                range = this.Range,
+                lineThickness = this.LineThickness,
+                lineColor = this.LineColor,
+                chartTitle = this.ChartTitle,
+                chartTitleText = this.ChartTitleText,
+                chartTitleXLoc = this.ChartTitleXLocation,
+                chartTitleYLoc = this.ChartTitleYLocation,
+                chartTitleFont = this.ChartTitleFont,
+                chartTitleSize = this.ChartTitleSize,
+                chartTitleColor = this.ChartTitleColor,
+                pointLabelLoc = this.PointLabelLocation,
+                pointLabelFont = this.PointLabelFont,
+                pointLabelSize = this.PointLabelSize,
+                pointLabelColor = this.PointLabelColor,
+                hoverStates = this.HoverStates,
+                hoverDisplay = this.HoverDisplay,
+                hoverLabelFont = this.HoverLabelFont,
+                hoverLabelSize = this.HoverLabelSize,
+                hoverLabelColor = this.HoverLabelColor,
+                hoverValueFont = this.HoverValueFont,
+                hoverValueSize = this.HoverValueSize,
+                hoverValueColor = this.HoverValueColor;
+                
+            var margin = {top: marginTop, right: marginRight, bottom: marginBottom, left: marginLeft},
+                w = (width*size) + margin.left + margin.right,
+                h = (height*size) + margin.top + margin.bottom;
+                
+            var bkgdColor = document.getElementsByTagName("body")[0];
+            bkgdColor.setAttribute("style","background-color:" + backgroundColor + ";margin:0px;");
+
+            var elem = document.getElementById("chart");
+            elem.setAttribute("style","width:40% height:" + h + "px; margin: 0px;");
+            
+            var graph = d3.select('#chart').append('svg')
+                .attr('width', w)
+                .attr('height', h);
+                
+            //Background Color
+            graph.append("svg:rect")
+                .attr("class", "bkgd")
+                .attr("width", w)
+                .attr("height", h)
+                .style("fill", "none");
+                
+            var group = graph.append('g');
+            
+            var hover = d3.select("#chart")
+                .append("div")
+                .attr("class", "tooltip")
+                .style("position", "absolute")
+                .style("z-index", "1000")
+                .style("padding", "5px")
+                .style("font-family", hoverLabelFont)
+                .style("font-size", hoverLabelSize)
+                .style("color", hoverLabelColor);
+                
+            queue()
+                .defer(d3.json, "{{ static_url("files/us_states.json") }}")
+                .await(ready);
+                
+            var numberFormat = d3.format("0,000");
+            var percentFormat = function(d) { return numberFormat(d) + "%"; };
+            var dollarFormat = function(d) { return "$" + numberFormat(d); };
+            
+            var projection = d3.geo.albersUsa();
+            var path = d3.geo.path()
+                .projection(projection);
+                
+            group.attr('transform', 'translate(' + margin.left + ', ' + margin.top + '),scale(' + size + ', ' + size + ')');
+            
+            var color = d3.scale.linear().domain([0,range]).range([stateMaxColor, stateBaseColor]);
+            
+            var maxVal = d3.max(data, function(d) { return d.VALUE; });
+            var minVal = d3.min(data, function(d) { return d.VALUE; });
+            var total = maxVal - minVal;
+            
+            var number = d3.format("0,000");
+            
+            function ready(error, us, _data) {
+            
+                group.selectAll('path')
+                    .data(us.features)
+                    .enter().append('path')
+                    .attr('class', 'states')
+                    .attr('d', d3.geo.path().projection(projection))
+                    //.attr('id', function(d){return d.properties.name.replace(/\s+/g, '')})
+                    .style('stroke', lineColor)
+                    .style('stroke-width', lineThickness/size);
+                    
+                var states = group.selectAll('.states')
+                    .data(data)
+                    .style('fill', function(d){return color( total/d.VALUE )})
+                    .attr('name', function(d) { return d.abbrev; })
+                    .on("mouseover", function(d, i) {   
+                        //console.log(d.VALUE + " : " + total/d.VALUE + " : " + color(d.VALUE));
+                        hover.transition().duration(100).style("opacity", 1)
+                            .style("background-color", "#aaaaaa")
+                            .style("left", (d3.event.pageX) + 20 + "px")
+                            .style("top", (d3.event.pageY) + "px");
+                        hover.html(d.STATE + "<br><span style='font-size:" + hoverValueSize + "; font-family:" + hoverValueFont + ";color:" + hoverValueColor + ";'>" + numberFormat(d.VALUE) + "</span>");
+                    })
+                    .on("mouseout", function(d) { if (hoverStates == true) hover.style("left", -100).style("top", -100).transition().duration(100).style("opacity", 0); })
+                    .on("mousemove", function(d, i) { if (hoverStates == true)hover.style("left", (d3.event.pageX) + 20 + "px").style("top", (d3.event.pageY) + "px"); });
+                    // .on('click', function(d) { 
+                    //     var filtr = "." + d.abbrev;
+                    //     $container.isotope({ filter: filtr }); 
+                    //     console.log(d.abbrev); 
+                    //     $("#filters button").removeClass('s-active');
+                    // });
+                
+                states.on('click', function(s) {
+                    var filtr = '.' + this.getAttribute('name');
+                    if(this.attributes.class.value == "states s-active") { //if clicking on the same state, remove active class and remove filter from filters
+                        filters.splice(filters.indexOf('.'+s.abbrev), 1);
+                        d3.select(this)
+                            .attr("class", "states").style("stroke", '#888').style("stroke-width", ".95px")
+                    } else { //state previously inactive, activate, and remove from filter list
+                        d3.select(this).attr("class", "states s-active");
+                        d3.selectAll('.states')
+                            .each(function(d) { 
+                                var i = filters.indexOf('.'+d.abbrev)
+                                if (i > -1) { //remove all states in filter array
+                                    filters.splice(i, 1);
+                                    console.log('removed: ' +d.abbrev)
+                                }
+                            })
+                            .filter(function(d, i) { return  d != s }) //remove active class from other states
+                            .attr("class", "states").style("stroke", '#888').style("stroke-width", ".95px");
+                        filters.push(filtr);
+                    }
+                    //d3.select(".states").style("stroke", '#888').style("stroke-width", ".95px")
+                    d3.select(".states.s-active").style("stroke", "black").style("stroke-width", 4)
+                    console.log(filters);
+                    $container.isotope({ filter: filters.join('') });
+                });
+
+                //clear filters
+                $('#legend').on("click", ".clear-all-filters", function(event) {
+                    filters = [];
+                    d3.select(".states.s-active").style("stroke", '#888').style("stroke-width", ".95px");
+                    $('.s-active').removeClass('s-active');
+                    $container.isotope({ filter: '' });
+                });
+
+                if (chartTitleXLoc == "Left") { var cxpos = margin.left; var ctextanchor = "start"; };
+                if (chartTitleXLoc == "Center") { var cxpos = (w - margin.right - margin.left)/2 + margin.left; var ctextanchor = "middle"; };
+                if (chartTitleXLoc == "Right") { var cxpos = (w - margin.right - margin.left) + margin.left; var ctextanchor = "end"; };
+                
+                if (chartTitle == true) {
+                graph.append("text")
+                    .attr("transform", "translate(" + cxpos + "," + (margin.top + chartTitleYLoc) + ")")
+                    .style({ 'text-anchor': ctextanchor, 'font-family': chartTitleFont, 'font-size': chartTitleSize, 'fill': chartTitleColor})
+                    .text(chartTitleText);
+                }
+                
+            }
+            
+        };
+        
+            this.updateChart = function(){
+                d3.select("svg").remove()
+                this.mainChart()
+            };  
+        };
+        
+    var chart = new createChart()         
+    chart.mainChart()
+})()</script>
+
+
+
+
+
+{% end %}

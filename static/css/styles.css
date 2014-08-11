@@ -253,7 +253,7 @@ a:hover {
     right: -30px; }
 .m-homepage .m-banner-slider {
   margin-bottom: 50px;
-  height: 241px;
+  height: 347px;
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2); }
   .m-homepage .m-banner-slider img {
     position: relative;
@@ -985,6 +985,12 @@ a:hover {
     font-weight: 100;
     line-height: 38px;
     font-style: italic; }
+#roundtables .host-agency-logo {
+  text-align: center;
+  margin: 30px 0 0;
+  clear: both; }
+  #roundtables .host-agency-logo img {
+    width: 120px; }
 #roundtables section {
   padding-bottom: 23px;
   margin-bottom: 35px;
@@ -998,7 +1004,8 @@ a:hover {
   margin-left: 30px;
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.2); }
 #roundtables .event-title h1 {
-  margin-bottom: 0; }
+  margin-bottom: 0;
+  font-size: 3.3em; }
 #roundtables .event-title h2 {
   font-weight: 100;
   text-align: center;
@@ -1062,6 +1069,11 @@ a:hover {
       line-height: 20px; }
   #roundtables .roundtable-attendees li:nth-child(2n) {
     margin-right: 0; }
+#roundtables .invitation-disclaimer {
+  font-family: "Exo", sans-serif;
+  font-weight: 100;
+  font-size: 18px;
+  line-height: 25px; }
 
 .drop-cap:first-letter {
   line-height: 86px;
@@ -1112,10 +1124,52 @@ a:hover {
       font-size: 16px;
       line-height: 22px; }
     .event-picture-container figcaption em {
-      color: rgba(255, 255, 255, 0.7); }
+      color: white; }
 
 #roundtables-first-paragraph {
   letter-spacing: -0.05px; }
+
+.country-homepage .m-main-menu {
+  text-align: center; }
+  .country-homepage .m-main-menu .language {
+    float: right; }
+    .country-homepage .m-main-menu .language a {
+      border: 0;
+      border-right: 1px solid rgba(255, 255, 255, 0.7);
+      padding: 1px 5px;
+      margin: 4px 0; }
+      .country-homepage .m-main-menu .language a:last-of-type {
+        border-right: 0; }
+.country-homepage #consortium-logo {
+  width: 600px; }
+.country-homepage section {
+  padding-bottom: 23px;
+  margin-bottom: 35px;
+  border-bottom: 1px solid #aaaaaa; }
+  .country-homepage section:first-of-type {
+    padding-top: 23px;
+    margin-top: 35px;
+    border-top: 1px solid #aaaaaa; }
+  .country-homepage section p {
+    font-size: 16px;
+    line-height: 22px; }
+.country-homepage .country-logo h2 {
+  margin-left: 85px;
+  font-weight: 100;
+  margin-top: -5px;
+  font-size: 30px; }
+.country-homepage .country-logo .country-flag {
+  width: 60px;
+  margin-bottom: -5px;
+  margin-right: 10px; }
+.country-homepage .more {
+  text-align: right;
+  margin-bottom: 0; }
+.country-homepage .m-half {
+  width: 46.875%;
+  margin-right: 35px; }
+  .country-homepage .m-half:nth-of-type(even) {
+    margin-right: 0; }
 
 body {
   margin: 0; }
