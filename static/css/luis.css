@@ -218,4 +218,6 @@ survey/no survey hover and active states*/
   max-width: 970px;
 }
 
-
+.m-homepage .first-title {
+  font-size: 5.2em;
+}
