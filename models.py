@@ -11,7 +11,7 @@ class Person(EmbeddedDocument):
 	email = StringField()
 	phone = StringField()
 	org = StringField()
-	contacted = BooleanField()
+	contacted = BooleanField() # <--------DEPRECATE
 
 class Company(Document):
 	companyName = StringField()
