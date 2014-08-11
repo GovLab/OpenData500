@@ -213,3 +213,9 @@ survey/no survey hover and active states*/
   padding: 1px 5px;
   margin: 4px 0;
 }
+
+.l-centered {
+  max-width: 970px;
+}
+
+
