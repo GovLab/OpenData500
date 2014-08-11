@@ -1195,29 +1195,66 @@ header {
 #container {
   min-height: 460px; }
 
+.logo {
+  border: 0;
+  float: left;
+  margin-top: -5px;
+  padding: 0; }
+  .logo img {
+    width: 109px; }
+
+.logo:hover {
+  background-color: transparent; }
+
 .m-main-menu {
-  font-size: 0; }
-  .m-main-menu a {
+  font-size: 0;
+  margin-top: 4px; }
+  .m-main-menu .m-main-menu-item {
     font-size: 12px;
-    padding: 5px 20px;
+    padding: 5px 0 4px;
     color: #fff;
     text-transform: uppercase;
     display: inline-block;
+    position: relative;
     border-right: 2px solid #8977a7; }
-  .m-main-menu a:hover {
+  .m-main-menu .m-main-menu-item a {
+    font-size: 12px;
+    padding: 5px 20px;
+    color: #fff;
+    text-transform: uppercase; }
+  .m-main-menu .m-main-menu-sub-menu {
+    display: none;
+    position: absolute;
+    background-color: #8977a7;
+    margin-top: 4px;
+    top: 21px;
+    left: -2px;
+    width: 161px;
+    padding: 0;
+    cursor: pointer;
+    border: 1px solid #472b74;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.2); }
+    .m-main-menu .m-main-menu-sub-menu li {
+      list-style: none; }
+    .m-main-menu .m-main-menu-sub-menu .m-main-menu-sub-menu-item {
+      font-size: 12px;
+      padding: 7px 20px;
+      color: #fff;
+      text-transform: uppercase;
+      text-align: left;
+      display: block; }
+    .m-main-menu .m-main-menu-sub-menu .m-main-menu-sub-menu-item:hover {
+      background-color: #472b74; }
+  .m-main-menu #submenu-about {
+    width: 182px; }
+  .m-main-menu .m-main-menu-item:hover .m-main-menu-sub-menu,
+  .m-main-menu .m-main-menu-sub-menu:hover {
+    display: block; }
+  .m-main-menu .m-main-menu-item a:hover {
     background-color: #8977a7;
     color: #fff; }
-  .m-main-menu a:last-child {
+  .m-main-menu .m-main-menu-item:last-child {
     border-right: 0; }
-  .m-main-menu .logo {
-    border: 0;
-    float: left;
-    margin-top: -5px;
-    padding: 0; }
-    .m-main-menu .logo img {
-      width: 109px; }
-  .m-main-menu .logo:hover {
-    background-color: transparent; }
 
 .m-page-title {
   font-size: 2.3em;
