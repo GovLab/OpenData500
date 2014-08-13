@@ -7,6 +7,8 @@
 
 <section class="submitDescription">
 	<h1>Open Data 500 <br>Company Survey</h1>
+	<p>The Open Data 500, funded by the Knight Foundation and conducted by the GovLab, is the first comprehensive study of U.S. companies that use open government data to generate new business and develop new products and services. The goal is to (1) provide a basis for assessing the economic value of government data; (2) encourage the development of new open data companies; and (3) foster a dialogue between government and business on how government data can be made more useful.</p>
+	<p>By participating in this study, your company can become part of a widely used resource for other businesses, investors, and the media to identify companies that are using Open Data in innovative ways. You will also be able to give feedback to government agencies whose data you use, and help us make government data more accessible, usable, and attuned to business needs.</p>
 
 	<p><strong>To qualify for the Open Data 500, a company must:</strong></p>
 	<ul>
@@ -48,7 +50,7 @@
 			<span class='company-name-error'></span>
 		</div>
 		<div class="m-form-line"><label for="url">Company URL: *</label><input type='text' name="url" id='url' data-parsley-trigger="change" data-parsley-type="url" required></div>
-		<div class="m-form-line"><label for="city">In which city is your company's headquarters located?</label><input type="text" name="city" id="city"></div>
+		<div class="m-form-line"><label for="city">In which city is this company located?</label><input type="text" name="city" id="city"></div>
 		<div class="m-form-line">
 			<label for="state">State: *</label>
 			<select name='state' id="state" required>
@@ -78,23 +80,12 @@
 		<div class="m-form-line"><label for="">Number of full-time employees: *</label><input type="text" name="fte" id="fte" data-parsley-trigger="focusout" data-parsley-type="number" required></div>
 	</fieldset>
 	
-	<!--*****************************************************************-BUSINESS MODEL-***************************************************************** !-->
-	<fieldset class="m-form-half">
-		<h3>Business Model <br><em>(check all that apply)</em> *</h3>
-		<div class="business-model-field">
-			{% for model in business_models %}
-				<input type="checkbox" id="{{model}}" name="businessModel" value="{{model}}" data-parsley-group="businessModel" /><label for="{{model}}">{{model}}</label><br>
-			{% end %}
-			<input type="checkbox" id="other_model" name="businessModel" value="Other" data-parsley-mincheck="1" data-parsley-group='businessModel' data-parsley-trigger="change" required><label for="Other">Other</label>
-			<input type="text" name="otherBusinessModel" id="other_model_text_field" />
-		</div>
-		<br>
-
 	<!--*****************************************************************-REVENUE SOURCES-***************************************************************** !-->
+	<fieldset class="m-form-half">
 		<h3>Which of the following are significant sources of revenue for your company? <br><em>(check all that apply)</em> *</h3>
 		<div class="revenue-source-field">
-			{% for i in range(0, len(new_revenueSource)) %}
-				<input type="checkbox" id="{{new_revenueSource[i]}}" name="revenueSource" value="{{new_revenueSource[i]}}" data-parsley-group="revenueSource" /><label for="{{new_revenueSource[i]}}">{{new_revenueSource[i]}}</label><br>
+			{% for i in range(0, len(revenueSource)) %}
+				<input type="checkbox" id="{{revenueSource[i]}}" name="revenueSource" value="{{revenueSource[i]}}" data-parsley-group="revenueSource" /><label for="{{revenueSource[i]}}">{{revenueSource[i]}}</label><br>
 			{% end %}
 			<input type="checkbox" id="other_revenue" name="revenueSource" value="Other" data-parsley-mincheck="1" data-parsley-group='revenueSource' data-parsley-trigger="change" required><label for="Other">Other</label>
 			<input type="text" name="otherRevenueSource" id="other_revenue_text_field" />
