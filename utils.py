@@ -17,6 +17,8 @@ companyType = ['Public', 'Private', 'Nonprofit']
 companyFunction = ['Consumer Research and/or Marketing', 'Consumer Services', 'Data Management and Analysis', 'Financial/Investment Services', 'Information for Consumers']
 criticalDataTypes = ['Federal Open Data', 'State Open Data', 'City/Local Open Data', 'Private/Proprietary Data Sources']
 revenueSource = ['Advertising', 'Data Management and Analytic Services', 'Database Licensing', 'Lead Generation To Other Businesses', 'Philanthropy', 'Software Licensing', 'Subscriptions', 'User Fees for Web or Mobile Access']
+new_revenueSource = ["Advertising", "Consulting", "Contributions/Donations", "Data analysis for clients", "Database licensing", "Government contract", "Lead generation to other businesses", "Membership fees", "Philanthropic grants", "Software licensing", "Subscriptions", "User fees for web or mobile access"]
+business_models = ['Business to Business', 'Business to Consumer', 'Business to Government']
 sectors = ['Agriculture', 'Arts, Entertainment and Recreation' 'Crime', 'Education', 'Energy', 'Environmental', 'Finance', 'Geospatial data/mapping', 'Health and Healthcare', 'Housing/Real Estate', 'Manufacturing', 'Nutrition', 'Scientific Research', 'Social Assistance', 'Trade', 'Transportation', 'Telecom', 'Weather']
 datatypes = ['Federal Open Data', 'State Open Data', 'City/Local Open Data']
 categories = ['Business & Legal Services', 'Data/Technology', 'Education', 'Energy', 'Environment & Weather', 'Finance & Investment', 'Food & Agriculture', 'Geospatial/Mapping', 'Governance', 'Healthcare', 'Housing/Real Estate', 'Insurance', 'Lifestyle & Consumer', 'Research & Consulting', 'Scientific Research', 'Transportation']
@@ -103,6 +105,13 @@ class Form(object):
             companyType = ''
         yearFounded = 0 if not arguments['yearFounded'] else arguments['yearFounded']
         fte = 0 if not arguments['fte'] else arguments['fte']
+        if 'businessModel' in arguments:
+            businessModel = [] if not arguments['businessModel'] else arguments['businessModel'].split(',')
+            if 'Other' in businessModel:
+                del businessModel[businessModel.index('Other')]
+                businessModel.append(arguments['otherBusinessModel'])
+        else:
+            businessModel = []
         if 'revenueSource' in arguments:
             revenueSource = [] if not arguments['revenueSource'] else arguments['revenueSource'].split(',')
             if 'Other' in revenueSource:
@@ -115,7 +124,7 @@ class Form(object):
             filters = [companyCategory, state, "survey-company"]
         else:
             companyCategory = ''
-            filters = []
+            filters = [state, "survey-company"]
         description = arguments['description']
         descriptionShort = arguments['descriptionShort']
         financialInfo = arguments['financialInfo']
@@ -136,6 +145,7 @@ class Form(object):
             fte = fte,
             companyType = companyType,
             revenueSource = revenueSource,
+            businessModel = businessModel,
             companyCategory = companyCategory,
             description= description,
             descriptionShort = descriptionShort,
@@ -187,6 +197,13 @@ class Form(object):
             c.companyType = ''
         c.yearFounded = 0 if not arguments['yearFounded'] else arguments['yearFounded']
         c.fte = 0 if not arguments['fte'] else arguments['fte']
+        if 'businessModel' in arguments:
+            c.businessModel = [] if not arguments['businessModel'] else arguments['businessModel'].split(',')
+            if 'Other' in c.businessModel:
+                del c.businessModel[c.businessModel.index('Other')]
+                c.businessModel.append(arguments['otherBusinessModel'])
+        else:
+            c.businessModel = []
         if 'revenueSource' in arguments:
             c.revenueSource = [] if not arguments['revenueSource'] else arguments['revenueSource'].split(',')
             if 'Other' in c.revenueSource:
@@ -503,6 +520,7 @@ class FileGenerator(object):
                 "yearFounded": c.yearFounded,
                 "fte": c.fte,
                 "companyType": c.companyType,
+                "businessModel": c.businessModel,
                 "companyCategory": c.companyCategory,
                 "revenueSource": c.revenueSource,
                 "description": c.description,
@@ -587,6 +605,7 @@ class FileGenerator(object):
             'year_founded',
             'full_time_employees',
             'company_type',
+            'business_model',
             'company_category',
             'revenue_source',
             'description',
@@ -607,6 +626,7 @@ class FileGenerator(object):
                 c.yearFounded,
                 c.fte,
                 c.companyType,
+                ', '.join(c.businessModel),
                 c.companyCategory,
                 ', '.join(c.revenueSource),
                 c.description,
@@ -638,6 +658,7 @@ class FileGenerator(object):
             'year_founded',
             'full_time_employees',
             'company_type',
+            'business_model',
             'company_category',
             'revenue_source',
             'description',
@@ -671,6 +692,7 @@ class FileGenerator(object):
                 c.yearFounded,
                 c.fte,
                 c.companyType,
+                ', '.join(c.businessModel),
                 c.companyCategory,
                 ', '.join(c.revenueSource),
                 c.description,

@@ -29,6 +29,7 @@ class Company(Document):
 	companyType = StringField() #Public, Private, etc
 	companyCategory = StringField() #Categories
 	revenueSource = ListField(StringField()) #checkbox with options
+	businessModel = ListField(StringField())
 	description = StringField()
 	descriptionShort = StringField()
 	financialInfo = StringField() #long question, write paragraph
