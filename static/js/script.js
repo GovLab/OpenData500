@@ -86,7 +86,6 @@ $(document).ready(function() {
     var companyID = $('.companyID').val();
 
     ///--*****************************************************************-CHECKBOX INTERACTIONS-*****************************************************************--//
-    //------------------------------ REVENUE SOURCE
     $('.m-form-half').on('focusout', '#other_revenue_text_field', function(event) {
         if ($('#other_revenue_text_field').val() == '') {
             $('#other_revenue').prop('checked', false);
@@ -95,18 +94,8 @@ $(document).ready(function() {
     $('.m-form-half').on('focus', '#other_revenue_text_field', function() {
         $('#other_revenue').prop('checked', true);
         $(this).closest('form').parsley().validate('revenueSource');
+
     });
-    //------------------------------ BUSINESS MODEL
-    $('.m-form-half').on('focusout', '#other_model_text_field', function(event) {
-        if ($('#other_model_text_field').val() == '') {
-            $('#other_model').prop('checked', false);
-        }
-    });
-    $('.m-form-half').on('focus', '#other_model_text_field', function() {
-        $('#other_model').prop('checked', true);
-        $(this).closest('form').parsley().validate('businessModel');
-    });
-    //------------------------------ CATEGORY
     $('.m-form-half').on('focus', '#other_category_text_field', function() {
         $('input[name="category"][value="Other"').prop('checked', true);
         $(this).parsley().validate('category');
@@ -116,7 +105,7 @@ $(document).ready(function() {
             $('input[name="category"][value="Other"').prop('checked', false);
         }
     });
-    //------------------------------ COMPANY TYPE
+
     $('.m-form-half').on('focus', "#other_company_type_field", function() {
         $('input[name="companyType"][value="Other"').prop('checked', true);
     });
