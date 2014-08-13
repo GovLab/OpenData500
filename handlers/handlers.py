@@ -14,14 +14,6 @@ class MainHandler(BaseHandler):
             return
         with open("templates/"+country+"/settings.json") as json_file:
             settings = json.load(json_file)
-        # lan = self.get_argument("lan", "")
-        # if lan and lan != self.get_cookie("lan"):
-        #     self.set_cookie("lan", lan)
-        # if not lan:
-        #     lan = self.get_cookie("lan")
-        # if not lan: or lan not in settings["available_languages"]:
-        #     lan = settings['default_language']
-        #     self.set_cookie("lan", lan)
         lan = self.get_cookie("lan")
         if not lan:
             lan = settings['default_language']
@@ -264,6 +256,8 @@ class SubmitCompanyHandler(BaseHandler):
             companyFunction = companyFunction,
             criticalDataTypes = criticalDataTypes,
             revenueSource = revenueSource,
+            new_revenueSource = new_revenueSource,
+            business_models = business_models,
             categories=categories,
             datatypes = datatypes,
             stateList = stateList,

@@ -69,8 +69,24 @@
 		<div class="m-form-line"><label for="">Number of full-time employees: *</label><input type="text" name="fte" id="fte" data-parsley-trigger="focusout" data-parsley-type="number" {% if company.fte %} value="{{ company.fte }}" {%end%} required></div>
 	</fieldset>
 	
-	<!--*****************************************************************-REVENUE SOURCES-***************************************************************** !-->
 	<fieldset class="m-form-half">
+	<!--*****************************************************************-BUSINESS MODELS-***************************************************************** !-->
+		<h3>Business Model <br><em>(check all that apply)</em> *</h3>
+		<div class="business-model-field">
+			{% for model in business_models %}
+				<input type="checkbox" id="{{model}}" name="businessModel" value="{{model}}" data-parsley-group="businessModel" {% if model in company.businessModel %} checked {% end %}/><label for="{{model}}">{{model}}</label><br>
+			{% end %}
+			{% if list(set(company.businessModel) - set(business_models)) %}
+				<input type="checkbox" id="other_model" name="businessModel" value="Other" {%if company.businessModel[0] %}checked{%end%} data-parsley-mincheck="1" data-parsley-group='businessModel' data-parsley-trigger="change" required><label for="Other">Other</label>
+				<input type="text" name="otherBusinessModel" id="other_model_text_field" value="{{ list(set(company.businessModel) - set(business_models))[0] }}" />
+			{% else %}
+				<input type="checkbox" id="other_model" name="businessModel" value="Other" data-parsley-mincheck="1" data-parsley-group='businessModel' data-parsley-trigger="change" required><label for="Other">Other</label>
+				<input type="text" name="otherBusinessModel" id="other_model_text_field" />
+			{% end %}
+		</div>
+		<br>
+
+	<!--*****************************************************************-REVENUE SOURCES-***************************************************************** !-->
 		<h3>Which of the following are significant sources of revenue for your company? <br><em>(check all that apply)</em> *</h3>
 		<div class="revenue-source-field">
 			{% for source in revenueSource %}

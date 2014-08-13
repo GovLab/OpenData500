@@ -14,6 +14,7 @@
 			<p><strong>Zip Code: </strong> {%if company.zipCode %}{{company.zipCode}}{%else%}Not Available{%end%}</p>
 			<p><strong>Full-Time Employees: </strong> {% if company.fte %} {{company.fte}}{%else%}Not Available{%end%}</p>
 			<p><strong>Type of Company: </strong> {% if company.companyType %} {{company.companyType}}{%else%}Not Available{%end%}</p>
+			<p><strong>Business Model: </strong>{% if company.businessModel %}{{company.businessModel}}{%else%}Not Available{%end%}</p>
 			<p><strong>Category: </strong> {{company.companyCategory}}</p>
 			<p><strong>Sources of Revenue: </strong>{% if len(company.revenueSource) > 0 %}{% if company.revenueSource[0] %}{{ ", ".join(company.revenueSource) }}{%else%}Not Available{%end%}{%else%}Not Available{%end%}</p>
 			{%if company.sourceCount == "NA" %}<p><strong>Approximate number of sources of government open data: </strong>Not Available

@@ -48,7 +48,7 @@
 			<span class='company-name-error'></span>
 		</div>
 		<div class="m-form-line"><label for="url">Company URL: *</label><input type='text' name="url" id='url' data-parsley-trigger="change" data-parsley-type="url" required></div>
-		<div class="m-form-line"><label for="city">In which city is this company located?</label><input type="text" name="city" id="city"></div>
+		<div class="m-form-line"><label for="city">In which city is your company's headquarters located?</label><input type="text" name="city" id="city"></div>
 		<div class="m-form-line">
 			<label for="state">State: *</label>
 			<select name='state' id="state" required>
@@ -78,12 +78,23 @@
 		<div class="m-form-line"><label for="">Number of full-time employees: *</label><input type="text" name="fte" id="fte" data-parsley-trigger="focusout" data-parsley-type="number" required></div>
 	</fieldset>
 	
-	<!--*****************************************************************-REVENUE SOURCES-***************************************************************** !-->
+	<!--*****************************************************************-BUSINESS MODEL-***************************************************************** !-->
 	<fieldset class="m-form-half">
+		<h3>Business Model <br><em>(check all that apply)</em> *</h3>
+		<div class="business-model-field">
+			{% for model in business_models %}
+				<input type="checkbox" id="{{model}}" name="businessModel" value="{{model}}" data-parsley-group="businessModel" /><label for="{{model}}">{{model}}</label><br>
+			{% end %}
+			<input type="checkbox" id="other_model" name="businessModel" value="Other" data-parsley-mincheck="1" data-parsley-group='businessModel' data-parsley-trigger="change" required><label for="Other">Other</label>
+			<input type="text" name="otherBusinessModel" id="other_model_text_field" />
+		</div>
+		<br>
+
+	<!--*****************************************************************-REVENUE SOURCES-***************************************************************** !-->
 		<h3>Which of the following are significant sources of revenue for your company? <br><em>(check all that apply)</em> *</h3>
 		<div class="revenue-source-field">
-			{% for i in range(0, len(revenueSource)) %}
-				<input type="checkbox" id="{{revenueSource[i]}}" name="revenueSource" value="{{revenueSource[i]}}" data-parsley-group="revenueSource" /><label for="{{revenueSource[i]}}">{{revenueSource[i]}}</label><br>
+			{% for i in range(0, len(new_revenueSource)) %}
+				<input type="checkbox" id="{{new_revenueSource[i]}}" name="revenueSource" value="{{new_revenueSource[i]}}" data-parsley-group="revenueSource" /><label for="{{new_revenueSource[i]}}">{{new_revenueSource[i]}}</label><br>
 			{% end %}
 			<input type="checkbox" id="other_revenue" name="revenueSource" value="Other" data-parsley-mincheck="1" data-parsley-group='revenueSource' data-parsley-trigger="change" required><label for="Other">Other</label>
 			<input type="text" name="otherRevenueSource" id="other_revenue_text_field" />
