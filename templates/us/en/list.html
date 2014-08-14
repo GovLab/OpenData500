@@ -178,17 +178,11 @@
 	  $container.isotope({ filter: filters.join('') });
 	});
 
-	// $('.states').on('click', 'path', function(event) {
-	// 	var filtr = $(this).attr('class').split(' ')[1];
-	// 	//$container.isotope({ filter: filtr });
-	// 	console.log(filtr);
+	// $container.delegate( '.m-candidates-item', 'click', function(){
+	// 		//$('.m-candidates-item.large').removeClass('large');
+	//         $(this).toggleClass('s-active');
+	//         $container.isotope();
 	// });
-
-	$container.delegate( '.m-candidates-item', 'click', function(){
-			//$('.m-candidates-item.large').removeClass('large');
-	        $(this).toggleClass('s-active');
-	        $container.isotope();
-	});
             
     var userData = document.getElementById('hidden').textContent.replace('<','').replace('>','');
     userData = JSON.parse(userData)

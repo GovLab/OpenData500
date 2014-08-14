@@ -190,6 +190,10 @@ survey/no survey hover and active states*/
   width: 45.5%
 }
 
+.m-candidates-item {
+  cursor: auto;
+}
+
 .m-homepage .m-banner-slider img {
   z-index: 0;
 }
