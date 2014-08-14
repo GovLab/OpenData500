@@ -363,6 +363,8 @@ a:hover {
   .about-page section {
     padding-bottom: 23px;
     margin-bottom: 35px;
+    padding-top: 23px;
+    margin-bottom: 35px;
     border-bottom: 1px solid #aaaaaa; }
     .about-page section ul li.list-title {
       list-style: none;
@@ -499,6 +501,17 @@ a:hover {
     border-color: rgba(0, 0, 0, 0.05); }
   .about-page .m-team-picture.s-active img {
     border-color: rgba(71, 43, 116, 0.4); }
+
+#about-govlab-approach h1 {
+  margin-top: 10px; }
+
+.sub-sections {
+  border-bottom: 1px solid #aaaaaa;
+  padding-bottom: 23px;
+  margin-bottom: 0; }
+  .sub-sections .m-half {
+    border-bottom: 0;
+    padding-bottom: 0; }
 
 #overlay {
   position: fixed;
@@ -807,6 +820,9 @@ a:hover {
   .login-form .m-form-line.submit {
     text-align: center;
     margin-top: 20px; }
+
+#resources-press h2 {
+  margin-bottom: 30px; }
 
 .resource-panel {
   margin-top: 80px; }
