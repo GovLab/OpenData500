@@ -37,6 +37,16 @@ class Application(tornado.web.Application):
         self.files = FileGenerator()
         self.tools = Tools()
         self.form = Form()
+        settings = dict(
+            template_path=os.path.join(os.path.dirname(__file__), "templates"),
+            static_path=os.path.join(os.path.dirname(__file__), "static"),
+            ui_modules={
+                "datetime": datetime},
+            debug=True,
+            cookie_secret=os.environ.get('COOKIE_SECRET'),
+            xsrf_cookies=True,
+            login_url="/login"
+        )
         handlers = [
             (r'/(favicon.ico)', tornado.web.StaticFileHandler, {"path": ""}),
             (r"/(?:([A-Za-z]{2})/)?", MainHandler),
@@ -51,24 +61,15 @@ class Application(tornado.web.Application):
             (r"/delete/([a-zA-Z0-9]{24})/?", DeleteCompanyHandler),
             (r"/validate/?", ValidateHandler),
             (r"/admin/agency-edit/(?:([a-zA-Z0-9]{24})?)/?", AdminEditAgencyHandler),
+            (r"/us/roundtables/(DOC_Roundtable_Agenda\.pdf)", tornado.web.StaticFileHandler, dict(path=settings['static_path']+"/files/us/")),
             #(r"/download/(.*)/?", MultiStaticFileHandler, {'paths': ['/static/files/', '/static/files/us/']}),
-            (r'/download/(.*)/?',tornado.web.StaticFileHandler, {'path':os.path.join(os.path.dirname(__file__), 'static')+"/files/"}),
+            (r'/download/(.*)/?',tornado.web.StaticFileHandler, {'path': os.path.join(os.path.dirname(__file__), 'static')+"/files/"}),
             (r'/login/?', LoginHandler),
             (r'/logout/?', LogoutHandler),
             (r'/register/?', RegisterHandler),
             (r"/(?:([A-Za-z]{2})/)?([^/]+)/?", StaticPageHandler),
             (r'/.*', NotFoundHandler)
         ]
-        settings = dict(
-            template_path=os.path.join(os.path.dirname(__file__), "templates"),
-            static_path=os.path.join(os.path.dirname(__file__), "static"),
-            ui_modules={
-                "datetime": datetime},
-            debug=True,
-            cookie_secret=os.environ.get('COOKIE_SECRET'),
-            xsrf_cookies=True,
-            login_url="/login"
-        )
         tornado.web.Application.__init__(self, handlers, **settings)
 
 def main():
