@@ -100,6 +100,23 @@
 				<input type="text" name="otherRevenueSource" id="other_revenue_text_field" />
 			{% end %}
 		</div>
+		<br>
+
+	<!--*****************************************************************-SOCIAL IMPACT-***************************************************************** !-->
+		<h3>Does your company’s mission have a direct, beneficial social impact in any of the following areas? <br><em>(check all that apply)</em> *</h3>
+		<div class="social-impact-field">
+			{% for impact in social_impacts %}
+				<input type="checkbox" id="{{impact}}" name="socialImpact" value="{{impact}}" data-parsley-group="socialImpact" {% if impact in company.socialImpact %} checked {% end %}/><label for="{{impact}}">{{impact}}</label><br>
+			{% end %}
+			{% if list(set(company.socialImpact) - set(social_impacts)) %}
+				<input type="checkbox" id="other_impact" name="socialImpact" value="Other" {%if company.socialImpact[0] %}checked{%end%} data-parsley-mincheck="1" data-parsley-group='socialImpact' data-parsley-trigger="change"><label for="Other">Other</label>
+				<input type="text" name="otherSocialImpact" id="other_impact_text_field" value="{{ list(set(company.socialImpact) - set(social_impacts))[0] }}" />
+			{% else %}
+				<input type="checkbox" id="other_impact" name="socialImpact" value="Other" data-parsley-mincheck="1" data-parsley-group='socialImpact' data-parsley-trigger="change"><label for="Other">Other</label>
+				<input type="text" name="otherSocialImpact" id="other_impact_text_field" />
+			{% end %}
+		</div>
+
 	</fieldset>
 
 	<!--*****************************************************************-CATEGORY-***************************************************************** !-->

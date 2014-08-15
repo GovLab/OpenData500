@@ -16,12 +16,14 @@ favicon_path = '/static/img/favicon.ico'
 companyType = ['Public', 'Private', 'Nonprofit']
 companyFunction = ['Consumer Research and/or Marketing', 'Consumer Services', 'Data Management and Analysis', 'Financial/Investment Services', 'Information for Consumers']
 criticalDataTypes = ['Federal Open Data', 'State Open Data', 'City/Local Open Data', 'Private/Proprietary Data Sources']
-revenueSource = ['Advertising', 'Data Management and Analytic Services', 'Database Licensing', 'Lead Generation To Other Businesses', 'Philanthropy', 'Software Licensing', 'Subscriptions', 'User Fees for Web or Mobile Access']
+revenueSource = ['advertising', 'Data Management and Analytic Services', 'Database Licensing', 'Lead Generation To Other Businesses', 'Philanthropy', 'Software Licensing', 'subscriptions', 'User Fees for Web or Mobile Access']
 new_revenueSource = ["Advertising", "Consulting", "Contributions/Donations", "Data analysis for clients", "Database licensing", "Government contract", "Lead generation to other businesses", "Membership fees", "Philanthropic grants", "Software licensing", "Subscriptions", "User fees for web or mobile access"]
+old_new_revenueSource = ['Advertising', "Consulting", "Contributions/Donations", "Data analysis for clients", 'Data Management and Analytic Services', 'Database Licensing', "Government contract", 'Lead Generation To Other Businesses', "Membership fees", "Philanthropic grants", 'Philanthropy', 'Software Licensing', 'Subscriptions', 'User Fees for Web or Mobile Access']
 business_models = ['Business to Business', 'Business to Consumer', 'Business to Government']
 sectors = ['Agriculture', 'Arts, Entertainment and Recreation' 'Crime', 'Education', 'Energy', 'Environmental', 'Finance', 'Geospatial data/mapping', 'Health and Healthcare', 'Housing/Real Estate', 'Manufacturing', 'Nutrition', 'Scientific Research', 'Social Assistance', 'Trade', 'Transportation', 'Telecom', 'Weather']
 datatypes = ['Federal Open Data', 'State Open Data', 'City/Local Open Data']
-categories = ['Business & Legal Services', 'Data/Technology', 'Education', 'Energy', 'Environment & Weather', 'Finance & Investment', 'Food & Agriculture', 'Geospatial/Mapping', 'Governance', 'Healthcare', 'Housing/Real Estate', 'Insurance', 'Lifestyle & Consumer', 'Research & Consulting', 'Scientific Research', 'Transportation']
+categories = ['Business & Legal Services', 'Data/Technology', 'Education', 'Energy', 'Environment & Weather', 'Finance & Investment', 'Food & Agriculture', 'Geospatial/Mapping', 'Governance', 'Healthcare', 'Housing/Real Estate', 'Insurance', 'Lifestyle & Consumer', 'Media', 'Research & Consulting', 'Scientific Research', 'Transportation']
+social_impacts = ['Citizen engagement and participation', 'Consumer empowerment', 'Educational opportunity', 'Environment and climate change', 'Financial access', 'Food access and supply', 'Good governance', 'Healthcare access', 'Housing access', 'Public safety']
 states ={ "AL": "Alabama", "AK": "Alaska", "AZ": "Arizona", "AR": "Arkansas", "CA": "California", "CO": "Colorado", "CT": "Connecticut", "DE": "Delaware", "DC": "District of Columbia", "FL": "Florida", "GA": "Georgia", "HI": "Hawaii", "ID": "Idaho", "IL": "Illinois", "IN": "Indiana", "IA": "Iowa", "KA": "Kansas", "KY": "Kentucky", "LA": "Louisiana", "ME": "Maine", "MD": "Maryland", "MA": "Massachusetts", "MI": "Michigan", "MN": "Minnesota", "MS": "Mississippi", "MO": "Missouri", "MT": "Montana", "NE": "Nebraska", "NV": "Nevada", "NH": "New Hampshire", "NJ": "New Jersey", "NM": "New Mexico", "NY": "New York", "NC": "North Carolina", "ND": "North Dakota", "OH": "Ohio", "OK": "Oklahoma", "OR": "Oregon", "PA": "Pennsylvania", "RI": "Rhode Island", "SC": "South Carolina", "SD": "South Dakota", "TN": "Tennessee", "TX": "Texas", "UT": "Utah", "VT": "Vermont", "VA": "Virginia", "WA": "Washington", "WV": "West Virginia", "WI": "Wisconsin", "WY": "Wyoming", "PR": "Puerto Rico"}
 stateListAbbrev = { 
             "us": [ "", "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KA", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY", "PR"],
@@ -105,6 +107,7 @@ class Form(object):
             companyType = ''
         yearFounded = 0 if not arguments['yearFounded'] else arguments['yearFounded']
         fte = 0 if not arguments['fte'] else arguments['fte']
+        #-------------BUSINESS MODEL
         if 'businessModel' in arguments:
             businessModel = [] if not arguments['businessModel'] else arguments['businessModel'].split(',')
             if 'Other' in businessModel:
@@ -112,6 +115,7 @@ class Form(object):
                 businessModel.append(arguments['otherBusinessModel'])
         else:
             businessModel = []
+        #-------------REVENUE SOURCE
         if 'revenueSource' in arguments:
             revenueSource = [] if not arguments['revenueSource'] else arguments['revenueSource'].split(',')
             if 'Other' in revenueSource:
@@ -119,6 +123,15 @@ class Form(object):
                 revenueSource.append(arguments['otherRevenueSource'])
         else:
             revenueSource = []
+        #-------------SOCIAL IMPACT
+        if 'socialImpact' in arguments:
+            socialImpact = [] if not arguments['socialImpact'] else arguments['socialImpact'].split(',')
+            if 'Other' in socialImpact:
+                del socialImpact[socialImpact.index('Other')]
+                socialImpact.append(arguments['otherSocialImpact'])
+        else:
+            socialImpact = []
+        #-------------CATEGORY
         if 'category' in arguments:
             companyCategory = arguments['otherCategory'] if arguments['category'] == 'Other' else arguments['category']
             filters = [companyCategory, state, "survey-company"]
@@ -147,6 +160,7 @@ class Form(object):
             revenueSource = revenueSource,
             businessModel = businessModel,
             companyCategory = companyCategory,
+            socialImpact = socialImpact,
             description= description,
             descriptionShort = descriptionShort,
             financialInfo = financialInfo,
@@ -197,6 +211,7 @@ class Form(object):
             c.companyType = ''
         c.yearFounded = 0 if not arguments['yearFounded'] else arguments['yearFounded']
         c.fte = 0 if not arguments['fte'] else arguments['fte']
+        #-------------BUSINESS MODEL
         if 'businessModel' in arguments:
             c.businessModel = [] if not arguments['businessModel'] else arguments['businessModel'].split(',')
             if 'Other' in c.businessModel:
@@ -204,6 +219,7 @@ class Form(object):
                 c.businessModel.append(arguments['otherBusinessModel'])
         else:
             c.businessModel = []
+        #-------------REVENUE SOURCE
         if 'revenueSource' in arguments:
             c.revenueSource = [] if not arguments['revenueSource'] else arguments['revenueSource'].split(',')
             if 'Other' in c.revenueSource:
@@ -211,6 +227,15 @@ class Form(object):
                 c.revenueSource.append(arguments['otherRevenueSource'])
         else:
             c.revenueSource = []
+        #-------------SOCIAL IMPACT
+        if 'socialImpact' in arguments:
+            c.socialImpact = [] if not arguments['socialImpact'] else arguments['socialImpact'].split(',')
+            if 'Other' in c.socialImpact:
+                del c.socialImpact[c.socialImpact.index('Other')]
+                c.socialImpact.append(arguments['otherRevenueSource'])
+        else:
+            c.socialImpact = []
+        #-------------CATEGORY
         if 'category' in arguments:
             c.companyCategory = arguments['otherCategory'] if arguments['category'] == 'Other' else arguments['category']
         else:
@@ -522,6 +547,7 @@ class FileGenerator(object):
                 "companyType": c.companyType,
                 "businessModel": c.businessModel,
                 "companyCategory": c.companyCategory,
+                'socialImpact': c.socialImpact,
                 "revenueSource": c.revenueSource,
                 "description": c.description,
                 "descriptionShort": c.descriptionShort,
@@ -608,6 +634,7 @@ class FileGenerator(object):
             'business_model',
             'company_category',
             'revenue_source',
+            'social_impact',
             'description',
             'description_short',
             'financial_info',
@@ -629,6 +656,7 @@ class FileGenerator(object):
                 ', '.join(c.businessModel),
                 c.companyCategory,
                 ', '.join(c.revenueSource),
+                ', '.join(c.socialImpact),
                 c.description,
                 c.descriptionShort,
                 c.financialInfo,
@@ -661,6 +689,7 @@ class FileGenerator(object):
             'business_model',
             'company_category',
             'revenue_source',
+            'social_impact',
             'description',
             'description_short',
             'financial_info',
@@ -695,6 +724,7 @@ class FileGenerator(object):
                 ', '.join(c.businessModel),
                 c.companyCategory,
                 ', '.join(c.revenueSource),
+                ', '.join(c.socialImpact),
                 c.description,
                 c.descriptionShort,
                 c.financialInfo,

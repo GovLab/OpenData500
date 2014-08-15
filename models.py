@@ -30,6 +30,7 @@ class Company(Document):
 	companyCategory = StringField() #Categories
 	revenueSource = ListField(StringField()) #checkbox with options
 	businessModel = ListField(StringField())
+	socialImpact = ListField(StringField())
 	description = StringField()
 	descriptionShort = StringField()
 	financialInfo = StringField() #long question, write paragraph

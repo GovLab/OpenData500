@@ -106,6 +106,18 @@ $(document).ready(function() {
         $('#other_model').prop('checked', true);
         $(this).closest('form').parsley().validate('businessModel');
     });
+
+    //------------------------------ SOCIAL IMPACT
+    $('.m-form-half').on('focusout', '#other_impact_text_field', function(event) {
+        if ($('#other_impact_text_field').val() == '') {
+            $('#other_impact').prop('checked', false);
+        }
+    });
+    $('.m-form-half').on('focus', '#other_impact_text_field', function() {
+        $('#other_impact').prop('checked', true);
+        $(this).closest('form').parsley().validate('socialImpact');
+    });
+
     //------------------------------ CATEGORY
     $('.m-form-half').on('focus', '#other_category_text_field', function() {
         $('input[name="category"][value="Other"').prop('checked', true);
