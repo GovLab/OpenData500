@@ -426,28 +426,20 @@ class SubmitDataHandler(BaseHandler):
 
 
 #-------MULTI FILE
-class MultiStaticFileHandler(tornado.web.StaticFileHandler):
-    def initialize(self, paths):
-        self.paths = paths 
-
-    def get(self, path):
-        logging.info(self.paths)
-        for p in self.paths:
+class PDFHandler(BaseHandler):
+    def get(self, filename):
+        paths = ['', 'us/']
+        logging.info(os.path.join(os.path.abspath(os.path.abspath(os.path.dirname(__file__))+ "/../"), "static/files/"))
+        file_path = os.path.join(os.path.abspath(os.path.abspath(os.path.dirname(__file__))+ "/../"), "static/files/")
+        for p in paths:
             try:
-                # Initialize the Static file with a path
-                super(MultiStaticFileHandler, self).initialize(p)
-                # Try to get the file
-                return super(MultiStaticFileHandler, self).get(path)
-            except tornado.web.HTTPError as exc:
-                logging.info("file not found")
-                # File not found, carry on
-                if exc.status_code == 404:
-                    continue
-                raise
-            except Exception, e:
-                logging.info("Something went wrong: " + str(e))
-        # Oops file not found anywhere!
-        raise tornado.web.HTTPError(404)
+                with open(file_path + p + filename, 'rb') as f:
+                    self.set_header("Content-Type", 'application/pdf; charset="utf-8"')
+                    self.set_header("Content-Disposition", "attachment; filename="+ filename)
+                    self.write(f.read())
+                    return
+            except IOError, e:
+                logging.info("Could not open file: " + str(e))
 
 class NotFoundHandler(BaseHandler):
     def get(self):
