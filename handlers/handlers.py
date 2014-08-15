@@ -424,6 +424,31 @@ class SubmitDataHandler(BaseHandler):
                 logging.info("Error deleting dataset: " + str(e))
                 self.write(response)
 
+
+#-------MULTI FILE
+class MultiStaticFileHandler(tornado.web.StaticFileHandler):
+    def initialize(self, paths):
+        self.paths = paths 
+
+    def get(self, path):
+        logging.info(self.paths)
+        for p in self.paths:
+            try:
+                # Initialize the Static file with a path
+                super(MultiStaticFileHandler, self).initialize(p)
+                # Try to get the file
+                return super(MultiStaticFileHandler, self).get(path)
+            except tornado.web.HTTPError as exc:
+                logging.info("file not found")
+                # File not found, carry on
+                if exc.status_code == 404:
+                    continue
+                raise
+            except Exception, e:
+                logging.info("Something went wrong: " + str(e))
+        # Oops file not found anywhere!
+        raise tornado.web.HTTPError(404)
+
 class NotFoundHandler(BaseHandler):
     def get(self):
         self.render('404.html',

@@ -220,3 +220,8 @@ survey/no survey hover and active states*/
 .m-homepage .first-title {
   font-size: 4.9em;
 }
+
+
+#candidates-warning {
+  height: 150px;
+}
