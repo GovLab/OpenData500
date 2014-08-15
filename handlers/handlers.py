@@ -429,8 +429,8 @@ class SubmitDataHandler(BaseHandler):
 class PDFHandler(BaseHandler):
     def get(self, filename):
         paths = ['', 'us/']
-        logging.info(os.path.join(os.path.abspath(os.path.abspath(os.path.dirname(__file__))+ "/../"), "static/files/"))
-        file_path = os.path.join(os.path.abspath(os.path.abspath(os.path.dirname(__file__))+ "/../"), "static/files/")
+        logging.info(os.path.join(os.path.abspath(os.path.abspath(os.path.dirname(__file__))), "static/files/"))
+        file_path = os.path.join(os.path.abspath(os.path.abspath(os.path.dirname(__file__))), "static/files/")
         for p in paths:
             try:
                 with open(file_path + p + filename, 'rb') as f:
