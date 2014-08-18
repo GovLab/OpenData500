@@ -264,7 +264,9 @@ class SubmitCompanyHandler(BaseHandler):
             companyFunction = companyFunction,
             criticalDataTypes = criticalDataTypes,
             revenueSource = revenueSource,
+            new_revenueSource = new_revenueSource,
             categories=categories,
+            source_count = source_count,
             datatypes = datatypes,
             stateList = stateList,
             user=self.current_user,
@@ -423,6 +425,23 @@ class SubmitDataHandler(BaseHandler):
             except Exception, e:
                 logging.info("Error deleting dataset: " + str(e))
                 self.write(response)
+
+
+#-------MULTI FILE
+class PDFHandler(BaseHandler):
+    def get(self, filename):
+        paths = ['', 'us/']
+        logging.info(os.path.join(os.path.dirname(os.path.dirname(__file__)), "static/files/"))
+        file_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "static/files/")
+        for p in paths:
+            try:
+                with open(file_path + p + filename, 'rb') as f:
+                    self.set_header("Content-Type", 'application/pdf; charset="utf-8"')
+                    self.set_header("Content-Disposition", "attachment; filename="+ filename)
+                    self.write(f.read())
+                    return
+            except IOError, e:
+                logging.info("Could not open file: " + str(e))
 
 class NotFoundHandler(BaseHandler):
     def get(self):
