@@ -265,6 +265,7 @@ class SubmitCompanyHandler(BaseHandler):
             criticalDataTypes = criticalDataTypes,
             revenueSource = revenueSource,
             categories=categories,
+            source_count = source_count,
             datatypes = datatypes,
             stateList = stateList,
             user=self.current_user,
