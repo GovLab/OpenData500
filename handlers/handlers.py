@@ -264,6 +264,7 @@ class SubmitCompanyHandler(BaseHandler):
             companyFunction = companyFunction,
             criticalDataTypes = criticalDataTypes,
             revenueSource = revenueSource,
+            new_revenueSource = new_revenueSource,
             categories=categories,
             source_count = source_count,
             datatypes = datatypes,
