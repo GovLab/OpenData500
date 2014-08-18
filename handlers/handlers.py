@@ -259,6 +259,7 @@ class SubmitCompanyHandler(BaseHandler):
             new_revenueSource = new_revenueSource,
             business_models = business_models,
             social_impacts = social_impacts,
+            source_count = source_count,
             categories=categories,
             datatypes = datatypes,
             stateList = stateList,

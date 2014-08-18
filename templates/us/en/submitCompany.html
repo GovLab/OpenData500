@@ -167,10 +167,9 @@
 	<fieldset class="m-form-half">
 		<h3>From approximately how many sources (i.e. agencies, subagencies, local and state governments) does your company use data? *</h3>
 		<div class="source-count-buttons">
-			<input type="radio" name="sourceCount" id="count1" value="1-10"><label for="count1">1-10</label>
-			<input type="radio" name="sourceCount" id="count2" value="10-50"><label for="count2">10-50</label>
-			<input type="radio" name="sourceCount" id="count3" value="50-100"><label for="count3">50-100</label>
-			<input type="radio" name="sourceCount" id="count4" value="100+" required><label for="count4">100+</label>
+			{% for count in source_count %}
+				<input type="radio" name="sourceCount" id="{{count}}" value="{{count}}" required><label for="{{count}}">{{count}}</label>
+			{%end %}
 		</div>
 		{% raw xsrf_form_html() %}
 	</fieldset>
