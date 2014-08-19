@@ -21,7 +21,7 @@
 
 	<!--*****************************************************************-CONTACT INFO-***************************************************************** !-->
 	<fieldset class="m-form-half">
-		<h3>Personal Information</h3>
+		<h3>Contact Information</h3>
 		<div class="m-form-line"><label for="">First Name: *</label><input type="text" name="firstName" id="firstName" data-parsley-maxlength="50" required></div>
 		<div class="m-form-line"><label for="">Last Name: *</label><input type="text" name="lastName" id="lastName" data-parsley-maxlength="50" required></div>
 		<div class="m-form-line"><label for="">Title: *</label><input type="text" name="title" id="title" data-parsley-maxlength="50" required></div>
@@ -93,8 +93,8 @@
 	<!--*****************************************************************-REVENUE SOURCES-***************************************************************** !-->
 		<h3>Which of the following are significant sources of revenue for your company? <br><em>(check all that apply)</em> *</h3>
 		<div class="revenue-source-field">
-			{% for i in range(0, len(new_revenueSource)) %}
-				<input type="checkbox" id="{{new_revenueSource[i]}}" name="revenueSource" value="{{new_revenueSource[i]}}" data-parsley-group="revenueSource" /><label for="{{new_revenueSource[i]}}">{{new_revenueSource[i]}}</label><br>
+			{% for source in new_revenueSource %}
+				<input type="checkbox" id="{{source}}" name="revenueSource" value="{{source}}" data-parsley-group="revenueSource" /><label for="{{source}}">{{source}}</label><br>
 			{% end %}
 			<input type="checkbox" id="other_revenue" name="revenueSource" value="Other" data-parsley-mincheck="1" data-parsley-group='revenueSource' data-parsley-trigger="change" required><label for="Other">Other</label>
 			<input type="text" name="otherRevenueSource" id="other_revenue_text_field" />
@@ -117,11 +117,12 @@
 	<fieldset class="m-form-half right">
 		<h3>What category best describes your company? *</h3>
 		<div class="category-field">
-			{% for category in categories %}
-				<input type="radio" id="{{category}}" name="category" data-parsley-group='category' value="{{ category }}"><label for="{{category}}">{{category}}</label><br>
-			{% end %}
-			<input type="radio" id="other_category" name="category" value="Other" data-parsley-mincheck="1" data-parsley-group='category' data-parsley-trigger="change" required><label for="Other">Other</label>
-			<input type="text" id="other_category_text_field" name="otherCategory" data-parsley-trigger="focus">
+			<label for="category">Category: *</label>
+			<select name='category' id="category" required>
+				{% for category in categories %}
+					<option name="category" value="{{category}}">{{ category }}</option>><br>
+				{% end %}
+			</select>
 		</div>
 	</fieldset>
 
@@ -164,12 +165,22 @@
 	</fieldset>
 
 	<!--*****************************************************************-DATA SOURCES-***************************************************************** !-->
+	<h2 class="data-section">Data Use and Source Information </h2>
 	<fieldset class="m-form-half">
 		<h3>From approximately how many sources (i.e. agencies, subagencies, local and state governments) does your company use data? *</h3>
 		<div class="source-count-buttons">
 			{% for count in source_count %}
 				<input type="radio" name="sourceCount" id="{{count}}" value="{{count}}" required><label for="{{count}}">{{count}}</label>
 			{%end %}
+		</div>
+		<br>
+		<h3>What types of data does your company use? <br><em>(check all that apply)</em></h3>
+		<div class="data-type-field">
+			{% for data_type in data_types %}
+				<input type="checkbox" id="{{data_type}}_data_type" name="dataTypes" value="{{data_type}}" data-parsley-group="dataTypes" /><label for="{{data_type}}_data_type">{{data_type}}</label><br>
+			{% end %}
+			<input type="checkbox" id="other_data_type" name="dataTypes" value="Other" data-parsley-mincheck="1" data-parsley-group='dataTypes' data-parsley-trigger="change" required><label for="Other">Other</label>
+			<input type="text" name="otherDataType" id="other_data_type_text_field" />
 		</div>
 		{% raw xsrf_form_html() %}
 	</fieldset>

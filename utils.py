@@ -24,6 +24,7 @@ sectors = ['Agriculture', 'Arts, Entertainment and Recreation' 'Crime', 'Educati
 datatypes = ['Federal Open Data', 'State Open Data', 'City/Local Open Data']
 categories = ['Business & Legal Services', 'Data/Technology', 'Education', 'Energy', 'Environment & Weather', 'Finance & Investment', 'Food & Agriculture', 'Geospatial/Mapping', 'Governance', 'Healthcare', 'Housing/Real Estate', 'Insurance', 'Lifestyle & Consumer', 'Media', 'Research & Consulting', 'Scientific Research', 'Transportation']
 social_impacts = ['Citizen engagement and participation', 'Consumer empowerment', 'Educational opportunity', 'Environment and climate change', 'Financial access', 'Food access and supply', 'Good governance', 'Healthcare access', 'Housing access', 'Public safety']
+data_types = ["Agriculture & Food", "Business", "Consumer", "Demographics & Social", "Economics", "Education", "Energy", "Environment", "Finance", "Geospatial/Mapping", "Government Operations", "Health/Healthcare", "Housing", "International/Global Development", "Legal", "Manufacturing", "Science and Research", "Public Safety", "Tourism", "Transportation", "Weather"]
 source_count = ['1-10', '11-50', '51-100', '101+']
 states ={ "AL": "Alabama", "AK": "Alaska", "AZ": "Arizona", "AR": "Arkansas", "CA": "California", "CO": "Colorado", "CT": "Connecticut", "DE": "Delaware", "DC": "District of Columbia", "FL": "Florida", "GA": "Georgia", "HI": "Hawaii", "ID": "Idaho", "IL": "Illinois", "IN": "Indiana", "IA": "Iowa", "KA": "Kansas", "KY": "Kentucky", "LA": "Louisiana", "ME": "Maine", "MD": "Maryland", "MA": "Massachusetts", "MI": "Michigan", "MN": "Minnesota", "MS": "Mississippi", "MO": "Missouri", "MT": "Montana", "NE": "Nebraska", "NV": "Nevada", "NH": "New Hampshire", "NJ": "New Jersey", "NM": "New Mexico", "NY": "New York", "NC": "North Carolina", "ND": "North Dakota", "OH": "Ohio", "OK": "Oklahoma", "OR": "Oregon", "PA": "Pennsylvania", "RI": "Rhode Island", "SC": "South Carolina", "SD": "South Dakota", "TN": "Tennessee", "TX": "Texas", "UT": "Utah", "VT": "Vermont", "VA": "Virginia", "WA": "Washington", "WV": "West Virginia", "WI": "Wisconsin", "WY": "Wyoming", "PR": "Puerto Rico"}
 stateListAbbrev = { 
@@ -143,10 +144,19 @@ class Form(object):
         descriptionShort = arguments['descriptionShort']
         financialInfo = arguments['financialInfo']
         datasetWishList = arguments['datasetWishList']
+        #-------------SOURCE COUNT
         if 'sourceCount' in arguments:
             sourceCount = arguments['sourceCount']
         else:
             sourceCount = ''
+        #-------------DATA TYPES
+        if 'dataTypes' in arguments:
+            dataTypes = [] if not arguments['dataTypes'] else arguments['dataTypes'].split(',')
+            if 'Other' in dataTypes:
+                del dataTypes[dataTypes.index('Other')]
+                dataTypes.append(arguments['otherDataType'])
+        else:
+            dataTypes = []
         company = models.Company(
             companyName = companyName,
             prettyName = prettyName,
@@ -167,6 +177,7 @@ class Form(object):
             financialInfo = financialInfo,
             datasetWishList = datasetWishList,
             sourceCount = sourceCount,
+            dataTypes = dataTypes,
             contact = contact,
             lastUpdated = datetime.now(),
             display = False, 
@@ -246,10 +257,19 @@ class Form(object):
         c.descriptionShort = arguments['descriptionShort']
         c.financialInfo = arguments['financialInfo']
         c.datasetWishList = arguments['datasetWishList']
+        #-------------SOURCE COUNT
         if 'sourceCount' in arguments:
             c.sourceCount = arguments['sourceCount']
         else:
             c.sourceCount = ''
+        #-------------DATA TYPES
+        if 'dataTypes' in arguments:
+            c.dataTypes = [] if not arguments['dataTypes'] else arguments['dataTypes'].split(',')
+            if 'Other' in c.dataTypes:
+                del c.dataTypes[c.dataTypes.index('Other')]
+                c.dataTypes.append(arguments['otherDataType'])
+        else:
+            c.dataTypes = []
         c.dataComments = arguments['dataComments'] if arguments['dataComments'] else c.dataComments
         c.vetted = True if 'vetted' in arguments else False
         c.display = True if 'display' in arguments else False
@@ -550,6 +570,7 @@ class FileGenerator(object):
                 "companyCategory": c.companyCategory,
                 'socialImpact': c.socialImpact,
                 "revenueSource": c.revenueSource,
+                "dataTypes": c.dataTypes,
                 "description": c.description,
                 "descriptionShort": c.descriptionShort,
                 "agencies":agencies,
@@ -639,7 +660,8 @@ class FileGenerator(object):
             'description',
             'description_short',
             'financial_info',
-            'sourceCount'
+            'sourceCount',
+            'data_types'
             ])
         for c in companies:
             newrow = [
@@ -661,7 +683,8 @@ class FileGenerator(object):
                 c.description,
                 c.descriptionShort,
                 c.financialInfo,
-                c.sourceCount 
+                c.sourceCount,
+                c.dataTypes
             ]
             for i in range(len(newrow)):  # For every value in our newrow
                 if hasattr(newrow[i], 'encode'):
@@ -695,6 +718,7 @@ class FileGenerator(object):
             'description_short',
             'financial_info',
             'source_count',
+            'data_types',
             'data_comments',
             'dataset_wishlist',
             'confidentiality',
@@ -730,6 +754,7 @@ class FileGenerator(object):
                 c.descriptionShort,
                 c.financialInfo,
                 c.sourceCount,
+                c.dataTypes,
                 c.dataComments,
                 c.datasetWishList,
                 c.confidentiality,

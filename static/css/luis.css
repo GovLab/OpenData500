@@ -221,3 +221,12 @@ survey/no survey hover and active states*/
 .m-homepage .first-title {
   font-size: 4.9em;
 }
+
+
+.m-form {
+  border: 0px;
+}
+
+.m-form .data-section  {
+  margin-top: 0px;
+}

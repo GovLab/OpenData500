@@ -261,7 +261,7 @@ class SubmitCompanyHandler(BaseHandler):
             social_impacts = social_impacts,
             source_count = source_count,
             categories=categories,
-            datatypes = datatypes,
+            data_types = data_types,
             stateList = stateList,
             user=self.current_user,
             menu=settings['menu'][lan],

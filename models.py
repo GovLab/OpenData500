@@ -36,6 +36,7 @@ class Company(Document):
 	financialInfo = StringField() #long question, write paragraph
 	datasetWishList = StringField() #What datasets...
 	sourceCount = StringField() #From how many sources does your company use data?
+	dataTypes = ListField(StringField())
 	dataComments = StringField() #Please give comments, good or bad....
 	confidentiality = StringField() #What info does the contact want to hide?
 	agencies = ListField(ReferenceField('Agency'))

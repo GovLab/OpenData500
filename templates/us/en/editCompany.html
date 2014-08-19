@@ -102,7 +102,26 @@
 		</div>
 		<br>
 
-	<!--*****************************************************************-SOCIAL IMPACT-***************************************************************** !-->
+	</fieldset>
+
+	<!--*****************************************************************-CATEGORY-***************************************************************** !-->
+	<fieldset class="m-form-half right">
+		<h3>What category best describes your company? * </h3>
+		<div class="category-field">
+			{% for category in categories %}
+				<input type="radio" id="{{category}}" name="category" data-parsley-group='category' value="{{ category }}" {% if category == company.companyCategory %} checked {% end %}><label for="{{category}}">{{category}}</label><br>
+			{% end %}
+			{% if company.companyCategory not in categories and company.companyCategory != '' %}
+				<input type="radio" id="other_category" name="category" value="Other" data-parsley-mincheck="1" data-parsley-group='category' data-parsley-trigger="change" checked required><label for="Other">Other</label>
+				<input type="text" id="other_category_text_field" name="otherCategory" {% if company.companyCategory %}value="{{ company.companyCategory }}"{%end%} data-parsley-trigger="focus">
+			{% else %}
+				<input type="radio" id="other_category" name="category" value="Other" data-parsley-mincheck="1" data-parsley-group='category' data-parsley-trigger="change" required><label for="Other">Other</label>
+				<input type="text" id="other_category_text_field" name="otherCategory" data-parsley-trigger="focus">
+			{% end %}
+		</div>
+		<br>
+
+			<!--*****************************************************************-SOCIAL IMPACT-***************************************************************** !-->
 		<h3>Does your company’s mission have a direct, beneficial social impact in any of the following areas? <br><em>(check all that apply)</em> *</h3>
 		<div class="social-impact-field">
 			{% for impact in social_impacts %}
@@ -114,24 +133,6 @@
 			{% else %}
 				<input type="checkbox" id="other_impact" name="socialImpact" value="Other" data-parsley-mincheck="1" data-parsley-group='socialImpact' data-parsley-trigger="change"><label for="Other">Other</label>
 				<input type="text" name="otherSocialImpact" id="other_impact_text_field" />
-			{% end %}
-		</div>
-
-	</fieldset>
-
-	<!--*****************************************************************-CATEGORY-***************************************************************** !-->
-	<fieldset class="m-form-half right">
-		<h3>What category best describes your company? * {{company.companyCategory}}</h3>
-		<div class="category-field">
-			{% for category in categories %}
-				<input type="radio" id="{{category}}" name="category" data-parsley-group='category' value="{{ category }}" {% if category == company.companyCategory %} checked {% end %}><label for="{{category}}">{{category}}</label><br>
-			{% end %}
-			{% if company.companyCategory not in categories and company.companyCategory != '' %}
-				<input type="radio" id="other_category" name="category" value="Other" data-parsley-mincheck="1" data-parsley-group='category' data-parsley-trigger="change" checked required><label for="Other">Other</label>
-				<input type="text" id="other_category_text_field" name="otherCategory" {% if company.companyCategory %}value="{{ company.companyCategory }}"{%end%} data-parsley-trigger="focus">
-			{% else %}
-				<input type="radio" id="other_category" name="category" value="Other" data-parsley-mincheck="1" data-parsley-group='category' data-parsley-trigger="change" required><label for="Other">Other</label>
-				<input type="text" id="other_category_text_field" name="otherCategory" data-parsley-trigger="focus">
 			{% end %}
 		</div>
 	</fieldset>
@@ -175,6 +176,7 @@
 		data-parsley-error-message="You are over the word limit.">{{ company.datasetWishList }}</textarea><br>
 	</fieldset>
 
+	<h2 class="data-section">Data Use and Source Information </h2>
 	<!--*****************************************************************-DATA SOURCES-***************************************************************** !-->
 	<fieldset class="m-form-half">
 		<h3>From approximately how many sources (i.e. agencies, subagencies, local and state governments) does your company use data? *</h3>
@@ -184,6 +186,25 @@
 			<input type="radio" name="sourceCount" id="count3" value="50-100" {% if company.sourceCount == '50-100' %}checked{%end%}><label for="count3">50-100</label>
 			<input type="radio" name="sourceCount" id="count4" value="100+" {% if company.sourceCount == '100+' %}checked{%end%} required><label for="count4">100+</label>
 		</div>
+		<br>
+
+		<!--*****************************************************************-DATA TYPES-***************************************************************** !-->
+		<h3>What types of data does your company use? <br><em>(check all that apply)</em></h3>
+		<div class="data-type-field">
+			{% for data_type in data_types %}
+				<input type="checkbox" id="{{data_type}}_data_type" name="dataTypes" value="{{data_type}}" data-parsley-group="dataTypes" {% if data_type in company.dataTypes %} checked {% end %}/><label for="{{data_type}}_data_type">{{data_type}}</label><br>
+			{% end %}
+			{% if list(set(company.dataTypes) - set(data_types)) %}
+				<input type="checkbox" id="other_data_type" name="dataTypes" value="Other" {%if company.dataTypes[0] %}checked{%end%} data-parsley-mincheck="1" data-parsley-group='dataTypes' data-parsley-trigger="change"><label for="Other">Other</label>
+				<input type="text" name="otherDataType" id="other_revenue_text_field" value="{{ list(set(company.dataTypes) - set(data_types))[0] }}" />
+			{% else %}
+				<input type="checkbox" id="other_data_type" name="dataTypes" value="Other" data-parsley-mincheck="1" data-parsley-group='dataTypes' data-parsley-trigger="change"><label for="Other">Other</label>
+				<input type="text" name="otherDataType" id="other_data_type_text_field" />
+			{% end %}
+		</div>
+		<br>
+
+
 		{% raw xsrf_form_html() %}
 	</fieldset>
 </form>

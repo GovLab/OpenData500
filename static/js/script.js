@@ -138,6 +138,16 @@ $(document).ready(function() {
         }
     });
 
+    //------------------------------ DATA TYPE
+    $('.m-form-half').on('focusout', '#other_data_type_text_field', function(event) {
+        if ($('#other_data_type_text_field').val() == '') {
+            $('#other_data_type').prop('checked', false);
+        }
+    });
+    $('.m-form-half').on('focus', '#other_data_type_text_field', function() {
+        $('#other_data_type').prop('checked', true);
+    });
+
 
     //--*****************************************************************-EXAMPLE POPUP-*****************************************************************--//
     var dialogOptions = {
