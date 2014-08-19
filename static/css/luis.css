@@ -225,3 +225,7 @@ survey/no survey hover and active states*/
 #candidates-warning {
   height: 150px;
 }
+
+.event-sponsor-container {
+  height: 100px;
+}
