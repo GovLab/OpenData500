@@ -39,11 +39,16 @@ class TestHandler(BaseHandler):
     @tornado.web.addslash
     #@tornado.web.authenticated
     def get(self, number):
+        with open("templates/us/settings.json") as json_file:
+            settings = json.load(json_file)
         self.render(
             "index_" + number + ".html",
             user=self.current_user,
             page_title='Open Data500',
             page_heading='Welcome to the Open Data 500 Pre-Launch',
+            settings=settings,
+            lan='en',
+            country='us'
         )
 
 #--------------------------------------------------------ROUNDATABLE PAGE------------------------------------------------------------
