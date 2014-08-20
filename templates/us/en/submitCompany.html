@@ -5,8 +5,9 @@
 
 
 
-<section id="submit-company" class="submitDescription">
-	<h1>Open Data 500 Survey</h1>
+<section class="submitDescription">
+	<h1>Open Data 500 <br>Company Survey</h1>
+
 	<p><strong>To qualify for the Open Data 500, a company must:</strong></p>
 	<ul>
 		<li>Be U.S.-based,</li>
@@ -20,7 +21,7 @@
 
 	<!--*****************************************************************-CONTACT INFO-***************************************************************** !-->
 	<fieldset class="m-form-half">
-		<h3>Personal Information</h3>
+		<h3>Contact Information</h3>
 		<div class="m-form-line"><label for="">First Name: *</label><input type="text" name="firstName" id="firstName" data-parsley-maxlength="50" required></div>
 		<div class="m-form-line"><label for="">Last Name: *</label><input type="text" name="lastName" id="lastName" data-parsley-maxlength="50" required></div>
 		<div class="m-form-line"><label for="">Title: *</label><input type="text" name="title" id="title" data-parsley-maxlength="50" required></div>
@@ -47,7 +48,7 @@
 			<span class='company-name-error'></span>
 		</div>
 		<div class="m-form-line"><label for="url">Company URL: *</label><input type='text' name="url" id='url' data-parsley-trigger="change" data-parsley-type="url" required></div>
-		<div class="m-form-line"><label for="city">In which city is this company located?</label><input type="text" name="city" id="city"></div>
+		<div class="m-form-line"><label for="city">In which city is your company's headquarters located?</label><input type="text" name="city" id="city"></div>
 		<div class="m-form-line">
 			<label for="state">State: *</label>
 			<select name='state' id="state" required>
@@ -76,9 +77,9 @@
 			required></div>
 		<div class="m-form-line"><label for="">Number of full-time employees: *</label><input type="text" name="fte" id="fte" data-parsley-trigger="focusout" data-parsley-type="number" required></div>
 	</fieldset>
-	
+
 	<!--*****************************************************************-REVENUE SOURCES-***************************************************************** !-->
-	<fieldset class="m-form-half">
+	<fieldset class="m-form-half">	
 		<h3>Which of the following are significant sources of revenue for your company? <br><em>(check all that apply)</em> *</h3>
 		<div class="revenue-source-field">
 			{% for source in new_revenueSource %}
@@ -87,6 +88,7 @@
 			<input type="checkbox" id="other_revenue" name="revenueSource" value="Other" data-parsley-mincheck="1" data-parsley-group='revenueSource' data-parsley-trigger="change" required><label for="Other">Other</label>
 			<input type="text" name="otherRevenueSource" id="other_revenue_text_field" />
 		</div>
+
 	</fieldset>
 
 	<!--*****************************************************************-CATEGORY-***************************************************************** !-->
@@ -140,16 +142,13 @@
 	</fieldset>
 
 	<!--*****************************************************************-DATA SOURCES-***************************************************************** !-->
+	<h2 class="data-section">Data Use and Source Information </h2>
 	<fieldset class="m-form-half">
 		<h3>From approximately how many sources (i.e. agencies, subagencies, local and state governments) does your company use data? *</h3>
 		<div class="source-count-buttons">
 			{% for count in source_count %}
 				<input type="radio" name="sourceCount" id="{{count}}" value="{{count}}" required><label for="{{count}}">{{count}}</label>
-			{% end %}	
-<!-- 			<input type="radio" name="sourceCount" id="count1" value="1-10"><label for="count1">1-10</label>
-			<input type="radio" name="sourceCount" id="count2" value="10-50"><label for="count2">10-50</label>
-			<input type="radio" name="sourceCount" id="count3" value="50-100"><label for="count3">50-100</label>
-			<input type="radio" name="sourceCount" id="count4" value="100+" required><label for="count4">100+</label> -->
+			{%end %}
 		</div>
 		{% raw xsrf_form_html() %}
 	</fieldset>
