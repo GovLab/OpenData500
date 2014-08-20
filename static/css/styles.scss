@@ -136,8 +136,16 @@ header {
 		display: block;
 	}
 
+	#submenu-about {
+		width: 182px;
+	}
 
-	
+
+	.m-main-menu-item:hover .m-main-menu-sub-menu,
+	.m-main-menu-sub-menu:hover {
+		display: block;
+	}
+
 	.m-main-menu-item a:hover {
 		background-color: $light_purple;
 		color: #fff;

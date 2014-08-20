@@ -1267,6 +1267,11 @@ header {
   .m-main-menu .m-main-menu-item:hover .m-main-menu-sub-menu,
   .m-main-menu .m-main-menu-sub-menu:hover {
     display: block; }
+  .m-main-menu #submenu-about {
+    width: 182px; }
+  .m-main-menu .m-main-menu-item:hover .m-main-menu-sub-menu,
+  .m-main-menu .m-main-menu-sub-menu:hover {
+    display: block; }
   .m-main-menu .m-main-menu-item a:hover {
     background-color: #8977a7;
     color: #fff; }
