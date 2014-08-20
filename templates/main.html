@@ -37,6 +37,11 @@
         }
     </style>
 
+{% try %}
+    {% set lan_ = lan %}
+{% except NameError %}
+    {% set lan_ = 'en' %}
+{% end %}
 
 </head>
 <body>
@@ -48,7 +53,7 @@
         
             <a class="logo" href="/{%try%}{%if country and country!="int" %}{{country}}/{%end%}{%except%}{%end%}"><img src="{{ static_url("img/od500-logo.png") }}" alt=""></a>
             <div id="mainMenu" class="m-main-menu">
-                {% for item in settings['menu'][lan] %}        
+                {% for item in settings['menu'][lan_] %}        
                     <div class="m-main-menu-item">
                         <a href="{{item['link']}}">{{item['item']}}</a>
                         {% if item['sub-menu'] %}
