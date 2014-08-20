@@ -286,6 +286,7 @@ class SubmitDataHandler(BaseHandler):
     @tornado.web.addslash
     #@tornado.web.authenticated
     def get(self, country, id):
+
         if not country:
             country = "us"
         if country not in available_countries:
@@ -297,7 +298,7 @@ class SubmitDataHandler(BaseHandler):
         if not lan or lan not in settings["available_languages"]:
             lan = settings["default_language"]
         company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
-        if company.country != country:
+        if company.country != country or '/'+company.country+'/' not in self.request.uri:
             self.redirect(str('/'+company.country+'/addData/'+id))
             return
         try:
@@ -311,7 +312,9 @@ class SubmitDataHandler(BaseHandler):
             user=self.current_user,
             settings=settings,
             country=country,
-            lan=lan
+            lan=lan,
+            source_count = source_count,
+            data_types = data_types
         )
 
     #@tornado.web.authenticated

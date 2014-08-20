@@ -6,7 +6,50 @@
 <h1>{{ page_heading }}</h1>
 
 
-	<!--*****************************************************************-AGENCY FORM-***************************************************************** !-->
+	<form class="m-form" method="post" data-parsley-validate>
+
+		<h2 class="data-section">Data Use and Source Information </h2>
+		<!--*****************************************************************-DATASET WISHLIST-***************************************************************** !-->
+		<fieldset class="m-form-half">
+			<h3>What datasets (if any) are not currently available that would be useful for your company to have as government open data?<br><em>[50 words or less]</em></h3>
+			<textarea rows="10" cols="59" name="datasetWishList" id="datasetWishList" 
+			data-parsley-trigger="keyup" 
+			data-parsley-maxwords="50" 
+			data-parsley-error-message="You are over the word limit."></textarea><br>
+		</fieldset>
+
+		<fieldset class="m-form-half right">
+			<h3>Please give your comments about the usefulness of all these data sources and datasets.<br><em>[250 words or less] * </em></h3>
+			<textarea rows="10" cols="59" name="dataComments" id="dataComments" 
+			parsley-trigger="keyup" 
+			data-parsley-maxwords="250" 
+			required>{%if company.dataComments %}{{ company.dataComments }}{% end %}</textarea><br>
+		</fieldset>
+
+		<!--*****************************************************************-DATA SOURCES-***************************************************************** !-->
+		<fieldset class="m-form-half">
+			<h3>From approximately how many sources (i.e. agencies, subagencies, local and state governments) does your company use data? *</h3>
+			<div class="source-count-buttons">
+				{% for count in source_count %}
+					<input type="radio" name="sourceCount" id="{{count}}" value="{{count}}" required><label for="{{count}}">{{count}}</label>
+				{%end %}
+			</div>
+			<br>
+			<h3>What types of data does your company use? <br><em>(check all that apply)</em></h3>
+			<div class="data-type-field">
+				{% for data_type in data_types %}
+					<input type="checkbox" id="{{data_type}}_data_type" name="dataTypes" value="{{data_type}}" data-parsley-group="dataTypes" /><label for="{{data_type}}_data_type">{{data_type}}</label><br>
+				{% end %}
+				<input type="checkbox" id="other_data_type" name="dataTypes" value="Other" data-parsley-mincheck="1" data-parsley-group='dataTypes' data-parsley-trigger="change" required><label for="Other">Other</label>
+				<input type="text" name="otherDataType" id="other_data_type_text_field" />
+			</div>
+			{% raw xsrf_form_html() %}
+			<input type="hidden" name="id" id="companyID" value="{{company.id}}">
+		</fieldset>
+
+	</form>
+
+	<!--*****************************************************************-AGENCIES AND SUBAGENCIES-***************************************************************** !-->
 	<div class="m-form-box data">
 		<p>Please tell us more about the open data sources your company uses.</p>
 		<p>Use the search bar to find and select government agencies, subagencies, city and state governments, or government-funded research programs from the list provided.</p>
@@ -99,25 +142,13 @@
 		</div>
 
 		<!--*****************************************************************-DATA COMMENTS-***************************************************************** !-->
-		<form method="post" class="m-form data-comment-form" data-parsley-validate>
-			<fieldset class="m-form-half right">
-				<h3>Please give your comments about the usefulness of all these data sources and datasets.<br><em>[250 words or less] * </em></h3>
-				<textarea rows="10" cols="59" name="dataComments" id="dataComments" 
-				parsley-trigger="keyup" 
-				data-parsley-maxwords="250" 
-				required>{%if company.dataComments %}{{ company.dataComments }}{% end %}</textarea><br>
-				<input type="hidden" name="id" id="companyID" value="{{company.id}}">
-				{% raw xsrf_form_html() %}
-				<input type="submit" class="m-button" value="Save And Finish">
-				<span class="response-message"></span>
-			</fieldset>
-			<!-- <input type="button" class="l-button data-submit-button" value="Save And Finish"> -->
-			
-		</form>
 	</div>
 
 <!--*****************************************************************-SUBMIT BUTTON-***************************************************************** !-->
-
+	<fieldset class="m-form-half">
+		<input type="submit" class="m-button" value="Save And Finish">
+		<span class="response-message"></span>
+	</fieldset>
 
 
 {% end %}
