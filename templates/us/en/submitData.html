@@ -6,9 +6,9 @@
 <h1>{{ page_heading }}</h1>
 
 
-	<form class="m-form" method="post" data-parsley-validate>
-
+	<form class="m-form" id="company-data-form" data-parsley-validate>
 		<h2 class="data-section">Data Use and Source Information </h2>
+		
 		<!--*****************************************************************-DATASET WISHLIST-***************************************************************** !-->
 		<fieldset class="m-form-half">
 			<h3>What datasets (if any) are not currently available that would be useful for your company to have as government open data?<br><em>[50 words or less]</em></h3>
@@ -16,14 +16,6 @@
 			data-parsley-trigger="keyup" 
 			data-parsley-maxwords="50" 
 			data-parsley-error-message="You are over the word limit."></textarea><br>
-		</fieldset>
-
-		<fieldset class="m-form-half right">
-			<h3>Please give your comments about the usefulness of all these data sources and datasets.<br><em>[250 words or less] * </em></h3>
-			<textarea rows="10" cols="59" name="dataComments" id="dataComments" 
-			parsley-trigger="keyup" 
-			data-parsley-maxwords="250" 
-			required>{%if company.dataComments %}{{ company.dataComments }}{% end %}</textarea><br>
 		</fieldset>
 
 		<!--*****************************************************************-DATA SOURCES-***************************************************************** !-->
@@ -46,11 +38,11 @@
 			{% raw xsrf_form_html() %}
 			<input type="hidden" name="id" id="companyID" value="{{company.id}}">
 		</fieldset>
-
 	</form>
 
 	<!--*****************************************************************-AGENCIES AND SUBAGENCIES-***************************************************************** !-->
 	<div class="m-form-box data">
+		<h2>Open Data Sources</h2>
 		<p>Please tell us more about the open data sources your company uses.</p>
 		<p>Use the search bar to find and select government agencies, subagencies, city and state governments, or government-funded research programs from the list provided.</p>
 		<p>If you can't find your data provider on the list, please fill out the form <a href="/#suggest">below</a> to suggest an agency, subagency, organization, etc.</p>
@@ -140,13 +132,21 @@
 				{% end %}<!-- END OF AGENCIES !-->
 			</div><br>
 		</div>
-
-		<!--*****************************************************************-DATA COMMENTS-***************************************************************** !-->
 	</div>
 
-<!--*****************************************************************-SUBMIT BUTTON-***************************************************************** !-->
+	<!--*****************************************************************-DATA COMMENTS-***************************************************************** !-->
+	<form class="m-form"  id="company-data-comment-form">
+		<fieldset class="m-form-half right">
+				<h3>Please give your comments about the usefulness of all these data sources and datasets.<br><em>[250 words or less] * </em></h3>
+				<textarea rows="10" cols="59" name="dataComments" id="dataComments" 
+				parsley-trigger="keyup" 
+				data-parsley-maxwords="250" 
+				required>{%if company.dataComments %}{{ company.dataComments }}{% end %}</textarea><br>
+		</fieldset>
+	</form>
+
 	<fieldset class="m-form-half">
-		<input type="submit" class="m-button" value="Save And Finish">
+		<input type="submit" id="submit-all-forms" class="m-button" value="Save And Finish">
 		<span class="response-message"></span>
 	</fieldset>
 

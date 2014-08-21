@@ -117,12 +117,11 @@
 	<fieldset class="m-form-half right">
 		<h3>What category best describes your company? *</h3>
 		<div class="category-field">
-			<label for="category">Category: *</label>
-			<select name='category' id="category" required>
-				{% for category in categories %}
-					<option name="category" value="{{category}}">{{ category }}</option>><br>
-				{% end %}
-			</select>
+			{% for category in categories %}
+				<input type="radio" id="{{category}}" name="category" data-parsley-group='category' value="{{ category }}"><label for="{{category}}">{{category}}</label><br>
+			{% end %}
+			<input type="radio" id="other_category" name="category" value="Other" data-parsley-mincheck="1" data-parsley-group='category' data-parsley-trigger="change" required><label for="Other">Other</label>
+			<input type="text" id="other_category_text_field" name="otherCategory" data-parsley-trigger="focus">
 		</div>
 	</fieldset>
 

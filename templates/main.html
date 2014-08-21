@@ -1,9 +1,13 @@
 <!doctype html> 
-
+{% try %}
+    {% set lan_ = lan %}
+{% except NameError %}
+    {% set lan_ = 'en' %}
+{% end %}
 <!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
 <!--[if IE 7 ]>     <html lang="en" class="no-js ie7"> <![endif]-->
 <!--[if IE 8 ]>     <html lang="en" class="no-js ie8"> <![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!--> <html lang="{{lan}}" class="no-js"> <!--<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html lang="{{lan_}}" class="no-js"> <!--<![endif]-->
 <head>
     <meta name="description" content="The Open Data 500 is the first comprehensive study of U.S. companies that use open government data to generate new business and develop new products and services.">
     <meta name="keywords" content="Open Data, Open Data 500, Companies, Government Open Data, Big DAta, US Government Data, Data, Open">
@@ -48,7 +52,7 @@
         
             <a class="logo" href="/{%try%}{%if country and country!="int" %}{{country}}/{%end%}{%except%}{%end%}"><img src="{{ static_url("img/od500-logo.png") }}" alt=""></a>
             <div id="mainMenu" class="m-main-menu">
-                {% for item in settings['menu'][lan] %}        
+                {% for item in settings['menu'][lan_] %}        
                     <div class="m-main-menu-item">
                         <a href="{{item['link']}}">{{item['item']}}</a>
                         {% if item['sub-menu'] %}
