@@ -34,7 +34,7 @@
 		<h3>Company Information</h3>	
 		<div class="m-form-line"><label for="companyName">Company Name *</label><input type='text' name="companyName" id='companyName' value="{{ company.companyName }}" required></div>
 		<div class="m-form-line"><label for="url">Company URL: *</label><input type='text' name="url" id='url' data-parsley-trigger="change" data-parsley-type="url" value="{{ company.url }}"></div>
-		<div class="m-form-line"><label for="city">In which city is this company located?</label><input type="text" name="city" id="city" {% if company.city %} value="{{ company.city }}" {% end %} data-parsley-maxlength="50"></div>
+		<div class="m-form-line"><label for="city">In which city is your company's headquarters located? </label><input type="text" name="city" id="city" {% if company.city %} value="{{ company.city }}" {% end %} data-parsley-maxlength="50"></div>
 		<div class="m-form-line">
 			<label for="state">State:</label>
 			<select name='state' id="state" required>
@@ -164,29 +164,27 @@
 		data-parsley-error-message="You are over the word limit.">{{ company.financialInfo }}</textarea><br><br>
 	</fieldset>
 
+	<h2 class="data-section">Data Use and Source Information </h2>
 	<!--*****************************************************************-DATASET WISHLIST-***************************************************************** !-->
-	<fieldset class="m-form-half right">
+	<fieldset class="m-form-half">
 		<h3>What datasets (if any) are not currently available that would be useful for your company to have as government open data?<br><em>[50 words or less]</em></h3>
 		<textarea rows="10" cols="59" name="datasetWishList" id="datasetWishList" 
 		data-parsley-trigger="keyup" 
 		data-parsley-maxwords="50" 
-		data-parsley-error-message="You are over the word limit.">{{ company.datasetWishList }}</textarea><br>
+		data-parsley-error-message="You are over the word limit.">{%if company.datasetWishList %}{{ company.datasetWishList }}{%else%}{%end%}</textarea><br>
 	</fieldset>
 
-	<h2 class="data-section">Data Use and Source Information </h2>
-	<!--*****************************************************************-DATA SOURCES-***************************************************************** !-->
-	<fieldset class="m-form-half">
-		<h3>From approximately how many sources (i.e. agencies, subagencies, local and state governments) does your company use data? *</h3>
-		<div class="source-count-buttons">
-			<input type="radio" name="sourceCount" id="count1" value="1-10" {% if company.sourceCount == '1-10' %}checked{%end%}><label for="count1">1-10</label>
-			<input type="radio" name="sourceCount" id="count2" value="10-50" {% if company.sourceCount == '10-50' %}checked{%end%}><label for="count2">10-50</label>
-			<input type="radio" name="sourceCount" id="count3" value="50-100" {% if company.sourceCount == '50-100' %}checked{%end%}><label for="count3">50-100</label>
-			<input type="radio" name="sourceCount" id="count4" value="100+" {% if company.sourceCount == '100+' %}checked{%end%}><label for="count4">100+</label>
-			<input type="radio" name="sourceCount" id="count5" value="NA" {% if company.sourceCount == 'NA' %}checked{%end%}><label for="count5">NA</label>
-		</div>
-		<br>
+	<!--*****************************************************************-EXAMPLE USES-***************************************************************** !-->
+	<fieldset class="m-form-half right">
+		<h3>Provide any specific examples of how your company uses open data.<br> <em>[200 words or less]</em></h3>
+		<textarea rows="10" cols="59" name="exampleUses" id="exampleUses" 
+		data-parsley-trigger="keyup" 
+		data-parsley-maxwords="200" 
+		data-parsley-error-message="You are over the word limit.">{%if company.exampleUses %}{{ company.exampleUses }}{%else%}{%end%}</textarea><br>
+	</fieldset>
 
-		<!--*****************************************************************-DATA TYPES-***************************************************************** !-->
+	<!--*****************************************************************-DATA TYPES-***************************************************************** !-->
+	<fieldset class="m-form-half">
 		<h3>What types of data does your company use? <br><em>(check all that apply)</em></h3>
 		<div class="data-type-field">
 			{% for data_type in data_types %}
@@ -194,16 +192,23 @@
 			{% end %}
 			{% if list(set(company.dataTypes) - set(data_types)) %}
 				<input type="checkbox" id="other_data_type" name="dataTypes" value="Other" {%if company.dataTypes[0] %}checked{%end%} data-parsley-mincheck="1" data-parsley-group='dataTypes' data-parsley-trigger="change"><label for="Other">Other</label>
-				<input type="text" name="otherDataType" id="other_revenue_text_field" value="{{ list(set(company.dataTypes) - set(data_types))[0] }}" />
+				<input type="text" name="otherDataType" id="other_data_type_text_field" value="{{ list(set(company.dataTypes) - set(data_types))[0] }}" />
 			{% else %}
 				<input type="checkbox" id="other_data_type" name="dataTypes" value="Other" data-parsley-mincheck="1" data-parsley-group='dataTypes' data-parsley-trigger="change"><label for="Other">Other</label>
 				<input type="text" name="otherDataType" id="other_data_type_text_field" />
 			{% end %}
 		</div>
-		<br>
+		<input type="hidden" name="id" id="companyID" value="{{company.id}}">
+	</fieldset>
 
-
-		{% raw xsrf_form_html() %}
+	<!--*****************************************************************-DATA SOURCES-***************************************************************** !-->
+	<fieldset class="m-form-half right">
+		<h3>From approximately how many sources (i.e. agencies, subagencies, local and state governments) does your company use data? *</h3>
+		<div class="source-count-buttons">
+			{% for count in source_count %}
+				<input type="radio" name="sourceCount" id="{{count}}" value="{{count}}" {% if company.sourceCount == count %}checked{%end%}><label for="{{count}}">{{count}}</label><br>
+			{%end %}
+		</div>
 	</fieldset>
 
 	<!--*****************************************************************-ADMIN SETTINGS-***************************************************************** !-->

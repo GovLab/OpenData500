@@ -67,17 +67,8 @@ $(document).ready(function() {
     var rm = $('.response-message');
     $("#company-data-comment-form").parsley();
     $("#company-data-form").parsley();
-
     $('body').on('click', "#submit-all-forms", function() {
-        //$("#company-data-comment-form").submit(function(event) {
-        //console.log($(this).parsley('validate'));
-        //$('#company-data-comment-form').parsley('validate');
-        if ($('#company-data-comment-form').parsley().validate()) {
-            safe_to_submit = true;
-        } else {
-            safe_to_submit = false;
-        }
-        if ($('#company-data-form').parsley().validate()) {
+        if ($('#company-data-comment-form').parsley().validate() && $('#company-data-form').parsley().validate()) {
             safe_to_submit = true;
         } else {
             safe_to_submit = false;
@@ -94,64 +85,34 @@ $(document).ready(function() {
         }
         if (safe_to_submit) {
             console.log('all cleared');
+            var data = $('#company-data-form').serializeArray().concat($('#company-data-comment-form').serializeArray());
+            data.push({
+                "name": "action",
+                "value": "submit-form"
+            })
+            $.ajax({
+                type: 'POST',
+                url: '/' + country + '/addData/' + $('#companyID').val(),
+                data: data,
+                error: function(error) {
+                    console.debug(JSON.stringify(error));
+                    rm.text('Oops... Something went wrong :/')
+                    rm.show().delay(5000).fadeOut();
+                },
+                beforeSend: function(xhr, settings) {},
+                success: function(data) {
+                    if (data['response'] != 'error') {
+                        document.location.href = '/' + country + '/thanks/';
+                    } else {
+                        rm.text('Oops... something went wrong').css('opacity', 1).delay(5000).animate({
+                            'opacity': 0
+                        }, 500);
+                    }
+
+                }
+            });
         }
-        //event.preventDefault();
     });
-
-
-    // $(".company-data-form").submit(function(event) {
-    //     console.log("in big form");
-    //     $(this).parsley('validate');
-    //     if ($(this).parsley().validate()) {
-    //         safe_to_submit = true;
-    //         console.log("big form is good");
-    //         // var id = $('#companyID').val();
-    //         // var data = {
-    //         //     "dataComments": $('#dataComments').val(),
-    //         //     "action": "dataComments",
-    //         //     "id": id,
-    //         //     "_xsrf": $("[name='_xsrf']").val()
-    //         // }
-    //         // $.ajax({
-    //         //     type: 'POST',
-    //         //     url: '/' + country + '/addData/' + id,
-    //         //     data: data,
-    //         //     error: function(error) {
-    //         //         console.debug(JSON.stringify(error));
-    //         //         rm.text('Oops... Something went wrong :/')
-    //         //         rm.show().delay(5000).fadeOut();
-    //         //     },
-    //         //     beforeSend: function(xhr, settings) {},
-    //         //     success: function(data) {
-    //         //         document.location.href = '/' + country + '/thanks/';
-    //         //     }
-    //         // });
-    //     } else {
-    //         safe_to_submit = false;
-    //     }
-    //     console.log("data form validated and safe:" + safe_to_submit);
-
-    //     event.preventDefault();
-    // });
-
-    // submitForms = function() {
-    //     $("#company-data-comment-form").submit();
-    //     $(".company-data-form").submit();
-    //     if ($(".agency").length == 0) {
-    //         safe_to_submit = false;
-    //         rm.text('You need to enter at least one source of data.').css('opacity', 1).delay(5000).animate({
-    //             'opacity': 0
-    //         }, 500);
-    //     } else if (!safe_to_submit) {
-    //         rm.text('You need to fix some stuff.').css('opacity', 1).delay(5000).animate({
-    //             'opacity': 0
-    //         }, 500);
-    //     }
-    //     if (safe_to_submit) {
-    //         console.log('all cleared');
-    //     }
-
-    // }
 
     //--*****************************************************************-ACCORDIONS-*****************************************************************--//
     $(function() {

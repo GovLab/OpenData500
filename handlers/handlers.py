@@ -319,7 +319,7 @@ class SubmitDataHandler(BaseHandler):
 
     #@tornado.web.authenticated
     def post(self, country, id):
-        logging.info("Submitting Data: "+ self.get_argument("action", None))
+        #logging.info("Submitting Data: "+ self.get_argument("action", None))
         logging.info(self.request.arguments)
         try:
             company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
@@ -344,7 +344,7 @@ class SubmitDataHandler(BaseHandler):
         except:
             rating = 0
         action = self.get_argument("action", None)
-        if action != 'dataComments':
+        if action != 'submit-form':
             try:
                 agency = models.Agency.objects.get(Q(name=agency_name) & Q(country=company.country))
             except Exception, e:
@@ -352,11 +352,13 @@ class SubmitDataHandler(BaseHandler):
                 self.set_status(400)
         response = {"message":"", "agency":0, "subagency":0, "dataset":0}
         #------------------------------------JUST SAVE DATA COMMENT QUESTION------------------------
-        if action == "dataComments":
-            logging.info("saving " + self.get_argument('dataComments', None))
-            if self.application.form.company_update_one(id, 'dataComments', self.get_argument('dataComments', None)):
-                self.write({"response":"success", "redirect":"/"+ country + "/thanks/?lan=" + lan})
-            else:
+        if action == "submit-form":
+            try:
+                form_values = {k:','.join(v) for k,v in self.request.arguments.iteritems()}
+                self.application.form.process_company(form_values, id)
+                self.write({"response":"success", "redirect":"/"+ country + "/thanks/"})
+            except Exception, e:
+                logging.info("Error: " + str(e))
                 self.write({"response":"error"})
         #------------------------------------ADDING AGENCY/SUBAGENCY------------------------
         if action == 'add':
