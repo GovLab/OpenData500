@@ -208,6 +208,7 @@
 			{% for count in source_count %}
 				<input type="radio" name="sourceCount" id="{{count}}" value="{{count}}" {% if company.sourceCount == count %}checked{%end%}><label for="{{count}}">{{count}}</label><br>
 			{%end %}
+			<input type="radio" name="sourceCount" id="NA" value="NA" {% if company.sourceCount == 'NA' %}checked{%end%}><label for="NA">NA</label><br>
 		</div>
 	</fieldset>
 

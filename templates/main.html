@@ -64,7 +64,15 @@
                         {%end%}
                     </div>
                 {%end%}
-                {%try%} {% if user %} <div class="m-main-menu-item"><a href="/admin/companies/">Admin</a>{% end %}{%except%}{%end%}</div>
+                {%try%} {% if user %} 
+                    <div class="m-main-menu-item">
+                        <a href="/admin/companies/">Admin</a>
+                        <ul id="submenu-about" class="m-main-menu-sub-menu">
+                            <li><a class="m-main-menu-sub-menu-item" href="/admin/companies/">Companies</a></li>
+                            <li><a class="m-main-menu-sub-menu-item" href="/admin/agencies/">Agencies</a></li>
+                        </ul>
+                    </div>
+                {% end %}{%except%}{%end%}
                 {%try%} {% if user %} <div class="m-main-menu-item"><a href="/logout/">Logout</a>{% end %}{%except%}{%end%}</div>
             </div>
         </div>
