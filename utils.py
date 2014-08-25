@@ -41,6 +41,12 @@ stateList = {
 agency_types = ['Federal','State','City/County','University/Institution']
 available_countries = ["us", "ca", "mx"]
 country_keys = { "us":"United States", "ca":"Canada", "United States":"us", "Canada":"ca",  "Mexico":"mx", "mx":"Mexico"}
+company_fields = ['companyName', 'url', 'yearFounded', 'city', 'state', 'zipCode', 'description', 'descriptionShort', 'financialInfo', 'notes']
+company_fields_checkboxes = ['revenueSource', 'businessModel', 'socialImpact']
+company_fields_radio = ['companyCategory', 'companyType']
+company_contact_fields = ['firstName', 'lastName', 'title', 'email', 'phone']
+company_data_fields = ['sourceCount', 'dataTypes', 'dataComments', 'exampleUses']
+company_admin_booleans = ['display', 'submittedSurvey','vetted', 'vettedByCompany', 'submittedThroughWebsite', 'locked']
 
 
 class Validators(object):
@@ -68,6 +74,23 @@ class Tools(object):
             c.save()
         logging.info("Filters Redone.")
 
+    @classmethod
+    def re_do_company_filter(self, id):
+        try: 
+            c = models.Company.objects.get(id=bson.objectid.ObjectId(id))
+        except Exception, e:
+            logging.info("Error creating filter: " + str(e))
+            return
+        filters = []
+        filters.append(self.prettify(c.companyCategory))
+        filters.append(c.state)
+        for a in c.agencies:
+            filters.append(a.prettyName)
+        if c.submittedSurvey:
+            filters.append("survey-company")
+        return filters
+
+    @classmethod
     def prettify(self, name):
         return re.sub(r'([^\s\w])+', '', name).replace(" ", "-")
 
@@ -79,23 +102,13 @@ class Form(object):
         title = arguments['title']
         email = arguments['email']
         phone = arguments['phone']
-        contacted = True if 'contacted' in arguments else False
         contact = models.Person(
             firstName = firstName,
             lastName = lastName,
             title = title,
             email = email,
             phone = phone,
-            contacted = contacted,
         )
-        #-------------------CEO INFO---------------
-        ceoFirstName = arguments['ceoFirstName']
-        ceoLastName = arguments['ceoLastName']
-        ceo = models.Person(
-                firstName = ceoFirstName,
-                lastName = ceoLastName,
-                title = "CEO"
-            )
         #-------------------COMPANY INFO---------------
         url = arguments['url']
         companyName = arguments['companyName']
@@ -112,7 +125,7 @@ class Form(object):
         fte = 0 if not arguments['fte'] else arguments['fte']
         #-------------BUSINESS MODEL
         if 'businessModel' in arguments:
-            businessModel = [] if not arguments['businessModel'] else arguments['businessModel'].split(',')
+            businessModel = arguments['businessModel'].split(',')
             if 'Other' in businessModel:
                 del businessModel[businessModel.index('Other')]
                 businessModel.append(arguments['otherBusinessModel'])
@@ -144,7 +157,6 @@ class Form(object):
         description = arguments['description']
         descriptionShort = arguments['descriptionShort']
         financialInfo = arguments['financialInfo']
-        datasetWishList = arguments['datasetWishList']
         #-------------SOURCE COUNT
         if 'sourceCount' in arguments:
             sourceCount = arguments['sourceCount']
@@ -162,20 +174,19 @@ class Form(object):
             companyName = companyName,
             prettyName = prettyName,
             url = url,
-            ceo = ceo,
             city = city,
             zipCode = zipCode,
             state=state,
             yearFounded = yearFounded,
             fte = fte,
             companyType = companyType,
+            businessModel = businessModel,
             revenueSource = revenueSource,
             companyCategory = companyCategory,
             socialImpact = socialImpact,
             description= description,
             descriptionShort = descriptionShort,
             financialInfo = financialInfo,
-            datasetWishList = datasetWishList,
             sourceCount = sourceCount,
             dataTypes = dataTypes,
             contact = contact,
@@ -192,95 +203,13 @@ class Form(object):
         company.save()
         return company
 
-    def process_company(self, arguments, id):
+    def process_company_data_info(self, arguments, id):
         try: 
             c = models.Company.objects.get(id=bson.objectid.ObjectId(id))
         except Exception, e:
             logging.info("Error processing company: " + str(e))
             return
-        #-------------------CONTACT INFO---------------
-        if 'firstName' in arguments:
-            c.contact.firstName = arguments['firstName']
-        if 'lastName' in arguments:
-            c.contact.lastName = arguments["lastName"]
-        if 'title' in arguments:
-            c.contact.title = arguments['title']
-        if 'email' in arguments:
-            c.contact.email = arguments['email']
-        if 'phone' in arguments:
-            c.contact.phone = arguments['phone']
-        if 'contacted' in arguments:
-            c.contact.contacted = True
-        else:
-            c.contact.contacted = False
-        #-------------------CEO INFO---------------
-        if 'ceoFirstName' in arguments:
-            c.ceo.firstName = arguments['ceoFirstName']
-        if 'ceoLastName' in arguments:
-            c.ceo.lastName = arguments['ceoLastName']
-        c.ceo.title = 'CEO'
-        #-------------------COMPANY INFO---------------
-        if 'url' in arguments:
-            c.url = arguments['url']
-        if 'companyName' in arguments:
-            c.companyName = arguments['companyName']
-            c.prettyName = re.sub(r'([^\s\w])+', '', c.companyName).replace(" ", "-").title()
-        if 'city' in arguments:
-            c.city = arguments['city']
-        if 'zipCode' in arguments:
-            c.zipCode = arguments['zipCode']
-        if 'state' in arguments:
-            c.state = arguments['state']
-        if 'country' in arguments:
-            c.country = country_keys[arguments['country']]
-        if 'companyType' in arguments:
-            c.companyType = arguments['otherCompanyType'] if arguments['companyType'] == 'Other' else arguments['companyType']
-        else:
-            c.companyType = ''
-        if 'yearFounded' in arguments:
-            c.yearFounded = 0 if not arguments['yearFounded'] else arguments['yearFounded']
-        if 'fte' in arguments:
-            c.fte = 0 if not arguments['fte'] else arguments['fte']
-        #BUSINESS MODEL
-        if 'businessModel' in arguments:
-            c.businessModel = [] if not arguments['businessModel'] else arguments['businessModel'].split(',')
-            if 'Other' in c.businessModel:
-                del c.businessModel[c.businessModel.index('Other')]
-                c.businessModel.append(arguments['otherBusinessModel'])
-        else:
-            c.businessModel = []
-        #REVENUE SOURCE
-        if 'revenueSource' in arguments:
-            c.revenueSource = [] if not arguments['revenueSource'] else arguments['revenueSource'].split(',')
-            if 'Other' in c.revenueSource:
-                del c.revenueSource[c.revenueSource.index('Other')]
-                c.revenueSource.append(arguments['otherRevenueSource'])
-        else:
-            c.revenueSource = []
-        #SOCIAL IMPACT
-        if 'socialImpact' in arguments:
-            c.socialImpact = [] if not arguments['socialImpact'] else arguments['socialImpact'].split(',')
-            if 'Other' in c.socialImpact:
-                del c.socialImpact[c.socialImpact.index('Other')]
-                c.socialImpact.append(arguments['otherRevenueSource'])
-        else:
-            c.socialImpact = []
-        #CATEGORY
-        if 'category' in arguments:
-            c.companyCategory = arguments['otherCategory'] if arguments['category'] == 'Other' else arguments['category']
-        else:
-            c.companyCategory = ''
-        c.filters = [c.companyCategory, c.state, "survey-company"]
-        if'description' in arguments:
-            c.description = arguments['description']
-        if 'descriptionShort' in arguments:
-            c.descriptionShort = arguments['descriptionShort']
-        if 'financialInfo' in arguments:
-            c.financialInfo = arguments['financialInfo']
         #-------------------DATA INFO---------------
-        #DATASET WISHLIST
-        if 'datasetWishList' in arguments:
-            c.datasetWishList = arguments['datasetWishList']
         #SOURCE COUNT
         if 'sourceCount' in arguments:
             c.sourceCount = arguments['sourceCount']
@@ -301,16 +230,85 @@ class Form(object):
         #EXAMPLE USES
         if 'exampleUses' in arguments:
             c.exampleUses = arguments['exampleUses']
+
+
+    def process_company(self, arguments, id):
+        try: 
+            c = models.Company.objects.get(id=bson.objectid.ObjectId(id))
+        except Exception, e:
+            logging.info("Error processing company: " + str(e))
+            return
+        #-------------------CONTACT INFO---------------
+        for item in company_contact_fields:
+            if item in arguments:
+                models.Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__contact__'+item:arguments[item]})
+        #-------------------TEXTFIELDS---------------
+        for item in company_fields:
+            if item in arguments:
+                models.Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+item:arguments[item]})
+        c.prettyName = Tools.prettify(c.companyName)
+        c.country = country_keys[arguments['country']]
+        #-------------------CHECKBOXES---------------
+        for item in company_fields_checkboxes:
+            if item in arguments:
+                models.Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+item:arguments[item].split(',')})
+            else:
+                models.Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+item:[]})
+            if 'Other' in arguments[item]:
+                models.Company.objects(id=bson.objectid.ObjectId(id)).update(**{'pull__'+item:'Other'})
+                models.Company.objects(id=bson.objectid.ObjectId(id)).update(**{'push__'+item:arguments['other'+item]})
+        #-------------------RADIO BUTTONS---------------
+        for item in company_fields_radio:
+            if item in arguments:
+                if arguments[item] == 'Other':
+                    models.Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+item:arguments['other' +item]})
+                else:
+                    models.Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+item:arguments[item]})
+            else:
+                models.Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+item:''})
+        # if 'companyType' in arguments:
+        #     c.companyType = arguments['otherCompanyType'] if arguments['companyType'] == 'Other' else arguments['companyType']
+        # else:
+        #     c.companyType = ''
+        if 'fte' in arguments:
+            c.fte = 0 if not arguments['fte'] else arguments['fte']
+        #BUSINESS MODEL
+        # if 'businessModel' in arguments:
+        #     c.businessModel = [] if not arguments['businessModel'] else arguments['businessModel'].split(',')
+        #     if 'Other' in c.businessModel:
+        #         del c.businessModel[c.businessModel.index('Other')]
+        #         c.businessModel.append(arguments['otherBusinessModel'])
+        # else:
+        #     c.businessModel = []
+        #REVENUE SOURCE
+        # if 'revenueSource' in arguments:
+        #     c.revenueSource = [] if not arguments['revenueSource'] else arguments['revenueSource'].split(',')
+        #     if 'Other' in c.revenueSource:
+        #         del c.revenueSource[c.revenueSource.index('Other')]
+        #         c.revenueSource.append(arguments['otherRevenueSource'])
+        # else:
+        #     c.revenueSource = []
+        #SOCIAL IMPACT
+        # if 'socialImpact' in arguments:
+        #     c.socialImpact = [] if not arguments['socialImpact'] else arguments['socialImpact'].split(',')
+        #     if 'Other' in c.socialImpact:
+        #         del c.socialImpact[c.socialImpact.index('Other')]
+        #         c.socialImpact.append(arguments['otherRevenueSource'])
+        # else:
+        #     c.socialImpact = []
+        #CATEGORY
+        # if 'category' in arguments:
+        #     c.companyCategory = arguments['otherCategory'] if arguments['category'] == 'Other' else arguments['category']
+        # else:
+        #     c.companyCategory = ''
+        c.filters = Tools.re_do_company_filter(id)
         #-------------------BOOLEANS---------------
-        c.vetted = True if 'vetted' in arguments else False
-        c.display = True if 'display' in arguments else False
-        c.vettedByCompany = True if 'vettedByCompany' in arguments else False
-        c.submittedSurvey = True if 'submittedSurvey' in arguments else False
-        c.vettedByCompany = False if 'vettedByCompany' in arguments else True
-        c.locked = True if 'locked' in arguments else False
+        for item in company_admin_booleans:
+            if item in arguments:
+                models.Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+item:True})
+            else:
+                models.Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+item:False})
         #-------------------SAVE---------------
-        if 'notes' in arguments:
-            c.notes = arguments['notes']
         c.lastUpdated = datetime.now()
         c.save()
         return

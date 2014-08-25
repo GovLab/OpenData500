@@ -173,12 +173,12 @@ $(document).ready(function() {
 
     //------------------------------ CATEGORY
     $('.m-form-half').on('focus', '#other_category_text_field', function() {
-        $('input[name="category"][value="Other"').prop('checked', true);
+        $('input[name="companyCategory"][value="Other"').prop('checked', true);
         $(this).parsley().validate('category');
     });
     $('.m-form-half').on('focusout', '#other_category_text_field', function() {
         if ($('#other_category_text_field').val() == '') {
-            $('input[name="category"][value="Other"').prop('checked', false);
+            $('input[name="companyCategory"][value="Other"').prop('checked', false);
         }
     });
 

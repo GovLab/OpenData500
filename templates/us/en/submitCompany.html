@@ -75,8 +75,20 @@
 		<div class="m-form-line"><label for="">Number of full-time employees: *</label><input type="text" name="fte" id="fte" data-parsley-trigger="focusout" data-parsley-type="number" required></div>
 	</fieldset>
 
-	<!--*****************************************************************-REVENUE SOURCES-***************************************************************** !-->
 	<fieldset class="m-form-half">	
+		<!--*****************************************************************-BUSINESS MODELS-***************************************************************** !-->
+		<h3>Business Model <br><em>(check all that apply)</em> *</h3>
+		<div class="business-model-field">
+			{% for model in business_models %}
+				<input type="checkbox" id="{{model}}" name="businessModel" value="{{model}}" data-parsley-group="businessModel" /><label for="{{model}}">{{model}}</label><br>
+			{% end %}
+			<input type="checkbox" id="other_model" name="businessModel" value="Other" data-parsley-mincheck="1" data-parsley-group='businessModel' data-parsley-trigger="change" required><label for="Other">Other</label>
+			<input type="text" name="otherBusinessModel" id="other_model_text_field" />
+		</div>
+		<br>
+		<br>
+
+		<!--*****************************************************************-REVENUE SOURCES-***************************************************************** !-->
 		<h3>Which of the following are significant sources of revenue for your company? <br><em>(check all that apply)</em> *</h3>
 		<div class="revenue-source-field">
 			{% for source in new_revenueSource %}
@@ -85,6 +97,7 @@
 			<input type="checkbox" id="other_revenue" name="revenueSource" value="Other" data-parsley-mincheck="1" data-parsley-group='revenueSource' data-parsley-trigger="change" required><label for="Other">Other</label>
 			<input type="text" name="otherRevenueSource" id="other_revenue_text_field" />
 		</div>
+		<br>
 		<br>
 
 	<!--*****************************************************************-SOCIAL IMPACT-***************************************************************** !-->
@@ -132,7 +145,7 @@
 	</fieldset>
 
 	<!--*****************************************************************-FINANCIAL INFO-***************************************************************** !-->
-	<fieldset class="m-form-half left">
+	<fieldset class="m-form-half">
 		<h3>Please include any financial or operational information that will help us understand your company. We are interested in specific information like past and projected annual revenues, total outside investment dollars to date, and significant investors or partners. <br><em>[100 words or less]</em></h3>
 		<textarea rows="10" cols="59" name="financialInfo" id="financialInfo" 
 		data-parsley-trigger="keyup" 
