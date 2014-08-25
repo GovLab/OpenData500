@@ -1,0 +1,15 @@
+{% extends "main.html" %}
+{% autoescape None %}
+
+{% block body %}
+
+<div id="map"></div>
+
+<script> 
+$(function(){
+  $("#map").load("../static/img/map.svg"); 
+
+});
+</script> 
+
+{%end%}

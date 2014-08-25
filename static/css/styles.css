@@ -357,6 +357,19 @@ a:hover {
   width: 600px !important;
   margin-top: -35px; }
 
+#world-map path {
+  fill: rgba(0, 0, 0, 0.15);
+  stroke: transparent; }
+#world-map .formal-agreement {
+  fill: rgba(71, 43, 116, 0.4) !important; }
+#world-map .working-agreement {
+  fill: #666666 !important; }
+#world-map .in-discussion,
+#world-map .in-discussion > path {
+  fill: #aaaaaa !important; }
+#world-map .project {
+  fill: #472b74 !important; }
+
 .about-page {
   font-size: 14px;
   line-height: 20px; }
