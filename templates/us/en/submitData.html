@@ -8,15 +8,6 @@
 
 	<form class="m-form" id="company-data-form" data-parsley-validate>
 		<h2 class="data-section">Data Use and Source Information </h2>
-		
-		<!--*****************************************************************-DATASET WISHLIST-***************************************************************** !-->
-		<fieldset class="m-form-half">
-			<h3>What datasets (if any) are not currently available that would be useful for your company to have as government open data?<br><em>[50 words or less]</em></h3>
-			<textarea rows="10" cols="59" name="datasetWishList" id="datasetWishList" 
-			data-parsley-trigger="keyup" 
-			data-parsley-maxwords="50" 
-			data-parsley-error-message="You are over the word limit.">{%if company.datasetWishList %}{{ company.datasetWishList }}{%else%}{%end%}</textarea><br>
-		</fieldset>
 
 		<!--*****************************************************************-EXAMPLE USES-***************************************************************** !-->
 		<fieldset class="m-form-half right">
@@ -25,6 +16,15 @@
 			data-parsley-trigger="keyup" 
 			data-parsley-maxwords="200" 
 			data-parsley-error-message="You are over the word limit.">{%if company.exampleUses %}{{ company.exampleUses }}{%else%}{%end%}</textarea><br>
+			<br>
+			
+			<!--*****************************************************************-DATA SOURCES-***************************************************************** !-->
+			<h3>From approximately how many sources (i.e. agencies, subagencies, local and state governments) does your company use data? *</h3>
+			<div class="source-count-buttons">
+				{% for count in source_count %}
+					<input type="radio" name="sourceCount" id="{{count}}" value="{{count}}" {% if company.sourceCount == count %}checked{%end%} required><label for="{{count}}">{{count}}</label><br>
+				{%end %}
+			</div>
 		</fieldset>
 
 		<!--*****************************************************************-DATA TYPES-***************************************************************** !-->
@@ -44,16 +44,6 @@
 			</div>
 			{% raw xsrf_form_html() %}
 			<input type="hidden" name="id" id="companyID" value="{{company.id}}">
-		</fieldset>
-
-		<!--*****************************************************************-DATA SOURCES-***************************************************************** !-->
-		<fieldset class="m-form-half right">
-			<h3>From approximately how many sources (i.e. agencies, subagencies, local and state governments) does your company use data? *</h3>
-			<div class="source-count-buttons">
-				{% for count in source_count %}
-					<input type="radio" name="sourceCount" id="{{count}}" value="{{count}}" {% if company.sourceCount == count %}checked{%end%} required><label for="{{count}}">{{count}}</label><br>
-				{%end %}
-			</div>
 		</fieldset>
 
 	</form>

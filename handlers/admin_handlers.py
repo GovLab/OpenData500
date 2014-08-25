@@ -241,6 +241,48 @@ class AgencyAdminHandler(BaseHandler):
             self.application.stats.update_total_agencies(country)
             self.write({"message":"All right, I'm done.", "total_agencies": self.application.stats.get_total_agencies(country)})
 
+#--------------------------------------------------------NEW COMPANY PAGE------------------------------------------------------------
+class NewCompanyHandler(BaseHandler):
+    @tornado.web.authenticated
+    def get(self):
+        try:
+            user = models.Users.objects.get(username=self.current_user)
+        except Exception, e:
+            logging.info("Could not get user: " + str(e))
+            self.redirect("/login/")
+            return
+        country = user.country
+        with open("templates/"+user.country+"/settings.json") as json_file:
+            settings = json.load(json_file)
+        self.render("admin/admin_add_company.html",
+            page_heading = "New Company",
+            companyType = companyType,
+            companyFunction = companyFunction,
+            criticalDataTypes = criticalDataTypes,
+            revenueSource = revenueSource,
+            new_revenueSource = new_revenueSource,
+            business_models = business_models,
+            categories=categories,
+            social_impacts = social_impacts,
+            data_types = data_types,
+            source_count = source_count,
+            stateList = stateList,
+            stateListAbbrev=stateListAbbrev,
+            user=self.current_user,
+            country = country,
+            country_keys = country_keys,
+            settings = settings,
+            lan = settings['default_language']
+        )
+
+    def post(self):
+        logging.info(self.request.arguments)
+        form_values = {k:','.join(v) for k,v in self.request.arguments.iteritems()}
+        self.application.form.process_new_company(form_values)
+        country = country_keys[form_values['country']]
+        self.application.stats.update_all_state_counts(country)
+        self.write('success')
+
 
 #--------------------------------------------------------EDIT COMPANY PAGE------------------------------------------------------------
 class EditCompanyHandler(BaseHandler):

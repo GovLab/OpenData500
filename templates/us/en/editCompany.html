@@ -26,7 +26,6 @@
 			data-parsley-pattern="(^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$)"
 			data-parsley-error-message="Phone must be in format: ###-###-####" 
 			{% if (company.contact) %} value="{{ company.contact.phone }}" {% end %}></div>
-		<div class="m-form-box contacted-box"><label for="contacted"><input type="checkbox" name="contacted" id="contacted" value="contacted" {% if (company.contact) %}{% if company.contact.contacted %} checked {% end %}{% end %}>Please check here if you would be willing to be contacted for further information about your company.</label></div>
 	</fieldset>
 
 	<!--*****************************************************************-COMPANY INFO-***************************************************************** !-->
@@ -44,8 +43,6 @@
 		</div>
 		<div class="m-form-line"><label for="country">Country:</label><input type="text" id="country" name="country" country="{{country}}" value="{{country_keys[country]}}" readonly></div>
 		<div class="m-form-line"><label for="zipCode">Zip Code: *</label><input type="text" name="zipCode" id="zipCode" data-parsley-trigger="change" data-parsley-pattern="(^\d{5}$)|(^\d{5}-\d{4}$)" {% if company.zipCode %}value="{{ company.zipCode }}" {% end %} required></div>
-		<div class="m-form-line"><label for="ceoFirstName">First Name of CEO:</label><input type="text" name="ceoFirstName" id="ceoFirstName" value="{{ company.ceo.firstName}}" data-parsley-maxlength="50"></div>
-		<div class="m-form-line"><label for="ceoLastName">Last Name of CEO:</label><input type="text" name="ceoLastName" id="ceoLastName" value="{{ company.ceo.lastName }}" data-parsley-maxlength="50"></div>
 		<div class="m-form-box">Type of Company: *<br>
 			<div class="company-type-field">
 				{% for type in companyType %}
@@ -169,14 +166,6 @@
 
 
 	<h2 class="data-section">Data Use and Source Information </h2>
-	<!--*****************************************************************-DATASET WISHLIST-***************************************************************** !-->
-	<fieldset class="m-form-half">
-		<h3>What datasets (if any) are not currently available that would be useful for your company to have as government open data?<br><em>[50 words or less]</em></h3>
-		<textarea rows="10" cols="59" name="datasetWishList" id="datasetWishList" 
-		data-parsley-trigger="keyup" 
-		data-parsley-maxwords="50" 
-		data-parsley-error-message="You are over the word limit.">{%if company.datasetWishList %}{{ company.datasetWishList }}{%else%}{%end%}</textarea><br>
-	</fieldset>
 
 	<!--*****************************************************************-EXAMPLE USES-***************************************************************** !-->
 	<fieldset class="m-form-half right">
@@ -185,6 +174,14 @@
 		data-parsley-trigger="keyup" 
 		data-parsley-maxwords="200" 
 		data-parsley-error-message="You are over the word limit.">{%if company.exampleUses %}{{ company.exampleUses }}{%else%}{%end%}</textarea><br>
+
+		<!--*****************************************************************-DATA SOURCES-***************************************************************** !-->
+		<h3>From approximately how many sources (i.e. agencies, subagencies, local and state governments) does your company use data? *</h3>
+		<div class="source-count-buttons">
+			{% for count in source_count %}
+				<input type="radio" name="sourceCount" id="{{count}}" value="{{count}}" {% if company.sourceCount == count %}checked{%end%} required><label for="{{count}}">{{count}}</label><br>
+			{%end %}
+		</div>
 	</fieldset>
 
 	<!--*****************************************************************-DATA TYPES-***************************************************************** !-->
@@ -203,16 +200,6 @@
 			{% end %}
 		</div>
 		<input type="hidden" name="id" id="companyID" value="{{company.id}}">
-	</fieldset>
-
-	<!--*****************************************************************-DATA SOURCES-***************************************************************** !-->
-	<fieldset class="m-form-half right">
-		<h3>From approximately how many sources (i.e. agencies, subagencies, local and state governments) does your company use data? *</h3>
-		<div class="source-count-buttons">
-			{% for count in source_count %}
-				<input type="radio" name="sourceCount" id="{{count}}" value="{{count}}" {% if company.sourceCount == count %}checked{%end%} required><label for="{{count}}">{{count}}</label><br>
-			{%end %}
-		</div>
 	</fieldset>
 	{% raw xsrf_form_html() %}
 
