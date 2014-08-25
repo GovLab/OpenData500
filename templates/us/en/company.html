@@ -16,6 +16,7 @@
 			<p><strong>Type of Company: </strong> {% if company.companyType %} {{company.companyType}}{%else%}Not Available{%end%}</p>
 			<p><strong>Category: </strong> {{company.companyCategory}}</p>
 			<p><strong>Sources of Revenue: </strong>{% if len(company.revenueSource) > 0 %}{% if company.revenueSource[0] %}{{ ", ".join(company.revenueSource) }}{%else%}Not Available{%end%}{%else%}Not Available{%end%}</p>
+			<p><strong>Areas of social impact: </strong>{% if len(company.socialImpact) > 0 %}{% if company.socialImpact[0] %}{{ ", ".join(company.socialImpact) }}{%else%}Not Available{%end%}{%else%}Not Available{%end%}</p>
 			{%if company.sourceCount == "NA" %}<p><strong>Approximate number of sources of government open data: </strong>Not Available
 			{% elif company.sourceCount %}<p><strong>Approximate number of sources of government open data: </strong>{{company.sourceCount}} Agencies/Local Governments/Organizations
 			{% else %}<p><strong>Approximate number of sources of government open data: </strong>Not Available{%end%}</p>

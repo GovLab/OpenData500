@@ -221,11 +221,18 @@ survey/no survey hover and active states*/
   font-size: 4.9em;
 }
 
-
 #candidates-warning {
   height: 150px;
 }
 
 .event-sponsor-container {
   height: 100px;
+}
+
+.m-form {
+  border: 0px;
+}
+
+.m-form .data-section  {
+  margin-top: 0px;
 }

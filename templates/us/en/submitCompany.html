@@ -30,7 +30,6 @@
 			data-parsley-trigger="focusout" 
 			data-parsley-pattern="(^\d{3}(-|\s)\d{3}(-|\s)\d{4}$)|(^\d{10})"
 			data-parsley-error-message="Phone must be in format: ###-###-####"></div>
-		<div class="m-form-box contacted-box"><label for="contacted"><input type="checkbox" name="contacted" id="contacted" value="True">Please check here if you would be willing to be contacted for further information about your company.</label></div>
 	</fieldset>
 
 	<!--*****************************************************************-COMPANY INFO-***************************************************************** !-->
@@ -58,9 +57,7 @@
 			</select>
 		</div>
 		<div class="m-form-line"><label for="country">Country:</label><input type="text" name="country" value="{{country_keys[country]}}" readonly></div>
-		<div class="m-form-line"><label for="zipCode">Zip Code:</label><input type="text" name="zipCode" id="zipCode" data-parsley-trigger="focusout" data-parsley-pattern="(^\d{5}$)|(^\d{5}-\d{4}$)"></div>
-		<div class="m-form-line"><label for="ceoFirstName">First Name of CEO:</label><input type="text" name="ceoFirstName" id="ceoFirstName" data-parsley-maxlength="50"></div>
-		<div class="m-form-line"><label for="ceoLastName">Last Name of CEO:</label><input type="text" name="ceoLastName" id="ceoLastName" data-parsley-maxlength="50"></div>
+		<div class="m-form-line"><label for="zipCode">Zip Code: *</label><input type="text" name="zipCode" id="zipCode" data-parsley-trigger="focusout" data-parsley-pattern="(^\d{5}$)|(^\d{5}-\d{4}$)" required></div>
 		<div class="m-form-box"><label for="companyType">Type of Company: *</label><br>
 			<div class="company-type-field">
 				{% for type in companyType %}
@@ -87,6 +84,17 @@
 			{% end %}
 			<input type="checkbox" id="other_revenue" name="revenueSource" value="Other" data-parsley-mincheck="1" data-parsley-group='revenueSource' data-parsley-trigger="change" required><label for="Other">Other</label>
 			<input type="text" name="otherRevenueSource" id="other_revenue_text_field" />
+		</div>
+		<br>
+
+	<!--*****************************************************************-SOCIAL IMPACT-***************************************************************** !-->
+		<h3>Does your company’s mission have a direct, beneficial social impact in any of the following areas? <br><em>(check all that apply)</em> </h3>
+		<div class="social-impact-field">
+			{% for impact in social_impacts %}
+				<input type="checkbox" id="{{impact}}" name="socialImpact" value="{{impact}}" data-parsley-group="socialImpact" /><label for="{{impact}}">{{impact}}</label><br>
+			{% end %}
+			<input type="checkbox" id="other_impact" name="socialImpact" value="Other" data-parsley-mincheck="1" data-parsley-group='socialImpact' data-parsley-trigger="change"><label for="Other">Other</label>
+			<input type="text" name="otherSocialImpact" id="other_impact_text_field" />
 		</div>
 
 	</fieldset>
@@ -131,29 +139,7 @@
 		data-parsley-maxwords="100" 
 		data-parsley-error-message="You are over the word limit."></textarea><br><br>
 	</fieldset>
-
-	<!--*****************************************************************-DATASET WISHLIST-***************************************************************** !-->
-	<fieldset class="m-form-half right">
-		<h3>What datasets (if any) are not currently available that would be useful for your company to have as government open data?<br><em>[50 words or less]</em></h3>
-		<textarea rows="10" cols="59" name="datasetWishList" id="datasetWishList" 
-		data-parsley-trigger="keyup" 
-		data-parsley-maxwords="50" 
-		data-parsley-error-message="You are over the word limit."></textarea><br>
-	</fieldset>
-
-	<!--*****************************************************************-DATA SOURCES-***************************************************************** !-->
-	<h2 class="data-section">Data Use and Source Information </h2>
-	<fieldset class="m-form-half">
-		<h3>From approximately how many sources (i.e. agencies, subagencies, local and state governments) does your company use data? *</h3>
-		<div class="source-count-buttons">
-			{% for count in source_count %}
-				<input type="radio" name="sourceCount" id="{{count}}" value="{{count}}" required><label for="{{count}}">{{count}}</label>
-			{%end %}
-		</div>
-		{% raw xsrf_form_html() %}
-	</fieldset>
-
-
+	{% raw xsrf_form_html() %}
 
 	<p class="disclaimer-text warning">Your responses will become part of a public database of information on Open Data companies. By submitting this form you are agreeing that, other than personal contact information, this information will be part of a publicly available database.</p>
 	<div class="saveCompanyForm-new">	
@@ -162,7 +148,6 @@
 		<span class="company-form-error-message error-message" style="display:none"></span>
 	</div>
 </form>
-<!--------------------------------------------DATASETS--------------------------------------!-->
 
 
 

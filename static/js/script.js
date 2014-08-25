@@ -62,6 +62,58 @@ $(document).ready(function() {
         });
     }
 
+    //--*****************************************************************-FINISH ADDING DATA-*****************************************************************--//
+    var safe_to_submit = false;
+    var rm = $('.response-message');
+    $("#company-data-comment-form").parsley();
+    $("#company-data-form").parsley();
+    $('body').on('click', "#submit-all-forms", function() {
+        if ($('#company-data-comment-form').parsley().validate() && $('#company-data-form').parsley().validate()) {
+            safe_to_submit = true;
+        } else {
+            safe_to_submit = false;
+        }
+        if ($(".agency").length == 0) {
+            safe_to_submit = false;
+            rm.text('You need to enter at least one source of data.').css('opacity', 1).delay(5000).animate({
+                'opacity': 0
+            }, 500);
+        } else if (!safe_to_submit) {
+            rm.text('You need to fix some stuff.').css('opacity', 1).delay(5000).animate({
+                'opacity': 0
+            }, 500);
+        }
+        if (safe_to_submit) {
+            console.log('all cleared');
+            var data = $('#company-data-form').serializeArray().concat($('#company-data-comment-form').serializeArray());
+            data.push({
+                "name": "action",
+                "value": "submit-form"
+            })
+            $.ajax({
+                type: 'POST',
+                url: '/' + country + '/addData/' + $('#companyID').val(),
+                data: data,
+                error: function(error) {
+                    console.debug(JSON.stringify(error));
+                    rm.text('Oops... Something went wrong :/')
+                    rm.show().delay(5000).fadeOut();
+                },
+                beforeSend: function(xhr, settings) {},
+                success: function(data) {
+                    if (data['response'] != 'error') {
+                        document.location.href = '/' + country + '/thanks/';
+                    } else {
+                        rm.text('Oops... something went wrong').css('opacity', 1).delay(5000).animate({
+                            'opacity': 0
+                        }, 500);
+                    }
+
+                }
+            });
+        }
+    });
+
     //--*****************************************************************-ACCORDIONS-*****************************************************************--//
     $(function() {
         $("#accordionUnvetted").accordion({
@@ -96,6 +148,30 @@ $(document).ready(function() {
         $(this).closest('form').parsley().validate('revenueSource');
 
     });
+
+    //------------------------------ BUSINESS MODEL
+    $('.m-form-half').on('focusout', '#other_model_text_field', function(event) {
+        if ($('#other_model_text_field').val() == '') {
+            $('#other_model').prop('checked', false);
+        }
+    });
+    $('.m-form-half').on('focus', '#other_model_text_field', function() {
+        $('#other_model').prop('checked', true);
+        $(this).closest('form').parsley().validate('businessModel');
+    });
+
+    //------------------------------ SOCIAL IMPACT
+    $('.m-form-half').on('focusout', '#other_impact_text_field', function(event) {
+        if ($('#other_impact_text_field').val() == '') {
+            $('#other_impact').prop('checked', false);
+        }
+    });
+    $('.m-form-half').on('focus', '#other_impact_text_field', function() {
+        $('#other_impact').prop('checked', true);
+        $(this).closest('form').parsley().validate('socialImpact');
+    });
+
+    //------------------------------ CATEGORY
     $('.m-form-half').on('focus', '#other_category_text_field', function() {
         $('input[name="category"][value="Other"').prop('checked', true);
         $(this).parsley().validate('category');
@@ -113,6 +189,16 @@ $(document).ready(function() {
         if ($('#other_company_type_field').val() == '') {
             $('input[name="companyType"][value="Other"').prop('checked', false);
         }
+    });
+
+    //------------------------------ DATA TYPE
+    $('.m-form-half').on('focusout', '#other_data_type_text_field', function(event) {
+        if ($('#other_data_type_text_field').val() == '') {
+            $('#other_data_type').prop('checked', false);
+        }
+    });
+    $('.m-form-half').on('focus', '#other_data_type_text_field', function() {
+        $('#other_data_type').prop('checked', true);
     });
 
 
@@ -457,38 +543,6 @@ $(document).ready(function() {
         }
     }, '.agency, .subagency');
 
-    //--*****************************************************************-FINISH ADDING DATA-*****************************************************************--//
-    var rm = $('.response-message');
-    $(".data-comment-form").parsley();
-    $(".data-comment-form").submit(function(event) {
-        $(this).parsley("validate");
-        if ($(this).parsley("isValid") && $(".agency").length > 0) {
-            var id = $('#companyID').val();
-            var data = {
-                "dataComments": $('#dataComments').val(),
-                "action": "dataComments",
-                "id": id,
-                "_xsrf": $("[name='_xsrf']").val()
-            }
-            $.ajax({
-                type: 'POST',
-                url: '/' + country + '/addData/' + id,
-                data: data,
-                error: function(error) {
-                    console.debug(JSON.stringify(error));
-                    rm.text('Oops... Something went wrong :/')
-                    rm.show().delay(5000).fadeOut();
-                },
-                beforeSend: function(xhr, settings) {},
-                success: function(data) {
-                    document.location.href = '/' + country + '/thanks/';
-                }
-            });
-        } else {
-            rm.text('You need to enter at least one source of data.');
-        }
-        event.preventDefault();
-    });
 
     function validURL(url) {
         var re = /^((https?|s?ftp|git):\/\/)?(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i;

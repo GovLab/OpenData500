@@ -17,10 +17,15 @@ companyType = ['Public', 'Private', 'Nonprofit']
 companyFunction = ['Consumer Research and/or Marketing', 'Consumer Services', 'Data Management and Analysis', 'Financial/Investment Services', 'Information for Consumers']
 criticalDataTypes = ['Federal Open Data', 'State Open Data', 'City/Local Open Data', 'Private/Proprietary Data Sources']
 revenueSource = ['advertising', 'Data Management and Analytic Services', 'Database Licensing', 'Lead Generation To Other Businesses', 'Philanthropy', 'Software Licensing', 'subscriptions', 'User Fees for Web or Mobile Access']
+new_revenueSource = ["Advertising", "Consulting", "Contributions/Donations", "Data analysis for clients", "Database licensing", "Government contract", "Lead generation to other businesses", "Membership fees", "Philanthropic grants", "Software licensing", "Subscriptions", "User fees for web or mobile access"]
+old_new_revenueSource = ['Advertising', "Consulting", "Contributions/Donations", "Data analysis for clients", 'Data Management and Analytic Services', 'Database Licensing', "Government contract", 'Lead Generation To Other Businesses', "Membership fees", "Philanthropic grants", 'Philanthropy', 'Software Licensing', 'Subscriptions', 'User Fees for Web or Mobile Access']
+business_models = ['Business to Business', 'Business to Consumer', 'Business to Government']
 sectors = ['Agriculture', 'Arts, Entertainment and Recreation' 'Crime', 'Education', 'Energy', 'Environmental', 'Finance', 'Geospatial data/mapping', 'Health and Healthcare', 'Housing/Real Estate', 'Manufacturing', 'Nutrition', 'Scientific Research', 'Social Assistance', 'Trade', 'Transportation', 'Telecom', 'Weather']
 new_revenueSource = ["Advertising", "Consulting", "Contributions/Donations", "Data analysis for clients", "Database licensing", "Government contract", "Lead generation to other businesses", "Membership fees", "Philanthropic grants", "Software licensing", "Subscriptions", "User fees for web or mobile access"]
 datatypes = ['Federal Open Data', 'State Open Data', 'City/Local Open Data']
-categories = ['Business & Legal Services', 'Data/Technology', 'Education', 'Energy', 'Environment & Weather', 'Finance & Investment', 'Food & Agriculture', 'Geospatial/Mapping', 'Governance', 'Healthcare', 'Housing/Real Estate', 'Insurance', 'Lifestyle & Consumer', 'Research & Consulting', 'Scientific Research', 'Transportation']
+categories = ['Business & Legal Services', 'Data/Technology', 'Education', 'Energy', 'Environment & Weather', 'Finance & Investment', 'Food & Agriculture', 'Geospatial/Mapping', 'Governance', 'Healthcare', 'Housing/Real Estate', 'Insurance', 'Lifestyle & Consumer', 'Media', 'Research & Consulting', 'Scientific Research', 'Transportation']
+social_impacts = ['Citizen engagement and participation', 'Consumer empowerment', 'Educational opportunity', 'Environment and climate change', 'Financial access', 'Food access and supply', 'Good governance', 'Healthcare access', 'Housing access', 'Public safety']
+data_types = ["Agriculture & Food", "Business", "Consumer", "Demographics & Social", "Economics", "Education", "Energy", "Environment", "Finance", "Geospatial/Mapping", "Government Operations", "Health/Healthcare", "Housing", "International/Global Development", "Legal", "Manufacturing", "Science and Research", "Public Safety", "Tourism", "Transportation", "Weather"]
 source_count = ['1-10', '11-50', '51-100', '101+']
 states ={ "AL": "Alabama", "AK": "Alaska", "AZ": "Arizona", "AR": "Arkansas", "CA": "California", "CO": "Colorado", "CT": "Connecticut", "DE": "Delaware", "DC": "District of Columbia", "FL": "Florida", "GA": "Georgia", "HI": "Hawaii", "ID": "Idaho", "IL": "Illinois", "IN": "Indiana", "IA": "Iowa", "KA": "Kansas", "KY": "Kentucky", "LA": "Louisiana", "ME": "Maine", "MD": "Maryland", "MA": "Massachusetts", "MI": "Michigan", "MN": "Minnesota", "MS": "Mississippi", "MO": "Missouri", "MT": "Montana", "NE": "Nebraska", "NV": "Nevada", "NH": "New Hampshire", "NJ": "New Jersey", "NM": "New Mexico", "NY": "New York", "NC": "North Carolina", "ND": "North Dakota", "OH": "Ohio", "OK": "Oklahoma", "OR": "Oregon", "PA": "Pennsylvania", "RI": "Rhode Island", "SC": "South Carolina", "SD": "South Dakota", "TN": "Tennessee", "TX": "Texas", "UT": "Utah", "VT": "Vermont", "VA": "Virginia", "WA": "Washington", "WV": "West Virginia", "WI": "Wisconsin", "WY": "Wyoming", "PR": "Puerto Rico"}
 stateListAbbrev = { 
@@ -105,6 +110,15 @@ class Form(object):
             companyType = ''
         yearFounded = 0 if not arguments['yearFounded'] else arguments['yearFounded']
         fte = 0 if not arguments['fte'] else arguments['fte']
+        #-------------BUSINESS MODEL
+        if 'businessModel' in arguments:
+            businessModel = [] if not arguments['businessModel'] else arguments['businessModel'].split(',')
+            if 'Other' in businessModel:
+                del businessModel[businessModel.index('Other')]
+                businessModel.append(arguments['otherBusinessModel'])
+        else:
+            businessModel = []
+        #-------------REVENUE SOURCE
         if 'revenueSource' in arguments:
             revenueSource = [] if not arguments['revenueSource'] else arguments['revenueSource'].split(',')
             if 'Other' in revenueSource:
@@ -112,6 +126,15 @@ class Form(object):
                 revenueSource.append(arguments['otherRevenueSource'])
         else:
             revenueSource = []
+        #-------------SOCIAL IMPACT
+        if 'socialImpact' in arguments:
+            socialImpact = [] if not arguments['socialImpact'] else arguments['socialImpact'].split(',')
+            if 'Other' in socialImpact:
+                del socialImpact[socialImpact.index('Other')]
+                socialImpact.append(arguments['otherSocialImpact'])
+        else:
+            socialImpact = []
+        #-------------CATEGORY
         if 'category' in arguments:
             companyCategory = arguments['otherCategory'] if arguments['category'] == 'Other' else arguments['category']
             filters = [companyCategory, state, "survey-company"]
@@ -122,10 +145,19 @@ class Form(object):
         descriptionShort = arguments['descriptionShort']
         financialInfo = arguments['financialInfo']
         datasetWishList = arguments['datasetWishList']
+        #-------------SOURCE COUNT
         if 'sourceCount' in arguments:
             sourceCount = arguments['sourceCount']
         else:
             sourceCount = ''
+        #-------------DATA TYPES
+        if 'dataTypes' in arguments:
+            dataTypes = [] if not arguments['dataTypes'] else arguments['dataTypes'].split(',')
+            if 'Other' in dataTypes:
+                del dataTypes[dataTypes.index('Other')]
+                dataTypes.append(arguments['otherDataType'])
+        else:
+            dataTypes = []
         company = models.Company(
             companyName = companyName,
             prettyName = prettyName,
@@ -139,11 +171,13 @@ class Form(object):
             companyType = companyType,
             revenueSource = revenueSource,
             companyCategory = companyCategory,
+            socialImpact = socialImpact,
             description= description,
             descriptionShort = descriptionShort,
             financialInfo = financialInfo,
             datasetWishList = datasetWishList,
             sourceCount = sourceCount,
+            dataTypes = dataTypes,
             contact = contact,
             lastUpdated = datetime.now(),
             display = False, 
@@ -165,30 +199,57 @@ class Form(object):
             logging.info("Error processing company: " + str(e))
             return
         #-------------------CONTACT INFO---------------
-        c.contact.firstName = arguments['firstName']
-        c.contact.lastName = arguments["lastName"]
-        c.contact.title = arguments['title']
-        c.contact.email = arguments['email']
-        c.contact.phone = arguments['phone']
-        c.contact.contacted = True if 'contacted' in arguments else False
+        if 'firstName' in arguments:
+            c.contact.firstName = arguments['firstName']
+        if 'lastName' in arguments:
+            c.contact.lastName = arguments["lastName"]
+        if 'title' in arguments:
+            c.contact.title = arguments['title']
+        if 'email' in arguments:
+            c.contact.email = arguments['email']
+        if 'phone' in arguments:
+            c.contact.phone = arguments['phone']
+        if 'contacted' in arguments:
+            c.contact.contacted = True
+        else:
+            c.contact.contacted = False
         #-------------------CEO INFO---------------
-        c.ceo.firstName = arguments['ceoFirstName']
-        c.ceo.lastName = arguments['ceoLastName']
+        if 'ceoFirstName' in arguments:
+            c.ceo.firstName = arguments['ceoFirstName']
+        if 'ceoLastName' in arguments:
+            c.ceo.lastName = arguments['ceoLastName']
         c.ceo.title = 'CEO'
         #-------------------COMPANY INFO---------------
-        c.url = arguments['url']
-        c.companyName = arguments['companyName'] if 'companyName' in arguments else c.companyName
-        c.prettyName = re.sub(r'([^\s\w])+', '', c.companyName).replace(" ", "-").title()
-        c.city = arguments['city']
-        c.zipCode = arguments['zipCode']
-        c.state = arguments['state']
-        c.country = country_keys[arguments['country']]
+        if 'url' in arguments:
+            c.url = arguments['url']
+        if 'companyName' in arguments:
+            c.companyName = arguments['companyName']
+            c.prettyName = re.sub(r'([^\s\w])+', '', c.companyName).replace(" ", "-").title()
+        if 'city' in arguments:
+            c.city = arguments['city']
+        if 'zipCode' in arguments:
+            c.zipCode = arguments['zipCode']
+        if 'state' in arguments:
+            c.state = arguments['state']
+        if 'country' in arguments:
+            c.country = country_keys[arguments['country']]
         if 'companyType' in arguments:
             c.companyType = arguments['otherCompanyType'] if arguments['companyType'] == 'Other' else arguments['companyType']
         else:
             c.companyType = ''
-        c.yearFounded = 0 if not arguments['yearFounded'] else arguments['yearFounded']
-        c.fte = 0 if not arguments['fte'] else arguments['fte']
+        if 'yearFounded' in arguments:
+            c.yearFounded = 0 if not arguments['yearFounded'] else arguments['yearFounded']
+        if 'fte' in arguments:
+            c.fte = 0 if not arguments['fte'] else arguments['fte']
+        #BUSINESS MODEL
+        if 'businessModel' in arguments:
+            c.businessModel = [] if not arguments['businessModel'] else arguments['businessModel'].split(',')
+            if 'Other' in c.businessModel:
+                del c.businessModel[c.businessModel.index('Other')]
+                c.businessModel.append(arguments['otherBusinessModel'])
+        else:
+            c.businessModel = []
+        #REVENUE SOURCE
         if 'revenueSource' in arguments:
             c.revenueSource = [] if not arguments['revenueSource'] else arguments['revenueSource'].split(',')
             if 'Other' in c.revenueSource:
@@ -196,26 +257,60 @@ class Form(object):
                 c.revenueSource.append(arguments['otherRevenueSource'])
         else:
             c.revenueSource = []
+        #SOCIAL IMPACT
+        if 'socialImpact' in arguments:
+            c.socialImpact = [] if not arguments['socialImpact'] else arguments['socialImpact'].split(',')
+            if 'Other' in c.socialImpact:
+                del c.socialImpact[c.socialImpact.index('Other')]
+                c.socialImpact.append(arguments['otherRevenueSource'])
+        else:
+            c.socialImpact = []
+        #CATEGORY
         if 'category' in arguments:
             c.companyCategory = arguments['otherCategory'] if arguments['category'] == 'Other' else arguments['category']
         else:
             c.companyCategory = ''
         c.filters = [c.companyCategory, c.state, "survey-company"]
-        c.description = arguments['description']
-        c.descriptionShort = arguments['descriptionShort']
-        c.financialInfo = arguments['financialInfo']
-        c.datasetWishList = arguments['datasetWishList']
+        if'description' in arguments:
+            c.description = arguments['description']
+        if 'descriptionShort' in arguments:
+            c.descriptionShort = arguments['descriptionShort']
+        if 'financialInfo' in arguments:
+            c.financialInfo = arguments['financialInfo']
+        #-------------------DATA INFO---------------
+        #DATASET WISHLIST
+        if 'datasetWishList' in arguments:
+            c.datasetWishList = arguments['datasetWishList']
+        #SOURCE COUNT
         if 'sourceCount' in arguments:
             c.sourceCount = arguments['sourceCount']
         else:
             c.sourceCount = ''
-        c.dataComments = arguments['dataComments'] if arguments['dataComments'] else c.dataComments
+        #DATA TYPES
+        if 'dataTypes' in arguments:
+            logging.info("data types" + arguments['dataTypes'])
+            c.dataTypes = [] if not arguments['dataTypes'] else arguments['dataTypes'].split(',')
+            if 'Other' in c.dataTypes:
+                del c.dataTypes[c.dataTypes.index('Other')]
+                c.dataTypes.append(arguments['otherDataType'])
+        else:
+            c.dataTypes = []
+        #DATA COMMENTS
+        if 'dataComments' in arguments:
+            c.dataComments = arguments['dataComments']
+        #EXAMPLE USES
+        if 'exampleUses' in arguments:
+            c.exampleUses = arguments['exampleUses']
+        #-------------------BOOLEANS---------------
         c.vetted = True if 'vetted' in arguments else False
         c.display = True if 'display' in arguments else False
         c.vettedByCompany = True if 'vettedByCompany' in arguments else False
         c.submittedSurvey = True if 'submittedSurvey' in arguments else False
         c.vettedByCompany = False if 'vettedByCompany' in arguments else True
         c.locked = True if 'locked' in arguments else False
+        #-------------------SAVE---------------
+        if 'notes' in arguments:
+            c.notes = arguments['notes']
         c.lastUpdated = datetime.now()
         c.save()
         return
@@ -500,13 +595,15 @@ class FileGenerator(object):
                 "city": c.city,
                 "state": c.state,
                 "zipCode": c.zipCode,
-                "ceoFirstName": c.ceo.firstName,
-                "ceoLastName": c.ceo.lastName,
                 "yearFounded": c.yearFounded,
                 "fte": c.fte,
                 "companyType": c.companyType,
                 "companyCategory": c.companyCategory,
+                'socialImpact': c.socialImpact,
                 "revenueSource": c.revenueSource,
+                "dataTypes": c.dataTypes,
+                "exampleUses": c.exampleUses,
+                "sourceCount": c.sourceCount,
                 "description": c.description,
                 "descriptionShort": c.descriptionShort,
                 "agencies":agencies,
@@ -584,13 +681,14 @@ class FileGenerator(object):
             'city',
             'state',
             'zip_code',
-            'ceo_first_name',
-            'ceo_last_name',
             'year_founded',
             'full_time_employees',
             'company_type',
             'company_category',
             'revenue_source',
+            'social_impact',
+            'data_types',
+            'example_uses',
             'description',
             'description_short',
             'financial_info',
@@ -604,17 +702,18 @@ class FileGenerator(object):
                 c.city,
                 c.state,
                 c.zipCode,
-                c.ceo.firstName,
-                c.ceo.lastName,
                 c.yearFounded,
                 c.fte,
                 c.companyType,
                 c.companyCategory,
                 ', '.join(c.revenueSource),
+                ', '.join(c.socialImpact),
+                ', '.join(c.dataTypes),
+                c.exampleUses,
                 c.description,
                 c.descriptionShort,
                 c.financialInfo,
-                c.sourceCount 
+                c.sourceCount
             ]
             for i in range(len(newrow)):  # For every value in our newrow
                 if hasattr(newrow[i], 'encode'):
@@ -635,19 +734,19 @@ class FileGenerator(object):
             'contact_first_name',
             'contact_last_name',
             'contact_email',
-            'ceo_first_name',
-            'ceo_last_name',
             'year_founded',
             'full_time_employees',
             'company_type',
             'company_category',
             'revenue_source',
+            'social_impact',
             'description',
             'description_short',
             'financial_info',
             'source_count',
+            'data_types',
             'data_comments',
-            'dataset_wishlist',
+            'example_uses',
             'confidentiality',
             'ts',
             'survey_submitted',
@@ -668,19 +767,19 @@ class FileGenerator(object):
                 c.contact.firstName,
                 c.contact.lastName,
                 c.contact.email,
-                c.ceo.firstName,
-                c.ceo.lastName,
                 c.yearFounded,
                 c.fte,
                 c.companyType,
                 c.companyCategory,
                 ', '.join(c.revenueSource),
+                ', '.join(c.socialImpact),
                 c.description,
                 c.descriptionShort,
                 c.financialInfo,
                 c.sourceCount,
+                ', '.join(c.dataTypes),
                 c.dataComments,
-                c.datasetWishList,
+                c.exampleUses,
                 c.confidentiality,
                 c.ts,
                 c.submittedSurvey,
