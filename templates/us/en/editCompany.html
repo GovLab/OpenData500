@@ -53,7 +53,7 @@
 					<input type="text" id="other_company_type_field" name="otherCompanyType" value ="{{ company.companyType }}">
 				{% else %}
 					<input type="radio" id="other_type" name="companyType" value="Other" data-parsley-mincheck="1" data-parsley-group='companyType' data-parsley-trigger="change" required><label for="other_type">Other</label>
-					<input type="text" id="other_company_type_field" name="otherCompanyType">
+					<input type="text" id="other_company_type_field" name="othercompanyType">
 				{% end %}
 			</div>
 		</div>
@@ -75,10 +75,10 @@
 			{% end %}
 			{% if list(set(company.businessModel) - set(business_models)) %}
 				<input type="checkbox" id="other_model" name="businessModel" value="Other" {%if company.businessModel[0] %}checked{%end%} data-parsley-mincheck="1" data-parsley-group='businessModel' data-parsley-trigger="change" required><label for="Other">Other</label>
-				<input type="text" name="otherBusinessModel" id="other_model_text_field" value="{{ list(set(company.businessModel) - set(business_models))[0] }}" />
+				<input type="text" name="otherbusinessModel" id="other_model_text_field" value="{{ list(set(company.businessModel) - set(business_models))[0] }}" />
 			{% else %}
 				<input type="checkbox" id="other_model" name="businessModel" value="Other" data-parsley-mincheck="1" data-parsley-group='businessModel' data-parsley-trigger="change" required><label for="Other">Other</label>
-				<input type="text" name="otherBusinessModel" id="other_model_text_field" />
+				<input type="text" name="otherbusinessModel" id="other_model_text_field" />
 			{% end %}
 		</div>
 		<br>
@@ -91,10 +91,10 @@
 			{% end %}
 			{% if list(set(company.revenueSource) - set(new_revenueSource)) %}
 				<input type="checkbox" id="other_revenue" name="revenueSource" value="Other" {%if company.revenueSource[0] %}checked{%end%} data-parsley-mincheck="1" data-parsley-group='revenueSource' data-parsley-trigger="change" required><label for="Other">Other</label>
-				<input type="text" name="otherRevenueSource" id="other_revenue_text_field" value="{{ list(set(company.revenueSource) - set(new_revenueSource))[0] }}" />
+				<input type="text" name="otherrevenueSource" id="other_revenue_text_field" value="{{ list(set(company.revenueSource) - set(new_revenueSource))[0] }}" />
 			{% else %}
 				<input type="checkbox" id="other_revenue" name="revenueSource" value="Other" data-parsley-mincheck="1" data-parsley-group='revenueSource' data-parsley-trigger="change" required><label for="Other">Other</label>
-				<input type="text" name="otherRevenueSource" id="other_revenue_text_field" />
+				<input type="text" name="otherrevenueSource" id="other_revenue_text_field" />
 			{% end %}
 		</div>
 		<br>
@@ -106,14 +106,14 @@
 		<h3>What category best describes your company? * </h3>
 		<div class="category-field">
 			{% for category in categories %}
-				<input type="radio" id="{{category}}" name="category" data-parsley-group='category' value="{{ category }}" {% if category == company.companyCategory %} checked {% end %}><label for="{{category}}">{{category}}</label><br>
+				<input type="radio" id="{{category}}" name="companyCategory" data-parsley-group='category' value="{{ category }}" {% if category == company.companyCategory %} checked {% end %}><label for="{{category}}">{{category}}</label><br>
 			{% end %}
 			{% if company.companyCategory not in categories and company.companyCategory != '' %}
-				<input type="radio" id="other_category" name="category" value="Other" data-parsley-mincheck="1" data-parsley-group='category' data-parsley-trigger="change" checked required><label for="Other">Other</label>
-				<input type="text" id="other_category_text_field" name="otherCategory" {% if company.companyCategory %}value="{{ company.companyCategory }}"{%end%} data-parsley-trigger="focus">
+				<input type="radio" id="other_category" name="companyCategory" value="Other" data-parsley-mincheck="1" data-parsley-group='category' data-parsley-trigger="change" checked required><label for="Other">Other</label>
+				<input type="text" id="other_category_text_field" name="othercompanyCategory" {% if company.companyCategory %}value="{{ company.companyCategory }}"{%end%} data-parsley-trigger="focus">
 			{% else %}
-				<input type="radio" id="other_category" name="category" value="Other" data-parsley-mincheck="1" data-parsley-group='category' data-parsley-trigger="change" required><label for="Other">Other</label>
-				<input type="text" id="other_category_text_field" name="otherCategory" data-parsley-trigger="focus">
+				<input type="radio" id="other_category" name="companyCategory" value="Other" data-parsley-mincheck="1" data-parsley-group='category' data-parsley-trigger="change" required><label for="Other">Other</label>
+				<input type="text" id="other_category_text_field" name="othercompanyCategory" data-parsley-trigger="focus">
 			{% end %}
 		</div>
 		<br>
@@ -126,10 +126,10 @@
 			{% end %}
 			{% if list(set(company.socialImpact) - set(social_impacts)) %}
 				<input type="checkbox" id="other_impact" name="socialImpact" value="Other" {%if company.socialImpact[0] %}checked{%end%} data-parsley-mincheck="1" data-parsley-group='socialImpact' data-parsley-trigger="change"><label for="Other">Other</label>
-				<input type="text" name="otherSocialImpact" id="other_impact_text_field" value="{{ list(set(company.socialImpact) - set(social_impacts))[0] }}" />
+				<input type="text" name="othersocialImpact" id="other_impact_text_field" value="{{ list(set(company.socialImpact) - set(social_impacts))[0] }}" />
 			{% else %}
 				<input type="checkbox" id="other_impact" name="socialImpact" value="Other" data-parsley-mincheck="1" data-parsley-group='socialImpact' data-parsley-trigger="change"><label for="Other">Other</label>
-				<input type="text" name="otherSocialImpact" id="other_impact_text_field" />
+				<input type="text" name="othersocialImpact" id="other_impact_text_field" />
 			{% end %}
 		</div>
 	</fieldset>

@@ -368,7 +368,7 @@ class SubmitDataHandler(BaseHandler):
         if action == "submit-form":
             try:
                 form_values = {k:','.join(v) for k,v in self.request.arguments.iteritems()}
-                self.application.form.process_company(form_values, id)
+                self.application.form.process_company_data_info(form_values, id)
                 self.write({"response":"success", "redirect":"/"+ country + "/thanks/"})
             except Exception, e:
                 logging.info("Error: " + str(e))

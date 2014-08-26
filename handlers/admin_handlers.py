@@ -501,6 +501,7 @@ class EditCompanyHandler(BaseHandler):
         logging.info(self.request.arguments)
         form_values = {k:','.join(v) for k,v in self.request.arguments.iteritems()}
         self.application.form.process_company(form_values, id)
+        self.application.form.process_company_data_info(form_values,id)
         self.write('success')
 
 #--------------------------------------------------------EDIT AGENCY (ADMIN) PAGE------------------------------------------------------------
@@ -714,24 +715,14 @@ class DeleteCompanyHandler(BaseHandler):
         agencies = models.Agency.objects(usedBy__in=[str(company.id)])
         for a in agencies:
             #-----REMOVE DATASETS (AGENCY)-----
-            temp = []
-            temp_print = []
             for d in a.datasets:
-                if d.usedBy != company:
-                    temp.append(d)
-                    temp_print.append(d.usedBy.companyName)
-            a.datasets = temp
-            logging.info(temp_print)
+                if d.usedBy == company:
+                    a.datasets.remove(d)
             #---REMOVE DATASETS (SUBAGENCY)---
             for s in a.subagencies:
-                temp = []
-                temp_print = []
                 for d in s.datasets:
-                    if company != d.usedBy:
-                        temp.append(d)
-                        temp_print.append(d.usedBy.companyName)
-                s.datasets = temp
-                logging.info(temp_print)
+                    if d.usedBy == company:
+                        s.datasets.remove(d)
                 #--REMOVE FROM SUBAGENCIES--
                 if company in s.usedBy:
                     s.usedBy.remove(company)

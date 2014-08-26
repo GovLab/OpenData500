@@ -45,7 +45,7 @@ company_fields = ['companyName', 'url', 'yearFounded', 'city', 'state', 'zipCode
 company_fields_checkboxes = ['revenueSource', 'businessModel', 'socialImpact']
 company_fields_radio = ['companyCategory', 'companyType']
 company_contact_fields = ['firstName', 'lastName', 'title', 'email', 'phone']
-company_data_fields = ['sourceCount', 'dataTypes', 'dataComments', 'exampleUses']
+company_data_fields = ['sourceCount', 'dataComments', 'exampleUses']
 company_admin_booleans = ['display', 'submittedSurvey','vetted', 'vettedByCompany', 'submittedThroughWebsite', 'locked']
 
 
@@ -128,7 +128,7 @@ class Form(object):
             businessModel = arguments['businessModel'].split(',')
             if 'Other' in businessModel:
                 del businessModel[businessModel.index('Other')]
-                businessModel.append(arguments['otherBusinessModel'])
+                businessModel.append(arguments['otherbusinessModel'])
         else:
             businessModel = []
         #-------------REVENUE SOURCE
@@ -136,7 +136,7 @@ class Form(object):
             revenueSource = [] if not arguments['revenueSource'] else arguments['revenueSource'].split(',')
             if 'Other' in revenueSource:
                 del revenueSource[revenueSource.index('Other')]
-                revenueSource.append(arguments['otherRevenueSource'])
+                revenueSource.append(arguments['otherrevenueSource'])
         else:
             revenueSource = []
         #-------------SOCIAL IMPACT
@@ -144,12 +144,12 @@ class Form(object):
             socialImpact = [] if not arguments['socialImpact'] else arguments['socialImpact'].split(',')
             if 'Other' in socialImpact:
                 del socialImpact[socialImpact.index('Other')]
-                socialImpact.append(arguments['otherSocialImpact'])
+                socialImpact.append(arguments['othersocialImpact'])
         else:
             socialImpact = []
         #-------------CATEGORY
-        if 'category' in arguments:
-            companyCategory = arguments['otherCategory'] if arguments['category'] == 'Other' else arguments['category']
+        if 'companyCategory' in arguments:
+            companyCategory = arguments['othercompanyCategory'] if arguments['companyCategory'] == 'Other' else arguments['companyCategory']
             filters = [companyCategory, state, "survey-company"]
         else:
             companyCategory = ''
@@ -157,19 +157,6 @@ class Form(object):
         description = arguments['description']
         descriptionShort = arguments['descriptionShort']
         financialInfo = arguments['financialInfo']
-        #-------------SOURCE COUNT
-        if 'sourceCount' in arguments:
-            sourceCount = arguments['sourceCount']
-        else:
-            sourceCount = ''
-        #-------------DATA TYPES
-        if 'dataTypes' in arguments:
-            dataTypes = [] if not arguments['dataTypes'] else arguments['dataTypes'].split(',')
-            if 'Other' in dataTypes:
-                del dataTypes[dataTypes.index('Other')]
-                dataTypes.append(arguments['otherDataType'])
-        else:
-            dataTypes = []
         company = models.Company(
             companyName = companyName,
             prettyName = prettyName,
@@ -187,8 +174,6 @@ class Form(object):
             description= description,
             descriptionShort = descriptionShort,
             financialInfo = financialInfo,
-            sourceCount = sourceCount,
-            dataTypes = dataTypes,
             contact = contact,
             lastUpdated = datetime.now(),
             display = False, 
@@ -210,11 +195,9 @@ class Form(object):
             logging.info("Error processing company: " + str(e))
             return
         #-------------------DATA INFO---------------
-        #SOURCE COUNT
-        if 'sourceCount' in arguments:
-            c.sourceCount = arguments['sourceCount']
-        else:
-            c.sourceCount = ''
+        for item in company_data_fields:
+            if item in arguments:
+                models.Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+item:arguments[item]})
         #DATA TYPES
         if 'dataTypes' in arguments:
             logging.info("data types" + arguments['dataTypes'])
@@ -224,12 +207,8 @@ class Form(object):
                 c.dataTypes.append(arguments['otherDataType'])
         else:
             c.dataTypes = []
-        #DATA COMMENTS
-        if 'dataComments' in arguments:
-            c.dataComments = arguments['dataComments']
-        #EXAMPLE USES
-        if 'exampleUses' in arguments:
-            c.exampleUses = arguments['exampleUses']
+        c.lastUpdated = datetime.now()
+        c.save()
 
 
     def process_company(self, arguments, id):
@@ -266,41 +245,8 @@ class Form(object):
                     models.Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+item:arguments[item]})
             else:
                 models.Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+item:''})
-        # if 'companyType' in arguments:
-        #     c.companyType = arguments['otherCompanyType'] if arguments['companyType'] == 'Other' else arguments['companyType']
-        # else:
-        #     c.companyType = ''
         if 'fte' in arguments:
             c.fte = 0 if not arguments['fte'] else arguments['fte']
-        #BUSINESS MODEL
-        # if 'businessModel' in arguments:
-        #     c.businessModel = [] if not arguments['businessModel'] else arguments['businessModel'].split(',')
-        #     if 'Other' in c.businessModel:
-        #         del c.businessModel[c.businessModel.index('Other')]
-        #         c.businessModel.append(arguments['otherBusinessModel'])
-        # else:
-        #     c.businessModel = []
-        #REVENUE SOURCE
-        # if 'revenueSource' in arguments:
-        #     c.revenueSource = [] if not arguments['revenueSource'] else arguments['revenueSource'].split(',')
-        #     if 'Other' in c.revenueSource:
-        #         del c.revenueSource[c.revenueSource.index('Other')]
-        #         c.revenueSource.append(arguments['otherRevenueSource'])
-        # else:
-        #     c.revenueSource = []
-        #SOCIAL IMPACT
-        # if 'socialImpact' in arguments:
-        #     c.socialImpact = [] if not arguments['socialImpact'] else arguments['socialImpact'].split(',')
-        #     if 'Other' in c.socialImpact:
-        #         del c.socialImpact[c.socialImpact.index('Other')]
-        #         c.socialImpact.append(arguments['otherRevenueSource'])
-        # else:
-        #     c.socialImpact = []
-        #CATEGORY
-        # if 'category' in arguments:
-        #     c.companyCategory = arguments['otherCategory'] if arguments['category'] == 'Other' else arguments['category']
-        # else:
-        #     c.companyCategory = ''
         c.filters = Tools.re_do_company_filter(id)
         #-------------------BOOLEANS---------------
         for item in company_admin_booleans:
