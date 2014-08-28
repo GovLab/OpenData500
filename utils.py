@@ -231,11 +231,11 @@ class Form(object):
         for item in company_fields_checkboxes:
             if item in arguments:
                 models.Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+item:arguments[item].split(',')})
+                if 'Other' in arguments[item]:
+                    models.Company.objects(id=bson.objectid.ObjectId(id)).update(**{'pull__'+item:'Other'})
+                    models.Company.objects(id=bson.objectid.ObjectId(id)).update(**{'push__'+item:arguments['other'+item]})
             else:
                 models.Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+item:[]})
-            if 'Other' in arguments[item]:
-                models.Company.objects(id=bson.objectid.ObjectId(id)).update(**{'pull__'+item:'Other'})
-                models.Company.objects(id=bson.objectid.ObjectId(id)).update(**{'push__'+item:arguments['other'+item]})
         #-------------------RADIO BUTTONS---------------
         for item in company_fields_radio:
             if item in arguments:
