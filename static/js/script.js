@@ -49,7 +49,7 @@ $(document).ready(function() {
                     },
                     beforeSend: function(xhr, settings) {
                         //$(event.target).attr('disabled', 'disabled'); 
-                        error_message.text('Saving...').show().delay(5000).fadeOut();
+                        error_message.text('Saving...').show();
                     },
                     success: function(data) {
                         document.location.href = '/' + country + '/addData/' + data['id'];
@@ -99,7 +99,9 @@ $(document).ready(function() {
                     rm.text('Oops... Something went wrong :/')
                     rm.show().delay(5000).fadeOut();
                 },
-                beforeSend: function(xhr, settings) {},
+                beforeSend: function(xhr, settings) {
+                    rm.text('Saving...').css('opacity', 1);
+                },
                 success: function(data) {
                     if (data['response'] != 'error') {
                         document.location.href = '/' + country + '/thanks/';

@@ -1,0 +1,78 @@
+{
+    "default_language": "es",
+    "available_languages": ["en", "es"],
+    "menu": {
+        "en": [{
+            "item": "About",
+            "link": "/mx/about/",
+            "sub-menu": [{
+                "item": "Goals",
+                "link": "/mx/about/#about-goals"
+            }, {
+                "item": "Approach",
+                "link": "/mx/about/#about-approach"
+            }, {
+                "item": "International Studies",
+                "link": "/mx/about/#about-international-studies"
+            }, {
+                "item": "People",
+                "link": "/mx/about/#about-people"
+            }]
+        }, {
+            "item": "Full List",
+            "link": "/mx/list/",
+            "sub-menu": []
+        }, {
+            "item": "Survey",
+            "link": "/mx/submitCompany/",
+            "sub-menu": []
+        }, {
+            "item": "Resources",
+            "link": "/mx/resources/",
+            "sub-menu": []
+        }],
+        "es": [{
+            "item": "Acerca de",
+            "link": "/mx/about/",
+            "sub-menu": [{
+                "item": "Meta",
+                "link": "/mx/about/#about-goals"
+            }, {
+                "item": "Enfoque",
+                "link": "/mx/about/#about-approach"
+            }, {
+                "item": "Estudios Internacionales",
+                "link": "/mx/about/#about-international-studies"
+            }, {
+                "item": "Nosotros",
+                "link": "/mx/about/#about-people"
+            }]
+        }, {
+            "item": "Listado",
+            "link": "/mx/list/",
+            "sub-menu": []
+        }, {
+            "item": "Encuesta",
+            "link": "/mx/submitCompany/",
+            "sub-menu": []
+        }, {
+            "item": "Recursos",
+            "link": "/mx/resources/",
+            "sub-menu": []
+        }]
+    },
+    "page_titles": {
+        "en": {
+            "index": "Welcome to the OD500",
+            "about": "About the OD500",
+            "resources": "Open Data Resources - OD500",
+            "list": "Open Data 500 Companies",
+            "submit": "Submit a Company to the OD500",
+            "stats": "OD500 By The Numbers",
+            "roundtables": "Open Data Roundtables",
+            "submitData": "Submit Agency and Data Information",
+            "thanks": "Thank You!"
+        },
+        "es": {}
+    }
+}
