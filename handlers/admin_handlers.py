@@ -605,6 +605,7 @@ class AdminEditAgencyHandler(BaseHandler):
                 self.write({"error":"Could not save agency"})
                 return
             self.write({"message":"Save Successful", "id":str(new_agency.id)})
+            self.application.files.generate_agency_list(country)
             return
         #------------------------------------------EDIT SUBAGENCY----------------------------
         if action =="edit-subagency":

@@ -559,7 +559,7 @@ $(document).ready(function() {
     //--*****************************************************************-AUTOCOMPLETE AGENCIES-*****************************************************************--//
     if ($('#agencyTags') != []) {
         if (country != undefined) {
-            $.getJSON("/static/files/" + country + "_Agency_List.json", function(agencies) {
+            $.getJSON("/static/files/" + country + "/" + country + "_Agency_List.json", function(agencies) {
                 try {
                     $("#agencyTags").autocomplete({
                         minLength: 2,
