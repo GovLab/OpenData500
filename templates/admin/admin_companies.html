@@ -7,8 +7,6 @@
 
 <h1>{{ page_heading }}</h1>
 
-<a href="/admin/company-add/"><input type="button" class="l-button" value="New Company"></a><br>
-
 <form class="m-form">
 	<fieldset class="m-form-half">
 		<h2>Stats</h2>
@@ -21,6 +19,7 @@
 		<h2>Utilities</h2>
 		{% raw xsrf_form_html() %}
 		<input type="button" class="l-button admin_utils" id="refresh" name="refresh" value="Refresh Stats"><br>
+		<a href="/admin/company-add/"><input type="button" class="l-button" value="New Company"></a><br>
 		<input type="button" class="l-button admin_utils" id="files" name="files" value="Generate All Files"><br>
 		<input type="button" class="l-button admin_utils" id="company_csv" name="files" value="Generate Company CSV (displayed only)"><br>
 		<input type="button" class="l-button admin_utils" id="company_all_csv" name="files" value="Generate Company CSV (All)"><br>
@@ -56,7 +55,7 @@
 			<td>{%try%}{% if (company.contact) %} {{ company.contact.email }} {% end %}{%except%}{%end%}</td>
 			<td>{{ company.lastUpdated.strftime("%b, %d '%y @%I:%M %p") }}</td>
 			<td>{%if company.submittedThroughWebsite %} √ {%end%}</td>
-			<td><input type="checkbox" name="display" id="display" value="display" c_id="{{company.id}}" {%if company.display %}checked{%end%}></td>
+			<td><input type="checkbox" name="display" class="change_display" id="display" value="display" c_id="{{company.id}}" {%if company.display %}checked{%end%}></td>
 			<td><p>{% if company.notes %}{{company.notes}}{%end%}</p></td>
 		</tr>
 	{% end %}
@@ -70,6 +69,7 @@
 		<th>Edit URL</th>
 		<th>Contact Email</th>
 		<th>Admin Edit</th>
+		<th>Displayed?</th>
 		<th>Notes</th>
 
 	</tr>
@@ -79,6 +79,7 @@
 			<td><a href="/edit/{{ company.id }}">Edit</a></td>
 			<td>{%try%}{% if (company.contact) %} {{ company.contact.email }} {% end %}{%except%}{%end%}</td>
 			<td><a href="/admin-edit/{{ company.id }}">Edit</a></td>
+			<td><input type="checkbox" name="display" class="change_display" id="display" value="display" c_id="{{company.id}}" {%if company.display %}checked{%end%}></td>
 			<td><p>{% if company.notes %}{{company.notes}}{%end%}</p></td>
 		</tr>
 	{% end %}
@@ -132,7 +133,7 @@ $(document).ready( function() {
 	    }
 	  });
 	});
-	$('.needVetting').on('click', '#display', function() {
+	$('#container').on('click', '.change_display', function() {
 		id = this.attributes['c_id'].value
 		p = this;
 		data = { "action":"display", "id":id, "_xsrf": $("[name='_xsrf']").val() }

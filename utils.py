@@ -94,6 +94,7 @@ class Tools(object):
     def prettify(self, name):
         return re.sub(r'([^\s\w])+', '', name).replace(" ", "-")
 
+
 class Form(object):
     def process_new_company(self, arguments):
         #-------------------CONTACT INFO---------------
@@ -158,6 +159,18 @@ class Form(object):
         description = arguments['description']
         descriptionShort = arguments['descriptionShort']
         financialInfo = arguments['financialInfo']
+        if 'submittedThroughWebsite' in arguments:
+            submittedThroughWebsite = False if arguments['submittedThroughWebsite'] == 'False' else True
+        else:
+            submittedThroughWebsite = True
+        if 'submittedSurvey' in arguments:
+            submittedSurvey = False if arguments['submittedSurvey'] == 'False' else True
+        else:
+            submittedSurvey = True
+        if 'vettedByCompany' in arguments:
+            vettedByCompany = False if arguments['vettedByCompany'] == 'False' else True
+        else:
+            vettedByCompany = True
         company = models.Company(
             companyName = companyName,
             prettyName = prettyName,
@@ -178,10 +191,10 @@ class Form(object):
             contact = contact,
             lastUpdated = datetime.now(),
             display = False, 
-            submittedSurvey = True,
+            submittedSurvey = submittedSurvey,
             vetted = False, 
-            vettedByCompany = True,
-            submittedThroughWebsite = True,
+            vettedByCompany = vettedByCompany,
+            submittedThroughWebsite = submittedThroughWebsite,
             locked=False,
             filters = filters,
             country=country

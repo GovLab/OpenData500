@@ -14,21 +14,22 @@ class MainHandler(BaseHandler):
             return
         with open("templates/"+country+"/settings.json") as json_file:
             settings = json.load(json_file)
-        # lan = self.get_argument("lan", "")
-        # if lan and lan != self.get_cookie("lan"):
-        #     self.set_cookie("lan", lan)
-        # if not lan:
-        #     lan = self.get_cookie("lan")
-        # if not lan: or lan not in settings["available_languages"]:
-        #     lan = settings['default_language']
-        #     self.set_cookie("lan", lan)
-        lan = self.get_cookie("lan")
-        if not lan:
+        lan = self.get_argument("lan", None)
+        if lan:
+            if lan != self.get_cookie('lan') and lan in settings['available_languages']:
+                self.set_cookie("lan", lan)
+                self.redirect("/" + country + "/")
+                return
+            if lan not in settings['available_languages']:
+                lan = settings['default_language']
+        elif not lan and self.get_cookie('lan') in settings['available_languages']:
+            lan = self.get_cookie('lan')
+        else:
             lan = settings['default_language']
         self.render(
             country.lower()+ "/" + lan + "/index.html",
             settings = settings,
-            menu=settings['menu'][lan],
+            #menu=settings['menu'][lan],
             user=self.current_user,
             lan = lan,
             country=country
@@ -113,8 +114,18 @@ class StaticPageHandler(BaseHandler):
             return
         with open("templates/"+country+"/settings.json") as json_file:
             settings = json.load(json_file)
-        lan = self.get_cookie("lan")
-        if not lan:
+        #------------LOAD LANGUAGE
+        lan = self.get_argument("lan", None)
+        if lan:
+            if lan != self.get_cookie('lan') and lan in settings['available_languages']:
+                self.set_cookie("lan", lan)
+                self.redirect(self.request.uri)
+                return
+            if lan not in settings['available_languages']:
+                lan = settings['default_language']
+        elif not lan and self.get_cookie('lan') in settings['available_languages']:
+            lan = self.get_cookie('lan')
+        else:
             lan = settings['default_language']
         if company: 
             self.render(
@@ -174,8 +185,18 @@ class ListHandler(BaseHandler):
             return
         with open("templates/"+country+"/settings.json") as json_file:
                 settings = json.load(json_file)
-        lan = self.get_cookie("lan")
-        if not lan:
+        #------------LOAD LANGUAGE
+        lan = self.get_argument("lan", None)
+        if lan:
+            if lan != self.get_cookie('lan') and lan in settings['available_languages']:
+                self.set_cookie("lan", lan)
+                self.redirect(self.request.uri)
+                return
+            if lan not in settings['available_languages']:
+                lan = settings['default_language']
+        elif not lan and self.get_cookie('lan') in settings['available_languages']:
+            lan = self.get_cookie('lan')
+        else:
             lan = settings['default_language']
         companies = models.Company.objects(Q(display=True) & Q(country=country)).order_by('prettyName')
         agencies = models.Agency.objects(Q(usedBy__not__size=0) & Q(source="dataGov") & Q(dataType="Federal")).order_by("-usedBy_count").only("name", "abbrev", "prettyName")[0:16]
@@ -253,16 +274,21 @@ class SubmitCompanyHandler(BaseHandler):
             return
         with open("templates/"+country+"/settings.json") as json_file:
                 settings = json.load(json_file)
-        lan = self.get_cookie("lan")
-        if not lan:
+        #------------LOAD LANGUAGE
+        lan = self.get_argument("lan", None)
+        if lan:
+            if lan != self.get_cookie('lan') and lan in settings['available_languages']:
+                self.set_cookie("lan", lan)
+                self.redirect(self.request.uri)
+                return
+            if lan not in settings['available_languages']:
+                lan = settings['default_language']
+        elif not lan and self.get_cookie('lan') in settings['available_languages']:
+            lan = self.get_cookie('lan')
+        else:
             lan = settings['default_language']
-        try:
-            page_title=settings['page_titles'][lan]["submit"]
-        except:
-            page_title="OD500"
         self.render(
             country+ "/" + lan + "/submitCompany.html",
-            page_title = page_title,
             country=country,
             country_keys=country_keys,
             companyType = companyType,
@@ -307,9 +333,19 @@ class SubmitDataHandler(BaseHandler):
             return
         with open("templates/"+country+"/settings.json") as json_file:
                 settings = json.load(json_file)
-        lan = self.get_cookie('lan')
-        if not lan or lan not in settings["available_languages"]:
-            lan = settings["default_language"]
+        #------------LOAD LANGUAGE
+        lan = self.get_argument("lan", None)
+        if lan:
+            if lan != self.get_cookie('lan') and lan in settings['available_languages']:
+                self.set_cookie("lan", lan)
+                self.redirect(self.request.uri)
+                return
+            if lan not in settings['available_languages']:
+                lan = settings['default_language']
+        elif not lan and self.get_cookie('lan') in settings['available_languages']:
+            lan = self.get_cookie('lan')
+        else:
+            lan = settings['default_language']
         company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
         if company.country != country or '/'+company.country+'/' not in self.request.uri:
             self.redirect(str('/'+company.country+'/addData/'+id))
@@ -437,23 +473,6 @@ class SubmitDataHandler(BaseHandler):
             except Exception, e:
                 logging.info("Error deleting dataset: " + str(e))
                 self.write(response)
-
-
-#-------MULTI FILE
-class PDFHandler(BaseHandler):
-    def get(self, filename):
-        paths = ['', 'us/']
-        logging.info(os.path.join(os.path.dirname(os.path.dirname(__file__)), "static/files/"))
-        file_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "static/files/")
-        for p in paths:
-            try:
-                with open(file_path + p + filename, 'rb') as f:
-                    self.set_header("Content-Type", 'application/pdf; charset="utf-8"')
-                    self.set_header("Content-Disposition", "attachment; filename="+ filename)
-                    self.write(f.read())
-                    return
-            except IOError, e:
-                logging.info("Could not open file: " + str(e))
 
 class NotFoundHandler(BaseHandler):
     def get(self):

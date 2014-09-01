@@ -177,6 +177,9 @@
 
 
 	{% raw xsrf_form_html() %}
+	<input type="hidden" name="submittedThroughWebsite" value="False">
+	<input type="hidden" name="vettedByCompany" value="False">
+	<input type="hidden" name="submittedSurvey" value="False">
 	<input type="submit" class="m-button" value="Add Company"><span class="company-form-error-message error-message" style="display:none"></span>
 </form>
 
