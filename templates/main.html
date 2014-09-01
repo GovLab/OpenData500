@@ -73,7 +73,7 @@
                         </ul>
                     </div>
                 {% end %}{%except%}{%end%}
-                {%try%} {% if user %} <div class="m-main-menu-item"><a href="/logout/">Logout</a>{% end %}{%except%}{%end%}</div>
+                {%try%} {% if user %} <div class="m-main-menu-item"><a href="/logout/">Logout</a></div>{% end %}{%except%}{%end%}
                 {% if len(settings['available_languages']) > 1 %}
                     <div class="m-main-menu-item">
                         <div class="language-options">
