@@ -199,8 +199,11 @@ class ListHandler(BaseHandler):
         else:
             lan = settings['default_language']
         companies = models.Company.objects(Q(display=True) & Q(country=country)).order_by('prettyName')
-        agencies = models.Agency.objects(Q(usedBy__not__size=0) & Q(source="dataGov") & Q(dataType="Federal")).order_by("-usedBy_count").only("name", "abbrev", "prettyName")[0:16]
-        stats = models.Stats.objects().first()
+        if country != 'mx':
+            agencies = models.Agency.objects(Q(usedBy__not__size=0) & Q(source="dataGov") & Q(dataType="Federal") & Q(country=country)).order_by("-usedBy_count").only("name", "abbrev", "prettyName")[0:16]
+        if country == 'mx':
+            agencies = models.Agency.objects(Q(dataType="Federal") & Q(country=country)).order_by("-usedBy_count").only("name", "abbrev", "prettyName")[0:16]
+        stats = models.Stats.objects.get(country=country)
         try:
             page_title=settings['page_titles'][lan]["list"]
         except:

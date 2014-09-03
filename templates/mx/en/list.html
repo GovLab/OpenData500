@@ -68,7 +68,7 @@
 	</div>
 </div>
 
-<div id="hidden" style="display:none;"><[{% for s in stats.states %}{% if s.abbrev == "PR" %}{"abbrev": "{{s.abbrev}}","STATE":"{{s.name}}","VALUE":"{{s.count}}"}{%else%}{"abbrev": "{{s.abbrev}}","STATE":"{{s.name}}","VALUE":"{{s.count}}"},{%end%}{%end%}]></[{%for s in stats.states %}{% if s.abbrev == "PR" %}{"abbrev": "{{s.abbrev}}","STATE":"{{s.name}}","VALUE":"{{s.count}}"}{%else%}{"abbrev": "{{s.abbrev}}","STATE":"{{s.name}}","VALUE":"{{s.count}}"},{%end%}{%end%}]></div>
+<div id="hidden" style="display:none;"><[{% for s in range(0, len(stats.states)) %}{% if s == len(stats.states)-1 %}{"abbrev": "{{stats.states[s].abbrev}}","STATE":"{{stats.states[s].name}}","VALUE":"{{stats.states[s].count}}"}{%else%}{"abbrev": "{{stats.states[s].abbrev}}","STATE":"{{stats.states[s].name}}","VALUE":"{{stats.states[s].count}}"},{%end%}{%end%}]></[{% for s in range(0, len(stats.states)) %}{% if s == len(stats.states)-1 %}{"abbrev": "{{stats.states[s].abbrev}}","STATE":"{{stats.states[s].name}}","VALUE":"{{stats.states[s].count}}"}{%else%}{"abbrev": "{{stats.states[s].abbrev}}","STATE":"{{stats.states[s].name}}","VALUE":"{{stats.states[s].count}}"},{%end%}{%end%}]></div>
 
 
 <script src="{{ static_url("js/d3.v3.min.js") }}"></script>
@@ -191,11 +191,11 @@
         var hoverDisplay = "State &amp; Value".replace('&amp;', '&')
         
         //General chart
-        this.Title = '500 Companies';
+        this.Title = '100 Companies';
         this.Size = 600;
         this.MarginTop = 60;
         this.MarginRight = 0;
-        this.MarginBottom = 40;
+        this.MarginBottom = 0;
         this.MarginLeft = -61;
         this.Guide = false;
         this.DataType = 'Number';
@@ -203,7 +203,7 @@
         //States
         this.StateBaseColor = '#eeeeee';
         this.StateMaxColor = '#4a2f76';
-        this.Range = 10;
+        this.Range = 30;
         this.LineThickness = .6;
         this.LineColor = '#888';
         //Labels
@@ -308,7 +308,12 @@
             var percentFormat = function(d) { return numberFormat(d) + "%"; };
             var dollarFormat = function(d) { return "$" + numberFormat(d); };
             
-            var projection = d3.geo.albersUsa();
+            var projection = d3.geo.conicConformal()
+                .rotate([102, 0])
+                .center([0, 24])
+                .parallels([17.5, 29.5])
+                .scale(1350)
+                .translate([w / 2 + 200, h / 2 + 30]);
             var path = d3.geo.path()
                 .projection(projection);
                 
@@ -322,14 +327,14 @@
             
             var number = d3.format("0,000");
             
-            function ready(error, us, _data) {
+            function ready(error, mx, _data) {
             
                 group.selectAll('path')
-                    .data(us.features)
+                    .data(mx.features)
                     .enter().append('path')
                     .attr('class', 'states')
                     .attr('d', d3.geo.path().projection(projection))
-                    //.attr('id', function(d){return d.properties.name.replace(/\s+/g, '')})
+                    .attr('id', function(d){return d.properties.NAME.replace(/\s+/g, '')})
                     .style('stroke', lineColor)
                     .style('stroke-width', lineThickness/size);
                     
