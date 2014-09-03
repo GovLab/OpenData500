@@ -7,19 +7,6 @@
 
 <section id="candidate-warnings-and-download">
 	<h1>Mexico Open Data 100 Companies</h1>
-    <div id="download-data" class="m-download-data">
-        <h2>Download the OD100 Data</h2>
-        <div>
-            <p>All Companies</p>
-            <p><a href="/download/us_OD500_Companies.json">JSON</a> | <a href="/download/us_OD500_Companies.csv">CSV</a></p>
-        </div>
-        <div><p>Agencies and Datasets</p>
-            <p><a href="/download/us_OD500_Agencies.json">JSON</a> | <a href="/download/us_OD500_Agencies.csv">CSV</a></p>
-        </div>
-    </div>
-	<div id="candidates-warning" class="warning">
-    	<p><strong>Please Note:</strong> We expect to that this list may change as we learn more about how each company operates – that’s part of our open process. Many of these companies have not yet responded to our survey, so information about them may change as we receive more input from them and from others.</p>
-    </div>
 </section>
 
 <div class="m-candidates">        
@@ -67,8 +54,6 @@
 		{%end%}
 	</div>
 </div>
-
-<div id="hidden" style="display:none;"><[{% for s in range(0, len(stats.states)) %}{% if s == len(stats.states)-1 %}{"abbrev": "{{stats.states[s].abbrev}}","STATE":"{{stats.states[s].name}}","VALUE":"{{stats.states[s].count}}"}{%else%}{"abbrev": "{{stats.states[s].abbrev}}","STATE":"{{stats.states[s].name}}","VALUE":"{{stats.states[s].count}}"},{%end%}{%end%}]></[{% for s in range(0, len(stats.states)) %}{% if s == len(stats.states)-1 %}{"abbrev": "{{stats.states[s].abbrev}}","STATE":"{{stats.states[s].name}}","VALUE":"{{stats.states[s].count}}"}{%else%}{"abbrev": "{{stats.states[s].abbrev}}","STATE":"{{stats.states[s].name}}","VALUE":"{{stats.states[s].count}}"},{%end%}{%end%}]></div>
 
 
 <script src="{{ static_url("js/d3.v3.min.js") }}"></script>
@@ -183,9 +168,7 @@
 	//         $container.isotope();
 	// });
             
-    var userData = document.getElementById('hidden').textContent.replace('<','').replace('>','');
-    userData = JSON.parse(userData)
-    data = userData
+    var data = [{% for s in range(0, len(stats.states)) %}{% if s == len(stats.states)-1 %}{"abbrev": "{{stats.states[s].abbrev}}","STATE":"{{stats.states[s].name}}","VALUE":"{{stats.states[s].count}}"}{%else%}{"abbrev": "{{stats.states[s].abbrev}}","STATE":"{{stats.states[s].name}}","VALUE":"{{stats.states[s].count}}"},{%end%}{%end%}]
     
     createChart = function(){
         var hoverDisplay = "State &amp; Value".replace('&amp;', '&')
@@ -195,7 +178,7 @@
         this.Size = 600;
         this.MarginTop = 60;
         this.MarginRight = 0;
-        this.MarginBottom = 0;
+        this.MarginBottom = 40;
         this.MarginLeft = -61;
         this.Guide = false;
         this.DataType = 'Number';
@@ -312,8 +295,8 @@
                 .rotate([102, 0])
                 .center([0, 24])
                 .parallels([17.5, 29.5])
-                .scale(1350)
-                .translate([w / 2 + 200, h / 2 + 30]);
+                .scale(1700)
+                .translate([w / 2 + 210, h / 2 + 30]);
             var path = d3.geo.path()
                 .projection(projection);
                 
@@ -330,20 +313,19 @@
             function ready(error, mx, _data) {
             
                 group.selectAll('path')
-                    .data(mx.features)
+                    .data(mx.features)//.sort(function(a, b) { return d3.descending(a.properties.NAME, b.properties.NAME);})
                     .enter().append('path')
                     .attr('class', 'states')
                     .attr('d', d3.geo.path().projection(projection))
-                    .attr('id', function(d){return d.properties.NAME.replace(/\s+/g, '')})
+                    .attr('name', function(d){ return d.properties.NAME})
                     .style('stroke', lineColor)
                     .style('stroke-width', lineThickness/size);
                     
                 var states = group.selectAll('.states')
                     .data(data)
-                    .style('fill', function(d){return color( total/d.VALUE )})
-                    .attr('name', function(d) { return d.abbrev; })
+                    .style('fill', function(d) { return color( total/d.VALUE )})
+                    //.attr('name', function(d) { return d.STATE.replace(/\s+/g, ''); })
                     .on("mouseover", function(d, i) {   
-                        //console.log(d.VALUE + " : " + total/d.VALUE + " : " + color(d.VALUE));
                         hover.transition().duration(100).style("opacity", 1)
                             .style("background-color", "#aaaaaa")
                             .style("left", (d3.event.pageX) + 20 + "px")
@@ -352,12 +334,6 @@
                     })
                     .on("mouseout", function(d) { if (hoverStates == true) hover.style("left", -100).style("top", -100).transition().duration(100).style("opacity", 0); })
                     .on("mousemove", function(d, i) { if (hoverStates == true)hover.style("left", (d3.event.pageX) + 20 + "px").style("top", (d3.event.pageY) + "px"); });
-                    // .on('click', function(d) { 
-                    //     var filtr = "." + d.abbrev;
-                    //     $container.isotope({ filter: filtr }); 
-                    //     console.log(d.abbrev); 
-                    //     $("#filters button").removeClass('s-active');
-                    // });
                 
                 states.on('click', function(s) {
                     var filtr = '.' + this.getAttribute('name');

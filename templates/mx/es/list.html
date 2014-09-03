@@ -6,20 +6,7 @@
 
 
 <section id="candidate-warnings-and-download">
-	<h1>Mexico Open Data 100 Companies</h1>
-    <div id="download-data" class="m-download-data">
-        <h2>Download the OD100 Data</h2>
-        <div>
-            <p>All Companies</p>
-            <p><a href="/download/us_OD500_Companies.json">JSON</a> | <a href="/download/us_OD500_Companies.csv">CSV</a></p>
-        </div>
-        <div><p>Agencies and Datasets</p>
-            <p><a href="/download/us_OD500_Agencies.json">JSON</a> | <a href="/download/us_OD500_Agencies.csv">CSV</a></p>
-        </div>
-    </div>
-	<div id="candidates-warning" class="warning">
-    	<p><strong>Please Note:</strong> We expect to that this list may change as we learn more about how each company operates – that’s part of our open process. Many of these companies have not yet responded to our survey, so information about them may change as we receive more input from them and from others.</p>
-    </div>
+    <h1>Compañías Open Data 100 México</h1>
 </section>
 
 <div class="m-candidates">        
@@ -49,26 +36,24 @@
     <div id="chart"></div>
     <div class="button-group legend" id="legend" data-filter-group="survey">
         <span>Filter by:  </span>
-    	<button class="color survey" data-filter=".survey-company">Submitted Survey</button>
-    	<button class="color candidate" data-filter=":not(.survey-company)">No Survey Submitted</button>
-    	<button class="color all" data-filter="*">Clear Filter</button>
+        <button class="color survey" data-filter=".survey-company">Submitted Survey</button>
+        <button class="color candidate" data-filter=":not(.survey-company)">No Survey Submitted</button>
+        <button class="color all" data-filter="*">Clear Filter</button>
         <button class="clear-all-filters">Clear All Filters</button>
     </div>
 
     <div id="spinner"></div>
-	<div class="m-candidates isotopes-container" data-isotope-options='{ "layoutMode": "fitColumns" }'>
-		{% for company in companies %}
+    <div class="m-candidates isotopes-container" data-isotope-options='{ "layoutMode": "fitColumns" }'>
+        {% for company in companies %}
             <div class="m-candidates-item{%for f in company.filters %} {{f}}{%end%}">
                 <a href="/{{company.country}}/{{company.prettyName}}"><h3><strong>{{ company.companyName }}</strong></h3></a>
                 <p class="m-homepage-list-location"> {%try%}{{ states[company.state] }}{%except%}{%end%}</p>
                 <em> {{ company.companyCategory }}</em>
                 <p class="m-homepage-list-desc">{{ company.descriptionShort }}</p>
-			</div>
-		{%end%}
-	</div>
+            </div>
+        {%end%}
+    </div>
 </div>
-
-<div id="hidden" style="display:none;"><[{% for s in stats.states %}{% if s.abbrev == "PR" %}{"abbrev": "{{s.abbrev}}","STATE":"{{s.name}}","VALUE":"{{s.count}}"}{%else%}{"abbrev": "{{s.abbrev}}","STATE":"{{s.name}}","VALUE":"{{s.count}}"},{%end%}{%end%}]></[{%for s in stats.states %}{% if s.abbrev == "PR" %}{"abbrev": "{{s.abbrev}}","STATE":"{{s.name}}","VALUE":"{{s.count}}"}{%else%}{"abbrev": "{{s.abbrev}}","STATE":"{{s.name}}","VALUE":"{{s.count}}"},{%end%}{%end%}]></div>
 
 
 <script src="{{ static_url("js/d3.v3.min.js") }}"></script>
@@ -101,16 +86,16 @@
     // var spinner = new Spinner(opts).spin();
 
 
-	var $container = $('.isotopes-container').isotope({
-		layoutMode: 'fitRows',
-		resizesContainer : false,
-	});
+    var $container = $('.isotopes-container').isotope({
+        layoutMode: 'fitRows',
+        resizesContainer : false,
+    });
     var filters = [];
     var filtr = '';
 
 
-	// filter items on button click
-	$('#filters-category').on( 'click', 'button', function( event ) {
+    // filter items on button click
+    $('#filters-category').on( 'click', 'button', function( event ) {
         filtr = $(this).attr('data-filter');
         if ($(this).hasClass('s-active')) { //already active, deactivate
             $(this).removeClass('s-active');
@@ -129,7 +114,7 @@
             $(this).addClass('s-active');
         }
         $container.isotope({ filter: filters.join('') });
-	});
+    });
 
 
     //filter by agency
@@ -156,8 +141,8 @@
         $container.isotope({ filter: filters.join('') });
     });
 
-	// filter items by survey type
-	$('#legend').on( 'click', 'button', function( event ) {
+    // filter items by survey type
+    $('#legend').on( 'click', 'button', function( event ) {
         var filtr = $(this).attr('data-filter');
         if ($(this).hasClass('s-active')) {
             $(this).removeClass('s-active');
@@ -174,24 +159,22 @@
             filters.push(filtr);
             console.log(filters.join(''))
         }
-	  $container.isotope({ filter: filters.join('') });
-	});
+      $container.isotope({ filter: filters.join('') });
+    });
 
-	// $container.delegate( '.m-candidates-item', 'click', function(){
-	// 		//$('.m-candidates-item.large').removeClass('large');
-	//         $(this).toggleClass('s-active');
-	//         $container.isotope();
-	// });
+    // $container.delegate( '.m-candidates-item', 'click', function(){
+    //      //$('.m-candidates-item.large').removeClass('large');
+    //         $(this).toggleClass('s-active');
+    //         $container.isotope();
+    // });
             
-    var userData = document.getElementById('hidden').textContent.replace('<','').replace('>','');
-    userData = JSON.parse(userData)
-    data = userData
+    var data = [{% for s in range(0, len(stats.states)) %}{% if s == len(stats.states)-1 %}{"abbrev": "{{stats.states[s].abbrev}}","STATE":"{{stats.states[s].name}}","VALUE":"{{stats.states[s].count}}"}{%else%}{"abbrev": "{{stats.states[s].abbrev}}","STATE":"{{stats.states[s].name}}","VALUE":"{{stats.states[s].count}}"},{%end%}{%end%}]
     
     createChart = function(){
         var hoverDisplay = "State &amp; Value".replace('&amp;', '&')
         
         //General chart
-        this.Title = '500 Companies';
+        this.Title = '100 Companies';
         this.Size = 600;
         this.MarginTop = 60;
         this.MarginRight = 0;
@@ -203,7 +186,7 @@
         //States
         this.StateBaseColor = '#eeeeee';
         this.StateMaxColor = '#4a2f76';
-        this.Range = 10;
+        this.Range = 30;
         this.LineThickness = .6;
         this.LineColor = '#888';
         //Labels
@@ -308,7 +291,12 @@
             var percentFormat = function(d) { return numberFormat(d) + "%"; };
             var dollarFormat = function(d) { return "$" + numberFormat(d); };
             
-            var projection = d3.geo.albersUsa();
+            var projection = d3.geo.conicConformal()
+                .rotate([102, 0])
+                .center([0, 24])
+                .parallels([17.5, 29.5])
+                .scale(1700)
+                .translate([w / 2 + 210, h / 2 + 30]);
             var path = d3.geo.path()
                 .projection(projection);
                 
@@ -322,23 +310,22 @@
             
             var number = d3.format("0,000");
             
-            function ready(error, us, _data) {
+            function ready(error, mx, _data) {
             
                 group.selectAll('path')
-                    .data(us.features)
+                    .data(mx.features)//.sort(function(a, b) { return d3.descending(a.properties.NAME, b.properties.NAME);})
                     .enter().append('path')
                     .attr('class', 'states')
                     .attr('d', d3.geo.path().projection(projection))
-                    //.attr('id', function(d){return d.properties.name.replace(/\s+/g, '')})
+                    .attr('name', function(d){ return d.properties.NAME})
                     .style('stroke', lineColor)
                     .style('stroke-width', lineThickness/size);
                     
                 var states = group.selectAll('.states')
                     .data(data)
-                    .style('fill', function(d){return color( total/d.VALUE )})
-                    .attr('name', function(d) { return d.abbrev; })
+                    .style('fill', function(d) { return color( total/d.VALUE )})
+                    //.attr('name', function(d) { return d.STATE.replace(/\s+/g, ''); })
                     .on("mouseover", function(d, i) {   
-                        //console.log(d.VALUE + " : " + total/d.VALUE + " : " + color(d.VALUE));
                         hover.transition().duration(100).style("opacity", 1)
                             .style("background-color", "#aaaaaa")
                             .style("left", (d3.event.pageX) + 20 + "px")
@@ -347,12 +334,6 @@
                     })
                     .on("mouseout", function(d) { if (hoverStates == true) hover.style("left", -100).style("top", -100).transition().duration(100).style("opacity", 0); })
                     .on("mousemove", function(d, i) { if (hoverStates == true)hover.style("left", (d3.event.pageX) + 20 + "px").style("top", (d3.event.pageY) + "px"); });
-                    // .on('click', function(d) { 
-                    //     var filtr = "." + d.abbrev;
-                    //     $container.isotope({ filter: filtr }); 
-                    //     console.log(d.abbrev); 
-                    //     $("#filters button").removeClass('s-active');
-                    // });
                 
                 states.on('click', function(s) {
                     var filtr = '.' + this.getAttribute('name');
