@@ -317,14 +317,14 @@
                     .enter().append('path')
                     .attr('class', 'states')
                     .attr('d', d3.geo.path().projection(projection))
-                    .attr('name', function(d){ return d.properties.NAME})
+                    //.attr('name', function(d){ return d.properties.NAME})
                     .style('stroke', lineColor)
                     .style('stroke-width', lineThickness/size);
                     
                 var states = group.selectAll('.states')
                     .data(data)
                     .style('fill', function(d) { return color( total/d.VALUE )})
-                    //.attr('name', function(d) { return d.STATE.replace(/\s+/g, ''); })
+                    .attr('name', function(d) { return d.STATE.replace(/\s+/g, ''); })
                     .on("mouseover", function(d, i) {   
                         hover.transition().duration(100).style("opacity", 1)
                             .style("background-color", "#aaaaaa")
