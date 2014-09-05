@@ -20,10 +20,6 @@
             "link": "/mx/list/",
             "sub-menu": []
         }, {
-            "item": "Survey",
-            "link": "/mx/submitCompany/",
-            "sub-menu": []
-        }, {
             "item": "Resources",
             "link": "/mx/resources/",
             "sub-menu": []
@@ -41,10 +37,6 @@
                 "item": "Nosotros",
                 "link": "/mx/about/#about-people"
             }]
-        }, {
-            "item": "Listado",
-            "link": "/mx/list/",
-            "sub-menu": []
         }, {
             "item": "Encuesta",
             "link": "/mx/submitCompany/",
