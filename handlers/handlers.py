@@ -214,7 +214,7 @@ class ListHandler(BaseHandler):
             stats = stats,
             states = states,
             agencies = agencies,
-            categories = categories,
+            categories = categories[lan],
             user = self.current_user,
             country = country,
             menu=settings['menu'][lan],

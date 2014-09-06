@@ -16,8 +16,8 @@
                 "link": "/mx/about/#about-people"
             }]
         }, {
-            "item": "Full List",
-            "link": "/mx/list/",
+            "item": "Survey",
+            "link": "/mx/submitCompany/",
             "sub-menu": []
         }, {
             "item": "Resources",
