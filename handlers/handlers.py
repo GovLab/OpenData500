@@ -294,16 +294,15 @@ class SubmitCompanyHandler(BaseHandler):
             country+ "/" + lan + "/submitCompany.html",
             country=country,
             country_keys=country_keys,
-            companyType = companyType,
-            companyFunction = companyFunction,
+            companyType = companyType[lan],
             criticalDataTypes = criticalDataTypes,
             revenueSource = revenueSource,
-            new_revenueSource = new_revenueSource,
-            business_models = business_models,
-            social_impacts = social_impacts,
+            new_revenueSource = new_revenueSource[lan],
+            business_models = business_models[lan],
+            social_impacts = social_impacts[lan],
             source_count = source_count,
-            categories=categories,
-            data_types = data_types,
+            categories=categories[lan],
+            data_types = data_types[lan],
             stateList = stateList,
             user=self.current_user,
             menu=settings['menu'][lan],
@@ -366,7 +365,7 @@ class SubmitDataHandler(BaseHandler):
             country=country,
             lan=lan,
             source_count = source_count,
-            data_types = data_types
+            data_types = data_types[lan]
         )
 
     #@tornado.web.authenticated

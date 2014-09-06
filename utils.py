@@ -13,19 +13,35 @@ import bson
 
 #Just some global varbs. 
 favicon_path = '/static/img/favicon.ico'
-companyType = ['Public', 'Private', 'Nonprofit']
-companyFunction = ['Consumer Research and/or Marketing', 'Consumer Services', 'Data Management and Analysis', 'Financial/Investment Services', 'Information for Consumers']
+companyType = {
+                "en": ['Public', 'Private', 'Nonprofit'],
+                "es": ['Pública', 'Privada', 'Sin Fines de Lucro']
+            }
 criticalDataTypes = ['Federal Open Data', 'State Open Data', 'City/Local Open Data', 'Private/Proprietary Data Sources']
 revenueSource = ['advertising', 'Data Management and Analytic Services', 'Database Licensing', 'Lead Generation To Other Businesses', 'Philanthropy', 'Software Licensing', 'subscriptions', 'User Fees for Web or Mobile Access']
 new_revenueSource = ["Advertising", "Consulting", "Contributions/Donations", "Data analysis for clients", "Database licensing", "Government contract", "Lead generation to other businesses", "Membership fees", "Philanthropic grants", "Software licensing", "Subscriptions", "User fees for web or mobile access"]
 old_new_revenueSource = ['Advertising', "Consulting", "Contributions/Donations", "Data analysis for clients", 'Data Management and Analytic Services', 'Database Licensing', "Government contract", 'Lead Generation To Other Businesses', "Membership fees", "Philanthropic grants", 'Philanthropy', 'Software Licensing', 'Subscriptions', 'User Fees for Web or Mobile Access']
-business_models = ['Business to Business', 'Business to Consumer', 'Business to Government']
-sectors = ['Agriculture', 'Arts, Entertainment and Recreation' 'Crime', 'Education', 'Energy', 'Environmental', 'Finance', 'Geospatial data/mapping', 'Health and Healthcare', 'Housing/Real Estate', 'Manufacturing', 'Nutrition', 'Scientific Research', 'Social Assistance', 'Trade', 'Transportation', 'Telecom', 'Weather']
-new_revenueSource = ["Advertising", "Consulting", "Contributions/Donations", "Data analysis for clients", "Database licensing", "Government contract", "Lead generation to other businesses", "Membership fees", "Philanthropic grants", "Software licensing", "Subscriptions", "User fees for web or mobile access"]
+business_models = {
+                    "en": ['Business to Business', 'Business to Consumer', 'Business to Government'],
+                    "es": ['Empresa a Empresa', 'Empresa a Consumidor', 'Empresa a Gobierno']
+                }
+new_revenueSource = {
+                    "en": ["Advertising", "Consulting", "Contributions/Donations", "Data analysis for clients", "Database licensing", "Government contract", "Lead generation to other businesses", "Membership fees", "Philanthropic grants", "Software licensing", "Subscriptions", "User fees for web or mobile access"],
+                    "es": ["Análisis de datos", "Consultoría", "Contratos gubernamentales", "Contribuciones/Donaciones", "Cuotas de usuarios para acces a web o móbil", "Filántropía", "Generación de interés del consumidor", "Licencias de software", "Licensias de bases de datos", "Membresías", "Publicidad", "Suscripciones"]
+                }
 datatypes = ['Federal Open Data', 'State Open Data', 'City/Local Open Data']
-categories = ['Business & Legal Services', 'Data/Technology', 'Education', 'Energy', 'Environment & Weather', 'Finance & Investment', 'Food & Agriculture', 'Geospatial/Mapping', 'Governance', 'Healthcare', 'Housing/Real Estate', 'Insurance', 'Lifestyle & Consumer', 'Media', 'Research & Consulting', 'Scientific Research', 'Transportation']
-social_impacts = ['Citizen engagement and participation', 'Consumer empowerment', 'Educational opportunity', 'Environment and climate change', 'Financial access', 'Food access and supply', 'Good governance', 'Healthcare access', 'Housing access', 'Public safety']
-data_types = ["Agriculture & Food", "Business", "Consumer", "Demographics & Social", "Economics", "Education", "Energy", "Environment", "Finance", "Geospatial/Mapping", "Government Operations", "Health/Healthcare", "Housing", "International/Global Development", "Legal", "Manufacturing", "Science and Research", "Public Safety", "Tourism", "Transportation", "Weather"]
+categories = {
+                "en": ['Business & Legal Services', 'Data/Technology', 'Education', 'Energy', 'Environment & Weather', 'Finance & Investment', 'Food & Agriculture', 'Geospatial/Mapping', 'Governance', 'Healthcare', 'Housing/Real Estate', 'Insurance', 'Lifestyle & Consumer', 'Media', 'Research & Consulting', 'Scientific Research', 'Transportation'],
+                "es": ["Alimento y Agricultura", "Bienes Raices", "Clima y Medio Ambiente", "Educación", "Energía", "Estilos de Vida y Consumidores", "Finanzas e Inversiones", "Gobierno", "Investigación Scientífica", "Investigación y Consultoría", "Mapas/Geoespacial", "Medios", "Salud", "Seguros", "Servicios Legales", "Tecnología/Datos", "Transportación"]
+            }
+social_impacts = {
+                "en": ['Citizen engagement and participation', 'Consumer empowerment', 'Educational opportunity', 'Environment and climate change', 'Financial access', 'Food access and supply', 'Good governance', 'Healthcare access', 'Housing access', 'Public safety'],
+                "es": ["Acceso a salud", "Acceso a vivienda", "Acceso financiero", "Acceso y suministro alimenticio", '"Buen Gobierno"', "Empoderamiento al consumidor", "Medio ambiente y cambio climático", "Oportunidades educacionales", "Participación ciudadana", "Segúridad pública"]
+            }
+data_types = {
+                "en": ["Agriculture & Food", "Business", "Consumer", "Demographics & Social", "Economics", "Education", "Energy", "Environment", "Finance", "Geospatial/Mapping", "Government Operations", "Health/Healthcare", "Housing", "International/Global Development", "Legal", "Manufacturing", "Science and Research", "Public Safety", "Tourism", "Transportation", "Weather"],
+                "es": ["Agricultura y Alimentación", "Ciencia e investigación", "Clima", "Consumidor", "Demografía y Social", "Desarrollo internacional", "Economía", "Educación", "Empresas", "Energía", "Finanza", "Legal", "Manufactura", "Mapas/Geoespacial", "Medio Ambiente", "Operaciones gubernamentales", "Salud", "Seguridad pública", "Transportación", "Turismo", "Vivienda"]
+            }
 source_count = ['1-10', '11-50', '51-100', '101+']
 states ={ "AL": "Alabama", "AK": "Alaska", "AZ": "Arizona", "AR": "Arkansas", "CA": "California", "CO": "Colorado", "CT": "Connecticut", "DE": "Delaware", "DC": "District of Columbia", "FL": "Florida", "GA": "Georgia", "HI": "Hawaii", "ID": "Idaho", "IL": "Illinois", "IN": "Indiana", "IA": "Iowa", "KA": "Kansas", "KY": "Kentucky", "LA": "Louisiana", "ME": "Maine", "MD": "Maryland", "MA": "Massachusetts", "MI": "Michigan", "MN": "Minnesota", "MS": "Mississippi", "MO": "Missouri", "MT": "Montana", "NE": "Nebraska", "NV": "Nevada", "NH": "New Hampshire", "NJ": "New Jersey", "NM": "New Mexico", "NY": "New York", "NC": "North Carolina", "ND": "North Dakota", "OH": "Ohio", "OK": "Oklahoma", "OR": "Oregon", "PA": "Pennsylvania", "RI": "Rhode Island", "SC": "South Carolina", "SD": "South Dakota", "TN": "Tennessee", "TX": "Texas", "UT": "Utah", "VT": "Vermont", "VA": "Virginia", "WA": "Washington", "WV": "West Virginia", "WI": "Wisconsin", "WY": "Wyoming", "PR": "Puerto Rico"}
 stateListAbbrev = { 
@@ -119,9 +135,9 @@ class Form(object):
         state = arguments['state']
         country = country_keys[arguments['country']]
         if 'companyType' in arguments:
-            companyType = arguments['otherCompanyType'] if arguments['companyType'] == 'Other' else arguments['companyType']
+            companyType_ = arguments['otherCompanyType'] if arguments['companyType'] == 'Other' else arguments['companyType']
         else:
-            companyType = ''
+            companyType_ = ''
         yearFounded = '' if not arguments['yearFounded'] else arguments['yearFounded']
         fte = 0 if not arguments['fte'] else arguments['fte']
         logging.info(yearFounded)
@@ -180,7 +196,7 @@ class Form(object):
             state=state,
             yearFounded = yearFounded,
             fte = fte,
-            companyType = companyType,
+            companyType = companyType_,
             businessModel = businessModel,
             revenueSource = revenueSource,
             companyCategory = companyCategory,

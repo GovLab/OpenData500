@@ -255,17 +255,17 @@ class NewCompanyHandler(BaseHandler):
         country = user.country
         with open("templates/"+user.country+"/settings.json") as json_file:
             settings = json.load(json_file)
+        lan = settings['default_language']
         self.render("admin/admin_add_company.html",
             page_heading = "New Company",
-            companyType = companyType,
-            companyFunction = companyFunction,
+            companyType = companyType[lan],
             criticalDataTypes = criticalDataTypes,
             revenueSource = revenueSource,
-            new_revenueSource = new_revenueSource,
-            business_models = business_models,
-            categories=categories,
-            social_impacts = social_impacts,
-            data_types = data_types,
+            new_revenueSource = new_revenueSource[lan],
+            business_models = business_models[lan],
+            categories=categories[lan],
+            social_impacts = social_impacts[lan],
+            data_types = data_types[lan],
             source_count = source_count,
             stateList = stateList,
             stateListAbbrev=stateListAbbrev,
@@ -273,7 +273,7 @@ class NewCompanyHandler(BaseHandler):
             country = country,
             country_keys = country_keys,
             settings = settings,
-            lan = settings['default_language']
+            lan = lan
         )
 
     def post(self):
@@ -287,135 +287,136 @@ class NewCompanyHandler(BaseHandler):
 
 
 #--------------------------------------------------------COMPANY EDIT (ADMIN) PAGE------------------------------------------------------------
-class AdminEditCompanyHandler(BaseHandler):
-    @tornado.web.addslash
-    @tornado.web.authenticated
-    def get(self, id):
-        try: 
-            company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
-            page_heading = "Editing " + company.companyName + ' (Admin)'
-            page_title = "Editing " + company.companyName + ' (Admin)'
-        except Exception, e:
-            logging.info('Could not get company: ' + str(e))
-            self.redirect('/404/')
-        user = models.Users.objects.get(username=self.current_user)
-        country=user.country
-        with open("templates/"+country+"/settings.json") as json_file:
-            settings = json.load(json_file)
-        self.render("admin/admin_edit_company.html",
-            page_title = page_title,
-            page_heading = page_heading,
-            company = company,
-            companyType = companyType,
-            companyFunction = companyFunction,
-            criticalDataTypes = criticalDataTypes,
-            revenueSource = revenueSource,
-            new_revenueSource = new_revenueSource,
-            categories=categories,
-            datatypes = datatypes,
-            stateList = stateList,
-            stateListAbbrev=stateListAbbrev,
-            user=self.current_user,
-            country = company.country,
-            country_keys = country_keys,
-            id = str(company.id),
-            settings = settings,
-            lan = settings['default_language']
-        )
+# class AdminEditCompanyHandler(BaseHandler):
+#     @tornado.web.addslash
+#     @tornado.web.authenticated
+#     def get(self, id):
+#         try: 
+#             company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
+#             page_heading = "Editing " + company.companyName + ' (Admin)'
+#             page_title = "Editing " + company.companyName + ' (Admin)'
+#         except Exception, e:
+#             logging.info('Could not get company: ' + str(e))
+#             self.redirect('/404/')
+#         user = models.Users.objects.get(username=self.current_user)
+#         country=user.country
+#         with open("templates/"+country+"/settings.json") as json_file:
+#             settings = json.load(json_file)
+#         lan = settings['default_language']
+#         self.render("admin/admin_edit_company.html",
+#             page_title = page_title,
+#             page_heading = page_heading,
+#             company = company,
+#             companyType = companyType[lan],
+#             companyFunction = companyFunction,
+#             criticalDataTypes = criticalDataTypes,
+#             revenueSource = revenueSource,
+#             new_revenueSource = new_revenueSource,
+#             categories=categories,
+#             datatypes = datatypes,
+#             stateList = stateList,
+#             stateListAbbrev=stateListAbbrev,
+#             user=self.current_user,
+#             country = company.country,
+#             country_keys = country_keys,
+#             id = str(company.id),
+#             settings = settings,
+#             lan = lan
+#         )
 
-    @tornado.web.authenticated
-    def post(self, id):
-        #print all arguments to log:
-        logging.info("Admin Editing Company")
-        logging.info(self.request.arguments)
-        #get user editing and set country
-        try:
-            user = models.Users.objects.get(username=self.current_user)
-        except Exception, e:
-            logging.info("Could not get user: " + str(e))
-            self.redirect("/login/")
-        country = user.country
-        logging.info("Working in: " + country)
-        #get the company you will be editing
-        company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
-        #------------------CONTACT INFO-------------------
-        company.contact.firstName = self.get_argument("firstName", None)
-        company.contact.lastName = self.get_argument("lastName", None)
-        company.contact.title = self.get_argument("title", None)
-        company.contact.org = self.get_argument("org", None)
-        company.contact.email = self.get_argument("email", None)
-        company.contact.phone = self.get_argument("phone", None)
-        try: 
-            if self.request.arguments['contacted']:
-                company.contact.contacted = True
-        except:
-            company.contact.contacted = False
-        #------------------CEO INFO-------------------
-        company.ceo.firstName = self.get_argument("ceoFirstName", None)
-        company.ceo.lastName = self.get_argument("ceoLastName", None)
-        #------------------COMPANY INFO-------------------
-        company.companyName = self.get_argument("companyName", None)
-        company.prettyName = re.sub(r'([^\s\w])+', '', company.companyName).replace(" ", "-").title()
-        company.url = self.get_argument('url', None)
-        company.city = self.get_argument('city', None)
-        company.state = self.get_argument('state', None)
-        company.zipCode = self.get_argument('zipCode', None)
-        company.companyType = self.get_argument("companyType", None)
-        if company.companyType == 'other': #if user entered custom option for Type
-            company.companyType = self.get_argument('otherCompanyType', None)
-        company.yearFounded = self.get_argument("yearFounded", 0)
-        if  not company.yearFounded:
-            company.yearFounded = 0
-        company.fte = self.get_argument("fte", 0)
-        if not company.fte:
-            company.fte = 0
-        company.companyCategory = self.get_argument("category", None)
-        if company.companyCategory == "Other":
-            company.companyCategory = self.get_argument("otherCategory", None)
-        try: #try and get all checked items. 
-            company.revenueSource = self.request.arguments['revenueSource']
-        except: #if no checked items, then make it into an empty array (form validation should prevent this always)
-            company.revenueSource = []
-        if 'Other' in company.revenueSource: #if user entered a custom option for Revenue Source
-            del company.revenueSource[company.revenueSource.index('Other')] #delete 'Other' from list
-            if self.get_argument('otherRevenueSource', None):
-                company.revenueSource.append(self.get_argument('otherRevenueSource', None)) #add custom option to list.
-        company.description = self.get_argument('description', None)
-        company.descriptionShort = self.get_argument('descriptionShort', None)
-        company.financialInfo = self.get_argument('financialInfo', None)
-        company.datasetWishList = self.get_argument('datasetWishList', None)
-        company.sourceCount = self.get_argument('sourceCount', None) 
-        company.dataComments = self.get_argument('dataComments', None)
-        company.filters = [company.companyCategory, company.state] #re-do filters
-        for a in company.agencies:
-                if a.prettyName:
-                    company.filters.append(a.prettyName)
-        if self.get_argument("submittedSurvey", None) == "submittedSurvey":
-            company.submittedSurvey = True
-            company.filters.append("survey-company")
-        else:
-            company.submittedSurvey = False
-        if self.get_argument("vettedByCompany", None) == "vettedByCompany":
-            company.vettedByCompany = False
-        else:
-            company.vettedByCompany = True
-        if self.get_argument("vetted", None) == "vetted":
-            company.vetted = True
-        else: 
-            company.vetted = False
-        if self.get_argument("display", None) == "display":
-            company.display = True
-        else: 
-            company.display = False
-        if self.get_argument("locked", None) == "locked":
-            company.locked = True
-        else: 
-            company.locked = False
-        company.lastUpdated = datetime.now()
-        company.notes = self.get_argument("notes", None)
-        company.save()
-        self.application.stats.update_all_state_counts(country)
-        self.write('success')
+#     @tornado.web.authenticated
+#     def post(self, id):
+#         #print all arguments to log:
+#         logging.info("Admin Editing Company")
+#         logging.info(self.request.arguments)
+#         #get user editing and set country
+#         try:
+#             user = models.Users.objects.get(username=self.current_user)
+#         except Exception, e:
+#             logging.info("Could not get user: " + str(e))
+#             self.redirect("/login/")
+#         country = user.country
+#         logging.info("Working in: " + country)
+#         #get the company you will be editing
+#         company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
+#         #------------------CONTACT INFO-------------------
+#         company.contact.firstName = self.get_argument("firstName", None)
+#         company.contact.lastName = self.get_argument("lastName", None)
+#         company.contact.title = self.get_argument("title", None)
+#         company.contact.org = self.get_argument("org", None)
+#         company.contact.email = self.get_argument("email", None)
+#         company.contact.phone = self.get_argument("phone", None)
+#         try: 
+#             if self.request.arguments['contacted']:
+#                 company.contact.contacted = True
+#         except:
+#             company.contact.contacted = False
+#         #------------------CEO INFO-------------------
+#         company.ceo.firstName = self.get_argument("ceoFirstName", None)
+#         company.ceo.lastName = self.get_argument("ceoLastName", None)
+#         #------------------COMPANY INFO-------------------
+#         company.companyName = self.get_argument("companyName", None)
+#         company.prettyName = re.sub(r'([^\s\w])+', '', company.companyName).replace(" ", "-").title()
+#         company.url = self.get_argument('url', None)
+#         company.city = self.get_argument('city', None)
+#         company.state = self.get_argument('state', None)
+#         company.zipCode = self.get_argument('zipCode', None)
+#         company.companyType = self.get_argument("companyType", None)
+#         if company.companyType == 'other': #if user entered custom option for Type
+#             company.companyType = self.get_argument('otherCompanyType', None)
+#         company.yearFounded = self.get_argument("yearFounded", 0)
+#         if  not company.yearFounded:
+#             company.yearFounded = 0
+#         company.fte = self.get_argument("fte", 0)
+#         if not company.fte:
+#             company.fte = 0
+#         company.companyCategory = self.get_argument("category", None)
+#         if company.companyCategory == "Other":
+#             company.companyCategory = self.get_argument("otherCategory", None)
+#         try: #try and get all checked items. 
+#             company.revenueSource = self.request.arguments['revenueSource']
+#         except: #if no checked items, then make it into an empty array (form validation should prevent this always)
+#             company.revenueSource = []
+#         if 'Other' in company.revenueSource: #if user entered a custom option for Revenue Source
+#             del company.revenueSource[company.revenueSource.index('Other')] #delete 'Other' from list
+#             if self.get_argument('otherRevenueSource', None):
+#                 company.revenueSource.append(self.get_argument('otherRevenueSource', None)) #add custom option to list.
+#         company.description = self.get_argument('description', None)
+#         company.descriptionShort = self.get_argument('descriptionShort', None)
+#         company.financialInfo = self.get_argument('financialInfo', None)
+#         company.datasetWishList = self.get_argument('datasetWishList', None)
+#         company.sourceCount = self.get_argument('sourceCount', None) 
+#         company.dataComments = self.get_argument('dataComments', None)
+#         company.filters = [company.companyCategory, company.state] #re-do filters
+#         for a in company.agencies:
+#                 if a.prettyName:
+#                     company.filters.append(a.prettyName)
+#         if self.get_argument("submittedSurvey", None) == "submittedSurvey":
+#             company.submittedSurvey = True
+#             company.filters.append("survey-company")
+#         else:
+#             company.submittedSurvey = False
+#         if self.get_argument("vettedByCompany", None) == "vettedByCompany":
+#             company.vettedByCompany = False
+#         else:
+#             company.vettedByCompany = True
+#         if self.get_argument("vetted", None) == "vetted":
+#             company.vetted = True
+#         else: 
+#             company.vetted = False
+#         if self.get_argument("display", None) == "display":
+#             company.display = True
+#         else: 
+#             company.display = False
+#         if self.get_argument("locked", None) == "locked":
+#             company.locked = True
+#         else: 
+#             company.locked = False
+#         company.lastUpdated = datetime.now()
+#         company.notes = self.get_argument("notes", None)
+#         company.save()
+#         self.application.stats.update_all_state_counts(country)
+#         self.write('success')
 
 
 #--------------------------------------------------------EDIT COMPANY PAGE------------------------------------------------------------
@@ -442,15 +443,14 @@ class EditCompanyHandler(BaseHandler):
                 self.render(company.country + "/" + lan + "/editCompany.html",
                     page_heading = "Editing " + company.companyName,
                     company = company,
-                    companyType = companyType,
-                    companyFunction = companyFunction,
+                    companyType = companyType[lan],
                     criticalDataTypes = criticalDataTypes,
                     revenueSource = revenueSource,
-                    new_revenueSource = new_revenueSource,
-                    business_models = business_models,
-                    categories=categories,
-                    social_impacts = social_impacts,
-                    data_types = data_types,
+                    new_revenueSource = new_revenueSource[lan],
+                    business_models = business_models[lan],
+                    categories=categories[lan],
+                    social_impacts = social_impacts[lan],
+                    data_types = data_types[lan],
                     source_count = source_count,
                     stateList = stateList,
                     stateListAbbrev=stateListAbbrev,
@@ -477,15 +477,14 @@ class EditCompanyHandler(BaseHandler):
             self.render("admin/admin_edit_company.html",
                 page_heading = "Editing " + company.companyName + ' (Admin)',
                 company = company,
-                companyType = companyType,
-                companyFunction = companyFunction,
+                companyType = companyType[lan],
                 criticalDataTypes = criticalDataTypes,
                 revenueSource = revenueSource,
-                new_revenueSource = new_revenueSource,
-                business_models = business_models,
-                categories=categories,
-                social_impacts = social_impacts,
-                data_types = data_types,
+                new_revenueSource = new_revenueSource[lan],
+                business_models = business_models[lan],
+                categories=categories[lan],
+                social_impacts = social_impacts[lan],
+                data_types = data_types[lan],
                 source_count = source_count,
                 stateList = stateList,
                 stateListAbbrev=stateListAbbrev,
