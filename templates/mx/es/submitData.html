@@ -47,10 +47,12 @@
 		</fieldset>
 
 		<fieldset class="m-form-half">
-			<h3>Que impacto tienen los datos gubernamentales abiertos en su compañía? <em>(Por favor marca todas las opciones que apliquen)</em></h3>
-			{% for impact in data_impacts %}
-				<input type="checkbox" id="{{impact}}_data_impacts" name="dataImpacts" value="{{impact}}" data-parsley-group="dataImpacts" {% if impact in company.dataImpacts %} checked {% end %}/><label for="{{impact}}_data_impacts">{{impact}}</label><br>
-			{% end%}
+			<h3>Qué impacto tienen los datos gubernamentales abiertos en tu compañía? <em>(Por favor marca todas las opciones que apliquen)*</em></h3>
+			<div class="data-impacts-field">
+				{% for impact in data_impacts %}
+					<input type="checkbox" id="{{impact}}_data_impacts" name="dataImpacts" value="{{impact}}" data-parsley-group="dataImpacts" {% if impact in company.dataImpacts %} checked {% end %} required/><label for="{{impact}}_data_impacts">{{impact}}</label><br>
+				{% end%}
+			</div>
 		</fieldset>
 
 	</form>

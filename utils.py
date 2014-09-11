@@ -44,7 +44,7 @@ data_types = {
             }
 data_impacts = {
                 "en": ["Cost efficiency", "New or improved product/service", "Job growth", "Revenue growth", "Identify new opportunities", "New/improved research"],
-                "es": ["Eficiencia de costos", "Servicios/productos nuevos o mejorados", "Crecimiento de empleo", "Crecimiento de ingresos", "Identificación de oportunidades nuevas", "Investigaciones nuevas/mejoradas"]
+                "es": ["Eficiencia económica", "Servicios/productos nuevos o mejorados", "Crecimiento de empleo", "Crecimiento de las ganancias", "Identificación de nuevas oportunidades", "Nuevas / mejoradas Investigaciones"]
             }
 source_count = ['1-10', '11-50', '51-100', '101+']
 states ={ "AL": "Alabama", "AK": "Alaska", "AZ": "Arizona", "AR": "Arkansas", "CA": "California", "CO": "Colorado", "CT": "Connecticut", "DE": "Delaware", "DC": "District of Columbia", "FL": "Florida", "GA": "Georgia", "HI": "Hawaii", "ID": "Idaho", "IL": "Illinois", "IN": "Indiana", "IA": "Iowa", "KA": "Kansas", "KY": "Kentucky", "LA": "Louisiana", "ME": "Maine", "MD": "Maryland", "MA": "Massachusetts", "MI": "Michigan", "MN": "Minnesota", "MS": "Mississippi", "MO": "Missouri", "MT": "Montana", "NE": "Nebraska", "NV": "Nevada", "NH": "New Hampshire", "NJ": "New Jersey", "NM": "New Mexico", "NY": "New York", "NC": "North Carolina", "ND": "North Dakota", "OH": "Ohio", "OK": "Oklahoma", "OR": "Oregon", "PA": "Pennsylvania", "RI": "Rhode Island", "SC": "South Carolina", "SD": "South Dakota", "TN": "Tennessee", "TX": "Texas", "UT": "Utah", "VT": "Vermont", "VA": "Virginia", "WA": "Washington", "WV": "West Virginia", "WI": "Wisconsin", "WY": "Wyoming", "PR": "Puerto Rico"}
