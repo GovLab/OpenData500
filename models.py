@@ -39,6 +39,7 @@ class Company(Document):
 	dataTypes = ListField(StringField())
 	dataComments = StringField() #Please give comments, good or bad....
 	exampleUses = StringField()
+	dataImpacts = ListField(StringField())
 	confidentiality = StringField() # <--------DEPRECATE
 	agencies = ListField(ReferenceField('Agency'))
 	ts = ComplexDateTimeField(default=datetime.now())

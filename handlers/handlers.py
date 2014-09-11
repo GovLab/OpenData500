@@ -365,7 +365,8 @@ class SubmitDataHandler(BaseHandler):
             country=country,
             lan=lan,
             source_count = source_count,
-            data_types = data_types[lan]
+            data_types = data_types[lan],
+            data_impacts = data_impacts[lan]
         )
 
     #@tornado.web.authenticated
