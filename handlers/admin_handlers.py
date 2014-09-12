@@ -406,6 +406,7 @@ class EditCompanyHandler(BaseHandler):
                     business_models = business_models[lan],
                     categories=categories[lan],
                     social_impacts = social_impacts[lan],
+                    data_impacts = data_impacts[lan],
                     data_types = data_types[lan],
                     source_count = source_count,
                     stateList = stateList,
