@@ -17,17 +17,17 @@ companyType = {
                 "en": ['Public', 'Private', 'Nonprofit'],
                 "es": ['Pública', 'Privada', 'Sin Fines de Lucro']
             }
-criticalDataTypes = ['Federal Open Data', 'State Open Data', 'City/Local Open Data', 'Private/Proprietary Data Sources']
-revenueSource = ['advertising', 'Data Management and Analytic Services', 'Database Licensing', 'Lead Generation To Other Businesses', 'Philanthropy', 'Software Licensing', 'subscriptions', 'User Fees for Web or Mobile Access']
-new_revenueSource = ["Advertising", "Consulting", "Contributions/Donations", "Data analysis for clients", "Database licensing", "Government contract", "Lead generation to other businesses", "Membership fees", "Philanthropic grants", "Software licensing", "Subscriptions", "User fees for web or mobile access"]
-old_new_revenueSource = ['Advertising', "Consulting", "Contributions/Donations", "Data analysis for clients", 'Data Management and Analytic Services', 'Database Licensing', "Government contract", 'Lead Generation To Other Businesses', "Membership fees", "Philanthropic grants", 'Philanthropy', 'Software Licensing', 'Subscriptions', 'User Fees for Web or Mobile Access']
+# criticalDataTypes = ['Federal Open Data', 'State Open Data', 'City/Local Open Data', 'Private/Proprietary Data Sources']
+# old_revenueSource = ['advertising', 'Data Management and Analytic Services', 'Database Licensing', 'Lead Generation To Other Businesses', 'Philanthropy', 'Software Licensing', 'subscriptions', 'User Fees for Web or Mobile Access']
+# new_revenueSource = ["Advertising", "Consulting", "Contributions/Donations", "Data analysis for clients", "Database licensing", "Government contract", "Lead generation to other businesses", "Membership fees", "Philanthropic grants", "Software licensing", "Subscriptions", "User fees for web or mobile access"]
+# old_new_revenueSource = ['Advertising', "Consulting", "Contributions/Donations", "Data analysis for clients", 'Data Management and Analytic Services', 'Database Licensing', "Government contract", 'Lead Generation To Other Businesses', "Membership fees", "Philanthropic grants", 'Philanthropy', 'Software Licensing', 'Subscriptions', 'User Fees for Web or Mobile Access']
 business_models = {
                     "en": ['Business to Business', 'Business to Consumer', 'Business to Government'],
                     "es": ['Empresa a Empresa', 'Empresa a Consumidor', 'Empresa a Gobierno']
                 }
-new_revenueSource = {
+revenueSource = {
                     "en": ["Advertising", "Consulting", "Contributions/Donations", "Data analysis for clients", "Database licensing", "Government contract", "Lead generation to other businesses", "Membership fees", "Philanthropic grants", "Software licensing", "Subscriptions", "User fees for web or mobile access"],
-                    "es": ["Análisis de datos", "Consultoría", "Contratos gubernamentales", "Contribuciones/Donaciones", " Tarifas para el servicio móvil / internet", "Filantropía", "Generación de clientes", "Licencias de software", "Licencias de bases de datos", "Cuotas de membresía", "Publicidad", "Suscripciones"]
+                    "es": ["Análisis de datos", "Consultoría", "Contratos gubernamentales", "Contribuciones/Donaciones", "Tarifas para el servicio móvil / internet", "Filantropía", "Generación de clientes", "Licencias de software", "Licencias de bases de datos", "Cuotas de membresía", "Publicidad", "Suscripciones"]
                 }
 datatypes = ['Federal Open Data', 'State Open Data', 'City/Local Open Data']
 categories = {
@@ -116,109 +116,11 @@ class Tools(object):
 
 
 class Form(object):
-    def process_new_company(self, arguments):
-        #-------------------CONTACT INFO---------------
-        firstName = arguments['firstName']
-        lastName = arguments["lastName"]
-        title = arguments['title']
-        email = arguments['email']
-        phone = arguments['phone']
-        contact = models.Person(
-            firstName = firstName,
-            lastName = lastName,
-            title = title,
-            email = email,
-            phone = phone,
-        )
-        #-------------------COMPANY INFO---------------
-        url = arguments['url']
-        companyName = arguments['companyName']
-        prettyName = re.sub(r'([^\s\w])+', '', companyName).replace(" ", "-").title()
-        city = arguments['city']
-        zipCode = arguments['zipCode']
-        state = arguments['state']
-        country = country_keys[arguments['country']]
-        if 'companyType' in arguments:
-            companyType_ = arguments['otherCompanyType'] if arguments['companyType'] == 'Other' else arguments['companyType']
-        else:
-            companyType_ = ''
-        yearFounded = '' if not arguments['yearFounded'] else arguments['yearFounded']
-        fte = 0 if not arguments['fte'] else arguments['fte']
-        logging.info(yearFounded)
-        #-------------BUSINESS MODEL
-        if 'businessModel' in arguments:
-            businessModel = arguments['businessModel'].split(',')
-            if 'Other' in businessModel:
-                del businessModel[businessModel.index('Other')]
-                businessModel.append(arguments['otherbusinessModel'])
-        else:
-            businessModel = []
-        #-------------REVENUE SOURCE
-        if 'revenueSource' in arguments:
-            revenueSource = [] if not arguments['revenueSource'] else arguments['revenueSource'].split(',')
-            if 'Other' in revenueSource:
-                del revenueSource[revenueSource.index('Other')]
-                revenueSource.append(arguments['otherrevenueSource'])
-        else:
-            revenueSource = []
-        #-------------SOCIAL IMPACT
-        if 'socialImpact' in arguments:
-            socialImpact = [] if not arguments['socialImpact'] else arguments['socialImpact'].split(',')
-            if 'Other' in socialImpact:
-                del socialImpact[socialImpact.index('Other')]
-                socialImpact.append(arguments['othersocialImpact'])
-        else:
-            socialImpact = []
-        #-------------CATEGORY
-        if 'companyCategory' in arguments:
-            companyCategory = arguments['othercompanyCategory'] if arguments['companyCategory'] == 'Other' else arguments['companyCategory']
-            filters = [companyCategory, state, "survey-company"]
-        else:
-            companyCategory = ''
-            filters = []
-        description = arguments['description']
-        descriptionShort = arguments['descriptionShort']
-        financialInfo = arguments['financialInfo']
-        if 'submittedThroughWebsite' in arguments:
-            submittedThroughWebsite = False if arguments['submittedThroughWebsite'] == 'False' else True
-        else:
-            submittedThroughWebsite = True
-        if 'submittedSurvey' in arguments:
-            submittedSurvey = False if arguments['submittedSurvey'] == 'False' else True
-        else:
-            submittedSurvey = True
-        if 'vettedByCompany' in arguments:
-            vettedByCompany = False if arguments['vettedByCompany'] == 'False' else True
-        else:
-            vettedByCompany = True
+    def create_new_company(self, arguments):
         company = models.Company(
-            companyName = companyName,
-            prettyName = prettyName,
-            url = url,
-            city = city,
-            zipCode = zipCode,
-            state=state,
-            yearFounded = yearFounded,
-            fte = fte,
-            companyType = companyType_,
-            businessModel = businessModel,
-            revenueSource = revenueSource,
-            companyCategory = companyCategory,
-            socialImpact = socialImpact,
-            description= description,
-            descriptionShort = descriptionShort,
-            financialInfo = financialInfo,
-            contact = contact,
-            lastUpdated = datetime.now(),
-            display = False, 
-            submittedSurvey = submittedSurvey,
-            vetted = False, 
-            vettedByCompany = vettedByCompany,
-            submittedThroughWebsite = submittedThroughWebsite,
-            locked=False,
-            filters = filters,
-            country=country
-        )
+            companyName = arguments['companyName'],
+            state = arguments['state'],
+            country = country_keys[arguments['country']])
         company.save()
         return company
 
@@ -234,13 +136,17 @@ class Form(object):
                 models.Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+item:arguments[item]})
         #DATA TYPES
         if 'dataTypes' in arguments:
-            logging.info("data types" + arguments['dataTypes'])
             c.dataTypes = [] if not arguments['dataTypes'] else arguments['dataTypes'].split(',')
             if 'Other' in c.dataTypes:
                 del c.dataTypes[c.dataTypes.index('Other')]
                 c.dataTypes.append(arguments['otherDataType'])
         else:
             c.dataTypes = []
+        if 'dataImpacts' in arguments:
+            c.dataImpacts = [] if not arguments['dataImpacts'] else arguments['dataImpacts'].split(',')
+            if 'Other' in c.dataImpacts:
+                del c.dataImpacts[c.dataImpacts.index('Other')]
+                c.dataImpacts.append(arguments['otherdataImpacts'])
         c.lastUpdated = datetime.now()
         c.save()
 
@@ -285,9 +191,7 @@ class Form(object):
         #-------------------BOOLEANS---------------
         for item in company_admin_booleans:
             if item in arguments:
-                models.Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+item:True})
-            else:
-                models.Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+item:False})
+                models.Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+item:arguments[item]})
         #-------------------SAVE---------------
         c.lastUpdated = datetime.now()
         c.save()

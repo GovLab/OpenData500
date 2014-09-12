@@ -1,0 +1,161 @@
+
+{% extends "../../main.html" %}
+{% autoescape None %}
+
+
+{% block body %}
+
+<h1>{{ page_heading }}</h1>
+
+<form method="post" id="add-agency-form" class="m-form agency-form">
+	<fieldset class="m-form-half">
+		<h3>Agency Information</h3>
+		<div class="m-form-line"><label for="">Name: </label><input type="text" name="" id="agencyName" value=""></div>
+		<div class="m-form-line"><label for="">Abbreviation: </label><input type="text" name="abbrev" id="agencyAbbrev" value="" ></div>
+		<div class="m-form-line"><label for="">URL: </label><input type="text" name="url" id="agencyURL" value="" ></div>
+		<div class="m-form-line"><label for="">Source:</label><input type="text" name="source" id="source" value="" ></div>
+		<div class="m-form-line">
+			<label for="type">Type:</label>
+			<select name='type' id="type">
+				<option selected disabled hidden value=''></option>
+				{% for type in agency_types %}
+					<option name="type" value="{{type}}">{{type}}</option>
+				{%end%}
+			</select>
+		</div>
+		<p>Country: {{ country.upper() }}</p>
+		<input type="button" class="l-button action-button" id="save-agency-button" name="save-agency-button" action="save-agency" value="Add/Save"><br>
+		<span class="response-message"></span><br><br>
+	</fieldset>
+	<h3>Subagencies</h3>
+	<fieldset class="m-form-three-quarters">
+		<div class="subagency-list">
+				<p>Subagencies</p>
+				<div class="subagency-item">
+					<h3>Add New</h3>
+					<div class="m-form-line"><label for="">Name: </label><input type="text" name="" id="subagency-name" value=""></div>
+					<div class="m-form-line"><label for="">Abbreviation: </label><input type="text" name="subagency-abbrev" id="subagency-abbrev" value=""></div>
+					<div class="m-form-line"><label for="">URL: </label><input type="text" name="subagency-url" id="subagency-url" value="" ></div>
+					<div class="subagency-list-buttons">
+						<input type="button" class="l-button subagency-action-button" id="edit-subagency-button" name="delete-subagency-button" action="add-subagency" value="Add">
+						<input type="button" class="l-button" id="delete-subagency-button" name="delete-subagency-button" style="display:none;" value="Delete This Subagency"><br>
+						<span class="response-message"></span>
+						<div class="confirm-delete-subagency" style="display:none">
+							<p>Are you sure?
+							<input type="button" class="l-button subagency-action-button" id="confirm-delete-subagency-button" action="delete-subagency" value="Yes">
+							<input type="button" class="l-button" id="cancel-delete-subagency-button" value="No"></p>
+						</div>
+					</div>
+				</div>
+		</div>
+	</fieldset>
+	<fieldset class="m-form-half">
+		<h3>Notes</h3>
+			<textarea rows="10" cols="59" name="notes" id="notes" parsley-trigger="keyup" parsley-maxwords="1000"></textarea>
+	</fieldset>
+	{% raw xsrf_form_html() %}
+</form>
+
+<div class="delete-agency">
+	<input type="button" class="l-button" id="delete-agency-button" name="delete-agency-button" value="Delete This Agency"><br>
+	<div class="confirm-delete-agency" style="display:none">
+		<p>Are you sure?</p>
+		<input type="button" class="l-button" id="confirm-delete-agency-button" value="Yes"><br>
+		<input type="button" class="l-button" id="cancel-delete-agency-button" value="No"><br>
+	</div>
+	<span class="delete-agency-warning">Note: You can only delete this agency if it is not in use by a company.</span><br>
+	<span class="delete-agency-error"></span>
+</div>
+
+<script type='text/template' id='template'>
+	<div class="subagency-item">
+		<h3><%= heading %></h3>
+		<div class="m-form-line"><label for="">Name: </label><input type="text" name="<%= name %>" id="subagency-name" value="<%= name %>"></div>
+		<div class="m-form-line"><label for="">Abbreviation: </label><input type="text" name="subagency-abbrev" id="subagency-abbrev" value="<%= abbrev %>"></div>
+		<div class="m-form-line"><label for="">URL: </label><input type="text" name="subagency-url" id="subagency-url" value="<%= url %>"></div>
+		<div class="subagency-list-buttons">
+			<input type="button" class="l-button action-button" id="edit-subagency-button" action="<%= new_action %>" value="<%= button %>">
+			<input type="button" class="l-button" id="delete-button" <%= delete_button %> value="Delete This Subagency"><br>
+			<span class="response-message"><%= message %></span>
+			<div class="confirm-delete" style="display:none">
+				<p>Are you sure?
+				<input type="button" class="l-button action-button" id="confirm-delete-subagency-button" action="delete-subagency" value="Yes">
+				<input type="button" class="l-button" id="cancel-delete-button" value="No"></p>
+			</div>
+		</div>
+	</div>
+
+</script>
+
+
+<script type="text/javascript">
+
+$(document).ready( function() {
+	//----------------------------------------ADD/EDIT/NEW/DELETE SUBAGENCY--------------------------------------------------
+	var subagency = _.template($("#template").html());
+	$(".subagency-list").on("click", "#delete-subagency-button", function() {
+		var current_options = $(this).parent().find(".confirm-delete-subagency")
+		$(this).parent().find(".confirm-delete-subagency").show();
+		current_options.on("click", "#cancel-delete-subagency-button", function(event) {
+			current_options.hide();
+			event.stopPropagation();
+		});
+	});
+	$(document).on("click", ".action-button", function() {
+		action = $(this).attr("action");
+		if (action == "save-agency") {
+			var this_form = $(".agency-form");
+		} else {
+			var this_form = $(this).closest(".subagency-item");
+		}
+		var id = $("#agency-id").val();
+		var data = {
+			"agency_new_name": this_form.find("#agencyName").val(),
+			"agency_old_name": this_form.find("#agencyName").attr("name"),
+			"agency_url": this_form.find("#agencyURL").val(),
+			"agency_abbrev": this_form.find("#agencyAbbrev").val(),
+			"agency_type": this_form.find("#type").val(),
+			"agency_source": this_form.find("#source").val(),
+			"agency_notes": this_form.find("#notes").val(),
+			"subagency_old_name": this_form.find("#subagency-name").attr("name"),
+			"subagency_new_name": this_form.find("#subagency-name").val(), 
+			"subagency_abbrev": this_form.find("#subagency-abbrev").val(), 
+			"subagency_url": this_form.find("#subagency-url").val(),
+			"action": action,
+			"_xsrf": $("[name='_xsrf']").val(),
+			}
+		console.log(data);
+		$.ajax({
+			type: 'POST',
+			url: '/admin/agency-add/',
+			data: data,
+			error: function(error) {
+		        console.debug(JSON.stringify(error));
+		        this_form.find(".response-message").text("Something went wrong : /");
+			},
+		    beforeSend: function(xhr, settings) {
+		    },
+		    success: function(data) {
+		    	console.log(data);
+		    	if (action =="delete-subagency") {
+		    		this_form.empty();
+		    	}
+		    	if (action =="add-subagency") {
+		    		this_form.empty();
+		    		console.log("asdfasdf")
+		    		$(".subagency-list").append(subagency(data))
+		    		$(".subagency-list").append(subagency({"heading":"Add New", "message":"", "name":"", "abbrev":"", "url":"", "button":"Add", "new_action":"add-subagency", "delete_button":"style='display:none;'"}))
+		    	}
+		    	if (action =="edit-subagency") {
+		    		this_form.find(".subagency-message").text(data['message']).show().delay(5000).fadeOut();
+		    	}
+		    }
+		});
+	});
+});
+
+</script>
+
+
+
+{% end %}

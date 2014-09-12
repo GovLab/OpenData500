@@ -1,0 +1,75 @@
+
+{% extends "../../main.html" %}
+{% autoescape None %}
+
+
+{% block body %}
+
+<h1>{{ page_heading }}</h1>
+
+
+<form class="m-form">
+	<fieldset class="m-form-half">
+		<h2>Stats</h2>
+		<h3>Total Agencies: </h3><p id="totalAgencies">{{stats.totalAgencies}}</p>
+	</fieldset>
+	<fieldset class="m-form-half right">
+		<h2>Utilities</h2>
+		<input type="button" class="l-button admin_utils" id="refresh" name="refresh" value="Refresh"><br>
+		<input type="button" class="l-button admin_utils" id="agency_list" name="files" value="Update Agency List File"><br>
+		<a href="/admin/agency-edit/"><input type="button" class="l-button" value="New Agency"></a><br>
+		<span class="message"></span>
+		{% raw xsrf_form_html() %}
+	</fieldset>
+</form>
+
+<table class="list-of-agencies" style="width:100%; text-align:left; border:1px;">
+	<tr>
+		<th>Agency Name</th>
+		<th>Edit URL</th>
+		<th>Date Submitted</th>
+		<th>No. Subagencies</th>
+		<th>Used By:</th>
+		<th>Source</th>
+	</tr>
+	{% for a in agencies %}
+		<tr>
+			<td><strong>{%if a.name %}{{ a.name }}{% else %}No Name{%end%}</strong></a></td>
+			<td><a href="/admin/agency-edit/{{ a.id }}">Edit</a></td>
+			<td>{{ a.ts.strftime("%b, %d '%y @%I:%M %p") }}</td>
+			<td>{{ len(a.subagencies) }}</td>
+			<td>{{ a.usedBy_count }}</td>
+			<td>{{ a.source }}</td>
+		</tr>
+	{% end %}
+</table>
+
+<script type="text/javascript">
+
+$(document).ready( function() {
+	$(".m-form").on("click", ".admin_utils", function() {
+		action = this.id;
+		$.ajax({
+			type: "POST",
+			url: "/admin/agencies/",
+			data: {"action":action, "_xsrf": $("[name='_xsrf']").val()},
+			error: function(error) {
+		        console.debug(JSON.stringify(error));
+		        $('.message').text("Derp. Something went wrong :/").show().delay(5000).fadeOut();
+			},
+		    beforeSend: function(xhr, settings) {
+		    	$('.message').text("Working on it...").show().delay(5000).fadeOut();
+		    },
+		    success: function(data) {
+		    	$('.message').text(data["message"]).show().delay(5000).fadeOut();
+		    	if (action == "refresh") {
+		    		$("#totalAgencies").text(data['total_agencies'])
+		    	}
+		    }
+		});
+	});
+});
+
+</script>
+
+{% end %}

@@ -58,13 +58,14 @@
 		</div>
 		<div class="m-form-line"><label for="country">Country:</label><input type="text" name="country" value="{{country_keys[country]}}" readonly></div>
 		<div class="m-form-line"><label for="zipCode">Zip Code: *</label><input type="text" name="zipCode" id="zipCode" data-parsley-trigger="focusout" data-parsley-pattern="(^\d{5}$)|(^\d{5}-\d{4}$)" required></div>
+		<!--*****************************************************************-COMPANY TYPE-***************************************************************** !-->
 		<div class="m-form-box"><label for="companyType">Type of Company: *</label><br>
 			<div class="company-type-field">
 				{% for type in companyType %}
 					<input type="radio" id="{{type}}" name="companyType" data-parsley-group='companyType' value="{{ type }}"><label for="{{type}}">{{type}}</label><br>
 				{% end %}
 				<input type="radio" id="other_type" name="companyType" value="Other" data-parsley-mincheck="1" data-parsley-group='companyType' data-parsley-trigger="change" required><label for="other_type">Other</label>
-				<input type="text" id="other_company_type_field" name="otherCompanyType">
+				<input type="text" id="other_company_type_field" name="othercompanyType">
 			</div>
 		</div>
 		<div class="m-form-line"><label for="">Founding Year: *</label><input type="text" name="yearFounded" id="yearFounded" 
@@ -91,7 +92,7 @@
 		<!--*****************************************************************-REVENUE SOURCES-***************************************************************** !-->
 		<h3>Which of the following are significant sources of revenue for your company? <br><em>(check all that apply)</em> *</h3>
 		<div class="revenue-source-field">
-			{% for source in new_revenueSource %}
+			{% for source in revenueSource %}
 				<input type="checkbox" id="{{source}}" name="revenueSource" value="{{source}}" data-parsley-group="revenueSource" /><label for="{{source}}">{{source}}</label><br>
 			{% end %}
 			<input type="checkbox" id="other_revenue" name="revenueSource" value="Other" data-parsley-mincheck="1" data-parsley-group='revenueSource' data-parsley-trigger="change" required><label for="Other">Other</label>
@@ -117,10 +118,10 @@
 		<h3>What category best describes your company? *</h3>
 		<div class="category-field">
 			{% for category in categories %}
-				<input type="radio" id="{{category}}" name="category" data-parsley-group='category' value="{{ category }}"><label for="{{category}}">{{category}}</label><br>
+				<input type="radio" id="{{category}}" name="companyCategory" data-parsley-group='category' value="{{ category }}"><label for="{{category}}">{{category}}</label><br>
 			{% end %}
-			<input type="radio" id="other_category" name="category" value="Other" data-parsley-mincheck="1" data-parsley-group='category' data-parsley-trigger="change" required><label for="Other">Other</label>
-			<input type="text" id="other_category_text_field" name="companyCategory" data-parsley-trigger="focus">
+			<input type="radio" id="other_category" name="companyCategory" value="Other" data-parsley-mincheck="1" data-parsley-group='category' data-parsley-trigger="change" required><label for="Other">Other</label>
+			<input type="text" id="other_category_text_field" name="othercompanyCategory" data-parsley-trigger="focus">
 		</div>
 	</fieldset>
 

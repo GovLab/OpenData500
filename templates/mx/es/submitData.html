@@ -32,13 +32,13 @@
 			<h3>¿Qué tipos de datos utiliza tu compañía? <br><em>(Por favor marca todas las opciones que apliquen)</em></h3>
 			<div class="data-type-field">
 				{% for data_type in data_types %}
-					<input type="checkbox" id="{{data_type}}_data_type" name="dataTypes" value="{{data_type}}" data-parsley-group="dataTypes" {% if data_type in company.dataTypes %} checked {% end %}/><label for="{{data_type}}_data_type">{{data_type}}</label><br>
+					<input type="checkbox" id="{{data_type}}_data_type" name="dataTypes" value="{{data_type}}" data-parsley-group="dataTypes" {% if data_type.decode('utf-8') in company.dataTypes %} checked {% end %}/><label for="{{data_type}}_data_type">{{data_type}}</label><br>
 				{% end %}
-				{% if list(set(company.dataTypes) - set(data_types)) %}
-					<input type="checkbox" id="other_data_type" name="dataTypes" value="Other" {%if company.dataTypes[0] %}checked{%end%} data-parsley-mincheck="1" data-parsley-group='dataTypes' data-parsley-trigger="change"><label for="Other">Other</label>
-					<input type="text" name="otherDataType" id="other_data_type_text_field" value="{{ list(set(company.dataTypes) - set(data_types))[0] }}" />
+				{% if [e for e in company.dataTypes if e.encode('utf-8') not in data_types] %}
+					<input type="checkbox" id="other_data_type" name="dataTypes" value="Other" {%if company.dataTypes[0] %}checked{%end%} data-parsley-mincheck="1" data-parsley-group='dataTypes' data-parsley-trigger="change"><label for="Other">Otro</label>
+					<input type="text" name="otherDataType" id="other_data_type_text_field" value="{{ [e for e in company.dataTypes if e.encode('utf-8') not in data_types][0] }}" />
 				{% else %}
-					<input type="checkbox" id="other_data_type" name="dataTypes" value="Other" data-parsley-mincheck="1" data-parsley-group='dataTypes' data-parsley-trigger="change"><label for="Other">Other</label>
+					<input type="checkbox" id="other_data_type" name="dataTypes" value="Other" data-parsley-mincheck="1" data-parsley-group='dataTypes' data-parsley-trigger="change"><label for="Other">Otro</label>
 					<input type="text" name="otherDataType" id="other_data_type_text_field" />
 				{% end %}
 			</div>
@@ -50,8 +50,15 @@
 			<h3>Qué impacto tienen los datos gubernamentales abiertos en tu compañía? <em>(Por favor marca todas las opciones que apliquen)*</em></h3>
 			<div class="data-impacts-field">
 				{% for impact in data_impacts %}
-					<input type="checkbox" id="{{impact}}_data_impacts" name="dataImpacts" value="{{impact}}" data-parsley-group="dataImpacts" {% if impact in company.dataImpacts %} checked {% end %} required/><label for="{{impact}}_data_impacts">{{impact}}</label><br>
+					<input type="checkbox" id="{{impact}}_data_impacts" name="dataImpacts" value="{{impact}}" data-parsley-group="dataImpacts" {% if impact.decode('utf-8') in company.dataImpacts %} checked {% end %} required/><label for="{{impact}}_data_impacts">{{impact}}</label><br>
 				{% end%}
+				{% if [e for e in company.dataImpacts if e.encode('utf-8') not in data_impacts] %}
+					<input type="checkbox" id="other_data_impacts" name="dataImpacts" value="Other" {%if company.dataImpacts[0] %}checked{%end%} data-parsley-mincheck="1" data-parsley-group='dataImpacts' data-parsley-trigger="change" required><label for="Other">Otro</label>
+					<input type="text" name="otherdataImpacts" id="other_data_impacts_text_field" value="{{ [e for e in company.dataImpacts if e.encode('utf-8') not in data_impacts][0] }}" />
+				{% else %}
+					<input type="checkbox" id="other_data_impacts" name="dataImpacts" value="Other" data-parsley-mincheck="1" data-parsley-group='dataImpacts' data-parsley-trigger="change" required><label for="Other">Otro</label>
+					<input type="text" name="otherdataImpacts" id="other_data_impacts_text_field" />
+				{% end %}
 			</div>
 		</fieldset>
 
@@ -59,7 +66,7 @@
 
 	<!--*****************************************************************-AGENCIES AND SUBAGENCIES-***************************************************************** !-->
 	<div class="m-form-box data">
-		<h2>Open Data Sources</h2>
+		<h2>Fuentes de datos abiertos gubernamentales</h2>
 		<p>Por favor cuéntanos más sobre las fuentes de datos que utiliza tu compañía.</p>
 		<p>Puedes usar la herramienta de búsqueda para seleccionar las agencias, sub agencias, gobiernos estatales y municipales, o instituciones de la lista disponible.</p>
 		<p>Si no puedes encontrar en la lista la fuente que buscas, por favor completa el formulario abajo [link] para sugerir una nueva agencia, sub agencia, organización, etc.</p>

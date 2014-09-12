@@ -21,12 +21,12 @@
 
 	<!--*****************************************************************-CONTACT INFO-***************************************************************** !-->
 	<fieldset class="m-form-half">
-		<h3>Contact Information</h3>
-		<div class="m-form-line"><label for="">First Name: *</label><input type="text" name="firstName" id="firstName" data-parsley-maxlength="50" required></div>
-		<div class="m-form-line"><label for="">Last Name: *</label><input type="text" name="lastName" id="lastName" data-parsley-maxlength="50" required></div>
-		<div class="m-form-line"><label for="">Title: *</label><input type="text" name="title" id="title" data-parsley-maxlength="50" required></div>
-		<div class="m-form-line"><label for="">Email: *</label><input type="text" name="email" id="email" data-parsley-maxlength="50" data-parsley-trigger="focusout" data-parsley-type="email" required></div>
-		<div class="m-form-line"><label for="">Phone:</label><input type="text" name="phone" id="phone" 
+		<h3>Información de Contacto</h3>
+		<div class="m-form-line"><label for="">Nombre: *</label><input type="text" name="firstName" id="firstName" data-parsley-maxlength="50" required></div>
+		<div class="m-form-line"><label for="">Apellido: *</label><input type="text" name="lastName" id="lastName" data-parsley-maxlength="50" required></div>
+		<div class="m-form-line"><label for="">Puesto: *</label><input type="text" name="title" id="title" data-parsley-maxlength="50" required></div>
+		<div class="m-form-line"><label for="">Correo electrónico: *</label><input type="text" name="email" id="email" data-parsley-maxlength="50" data-parsley-trigger="focusout" data-parsley-type="email" required></div>
+		<div class="m-form-line"><label for="">Teléfono:</label><input type="text" name="phone" id="phone" 
 			data-parsley-trigger="focusout" 
 			data-parsley-pattern="(^\d{3}(-|\s)\d{3}(-|\s)\d{4}$)|(^\d{10})"
 			data-parsley-error-message="Phone must be in format: ###-###-####"></div>
@@ -34,9 +34,9 @@
 
 	<!--*****************************************************************-COMPANY INFO-***************************************************************** !-->
 	<fieldset class="m-form-half right">
-		<h3>Company Information</h3>
+		<h3>Información de la Compañía</h3>
 		<div class="m-form-line">
-			<label for="companyName">Company Name: *</label><input type="text" name="companyName" id="companyName" 
+			<label for="companyName">Nombre de la compañía: *</label><input type="text" name="companyName" id="companyName" 
 			data-parsley-trigger="focusout"
             data-parsley-remote
             data-parsley-remote-options='{ "type": "POST" }'
@@ -46,67 +46,67 @@
             required>
 			<span class='company-name-error'></span>
 		</div>
-		<div class="m-form-line"><label for="url">Company URL: *</label><input type='text' name="url" id='url' data-parsley-trigger="change" data-parsley-type="url" required></div>
-		<div class="m-form-line"><label for="city">In which city is your company's headquarters located?</label><input type="text" name="city" id="city"></div>
+		<div class="m-form-line"><label for="url">URL de la compañía: *</label><input type='text' name="url" id='url' data-parsley-trigger="change" data-parsley-type="url" required></div>
+		<div class="m-form-line"><label for="city">¿En qué ciudad se encuentra su oficina central?</label><input type="text" name="city" id="city"></div>
 		<div class="m-form-line">
-			<label for="state">State: *</label>
+			<label for="state">Estado: *</label>
 			<select name='state' id="state" required>
 				{% for i in range(0, len(stateList[country])) %}
 					<option name="state" value="{{stateListAbbrev[country][i]}}">{{ stateList[country][i] }}</option>
 				{%end%}
 			</select>
 		</div>
-		<div class="m-form-line"><label for="country">Country:</label><input type="text" name="country" value="{{country_keys[country]}}" readonly></div>
-		<div class="m-form-line"><label for="zipCode">Zip Code: *</label><input type="text" name="zipCode" id="zipCode" data-parsley-trigger="focusout" data-parsley-pattern="(^\d{5}$)|(^\d{5}-\d{4}$)" required></div>
-		<div class="m-form-box"><label for="companyType">Type of Company: *</label><br>
+		<div class="m-form-line"><label for="country">País:</label><input type="text" name="country" value="{{country_keys[country]}}" readonly></div>
+		<div class="m-form-line"><label for="zipCode">Código postal: *</label><input type="text" name="zipCode" id="zipCode" data-parsley-trigger="focusout" data-parsley-pattern="(^\d{5}$)|(^\d{5}-\d{4}$)" required></div>
+		<div class="m-form-box"><label for="companyType">Tipo de compañía: *</label><br>
 			<div class="company-type-field">
 				{% for type in companyType %}
 					<input type="radio" id="{{type}}" name="companyType" data-parsley-group='companyType' value="{{ type }}"><label for="{{type}}">{{type}}</label><br>
 				{% end %}
-				<input type="radio" id="other_type" name="companyType" value="Other" data-parsley-mincheck="1" data-parsley-group='companyType' data-parsley-trigger="change" required><label for="other_type">Other</label>
-				<input type="text" id="other_company_type_field" name="otherCompanyType">
+				<input type="radio" id="other_type" name="companyType" value="Other" data-parsley-mincheck="1" data-parsley-group='companyType' data-parsley-trigger="change" required><label for="other_type">Otro</label>
+				<input type="text" id="other_company_type_field" name="othercompanyType">
 			</div>
 		</div>
-		<div class="m-form-line"><label for="">Founding Year: *</label><input type="text" name="yearFounded" id="yearFounded" 
+		<div class="m-form-line"><label for="">Año de fundación: *</label><input type="text" name="yearFounded" id="yearFounded" 
 			data-parsley-type="number" 
 			data-parsley-trigger="focusout" 
 			data-parsley-range="[1000, 2014]" 
 			required></div>
-		<div class="m-form-line"><label for="">Number of full-time employees: *</label><input type="text" name="fte" id="fte" data-parsley-trigger="focusout" data-parsley-type="number" required></div>
+		<div class="m-form-line"><label for="">Número de empleados de tiempo completo: *</label><input type="text" name="fte" id="fte" data-parsley-trigger="focusout" data-parsley-type="number" required></div>
 	</fieldset>
 
 	<fieldset class="m-form-half">	
 		<!--*****************************************************************-BUSINESS MODELS-***************************************************************** !-->
-		<h3>Business Model <br><em>(check all that apply)</em> *</h3>
+		<h3>Modelo de Negocio <br><em>(Por favor marca todas las opciones que apliquen)</em> *</h3>
 		<div class="business-model-field">
 			{% for model in business_models %}
 				<input type="checkbox" id="{{model}}" name="businessModel" value="{{model}}" data-parsley-group="businessModel" /><label for="{{model}}">{{model}}</label><br>
 			{% end %}
-			<input type="checkbox" id="other_model" name="businessModel" value="Other" data-parsley-mincheck="1" data-parsley-group='businessModel' data-parsley-trigger="change" required><label for="Other">Other</label>
+			<input type="checkbox" id="other_model" name="businessModel" value="Other" data-parsley-mincheck="1" data-parsley-group='businessModel' data-parsley-trigger="change" required><label for="Other">Otro</label>
 			<input type="text" name="otherbusinessModel" id="other_model_text_field" />
 		</div>
 		<br>
 		<br>
 
 		<!--*****************************************************************-REVENUE SOURCES-***************************************************************** !-->
-		<h3>Which of the following are significant sources of revenue for your company? <br><em>(check all that apply)</em> *</h3>
+		<h3>¿Cuáles de la siguientes fuentes de ingresos, son las más importantes para tu compañía? <br><em>(Por favor marca todas las opciones que apliquen)</em> *</h3>
 		<div class="revenue-source-field">
-			{% for source in new_revenueSource %}
+			{% for source in revenueSource %}
 				<input type="checkbox" id="{{source}}" name="revenueSource" value="{{source}}" data-parsley-group="revenueSource" /><label for="{{source}}">{{source}}</label><br>
 			{% end %}
-			<input type="checkbox" id="other_revenue" name="revenueSource" value="Other" data-parsley-mincheck="1" data-parsley-group='revenueSource' data-parsley-trigger="change" required><label for="Other">Other</label>
+			<input type="checkbox" id="other_revenue" name="revenueSource" value="Other" data-parsley-mincheck="1" data-parsley-group='revenueSource' data-parsley-trigger="change" required><label for="Other">Otro</label>
 			<input type="text" name="otherrevenueSource" id="other_revenue_text_field" />
 		</div>
 		<br>
 		<br>
 
 	<!--*****************************************************************-SOCIAL IMPACT-***************************************************************** !-->
-		<h3>Does your company’s mission have a direct, beneficial social impact in any of the following areas? <br><em>(check all that apply)</em> </h3>
+		<h3>¿La misión de tu compañía, ha generado un impacto social directo en alguna de las siguientes áreas? <br><em>(Por favor marcar todas las opciones que apliquen)</em></h3>
 		<div class="social-impact-field">
 			{% for impact in social_impacts %}
 				<input type="checkbox" id="{{impact}}" name="socialImpact" value="{{impact}}" data-parsley-group="socialImpact" /><label for="{{impact}}">{{impact}}</label><br>
 			{% end %}
-			<input type="checkbox" id="other_impact" name="socialImpact" value="Other" data-parsley-mincheck="1" data-parsley-group='socialImpact' data-parsley-trigger="change"><label for="Other">Other</label>
+			<input type="checkbox" id="other_impact" name="socialImpact" value="Other" data-parsley-mincheck="1" data-parsley-group='socialImpact' data-parsley-trigger="change"><label for="Other">Otro</label>
 			<input type="text" name="othersocialImpact" id="other_impact_text_field" />
 		</div>
 
@@ -114,19 +114,19 @@
 
 	<!--*****************************************************************-CATEGORY-***************************************************************** !-->
 	<fieldset class="m-form-half right">
-		<h3>What category best describes your company? *</h3>
+		<h3>¿Cuál categoría describe mejor tu compañía? *</h3>
 		<div class="category-field">
 			{% for category in categories %}
 				<input type="radio" id="{{category}}" name="category" data-parsley-group='category' value="{{ category }}"><label for="{{category}}">{{category}}</label><br>
 			{% end %}
-			<input type="radio" id="other_category" name="category" value="Other" data-parsley-mincheck="1" data-parsley-group='category' data-parsley-trigger="change" required><label for="Other">Other</label>
+			<input type="radio" id="other_category" name="category" value="Other" data-parsley-mincheck="1" data-parsley-group='category' data-parsley-trigger="change" required><label for="Other">Otro</label>
 			<input type="text" id="other_category_text_field" name="companyCategory" data-parsley-trigger="focus">
 		</div>
 	</fieldset>
 
 	<!--*****************************************************************-DESCRIPTION-***************************************************************** !-->
 	<fieldset class="m-form-half left">
-		<h3>Please give us a short public statement describing your company’s mission and work. You can take this material from your website or other publications if you choose to. <br><em>[200 words or less]</em> *</h3>
+		<h3>Por favor describe de manera breve la misión y el trabajo de tu compañía. Puedes obtener la información de su página web u otras publicaciones al respecto. <br><em>[Máximo 200 palabras]</em> *</h3>
 		<textarea rows="10" cols="59" name="description" id="description" 
 		data-parsley-trigger="keyup" 
 		data-parsley-maxwords="200" 
@@ -136,7 +136,7 @@
 
 	<!--*****************************************************************-SHORT DESCRIPTION-***************************************************************** !-->
 	<fieldset class="m-form-half right">
-		<h3>As a summary, please provide a one sentence description of your company. <br><em>[25 words or less]</em> *</h3>
+		<h3>Por favor escribe un breve resumen de tu compañía.. <br><em>[Máximo 25 palabras]</em> *</h3>
 		<textarea rows="10" cols="59" name="descriptionShort" id="descriptionShort" 
 		data-parsley-trigger="keyup" 
 		data-parsley-maxwords="25" 
@@ -146,7 +146,7 @@
 
 	<!--*****************************************************************-FINANCIAL INFO-***************************************************************** !-->
 	<fieldset class="m-form-half">
-		<h3>Please include any financial or operational information that will help us understand your company. We are interested in specific information like past and projected annual revenues, total outside investment dollars to date, and significant investors or partners. <br><em>[100 words or less]</em></h3>
+		<h3>Por favor incluye cualquier información financiera u operativa, la cual nos ayudará a entender a tu compañía. Tenemos interés en información específica, como ingresos anuales pasados y proyectados, el total de dólares invertidos hasta la fecha, y socios o inversionistas importantes. <br><em>[Máximo 100 palabras]</em></h3>
 		<textarea rows="10" cols="59" name="financialInfo" id="financialInfo" 
 		data-parsley-trigger="keyup" 
 		data-parsley-maxwords="100" 
@@ -154,10 +154,10 @@
 	</fieldset>
 	{% raw xsrf_form_html() %}
 
-	<p class="disclaimer-text warning">Your responses will become part of a public database of information on Open Data companies. By submitting this form you are agreeing that, other than personal contact information, this information will be part of a publicly available database.</p>
+	<p class="disclaimer-text warning">Tus respuestas serán incluidas en una base de datos públicos que expone información sobre compañías que utilizan datos gubernamentales abiertos. Al enviar este formulario, estás aceptando que - con excepción de tu información de contacto personal - la información será accesible al público.</p>
 	<div class="saveCompanyForm-new">	
 		<input type="hidden" class="companyID" name="companyID" value="">
-		<input type="submit" class="m-button" id="formSave" name="formSave" value="Next">
+		<input type="submit" class="m-button" id="formSave" name="formSave" value="Siguiente">
 		<span class="company-form-error-message error-message" style="display:none"></span>
 	</div>
 </form>

@@ -14,6 +14,7 @@ class MainHandler(BaseHandler):
             return
         with open("templates/"+country+"/settings.json") as json_file:
             settings = json.load(json_file)
+        #------------LOAD LANGUAGE
         lan = self.get_argument("lan", None)
         if lan:
             if lan != self.get_cookie('lan') and lan in settings['available_languages']:
@@ -26,6 +27,7 @@ class MainHandler(BaseHandler):
             lan = self.get_cookie('lan')
         else:
             lan = settings['default_language']
+        #------------END LANGUAGE
         self.render(
             country.lower()+ "/" + lan + "/index.html",
             settings = settings,
@@ -295,9 +297,7 @@ class SubmitCompanyHandler(BaseHandler):
             country=country,
             country_keys=country_keys,
             companyType = companyType[lan],
-            criticalDataTypes = criticalDataTypes,
-            revenueSource = revenueSource,
-            new_revenueSource = new_revenueSource[lan],
+            revenueSource = revenueSource[lan],
             business_models = business_models[lan],
             social_impacts = social_impacts[lan],
             source_count = source_count,
@@ -316,7 +316,23 @@ class SubmitCompanyHandler(BaseHandler):
         logging.info("Submitting New Company")
         logging.info(self.request.arguments)
         form_values = {k:','.join(v) for k,v in self.request.arguments.iteritems()}
-        company = self.application.form.process_new_company(form_values)
+        company = self.application.form.create_new_company(form_values)
+        id = str(company.id)
+        form_values['submittedSurvey'] = True
+        form_values['vetted'] = False
+        form_values['vettedByCompany'] = True
+        form_values['submittedThroughWebsite'] = True
+        form_values['locked'] = False
+        form_values['display'] = False
+        try:
+            self.application.form.process_company(form_values, id)
+        except Exception, e:
+            logging.info("Could not save company: " + str(e))
+            logging.info("Aborting")
+            self.write("Could not save company: " + str(e))
+            company.delete()
+            return
+        country = country_keys[form_values['country']]
         self.application.stats.update_all_state_counts(country)
         id = str(company.id)
         self.write({"id": id})

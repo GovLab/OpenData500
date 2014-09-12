@@ -1,4 +1,4 @@
-{% extends "../main.html" %}
+{% extends "../../main.html" %}
 {% autoescape None %}
 
 {% block body %}
@@ -44,6 +44,7 @@
 		</div>
 		<div class="m-form-line"><label for="country">Country:</label><input type="text" id="country" name="country" country="{{country}}" value="{{country_keys[country]}}" readonly></div>
 		<div class="m-form-line"><label for="zipCode">Zip Code:</label><input type="text" name="zipCode" id="zipCode" data-parsley-trigger="change" data-parsley-pattern="(^\d{5}$)|(^\d{5}-\d{4}$)" {% if company.zipCode %}value="{{ company.zipCode }}" {% end %}></div>
+		<!--*****************************************************************-COMPANY TYPE-***************************************************************** !-->
 		<div class="m-form-box">Type of Company: *<br>
 			<div class="company-type-field">
 				{% for type in companyType %}
@@ -86,12 +87,12 @@
 		<!--*****************************************************************-REVENUE SOURCES-***************************************************************** !-->
 		<h3>Which of the following are significant sources of revenue for your company? <br><em>(check all that apply)</em> *</h3>
 		<div class="revenue-source-field">
-			{% for source in ['old--------------'] + revenueSource + ['new----------------'] + new_revenueSource %}
+			{% for source in revenueSource %}
 				<input type="checkbox" id="{{source}}" name="revenueSource" value="{{source}}" data-parsley-group="revenueSource" {% if source in company.revenueSource %} checked {% end %}/><label for="{{source}}">{{source}}</label><br>
 			{% end %}
-			{% if list(set(company.revenueSource) - set(revenueSource + new_revenueSource)) %}
+			{% if [e for e in company.revenueSource if e.encode('utf-8') not in revenueSource] %}
 				<input type="checkbox" id="other_revenue" name="revenueSource" value="Other" {%if company.revenueSource[0] %}checked{%end%} data-parsley-mincheck="1" data-parsley-group='revenueSource' data-parsley-trigger="change"><label for="Other">Other</label>
-				<input type="text" name="otherrevenueSource" id="other_revenue_text_field" value="{{ list(set(company.revenueSource) - set(revenueSource + new_revenueSource))[0] }}" />
+				<input type="text" name="otherrevenueSource" id="other_revenue_text_field" value="{{ [e for e in company.revenueSource if e.encode('utf-8') not in revenueSource][0] }}" />
 			{% else %}
 				<input type="checkbox" id="other_revenue" name="revenueSource" value="Other" data-parsley-mincheck="1" data-parsley-group='revenueSource' data-parsley-trigger="change"><label for="Other">Other</label>
 				<input type="text" name="otherrevenueSource" id="other_revenue_text_field" />
@@ -199,6 +200,22 @@
 		<input type="hidden" name="id" id="companyID" value="{{company.id}}">
 	</fieldset>
 
+	<!--*****************************************************************-DATA IMPACT-***************************************************************** !-->
+	<fieldset class="m-form-half">
+			<h3>What impact does open data use have on your company? (check all that apply)</h3>
+			<div class="data-impacts-field">
+				{% for impact in data_impacts %}
+					<input type="checkbox" id="{{impact}}_data_impacts" name="dataImpacts" value="{{impact}}" data-parsley-group="dataImpacts" {% if impact in company.dataImpacts %} checked {% end %}/><label for="{{impact}}_data_impacts">{{impact}}</label><br>
+				{% end%}
+				{% if list(set(company.dataImpacts) - set(data_impacts)) %}
+					<input type="checkbox" id="other_data_impacts" name="dataImpacts" value="Other" {%if company.dataImpacts[0] %}checked{%end%} data-parsley-mincheck="1" data-parsley-group='dataImpacts' data-parsley-trigger="change"><label for="Other">Other</label>
+					<input type="text" name="otherDataImpact" id="other_data_impacts_text_field" value="{{ list(set(company.dataImpacts) - set(data_impacts))[0] }}" />
+				{% else %}
+					<input type="checkbox" id="other_data_impacts" name="dataImpacts" value="Other" data-parsley-mincheck="1" data-parsley-group='dataImpacts' data-parsley-trigger="change"><label for="Other">Other</label>
+					<input type="text" name="otherDataImpact" id="other_data_impacts_text_field" />
+				{% end %}
+			</div>
+		</fieldset>
 
 	<!--*****************************************************************-ADMIN SETTINGS-***************************************************************** !-->
 	<h2>Admin Settings</h2><br>
@@ -374,6 +391,7 @@ $(document).ready( function () {
 		          $("#submit_form_admin_button").prop("disabled", false); 
 		          rm.text("Saved!").show().delay(5000).fadeOut();
 		          console.log("regular saved!");
+		          document.location.href = '/admin/companies/';
 		        }
 		      });
         } else {

@@ -43,6 +43,7 @@
 		</div>
 		<div class="m-form-line"><label for="country">Country:</label><input type="text" id="country" name="country" country="{{country}}" value="{{country_keys[country]}}" readonly></div>
 		<div class="m-form-line"><label for="zipCode">Zip Code: *</label><input type="text" name="zipCode" id="zipCode" data-parsley-trigger="change" data-parsley-pattern="(^\d{5}$)|(^\d{5}-\d{4}$)" {% if company.zipCode %}value="{{ company.zipCode }}" {% end %} required></div>
+		<!--*****************************************************************-COMPANY TYPE-***************************************************************** !-->
 		<div class="m-form-box">Type of Company: *<br>
 			<div class="company-type-field">
 				{% for type in companyType %}
@@ -50,7 +51,7 @@
 				{% end %}
 				{% if company.companyType not in companyType and company.companyType != '' %}
 					<input type="radio" id="other_type" name="companyType" value="Other" data-parsley-mincheck="1" data-parsley-group='companyType' data-parsley-trigger="change" checked required><label for="other_type">Other</label>
-					<input type="text" id="other_company_type_field" name="otherCompanyType" value ="{{ company.companyType }}">
+					<input type="text" id="other_company_type_field" name="othercompanyType" value ="{{ company.companyType }}">
 				{% else %}
 					<input type="radio" id="other_type" name="companyType" value="Other" data-parsley-mincheck="1" data-parsley-group='companyType' data-parsley-trigger="change" required><label for="other_type">Other</label>
 					<input type="text" id="other_company_type_field" name="othercompanyType">
@@ -86,12 +87,12 @@
 		<!--*****************************************************************-REVENUE SOURCES-***************************************************************** !-->
 		<h3>Which of the following are significant sources of revenue for your company? <br><em>(check all that apply)</em> *</h3>
 		<div class="revenue-source-field">
-			{% for source in new_revenueSource %}
+			{% for source in revenueSource %}
 				<input type="checkbox" id="{{source}}" name="revenueSource" value="{{source}}" data-parsley-group="revenueSource" {% if source in company.revenueSource %} checked {% end %}/><label for="{{source}}">{{source}}</label><br>
 			{% end %}
-			{% if list(set(company.revenueSource) - set(new_revenueSource)) %}
+			{% if list(set(company.revenueSource) - set(revenueSource)) %}
 				<input type="checkbox" id="other_revenue" name="revenueSource" value="Other" {%if company.revenueSource[0] %}checked{%end%} data-parsley-mincheck="1" data-parsley-group='revenueSource' data-parsley-trigger="change" required><label for="Other">Other</label>
-				<input type="text" name="otherrevenueSource" id="other_revenue_text_field" value="{{ list(set(company.revenueSource) - set(new_revenueSource))[0] }}" />
+				<input type="text" name="otherrevenueSource" id="other_revenue_text_field" value="{{ list(set(company.revenueSource) - set(revenueSource))[0] }}" />
 			{% else %}
 				<input type="checkbox" id="other_revenue" name="revenueSource" value="Other" data-parsley-mincheck="1" data-parsley-group='revenueSource' data-parsley-trigger="change" required><label for="Other">Other</label>
 				<input type="text" name="otherrevenueSource" id="other_revenue_text_field" />

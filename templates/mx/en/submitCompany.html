@@ -64,7 +64,7 @@
 					<input type="radio" id="{{type}}" name="companyType" data-parsley-group='companyType' value="{{ type }}"><label for="{{type}}">{{type}}</label><br>
 				{% end %}
 				<input type="radio" id="other_type" name="companyType" value="Other" data-parsley-mincheck="1" data-parsley-group='companyType' data-parsley-trigger="change" required><label for="other_type">Other</label>
-				<input type="text" id="other_company_type_field" name="otherCompanyType">
+				<input type="text" id="other_company_type_field" name="othercompanyType">
 			</div>
 		</div>
 		<div class="m-form-line"><label for="">Founding Year: *</label><input type="text" name="yearFounded" id="yearFounded" 
@@ -91,7 +91,7 @@
 		<!--*****************************************************************-REVENUE SOURCES-***************************************************************** !-->
 		<h3>Which of the following are significant sources of revenue for your company? <br><em>(check all that apply)</em> *</h3>
 		<div class="revenue-source-field">
-			{% for source in new_revenueSource %}
+			{% for source in revenueSource %}
 				<input type="checkbox" id="{{source}}" name="revenueSource" value="{{source}}" data-parsley-group="revenueSource" /><label for="{{source}}">{{source}}</label><br>
 			{% end %}
 			<input type="checkbox" id="other_revenue" name="revenueSource" value="Other" data-parsley-mincheck="1" data-parsley-group='revenueSource' data-parsley-trigger="change" required><label for="Other">Other</label>
