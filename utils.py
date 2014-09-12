@@ -13,14 +13,39 @@ import bson
 
 #Just some global varbs. 
 favicon_path = '/static/img/favicon.ico'
-companyType = ['Public', 'Private', 'Nonprofit']
-companyFunction = ['Consumer Research and/or Marketing', 'Consumer Services', 'Data Management and Analysis', 'Financial/Investment Services', 'Information for Consumers']
-criticalDataTypes = ['Federal Open Data', 'State Open Data', 'City/Local Open Data', 'Private/Proprietary Data Sources']
-revenueSource = ['advertising', 'Data Management and Analytic Services', 'Database Licensing', 'Lead Generation To Other Businesses', 'Philanthropy', 'Software Licensing', 'subscriptions', 'User Fees for Web or Mobile Access']
-sectors = ['Agriculture', 'Arts, Entertainment and Recreation' 'Crime', 'Education', 'Energy', 'Environmental', 'Finance', 'Geospatial data/mapping', 'Health and Healthcare', 'Housing/Real Estate', 'Manufacturing', 'Nutrition', 'Scientific Research', 'Social Assistance', 'Trade', 'Transportation', 'Telecom', 'Weather']
-new_revenueSource = ["Advertising", "Consulting", "Contributions/Donations", "Data analysis for clients", "Database licensing", "Government contract", "Lead generation to other businesses", "Membership fees", "Philanthropic grants", "Software licensing", "Subscriptions", "User fees for web or mobile access"]
+companyType = {
+                "en": ['Public', 'Private', 'Nonprofit'],
+                "es": ['Pública', 'Privada', 'Sin Fines de Lucro']
+            }
+# criticalDataTypes = ['Federal Open Data', 'State Open Data', 'City/Local Open Data', 'Private/Proprietary Data Sources']
+# old_revenueSource = ['advertising', 'Data Management and Analytic Services', 'Database Licensing', 'Lead Generation To Other Businesses', 'Philanthropy', 'Software Licensing', 'subscriptions', 'User Fees for Web or Mobile Access']
+# new_revenueSource = ["Advertising", "Consulting", "Contributions/Donations", "Data analysis for clients", "Database licensing", "Government contract", "Lead generation to other businesses", "Membership fees", "Philanthropic grants", "Software licensing", "Subscriptions", "User fees for web or mobile access"]
+# old_new_revenueSource = ['Advertising', "Consulting", "Contributions/Donations", "Data analysis for clients", 'Data Management and Analytic Services', 'Database Licensing', "Government contract", 'Lead Generation To Other Businesses', "Membership fees", "Philanthropic grants", 'Philanthropy', 'Software Licensing', 'Subscriptions', 'User Fees for Web or Mobile Access']
+business_models = {
+                    "en": ['Business to Business', 'Business to Consumer', 'Business to Government'],
+                    "es": ['Empresa a Empresa', 'Empresa a Consumidor', 'Empresa a Gobierno']
+                }
+revenueSource = {
+                    "en": ["Advertising", "Consulting", "Contributions/Donations", "Data analysis for clients", "Database licensing", "Government contract", "Lead generation to other businesses", "Membership fees", "Philanthropic grants", "Software licensing", "Subscriptions", "User fees for web or mobile access"],
+                    "es": ["Análisis de datos", "Consultoría", "Contratos gubernamentales", "Contribuciones/Donaciones", "Tarifas para el servicio móvil / internet", "Filantropía", "Generación de clientes", "Licencias de software", "Licencias de bases de datos", "Cuotas de membresía", "Publicidad", "Suscripciones"]
+                }
 datatypes = ['Federal Open Data', 'State Open Data', 'City/Local Open Data']
-categories = ['Business & Legal Services', 'Data/Technology', 'Education', 'Energy', 'Environment & Weather', 'Finance & Investment', 'Food & Agriculture', 'Geospatial/Mapping', 'Governance', 'Healthcare', 'Housing/Real Estate', 'Insurance', 'Lifestyle & Consumer', 'Research & Consulting', 'Scientific Research', 'Transportation']
+categories = {
+                "en": ['Business & Legal Services', 'Data/Technology', 'Education', 'Energy', 'Environment & Weather', 'Finance & Investment', 'Food & Agriculture', 'Geospatial/Mapping', 'Governance', 'Healthcare', 'Housing/Real Estate', 'Insurance', 'Lifestyle & Consumer', 'Media', 'Research & Consulting', 'Scientific Research', 'Transportation'],
+                "es": ["Agricultura y Alimentación", "Vivienda/Bienes Raíces", "Clima y Medio Ambiente", "Educación", "Energía", "Estilos de vida y Consumidores", "Finanzas e Inversiones", "Gobierno", "Investigación Científica", "Investigación y Consultoría", "Mapeo/Geoespacial", "Medios", "Salud", "Seguros", "Servicios Legales", "Tecnología/Datos", "Transporte"]
+            }
+social_impacts = {
+                "en": ['Citizen engagement and participation', 'Consumer empowerment', 'Educational opportunity', 'Environment and climate change', 'Financial access', 'Food access and supply', 'Good governance', 'Healthcare access', 'Housing access', 'Public safety'],
+                "es": ["Acceso a la salud", "Acceso a la vivienda", "Acceso financiero", "Acceso y suministro de alimentos", '"Buen Gobierno"', "Empoderamiento al consumidor", "Medio ambiente y cambio climático", "Oportunidades educacionales", "Participación ciudadana", "Seguridad pública"]
+            }
+data_types = {
+                "en": ["Agriculture & Food", "Business", "Consumer", "Demographics & Social", "Economics", "Education", "Energy", "Environment", "Finance", "Geospatial/Mapping", "Government Operations", "Health/Healthcare", "Housing", "International/Global Development", "Legal", "Manufacturing", "Science and Research", "Public Safety", "Tourism", "Transportation", "Weather"],
+                "es": ["Agricultura y Alimentación", "Ciencia e investigación", "Clima", "Consumidor", "Demografía y Población", "Desarrollo internacional", "Economía", "Educación", "Empresas", "Energía", "Finanzas", "Legal", "Manufactura", "Mapeo/Geoespacial", "Medio Ambiente", "Operaciones gubernamentales", "Salud", "Seguridad pública", "Transporte", "Turismo", "Vivienda"]
+            }
+data_impacts = {
+                "en": ["Cost efficiency", "New or improved product/service", "Job growth", "Revenue growth", "Identify new opportunities", "New/improved research"],
+                "es": ["Eficiencia económica", "Servicios/productos nuevos o mejorados", "Crecimiento de empleo", "Crecimiento de las ganancias", "Identificación de nuevas oportunidades", "Nuevas / mejoradas Investigaciones"]
+            }
 source_count = ['1-10', '11-50', '51-100', '101+']
 states ={ "AL": "Alabama", "AK": "Alaska", "AZ": "Arizona", "AR": "Arkansas", "CA": "California", "CO": "Colorado", "CT": "Connecticut", "DE": "Delaware", "DC": "District of Columbia", "FL": "Florida", "GA": "Georgia", "HI": "Hawaii", "ID": "Idaho", "IL": "Illinois", "IN": "Indiana", "IA": "Iowa", "KA": "Kansas", "KY": "Kentucky", "LA": "Louisiana", "ME": "Maine", "MD": "Maryland", "MA": "Massachusetts", "MI": "Michigan", "MN": "Minnesota", "MS": "Mississippi", "MO": "Missouri", "MT": "Montana", "NE": "Nebraska", "NV": "Nevada", "NH": "New Hampshire", "NJ": "New Jersey", "NM": "New Mexico", "NY": "New York", "NC": "North Carolina", "ND": "North Dakota", "OH": "Ohio", "OK": "Oklahoma", "OR": "Oregon", "PA": "Pennsylvania", "RI": "Rhode Island", "SC": "South Carolina", "SD": "South Dakota", "TN": "Tennessee", "TX": "Texas", "UT": "Utah", "VT": "Vermont", "VA": "Virginia", "WA": "Washington", "WV": "West Virginia", "WI": "Wisconsin", "WY": "Wyoming", "PR": "Puerto Rico"}
 stateListAbbrev = { 
@@ -36,6 +61,12 @@ stateList = {
 agency_types = ['Federal','State','City/County','University/Institution']
 available_countries = ["us", "ca", "mx"]
 country_keys = { "us":"United States", "ca":"Canada", "United States":"us", "Canada":"ca",  "Mexico":"mx", "mx":"Mexico"}
+company_fields = ['companyName', 'url', 'yearFounded', 'city', 'state', 'zipCode', 'description', 'descriptionShort', 'financialInfo', 'notes']
+company_fields_checkboxes = ['revenueSource', 'businessModel', 'socialImpact']
+company_fields_radio = ['companyCategory', 'companyType']
+company_contact_fields = ['firstName', 'lastName', 'title', 'email', 'phone']
+company_data_fields = ['sourceCount', 'dataComments', 'exampleUses']
+company_admin_booleans = ['display', 'submittedSurvey','vetted', 'vettedByCompany', 'submittedThroughWebsite', 'locked']
 
 
 class Validators(object):
@@ -63,100 +94,62 @@ class Tools(object):
             c.save()
         logging.info("Filters Redone.")
 
+    @classmethod
+    def re_do_company_filter(self, id):
+        try: 
+            c = models.Company.objects.get(id=bson.objectid.ObjectId(id))
+        except Exception, e:
+            logging.info("Error creating filter: " + str(e))
+            return
+        filters = []
+        filters.append(self.prettify(c.companyCategory))
+        filters.append(c.state)
+        for a in c.agencies:
+            filters.append(a.prettyName)
+        if c.submittedSurvey:
+            filters.append("survey-company")
+        return filters
+
+    @classmethod
     def prettify(self, name):
         return re.sub(r'([^\s\w])+', '', name).replace(" ", "-")
 
+
 class Form(object):
-    def process_new_company(self, arguments):
-        #-------------------CONTACT INFO---------------
-        firstName = arguments['firstName']
-        lastName = arguments["lastName"]
-        title = arguments['title']
-        email = arguments['email']
-        phone = arguments['phone']
-        contacted = True if 'contacted' in arguments else False
-        contact = models.Person(
-            firstName = firstName,
-            lastName = lastName,
-            title = title,
-            email = email,
-            phone = phone,
-            contacted = contacted,
-        )
-        #-------------------CEO INFO---------------
-        ceoFirstName = arguments['ceoFirstName']
-        ceoLastName = arguments['ceoLastName']
-        ceo = models.Person(
-                firstName = ceoFirstName,
-                lastName = ceoLastName,
-                title = "CEO"
-            )
-        #-------------------COMPANY INFO---------------
-        url = arguments['url']
-        companyName = arguments['companyName']
-        prettyName = re.sub(r'([^\s\w])+', '', companyName).replace(" ", "-").title()
-        city = arguments['city']
-        zipCode = arguments['zipCode']
-        state = arguments['state']
-        country = country_keys[arguments['country']]
-        if 'companyType' in arguments:
-            companyType = arguments['otherCompanyType'] if arguments['companyType'] == 'Other' else arguments['companyType']
-        else:
-            companyType = ''
-        yearFounded = 0 if not arguments['yearFounded'] else arguments['yearFounded']
-        fte = 0 if not arguments['fte'] else arguments['fte']
-        if 'revenueSource' in arguments:
-            revenueSource = [] if not arguments['revenueSource'] else arguments['revenueSource'].split(',')
-            if 'Other' in revenueSource:
-                del revenueSource[revenueSource.index('Other')]
-                revenueSource.append(arguments['otherRevenueSource'])
-        else:
-            revenueSource = []
-        if 'category' in arguments:
-            companyCategory = arguments['otherCategory'] if arguments['category'] == 'Other' else arguments['category']
-            filters = [companyCategory, state, "survey-company"]
-        else:
-            companyCategory = ''
-            filters = []
-        description = arguments['description']
-        descriptionShort = arguments['descriptionShort']
-        financialInfo = arguments['financialInfo']
-        datasetWishList = arguments['datasetWishList']
-        if 'sourceCount' in arguments:
-            sourceCount = arguments['sourceCount']
-        else:
-            sourceCount = ''
+    def create_new_company(self, arguments):
         company = models.Company(
-            companyName = companyName,
-            prettyName = prettyName,
-            url = url,
-            ceo = ceo,
-            city = city,
-            zipCode = zipCode,
-            state=state,
-            yearFounded = yearFounded,
-            fte = fte,
-            companyType = companyType,
-            revenueSource = revenueSource,
-            companyCategory = companyCategory,
-            description= description,
-            descriptionShort = descriptionShort,
-            financialInfo = financialInfo,
-            datasetWishList = datasetWishList,
-            sourceCount = sourceCount,
-            contact = contact,
-            lastUpdated = datetime.now(),
-            display = False, 
-            submittedSurvey = True,
-            vetted = False, 
-            vettedByCompany = True,
-            submittedThroughWebsite = True,
-            locked=False,
-            filters = filters,
-            country=country
-        )
+            companyName = arguments['companyName'],
+            state = arguments['state'],
+            country = country_keys[arguments['country']])
         company.save()
         return company
+
+    def process_company_data_info(self, arguments, id):
+        try: 
+            c = models.Company.objects.get(id=bson.objectid.ObjectId(id))
+        except Exception, e:
+            logging.info("Error processing company: " + str(e))
+            return
+        #-------------------DATA INFO---------------
+        for item in company_data_fields:
+            if item in arguments:
+                models.Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+item:arguments[item]})
+        #DATA TYPES
+        if 'dataTypes' in arguments:
+            c.dataTypes = [] if not arguments['dataTypes'] else arguments['dataTypes'].split(',')
+            if 'Other' in c.dataTypes:
+                del c.dataTypes[c.dataTypes.index('Other')]
+                c.dataTypes.append(arguments['otherDataType'])
+        else:
+            c.dataTypes = []
+        if 'dataImpacts' in arguments:
+            c.dataImpacts = [] if not arguments['dataImpacts'] else arguments['dataImpacts'].split(',')
+            if 'Other' in c.dataImpacts:
+                del c.dataImpacts[c.dataImpacts.index('Other')]
+                c.dataImpacts.append(arguments['otherdataImpacts'])
+        c.lastUpdated = datetime.now()
+        c.save()
+
 
     def process_company(self, arguments, id):
         try: 
@@ -165,57 +158,41 @@ class Form(object):
             logging.info("Error processing company: " + str(e))
             return
         #-------------------CONTACT INFO---------------
-        c.contact.firstName = arguments['firstName']
-        c.contact.lastName = arguments["lastName"]
-        c.contact.title = arguments['title']
-        c.contact.email = arguments['email']
-        c.contact.phone = arguments['phone']
-        c.contact.contacted = True if 'contacted' in arguments else False
-        #-------------------CEO INFO---------------
-        c.ceo.firstName = arguments['ceoFirstName']
-        c.ceo.lastName = arguments['ceoLastName']
-        c.ceo.title = 'CEO'
-        #-------------------COMPANY INFO---------------
-        c.url = arguments['url']
-        c.companyName = arguments['companyName'] if 'companyName' in arguments else c.companyName
-        c.prettyName = re.sub(r'([^\s\w])+', '', c.companyName).replace(" ", "-").title()
-        c.city = arguments['city']
-        c.zipCode = arguments['zipCode']
-        c.state = arguments['state']
+        for item in company_contact_fields:
+            if item in arguments:
+                models.Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__contact__'+item:arguments[item]})
+        #-------------------TEXTFIELDS---------------
+        for item in company_fields:
+            if item in arguments:
+                models.Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+item:arguments[item]})
+        c.prettyName = Tools.prettify(c.companyName)
         c.country = country_keys[arguments['country']]
-        if 'companyType' in arguments:
-            c.companyType = arguments['otherCompanyType'] if arguments['companyType'] == 'Other' else arguments['companyType']
-        else:
-            c.companyType = ''
-        c.yearFounded = 0 if not arguments['yearFounded'] else arguments['yearFounded']
-        c.fte = 0 if not arguments['fte'] else arguments['fte']
-        if 'revenueSource' in arguments:
-            c.revenueSource = [] if not arguments['revenueSource'] else arguments['revenueSource'].split(',')
-            if 'Other' in c.revenueSource:
-                del c.revenueSource[c.revenueSource.index('Other')]
-                c.revenueSource.append(arguments['otherRevenueSource'])
-        else:
-            c.revenueSource = []
-        if 'category' in arguments:
-            c.companyCategory = arguments['otherCategory'] if arguments['category'] == 'Other' else arguments['category']
-        else:
-            c.companyCategory = ''
-        c.filters = [c.companyCategory, c.state, "survey-company"]
-        c.description = arguments['description']
-        c.descriptionShort = arguments['descriptionShort']
-        c.financialInfo = arguments['financialInfo']
-        c.datasetWishList = arguments['datasetWishList']
-        if 'sourceCount' in arguments:
-            c.sourceCount = arguments['sourceCount']
-        else:
-            c.sourceCount = ''
-        c.dataComments = arguments['dataComments'] if arguments['dataComments'] else c.dataComments
-        c.vetted = True if 'vetted' in arguments else False
-        c.display = True if 'display' in arguments else False
-        c.vettedByCompany = True if 'vettedByCompany' in arguments else False
-        c.submittedSurvey = True if 'submittedSurvey' in arguments else False
-        c.vettedByCompany = False if 'vettedByCompany' in arguments else True
-        c.locked = True if 'locked' in arguments else False
+        #-------------------CHECKBOXES---------------
+        for item in company_fields_checkboxes:
+            if item in arguments:
+                models.Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+item:arguments[item].split(',')})
+                if 'Other' in arguments[item]:
+                    models.Company.objects(id=bson.objectid.ObjectId(id)).update(**{'pull__'+item:'Other'})
+                    models.Company.objects(id=bson.objectid.ObjectId(id)).update(**{'push__'+item:arguments['other'+item]})
+            else:
+                models.Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+item:[]})
+        #-------------------RADIO BUTTONS---------------
+        for item in company_fields_radio:
+            if item in arguments:
+                if arguments[item] == 'Other':
+                    models.Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+item:arguments['other' +item]})
+                else:
+                    models.Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+item:arguments[item]})
+            else:
+                models.Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+item:''})
+        if 'fte' in arguments:
+            c.fte = 0 if not arguments['fte'] else arguments['fte']
+        c.filters = Tools.re_do_company_filter(id)
+        #-------------------BOOLEANS---------------
+        for item in company_admin_booleans:
+            if item in arguments:
+                models.Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+item:arguments[item]})
+        #-------------------SAVE---------------
         c.lastUpdated = datetime.now()
         c.save()
         return
@@ -500,13 +477,15 @@ class FileGenerator(object):
                 "city": c.city,
                 "state": c.state,
                 "zipCode": c.zipCode,
-                "ceoFirstName": c.ceo.firstName,
-                "ceoLastName": c.ceo.lastName,
                 "yearFounded": c.yearFounded,
                 "fte": c.fte,
                 "companyType": c.companyType,
                 "companyCategory": c.companyCategory,
+                'socialImpact': c.socialImpact,
                 "revenueSource": c.revenueSource,
+                "dataTypes": c.dataTypes,
+                "exampleUses": c.exampleUses,
+                "sourceCount": c.sourceCount,
                 "description": c.description,
                 "descriptionShort": c.descriptionShort,
                 "agencies":agencies,
@@ -584,13 +563,14 @@ class FileGenerator(object):
             'city',
             'state',
             'zip_code',
-            'ceo_first_name',
-            'ceo_last_name',
             'year_founded',
             'full_time_employees',
             'company_type',
             'company_category',
             'revenue_source',
+            'social_impact',
+            'data_types',
+            'example_uses',
             'description',
             'description_short',
             'financial_info',
@@ -604,17 +584,18 @@ class FileGenerator(object):
                 c.city,
                 c.state,
                 c.zipCode,
-                c.ceo.firstName,
-                c.ceo.lastName,
                 c.yearFounded,
                 c.fte,
                 c.companyType,
                 c.companyCategory,
                 ', '.join(c.revenueSource),
+                ', '.join(c.socialImpact),
+                ', '.join(c.dataTypes),
+                c.exampleUses,
                 c.description,
                 c.descriptionShort,
                 c.financialInfo,
-                c.sourceCount 
+                c.sourceCount
             ]
             for i in range(len(newrow)):  # For every value in our newrow
                 if hasattr(newrow[i], 'encode'):
@@ -635,19 +616,19 @@ class FileGenerator(object):
             'contact_first_name',
             'contact_last_name',
             'contact_email',
-            'ceo_first_name',
-            'ceo_last_name',
             'year_founded',
             'full_time_employees',
             'company_type',
             'company_category',
             'revenue_source',
+            'social_impact',
             'description',
             'description_short',
             'financial_info',
             'source_count',
+            'data_types',
             'data_comments',
-            'dataset_wishlist',
+            'example_uses',
             'confidentiality',
             'ts',
             'survey_submitted',
@@ -668,19 +649,19 @@ class FileGenerator(object):
                 c.contact.firstName,
                 c.contact.lastName,
                 c.contact.email,
-                c.ceo.firstName,
-                c.ceo.lastName,
                 c.yearFounded,
                 c.fte,
                 c.companyType,
                 c.companyCategory,
                 ', '.join(c.revenueSource),
+                ', '.join(c.socialImpact),
                 c.description,
                 c.descriptionShort,
                 c.financialInfo,
                 c.sourceCount,
+                ', '.join(c.dataTypes),
                 c.dataComments,
-                c.datasetWishList,
+                c.exampleUses,
                 c.confidentiality,
                 c.ts,
                 c.submittedSurvey,
@@ -805,46 +786,46 @@ class FileGenerator(object):
         logging.info("Agency CSV File Done!")
 
 
-    def generate_sankey_json(self, country):
-        #get qualifying agencies
-        agencies = models.Agency.objects(Q(usedBy__not__size=0) & Q(source__not__exact="web") & Q(dataType="Federal")).order_by('name') #federal agencies from official list that are used by a company
-        #going to just make a list of all the category-agency combos
-        cats = [] #list of used categories
-        cats_agency_combo = []
-        for a in agencies:
-            for c in a.usedBy:
-                if c.display:
-                    if c.companyCategory in categories: #exclude "Other" Categories, and only displayed companies
-                        cats_agency_combo.append(c.companyCategory+"|"+a.name)
-                        cats.append(c.companyCategory)
-        count = list(Counter(cats_agency_combo).items()) #count repeat combos
-        #make dictionary
-        cat_v_agencies = {"nodes": [], "links": []}
-        #make node list
-        cat_agency_list = [] #keep track of category agency list, we're going to need their indeces. 
-        for c in categories: #Add categories to node list
-            if c in cats: #only add category if used
-                cat_v_agencies['nodes'].append({"name":c})
-                cat_agency_list.append(c)
-        for a in agencies: #add agency names to node list
-            used = False
-            for c in a.usedBy:
-                if c.display:
-                    used = True
-            if used:
-                cat_v_agencies['nodes'].append({"name":a.name})
-                cat_agency_list.append(a.name)
-        #make the links
-        for c in count:
-            link = {"source":cat_agency_list.index(c[0].split('|')[0]), "target":cat_agency_list.index(c[0].split('|')[1]), "value":c[1]} #make a link
-            cat_v_agencies['links'].append(link)
-        for n in cat_v_agencies['nodes']: #Abbreviate Department
-            n['name'] = n['name'].replace('Department', 'Dept.')
-            n['name'] = n['name'].replace('Administration', 'Admin.')
-            n['name'] = n['name'].replace('United States', 'US')
-            n['name'] = n['name'].replace('National', "Nat'l")
-        with open(os.path.join(os.path.dirname(__file__), 'static') + "/files/" + country + '_sankey.json', 'w') as outfile:
-            json.dump(cat_v_agencies, outfile)
+    # def generate_sankey_json(self, country):
+    #     #get qualifying agencies
+    #     agencies = models.Agency.objects(Q(usedBy__not__size=0) & Q(source__not__exact="web") & Q(dataType="Federal")).order_by('name') #federal agencies from official list that are used by a company
+    #     #going to just make a list of all the category-agency combos
+    #     cats = [] #list of used categories
+    #     cats_agency_combo = []
+    #     for a in agencies:
+    #         for c in a.usedBy:
+    #             if c.display:
+    #                 if c.companyCategory in categories: #exclude "Other" Categories, and only displayed companies
+    #                     cats_agency_combo.append(c.companyCategory+"|"+a.name)
+    #                     cats.append(c.companyCategory)
+    #     count = list(Counter(cats_agency_combo).items()) #count repeat combos
+    #     #make dictionary
+    #     cat_v_agencies = {"nodes": [], "links": []}
+    #     #make node list
+    #     cat_agency_list = [] #keep track of category agency list, we're going to need their indeces. 
+    #     for c in categories: #Add categories to node list
+    #         if c in cats: #only add category if used
+    #             cat_v_agencies['nodes'].append({"name":c})
+    #             cat_agency_list.append(c)
+    #     for a in agencies: #add agency names to node list
+    #         used = False
+    #         for c in a.usedBy:
+    #             if c.display:
+    #                 used = True
+    #         if used:
+    #             cat_v_agencies['nodes'].append({"name":a.name})
+    #             cat_agency_list.append(a.name)
+    #     #make the links
+    #     for c in count:
+    #         link = {"source":cat_agency_list.index(c[0].split('|')[0]), "target":cat_agency_list.index(c[0].split('|')[1]), "value":c[1]} #make a link
+    #         cat_v_agencies['links'].append(link)
+    #     for n in cat_v_agencies['nodes']: #Abbreviate Department
+    #         n['name'] = n['name'].replace('Department', 'Dept.')
+    #         n['name'] = n['name'].replace('Administration', 'Admin.')
+    #         n['name'] = n['name'].replace('United States', 'US')
+    #         n['name'] = n['name'].replace('National', "Nat'l")
+    #     with open(os.path.join(os.path.dirname(__file__), 'static') + "/files/" + country + '_sankey.json', 'w') as outfile:
+    #         json.dump(cat_v_agencies, outfile)
 
     def generate_chord_chart_files(self, country):
         agencies = models.Agency.objects(Q(usedBy__not__size=0) & Q(source__not__exact="web") & Q(dataType="Federal") & Q(country="us")).order_by('name')
@@ -952,7 +933,7 @@ class FileGenerator(object):
                         "ss": s.abbrev
                     }
                     agency_list.append(agency)
-        with open(os.path.join(os.path.dirname(__file__), 'static') + "/files/" + country + '_Agency_List.json', 'w') as outfile:
+        with open(os.path.join(os.path.dirname(__file__), 'static') + "/files/" + country + '/'+ country + '_Agency_List.json', 'w') as outfile:
             json.dump(agency_list, outfile)
         logging.info("Agency List Done!")
 

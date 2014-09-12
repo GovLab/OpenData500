@@ -1146,47 +1146,19 @@ a:hover {
 #roundtables-first-paragraph {
   letter-spacing: -0.05px; }
 
-.country-homepage .m-main-menu {
-  text-align: center; }
-  .country-homepage .m-main-menu .language {
-    float: right; }
-    .country-homepage .m-main-menu .language a {
-      border: 0;
-      border-right: 1px solid rgba(255, 255, 255, 0.7);
-      padding: 1px 5px;
-      margin: 4px 0; }
-      .country-homepage .m-main-menu .language a:last-of-type {
-        border-right: 0; }
-.country-homepage #consortium-logo {
-  width: 600px; }
-.country-homepage section {
-  padding-bottom: 23px;
-  margin-bottom: 35px;
-  border-bottom: 1px solid #aaaaaa; }
-  .country-homepage section:first-of-type {
-    padding-top: 23px;
-    margin-top: 35px;
-    border-top: 1px solid #aaaaaa; }
-  .country-homepage section p {
-    font-size: 16px;
-    line-height: 22px; }
-.country-homepage .country-logo h2 {
-  margin-left: 85px;
-  font-weight: 100;
-  margin-top: -5px;
-  font-size: 30px; }
-.country-homepage .country-logo .country-flag {
-  width: 60px;
-  margin-bottom: -5px;
-  margin-right: 10px; }
-.country-homepage .more {
-  text-align: right;
-  margin-bottom: 0; }
-.country-homepage .m-half {
-  width: 46.875%;
-  margin-right: 35px; }
-  .country-homepage .m-half:nth-of-type(even) {
-    margin-right: 0; }
+.m-country-homepage .country-flag {
+  margin: 0 auto;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  border: 3px solid #472b74;
+  overflow: hidden; }
+  .m-country-homepage .country-flag img {
+    height: 150px;
+    margin-left: -51px;
+    margin-top: 23px; }
 
 body {
   margin: 0; }
@@ -1262,6 +1234,11 @@ header {
       display: block; }
     .m-main-menu .m-main-menu-sub-menu .m-main-menu-sub-menu-item:hover {
       background-color: #472b74; }
+  .m-main-menu #submenu-about {
+    width: 182px; }
+  .m-main-menu .m-main-menu-item:hover .m-main-menu-sub-menu,
+  .m-main-menu .m-main-menu-sub-menu:hover {
+    display: block; }
   .m-main-menu #submenu-about {
     width: 182px; }
   .m-main-menu .m-main-menu-item:hover .m-main-menu-sub-menu,

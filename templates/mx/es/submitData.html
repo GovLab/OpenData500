@@ -3,15 +3,15 @@
 
 {% block body %}
 
-<h1>{{ page_heading }}</h1>
+<h1>Información de datos y fuentes de información para {{company.companyName}}</h1>
 
 
 	<form class="m-form" id="company-data-form" data-parsley-validate>
-		<h2 class="data-section">Data Use and Source Information </h2>
+		<h2 class="data-section">El uso de datos y fuentes de información</h2>
 
 		<!--*****************************************************************-EXAMPLE USES-***************************************************************** !-->
 		<fieldset class="m-form-half right">
-			<h3>Provide any specific examples of how your company uses open data.<br> <em>[200 words or less]</em></h3>
+			<h3>Por favor enuncia ejemplos específicos sobre cómo tu compañía utiliza datos gubernamentales abiertos.<br> <em>[Máximo 200 palabras]</em></h3>
 			<textarea rows="10" cols="59" name="exampleUses" id="exampleUses" 
 			data-parsley-trigger="keyup" 
 			data-parsley-maxwords="200" 
@@ -19,7 +19,7 @@
 			<br>
 			
 			<!--*****************************************************************-DATA SOURCES-***************************************************************** !-->
-			<h3>From approximately how many sources (i.e. agencies, subagencies, local and state governments) does your company use data? *</h3>
+			<h3>¿Aproximadamente cuántas fuentes de datos gubernamentales (ejem. agencias, sub agencias, gobiernos estatales y municipales) utiliza tu compañía? *</h3>
 			<div class="source-count-buttons">
 				{% for count in source_count %}
 					<input type="radio" name="sourceCount" id="{{count}}" value="{{count}}" {% if company.sourceCount == count %}checked{%end%} required><label for="{{count}}">{{count}}</label><br>
@@ -29,16 +29,16 @@
 
 		<!--*****************************************************************-DATA TYPES-***************************************************************** !-->
 		<fieldset class="m-form-half">
-			<h3>What types of data does your company use? <br><em>(check all that apply)</em></h3>
+			<h3>¿Qué tipos de datos utiliza tu compañía? <br><em>(Por favor marca todas las opciones que apliquen)</em></h3>
 			<div class="data-type-field">
 				{% for data_type in data_types %}
-					<input type="checkbox" id="{{data_type}}_data_type" name="dataTypes" value="{{data_type}}" data-parsley-group="dataTypes" {% if data_type in company.dataTypes %} checked {% end %}/><label for="{{data_type}}_data_type">{{data_type}}</label><br>
+					<input type="checkbox" id="{{data_type}}_data_type" name="dataTypes" value="{{data_type}}" data-parsley-group="dataTypes" {% if data_type.decode('utf-8') in company.dataTypes %} checked {% end %}/><label for="{{data_type}}_data_type">{{data_type}}</label><br>
 				{% end %}
-				{% if list(set(company.dataTypes) - set(data_types)) %}
-					<input type="checkbox" id="other_data_type" name="dataTypes" value="Other" {%if company.dataTypes[0] %}checked{%end%} data-parsley-mincheck="1" data-parsley-group='dataTypes' data-parsley-trigger="change"><label for="Other">Other</label>
-					<input type="text" name="otherDataType" id="other_data_type_text_field" value="{{ list(set(company.dataTypes) - set(data_types))[0] }}" />
+				{% if [e for e in company.dataTypes if e.encode('utf-8') not in data_types] %}
+					<input type="checkbox" id="other_data_type" name="dataTypes" value="Other" {%if company.dataTypes[0] %}checked{%end%} data-parsley-mincheck="1" data-parsley-group='dataTypes' data-parsley-trigger="change"><label for="Other">Otro</label>
+					<input type="text" name="otherDataType" id="other_data_type_text_field" value="{{ [e for e in company.dataTypes if e.encode('utf-8') not in data_types][0] }}" />
 				{% else %}
-					<input type="checkbox" id="other_data_type" name="dataTypes" value="Other" data-parsley-mincheck="1" data-parsley-group='dataTypes' data-parsley-trigger="change"><label for="Other">Other</label>
+					<input type="checkbox" id="other_data_type" name="dataTypes" value="Other" data-parsley-mincheck="1" data-parsley-group='dataTypes' data-parsley-trigger="change"><label for="Other">Otro</label>
 					<input type="text" name="otherDataType" id="other_data_type_text_field" />
 				{% end %}
 			</div>
@@ -46,24 +46,40 @@
 			<input type="hidden" name="id" id="companyID" value="{{company.id}}">
 		</fieldset>
 
+		<fieldset class="m-form-half">
+			<h3>Qué impacto tienen los datos gubernamentales abiertos en tu compañía? <em>(Por favor marca todas las opciones que apliquen)*</em></h3>
+			<div class="data-impacts-field">
+				{% for impact in data_impacts %}
+					<input type="checkbox" id="{{impact}}_data_impacts" name="dataImpacts" value="{{impact}}" data-parsley-group="dataImpacts" {% if impact.decode('utf-8') in company.dataImpacts %} checked {% end %} required/><label for="{{impact}}_data_impacts">{{impact}}</label><br>
+				{% end%}
+				{% if [e for e in company.dataImpacts if e.encode('utf-8') not in data_impacts] %}
+					<input type="checkbox" id="other_data_impacts" name="dataImpacts" value="Other" {%if company.dataImpacts[0] %}checked{%end%} data-parsley-mincheck="1" data-parsley-group='dataImpacts' data-parsley-trigger="change" required><label for="Other">Otro</label>
+					<input type="text" name="otherdataImpacts" id="other_data_impacts_text_field" value="{{ [e for e in company.dataImpacts if e.encode('utf-8') not in data_impacts][0] }}" />
+				{% else %}
+					<input type="checkbox" id="other_data_impacts" name="dataImpacts" value="Other" data-parsley-mincheck="1" data-parsley-group='dataImpacts' data-parsley-trigger="change" required><label for="Other">Otro</label>
+					<input type="text" name="otherdataImpacts" id="other_data_impacts_text_field" />
+				{% end %}
+			</div>
+		</fieldset>
+
 	</form>
 
 	<!--*****************************************************************-AGENCIES AND SUBAGENCIES-***************************************************************** !-->
 	<div class="m-form-box data">
-		<h2>Open Data Sources</h2>
-		<p>Please tell us more about the open data sources your company uses.</p>
-		<p>Use the search bar to find and select government agencies, subagencies, city and state governments, or government-funded research programs from the list provided.</p>
-		<p>If you can't find your data provider on the list, please fill out the form <a href="/#suggest">below</a> to suggest an agency, subagency, organization, etc.</p>
-		<p><strong>[Optional]:</strong> Please tell us which datasets your company uses from the agencies, city, or state governments you select, and please score each dataset on a scale of 1 to 4 (i.e. 1 = Poor; 4 = Excellent)</p>
-		<p><div class="example-popup"><a>See Example.</a></div></p>
+		<h2>Fuentes de datos abiertos gubernamentales</h2>
+		<p>Por favor cuéntanos más sobre las fuentes de datos que utiliza tu compañía.</p>
+		<p>Puedes usar la herramienta de búsqueda para seleccionar las agencias, sub agencias, gobiernos estatales y municipales, o instituciones de la lista disponible.</p>
+		<p>Si no puedes encontrar en la lista la fuente que buscas, por favor completa el formulario abajo [link] para sugerir una nueva agencia, sub agencia, organización, etc.</p>
+		<p><strong>[Opcional]: </strong>Por favor cuéntanos sobre el conjunto de datos que utiliza tu compañía, que pertenecen a las fuentes gubernamentales que seleccionaste. Por favor clasifica cada conjunto de datos en una escala de 1 a 4 (como en el siguiente ejemplo: 1 = pobre, 4 = excelente).</p>
+		<p><div class="example-popup"><a>Ver ejemplo.</a></div></p>
 		<div class="dialog-example" style="display:none">
 			<img src="{{ static_url("img/ExampleData.png") }}">
 		</div>
 		<div class="ui-widget">
-			<label for="tags">Search: </label>
-			<input id="agencyTags" placeholder="e.g. NYC, Department of Transportation, DARPA, Defense, Texas, Census..." value="" size="78">
+			<label for="tags">Buscar: </label>
+			<input id="agencyTags" placeholder="ejemplo: INEGI, Secretaría de Salud, PEMEX, etc..." value="" size="78">
 			<input type="hidden" id="searchval" />
-			<input type="button" class="l-button" id="addSearchResult" value="Add Agency/Sub-Agency">
+			<input type="button" class="l-button" id="addSearchResult" value="Agregar">
 			<input type="hidden" class="companyID" name="companyID" value="{{ company.id }}">
 			<div class="errors-search">
 				<span class="agency-search-error-message" style="display:inline-block;"></span>
@@ -145,7 +161,7 @@
 	<!--*****************************************************************-DATA COMMENTS-***************************************************************** !-->
 	<form class="m-form"  id="company-data-comment-form">
 		<fieldset class="m-form-half right">
-				<h3>Please give your comments about the usefulness of all these data sources and datasets.<br><em>[250 words or less] </em></h3>
+				<h3>Nos interesa tu opinión por lo que nos gustaría saber tus comentarios sobre la utilidad de todas estas fuentes de datos y conjuntos de datos.<br><em>[Máximo 250 palabras] </em></h3>
 				<textarea rows="10" cols="59" name="dataComments" id="dataComments" 
 				parsley-trigger="keyup" 
 				data-parsley-maxwords="250">{%if company.dataComments %}{{ company.dataComments }}{% end %}</textarea><br>
@@ -153,7 +169,7 @@
 	</form>
 
 	<fieldset class="m-form-half">
-		<input type="button" id="submit-all-forms" class="m-button" value="Save And Finish">
+		<input type="button" id="submit-all-forms" class="m-button" value="Guardar y Terminar">
 		<span class="response-message"></span>
 	</fieldset>
 

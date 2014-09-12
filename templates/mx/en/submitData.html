@@ -11,7 +11,7 @@
 
 		<!--*****************************************************************-EXAMPLE USES-***************************************************************** !-->
 		<fieldset class="m-form-half right">
-			<h3>Provide any specific examples of how your company uses open data.<br> <em>[200 words or less]</em></h3>
+			<h3>Provide any specific examples of how your company uses government open data.<br> <em>[200 words or less]</em></h3>
 			<textarea rows="10" cols="59" name="exampleUses" id="exampleUses" 
 			data-parsley-trigger="keyup" 
 			data-parsley-maxwords="200" 
@@ -19,7 +19,7 @@
 			<br>
 			
 			<!--*****************************************************************-DATA SOURCES-***************************************************************** !-->
-			<h3>From approximately how many sources (i.e. agencies, subagencies, local and state governments) does your company use data? *</h3>
+			<h3>From approximately how many sources (i.e. agencies, subagencies, local and state governments) does your company use open government data? *</h3>
 			<div class="source-count-buttons">
 				{% for count in source_count %}
 					<input type="radio" name="sourceCount" id="{{count}}" value="{{count}}" {% if company.sourceCount == count %}checked{%end%} required><label for="{{count}}">{{count}}</label><br>
@@ -29,7 +29,7 @@
 
 		<!--*****************************************************************-DATA TYPES-***************************************************************** !-->
 		<fieldset class="m-form-half">
-			<h3>What types of data does your company use? <br><em>(check all that apply)</em></h3>
+			<h3>What types of open government data does your company use? <br><em>(check all that apply)</em></h3>
 			<div class="data-type-field">
 				{% for data_type in data_types %}
 					<input type="checkbox" id="{{data_type}}_data_type" name="dataTypes" value="{{data_type}}" data-parsley-group="dataTypes" {% if data_type in company.dataTypes %} checked {% end %}/><label for="{{data_type}}_data_type">{{data_type}}</label><br>
@@ -44,6 +44,22 @@
 			</div>
 			{% raw xsrf_form_html() %}
 			<input type="hidden" name="id" id="companyID" value="{{company.id}}">
+		</fieldset>
+
+		<fieldset class="m-form-half">
+			<h3>What impact does open data use have on your company? (check all that apply)</h3>
+			<div class="data-impacts-field">
+				{% for impact in data_impacts %}
+					<input type="checkbox" id="{{impact}}_data_impacts" name="dataImpacts" value="{{impact}}" data-parsley-group="dataImpacts" {% if impact in company.dataImpacts %} checked {% end %}/><label for="{{impact}}_data_impacts">{{impact}}</label><br>
+				{% end%}
+				{% if list(set(company.dataImpacts) - set(data_impacts)) %}
+					<input type="checkbox" id="other_data_impacts" name="dataImpacts" value="Other" {%if company.dataImpacts[0] %}checked{%end%} data-parsley-mincheck="1" data-parsley-group='dataImpacts' data-parsley-trigger="change" required><label for="Other">Other</label>
+					<input type="text" name="otherDataImpact" id="other_data_impacts_text_field" value="{{ list(set(company.dataImpacts) - set(data_impacts))[0] }}" />
+				{% else %}
+					<input type="checkbox" id="other_data_impacts" name="dataImpacts" value="Other" data-parsley-mincheck="1" data-parsley-group='dataImpacts' data-parsley-trigger="change" required><label for="Other">Other</label>
+					<input type="text" name="otherDataImpact" id="other_data_impacts_text_field" />
+				{% end %}
+			</div>
 		</fieldset>
 
 	</form>
@@ -61,7 +77,7 @@
 		</div>
 		<div class="ui-widget">
 			<label for="tags">Search: </label>
-			<input id="agencyTags" placeholder="e.g. NYC, Department of Transportation, DARPA, Defense, Texas, Census..." value="" size="78">
+			<input id="agencyTags" placeholder="example: INEGI, Secretaría de Salud, PEMEX, etc..." value="" size="78">
 			<input type="hidden" id="searchval" />
 			<input type="button" class="l-button" id="addSearchResult" value="Add Agency/Sub-Agency">
 			<input type="hidden" class="companyID" name="companyID" value="{{ company.id }}">

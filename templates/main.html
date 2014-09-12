@@ -1,12 +1,16 @@
 <!doctype html> 
-
+{% try %}
+    {% set lan_ = lan %}
+{% except NameError %}
+    {% set lan_ = 'en' %}
+{% end %}
 <!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
 <!--[if IE 7 ]>     <html lang="en" class="no-js ie7"> <![endif]-->
 <!--[if IE 8 ]>     <html lang="en" class="no-js ie8"> <![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!--> <html lang="{{lan}}" class="no-js"> <!--<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html lang="{{lan_}}" class="no-js"> <!--<![endif]-->
 <head>
     <meta name="description" content="The Open Data 500 is the first comprehensive study of U.S. companies that use open government data to generate new business and develop new products and services.">
-    <meta name="keywords" content="Open Data, Open Data 500, Companies, Government Open Data, Big DAta, US Government Data, Data, Open">
+    <meta name="keywords" content="Open Data, Open Data 500, Companies, Government Open Data, Big Data, US Government Data, Data, Open">
     <meta name="author" content="NYU Governance Lab">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -38,6 +42,7 @@
     </style>
 
 
+
 </head>
 <body>
     <!-- <div class="parallax-bg" id="background" data-stellar-ratio="-0.01"></div> -->
@@ -45,10 +50,9 @@
     <div class="parallax-bg" id="background-3" data-stellar-ratio="-0.02"></div>   -->
     <header>
         <div class="l-centered">
-        
             <a class="logo" href="/{%try%}{%if country and country!="int" %}{{country}}/{%end%}{%except%}{%end%}"><img src="{{ static_url("img/od500-logo.png") }}" alt=""></a>
             <div id="mainMenu" class="m-main-menu">
-                {% for item in settings['menu'][lan] %}        
+                {% for item in settings['menu'][lan_] %}        
                     <div class="m-main-menu-item">
                         <a href="{{item['link']}}">{{item['item']}}</a>
                         {% if item['sub-menu'] %}
@@ -60,8 +64,25 @@
                         {%end%}
                     </div>
                 {%end%}
-                {%try%} {% if user %} <div class="m-main-menu-item"><a href="/admin/companies/">Admin</a>{% end %}{%except%}{%end%}</div>
-                {%try%} {% if user %} <div class="m-main-menu-item"><a href="/logout/">Logout</a>{% end %}{%except%}{%end%}</div>
+                {%try%} {% if user %} 
+                    <div class="m-main-menu-item">
+                        <a href="/admin/companies/">Admin</a>
+                        <ul id="submenu-about" class="m-main-menu-sub-menu">
+                            <li><a class="m-main-menu-sub-menu-item" href="/admin/companies/">Companies</a></li>
+                            <li><a class="m-main-menu-sub-menu-item" href="/admin/agencies/">Agencies</a></li>
+                        </ul>
+                    </div>
+                {% end %}{%except%}{%end%}
+                {%try%} {% if user %} <div class="m-main-menu-item"><a href="/logout/">Logout</a></div>{% end %}{%except%}{%end%}
+                {% if len(settings['available_languages']) > 1 %}
+                    <div class="m-main-menu-item">
+                        <div class="language-options">
+                            {% for language in settings['available_languages'] %}
+                                <a href="?lan={{language}}">{{language.upper()}}</a>
+                            {%end%}
+                        </div>
+                    </div>
+                {%end%}
             </div>
         </div>
     </header><!-- end header -->
@@ -93,7 +114,6 @@
         <div class="l-centered">
             <div class="m-footer-logos">
                 <a href="http://thegovlab.org/"><img id="govlab-logo" src="{{ static_url("img/govlab-logo.png") }}" alt="The GovLab"></a>
-                <a href="http://www.knightfoundation.org/"><img id="knight-logo" src="{{ static_url("img/knight-logo.png") }}" alt="Knight Foundation"></a>
             </div>
             <ul>
                 <li class="footer-menu-item"><a href="https://twitter.com/opendata500" target="_blank">Twitter</a></li> 

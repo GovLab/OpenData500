@@ -10,7 +10,7 @@ class Person(EmbeddedDocument):
 	title = StringField()
 	email = StringField()
 	phone = StringField()
-	org = StringField()
+	org = StringField() # <--------DEPRECATE
 	contacted = BooleanField() # <--------DEPRECATE
 
 class Company(Document):
@@ -19,8 +19,8 @@ class Company(Document):
 	url = StringField()
 	contact = EmbeddedDocumentField(Person)
 	ceo = EmbeddedDocumentField(Person)
-	yearFounded = IntField()
-	previousName = StringField()
+	yearFounded = StringField()
+	previousName = StringField() # <--------DEPRECATE
 	city = StringField()
 	state = StringField()
 	country = StringField()
@@ -29,13 +29,18 @@ class Company(Document):
 	companyType = StringField() #Public, Private, etc
 	companyCategory = StringField() #Categories
 	revenueSource = ListField(StringField()) #checkbox with options
+	businessModel = ListField(StringField())
+	socialImpact = ListField(StringField())
 	description = StringField()
 	descriptionShort = StringField()
-	financialInfo = StringField() #long question, write paragraph
-	datasetWishList = StringField() #What datasets...
+	financialInfo = StringField() 
+	datasetWishList = StringField() # <--------DEPRECATE
 	sourceCount = StringField() #From how many sources does your company use data?
+	dataTypes = ListField(StringField())
 	dataComments = StringField() #Please give comments, good or bad....
-	confidentiality = StringField() #What info does the contact want to hide?
+	exampleUses = StringField()
+	dataImpacts = ListField(StringField())
+	confidentiality = StringField() # <--------DEPRECATE
 	agencies = ListField(ReferenceField('Agency'))
 	ts = ComplexDateTimeField(default=datetime.now())
 	lastUpdated = ComplexDateTimeField()

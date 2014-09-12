@@ -1,0 +1,248 @@
+{% extends "../../main.html" %}
+{% autoescape None %}
+
+{% block body %}
+
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>Agregar Compañía</h2>
+
+
+<form method="post" id="newCompany" class="m-form" data-parsley-validate>
+
+	<!--*****************************************************************-CONTACT INFO-***************************************************************** !-->
+	<fieldset class="m-form-half">
+		<h3>Información de Contacto</h3>
+		<div class="m-form-line"><label for="">Nombre: *</label><input type="text" name="firstName" id="firstName" data-parsley-maxlength="50"></div>
+		<div class="m-form-line"><label for="">Apellido: *</label><input type="text" name="lastName" id="lastName" data-parsley-maxlength="50"></div>
+		<div class="m-form-line"><label for="">Puesto: *</label><input type="text" name="title" id="title" data-parsley-maxlength="50"></div>
+		<div class="m-form-line"><label for="">Correo electrónico: *</label><input type="text" name="email" id="email" data-parsley-maxlength="50" data-parsley-trigger="focusout" data-parsley-type="email"></div>
+		<div class="m-form-line"><label for="">Teléfono:</label><input type="text" name="phone" id="phone" 
+			data-parsley-trigger="focusout" 
+			data-parsley-pattern="(^\d{3}(-|\s)\d{3}(-|\s)\d{4}$)|(^\d{10})"
+			data-parsley-error-message="Phone must be in format: ###-###-####"></div>
+	</fieldset>
+
+	<!--*****************************************************************-COMPANY INFO-***************************************************************** !-->
+	<fieldset class="m-form-half right">
+		<h3>Información de la compañía</h3>
+		<div class="m-form-line">
+			<label for="companyName">Nombre de la compañía: *</label><input type="text" name="companyName" id="companyName" 
+			data-parsley-trigger="focusout"
+            data-parsley-remote
+            data-parsley-remote-options='{ "type": "POST" }'
+            data-parsley-remote-validator="validateName"
+            data-parsley-maxlength="70"
+            data-parsley-error-message=""
+            required>
+			<span class='company-name-error'></span>
+		</div>
+		<div class="m-form-line"><label for="url">URL de la compañía: *</label><input type='text' name="url" id='url' data-parsley-trigger="change" data-parsley-type="url"></div>
+		<div class="m-form-line"><label for="city">¿En qué ciudad se encuentra su oficina central?</label><input type="text" name="city" id="city"></div>
+		<div class="m-form-line">
+			<label for="state">Estado: *</label>
+			<select name='state' id="state" required>
+				{% for i in range(0, len(stateList[country])) %}
+					<option name="state" value="{{stateListAbbrev[country][i]}}">{{ stateList[country][i] }}</option>
+				{%end%}
+			</select>
+		</div>
+		<div class="m-form-line"><label for="country">País:</label><input type="text" name="country" id="{{country}}" value="{{country_keys[country]}}" readonly></div>
+		<div class="m-form-line"><label for="zipCode">Código postal: *</label><input type="text" name="zipCode" id="zipCode" data-parsley-trigger="focusout" data-parsley-pattern="(^\d{5}$)|(^\d{5}-\d{4}$)"></div>
+		<div class="m-form-box"><label for="companyType">Tipo de compañía: *</label><br>
+			<div class="company-type-field">
+				{% for type in companyType %}
+					<input type="radio" id="{{type}}" name="companyType" data-parsley-group='companyType' value="{{ type }}"><label for="{{type}}">{{type}}</label><br>
+				{% end %}
+				<input type="radio" id="other_type" name="companyType" value="Other" data-parsley-mincheck="1" data-parsley-group='companyType' data-parsley-trigger="change"><label for="other_type">Otro</label>
+				<input type="text" id="other_company_type_field" name="othercompanyType">
+			</div>
+		</div>
+		<div class="m-form-line"><label for="">Año de fundación:: *</label><input type="text" name="yearFounded" id="yearFounded" 
+			data-parsley-type="number" 
+			data-parsley-trigger="focusout" 
+			data-parsley-range="[1000, 2014]"></div>
+		<div class="m-form-line"><label for="">Número de empleados de tiempo completo: *</label><input type="text" name="fte" id="fte" data-parsley-trigger="focusout" data-parsley-type="number"></div>
+	</fieldset>
+	
+	<!--*****************************************************************-BUSINESS MODEL-***************************************************************** !-->
+	<fieldset class="m-form-half">
+		<h3>Modelo de Negocio <br><em>(Por favor marca todas las opciones que apliquen)</em> *</h3>
+		<div class="business-model-field">
+			{% for model in business_models %}
+				<input type="checkbox" id="{{model}}" name="businessModel" value="{{model}}" data-parsley-group="businessModel" /><label for="{{model}}">{{model}}</label><br>
+			{% end %}
+			<input type="checkbox" id="other_model" name="businessModel" value="Other" data-parsley-mincheck="1" data-parsley-group='businessModel' data-parsley-trigger="change"><label for="Other">Otro</label>
+			<input type="text" name="otherbusinessModel" id="other_model_text_field" />
+		</div>
+		<br>
+
+	<!--*****************************************************************-REVENUE SOURCES-***************************************************************** !-->
+		<h3>¿Cuáles de la siguientes fuentes de ingresos, son las más importantes para tu compañía? <br><em>(Por favor marca todas las opciones que apliquen)</em> *</h3>
+		<div class="revenue-source-field">
+			{% for source in revenueSource %}
+				<input type="checkbox" id="{{source}}" name="revenueSource" value="{{source}}" data-parsley-group="revenueSource" /><label for="{{source}}">{{source}}</label><br>
+			{% end %}
+			<input type="checkbox" id="other_revenue" name="revenueSource" value="Other" data-parsley-mincheck="1" data-parsley-group='revenueSource' data-parsley-trigger="change"><label for="other_revenue">Otro</label>
+			<input type="text" name="otherrevenueSource" id="other_revenue_text_field" />
+		</div>
+		<br>
+
+	<!--*****************************************************************-SOCIAL IMPACT-***************************************************************** !-->
+		<h3>¿La misión de tu compañía, ha generado un impacto social directo en alguna de las siguientes áreas? <br><em>(Por favor marca todas las opciones que apliquen)</em> </h3>
+		<div class="social-impact-field">
+			{% for impact in social_impacts %}
+				<input type="checkbox" id="{{impact}}" name="socialImpact" value="{{impact}}" data-parsley-group="socialImpact" /><label for="{{impact}}">{{impact}}</label><br>
+			{% end %}
+			<input type="checkbox" id="other_impact" name="socialImpact" value="Other" data-parsley-mincheck="1" data-parsley-group='socialImpact' data-parsley-trigger="change"><label for="Other">Otro</label>
+			<input type="text" name="othersocialImpact" id="other_impact_text_field" />
+		</div>
+
+	</fieldset>
+
+	<!--*****************************************************************-CATEGORY-***************************************************************** !-->
+	<fieldset class="m-form-half right">
+		<h3>¿Cuál categoría describe mejor tu compañía? *</h3>
+		<div class="category-field">
+			{% for category in categories %}
+				<input type="radio" id="{{category}}" name="companyCategory" data-parsley-group='category' value="{{ category }}"><label for="{{category}}">{{category}}</label><br>
+			{% end %}
+			<input type="radio" id="other_category" name="companyCategory" value="Other" data-parsley-mincheck="1" data-parsley-group='category' data-parsley-trigger="change"><label for="Other">Otro</label>
+			<input type="text" id="other_category_text_field" name="othercompanyCategory" data-parsley-trigger="focus">
+		</div>
+	</fieldset>
+
+	<!--*****************************************************************-DESCRIPTION-***************************************************************** !-->
+	<fieldset class="m-form-half left">
+		<h3>Por favor describe de manera breve la misión y el trabajo de tu compañía. Puedes obtener la información de su página web u otras publicaciones al respecto. <br><em>[Máximo 200 palabras]</em> *</h3>
+		<textarea rows="10" cols="59" name="description" id="description" 
+		data-parsley-trigger="keyup" 
+		data-parsley-maxwords="200" 
+		data-parsley-error-message="You are over the word limit."></textarea><br><br>
+	</fieldset>
+
+	<!--*****************************************************************-SHORT DESCRIPTION-***************************************************************** !-->
+	<fieldset class="m-form-half right">
+		<h3>Por favor escribe un breve resumen de tu compañía. <br><em>[Máximo 25 palabras]</em> *</h3>
+		<textarea rows="10" cols="59" name="descriptionShort" id="descriptionShort" 
+		data-parsley-trigger="keyup" 
+		data-parsley-maxwords="25" 
+		data-parsley-error-message="You are over the word limit."></textarea><br>
+	</fieldset>
+
+	<!--*****************************************************************-FINANCIAL INFO-***************************************************************** !-->
+	<fieldset class="m-form-half left">
+		<h3>Por favor incluye cualquier información financiera u operativa, la cual nos ayudará a entender a tu compañía. Tenemos interés en información específica, como ingresos anuales pasados y proyectados, el total de dólares invertidos hasta la fecha, y socios o inversionistas importantes. <br><em>[Máximo 100 palabras]</em></h3>
+		<textarea rows="10" cols="59" name="financialInfo" id="financialInfo" 
+		data-parsley-trigger="keyup" 
+		data-parsley-maxwords="100" 
+		data-parsley-error-message="You are over the word limit."></textarea><br><br>
+	</fieldset>
+
+	<h2 class="data-section">El uso de datos y fuentes de información </h2>	
+	<!--*****************************************************************-EXAMPLE USES-***************************************************************** !-->
+	<fieldset class="m-form-half">
+		<h3>Por favor enuncia ejemplos específicos sobre cómo tu compañía utiliza datos gubernamentales abiertos.<br> <em>[Máximo 200 palabras]</em></h3>
+		<textarea rows="10" cols="59" name="exampleUses" id="exampleUses" 
+		data-parsley-trigger="keyup" 
+		data-parsley-maxwords="200" 
+		data-parsley-error-message="You are over the word limit."></textarea><br>
+
+		<!--*****************************************************************-DATA TYPES-***************************************************************** !-->
+		<h3>¿Qué tipos de datos utiliza tu compañía? <br><em>(Por favor marca todas las opciones que apliquen)</em></h3>
+		<div class="data-type-field">
+			{% for data_type in data_types %}
+				<input type="checkbox" id="{{data_type}}_data_type" name="dataTypes" value="{{data_type}}" data-parsley-group="dataTypes" /><label for="{{data_type}}_data_type">{{data_type}}</label><br>
+			{% end %}
+			<input type="checkbox" id="other_data_type" name="dataTypes" value="Other" data-parsley-mincheck="1" data-parsley-group='dataTypes' data-parsley-trigger="change"><label for="Other">Otro</label>
+			<input type="text" name="otherDataType" id="other_data_type_text_field" />
+		</div>
+	</fieldset>
+
+	<!--*****************************************************************-DATA SOURCES-***************************************************************** !-->
+	<fieldset class="m-form-half right">
+		<h3>¿Aproximadamente cuántas fuentes de datos gubernamentales (ejem. agencias, sub agencias, gobiernos estatales y municipales) utiliza tu compañía? *</h3>
+		<div class="source-count-buttons">
+			{% for count in source_count %}
+				<input type="radio" name="sourceCount" id="{{count}}" value="{{count}}"><label for="{{count}}">{{count}}</label><br>
+			{%end %}
+		</div>
+		<br>
+
+		<h3>Qué impacto tienen los datos gubernamentales abiertos en tu compañía? <em>(Por favor marca todas las opciones que apliquen)*</em></h3>
+		<div class="data-impacts-field">
+			{% for impact in data_impacts %}
+				<input type="checkbox" id="{{impact}}_data_impacts" name="dataImpacts" value="{{impact}}" data-parsley-group="dataImpacts" /><label for="{{impact}}_data_impacts">{{impact}}</label><br>
+			{% end%}
+			<input type="checkbox" id="other_data_impacts" name="dataImpacts" value="Other" data-parsley-mincheck="1" data-parsley-group='dataImpacts' data-parsley-trigger="change" ><label for="Other">Otro</label>
+			<input type="text" name="otherDataImpact" id="other_data_impacts_text_field" />
+		</div>
+	</fieldset>
+
+
+	{% raw xsrf_form_html() %}
+	<input type="hidden" name="submittedThroughWebsite" value="False">
+	<input type="hidden" name="vettedByCompany" value="False">
+	<input type="hidden" name="submittedSurvey" value="False">
+	<input type="submit" class="m-button" value="Agregar Compañía"><span class="company-form-error-message error-message" style="display:none"></span>
+</form>
+
+
+<script>
+
+$(document).ready( function() {
+	//--*****************************************************************-VALIDATE & SUBMIT COMPANY FORM-*****************************************************************--//
+    var _xsrf = $("[name='_xsrf']").val();
+    var country = $('[name="country"]').attr('id');
+    var error_message = $('.company-form-error-message');
+    var companyName = $("#companyName").parsley()
+        .addAsyncValidator('validateName', function(xhr) {
+            window.ParsleyUI.removeError(companyName, 'name-exists');
+            if (xhr.status === 404) {
+                window.ParsleyUI.addError(companyName, 'name-exists', "This company has already been submitted. Please contact opendata500@thegovlab.org if you have any questions.");
+            }
+            return xhr.status === 200;
+        }, '/validate/?country=' + country + '&_xsrf=' + _xsrf);
+    $("#newCompany").parsley();
+
+    $("#newCompany").submit(function(event) {
+        $(this).parsley("validate");
+        if ($(this).parsley("isValid")) {
+            var data = $('#newCompany').serializeArray();
+            $.ajax({
+                type: 'POST',
+                url: '/admin/company-add/',
+                data: data,
+                error: function(error) {
+                    console.debug(JSON.stringify(error));
+                    error_message.text('Oops... Something went wrong :/').show().delay(5000).fadeOut();
+                },
+                beforeSend: function(xhr, settings) {
+                    error_message.text('Saving...').show().delay(5000).fadeOut();
+                },
+                success: function(response) {
+                	if (response == 'success') {
+                    	document.location.href = '/admin/companies/';
+                	} else {
+	                	error_message.text('Oops... Something went wrong :/').show().delay(5000).fadeOut();
+	                	console.log(response);
+                	}
+                }
+            });
+        } else {
+            error_message.text('You still need to fix some items.').show().delay(5000).fadeOut();
+        }
+        event.preventDefault();
+    });
+});
+</script>
+
+{% end %}
+
+
+
