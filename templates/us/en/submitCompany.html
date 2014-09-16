@@ -22,14 +22,20 @@
 	<!--*****************************************************************-CONTACT INFO-***************************************************************** !-->
 	<fieldset class="m-form-half">
 		<h3>Contact Information</h3>
-		<div class="m-form-line"><label for="">First Name: *</label><input type="text" name="firstName" id="firstName" data-parsley-maxlength="50" required></div>
-		<div class="m-form-line"><label for="">Last Name: *</label><input type="text" name="lastName" id="lastName" data-parsley-maxlength="50" required></div>
-		<div class="m-form-line"><label for="">Title: *</label><input type="text" name="title" id="title" data-parsley-maxlength="50" required></div>
-		<div class="m-form-line"><label for="">Email: *</label><input type="text" name="email" id="email" data-parsley-maxlength="50" data-parsley-trigger="focusout" data-parsley-type="email" required></div>
-		<div class="m-form-line"><label for="">Phone:</label><input type="text" name="phone" id="phone" 
-			data-parsley-trigger="focusout" 
-			data-parsley-pattern="(^\d{3}(-|\s)\d{3}(-|\s)\d{4}$)|(^\d{10})"
-			data-parsley-error-message="Phone must be in format: ###-###-####"></div>
+		{% for k in form['contact']%}
+			<div class="m-form-line"><label for="{{k['label_for']}}">{{k['label']}}: {% if k['required']%}*{%end%}</label><input 
+				type="{{k['type']}}"
+				name="{{k['name']}}"
+				id="{{k['id']}}"
+				{%if k['data-parsley-type'] %} data-parsley-type="{{k['data-parsley-type']}}" {%end%}
+				{%if k['data-parsley-maxlength'] %} data-parsley-maxlength="{{k['data-parsley-maxlength']}}" {%end%}
+				{%if k['data-parsley-trigger'] %} data-parsley-trigger="{{k['data-parsley-trigger']}}" {%end%}
+				{%if k['data-parsley-pattern'] %} data-parsley-pattern="{{k['data-parsley-pattern']}}" {%end%}
+				{%if k['data-parsley-error-message'] %} data-parsley-error-message="{{k['data-parsley-error-message']}}" {%end%}
+				{%if k['required'] %} {{k['required']}}{%end%}>
+			</div>
+		{%end%}
+
 	</fieldset>
 
 	<!--*****************************************************************-COMPANY INFO-***************************************************************** !-->

@@ -1,0 +1,77 @@
+{
+	"en": {
+			"contact": [ 
+				{
+					"label_for":"firstName",
+					"label": "First Name",
+					"required": "required",
+					"type":"text",
+					"name":"firstName",
+					"id":"firstName",
+					"class":"",
+					"data-parsley-maxlength":50,
+					"data-parsley-trigger":"focusout",
+					"data-parsley-type":"email",
+					"data-parsley-pattern":"",
+					"data-parsley-error-message":""
+				},
+				{
+					"label_for":"lastName",
+					"label": "Last Name",
+					"required": "required",
+					"type":"text",
+					"name":"lastName",
+					"id":"lastName",
+					"class":"",
+					"data-parsley-maxlength":50,
+					"data-parsley-trigger":"",
+					"data-parsley-type":"",
+					"data-parsley-pattern":"",
+					"data-parsley-error-message":""
+				},
+				{
+					"label_for":"title",
+					"label": "Title",
+					"required": "required",
+					"type":"text",
+					"name":"title",
+					"id":"title",
+					"class":"",
+					"data-parsley-maxlength":50,
+					"data-parsley-trigger":"",
+					"data-parsley-type":"",
+					"data-parsley-pattern":"",
+					"data-parsley-error-message":""
+				},
+				{
+					"label_for":"email",
+					"label": "Email",
+					"required": "required",
+					"type":"text",
+					"name":"email",
+					"id":"email",
+					"class":"",
+					"data-parsley-maxlength":"",
+					"data-parsley-trigger":"focusout",
+					"data-parsley-type":"email",
+					"data-parsley-pattern":"",
+					"data-parsley-error-message":""
+				},
+				{
+					"label_for":"phone",
+					"label": "Phone",
+					"required": "",
+					"type":"text",
+					"name":"phone",
+					"id":"phone",
+					"class":"",
+					"data-parsley-maxlength":50,
+					"data-parsley-trigger":"focusout",
+					"data-parsley-type":"",
+					"data-parsley-pattern":"(^\\d{3}(-|\\s)\\d{3}(-|\\s)\\d{4}$)|(^\\d{10})",
+					"data-parsley-error-message":"Phone must be in format: ###-###-####"
+				}
+			]
+	},
+	"es":{}
+}

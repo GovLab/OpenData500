@@ -292,6 +292,8 @@ class SubmitCompanyHandler(BaseHandler):
             lan = self.get_cookie('lan')
         else:
             lan = settings['default_language']
+        with open("templates/form.json") as json_file:
+                form = json.load(json_file)
         self.render(
             country+ "/" + lan + "/submitCompany.html",
             country=country,
@@ -308,6 +310,7 @@ class SubmitCompanyHandler(BaseHandler):
             menu=settings['menu'][lan],
             stateListAbbrev=stateListAbbrev,
             settings=settings,
+            form = form[lan],
             lan=lan
         )
 
