@@ -55,12 +55,8 @@
 				<input type="text" id="other_company_type_field" name="othercompanyType">
 			</div>
 		</div>
-		<div class="m-form-line"><label for="">Founding Year: *</label><input type="text" name="yearFounded" id="yearFounded" 
-			data-parsley-type="number" 
-			data-parsley-trigger="focusout" 
-			data-parsley-range="[1000, 2014]" 
-			required></div>
-		<div class="m-form-line"><label for="">Number of full-time employees: *</label><input type="text" name="fte" id="fte" data-parsley-trigger="focusout" data-parsley-type="number" required></div>
+		{{form['founding_year_required']}}
+		{{form['fte_required']}}
 	</fieldset>
 
 	<fieldset class="m-form-half">	
@@ -119,21 +115,12 @@
 
 	<!--*****************************************************************-SHORT DESCRIPTION-***************************************************************** !-->
 	<fieldset class="m-form-half right">
-		<h3>As a summary, please provide a one sentence description of your company. <br><em>[25 words or less]</em> *</h3>
-		<textarea rows="10" cols="59" name="descriptionShort" id="descriptionShort" 
-		data-parsley-trigger="keyup" 
-		data-parsley-maxwords="25" 
-		data-parsley-error-message="You are over the word limit." 
-		required></textarea><br>
+		{{form['description_short_required']}}
 	</fieldset>
 
 	<!--*****************************************************************-FINANCIAL INFO-***************************************************************** !-->
 	<fieldset class="m-form-half">
-		<h3>Please include any financial or operational information that will help us understand your company. We are interested in specific information like past and projected annual revenues, total outside investment dollars to date, and significant investors or partners. <br><em>[100 words or less]</em></h3>
-		<textarea rows="10" cols="59" name="financialInfo" id="financialInfo" 
-		data-parsley-trigger="keyup" 
-		data-parsley-maxwords="100" 
-		data-parsley-error-message="You are over the word limit."></textarea><br><br>
+		{{form['financial_info']}}
 	</fieldset>
 	{% raw xsrf_form_html() %}
 

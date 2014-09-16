@@ -27,7 +27,7 @@ $(document).ready(function() {
             .addAsyncValidator('validateName', function(xhr) {
                 window.ParsleyUI.removeError(companyName, 'name-exists');
                 if (xhr.status === 404) {
-                    window.ParsleyUI.addError(companyName, 'name-exists', "This company has already been submitted. Please contact opendata500@thegovlab.org if you have any questions.");
+                    window.ParsleyUI.addError(companyName, 'name-exists', "Error:");
                 }
                 return xhr.status === 200;
             }, '/validate/?country=' + country + '&_xsrf=' + _xsrf);

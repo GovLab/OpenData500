@@ -3,8 +3,6 @@
 
 {% block body %}
 
-
-
 <section class="submitDescription">
 	<h1>#OD100MX <br>Encuesta</h1>
 
@@ -22,32 +20,19 @@
 	<!--*****************************************************************-CONTACT INFO-***************************************************************** !-->
 	<fieldset class="m-form-half">
 		<h3>Información de Contacto</h3>
-		<div class="m-form-line"><label for="">Nombre: *</label><input type="text" name="firstName" id="firstName" data-parsley-maxlength="50" required></div>
-		<div class="m-form-line"><label for="">Apellido: *</label><input type="text" name="lastName" id="lastName" data-parsley-maxlength="50" required></div>
-		<div class="m-form-line"><label for="">Puesto: *</label><input type="text" name="title" id="title" data-parsley-maxlength="50" required></div>
-		<div class="m-form-line"><label for="">Correo electrónico: *</label><input type="text" name="email" id="email" data-parsley-maxlength="50" data-parsley-trigger="focusout" data-parsley-type="email" required></div>
-		<div class="m-form-line"><label for="">Teléfono:</label><input type="text" name="phone" id="phone" 
-			data-parsley-trigger="focusout" 
-			data-parsley-pattern="(^\d{3}(-|\s)\d{3}(-|\s)\d{4}$)|(^\d{10})"
-			data-parsley-error-message="Phone must be in format: ###-###-####"></div>
+		{{form['contact_first_name_required']}}
+		{{form['contact_last_name_required']}}
+		{{form['contact_title_required']}}
+		{{form['contact_email_required']}}
+		{{form['contact_phone']}}
 	</fieldset>
 
 	<!--*****************************************************************-COMPANY INFO-***************************************************************** !-->
 	<fieldset class="m-form-half right">
 		<h3>Información de la Compañía</h3>
-		<div class="m-form-line">
-			<label for="companyName">Nombre de la compañía: *</label><input type="text" name="companyName" id="companyName" 
-			data-parsley-trigger="focusout"
-            data-parsley-remote
-            data-parsley-remote-options='{ "type": "POST" }'
-            data-parsley-remote-validator="validateName"
-            data-parsley-maxlength="70"
-            data-parsley-error-message=""
-            required>
-			<span class='company-name-error'></span>
-		</div>
-		<div class="m-form-line"><label for="url">URL de la compañía: *</label><input type='text' name="url" id='url' data-parsley-trigger="change" data-parsley-type="url" required></div>
-		<div class="m-form-line"><label for="city">¿En qué ciudad se encuentra su oficina central?</label><input type="text" name="city" id="city"></div>
+		{{form['company_name_required']}}
+		{{form['company_url_required']}}
+		{{form['city']}}
 		<div class="m-form-line">
 			<label for="state">Estado: *</label>
 			<select name='state' id="state" required>
@@ -57,7 +42,7 @@
 			</select>
 		</div>
 		<div class="m-form-line"><label for="country">País:</label><input type="text" name="country" value="{{country_keys[country]}}" readonly></div>
-		<div class="m-form-line"><label for="zipCode">Código postal: *</label><input type="text" name="zipCode" id="zipCode" data-parsley-trigger="focusout" data-parsley-pattern="(^\d{5}$)|(^\d{5}-\d{4}$)" required></div>
+		{{form['zip_code_required']}}
 		<div class="m-form-box"><label for="companyType">Tipo de compañía: *</label><br>
 			<div class="company-type-field">
 				{% for type in companyType %}
@@ -67,12 +52,8 @@
 				<input type="text" id="other_company_type_field" name="othercompanyType">
 			</div>
 		</div>
-		<div class="m-form-line"><label for="">Año de fundación: *</label><input type="text" name="yearFounded" id="yearFounded" 
-			data-parsley-type="number" 
-			data-parsley-trigger="focusout" 
-			data-parsley-range="[1000, 2014]" 
-			required></div>
-		<div class="m-form-line"><label for="">Número de empleados de tiempo completo: *</label><input type="text" name="fte" id="fte" data-parsley-trigger="focusout" data-parsley-type="number" required></div>
+		{{form['founding_year_required']}}
+		{{form['fte_required']}}
 	</fieldset>
 
 	<fieldset class="m-form-half">	
@@ -126,31 +107,17 @@
 
 	<!--*****************************************************************-DESCRIPTION-***************************************************************** !-->
 	<fieldset class="m-form-half left">
-		<h3>Por favor describe de manera breve la misión y el trabajo de tu compañía. Puedes obtener la información de su página web u otras publicaciones al respecto. <br><em>[Máximo 200 palabras]</em> *</h3>
-		<textarea rows="10" cols="59" name="description" id="description" 
-		data-parsley-trigger="keyup" 
-		data-parsley-maxwords="200" 
-		data-parsley-error-message="You are over the word limit."
-		required></textarea><br><br>
+		{{form['description_required']}}
 	</fieldset>
 
 	<!--*****************************************************************-SHORT DESCRIPTION-***************************************************************** !-->
 	<fieldset class="m-form-half right">
-		<h3>Por favor escribe un breve resumen de tu compañía.. <br><em>[Máximo 25 palabras]</em> *</h3>
-		<textarea rows="10" cols="59" name="descriptionShort" id="descriptionShort" 
-		data-parsley-trigger="keyup" 
-		data-parsley-maxwords="25" 
-		data-parsley-error-message="You are over the word limit." 
-		required></textarea><br>
+		{{form['description_short_required']}}
 	</fieldset>
 
 	<!--*****************************************************************-FINANCIAL INFO-***************************************************************** !-->
 	<fieldset class="m-form-half">
-		<h3>Por favor incluye cualquier información financiera u operativa, la cual nos ayudará a entender a tu compañía. Tenemos interés en información específica, como ingresos anuales pasados y proyectados, el total de dólares invertidos hasta la fecha, y socios o inversionistas importantes. <br><em>[Máximo 100 palabras]</em></h3>
-		<textarea rows="10" cols="59" name="financialInfo" id="financialInfo" 
-		data-parsley-trigger="keyup" 
-		data-parsley-maxwords="100" 
-		data-parsley-error-message="You are over the word limit."></textarea><br><br>
+		{{form['financial_info']}}
 	</fieldset>
 	{% raw xsrf_form_html() %}
 
