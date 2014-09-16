@@ -1,77 +1,21 @@
 {
 	"en": {
-			"contact": [ 
-				{
-					"label_for":"firstName",
-					"label": "First Name",
-					"required": "required",
-					"type":"text",
-					"name":"firstName",
-					"id":"firstName",
-					"class":"",
-					"data-parsley-maxlength":50,
-					"data-parsley-trigger":"focusout",
-					"data-parsley-type":"email",
-					"data-parsley-pattern":"",
-					"data-parsley-error-message":""
-				},
-				{
-					"label_for":"lastName",
-					"label": "Last Name",
-					"required": "required",
-					"type":"text",
-					"name":"lastName",
-					"id":"lastName",
-					"class":"",
-					"data-parsley-maxlength":50,
-					"data-parsley-trigger":"",
-					"data-parsley-type":"",
-					"data-parsley-pattern":"",
-					"data-parsley-error-message":""
-				},
-				{
-					"label_for":"title",
-					"label": "Title",
-					"required": "required",
-					"type":"text",
-					"name":"title",
-					"id":"title",
-					"class":"",
-					"data-parsley-maxlength":50,
-					"data-parsley-trigger":"",
-					"data-parsley-type":"",
-					"data-parsley-pattern":"",
-					"data-parsley-error-message":""
-				},
-				{
-					"label_for":"email",
-					"label": "Email",
-					"required": "required",
-					"type":"text",
-					"name":"email",
-					"id":"email",
-					"class":"",
-					"data-parsley-maxlength":"",
-					"data-parsley-trigger":"focusout",
-					"data-parsley-type":"email",
-					"data-parsley-pattern":"",
-					"data-parsley-error-message":""
-				},
-				{
-					"label_for":"phone",
-					"label": "Phone",
-					"required": "",
-					"type":"text",
-					"name":"phone",
-					"id":"phone",
-					"class":"",
-					"data-parsley-maxlength":50,
-					"data-parsley-trigger":"focusout",
-					"data-parsley-type":"",
-					"data-parsley-pattern":"(^\\d{3}(-|\\s)\\d{3}(-|\\s)\\d{4}$)|(^\\d{10})",
-					"data-parsley-error-message":"Phone must be in format: ###-###-####"
-				}
-			]
-	},
-	"es":{}
+		"contact_first_name_required": "<div class=\"m-form-line\"><label for=\"\">First Name: *</label><input type=\"text\" name=\"firstName\" id=\"firstName\" data-parsley-maxlength=\"50\" required></div>",
+		"contact_first_name": "<div class=\"m-form-line\"><label for=\"\">First Name: *</label><input type=\"text\" name=\"firstName\" id=\"firstName\" data-parsley-maxlength=\"50\"></div>",
+		"contact_last_name_required": "<div class=\"m-form-line\"><label for=\"\">Last Name: *</label><input type=\"text\" name=\"lastName\" id=\"lastName\" data-parsley-maxlength=\"50\" required></div>",
+		"contact_last_name": "<div class=\"m-form-line\"><label for=\"\">Last Name: *</label><input type=\"text\" name=\"lastName\" id=\"lastName\" data-parsley-maxlength=\"50\" ></div>",
+		"contact_title_required": "<div class=\"m-form-line\"><label for=\"\">Title: *</label><input type=\"text\" name=\"title\" id=\"title\" data-parsley-maxlength=\"50\" required></div>",
+		"contact_title": "<div class=\"m-form-line\"><label for=\"\">Title: *</label><input type=\"text\" name=\"title\" id=\"title\" data-parsley-maxlength=\"50\"></div>",
+		"contact_email_required": "<div class=\"m-form-line\"><label for=\"\">Email: *</label><input type=\"text\" name=\"email\" id=\"email\" data-parsley-maxlength=\"50\" data-parsley-trigger=\"focusout\" data-parsley-type=\"email\" required></div>",
+		"contact_email": "<div class=\"m-form-line\"><label for=\"\">Email: *</label><input type=\"text\" name=\"email\" id=\"email\" data-parsley-maxlength=\"50\" data-parsley-trigger=\"focusout\" data-parsley-type=\"email\"></div>",
+		"contact_phone": "<div class=\"m-form-line\"><label for=\"\">Phone:</label><input type=\"text\" name=\"phone\" id=\"phone\" data-parsley-trigger=\"focusout\" data-parsley-pattern=\"(^\\d{3}(-|\\s)\\d{3}(-|\\s)\\d{4}$)|(^\\d{10})\" data-parsley-error-message=\"Phone must be in format: ###-###-####\"></div>",
+		"company_name_required": "<div class=\"m-form-line\"><label for=\"companyName\">Company Name: *</label><input type=\"text\" name=\"companyName\" id=\"companyName\" data-parsley-trigger=\"focusout\" data-parsley-remote data-parsley-remote-options='{ \"type\": \"POST\" }' data-parsley-remote-validator=\"validateName\" data-parsley-maxlength=\"70\" data-parsley-error-message=\"\" required><span class='company-name-error'></span></div>",
+		"company_url": "<div class=\"m-form-line\"><label for=\"url\">Company URL: *</label><input type='text' name=\"url\" id=\"url\" data-parsley-trigger=\"change\" data-parsley-type=\"url\" required></div>",
+		"company_url_required": "<div class=\"m-form-line\"><label for=\"url\">Company URL: *</label><input type='text' name=\"url\" id=\"url\" data-parsley-trigger=\"change\" data-parsley-type=\"url\"></div>",
+		"city": "<div class=\"m-form-line\"><label for=\"city\">In which city is your company's headquarters located?</label><input type=\"text\" name=\"city\" id=\"city\" data-parsley-trigger=\"focusout\" data-parsley-maxlength=\"50\"></div>",
+		"zip_code_required": "<div class=\"m-form-line\"><label for=\"zipCode\">Zip Code: *</label><input type=\"text\" name=\"zipCode\" id=\"zipCode\" data-parsley-trigger=\"focusout\" data-parsley-pattern=\"(^\\d{5}$)|(^\\d{5}-\\d{4}$)\" required></div>",
+		"zip_code": "<div class=\"m-form-line\"><label for=\"zipCode\">Zip Code: *</label><input type=\"text\" name=\"zipCode\" id=\"zipCode\" data-parsley-trigger=\"focusout\" data-parsley-pattern=\"(^\\d{5}$)|(^\\d{5}-\\d{4}$)\"></div>",
+		"description_required": "<h3>Please give us a short public statement describing your company’s mission and work. You can take this material from your website or other publications if you choose to. <br><em>[200 words or less]</em> *</h3><textarea rows=\"10\" cols=\"59\" name=\"description\" id=\"description\" data-parsley-trigger=\"keyup\" data-parsley-maxwords=\"200\" data-parsley-error-message=\"You are over the word limit.\" required></textarea><br><br>",
+		"description": "<h3>Please give us a short public statement describing your company’s mission and work. You can take this material from your website or other publications if you choose to. <br><em>[200 words or less]</em> *</h3><textarea rows=\"10\" cols=\"59\" name=\"description\" id=\"description\" data-parsley-trigger=\"keyup\" data-parsley-maxwords=\"200\" data-parsley-error-message=\"You are over the word limit.\"></textarea><br><br>"
+	}
 }

@@ -22,38 +22,19 @@
 	<!--*****************************************************************-CONTACT INFO-***************************************************************** !-->
 	<fieldset class="m-form-half">
 		<h3>Contact Information</h3>
-		{% for k in form['contact']%}
-			<div class="m-form-line"><label for="{{k['label_for']}}">{{k['label']}}: {% if k['required']%}*{%end%}</label><input 
-				type="{{k['type']}}"
-				name="{{k['name']}}"
-				id="{{k['id']}}"
-				{%if k['data-parsley-type'] %} data-parsley-type="{{k['data-parsley-type']}}" {%end%}
-				{%if k['data-parsley-maxlength'] %} data-parsley-maxlength="{{k['data-parsley-maxlength']}}" {%end%}
-				{%if k['data-parsley-trigger'] %} data-parsley-trigger="{{k['data-parsley-trigger']}}" {%end%}
-				{%if k['data-parsley-pattern'] %} data-parsley-pattern="{{k['data-parsley-pattern']}}" {%end%}
-				{%if k['data-parsley-error-message'] %} data-parsley-error-message="{{k['data-parsley-error-message']}}" {%end%}
-				{%if k['required'] %} {{k['required']}}{%end%}>
-			</div>
-		{%end%}
-
+		{{form['contact_first_name_required']}}
+		{{form['contact_last_name_required']}}
+		{{form['contact_title_required']}}
+		{{form['contact_email_required']}}
+		{{form['contact_phone']}}
 	</fieldset>
 
 	<!--*****************************************************************-COMPANY INFO-***************************************************************** !-->
 	<fieldset class="m-form-half right">
 		<h3>Company Information</h3>
-		<div class="m-form-line">
-			<label for="companyName">Company Name: *</label><input type="text" name="companyName" id="companyName" 
-			data-parsley-trigger="focusout"
-            data-parsley-remote
-            data-parsley-remote-options='{ "type": "POST" }'
-            data-parsley-remote-validator="validateName"
-            data-parsley-maxlength="70"
-            data-parsley-error-message=""
-            required>
-			<span class='company-name-error'></span>
-		</div>
-		<div class="m-form-line"><label for="url">Company URL: *</label><input type='text' name="url" id='url' data-parsley-trigger="change" data-parsley-type="url" required></div>
-		<div class="m-form-line"><label for="city">In which city is your company's headquarters located?</label><input type="text" name="city" id="city"></div>
+		{{form['company_name_required']}}
+		{{form['company_url_required']}}
+		{{form['city']}}
 		<div class="m-form-line">
 			<label for="state">State: *</label>
 			<select name='state' id="state" required>
@@ -63,7 +44,7 @@
 			</select>
 		</div>
 		<div class="m-form-line"><label for="country">Country:</label><input type="text" name="country" value="{{country_keys[country]}}" readonly></div>
-		<div class="m-form-line"><label for="zipCode">Zip Code: *</label><input type="text" name="zipCode" id="zipCode" data-parsley-trigger="focusout" data-parsley-pattern="(^\d{5}$)|(^\d{5}-\d{4}$)" required></div>
+		{{form['zip_code_required']}}
 		<!--*****************************************************************-COMPANY TYPE-***************************************************************** !-->
 		<div class="m-form-box"><label for="companyType">Type of Company: *</label><br>
 			<div class="company-type-field">
@@ -133,12 +114,7 @@
 
 	<!--*****************************************************************-DESCRIPTION-***************************************************************** !-->
 	<fieldset class="m-form-half left">
-		<h3>Please give us a short public statement describing your company’s mission and work. You can take this material from your website or other publications if you choose to. <br><em>[200 words or less]</em> *</h3>
-		<textarea rows="10" cols="59" name="description" id="description" 
-		data-parsley-trigger="keyup" 
-		data-parsley-maxwords="200" 
-		data-parsley-error-message="You are over the word limit."
-		required></textarea><br><br>
+		{{form['description_required']}}
 	</fieldset>
 
 	<!--*****************************************************************-SHORT DESCRIPTION-***************************************************************** !-->

@@ -258,7 +258,7 @@ class ValidateHandler(BaseHandler):
         if not country:
             country = 'us'
         companyName = self.get_argument("companyName", None)
-        prettyName = re.sub(r'([^\s\w])+', '', companyName).replace(" ", "-").title()
+        prettyName = self.application.tools.prettify(companyName)
         try: 
             c = models.Company.objects.get(Q(country=country) & Q(prettyName=prettyName))
             logging.info('company exists.')
