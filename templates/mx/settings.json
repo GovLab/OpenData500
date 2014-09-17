@@ -60,5 +60,48 @@
             "thanks": "Thank You!"
         },
         "es": {}
+    },
+    "footer_menu": {
+        "en":[{
+            "item": "Twitter",
+            "link": "https://twitter.com/PresidenciaMX"
+        },
+        {
+            "item":"About",
+            "link":"/mx/about/"
+        },
+        {
+            "item":"Terms of Service",
+            "link":"/mx/tos/"
+        },
+        {
+            "item":"Contact Us",
+            "link":"mailto:OD100MX@datos.gob.mx"
+        }],
+        "es":[{
+            "item": "Twitter",
+            "link": "https://twitter.com/PresidenciaMX"
+        },
+        {
+            "item":"Acerca de",
+            "link":"/mx/about/"
+        },
+        {
+            "item":"Términos y Condiciones",
+            "link":"/mx/tos/"
+        },
+        {
+            "item":"Contacto",
+            "link":"mailto:OD100MX@datos.gob.mx"
+        }]
     }
 }
+
+
+
+
+
+
+
+
+
