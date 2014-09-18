@@ -17,150 +17,13 @@
 	 {% module Form(country, "en", True, True, company) %}
 
 
-	<h2 class="data-section">Data Use and Source Information </h2>
-
-	<!--*****************************************************************-EXAMPLE USES-***************************************************************** !-->
-	<fieldset class="m-form-half right">
-		<h3>Provide any specific examples of how your company uses open data.<br> <em>[200 words or less]</em></h3>
-		<textarea rows="10" cols="59" name="exampleUses" id="exampleUses" 
-		data-parsley-trigger="keyup" 
-		data-parsley-maxwords="200" 
-		data-parsley-error-message="You are over the word limit.">{%if company.exampleUses %}{{ company.exampleUses }}{%else%}{%end%}</textarea><br>
-
-		<!--*****************************************************************-DATA SOURCES-***************************************************************** !-->
-		<h3>From approximately how many sources (i.e. agencies, subagencies, local and state governments) does your company use data? *</h3>
-		<div class="source-count-buttons">
-			{% for count in source_count %}
-				<input type="radio" name="sourceCount" id="{{count}}" value="{{count}}" {% if company.sourceCount == count %}checked{%end%} required><label for="{{count}}">{{count}}</label><br>
-			{%end %}
-		</div>
-	</fieldset>
-
-	<!--*****************************************************************-DATA TYPES-***************************************************************** !-->
-	<fieldset class="m-form-half">
-		<h3>What types of data does your company use? <br><em>(check all that apply)</em></h3>
-		<div class="data-type-field">
-			{% for data_type in data_types %}
-				<input type="checkbox" id="{{data_type}}_data_type" name="dataTypes" value="{{data_type}}" data-parsley-group="dataTypes" {% if data_type in company.dataTypes %} checked {% end %}/><label for="{{data_type}}_data_type">{{data_type}}</label><br>
-			{% end %}
-			{% if list(set(company.dataTypes) - set(data_types)) %}
-				<input type="checkbox" id="other_data_type" name="dataTypes" value="Other" {%if company.dataTypes[0] %}checked{%end%} data-parsley-mincheck="1" data-parsley-group='dataTypes' data-parsley-trigger="change"><label for="Other">Other</label>
-				<input type="text" name="otherDataType" id="other_data_type_text_field" value="{{ list(set(company.dataTypes) - set(data_types))[0] }}" />
-			{% else %}
-				<input type="checkbox" id="other_data_type" name="dataTypes" value="Other" data-parsley-mincheck="1" data-parsley-group='dataTypes' data-parsley-trigger="change"><label for="Other">Other</label>
-				<input type="text" name="otherDataType" id="other_data_type_text_field" />
-			{% end %}
-		</div>
-		<input type="hidden" name="id" id="companyID" value="{{company.id}}">
-	</fieldset>
+	{% module FormData(country, "es", True, company) %}
 	{% raw xsrf_form_html() %}
 
 </form>
 <br>
 
-<!--*****************************************************************-AGENCY FORM-***************************************************************** !-->
-<div class="m-form-box data">
-	<p>Please tell us more about the open data sources your company uses.</p>
-	<p>Use the search bar to find and select government agencies, subagencies, city and state governments, or government-funded research programs from the list provided.</p>
-	<p>If you can't find your data provider on the list, please fill out the form <a href="/#suggest">below</a> to suggest an agency, subagency, organization, etc.</p>
-	<p><strong>[Optional]:</strong> Please tell us which datasets your company uses from the agencies, city, or state governments you select, and please score each dataset on a scale of 1 to 4 (i.e. 1 = Poor; 4 = Excellent)</p>
-	<p><div class="example-popup"><a>See Example.</a></div></p>
-	<div class="dialog-example" style="display:none">
-		<img src="{{ static_url("img/ExampleData.png") }}">
-	</div>
-	<div class="ui-widget">
-		<label for="tags">Search: </label>
-		<input id="agencyTags" placeholder="e.g. NYC, Department of Transportation, DARPA, Defense, Texas, Census..." value="" size="78">
-		<input type="hidden" id="searchval" />
-		<input type="button" class="l-button" id="addSearchResult" value="Add Agency/Sub-Agency">
-		<input type="hidden" class="companyID" name="companyID" value="{{ company.id }}">
-		<div class="errors-search">
-			<span class="agency-search-error-message" style="display:inline-block;"></span>
-		</div>
-	</div>
-	<div class="agencyList">
-		<div id="accordionAgency">
-			{% for agency in company.agencies %}
-				<h3 class="agency" name='{{agency.name.replace(" ", "-") }}'><a href="#">{{agency.name}}</a>
-					<span style="float:right; display: none;" class="toolbar ui-corner-all ui-icon ui-icon-circle-close red" subagency="" agency="{{agency.name.replace(" ","-")}}"></span>
-				</h3>
-				<div id="{{agency.name.replace(" ","-")}}Accordion">
-					<br><h3>Agency Level Datasets</h3><br>
-					<table class="datasetTable">
-						<tr>
-							<th class="table-header-name">Dataset Name</th>
-							<th class="table-header-url">Dataset URL</th>
-							<th class="table-header-rating">Rating (1-4)</th>
-							<th class="table-header-buttons"></th>
-						</tr>
-						{% for d in agency.datasets %}{% if company == d.usedBy %}
-							<tr class="dataset-row" name="{{d.datasetName}}" subagency="" agency="{{agency.name.replace(" ","-")}}">
-								<td><input type="text" name="datasetName" id="datasetName" {% if (d.datasetName) %} value="{{d.datasetName}}" {% end %} ></td>
-								<td><input type="text" name="datasetURL" id="datasetURL" {% if (d.datasetURL) %} value="{{d.datasetURL}}" {% end %}></td>
-								<td><input type="text" name="rating" id="rating" size="3" {% if (d.rating) %} value="{{d.rating}}" {% end %}></td>
-								<td><input type="button" class="l-button" id="saveDataset" value="Save"><input type="button" class="l-button" id="deleteDataset" value="Delete">
-									<span class="dataset-error-message" style="display:inline-block;"></span></td>
-							</tr>
-						{% end %}{% end %}
-						<tr class="dataset-row" subagency="" agency="{{agency.name.replace(" ","-")}}" >
-							<td><input type="text" name="datasetName" id="datasetName" placeholder="Agency-Level Dataset" value=""></td>
-							<td><input type="text" name="datasetURL" id="datasetURL" value=""></td>
-							<td><input type="text" name="rating" id="rating" size="3" value=""></td>
-							<td><input type="button" class="l-button" id="saveDataset" value="Save"><input type="button" class="l-button" id="deleteDataset" value="Delete" style="display:none">
-								<span class="dataset-error-message" style="display:inline-block;"></span></td>
-						</tr>
-					</table>	<!---END DATASETS FROM JUST AGENCY !-->
-					<!-- ROLL THROUGH SUBAGENCIES !-->
-					{% if agency.subagencies %}<br><h3>Sub-Agencies</h3><br>{% end %}
-					<div id="accordionSubAgency" class="{{agency.name.replace(" ", "-") }}Subagencies">
-						{% for sub in agency.subagencies %}{% if company in sub.usedBy %}
-							<h3 class="subagency" name="{{sub.name.replace(" ", "-") }}"><a href="#">{{sub.name}}</a>
-								<span style="float:right; display: none;" class="toolbar ui-corner-all ui-icon ui-icon-circle-close red" subagency="{{sub.name.replace(" ","-")}}" agency="{{agency.name.replace(" ","-")}}"></span>
-							</h3>
-							<div class="{{ sub.name.replace(" ", "-") }}">
-								<table class="subagencyDatasetTable">
-									<tr>
-										<th class="table-header-name">Dataset Name</th>
-										<th class="table-header-url">Dataset URL</th>
-										<th class="table-header-rating">Rating (1-4)</th>
-										<th class="table-header-buttons"></th>
-									</tr>
-									{% for d in sub.datasets %}{%if company == d.usedBy %}
-										<tr class="dataset-row" name="{{d.datasetName}}" subagency="{{ sub.name.replace(" ", "-") }}" agency="{{agency.name.replace(" ","-")}}">
-											<td><input type="text" name="datasetName" id="datasetName" {% if (d.datasetName) %} value="{{d.datasetName}}" {% end %}></td>
-											<td><input type="text" name="datasetURL" id="datasetURL" {% if (d.datasetURL) %} value="{{d.datasetURL}}" {% end %}></td>
-											<td><input type="text" name="rating" id="rating" size="3" {% if (d.rating) %} value="{{d.rating}}" {% end %}></td>
-											<td><input type="button" class="l-button" id="saveDataset" value="Save"><input type="button" class="l-button" id="deleteDataset" value="Delete">
-												<span class="dataset-error-message" style="display:inline-block;"></span></td>
-										</tr>
-									{% end %}{% end %}
-									<tr class="dataset-row" subagency="{{ sub.name.replace(" ", "-") }}" agency="{{agency.name.replace(" ","-")}}">
-										<td><input type="text" name="datasetName" id="datasetName" placeholder="Subagency-Level Dataset" value=""></td>
-										<td><input type="text" name="datasetURL" id="datasetURL" value=""></td>
-										<td><input type="text" name="rating" id="rating" size="3" value=""></td>
-										<td><input type="button" class="l-button" id="saveDataset" value="Save"><input type="button" class="l-button" id="deleteDataset" value="Delete" style="display:none">
-											<span class="dataset-error-message" style="display:inline-block;"></span></td>
-									</tr>
-								</table>
-							</div>
-						{% end %}{% end %} <!-- END OF SUBAGENCIES !-->
-					</div>
-				</div>
-			{% end %}<!-- END OF AGENCIES !-->
-		</div><br>
-	</div>
-</div>
-
-<!--*****************************************************************-DATA COMMENTS-***************************************************************** !-->
-<form method="post" class="m-form data-comment-form" data-parsley-validate>
-	<fieldset class="m-form-half right">
-		<h3>Please give your comments about the usefulness of all these data sources and datasets.<br><em>[250 words or less] </em></h3>
-		<textarea rows="10" cols="59" name="dataComments" id="dataComments" 
-		parsley-trigger="keyup" 
-		data-parsley-maxwords="250"
-		required>{%if company.dataComments %}{{ company.dataComments }}{% end %}</textarea><br>
-	</fieldset>
-</form>
+{% module AgencyAdd(country, settings['default_language'], company) %}
 
 <!--*****************************************************************-SUBMIT BUTTON-***************************************************************** !-->
 <div class='submit_form'>
@@ -178,7 +41,7 @@ $(document).ready( function () {
     $("#company_form_edit").parsley();
     $('#data_comments_form').parsley();
     $('.submit_form').on('click', '#submit_form_edit_button', function() {
-        if ($("#company_form_edit").parsley().validate() && $('.data-comment-form').parsley().validate() && $(".agency").length > 0) {
+        if ($("#company_form_edit").parsley().validate() && $('#company-data-comment-form').parsley().validate() && $(".agency").length > 0) {
             data = $('#company_form_edit').serializeArray();
             data[data.length] = { name: "dataComments", value: $('#dataComments').val() };
             $.ajax({

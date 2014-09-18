@@ -43,7 +43,8 @@ class Application(tornado.web.Application):
             ui_modules={
                 "datetime": datetime,
                 'Form': FormModule,
-                'FormData':FormDataModule},
+                'FormData':FormDataModule,
+                'AgencyAdd':AgencyAddModule},
             debug=True,
             cookie_secret=os.environ.get('COOKIE_SECRET'),
             xsrf_cookies=True,

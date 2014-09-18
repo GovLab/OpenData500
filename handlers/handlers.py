@@ -543,7 +543,7 @@ class FormDataModule(tornado.web.UIModule):
             )
 
 class AgencyAddModule(tornado.web.UIModule):
-    def render(self, country, lan, required, edit, company=None):
+    def render(self, country, lan, company=None):
         with open("templates/agencyAdd.json") as json_file:
                 form = json.load(json_file)
         return self.render_string(
@@ -551,11 +551,6 @@ class AgencyAddModule(tornado.web.UIModule):
             c=company, 
             country=country, 
             lan=lan, 
-            required=required, 
-            edit=edit,
             form=form[lan],
-            source_count = source_count,
-            data_types = data_types[lan],
-            data_impacts = data_impacts[lan]
             )
 
