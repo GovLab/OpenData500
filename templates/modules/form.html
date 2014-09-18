@@ -1,0 +1,352 @@
+{% autoescape None %} 
+	<!--*****************************************************************-CONTACT INFO-***************************************************************** !-->
+	<fieldset class="m-form-half">
+		<h3>{{form['contact_information_title']}}</h3>
+		<div class="m-form-line"><label for="">{{form['first_name']}}: *</label>
+			<input type="text" 
+			name="firstName" 
+			id="firstName" 
+			{%if c %}value="{{ c.contact.firstName }}"{%end%}
+			data-parsley-maxlength="50" 
+			{%if required %}required{%end%}></div>
+		<div class="m-form-line"><label for="">{{form['last_name']}}: *</label>
+			<input type="text" 
+			name="lastName" 
+			id="lastName" 
+			{%if c %}value="{{ c.contact.lastName }}"{%end%}
+			data-parsley-maxlength="50" 
+			{%if required %}required{%end%}></div>
+		<div class="m-form-line"><label for="">{{form['title']}}: *</label>
+			<input type="text" 
+			name="title" 
+			id="title" 
+			{%if c %}value="{{ c.contact.title }}"{%end%}
+			data-parsley-maxlength="50" 
+			{%if required %}required{%end%}></div>
+		<div class="m-form-line"><label for="">{{form['email']}}: *</label>
+			<input type="text" 
+			name="email" 
+			id="email" 
+			{%if c %}value="{{ c.contact.email }}"{%end%}
+			data-parsley-maxlength="50" 
+			data-parsley-trigger="focusout" 
+			data-parsley-type="email" 
+			{%if required %}required{%end%}></div>
+		<div class="m-form-line"><label for="">{{form['phone']}}:</label>
+			<input type="text" 
+			name="phone" 
+			id="phone" 
+			{%if c %}value="{{ c.contact.phone }}"{%end%}
+			data-parsley-trigger="focusout" 
+			data-parsley-pattern="(^\d{3}(-|\s)\d{3}(-|\s)\d{4}$)|(^\d{10})"
+			data-parsley-error-message="Phone must be in format: ###-###-####"></div>
+	</fieldset>
+
+	<!--*****************************************************************-COMPANY INFO-***************************************************************** !-->
+	<fieldset class="m-form-half right">
+		<h3>{{form['company_information_title']}}</h3>
+		{%if not edit %}
+		<div class="m-form-line">
+			<label for="companyName">{{form['company_name']}}: *</label>
+			<input type="text" 
+			name="companyName" 
+			id="companyName" 
+			{%if c %}value="{{ c.companyName }}"{%end%}
+			data-parsley-trigger="focusout"
+            data-parsley-remote
+            data-parsley-remote-options='{ "type": "POST" }'
+            data-parsley-remote-validator="validateName"
+            data-parsley-maxlength="70"
+            data-parsley-error-message=""
+            required>
+			<span class='company-name-error'></span></div>
+		{%end%}
+		<div class="m-form-line"><label for="url">{{form['company_url']}}: *</label>
+			<input type='text' 
+			name="url" 
+			id='url' 
+			{%if c %}value="{{ c.url }}"{%end%}
+			data-parsley-trigger="change" 
+			data-parsley-type="url" 
+			{%if required %}required{%end%}></div>
+		<div class="m-form-line"><label for="city">{{form['city']}}</label>
+			<input type="text" 
+			name="city" 
+			id="city"
+			{%if c %}value="{{ c.city }}"{%end%}></div>
+		<div class="m-form-line">
+			<label for="state">{{form['state']}}:</label>
+			<select name='state' id="state" required>
+				{% for i in range(0, len(stateList[country])) %}
+					<option name="state" 
+					value="{{stateListAbbrev[country][i]}}" 
+					{%if c %}
+						{%try%}{%if c.state.replace(' ','') == stateListAbbrev[country][i] %} selected="selected" {%end%}
+						{%except%}{%end%}
+					{%end%}>{{ stateList[country][i] }}</option>
+				{%end%}
+			</select></div>
+		<div class="m-form-line"><label for="country">{{form['country']}}:</label>
+			<input type="text" 
+			name="country" 
+			value="{{country_keys[country]}}" 
+			readonly></div>
+		<div class="m-form-line"><label for="zipCode">{{form['zip_code']}}: *</label>
+			<input type="text" 
+			name="zipCode" 
+			id="zipCode" 
+			{%if c %}value="{{ c.zipCode }}"{%end%} 
+			data-parsley-trigger="focusout" 
+			data-parsley-pattern="(^\d{5}$)|(^\d{5}-\d{4}$)" 
+			{%if required %}required{%end%}></div>
+		<!--*****************************************************************-TYPE OF COMPANY, YEAR FOUNDED, FTE-***************************************************************** !-->
+		<div class="m-form-box"><label for="companyType">{{form['type_of_company']}}: *</label><br>
+			<div class="company-type-field">
+				{% for type in companyType %}
+					<input type="radio" 
+					id="{{type}}" 
+					name="companyType" 
+					data-parsley-group='companyType' 
+					value="{{ type }}"
+					{%if c %}
+						{% if c.companyType == type %} checked {% end %}
+					{%end%}>
+					<label for="{{type}}">{{type}}</label><br>
+				{% end %}
+				{%if c %}
+					{% if c.companyType not in companyType and c.companyType != '' %}
+						<input type="radio" id="other_type" name="companyType" value="Other" 
+							data-parsley-mincheck="1" 
+							data-parsley-group='companyType' 
+							data-parsley-trigger="change" 
+							checked 
+							{%if required %}required{%end%}>
+						<label for="other_type">{{form['other']}}</label>
+						<input type="text" id="other_company_type_field" name="othercompanyType" value ="{{ c.companyType }}">
+					{% else %}
+						<input type="radio" id="other_type" name="companyType" value="Other" 
+							data-parsley-mincheck="1" 
+							data-parsley-group='companyType' 
+							data-parsley-trigger="change" 
+							{%if required %}required{%end%}>
+							<label for="other_type">Otro</label>
+						<input type="text" id="other_company_type_field" name="othercompanyType">
+					{% end %}
+				{%else%}
+					<input type="radio" id="other_type" name="companyType" value="Other" 
+						data-parsley-mincheck="1" 
+						data-parsley-group='companyType' 
+						data-parsley-trigger="change" 
+						{%if required %}required{%end%}>
+					<label for="other_type">{{form['other']}}</label>
+					<input type="text" id="other_company_type_field" name="othercompanyType">
+				{%end%}
+			</div></div>
+		<div class="m-form-line"><label for="">{{form['year_founded']}}: *</label>
+			<input type="text" 
+			name="yearFounded" 
+			id="yearFounded" 
+			{%if c %}value="{{ c.yearFounded }}"{%end%} 
+			data-parsley-type="number" 
+			data-parsley-trigger="focusout" 
+			data-parsley-range="[1000, 2014]" 
+			{%if required %}required{%end%}></div>
+		<div class="m-form-line"><label for="">{{form['fte']}}: *</label>
+			<input type="text" 
+			name="fte" 
+			id="fte" 
+			{%if c %}value="{{ c.fte }}"{%end%} 
+			data-parsley-trigger="focusout" 
+			data-parsley-type="number" 
+			{%if required %}required{%end%}></div>
+	</fieldset>
+
+	<fieldset class="m-form-half">	
+		<!--*****************************************************************-BUSINESS MODELS-***************************************************************** !-->
+		<h3>{{form['business_model']}}<br><em>{{form['select_all']}}</em> *</h3>
+		<div class="business-model-field">
+			{% for model in business_models %}
+				<input type="checkbox" id="{{model}}" name="businessModel" value="{{model}}" 
+				data-parsley-group="businessModel" 
+				{%if c %}
+					{% if model in c.businessModel %} checked {% end %}
+				{% end %}/>
+				<label for="{{model}}">{{model}}</label><br>
+			{% end %}
+			{%if c%}
+				{% if [e for e in c.businessModel if e.encode('utf-8') not in business_models] %}
+					<input type="checkbox" id="other_model" name="businessModel" value="Other" 
+						{%if c.businessModel[0] %}checked{%end%} 
+						data-parsley-mincheck="1" 
+						data-parsley-group='businessModel' 
+						data-parsley-trigger="change" 
+						{%if required %}required{%end%}><label for="Other">{{form['other']}}</label>
+					<input type="text" name="otherbusinessModel" id="other_model_text_field" value="{{ [e for e in c.businessModel if e.encode('utf-8') not in business_models][0] }}" />
+				{% else %}
+					<input type="checkbox" id="other_model" name="businessModel" value="Other" 
+						data-parsley-mincheck="1" 
+						data-parsley-group='businessModel' 
+						data-parsley-trigger="change" 
+						{%if required %}required{%end%}><label for="Other">{{form['other']}}</label>
+					<input type="text" name="otherbusinessModel" id="other_model_text_field" />
+				{% end %}
+			{%else%}
+				<input type="checkbox" id="other_model" name="businessModel" value="Other" 
+					data-parsley-mincheck="1" 
+					data-parsley-group='businessModel' 
+					data-parsley-trigger="change" 
+					{%if required %}required{%end%}><label for="Other">{{form['other']}}</label>
+				<input type="text" name="otherbusinessModel" id="other_model_text_field" />
+			{%end%}
+		</div>
+		<br>
+		<br>
+
+		<!--*****************************************************************-REVENUE SOURCES-***************************************************************** !-->
+		<h3>{{form['sources_of_revenue']}}<br><em>{{form['select_all']}}</em> *</h3>
+		<div class="revenue-source-field">
+			{% for source in revenueSource %}
+				<input type="checkbox" id="{{source}}" 
+					name="revenueSource" 
+					value="{{source}}" 
+					data-parsley-group="revenueSource" 
+					{%if c %}
+						{% if source.decode('utf-8') in c.revenueSource %} checked {% end %}
+					{%end%}/><label for="{{source}}">{{source}}</label><br>
+			{% end %}
+			{%if c %}
+				{% if [e for e in c.revenueSource if e.encode('utf-8') not in revenueSource] %}
+					<input type="checkbox" id="other_revenue" name="revenueSource" value="Other" 
+						{%if c.revenueSource[0] %}checked{%end%} 
+						data-parsley-mincheck="1" 
+						data-parsley-group='revenueSource' 
+						data-parsley-trigger="change" 
+						{%if required %}required{%end%}><label for="Other">{{form['other']}}</label>
+					<input type="text" name="otherrevenueSource" id="other_revenue_text_field" value="{{ [e for e in c.revenueSource if e.encode('utf-8') not in revenueSource][0] }}" />
+				{% else %}
+					<input type="checkbox" id="other_revenue" name="revenueSource" value="Other" 
+						data-parsley-mincheck="1" 
+						data-parsley-group='revenueSource' 
+						data-parsley-trigger="change" 
+						{%if required %}required{%end%}><label for="Other">{{form['other']}}</label>
+					<input type="text" name="otherrevenueSource" id="other_revenue_text_field" />
+				{% end %}
+			{%else%}
+				<input type="checkbox" id="other_revenue" name="revenueSource" value="Other" 
+					data-parsley-mincheck="1" data-parsley-group='revenueSource' 
+					data-parsley-trigger="change" 
+					{%if required %}required{%end%}><label for="Other">{{form['other']}}</label>
+				<input type="text" name="otherrevenueSource" id="other_revenue_text_field" />
+			{%end%}
+		</div>
+		<br>
+		<br>
+
+		<!--*****************************************************************-SOCIAL IMPACT-***************************************************************** !-->
+		<h3>{{form['social_impact']}}<br><em>{{form['select_all']}}</em> </h3>
+		<div class="social-impact-field">
+			{% for impact in social_impacts %}
+				<input type="checkbox" 
+					id="{{impact}}" 
+					name="socialImpact" 
+					value="{{impact}}" 
+					data-parsley-group="socialImpact" 
+					{% if c %}
+						{% if impact in c.socialImpact %} checked {% end %}
+					{%end%}/><label for="{{impact}}">{{impact}}</label><br>
+			{% end %}
+			{% if c %}
+				{% if [e for e in c.socialImpact if e.encode('utf-8') not in social_impacts] %}
+					<input type="checkbox" id="other_impact" name="socialImpact" value="Other" {%if c.socialImpact[0] %}checked{%end%} data-parsley-mincheck="1" data-parsley-group='socialImpact' data-parsley-trigger="change"><label for="Other">{{form['other']}}</label>
+					<input type="text" name="othersocialImpact" id="other_impact_text_field" value="{{ [e for e in c.socialImpact if e.encode('utf-8') not in social_impacts][0] }}" />
+				{% else %}
+					<input type="checkbox" id="other_impact" name="socialImpact" value="Other" data-parsley-mincheck="1" data-parsley-group='socialImpact' data-parsley-trigger="change"><label for="Other">{{form['other']}}</label>
+					<input type="text" name="othersocialImpact" id="other_impact_text_field" />
+				{% end %}
+			{%else%}
+				<input type="checkbox" id="other_impact" name="socialImpact" value="Other" 
+					data-parsley-mincheck="1" 
+					data-parsley-group='socialImpact' 
+					data-parsley-trigger="change"><label for="Other">{{form['other']}}</label>
+				<input type="text" name="othersocialImpact" id="other_impact_text_field" />
+			{%end%}
+		</div>
+	</fieldset>
+
+	<!--*****************************************************************-CATEGORY-***************************************************************** !-->
+	<fieldset class="m-form-half right">
+		<h3>{{form['category']}} *</h3>
+		<div class="category-field">
+			{% for category in categories %}
+				<input type="radio" 
+					id="{{category}}" 
+					name="category" 
+					data-parsley-group='category' 
+					value="{{ category }}"
+					{% if c %}
+						{% if category == c.companyCategory %} checked {% end %}
+					{%end%}><label for="{{category}}">{{category}}</label><br>
+			{% end %}
+			{%if c %}
+				{% if c.companyCategory not in categories and c.companyCategory != '' %}
+					<input type="radio" id="other_category" name="companyCategory" value="Other" 
+						data-parsley-mincheck="1" 
+						data-parsley-group='category' 
+						data-parsley-trigger="change" checked 
+						{%if required %}required{%end%}><label for="Other">{{form['other']}}</label>
+					<input type="text" id="other_category_text_field" name="othercompanyCategory" {% if c.companyCategory %}value="{{ c.companyCategory }}"{%end%} data-parsley-trigger="focus">
+				{% else %}
+					<input type="radio" id="other_category" name="companyCategory" value="Other" 
+						data-parsley-mincheck="1" 
+						data-parsley-group='category' 
+						data-parsley-trigger="change" 
+						{%if required %}required{%end%}><label for="Other">{{form['other']}}</label>
+					<input type="text" id="other_category_text_field" name="othercompanyCategory" data-parsley-trigger="focus">
+				{% end %}
+			{%else%}
+				<input type="radio" id="other_category" name="category" value="Other" 
+					data-parsley-mincheck="1" 
+					data-parsley-group='category' 
+					data-parsley-trigger="change" 
+					{%if required %}required{%end%}><label for="Other">{{form['other']}}</label>
+				<input type="text" id="other_category_text_field" name="companyCategory" data-parsley-trigger="focus">
+			{%end%}
+		</div>
+	</fieldset>
+
+
+	<!--*****************************************************************-DESCRIPTION-***************************************************************** !-->
+	<fieldset class="m-form-half left">
+		<h3>{{form['description']}}<br><em>{{form['word_limit_200']}}</em> *</h3>
+		<textarea rows="10" cols="59" name="description" id="description" 
+		data-parsley-trigger="keyup" 
+		data-parsley-maxwords="200" 
+		data-parsley-error-message="{{form['word_limit_error']}}"
+		{%if required %}required{%end%}>{%if c %}{{ c.description }}{%end%}</textarea><br><br>
+	</fieldset>
+
+	<!--*****************************************************************-SHORT DESCRIPTION-***************************************************************** !-->
+	<fieldset class="m-form-half right">
+		<h3>{{form['description_short']}} <br><em>{{form['word_limit_25']}}</em> *</h3>
+		<textarea rows="10" cols="59" name="descriptionShort" id="descriptionShort" 
+		data-parsley-trigger="keyup" 
+		data-parsley-maxwords="25" 
+		data-parsley-error-message="{{form['word_limit_error']}}" 
+		{%if required %}required{%end%}>{%if c %}{{ c.descriptionShort }}{%end%}</textarea><br>
+	</fieldset>
+
+	<!--*****************************************************************-FINANCIAL INFO-***************************************************************** !-->
+	<fieldset class="m-form-half">
+		<h3>{{form['financial_info']}} <br><em>{{form['word_limit_100']}}</em></h3>
+		<textarea rows="10" cols="59" name="financialInfo" id="financialInfo" 
+		data-parsley-trigger="keyup" 
+		data-parsley-maxwords="100" 
+		data-parsley-error-message="{{form['word_limit_error']}}">{%if c %}{{ c.financialInfo }}{%end%}</textarea><br><br>
+	</fieldset>
+
+
+
+
+
+
+

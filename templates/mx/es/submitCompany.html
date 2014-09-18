@@ -5,7 +5,6 @@
 
 <section class="submitDescription">
 	<h1>#OD100MX <br>Encuesta</h1>
-
 	<p><strong>Para participar en el OD100MX, la compañía debe:</strong></p>
 	<ul>
 		<li><strong>Tener su base en México</strong> (o realizar gran parte de sus operaciones en México),</li>
@@ -17,108 +16,7 @@
 </section>
 <form method="post" id="submitCompany" class="m-form companyForm" data-parsley-validate>
 
-	<!--*****************************************************************-CONTACT INFO-***************************************************************** !-->
-	<fieldset class="m-form-half">
-		<h3>Información de Contacto</h3>
-		{{form['contact_first_name_required']}}
-		{{form['contact_last_name_required']}}
-		{{form['contact_title_required']}}
-		{{form['contact_email_required']}}
-		{{form['contact_phone']}}
-	</fieldset>
-
-	<!--*****************************************************************-COMPANY INFO-***************************************************************** !-->
-	<fieldset class="m-form-half right">
-		<h3>Información de la Compañía</h3>
-		{{form['company_name_required']}}
-		{{form['company_url_required']}}
-		{{form['city']}}
-		<div class="m-form-line">
-			<label for="state">Estado: *</label>
-			<select name='state' id="state" required>
-				{% for i in range(0, len(stateList[country])) %}
-					<option name="state" value="{{stateListAbbrev[country][i]}}">{{ stateList[country][i] }}</option>
-				{%end%}
-			</select>
-		</div>
-		<div class="m-form-line"><label for="country">País:</label><input type="text" name="country" value="{{country_keys[country]}}" readonly></div>
-		{{form['zip_code_required']}}
-		<div class="m-form-box"><label for="companyType">Tipo de compañía: *</label><br>
-			<div class="company-type-field">
-				{% for type in companyType %}
-					<input type="radio" id="{{type}}" name="companyType" data-parsley-group='companyType' value="{{ type }}"><label for="{{type}}">{{type}}</label><br>
-				{% end %}
-				<input type="radio" id="other_type" name="companyType" value="Other" data-parsley-mincheck="1" data-parsley-group='companyType' data-parsley-trigger="change" required><label for="other_type">Otro</label>
-				<input type="text" id="other_company_type_field" name="othercompanyType">
-			</div>
-		</div>
-		{{form['founding_year_required']}}
-		{{form['fte_required']}}
-	</fieldset>
-
-	<fieldset class="m-form-half">	
-		<!--*****************************************************************-BUSINESS MODELS-***************************************************************** !-->
-		<h3>Modelo de Negocio <br><em>(Por favor marca todas las opciones que apliquen)</em> *</h3>
-		<div class="business-model-field">
-			{% for model in business_models %}
-				<input type="checkbox" id="{{model}}" name="businessModel" value="{{model}}" data-parsley-group="businessModel" /><label for="{{model}}">{{model}}</label><br>
-			{% end %}
-			<input type="checkbox" id="other_model" name="businessModel" value="Other" data-parsley-mincheck="1" data-parsley-group='businessModel' data-parsley-trigger="change" required><label for="Other">Otro</label>
-			<input type="text" name="otherbusinessModel" id="other_model_text_field" />
-		</div>
-		<br>
-		<br>
-
-		<!--*****************************************************************-REVENUE SOURCES-***************************************************************** !-->
-		<h3>¿Cuáles de la siguientes fuentes de ingresos, son las más importantes para tu compañía? <br><em>(Por favor marca todas las opciones que apliquen)</em> *</h3>
-		<div class="revenue-source-field">
-			{% for source in revenueSource %}
-				<input type="checkbox" id="{{source}}" name="revenueSource" value="{{source}}" data-parsley-group="revenueSource" /><label for="{{source}}">{{source}}</label><br>
-			{% end %}
-			<input type="checkbox" id="other_revenue" name="revenueSource" value="Other" data-parsley-mincheck="1" data-parsley-group='revenueSource' data-parsley-trigger="change" required><label for="Other">Otro</label>
-			<input type="text" name="otherrevenueSource" id="other_revenue_text_field" />
-		</div>
-		<br>
-		<br>
-
-	<!--*****************************************************************-SOCIAL IMPACT-***************************************************************** !-->
-		<h3>¿La misión de tu compañía, ha generado un impacto social directo en alguna de las siguientes áreas? <br><em>(Por favor marcar todas las opciones que apliquen)</em></h3>
-		<div class="social-impact-field">
-			{% for impact in social_impacts %}
-				<input type="checkbox" id="{{impact}}" name="socialImpact" value="{{impact}}" data-parsley-group="socialImpact" /><label for="{{impact}}">{{impact}}</label><br>
-			{% end %}
-			<input type="checkbox" id="other_impact" name="socialImpact" value="Other" data-parsley-mincheck="1" data-parsley-group='socialImpact' data-parsley-trigger="change"><label for="Other">Otro</label>
-			<input type="text" name="othersocialImpact" id="other_impact_text_field" />
-		</div>
-
-	</fieldset>
-
-	<!--*****************************************************************-CATEGORY-***************************************************************** !-->
-	<fieldset class="m-form-half right">
-		<h3>¿Cuál categoría describe mejor tu compañía? *</h3>
-		<div class="category-field">
-			{% for category in categories %}
-				<input type="radio" id="{{category}}" name="category" data-parsley-group='category' value="{{ category }}"><label for="{{category}}">{{category}}</label><br>
-			{% end %}
-			<input type="radio" id="other_category" name="category" value="Other" data-parsley-mincheck="1" data-parsley-group='category' data-parsley-trigger="change" required><label for="Other">Otro</label>
-			<input type="text" id="other_category_text_field" name="companyCategory" data-parsley-trigger="focus">
-		</div>
-	</fieldset>
-
-	<!--*****************************************************************-DESCRIPTION-***************************************************************** !-->
-	<fieldset class="m-form-half left">
-		{{form['description_required']}}
-	</fieldset>
-
-	<!--*****************************************************************-SHORT DESCRIPTION-***************************************************************** !-->
-	<fieldset class="m-form-half right">
-		{{form['description_short_required']}}
-	</fieldset>
-
-	<!--*****************************************************************-FINANCIAL INFO-***************************************************************** !-->
-	<fieldset class="m-form-half">
-		{{form['financial_info']}}
-	</fieldset>
+	{% module Form(country, lan, True, False) %}
 	{% raw xsrf_form_html() %}
 
 	<p class="disclaimer-text warning">Tus respuestas serán incluidas en una base de datos públicos que expone información sobre compañías que utilizan datos gubernamentales abiertos. Al enviar este formulario, estás aceptando que - con excepción de tu información de contacto personal - la información será accesible al público.</p>

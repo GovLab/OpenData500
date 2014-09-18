@@ -502,7 +502,29 @@ class NotFoundHandler(BaseHandler):
             lan='english',
             country='us')
 
-
+class FormModule(tornado.web.UIModule):
+    def render(self, country, lan, required, edit, company=None):
+        with open("templates/form.json") as json_file:
+                form = json.load(json_file)
+        return self.render_string(
+            'modules/form.html', 
+            c=company, 
+            country=country, 
+            lan=lan, 
+            required=required, 
+            edit=edit,
+            form=form[lan],
+            country_keys=country_keys,
+            companyType = companyType[lan],
+            revenueSource = revenueSource[lan],
+            business_models = business_models[lan],
+            social_impacts = social_impacts[lan],
+            source_count = source_count,
+            categories=categories[lan],
+            data_types = data_types[lan],
+            stateList = stateList,
+            stateListAbbrev=stateListAbbrev
+            )
 
 
 
