@@ -109,12 +109,12 @@
 					data-parsley-group='companyType' 
 					value="{{ type }}"
 					{%if c %}
-						{% if c.companyType == type %} checked {% end %}
+						{% if type.decode('utf-8') == c.companyType %} checked {% end %}
 					{%end%}>
 					<label for="{{type}}">{{type}}</label><br>
 				{% end %}
 				{%if c %}
-					{% if c.companyType not in companyType and c.companyType != '' %}
+					{% if c.companyType.encode('utf-8') not in companyType and c.companyType != '' %}
 						<input type="radio" id="other_type" name="companyType" value="Other" 
 							data-parsley-mincheck="1" 
 							data-parsley-group='companyType' 
@@ -129,7 +129,7 @@
 							data-parsley-group='companyType' 
 							data-parsley-trigger="change" 
 							{%if required %}required{%end%}>
-							<label for="other_type">Otro</label>
+							<label for="other_type">{{form['other']}}</label>
 						<input type="text" id="other_company_type_field" name="othercompanyType">
 					{% end %}
 				{%else%}
@@ -169,7 +169,7 @@
 				<input type="checkbox" id="{{model}}" name="businessModel" value="{{model}}" 
 				data-parsley-group="businessModel" 
 				{%if c %}
-					{% if model in c.businessModel %} checked {% end %}
+					{% if model.decode('utf-8') in c.businessModel %} checked {% end %}
 				{% end %}/>
 				<label for="{{model}}">{{model}}</label><br>
 			{% end %}
@@ -252,7 +252,7 @@
 					value="{{impact}}" 
 					data-parsley-group="socialImpact" 
 					{% if c %}
-						{% if impact in c.socialImpact %} checked {% end %}
+						{% if impact.decode('utf-8') in c.socialImpact %} checked {% end %}
 					{%end%}/><label for="{{impact}}">{{impact}}</label><br>
 			{% end %}
 			{% if c %}
@@ -280,15 +280,15 @@
 			{% for category in categories %}
 				<input type="radio" 
 					id="{{category}}" 
-					name="category" 
+					name="companyCategory" 
 					data-parsley-group='category' 
 					value="{{ category }}"
 					{% if c %}
-						{% if category == c.companyCategory %} checked {% end %}
+						{% if c.companyCategory == category.decode('utf-8') %} checked {% end %}
 					{%end%}><label for="{{category}}">{{category}}</label><br>
 			{% end %}
 			{%if c %}
-				{% if c.companyCategory not in categories and c.companyCategory != '' %}
+				{% if c.companyCategory.encode('utf-8') not in categories and c.companyCategory != '' %}
 					<input type="radio" id="other_category" name="companyCategory" value="Other" 
 						data-parsley-mincheck="1" 
 						data-parsley-group='category' 
@@ -304,7 +304,7 @@
 					<input type="text" id="other_category_text_field" name="othercompanyCategory" data-parsley-trigger="focus">
 				{% end %}
 			{%else%}
-				<input type="radio" id="other_category" name="category" value="Other" 
+				<input type="radio" id="other_category" name="companyCategory" value="Other" 
 					data-parsley-mincheck="1" 
 					data-parsley-group='category' 
 					data-parsley-trigger="change" 

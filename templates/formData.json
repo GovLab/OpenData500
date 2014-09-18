@@ -1,0 +1,22 @@
+{
+	"en": {
+		"data_use_header":"Data Use and Source Information",
+		"example_uses":"Provide any specific examples of how your company uses open data.",
+		"data_sources":"From approximately how many sources (i.e. agencies, subagencies, local and state governments) does your company use data?",
+		"data_types":"What types of data does your company use?",
+		"data_impacts":"What impact does open data use have on your company?",
+		"check_all":"(check all that apply)",
+		"word_limit_200":"[200 words or less]",
+		"other":"Other"
+	},
+	"es": {
+		"data_use_header":"El uso de datos y fuentes de información",
+		"example_uses":"Por favor enuncia ejemplos específicos sobre cómo tu compañía utiliza datos gubernamentales abiertos.",
+		"data_sources":"¿Aproximadamente cuántas fuentes de datos gubernamentales (ejem. agencias, sub agencias, gobiernos estatales y municipales) utiliza tu compañía?",
+		"data_types":"¿Qué tipos de datos utiliza tu compañía?",
+		"data_impacts":"Qué impacto tienen los datos gubernamentales abiertos en tu compañía?",
+		"check_all":"(Por favor marca todas las opciones que apliquen)",
+		"word_limit_200":"[Máximo 200 palabras]",
+		"other":"Otro"
+	}
+}
