@@ -85,7 +85,7 @@
 		<br>
 
 		<!--*****************************************************************-REVENUE SOURCES-***************************************************************** !-->
-		<h3>¿Cuáles de la siguientes fuentes de ingresos, son las más importantes para tu compañía? <br><em>(Por favor marca todas las opciones que apliquen)</em> *</h3>
+		<h3>¿Cuáles de las siguientes fuentes de ingresos, son las más importantes para tu compañía? <br><em>(Por favor marca todas las opciones que apliquen)</em> *</h3>
 		<div class="revenue-source-field">
 			{% for source in revenueSource %}
 				<input type="checkbox" id="{{source}}" name="revenueSource" value="{{source}}" data-parsley-group="revenueSource" {% if source.decode('utf-8') in company.revenueSource %} checked {% end %}/><label for="{{source}}">{{source}}</label><br>
@@ -177,7 +177,7 @@
 		data-parsley-error-message="You are over the word limit.">{%if company.exampleUses %}{{ company.exampleUses }}{%else%}{%end%}</textarea><br>
 
 		<!--*****************************************************************-DATA SOURCES-***************************************************************** !-->
-		<h3>¿Aproximadamente cuántas fuentes de datos gubernamentales (ejem. agencias, sub agencias, gobiernos estatales y municipales) utiliza tu compañía? *</h3>
+		<h3>¿Aproximadamente cuántas fuentes de datos gubernamentales (ejem. secretarías, entidades, gobiernos estatales y municipales) utiliza tu compañía? *</h3>
 		<div class="source-count-buttons">
 			{% for count in source_count %}
 				<input type="radio" name="sourceCount" id="{{count}}" value="{{count}}" {% if company.sourceCount == count %}checked{%end%} required><label for="{{count}}">{{count}}</label><br>
@@ -226,8 +226,8 @@
 <!--*****************************************************************-AGENCY FORM-***************************************************************** !-->
 <div class="m-form-box data">
 	<p>Por favor cuéntanos más sobre las fuentes de datos que utiliza tu compañía.</p>
-	<p>Puedes usar la herramienta de búsqueda para seleccionar las agencias, sub agencias, gobiernos estatales y municipales, o instituciones de la lista disponible.</p>
-	<p>Si no puedes encontrar en la lista la fuente que buscas, por favor mándanos un <a href="mailto:OD100MX@datos.gob.mx">correo</a> para sugerir una nueva agencia, sub agencia, organización, etc.</p>
+	<p>Puedes usar la herramienta de búsqueda para seleccionar las secretarías, entidades, gobiernos estatales y municipales, o instituciones de la lista disponible.</p>
+	<p>Si no puedes encontrar en la lista la fuente que buscas, por favor mándanos un <a href="mailto:OD100MX@datos.gob.mx">correo</a> para sugerir una nueva secretaría, entidad, organización, etc.</p>
 	<p><strong>[Opcional]: </strong>Por favor cuéntanos sobre el conjunto de datos que utiliza tu compañía, que pertenecen a las fuentes gubernamentales que seleccionaste. Por favor clasifica cada conjunto de datos en una escala de 1 a 4 (como en el siguiente ejemplo: 1 = pobre, 4 = excelente).</p>
 	<p><div class="example-popup"><a>Ver ejemplo.</a></div></p>
 	<div class="dialog-example" style="display:none">
