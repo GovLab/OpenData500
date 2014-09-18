@@ -7,60 +7,9 @@
 
 
 	<form class="m-form" id="company-data-form" data-parsley-validate>
-		<h2 class="data-section">Data Use and Source Information </h2>
-
-		<!--*****************************************************************-EXAMPLE USES-***************************************************************** !-->
-		<fieldset class="m-form-half right">
-			<h3>Provide any specific examples of how your company uses government open data.<br> <em>[200 words or less]</em></h3>
-			<textarea rows="10" cols="59" name="exampleUses" id="exampleUses" 
-			data-parsley-trigger="keyup" 
-			data-parsley-maxwords="200" 
-			data-parsley-error-message="You are over the word limit.">{%if company.exampleUses %}{{ company.exampleUses }}{%else%}{%end%}</textarea><br>
-			<br>
-			
-			<!--*****************************************************************-DATA SOURCES-***************************************************************** !-->
-			<h3>From approximately how many sources (i.e. agencies, subagencies, local and state governments) does your company use open government data? *</h3>
-			<div class="source-count-buttons">
-				{% for count in source_count %}
-					<input type="radio" name="sourceCount" id="{{count}}" value="{{count}}" {% if company.sourceCount == count %}checked{%end%} required><label for="{{count}}">{{count}}</label><br>
-				{%end %}
-			</div>
-		</fieldset>
-
-		<!--*****************************************************************-DATA TYPES-***************************************************************** !-->
-		<fieldset class="m-form-half">
-			<h3>What types of open government data does your company use? <br><em>(check all that apply)</em></h3>
-			<div class="data-type-field">
-				{% for data_type in data_types %}
-					<input type="checkbox" id="{{data_type}}_data_type" name="dataTypes" value="{{data_type}}" data-parsley-group="dataTypes" {% if data_type in company.dataTypes %} checked {% end %}/><label for="{{data_type}}_data_type">{{data_type}}</label><br>
-				{% end %}
-				{% if list(set(company.dataTypes) - set(data_types)) %}
-					<input type="checkbox" id="other_data_type" name="dataTypes" value="Other" {%if company.dataTypes[0] %}checked{%end%} data-parsley-mincheck="1" data-parsley-group='dataTypes' data-parsley-trigger="change"><label for="Other">Other</label>
-					<input type="text" name="otherDataType" id="other_data_type_text_field" value="{{ list(set(company.dataTypes) - set(data_types))[0] }}" />
-				{% else %}
-					<input type="checkbox" id="other_data_type" name="dataTypes" value="Other" data-parsley-mincheck="1" data-parsley-group='dataTypes' data-parsley-trigger="change"><label for="Other">Other</label>
-					<input type="text" name="otherDataType" id="other_data_type_text_field" />
-				{% end %}
-			</div>
-			{% raw xsrf_form_html() %}
-			<input type="hidden" name="id" id="companyID" value="{{company.id}}">
-		</fieldset>
-
-		<fieldset class="m-form-half">
-			<h3>What impact does open data use have on your company? (check all that apply)</h3>
-			<div class="data-impacts-field">
-				{% for impact in data_impacts %}
-					<input type="checkbox" id="{{impact}}_data_impacts" name="dataImpacts" value="{{impact}}" data-parsley-group="dataImpacts" {% if impact in company.dataImpacts %} checked {% end %}/><label for="{{impact}}_data_impacts">{{impact}}</label><br>
-				{% end%}
-				{% if list(set(company.dataImpacts) - set(data_impacts)) %}
-					<input type="checkbox" id="other_data_impacts" name="dataImpacts" value="Other" {%if company.dataImpacts[0] %}checked{%end%} data-parsley-mincheck="1" data-parsley-group='dataImpacts' data-parsley-trigger="change" required><label for="Other">Other</label>
-					<input type="text" name="otherDataImpact" id="other_data_impacts_text_field" value="{{ list(set(company.dataImpacts) - set(data_impacts))[0] }}" />
-				{% else %}
-					<input type="checkbox" id="other_data_impacts" name="dataImpacts" value="Other" data-parsley-mincheck="1" data-parsley-group='dataImpacts' data-parsley-trigger="change" required><label for="Other">Other</label>
-					<input type="text" name="otherDataImpact" id="other_data_impacts_text_field" />
-				{% end %}
-			</div>
-		</fieldset>
+		
+		{% module FormData(country, "es", True, company) %}
+		{% raw xsrf_form_html() %}
 
 	</form>
 

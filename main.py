@@ -42,7 +42,8 @@ class Application(tornado.web.Application):
             static_path=os.path.join(os.path.dirname(__file__), "static"),
             ui_modules={
                 "datetime": datetime,
-                'Form': FormModule},
+                'Form': FormModule,
+                'FormData':FormDataModule},
             debug=True,
             cookie_secret=os.environ.get('COOKIE_SECRET'),
             xsrf_cookies=True,
