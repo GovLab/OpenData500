@@ -27,7 +27,7 @@ business_models = {
                 }
 revenueSource = {
                     "en": ["Advertising", "Consulting", "Contributions/Donations", "Data analysis for clients", "Database licensing", "Government contract", "Lead generation to other businesses", "Membership fees", "Philanthropic grants", "Software licensing", "Subscriptions", "User fees for web or mobile access"],
-                    "es": ["Análisis de datos", "Consultoría", "Contratos gubernamentales", "Contribuciones/Donaciones", "Tarifas para el servicio móvil / internet", "Filantropía", "Generación de clientes", "Licencias de software", "Licencias de bases de datos", "Cuotas de membresía", "Publicidad", "Suscripciones"]
+                    "es": ["Análisis de datos", "Consultoría", "Contratos gubernamentales", "Contribuciones/Donaciones", "Tarifas para el servicio móvil/internet", "Filantropía", "Generación de clientes", "Licencias de software", "Licencias de bases de datos", "Cuotas de membresía", "Publicidad", "Suscripciones"]
                 }
 datatypes = ['Federal Open Data', 'State Open Data', 'City/Local Open Data']
 categories = {
