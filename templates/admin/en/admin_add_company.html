@@ -17,52 +17,13 @@
 
 	{% module Form(country, settings['default_language'], False, False) %}
 
-	<h2 class="data-section">Data Use and Source Information </h2>	
-	<!--*****************************************************************-EXAMPLE USES-***************************************************************** !-->
-	<fieldset class="m-form-half">
-		<h3>Provide any specific examples of how your company uses open data.<br> <em>[200 words or less]</em></h3>
-		<textarea rows="10" cols="59" name="exampleUses" id="exampleUses" 
-		data-parsley-trigger="keyup" 
-		data-parsley-maxwords="200" 
-		data-parsley-error-message="You are over the word limit."></textarea><br>
-
-		<!--*****************************************************************-DATA TYPES-***************************************************************** !-->
-		<h3>What types of data does your company use? <br><em>(check all that apply)</em></h3>
-		<div class="data-type-field">
-			{% for data_type in data_types %}
-				<input type="checkbox" id="{{data_type}}_data_type" name="dataTypes" value="{{data_type}}" data-parsley-group="dataTypes" /><label for="{{data_type}}_data_type">{{data_type}}</label><br>
-			{% end %}
-			<input type="checkbox" id="other_data_type" name="dataTypes" value="Other" data-parsley-mincheck="1" data-parsley-group='dataTypes' data-parsley-trigger="change"><label for="Other">Other</label>
-			<input type="text" name="otherDataType" id="other_data_type_text_field" />
-		</div>
-	</fieldset>
-
-	<!--*****************************************************************-DATA SOURCES-***************************************************************** !-->
-	<fieldset class="m-form-half right">
-		<h3>From approximately how many sources (i.e. agencies, subagencies, local and state governments) does your company use data? *</h3>
-		<div class="source-count-buttons">
-			{% for count in source_count %}
-				<input type="radio" name="sourceCount" id="{{count}}" value="{{count}}"><label for="{{count}}">{{count}}</label><br>
-			{%end %}
-		</div>
-		<br>
-
-		<h3>What impact does open data use have on your company? <em>(check all that apply)*</em></h3>
-		<div class="data-impacts-field">
-			{% for impact in data_impacts %}
-				<input type="checkbox" id="{{impact}}_data_impacts" name="dataImpacts" value="{{impact}}" data-parsley-group="dataImpacts" /><label for="{{impact}}_data_impacts">{{impact}}</label><br>
-			{% end%}
-			<input type="checkbox" id="other_data_impacts" name="dataImpacts" value="Other" data-parsley-mincheck="1" data-parsley-group='dataImpacts' data-parsley-trigger="change" ><label for="Other">Other</label>
-			<input type="text" name="otherDataImpact" id="other_data_impacts_text_field" />
-		</div>
-	</fieldset>
-
+	{% module FormData(country, settings['default_language'], False) %}
 
 	{% raw xsrf_form_html() %}
-	<input type="hidden" name="submittedThroughWebsite" value="False">
-	<input type="hidden" name="vettedByCompany" value="False">
-	<input type="hidden" name="submittedSurvey" value="False">
-	<input type="submit" class="m-button" value="Add Company"><span class="company-form-error-message error-message" style="display:none"></span>
+
+	<fieldset class="m-form-half">
+		<input type="submit" class="m-button" value="Add Company"><span class="company-form-error-message error-message" style="display:none"></span>
+	</fieldset>
 </form>
 
 

@@ -45,7 +45,7 @@
 	<!--*****************************************************************-COMPANY INFO-***************************************************************** !-->
 	<fieldset class="m-form-half right">
 		<h3>{{form['company_information_title']}}</h3>
-		{%if not edit %}
+		{%if not edit or not required %}
 		<div class="m-form-line">
 			<label for="companyName">{{form['company_name']}}: *</label>
 			<input type="text" 

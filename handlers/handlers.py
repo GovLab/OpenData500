@@ -292,31 +292,18 @@ class SubmitCompanyHandler(BaseHandler):
             lan = self.get_cookie('lan')
         else:
             lan = settings['default_language']
-        with open("templates/form.json") as json_file:
-                form = json.load(json_file)
         self.render(
             country+ "/" + lan + "/submitCompany.html",
             country=country,
             country_keys=country_keys,
-            companyType = companyType[lan],
-            revenueSource = revenueSource[lan],
-            business_models = business_models[lan],
-            social_impacts = social_impacts[lan],
-            source_count = source_count,
-            categories=categories[lan],
-            data_types = data_types[lan],
-            stateList = stateList,
             user=self.current_user,
             menu=settings['menu'][lan],
-            stateListAbbrev=stateListAbbrev,
             settings=settings,
-            form = form[lan],
             lan=lan
         )
 
     #@tornado.web.authenticated
     def post(self, country=None):
-        logging.info("Submitting New Company")
         logging.info(self.request.arguments)
         form_values = {k:','.join(v) for k,v in self.request.arguments.iteritems()}
         company = self.application.form.create_new_company(form_values)
@@ -346,7 +333,6 @@ class SubmitDataHandler(BaseHandler):
     @tornado.web.addslash
     #@tornado.web.authenticated
     def get(self, country, id):
-
         if not country:
             country = "us"
         if country not in available_countries:
@@ -382,10 +368,7 @@ class SubmitDataHandler(BaseHandler):
             user=self.current_user,
             settings=settings,
             country=country,
-            lan=lan,
-            source_count = source_count,
-            data_types = data_types[lan],
-            data_impacts = data_impacts[lan]
+            lan=lan
         )
 
     #@tornado.web.authenticated
@@ -502,55 +485,5 @@ class NotFoundHandler(BaseHandler):
             lan='english',
             country='us')
 
-class FormModule(tornado.web.UIModule):
-    def render(self, country, lan, required, edit, company=None):
-        with open("templates/form.json") as json_file:
-                form = json.load(json_file)
-        return self.render_string(
-            'modules/form.html', 
-            c=company, 
-            country=country, 
-            lan=lan, 
-            required=required, 
-            edit=edit,
-            form=form[lan],
-            country_keys=country_keys,
-            companyType = companyType[lan],
-            revenueSource = revenueSource[lan],
-            business_models = business_models[lan],
-            social_impacts = social_impacts[lan],
-            source_count = source_count,
-            categories=categories[lan],
-            data_types = data_types[lan],
-            stateList = stateList,
-            stateListAbbrev=stateListAbbrev
-            )
 
-class FormDataModule(tornado.web.UIModule):
-    def render(self, country, lan, required, company=None):
-        with open("templates/formData.json") as json_file:
-                form = json.load(json_file)
-        return self.render_string(
-            'modules/formData.html', 
-            c=company, 
-            country=country, 
-            lan=lan, 
-            required=required, 
-            form=form[lan],
-            source_count = source_count,
-            data_types = data_types[lan],
-            data_impacts = data_impacts[lan]
-            )
-
-class AgencyAddModule(tornado.web.UIModule):
-    def render(self, country, lan, company=None):
-        with open("templates/agencyAdd.json") as json_file:
-                form = json.load(json_file)
-        return self.render_string(
-            'modules/agencyAdd.html', 
-            c=company, 
-            country=country, 
-            lan=lan, 
-            form=form[lan],
-            )
 

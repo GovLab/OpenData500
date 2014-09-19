@@ -22,6 +22,7 @@ from datetime import datetime
 from utils import *
 from handlers.handlers import *
 from handlers.admin_handlers import *
+from handlers.modules import *
 
 # import and define tornado-y things
 from tornado.options import define
@@ -44,7 +45,8 @@ class Application(tornado.web.Application):
                 "datetime": datetime,
                 'Form': FormModule,
                 'FormData':FormDataModule,
-                'AgencyAdd':AgencyAddModule},
+                'AgencyAdd':AgencyAddModule,
+                'AdminSettings':AdminSettingsModule},
             debug=True,
             cookie_secret=os.environ.get('COOKIE_SECRET'),
             xsrf_cookies=True,
