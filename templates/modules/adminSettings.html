@@ -1,0 +1,31 @@
+{% autoescape None %} 
+
+{#--*****************************************************************-ADMIN SETTINGS-***************************************************************** --#}
+<h2>Admin Settings</h2><br>
+<fieldset class="m-form">
+	<fieldset class="m-form-half">
+		<h3>Mark {{c.companyName}} as vetted?</h3>
+			<label for="vetted"><input type="checkbox" name="vetted" id="vetted" value="vetted" {%if c.vetted %}checked{%end%}>Vetted</label>
+	</fieldset>
+	<fieldset class="m-form-half">
+		<h3>Display {{c.companyName}} on the OD500 page?</h3>
+			<label for="display"><input type="checkbox" name="display" id="display" value="display" {%if c.display %}checked{%end%}>Display</label>
+	</fieldset>
+	<fieldset class="m-form-half">
+		<h3>Has {{c.companyName}} vetted the survey?</h3>
+			<label for="vettedByCompany"><input type="checkbox" name="vettedByCompany" id="vettedByCompany" value="vettedByCompany" {%if c.vettedByCompany %}checked{%end%}>Vetted by {{c.companyName}}</label>
+	</fieldset>
+	<fieldset class="m-form-half">
+		<h3>Has {{c.companyName}} submitted their survey?</h3>
+			<label for="submittedSurvey"><input type="checkbox" name="submittedSurvey" id="submittedSurvey" value="submittedSurvey" {%if c.submittedSurvey %}checked{%end%}>Submitted Survey</label>
+	</fieldset>
+	<fieldset class="m-form-half">
+		<h3>Prevent editing on this company (only admin can edit)?</h3>
+			<label for="locked"><input type="checkbox" name="locked" id="locked" value="locked" {%if c.locked %}checked{%end%}>Lock</label>
+	</fieldset>
+	<fieldset class="m-form-half">
+		<h3>Notes</h3>
+			<textarea rows="10" cols="59" name="notes" id="notes" data-parsley-trigger="keyup" data-parsley-maxlength="3000">{%if c.notes %}{{c.notes}}{%end%}</textarea>
+	</fieldset>
+</fieldset>
+<input type="hidden" class="companyID" name="companyID" id="companyID" value="{{ c.id }}">

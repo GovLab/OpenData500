@@ -11,42 +11,15 @@
 <br>
 <br>
 <br>
-<h2>{{ page_heading }}</h2>
+<h2>Editing {{company.companyName}} (Admin)</h2>
 <form method="post" id="company_form_admin" class="m-form company_form_admin" data-parsley-validate>
 
 	{% module Form(country, settings['default_language'], False, True, company) %}
 
 	{% module FormData(country, settings['default_language'], False, company) %}
 
-	{#--*****************************************************************-ADMIN SETTINGS-***************************************************************** --#}
-	<h2>Admin Settings</h2><br>
-	<fieldset class="m-form">
-		<fieldset class="m-form-half">
-			<h3>Mark {{company.companyName}} as vetted?</h3>
-				<label for="vetted"><input type="checkbox" name="vetted" id="vetted" value="vetted" {%if company.vetted %}checked{%end%}>Vetted</label>
-		</fieldset>
-		<fieldset class="m-form-half">
-			<h3>Display {{company.companyName}} on the OD500 page?</h3>
-				<label for="display"><input type="checkbox" name="display" id="display" value="display" {%if company.display %}checked{%end%}>Display</label>
-		</fieldset>
-		<fieldset class="m-form-half">
-			<h3>Has {{company.companyName}} vetted the survey?</h3>
-				<label for="vettedByCompany"><input type="checkbox" name="vettedByCompany" id="vettedByCompany" value="vettedByCompany" {%if company.vettedByCompany %}checked{%end%}>Vetted by {{company.companyName}}</label>
-		</fieldset>
-		<fieldset class="m-form-half">
-			<h3>Has {{company.companyName}} submitted their survey?</h3>
-				<label for="submittedSurvey"><input type="checkbox" name="submittedSurvey" id="submittedSurvey" value="submittedSurvey" {%if company.submittedSurvey %}checked{%end%}>Submitted Survey</label>
-		</fieldset>
-		<fieldset class="m-form-half">
-			<h3>Prevent editing on this company (only admin can edit)?</h3>
-				<label for="locked"><input type="checkbox" name="locked" id="locked" value="locked" {%if company.locked %}checked{%end%}>Lock</label>
-		</fieldset>
-		<fieldset class="m-form-half">
-			<h3>Notes</h3>
-				<textarea rows="10" cols="59" name="notes" id="notes" data-parsley-trigger="keyup" data-parsley-maxlength="3000">{%if company.notes %}{{company.notes}}{%end%}</textarea>
-		</fieldset>
-	</fieldset>
-	<input type="hidden" class="companyID" name="companyID" id="companyID" value="{{ id }}">
+	{% module AdminSettings(country, settings['default_language'], company) %}
+
 	{% raw xsrf_form_html() %}
 </form>
 <br>
