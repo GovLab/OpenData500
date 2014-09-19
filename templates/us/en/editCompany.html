@@ -25,14 +25,14 @@
 
 {% module AgencyAdd(country, settings['default_language'], company) %}
 
-<!--*****************************************************************-SUBMIT BUTTON-***************************************************************** !-->
+{#--*****************************************************************-SUBMIT BUTTON-***************************************************************** --#}
 <div class='submit_form'>
 	<input type="submit" class="l-button" id="submit_form_edit_button" name="formSave" value="Save Company Info">
 	<span class="response-message" style="display:none"></span>
 </div>
 
 
-<!--*****************************************************************-SUBMIT FORM-***************************************************************** !-->
+{#--*****************************************************************-SUBMIT FORM-***************************************************************** --#}
 <script>
 $(document).ready( function () {
     var _xsrf = $("[name='_xsrf']").val();

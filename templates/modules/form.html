@@ -1,5 +1,5 @@
 {% autoescape None %} 
-	<!--*****************************************************************-CONTACT INFO-***************************************************************** !-->
+	{#--*****************************************************************-CONTACT INFO-***************************************************************** --#}
 	<fieldset class="m-form-half">
 		<h3>{{form['contact_information_title']}}</h3>
 		<div class="m-form-line"><label for="">{{form['first_name']}}: *</label>
@@ -42,7 +42,7 @@
 			data-parsley-error-message="Phone must be in format: ###-###-####"></div>
 	</fieldset>
 
-	<!--*****************************************************************-COMPANY INFO-***************************************************************** !-->
+	{#--*****************************************************************-COMPANY INFO-***************************************************************** --#}
 	<fieldset class="m-form-half right">
 		<h3>{{form['company_information_title']}}</h3>
 		{%if not edit or not required %}
@@ -99,7 +99,7 @@
 			data-parsley-trigger="focusout" 
 			data-parsley-pattern="(^\d{5}$)|(^\d{5}-\d{4}$)" 
 			{%if required %}required{%end%}></div>
-		<!--*****************************************************************-TYPE OF COMPANY, YEAR FOUNDED, FTE-***************************************************************** !-->
+		{#--*****************************************************************-TYPE OF COMPANY, YEAR FOUNDED, FTE-***************************************************************** --#}
 		<div class="m-form-box"><label for="companyType">{{form['type_of_company']}}: *</label><br>
 			<div class="company-type-field">
 				{% for type in companyType %}
@@ -162,7 +162,7 @@
 	</fieldset>
 
 	<fieldset class="m-form-half">	
-		<!--*****************************************************************-BUSINESS MODELS-***************************************************************** !-->
+		{#--*****************************************************************-BUSINESS MODELS-***************************************************************** --#}
 		<h3>{{form['business_model']}}<br><em>{{form['select_all']}}</em> *</h3>
 		<div class="business-model-field">
 			{% for model in business_models %}
@@ -202,7 +202,7 @@
 		<br>
 		<br>
 
-		<!--*****************************************************************-REVENUE SOURCES-***************************************************************** !-->
+		{#--*****************************************************************-REVENUE SOURCES-***************************************************************** --#}
 		<h3>{{form['sources_of_revenue']}}<br><em>{{form['select_all']}}</em> *</h3>
 		<div class="revenue-source-field">
 			{% for source in revenueSource %}
@@ -242,7 +242,7 @@
 		<br>
 		<br>
 
-		<!--*****************************************************************-SOCIAL IMPACT-***************************************************************** !-->
+		{#--*****************************************************************-SOCIAL IMPACT-***************************************************************** --#}
 		<h3>{{form['social_impact']}}<br><em>{{form['select_all']}}</em> </h3>
 		<div class="social-impact-field">
 			{% for impact in social_impacts %}
@@ -273,7 +273,7 @@
 		</div>
 	</fieldset>
 
-	<!--*****************************************************************-CATEGORY-***************************************************************** !-->
+	{#--*****************************************************************-CATEGORY-***************************************************************** --#}
 	<fieldset class="m-form-half right">
 		<h3>{{form['category']}} *</h3>
 		<div class="category-field">
@@ -315,7 +315,7 @@
 	</fieldset>
 
 
-	<!--*****************************************************************-DESCRIPTION-***************************************************************** !-->
+	{#--*****************************************************************-DESCRIPTION-***************************************************************** --#}
 	<fieldset class="m-form-half left">
 		<h3>{{form['description']}}<br><em>{{form['word_limit_200']}}</em> *</h3>
 		<textarea rows="10" cols="59" name="description" id="description" 
@@ -325,7 +325,7 @@
 		{%if required %}required{%end%}>{%if c %}{{ c.description }}{%end%}</textarea><br><br>
 	</fieldset>
 
-	<!--*****************************************************************-SHORT DESCRIPTION-***************************************************************** !-->
+	{#--*****************************************************************-SHORT DESCRIPTION-***************************************************************** --#}
 	<fieldset class="m-form-half right">
 		<h3>{{form['description_short']}} <br><em>{{form['word_limit_25']}}</em> *</h3>
 		<textarea rows="10" cols="59" name="descriptionShort" id="descriptionShort" 
@@ -335,7 +335,7 @@
 		{%if required %}required{%end%}>{%if c %}{{ c.descriptionShort }}{%end%}</textarea><br>
 	</fieldset>
 
-	<!--*****************************************************************-FINANCIAL INFO-***************************************************************** !-->
+	{#--*****************************************************************-FINANCIAL INFO-***************************************************************** --#}
 	<fieldset class="m-form-half">
 		<h3>{{form['financial_info']}} <br><em>{{form['word_limit_100']}}</em></h3>
 		<textarea rows="10" cols="59" name="financialInfo" id="financialInfo" 
@@ -349,7 +349,7 @@
 
 <script>
 $(document).ready( function () {
-	//--*****************************************************************-CHECKBOX INTERACTIONS-*****************************************************************--//
+	{#--*****************************************************************-CHECKBOX INTERACTIONS-*****************************************************************--#}
     $('.m-form-half').on('focusout', '#other_revenue_text_field', function(event) {
         if ($('#other_revenue_text_field').val() == '') {
             $('#other_revenue').prop('checked', false);

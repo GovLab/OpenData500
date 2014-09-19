@@ -1,0 +1,38 @@
+{
+	"en":{
+		"open_data_sources":"Open Data Sources",
+		"agency_add_description":"<p>Please tell us more about the open data sources your company uses.</p><p>Use the search bar to find and select government agencies, subagencies, city and state governments, or government-funded research programs from the list provided.</p><p>If you can't find your data provider on the list, please fill out the form <a href=\"/#suggest\">below</a> to suggest an agency, subagency, organization, etc.</p>",
+		"agency_add_optional":"<strong>[Optional]:</strong> Please tell us which datasets your company uses from the agencies, city, or state governments you select, and please score each dataset on a scale of 1 to 4 (i.e. 1 = Poor; 4 = Excellent)",
+		"example":"See Example.",
+		"search":"Search",
+		"placeholder":"e.g. NYC, Department of Transportation, DARPA, Defense, Texas, Census...",
+		"add_agency_button":"Add Agency/Sub-Agency",
+		"agency_level_datasets":"Agency Level Datasets",
+		"dataset_name":"Dataset Name",
+		"dataset_url":"Dataset URL",
+		"dataset_rating":"Rating (1-4)",
+		"subagencies":"Sub-Agencies",
+		"save_button":"Save",
+		"delete_button":"Delete",
+		"data_comments":"Please give your comments about the usefulness of all these data sources and datasets.",
+		"word_limit_250":"[250 words or less]"
+	},
+	"es":{
+		"open_data_sources":"Fuentes de datos abiertos gubernamentales",
+		"agency_add_description":"<p>Por favor cuéntanos más sobre las fuentes de datos que utiliza tu compañía.</p><p>Puedes usar la herramienta de búsqueda para seleccionar las secretarías, entidades, gobiernos estatales y municipales, o instituciones de la lista disponible.</p><p>Si no puedes encontrar en la lista la fuente que buscas, por favor completa el formulario abajo [link] para sugerir una nueva secretaría, entidades, organización, etc.</p>",
+		"agency_add_optional":"<strong>[Opcional]:</strong> Por favor cuéntanos sobre el conjunto de datos que utiliza tu compañía, que pertenecen a las fuentes gubernamentales que seleccionaste. Por favor clasifica cada conjunto de datos en una escala de 1 a 4 (como en el siguiente ejemplo: 1 = pobre, 4 = excelente).",
+		"example":"Ver ejemplo.",
+		"search":"Buscar",
+		"placeholder":"ejemplo: INEGI, Secretaría de Salud, PEMEX, etc...",
+		"add_agency_button":"Agregar",
+		"agency_level_datasets":"Conjuntos de datos a nivel secretaría",
+		"dataset_name":"Nombre de conjunto de datos",
+		"dataset_url":"URL",
+		"dataset_rating":"Rating (1-4)",
+		"subagencies":"Entidades",
+		"save_button":"Guardar",
+		"delete_button":"Borrar",
+		"data_comments":"Nos interesa tu opinión por lo que nos gustaría saber tus comentarios sobre la utilidad de todas estas fuentes de datos y conjuntos de datos.",
+		"word_limit_250":"[Máximo 250 palabras]"
+	}
+}

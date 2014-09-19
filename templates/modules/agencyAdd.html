@@ -1,6 +1,6 @@
 {% autoescape None %} 
 
-<!--*****************************************************************-AGENCIES AND SUBAGENCIES-***************************************************************** !-->
+{#--*****************************************************************-AGENCIES AND SUBAGENCIES-***************************************************************** --#}
 <div class="m-form-box data">
 	<h2>{{form['open_data_sources']}}</h2>
 	{{form['agency_add_description']}}
@@ -92,7 +92,7 @@
 	</div>
 </div>
 
-<!--*****************************************************************-DATA COMMENTS-***************************************************************** !-->
+{#--*****************************************************************-DATA COMMENTS-***************************************************************** --#}
 <form class="m-form"  id="company-data-comment-form">
 	<fieldset class="m-form-half right">
 			<h3>{{form['data_comments']}}<br><em>{{form['word_limit_250']}}</em></h3>
@@ -111,7 +111,7 @@ $(document).ready( function () {
 
 	var country = "{{country}}";
 	var companyID = $('.companyID').val();
-	//--*****************************************************************-EXAMPLE POPUP-*****************************************************************--//
+	{#--*****************************************************************-EXAMPLE POPUP-*****************************************************************--#}
     var dialogOptions = {
         autoOpen: false,
         height: 560,
@@ -127,7 +127,7 @@ $(document).ready( function () {
         $(".dialog-example").dialog(dialogOptions).dialog("open");
     });
 
-    //--*****************************************************************-CHECKBOX INTERACTIONS-*****************************************************************--//
+    {#--*****************************************************************-CHECKBOX INTERACTIONS-*****************************************************************--#}
     //------------------------------ DATA TYPE
     $('.m-form-half').on('focusout', '#other_data_type_text_field', function(event) {
         if ($('#other_data_type_text_field').val() == '') {
@@ -148,7 +148,7 @@ $(document).ready( function () {
         $('#other_data_impacts').prop('checked', true);
     });
 
-    //--*****************************************************************-DATA ACCORDIONS-*****************************************************************--//
+    {#--*****************************************************************-DATA ACCORDIONS-*****************************************************************--#}
     $("#accordionAgency, #accordionSubAgency").accordion({
         active: false,
         collapsible: true,
@@ -156,7 +156,7 @@ $(document).ready( function () {
         heightStyle: "content"
     });
 
-    //--*****************************************************************-DELETE AGENCIES AND SUBAGENCIES-*****************************************************************--//
+    {#--*****************************************************************-DELETE AGENCIES AND SUBAGENCIES-*****************************************************************--#}
     $('#accordionAgency, #accordionSubAgency').on('click', '.toolbar', function(event) {
         var error_message = $('.agency-search-error-message');
         var this_form = $(this);
@@ -210,7 +210,7 @@ $(document).ready( function () {
             }
         });
     });
-    //--*****************************************************************-ADD/EDIT DATASET-*****************************************************************--//
+    {#--*****************************************************************-ADD/EDIT DATASET-*****************************************************************--#}
     var new_dataset_template = '<tr class="dataset-row" name="" subagency="<%= subagency %>" agency="<%= agency %>">' +
         '<td><input type="text" name="<%= dataset_name %>" id="datasetName" value=""></td>' +
         '<td><input type="text" name="datasetURL" id="datasetURL" value=""></td>' +
@@ -305,7 +305,7 @@ $(document).ready( function () {
     });
 
 
-    //--*****************************************************************-DELETE DATASET-*****************************************************************--//
+    {#--*****************************************************************-DELETE DATASET-*****************************************************************--#}
     $('.agencyList').on('click', '#deleteDataset', function(event) {
         var currentDatasetForm = $(this).parent().parent();
         var dataset_name = currentDatasetForm.find('#datasetName').val();
@@ -339,7 +339,7 @@ $(document).ready( function () {
         }
     });
 
-    //--*****************************************************************-TEMPLATES FOR AGENCY/DATA FORM-*****************************************************************--//
+    {#--*****************************************************************-TEMPLATES FOR AGENCY/DATA FORM-*****************************************************************--#}
     var new_agency_template = '<h3 class="agency" name="<%= agency_pretty %>"><a href="#"><%= agency %></a>' +
         '<span style="float:right; display:none;" class="toolbar ui-corner-all ui-icon ui-icon-circle-close red" subagency="" agency="<%= agency_pretty %>"></span>' +
         '</h3>' +
@@ -381,7 +381,7 @@ $(document).ready( function () {
         '</tr>' +
         '</div>';
 
-    //--*****************************************************************-ADD AGENCY FROM SEARCH BAR-*****************************************************************--//
+    {#--*****************************************************************-ADD AGENCY FROM SEARCH BAR-*****************************************************************--#}
     $('body').on('click', '#addSearchResult', function(event) {
         var error_message = $('.agency-search-error-message');
         var a = $('#searchval').val().trim().split(" - ");
@@ -464,7 +464,7 @@ $(document).ready( function () {
             });
         }
     });
-	//--*****************************************************************-VALIDATE URL-*****************************************************************--//
+	{#--*****************************************************************-VALIDATE URL-*****************************************************************--#}
 	function validURL(url) {
         var re = /^((https?|s?ftp|git):\/\/)?(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i;
         var r = new RegExp(re);
@@ -475,7 +475,7 @@ $(document).ready( function () {
         }
     }
 
-    //--*****************************************************************-SHOW DELETE ICONS ON HOVER-*****************************************************************--//
+    {#--*****************************************************************-SHOW DELETE ICONS ON HOVER-*****************************************************************--#}
     $('#accordionAgency, #accordionSubAgency').on({
         mouseenter: function() {
             $(this).find('.toolbar').show();
@@ -485,7 +485,7 @@ $(document).ready( function () {
         }
     }, '.agency, .subagency');
 
-    //--*****************************************************************-AUTOCOMPLETE AGENCIES-*****************************************************************--//
+    {#--*****************************************************************-AUTOCOMPLETE AGENCIES-*****************************************************************--#}
     if ($('#agencyTags') != []) {
         if (country != undefined) {
             $.getJSON("/static/files/" + country + "/" + country + "_Agency_List.json", function(agencies) {

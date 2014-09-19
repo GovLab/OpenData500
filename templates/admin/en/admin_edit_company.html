@@ -18,7 +18,7 @@
 
 	{% module FormData(country, settings['default_language'], False, company) %}
 
-	<!--*****************************************************************-ADMIN SETTINGS-***************************************************************** !-->
+	{#--*****************************************************************-ADMIN SETTINGS-***************************************************************** --#}
 	<h2>Admin Settings</h2><br>
 	<fieldset class="m-form">
 		<fieldset class="m-form-half">
@@ -53,7 +53,7 @@
 
 {% module AgencyAdd(country, settings['default_language'], company) %}
 
-<!--*****************************************************************-SUBMIT BUTTON-***************************************************************** !-->
+{#--*****************************************************************-SUBMIT BUTTON-***************************************************************** --#}
 <div class='submit_form'>
 	<input type="submit" class="l-button" id="submit_form_admin_button" name="formSave" value="Save Company Info">
 	<span class="response-message" style="display:none"></span>
@@ -63,7 +63,7 @@
 
 <script>
 $(document).ready( function () {
-	//----------------------------------Admin FORM--------------------------------------
+	{#----------------------------------Admin FORM--------------------------------------#}
     var _xsrf = $("[name='_xsrf']").val();
     var rm = $('.response-message');
     var id = $('#companyID').val();
