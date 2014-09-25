@@ -385,6 +385,15 @@ a:hover {
       margin-bottom: 5px; }
       .about-page section ul li.list-title h3 {
         font-size: 16px; }
+  .about-page .m-country-flag {
+    text-align: center;
+    clear: both;
+    margin: 40px auto 0; }
+    .about-page .m-country-flag img {
+      height: 80px;
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.2); }
+  .about-page h1 {
+    margin-top: 10px; }
   .about-page .intro {
     overflow: hidden; }
   .about-page section:last-child {
@@ -514,9 +523,6 @@ a:hover {
     border-color: rgba(0, 0, 0, 0.05); }
   .about-page .m-team-picture.s-active img {
     border-color: rgba(71, 43, 116, 0.4); }
-
-#about-govlab-approach h1 {
-  margin-top: 10px; }
 
 .sub-sections {
   border-bottom: 1px solid #aaaaaa;
@@ -1202,8 +1208,6 @@ header {
   float: left;
   margin-top: -5px;
   padding: 0; }
-  .logo img {
-    width: 109px; }
 
 .logo:hover {
   background-color: transparent; }
@@ -1247,6 +1251,16 @@ header {
       display: block; }
     .m-main-menu .m-main-menu-sub-menu .m-main-menu-sub-menu-item:hover {
       background-color: #472b74; }
+  .m-main-menu .language-options {
+    font-size: 0;
+    position: relative;
+    left: 250px; }
+    .m-main-menu .language-options > a {
+      font-size: 12px;
+      padding-right: 4px;
+      padding-left: 4px; }
+      .m-main-menu .language-options > a:first-child {
+        border-right: 2px solid #8977a7; }
   .m-main-menu #submenu-about {
     width: 182px; }
   .m-main-menu .m-main-menu-item:hover .m-main-menu-sub-menu,
@@ -1297,7 +1311,7 @@ header {
 #mc_embed_signup {
   position: fixed;
   border: 1px solid #8977a7;
-  background-color: rgba(71, 43, 116, 0.1);
+  background-color: #ece9f0;
   padding: 13px 15px 13px 20px;
   z-index: 10;
   right: -1px;

@@ -65,9 +65,9 @@ header {
 	margin-top: -5px;
 	padding: 0;
 
-	img {
-		width: 109px;
-	}
+	// img {
+	// 	width: 109px;
+	// }
 }
 
 .logo:hover {
@@ -124,6 +124,22 @@ header {
 
 		.m-main-menu-sub-menu-item:hover {
 			background-color: $purple;
+		}
+	}
+
+	.language-options {
+		font-size: 0;
+		position: relative;
+		left: 250px;
+
+		> a {
+			font-size: 12px;
+			padding-right: 4px;
+			padding-left: 4px;
+
+			&:first-child {
+				border-right: 2px solid $light_purple;
+			}
 		}
 	}
 
@@ -201,7 +217,7 @@ header {
 #mc_embed_signup {
 	position: fixed;
 	border: 1px solid $light_purple;
-	background-color: $super_light_purple;
+	background-color: $super_light_purple_matte;
 	padding: 13px 15px 13px 20px;
 	z-index: 10;
 	right: -1px;

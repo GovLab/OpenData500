@@ -23,6 +23,22 @@
 		}
 	}
 
+	.m-country-flag {
+		text-align: center;
+		clear:both;
+		margin: 40px auto 0;
+
+		img {
+			height: 80px;
+			@include drop_shadow;
+			
+		}
+	}
+
+	h1 {
+		margin-top: 10px;
+	}
+
 	.intro {
 		overflow: hidden;
 	}
@@ -202,11 +218,11 @@
 	}	
 }
 
-#about-govlab-approach {
-	h1 {
-		margin-top: 10px;
-	}
-}
+// #about-govlab-approach {
+// 	h1 {
+// 		margin-top: 10px;
+// 	}
+// }
 
 .sub-sections {
 	border-bottom: 1px solid $light_gray;
