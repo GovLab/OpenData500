@@ -1479,3 +1479,13 @@ footer {
     footer .creative-commons-license img {
       float: left;
       margin-right: 10px; }
+
+.m-international-page {
+  font-size: 14px;
+  line-height: 20px; }
+  .m-international-page .m-country-flag.s-international img {
+    box-shadow: 0 0 0;
+    width: 300px;
+    height: auto; }
+  .m-international-page .first-title {
+    margin-top: 20px; }

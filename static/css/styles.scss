@@ -458,3 +458,19 @@ footer {
 		}
 	}
 }
+
+.m-international-page {
+	font-size: 14px;
+	line-height: 20px;
+
+	.m-country-flag.s-international img {
+		box-shadow: 0 0 0;
+		width: 300px;
+		height: auto;
+	}
+
+	.first-title {
+		margin-top: 20px;
+	}
+}
+

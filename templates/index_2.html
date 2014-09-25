@@ -1,0 +1,30 @@
+{% extends "main.html" %}
+{% autoescape None %}
+
+{% block body %}
+<div class="m-international-page">
+	<div class="m-country-flag s-international">
+        <img src="{{ static_url("img/map.png") }}" alt="">
+    </div>
+
+	<h1 class="first-title">International Studies</h1>
+
+	<p class="intro">The Open Data 500 international studies are a network of projects to study,
+	facilitate, and improve the use of open government data around the world. It is
+	maintained and coordinated by The GovLab and is based on Open Data 500 U.S.
+	study. If you are interested in collaborating on an open data study outside of the
+	U.S., please email us at <a href="mailto:opendata500@thegovlab.org">opendata500@thegovlab.org</a>.</p>
+
+	<section class="m-half">
+	<p>We are now working with the governments of Mexico and Australia to conduct
+	open data studies in their countries. We are currently in the planning stages with
+	several other countries to work with us on these types of initiatives.</p>
+	</section>
+	<section class="m-half">
+	<ul>
+		<li>Open Data 100 Mexico (Coming in October 2014)</li>
+		<li>Open Data 100 Australia (Coming in 2015)</li>
+	</ul>
+	</section>
+</div>
+{%end%}
