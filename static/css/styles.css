@@ -215,7 +215,7 @@ a:hover {
   margin: 15px 0 50px 0;
   font-size: 3.8em; }
 .m-homepage .first-title {
-  margin: 65px 0 30px 0;
+  margin: 25px 0 30px 0;
   font-size: 5.5em; }
 .m-homepage section {
   padding-bottom: 24px;
@@ -385,15 +385,8 @@ a:hover {
       margin-bottom: 5px; }
       .about-page section ul li.list-title h3 {
         font-size: 16px; }
-  .about-page .m-country-flag {
-    text-align: center;
-    clear: both;
-    margin: 40px auto 0; }
-    .about-page .m-country-flag img {
-      height: 80px;
-      box-shadow: 0 0 6px rgba(0, 0, 0, 0.2); }
   .about-page h1 {
-    margin-top: 10px; }
+    margin-top: 25px; }
   .about-page .intro {
     overflow: hidden; }
   .about-page section:last-child {
@@ -1193,7 +1186,9 @@ h1 {
 header {
   background-color: #472b74;
   border-bottom: 5px solid #8977a7;
-  padding: 10px 0; }
+  padding: 10px 0;
+  height: 30px;
+  text-align: center; }
 
 .l-centered {
   width: 100%;
@@ -1208,6 +1203,14 @@ header {
   float: left;
   margin-top: -5px;
   padding: 0; }
+
+.m-country-flag {
+  text-align: center;
+  clear: both;
+  margin: 40px auto 0; }
+  .m-country-flag img {
+    height: 80px;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.2); }
 
 .logo:hover {
   background-color: transparent; }

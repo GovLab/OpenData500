@@ -23,20 +23,8 @@
 		}
 	}
 
-	.m-country-flag {
-		text-align: center;
-		clear:both;
-		margin: 40px auto 0;
-
-		img {
-			height: 80px;
-			@include drop_shadow;
-			
-		}
-	}
-
 	h1 {
-		margin-top: 10px;
+		margin-top: 25px;
 	}
 
 	.intro {

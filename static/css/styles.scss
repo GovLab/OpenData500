@@ -42,6 +42,8 @@ header {
 	background-color: $purple;
 	border-bottom: 5px solid $light_purple;
 	padding: 10px 0;
+	height: 30px;
+    text-align: center;
 }
 
 // === Layout classes
@@ -50,6 +52,7 @@ header {
 	width: 960px / 960px * 100%;
 	max-width: 960px;
 	margin: 0 auto;
+
 }
 
 #container {
@@ -68,6 +71,18 @@ header {
 	// img {
 	// 	width: 109px;
 	// }
+}
+
+.m-country-flag {
+	text-align: center;
+	clear:both;
+	margin: 40px auto 0;
+
+	img {
+		height: 80px;
+		@include drop_shadow;
+		
+	}
 }
 
 .logo:hover {
