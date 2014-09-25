@@ -1,0 +1,130 @@
+{% autoescape None %} 
+
+<h2 class="data-section">{{form['data_use_header']}} </h2>
+
+		{#--*****************************************************************-EXAMPLE USES-***************************************************************** --#}
+		<fieldset class="m-form-half right">
+			<h3>{{form['example_uses']}}<br> <em>{{form['word_limit_200']}}</em></h3>
+			<textarea rows="10" cols="59" name="exampleUses" id="exampleUses" 
+			data-parsley-trigger="keyup" 
+			data-parsley-maxwords="200" 
+			data-parsley-error-message="You are over the word limit.">{% if c %}{%if c.exampleUses %}{{ c.exampleUses }}{%else%}{%end%}{%end%}</textarea><br>
+			<br>
+			
+			{#--*****************************************************************-DATA SOURCES-***************************************************************** --#}
+			<h3>{{form['data_sources']}} *</h3>
+			<div class="source-count-buttons">
+				{% for count in source_count %}
+					<input type="radio" 
+						name="sourceCount" 
+						id="{{count}}" 
+						value="{{count}}" 
+						{% if c %}
+							{% if c.sourceCount == count %}checked{%end%} 
+						{%end%}
+						{%if required %}required{%end%}><label for="{{count}}">{{count}}</label><br>
+				{%end %}
+				{% if not required %}
+					<input type="radio" 
+						name="sourceCount" 
+						id="NA" value="NA" 
+						{% if c %}
+							{% if c.sourceCount == "NA" %}checked{%end%}
+						{%end%} 
+						{%if required %}required{%end%}><label for="NA">NA</label><br>
+				{%end%}
+			</div>
+		</fieldset>
+
+		{#--*****************************************************************-DATA TYPES-***************************************************************** --#}
+		<fieldset class="m-form-half">
+			<h3>{{form['data_types']}} <br><em>{{form['check_all']}}</em></h3>
+			<div class="data-type-field">
+				{% for data_type in data_types %}
+					<input type="checkbox" 
+						id="{{data_type}}_data_type" 
+						name="dataTypes" 
+						value="{{data_type}}" 
+						data-parsley-group="dataTypes" 
+						{% if c %}
+							{% if data_type.decode('utf-8') in c.dataTypes %} checked {% end %}
+						{%end%}/><label for="{{data_type}}_data_type">{{data_type}}</label><br>
+				{% end %}
+				{% if c %}
+					{% if [e for e in c.dataTypes if e.encode('utf-8') not in data_types] %}
+						<input type="checkbox" id="other_data_type" name="dataTypes" value="Other" 
+							{%if c.dataTypes[0] %}checked{%end%} 
+							data-parsley-mincheck="1" 
+							data-parsley-group='dataTypes' 
+							data-parsley-trigger="change"><label for="Other">{{form['other']}}</label>
+						<input type="text" name="otherDataType" id="other_data_type_text_field" value="{{ [e for e in c.dataTypes if e.encode('utf-8') not in data_types][0] }}" />
+					{% else %}
+						<input type="checkbox" id="other_data_type" name="dataTypes" value="Other" 
+							data-parsley-mincheck="1" 
+							data-parsley-group='dataTypes' 
+							data-parsley-trigger="change"><label for="Other">{{form['other']}}</label>
+						<input type="text" name="otherDataType" id="other_data_type_text_field" />
+					{% end %}
+				{%else%}
+					<input type="checkbox" id="other_data_type" name="dataTypes" value="Other" 
+						data-parsley-mincheck="1" 
+						data-parsley-group='dataTypes' 
+						data-parsley-trigger="change"><label for="Other">{{form['other']}}</label>
+					<input type="text" name="otherDataType" id="other_data_type_text_field" />
+				{% end %}
+			</div>
+		</fieldset>
+
+		{#--*****************************************************************-DATA IMPACTS-***************************************************************** --#}
+		<fieldset class="m-form-half">
+			<h3>{{form['data_impacts']}} <em>{{form['check_all']}}*</em></h3>
+			<div class="data-impacts-field">
+				{% for impact in data_impacts %}
+					<input type="checkbox" id="{{impact}}_data_impacts" 
+					name="dataImpacts" 
+					value="{{impact}}" 
+					data-parsley-group="dataImpacts" 
+					{% if c %}
+						{% if impact.decode('utf-8') in c.dataImpacts %} checked {% end %}
+					{% end %}/><label for="{{impact}}_data_impacts">{{impact}}</label><br>
+				{% end%}
+				{% if c %}
+					{% if [e for e in c.dataImpacts if e.encode('utf-8') not in data_impacts] %}
+						<input type="checkbox" id="other_data_impacts" name="dataImpacts" value="Other" 
+							{%if c.dataImpacts[0] %}checked{%end%} 
+							data-parsley-mincheck="1" 
+							data-parsley-group='dataImpacts' 
+							data-parsley-trigger="change" 
+							{%if required %}required{%end%}><label for="Other">{{form['other']}}</label>
+						<input type="text" name="otherdataImpacts" id="other_data_impacts_text_field" value="{{ [e for e in c.dataImpacts if e.encode('utf-8') not in data_impacts][0] }}" />
+					{% else %}
+						<input type="checkbox" id="other_data_impacts" name="dataImpacts" value="Other" 
+							data-parsley-mincheck="1" 
+							data-parsley-group='dataImpacts' 
+							data-parsley-trigger="change" 
+							{%if required %}required{%end%}><label for="Other">{{form['other']}}</label>
+						<input type="text" name="otherdataImpacts" id="other_data_impacts_text_field" />
+					{% end %}
+				{%else%}
+					<input type="checkbox" id="other_data_impacts" name="dataImpacts" value="Other" 
+						data-parsley-mincheck="1" 
+						data-parsley-group='dataImpacts' 
+						data-parsley-trigger="change"
+						{%if required %}required{%end%}><label for="Other">{{form['other']}}</label>
+					<input type="text" name="otherDataImpact" id="other_data_impacts_text_field" />
+				{%end%}
+			</div>
+		</fieldset>
+
+		{% if c %}
+			<input type="hidden" name="id" id="companyID" value="{{c.id}}">
+		{%end%}
+
+
+
+
+
+
+
+
+

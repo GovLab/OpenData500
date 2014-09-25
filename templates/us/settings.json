@@ -66,5 +66,26 @@
             "submitData": "Submit Agency and Data Information",
             "thanks": "Thank You!"
         }
+    },
+    "footer_menu": {
+        "en":[{
+            "item": "Twitter",
+            "link": "https://twitter.com/opendata500"
+        },
+        {
+            "item":"About",
+            "link":"/us/about/"
+        },
+        {
+            "item":"Contact Us",
+            "link":"mailto:opendata500@thegovlab.org"
+        }]
     }
 }
+
+
+
+
+
+
+

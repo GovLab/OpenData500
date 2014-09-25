@@ -1,0 +1,82 @@
+{% extends "../../main.html" %}
+{% autoescape None %}
+
+{% block body %}
+
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>{{ page_heading }}</h2>
+
+
+<form method="post" id="newCompany" class="m-form" data-parsley-validate>
+
+	{% module Form(country, settings['default_language'], False, False) %}
+
+	{% module FormData(country, settings['default_language'], False) %}
+
+	{% raw xsrf_form_html() %}
+
+	<fieldset class="m-form-half">
+		<input type="submit" class="m-button" value="Add Company"><span class="company-form-error-message error-message" style="display:none"></span>
+	</fieldset>
+</form>
+
+
+<script>
+
+$(document).ready( function() {
+	{#--*****************************************************************-VALIDATE & SUBMIT COMPANY FORM-*****************************************************************--#}
+    var _xsrf = $("[name='_xsrf']").val();
+    var country = $('[name="country"]').attr('id');
+    var error_message = $('.company-form-error-message');
+    var companyName = $("#companyName").parsley()
+        .addAsyncValidator('validateName', function(xhr) {
+            window.ParsleyUI.removeError(companyName, 'name-exists');
+            if (xhr.status === 404) {
+                window.ParsleyUI.addError(companyName, 'name-exists', "This company has already been submitted. Please contact opendata500@thegovlab.org if you have any questions.");
+            }
+            return xhr.status === 200;
+        }, '/validate/?country=' + country + '&_xsrf=' + _xsrf);
+    $("#newCompany").parsley();
+
+    $("#newCompany").submit(function(event) {
+        $(this).parsley("validate");
+        if ($(this).parsley("isValid")) {
+            var data = $('#newCompany').serializeArray();
+            $.ajax({
+                type: 'POST',
+                url: '/admin/company-add/',
+                data: data,
+                error: function(error) {
+                    console.debug(JSON.stringify(error));
+                    error_message.text('Oops... Something went wrong :/').show().delay(5000).fadeOut();
+                },
+                beforeSend: function(xhr, settings) {
+                    error_message.text('Saving...').show().delay(5000).fadeOut();
+                },
+                success: function(response) {
+                	if (response == 'success') {
+                    	document.location.href = '/admin/companies/';
+                	} else {
+	                	error_message.text('Oops... Something went wrong :/').show().delay(5000).fadeOut();
+	                	console.log(response);
+                	}
+                }
+            });
+        } else {
+            error_message.text('You still need to fix some items.').show().delay(5000).fadeOut();
+        }
+        event.preventDefault();
+    });
+});
+</script>
+
+{% end %}
+
+
+

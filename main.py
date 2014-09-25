@@ -22,6 +22,7 @@ from datetime import datetime
 from utils import *
 from handlers.handlers import *
 from handlers.admin_handlers import *
+from handlers.modules import *
 
 # import and define tornado-y things
 from tornado.options import define
@@ -41,7 +42,11 @@ class Application(tornado.web.Application):
             template_path=os.path.join(os.path.dirname(__file__), "templates"),
             static_path=os.path.join(os.path.dirname(__file__), "static"),
             ui_modules={
-                "datetime": datetime},
+                "datetime": datetime,
+                'Form': FormModule,
+                'FormData':FormDataModule,
+                'AgencyAdd':AgencyAddModule,
+                'AdminSettings':AdminSettingsModule},
             debug=True,
             cookie_secret=os.environ.get('COOKIE_SECRET'),
             xsrf_cookies=True,
@@ -61,8 +66,8 @@ class Application(tornado.web.Application):
             (r"/delete/([a-zA-Z0-9]{24})/?", DeleteCompanyHandler),
             (r"/validate/?", ValidateHandler),
             (r"/admin/agency-edit/(?:([a-zA-Z0-9]{24})?)/?", AdminEditAgencyHandler),
-            (r"/roundtables/(.*)", PDFHandler),
-            (r'/download/(.*)/?',tornado.web.StaticFileHandler, {'path': os.path.join(os.path.dirname(__file__), 'static')+"/files/"}),
+            (r"/admin/company-add/?", NewCompanyHandler),
+            (r'/download/(.*)/?',tornado.web.StaticFileHandler, {'path':os.path.join(os.path.dirname(__file__), 'static')+"/files/"}),
             (r'/login/?', LoginHandler),
             (r'/logout/?', LogoutHandler),
             (r'/register/?', RegisterHandler),

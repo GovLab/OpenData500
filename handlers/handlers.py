@@ -14,21 +14,24 @@ class MainHandler(BaseHandler):
             return
         with open("templates/"+country+"/settings.json") as json_file:
             settings = json.load(json_file)
-        # lan = self.get_argument("lan", "")
-        # if lan and lan != self.get_cookie("lan"):
-        #     self.set_cookie("lan", lan)
-        # if not lan:
-        #     lan = self.get_cookie("lan")
-        # if not lan: or lan not in settings["available_languages"]:
-        #     lan = settings['default_language']
-        #     self.set_cookie("lan", lan)
-        lan = self.get_cookie("lan")
-        if not lan:
+        #------------LOAD LANGUAGE
+        lan = self.get_argument("lan", None)
+        if lan:
+            if lan != self.get_cookie('lan') and lan in settings['available_languages']:
+                self.set_cookie("lan", lan)
+                self.redirect("/" + country + "/")
+                return
+            if lan not in settings['available_languages']:
+                lan = settings['default_language']
+        elif not lan and self.get_cookie('lan') in settings['available_languages']:
+            lan = self.get_cookie('lan')
+        else:
             lan = settings['default_language']
+        #------------END LANGUAGE
         self.render(
             country.lower()+ "/" + lan + "/index.html",
             settings = settings,
-            menu=settings['menu'][lan],
+            #menu=settings['menu'][lan],
             user=self.current_user,
             lan = lan,
             country=country
@@ -113,8 +116,18 @@ class StaticPageHandler(BaseHandler):
             return
         with open("templates/"+country+"/settings.json") as json_file:
             settings = json.load(json_file)
-        lan = self.get_cookie("lan")
-        if not lan:
+        #------------LOAD LANGUAGE
+        lan = self.get_argument("lan", None)
+        if lan:
+            if lan != self.get_cookie('lan') and lan in settings['available_languages']:
+                self.set_cookie("lan", lan)
+                self.redirect(self.request.uri)
+                return
+            if lan not in settings['available_languages']:
+                lan = settings['default_language']
+        elif not lan and self.get_cookie('lan') in settings['available_languages']:
+            lan = self.get_cookie('lan')
+        else:
             lan = settings['default_language']
         if company: 
             self.render(
@@ -174,12 +187,25 @@ class ListHandler(BaseHandler):
             return
         with open("templates/"+country+"/settings.json") as json_file:
                 settings = json.load(json_file)
-        lan = self.get_cookie("lan")
-        if not lan:
+        #------------LOAD LANGUAGE
+        lan = self.get_argument("lan", None)
+        if lan:
+            if lan != self.get_cookie('lan') and lan in settings['available_languages']:
+                self.set_cookie("lan", lan)
+                self.redirect(self.request.uri)
+                return
+            if lan not in settings['available_languages']:
+                lan = settings['default_language']
+        elif not lan and self.get_cookie('lan') in settings['available_languages']:
+            lan = self.get_cookie('lan')
+        else:
             lan = settings['default_language']
         companies = models.Company.objects(Q(display=True) & Q(country=country)).order_by('prettyName')
-        agencies = models.Agency.objects(Q(usedBy__not__size=0) & Q(source="dataGov") & Q(dataType="Federal")).order_by("-usedBy_count").only("name", "abbrev", "prettyName")[0:16]
-        stats = models.Stats.objects().first()
+        if country != 'mx':
+            agencies = models.Agency.objects(Q(usedBy__not__size=0) & Q(source="dataGov") & Q(dataType="Federal") & Q(country=country)).order_by("-usedBy_count").only("name", "abbrev", "prettyName")[0:16]
+        if country == 'mx':
+            agencies = models.Agency.objects(Q(dataType="Federal") & Q(country=country)).order_by("-usedBy_count").only("name", "abbrev", "prettyName")[0:16]
+        stats = models.Stats.objects.get(country=country)
         try:
             page_title=settings['page_titles'][lan]["list"]
         except:
@@ -190,7 +216,7 @@ class ListHandler(BaseHandler):
             stats = stats,
             states = states,
             agencies = agencies,
-            categories = categories,
+            categories = categories[lan],
             user = self.current_user,
             country = country,
             menu=settings['menu'][lan],
@@ -232,7 +258,7 @@ class ValidateHandler(BaseHandler):
         if not country:
             country = 'us'
         companyName = self.get_argument("companyName", None)
-        prettyName = re.sub(r'([^\s\w])+', '', companyName).replace(" ", "-").title()
+        prettyName = self.application.tools.prettify(companyName)
         try: 
             c = models.Company.objects.get(Q(country=country) & Q(prettyName=prettyName))
             logging.info('company exists.')
@@ -253,40 +279,50 @@ class SubmitCompanyHandler(BaseHandler):
             return
         with open("templates/"+country+"/settings.json") as json_file:
                 settings = json.load(json_file)
-        lan = self.get_cookie("lan")
-        if not lan:
+        #------------LOAD LANGUAGE
+        lan = self.get_argument("lan", None)
+        if lan:
+            if lan != self.get_cookie('lan') and lan in settings['available_languages']:
+                self.set_cookie("lan", lan)
+                self.redirect(self.request.uri)
+                return
+            if lan not in settings['available_languages']:
+                lan = settings['default_language']
+        elif not lan and self.get_cookie('lan') in settings['available_languages']:
+            lan = self.get_cookie('lan')
+        else:
             lan = settings['default_language']
-        try:
-            page_title=settings['page_titles'][lan]["submit"]
-        except:
-            page_title="OD500"
         self.render(
             country+ "/" + lan + "/submitCompany.html",
-            page_title = page_title,
             country=country,
             country_keys=country_keys,
-            companyType = companyType,
-            companyFunction = companyFunction,
-            criticalDataTypes = criticalDataTypes,
-            revenueSource = revenueSource,
-            new_revenueSource = new_revenueSource,
-            categories=categories,
-            source_count = source_count,
-            datatypes = datatypes,
-            stateList = stateList,
             user=self.current_user,
             menu=settings['menu'][lan],
-            stateListAbbrev=stateListAbbrev,
             settings=settings,
             lan=lan
         )
 
     #@tornado.web.authenticated
     def post(self, country=None):
-        logging.info("Submitting New Company")
         logging.info(self.request.arguments)
         form_values = {k:','.join(v) for k,v in self.request.arguments.iteritems()}
-        company = self.application.form.process_new_company(form_values)
+        company = self.application.form.create_new_company(form_values)
+        id = str(company.id)
+        form_values['submittedSurvey'] = True
+        form_values['vetted'] = False
+        form_values['vettedByCompany'] = True
+        form_values['submittedThroughWebsite'] = True
+        form_values['locked'] = False
+        form_values['display'] = False
+        try:
+            self.application.form.process_company(form_values, id)
+        except Exception, e:
+            logging.info("Could not save company: " + str(e))
+            logging.info("Aborting")
+            self.write("Could not save company: " + str(e))
+            company.delete()
+            return
+        country = country_keys[form_values['country']]
         self.application.stats.update_all_state_counts(country)
         id = str(company.id)
         self.write({"id": id})
@@ -304,11 +340,21 @@ class SubmitDataHandler(BaseHandler):
             return
         with open("templates/"+country+"/settings.json") as json_file:
                 settings = json.load(json_file)
-        lan = self.get_cookie('lan')
-        if not lan or lan not in settings["available_languages"]:
-            lan = settings["default_language"]
+        #------------LOAD LANGUAGE
+        lan = self.get_argument("lan", None)
+        if lan:
+            if lan != self.get_cookie('lan') and lan in settings['available_languages']:
+                self.set_cookie("lan", lan)
+                self.redirect(self.request.uri)
+                return
+            if lan not in settings['available_languages']:
+                lan = settings['default_language']
+        elif not lan and self.get_cookie('lan') in settings['available_languages']:
+            lan = self.get_cookie('lan')
+        else:
+            lan = settings['default_language']
         company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
-        if company.country != country:
+        if company.country != country or '/'+company.country+'/' not in self.request.uri:
             self.redirect(str('/'+company.country+'/addData/'+id))
             return
         try:
@@ -327,7 +373,7 @@ class SubmitDataHandler(BaseHandler):
 
     #@tornado.web.authenticated
     def post(self, country, id):
-        logging.info("Submitting Data: "+ self.get_argument("action", None))
+        #logging.info("Submitting Data: "+ self.get_argument("action", None))
         logging.info(self.request.arguments)
         try:
             company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
@@ -352,7 +398,7 @@ class SubmitDataHandler(BaseHandler):
         except:
             rating = 0
         action = self.get_argument("action", None)
-        if action != 'dataComments':
+        if action != 'submit-form':
             try:
                 agency = models.Agency.objects.get(Q(name=agency_name) & Q(country=company.country))
             except Exception, e:
@@ -360,11 +406,13 @@ class SubmitDataHandler(BaseHandler):
                 self.set_status(400)
         response = {"message":"", "agency":0, "subagency":0, "dataset":0}
         #------------------------------------JUST SAVE DATA COMMENT QUESTION------------------------
-        if action == "dataComments":
-            logging.info("saving " + self.get_argument('dataComments', None))
-            if self.application.form.company_update_one(id, 'dataComments', self.get_argument('dataComments', None)):
-                self.write({"response":"success", "redirect":"/"+ country + "/thanks/?lan=" + lan})
-            else:
+        if action == "submit-form":
+            try:
+                form_values = {k:','.join(v) for k,v in self.request.arguments.iteritems()}
+                self.application.form.process_company_data_info(form_values, id)
+                self.write({"response":"success", "redirect":"/"+ country + "/thanks/"})
+            except Exception, e:
+                logging.info("Error: " + str(e))
                 self.write({"response":"error"})
         #------------------------------------ADDING AGENCY/SUBAGENCY------------------------
         if action == 'add':
@@ -431,31 +479,11 @@ class SubmitDataHandler(BaseHandler):
                 logging.info("Error deleting dataset: " + str(e))
                 self.write(response)
 
-
-#-------MULTI FILE
-class PDFHandler(BaseHandler):
-    def get(self, filename):
-        paths = ['', 'us/']
-        logging.info(os.path.join(os.path.dirname(os.path.dirname(__file__)), "static/files/"))
-        file_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "static/files/")
-        for p in paths:
-            try:
-                with open(file_path + p + filename, 'rb') as f:
-                    self.set_header("Content-Type", 'application/pdf; charset="utf-8"')
-                    self.set_header("Content-Disposition", "attachment; filename="+ filename)
-                    self.write(f.read())
-                    return
-            except IOError, e:
-                logging.info("Could not open file: " + str(e))
-
 class NotFoundHandler(BaseHandler):
     def get(self):
         self.render('404.html',
             lan='english',
             country='us')
-
-
-
 
 
 

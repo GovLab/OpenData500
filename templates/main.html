@@ -64,8 +64,25 @@
                         {%end%}
                     </div>
                 {%end%}
-                {%try%} {% if user %} <div class="m-main-menu-item"><a href="/admin/companies/">Admin</a>{% end %}{%except%}{%end%}</div>
-                {%try%} {% if user %} <div class="m-main-menu-item"><a href="/logout/">Logout</a>{% end %}{%except%}{%end%}</div>
+                {%try%} {% if user %} 
+                    <div class="m-main-menu-item">
+                        <a href="/admin/companies/">Admin</a>
+                        <ul id="submenu-about" class="m-main-menu-sub-menu">
+                            <li><a class="m-main-menu-sub-menu-item" href="/admin/companies/">Companies</a></li>
+                            <li><a class="m-main-menu-sub-menu-item" href="/admin/agencies/">Agencies</a></li>
+                        </ul>
+                    </div>
+                {% end %}{%except%}{%end%}
+                {%try%} {% if user %} <div class="m-main-menu-item"><a href="/logout/">Logout</a></div>{% end %}{%except%}{%end%}
+                {% if len(settings['available_languages']) > 1 %}
+                    <div class="m-main-menu-item">
+                        <div class="language-options">
+                            {% for language in settings['available_languages'] %}
+                                <a href="?lan={{language}}">{{language.upper()}}</a>
+                            {%end%}
+                        </div>
+                    </div>
+                {%end%}
             </div>
         </div>
     </header><!-- end header -->
@@ -97,12 +114,15 @@
         <div class="l-centered">
             <div class="m-footer-logos">
                 <a href="http://thegovlab.org/"><img id="govlab-logo" src="{{ static_url("img/govlab-logo.png") }}" alt="The GovLab"></a>
-                <a href="http://www.knightfoundation.org/"><img id="knight-logo" src="{{ static_url("img/knight-logo.png") }}" alt="Knight Foundation"></a>
             </div>
             <ul>
-                <li class="footer-menu-item"><a href="https://twitter.com/opendata500" target="_blank">Twitter</a></li> 
-                <li class="footer-menu-item"><a href="/about/">About</a></li> 
-                <li class="footer-menu-item last"><a href="mailto:opendata500@thegovlab.org">Contact Us</a></li> 
+                {% for i in range(0, len(settings['footer_menu'][lan_])) %}
+                    {% if i == len(settings['footer_menu'][lan_])-1 %}
+                        <li class="footer-menu-item last"><a href="{{settings['footer_menu'][lan_][i]['link']}}" target="_blank">{{settings['footer_menu'][lan_][i]['item']}}</a></li> 
+                    {%else%}
+                        <li class="footer-menu-item"><a href="{{settings['footer_menu'][lan_][i]['link']}}" target="_blank">{{settings['footer_menu'][lan_][i]['item']}}</a></li> 
+                    {%end%}
+                {%end%}
             </ul>
             <p class="creative-commons-license"><a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Dataset" property="dct:title" rel="dct:type">The Open Data 500</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://thegovlab.org/" property="cc:attributionName" rel="cc:attributionURL">The GovLab</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.<br />Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="https://github.com/luisdaniel/OpenData500" rel="dct:source">https://github.com/luisdaniel/OpenData500</a>.</p>
         </div>
@@ -307,9 +327,15 @@
     <!-- Parallax Effect -->
     <script src="{{ static_url("js/libs/jquery.stellar.min.js") }}"></script>
     <!-- parsley.js (for form validation) -->
+    <script src="{{ static_url("js/es.js") }}"></script>
     <script src="{{ static_url("js/parsley.js") }}"></script>
     <script src="{{ static_url("js/parsley.extras.js") }}"></script>
     <script src="{{ static_url("js/parsley.remote.js") }}"></script>
+    {% if lan == 'es' %}
+        <script type="text/javascript">
+          window.ParsleyValidator.setLocale('es');
+        </script>
+    {%end%}
     <!-- main script -->
     <script src="{{ static_url("js/script.js") }}"></script>
     <script src="{{ static_url("js/ui-scripts.js") }}"></script>

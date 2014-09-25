@@ -1,0 +1,107 @@
+{
+    "default_language": "es",
+    "available_languages": ["en", "es"],
+    "menu": {
+        "en": [{
+            "item": "About",
+            "link": "/mx/about/",
+            "sub-menu": [{
+                "item": "Goals",
+                "link": "/mx/about/#about-goals"
+            }, {
+                "item": "Approach",
+                "link": "/mx/about/#about-approach"
+            }, {
+                "item": "People",
+                "link": "/mx/about/#about-people"
+            }]
+        }, {
+            "item": "Survey",
+            "link": "/mx/submitCompany/",
+            "sub-menu": []
+        }, {
+            "item": "Resources",
+            "link": "/mx/resources/",
+            "sub-menu": []
+        }],
+        "es": [{
+            "item": "Acerca de",
+            "link": "/mx/about/",
+            "sub-menu": [{
+                "item": "Meta",
+                "link": "/mx/about/#about-goals"
+            }, {
+                "item": "Enfoque",
+                "link": "/mx/about/#about-approach"
+            }, {
+                "item": "Nosotros",
+                "link": "/mx/about/#about-people"
+            }]
+        }, {
+            "item": "Encuesta",
+            "link": "/mx/submitCompany/",
+            "sub-menu": []
+        }, {
+            "item": "Recursos",
+            "link": "/mx/resources/",
+            "sub-menu": []
+        }]
+    },
+    "page_titles": {
+        "en": {
+            "index": "Welcome to the OD500",
+            "about": "About the OD500",
+            "resources": "Open Data Resources - OD500",
+            "list": "Open Data 500 Companies",
+            "submit": "Submit a Company to the OD500",
+            "stats": "OD500 By The Numbers",
+            "roundtables": "Open Data Roundtables",
+            "submitData": "Submit Agency and Data Information",
+            "thanks": "Thank You!"
+        },
+        "es": {}
+    },
+    "footer_menu": {
+        "en":[{
+            "item": "Twitter",
+            "link": "https://twitter.com/PresidenciaMX"
+        },
+        {
+            "item":"About",
+            "link":"/mx/about/"
+        },
+        {
+            "item":"Terms of Service",
+            "link":"/mx/tos/"
+        },
+        {
+            "item":"Contact Us",
+            "link":"mailto:OD100MX@datos.gob.mx"
+        }],
+        "es":[{
+            "item": "Twitter",
+            "link": "https://twitter.com/PresidenciaMX"
+        },
+        {
+            "item":"Acerca de",
+            "link":"/mx/about/"
+        },
+        {
+            "item":"Términos y Condiciones",
+            "link":"/mx/tos/"
+        },
+        {
+            "item":"Contacto",
+            "link":"mailto:OD100MX@datos.gob.mx"
+        }]
+    }
+}
+
+
+
+
+
+
+
+
+

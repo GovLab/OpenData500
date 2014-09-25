@@ -1,0 +1,159 @@
+
+{% extends "../../main.html" %}
+{% autoescape None %}
+
+
+{% block body %}
+
+<h1>{{ page_heading }}</h1>
+
+<form class="m-form">
+	<fieldset class="m-form-half">
+		<h2>Stats</h2>
+		<h3>Total Companies: </h3><p id="totalCompanies">{{stats.totalCompanies}}</p>
+		<h3>Total Companies Displayed: </h3><p id="totalCompaniesDisplayed">{{stats.totalCompaniesDisplayed}}</p>
+		<h3>Total Companies Submitted Via Web: </h3><p id="totalCompaniesWeb">{{stats.totalCompaniesWeb}}</p>
+		<h3>Total Companies With Complete Surveys: </h3><p id="totalCompaniesSurvey">{{stats.totalCompaniesSurvey}}</p>
+	</fieldset>
+	<fieldset class="m-form-half right">
+		<h2>Utilities</h2>
+		{% raw xsrf_form_html() %}
+		<input type="button" class="l-button admin_utils" id="refresh" name="refresh" value="Refresh Stats"><br>
+		<a href="/admin/company-add/"><input type="button" class="l-button" value="New Company"></a><br>
+		<input type="button" class="l-button admin_utils" id="files" name="files" value="Generate All Files"><br>
+		<input type="button" class="l-button admin_utils" id="company_csv" name="files" value="Generate Company CSV (displayed only)"><br>
+		<input type="button" class="l-button admin_utils" id="company_all_csv" name="files" value="Generate Company CSV (All)"><br>
+		{% if user == "luis" %}<input type="button" class="l-button admin_utils" id="agency_csv" name="files" value="Generate Agency CSV"><br>{%end%}
+		{% if country == "us" %}<input type="button" class="l-button admin_utils" id="vizz" name="vizz" value="Generate Vizz File"><br>{%end%}
+		<input type="button" class="l-button admin_utils" id="redo_filters" name="filters" value="Re-Do Company Filters"><br>
+		<span class="message"></span>
+	</fieldset>
+	<fieldset class="m-form-half">
+		<h3>Links</h3>
+		<a href="/download/us_OD500_Companies.csv">Companies CSV</a><br />
+		<a href="/download/us_OD500_Companies_All.csv">Companies (All) CSV</a><br />
+		<a href="/download/us_OD500_Agencies.csv">Agencies CSV</a><br />
+	</fieldset>
+</form>
+<br>
+<hr>
+<h2>Need Vetting</h2>
+<table class="needVetting" style="width:100%; text-align:left; border:1px;">
+	<tr>
+		<th>Company Name</th>
+		<th>Edit URL</th>
+		<th>Contact Email</th>
+		<th>Date Updated</th>
+		<th>Via Web?</th>
+		<th>Displayed?</th>
+		<th>Notes</th>
+	</tr>
+	{% for company in needVetting %}
+		<tr>
+			<td><strong>{{ company.companyName }}</strong></a></td>
+			<td><a href="/admin-edit/{{ company.id }}">Edit</a></td>
+			<td>{%try%}{% if (company.contact) %} {{ company.contact.email }} {% end %}{%except%}{%end%}</td>
+			<td>{{ company.lastUpdated.strftime("%b, %d '%y @%I:%M %p") }}</td>
+			<td>{%if company.submittedThroughWebsite %} √ {%end%}</td>
+			<td><input type="checkbox" name="display" class="change_display" id="display" value="display" c_id="{{company.id}}" {%if company.display %}checked{%end%}></td>
+			<td><p>{% if company.notes %}{{company.notes}}{%end%}</p></td>
+		</tr>
+	{% end %}
+</table>
+<br>
+<hr>
+<h2>Need to fill out Surveys</h2>
+<table style="width:100%; text-align:left;">
+	<tr>
+		<th>Company Name</th>
+		<th>Edit URL</th>
+		<th>Contact Email</th>
+		<th>Admin Edit</th>
+		<th>Displayed?</th>
+		<th>Notes</th>
+
+	</tr>
+	{% for company in sendSurveys %}
+		<tr>
+			<td><strong>{{ company.companyName }}</strong></a></td>
+			<td><a href="/edit/{{ company.id }}">Edit</a></td>
+			<td>{%try%}{% if (company.contact) %} {{ company.contact.email }} {% end %}{%except%}{%end%}</td>
+			<td><a href="/admin-edit/{{ company.id }}">Edit</a></td>
+			<td><input type="checkbox" name="display" class="change_display" id="display" value="display" c_id="{{company.id}}" {%if company.display %}checked{%end%}></td>
+			<td><p>{% if company.notes %}{{company.notes}}{%end%}</p></td>
+		</tr>
+	{% end %}
+</table>
+<br>
+<br>
+<hr>
+<h2>Submitted Survey, Vetted, and Displayed</h2>
+<div id="accordionUnvetted">
+{% for company in surveySubmitted %}
+	<h3><strong>{{ company.companyName }}</strong> Submitted: {{company.ts}}</h3> 
+	<div>
+		<p>{% if company.notes %}{{company.notes}}{%end%}</p>
+		<p><a href="/admin-edit/{{ company.id }}">Edit</a></p>
+	</div>
+{% end %}
+</div>
+<script>
+
+$(document).ready( function() {
+	$('.m-form').on('click', '.admin_utils', function() {
+		action = this.id;
+		console.log(action)
+		if (action == "files") {
+			$('.message').text("Hold on, this one takes a bit...").show();
+		} else {
+			$('.message').text("Hold up...").show();
+		}
+		data = { "action":action, "_xsrf": $("[name='_xsrf']").val() }
+	  $.ajax({
+	    type: 'POST',
+	    url: '/admin/companies/',
+	    data: data,
+	    error: function(error) {
+	        console.debug(JSON.stringify(error));
+	        $('.message').text("That didn't work...").show().delay(5000).fadeOut();;
+		},
+	    beforeSend: function(xhr, settings) {
+	    },
+	    success: function(data) {
+	    	if (action == "refresh") {
+				console.log(data);
+				$('#totalCompanies').text(data['totalCompanies']);
+				$('#totalCompaniesWeb').text(data['totalCompaniesWeb']);
+				$('#totalCompaniesSurvey').text(data['totalCompaniesSurvey']);
+				$('#totalCompaniesDisplayed').text(data['totalCompaniesDisplayed']);
+				$('.message').text("Aight, I'm done.").show().delay(5000).fadeOut();
+			} else {
+				$('.message').text("Aight, I'm done.").show().delay(5000).fadeOut();
+			}
+	    }
+	  });
+	});
+	$('#container').on('click', '.change_display', function() {
+		id = this.attributes['c_id'].value
+		p = this;
+		data = { "action":"display", "id":id, "_xsrf": $("[name='_xsrf']").val() }
+		$.ajax({
+		    type: 'POST',
+		    url: '/admin/companies/',
+		    data: data,
+		    error: function(error) {
+		        console.debug(JSON.stringify(error));
+			},
+		    beforeSend: function(xhr, settings) {
+		    },
+		    success: function(data) {
+		    	console.log('success!');
+		    }
+		});
+	});
+});
+
+
+</script>
+
+{% end %}

@@ -1,0 +1,44 @@
+{% extends "../../main.html" %}
+{% autoescape None %}
+
+{% block body %}
+
+<div class="m-homepage">
+
+    <h1 class="first-title">Open Data 100 Mexico</h1>
+
+    <section class="m-homepage-banner">
+        <img src="/static/img/mx/datosgobmx_banner.jpg">
+    </section>
+
+    <section class="m-homepage-about">
+        <h1>About This Project</h1>
+        <p class="intro">The Open Data 100 Mexico, based on the Open Data 500 United States, is the first comprehensive study of Mexican companies that use open government data to generate new business, develop new products and services, and create social value.</p>
+        <p class="more"><a href="/mx/about/" class="m-button">Learn More</a></p> 
+    </section>
+
+    <section class="m-homepage-participate">
+        <h1>How To Participate</h1>
+        <div class="m-homepage-box">
+            <h2>1</h2>
+            <h3>If you represent an Open Data company</h3>
+            <p>If your company is not already on our list, please fill out our <a href="/submitCompany/">survey</a> to tell us about your work and the data you use.</p>    
+        </div>
+        <div class="m-homepage-box">
+            <h2>2</h2>
+            <h3>If you would like to recommend an Open Data company</h3>
+            <p>Please email us at <a href="mailto:OD100MX@datos.gob.mx">OD100MX@datos.gob.mx</a>.</p>
+        </div>
+        <div class="m-homepage-box">
+            <h2>3</h2>
+            <h3>If you have general information to share about open data in Mexico</h3>
+            <p><a href="http://www.opendata500.com/about/#disqus_thread">Join the Conversation</a>, tweet your comments to #OD100MX, or email us at <a href="mailto:OD100MX@datos.gob.mx">OD100MX@datos.gob.mx</a>.</p>
+        </div>
+    </section>
+</div>
+
+
+<script>
+    $('#mc_embed_signup').removeClass('s-disabled').delay(5000).addClass('s-disabled');
+</script>
+{% end %}
