@@ -1215,6 +1215,17 @@ header {
 .logo:hover {
   background-color: transparent; }
 
+#country-selector {
+  font-size: 12px;
+  padding: 5px 0 4px;
+  color: #8977a7;
+  text-transform: uppercase;
+  display: inline-block;
+  float: right;
+  margin-top: 50px; }
+  #country-selector:hover {
+    color: #472b74; }
+
 .m-main-menu {
   font-size: 0;
   margin-top: 4px; }
@@ -1257,7 +1268,7 @@ header {
   .m-main-menu .language-options {
     font-size: 0;
     position: relative;
-    left: 250px; }
+    left: 320px; }
     .m-main-menu .language-options > a {
       font-size: 12px;
       padding-right: 4px;
@@ -1277,7 +1288,8 @@ header {
   .m-main-menu .m-main-menu-item a:hover {
     background-color: #8977a7;
     color: #fff; }
-  .m-main-menu .m-main-menu-item:last-child {
+  .m-main-menu .m-main-menu-item:last-of-type,
+  .m-main-menu .m-main-menu-item:nth-last-of-type(2) {
     border-right: 0; }
 
 .m-page-title {

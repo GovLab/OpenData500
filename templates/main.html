@@ -45,9 +45,11 @@
     <header>
         <div class="l-centered">
             <a class="logo" href="/{%try%}{%if country and country!="int" %}{{country}}/{%end%}{%except%}{%end%}">
-                {% if country =="mx" %}<img src="{{ static_url("img/od100-logo-mx.png") }}" alt="">{%end%}
+                {% if country =="mx" %}
+                    <img src="{{ static_url("img/od100-logo-mx.png") }}" alt="">
+                    
+                {%end%}
                 {% if country =="us" %}<img src="{{ static_url("img/od500-logo-us.png") }}" alt="">{%end%}</a>
-
             <div id="mainMenu" class="m-main-menu">
                 {% for item in settings['menu'][lan_] %}        
                     <div class="m-main-menu-item">
@@ -80,7 +82,11 @@
                         </div>
                     </div>
                 {%end%}
+                {% if country =="mx" %}
+                <a id="country-selector" href="/us">United States Study</a>
+                {% end %}
             </div>
+
         </div>
     </header><!-- end header -->
     

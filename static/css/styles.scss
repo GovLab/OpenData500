@@ -89,6 +89,21 @@ header {
 	background-color: transparent;
 }
 
+#country-selector {
+	font-size: 12px;
+	padding: 5px 0 4px;
+	color: $light_purple;
+	text-transform: uppercase;
+	display: inline-block;
+	// position: absolute;
+	// right: 0;
+	float: right;
+	margin-top: 50px;
+
+	&:hover {
+		color: $purple;
+	}
+}
 
 .m-main-menu {
 	font-size: 0;
@@ -145,7 +160,7 @@ header {
 	.language-options {
 		font-size: 0;
 		position: relative;
-		left: 250px;
+		left: 320px;
 
 		> a {
 			font-size: 12px;
@@ -183,7 +198,8 @@ header {
 		color: #fff;
 	}
 	
-	.m-main-menu-item:last-child {
+	.m-main-menu-item:last-of-type,
+	.m-main-menu-item:nth-last-of-type(2) {
 		border-right: 0;
 	}
 }
