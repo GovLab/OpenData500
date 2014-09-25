@@ -217,10 +217,10 @@ survey/no survey hover and active states*/
   max-width: 970px;
 }
 
-.m-homepage .first-title {
+/*.m-homepage .first-title {
   font-size: 4.9em;
 }
-
+*/
 #candidates-warning {
   height: 150px;
 }
@@ -237,7 +237,7 @@ survey/no survey hover and active states*/
   margin-top: 0px;
 }
 
-.m-main-menu-item .language-options {
+/*.m-main-menu-item .language-options {
   padding-left: 80px;
 }
 
@@ -248,4 +248,4 @@ survey/no survey hover and active states*/
 .m-main-menu-item .language-options a:last-child {
   padding: 5px 5px 5px 2px;
   border-right: 0;
-}
+}*/

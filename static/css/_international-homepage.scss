@@ -1,0 +1,25 @@
+#world-map {
+	path {
+		fill: $lighter_gray;
+		stroke: transparent;
+	}
+
+	.formal-agreement {
+	fill: $purple_alpha_40 !important;
+	}
+
+	.working-agreement {
+		fill: $dark_gray !important;
+	}
+
+	.in-discussion,
+	.in-discussion > path {
+		fill: $light_gray !important;
+	}
+
+	.project {
+		fill: $purple !important;
+	}
+}
+
+

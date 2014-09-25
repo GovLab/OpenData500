@@ -34,12 +34,6 @@
     <!--[if lt IE 9]>
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <style>
-        header {
-            height: 30px;
-            text-align: center;
-        }
-    </style>
 
 
 
@@ -50,7 +44,12 @@
     <div class="parallax-bg" id="background-3" data-stellar-ratio="-0.02"></div>   -->
     <header>
         <div class="l-centered">
-            <a class="logo" href="/{%try%}{%if country and country!="int" %}{{country}}/{%end%}{%except%}{%end%}"><img src="{{ static_url("img/od500-logo.png") }}" alt=""></a>
+            <a class="logo" href="/{%try%}{%if country and country!="int" %}{{country}}/{%end%}{%except%}{%end%}">
+                {% if country =="mx" %}
+                    <img src="{{ static_url("img/od100-logo-mx.png") }}" alt="">
+                    
+                {%end%}
+                {% if country =="us" %}<img src="{{ static_url("img/od500-logo-us.png") }}" alt="">{%end%}</a>
             <div id="mainMenu" class="m-main-menu">
                 {% for item in settings['menu'][lan_] %}        
                     <div class="m-main-menu-item">
@@ -83,7 +82,11 @@
                         </div>
                     </div>
                 {%end%}
+                {% if country =="mx" %}
+                <a id="country-selector" href="/us">United States Study</a>
+                {% end %}
             </div>
+
         </div>
     </header><!-- end header -->
     

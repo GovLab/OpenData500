@@ -3,6 +3,7 @@
 @import 'layout';
 @import 'typography';
 @import 'homepage';
+@import 'international-homepage';
 @import 'about';
 @import 'preview';
 @import 'submitcompany';
@@ -41,6 +42,8 @@ header {
 	background-color: $purple;
 	border-bottom: 5px solid $light_purple;
 	padding: 10px 0;
+	height: 30px;
+    text-align: center;
 }
 
 // === Layout classes
@@ -49,6 +52,7 @@ header {
 	width: 960px / 960px * 100%;
 	max-width: 960px;
 	margin: 0 auto;
+
 }
 
 #container {
@@ -64,8 +68,20 @@ header {
 	margin-top: -5px;
 	padding: 0;
 
+	// img {
+	// 	width: 109px;
+	// }
+}
+
+.m-country-flag {
+	text-align: center;
+	clear:both;
+	margin: 40px auto 0;
+
 	img {
-		width: 109px;
+		height: 80px;
+		@include drop_shadow;
+		
 	}
 }
 
@@ -73,6 +89,21 @@ header {
 	background-color: transparent;
 }
 
+#country-selector {
+	font-size: 12px;
+	padding: 5px 0 4px;
+	color: $light_purple;
+	text-transform: uppercase;
+	display: inline-block;
+	// position: absolute;
+	// right: 0;
+	float: right;
+	margin-top: 50px;
+
+	&:hover {
+		color: $purple;
+	}
+}
 
 .m-main-menu {
 	font-size: 0;
@@ -126,6 +157,22 @@ header {
 		}
 	}
 
+	.language-options {
+		font-size: 0;
+		position: relative;
+		left: 320px;
+
+		> a {
+			font-size: 12px;
+			padding-right: 4px;
+			padding-left: 4px;
+
+			&:first-child {
+				border-right: 2px solid $light_purple;
+			}
+		}
+	}
+
 	#submenu-about {
 		width: 182px;
 	}
@@ -151,7 +198,8 @@ header {
 		color: #fff;
 	}
 	
-	.m-main-menu-item:last-child {
+	.m-main-menu-item:last-of-type,
+	.m-main-menu-item:nth-last-of-type(2) {
 		border-right: 0;
 	}
 }
@@ -200,7 +248,7 @@ header {
 #mc_embed_signup {
 	position: fixed;
 	border: 1px solid $light_purple;
-	background-color: $super_light_purple;
+	background-color: $super_light_purple_matte;
 	padding: 13px 15px 13px 20px;
 	z-index: 10;
 	right: -1px;
@@ -426,3 +474,19 @@ footer {
 		}
 	}
 }
+
+.m-international-page {
+	font-size: 14px;
+	line-height: 20px;
+
+	.m-country-flag.s-international img {
+		box-shadow: 0 0 0;
+		width: 300px;
+		height: auto;
+	}
+
+	.first-title {
+		margin-top: 20px;
+	}
+}
+
