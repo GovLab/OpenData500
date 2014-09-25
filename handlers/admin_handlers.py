@@ -42,14 +42,17 @@ class LoginHandler(BaseHandler):
             logging.info('unsuccessful login')
             error_msg = u"?error=" + tornado.escape.url_escape("User does not exist")
             self.redirect(u"/login" + error_msg)
+            return
         if user and user.password and bcrypt.hashpw(password, user.password.encode('utf-8')) == user.password:
             logging.info('successful login for '+username)
             self.set_current_user(username)
             self.redirect("/admin/companies/")
+            return
         else: 
             logging.info('unsuccessful login')
             error_msg = u"?error=" + tornado.escape.url_escape("Incorrect Password")
             self.redirect(u"/login" + error_msg)
+            return
 
     def set_current_user(self, user):
         logging.info('setting ' + user)
