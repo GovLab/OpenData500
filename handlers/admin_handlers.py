@@ -675,7 +675,27 @@ class AdminEditAgencyHandler(BaseHandler):
 #--------------------------------------------------------DELETE COMPANY------------------------------------------------------------
 class DeleteCompanyHandler(BaseHandler):
     @tornado.web.authenticated
-    def get(self, id):
+    def get(self, id, country=None):
+        if not country:
+            country = "us"
+        if country not in available_countries:
+            self.redirect("/404/")
+            return
+        with open("templates/"+country+"/settings.json") as json_file:
+            settings = json.load(json_file)
+        #------------LOAD LANGUAGE
+        lan = self.get_argument("lan", None)
+        if lan:
+            if lan != self.get_cookie('lan') and lan in settings['available_languages']:
+                self.set_cookie("lan", lan)
+                self.redirect(self.request.uri)
+                return
+            if lan not in settings['available_languages']:
+                lan = settings['default_language']
+        elif not lan and self.get_cookie('lan') in settings['available_languages']:
+            lan = self.get_cookie('lan')
+        else:
+            lan = settings['default_language']
         try:
             company = models.Company.objects.get(id=bson.objectid.ObjectId(id)) 
         except:
@@ -683,30 +703,23 @@ class DeleteCompanyHandler(BaseHandler):
                 "404.html",
                 page_title='404 - Open Data500',
                 page_heading='Oh no...',
-                error = "404 - Not Found"
+                error = "404 - Not Found",
+                lan=lan,
+                country=country
             )
-        # #-----REMOVE FROM ALL AGENCIES-----
-        agencies = models.Agency.objects(usedBy__in=[str(company.id)])
-        for a in agencies:
-            #-----REMOVE DATASETS (AGENCY)-----
-            for d in a.datasets:
-                if d.usedBy == company:
-                    a.datasets.remove(d)
-            #---REMOVE DATASETS (SUBAGENCY)---
-            for s in a.subagencies:
-                for d in s.datasets:
-                    if d.usedBy == company:
-                        s.datasets.remove(d)
-                #--REMOVE FROM SUBAGENCIES--
-                if company in s.usedBy:
-                    s.usedBy.remove(company)
-            #-----REMOVE FROM AGENCY----
-            a.usedBy.remove(company)
-            a.usedBy_count = len(a.usedBy)
-            a.save()
-        ##----------DELETE COMPANY--------
-        company.delete()
-        self.redirect('/admin/companies/')
+        logging.info("deleting: " + company.companyName)
+        if len(company.agencies) !=0:
+            self.render(
+                "404.html",
+                page_title='404 - Open Data500',
+                page_heading='Oh no...',
+                error = "404 - Not Found",
+                lan=lan,
+                country=country
+            )
+        else:
+            company.delete()
+            self.redirect('/admin/companies/')
 
 
 
