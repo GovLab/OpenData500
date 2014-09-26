@@ -76,15 +76,13 @@
                 {% if len(settings['available_languages']) > 1 %}
                     <div class="m-main-menu-item">
                         <div class="language-options">
+                            <a href="/us/international/">International</a>
                             {% for language in settings['available_languages'] %}
                                 <a href="?lan={{language}}">{{language.upper()}}</a>
                             {%end%}
                         </div>
                     </div>
                 {%end%}
-                {% if country =="mx" %}
-                <a id="country-selector" href="/us">United States Study</a>
-                {% end %}
             </div>
 
         </div>
