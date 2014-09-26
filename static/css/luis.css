@@ -249,3 +249,18 @@ survey/no survey hover and active states*/
   padding: 5px 5px 5px 2px;
   border-right: 0;
 }*/
+
+.survey-instructions {
+  font-size: 14px;
+}
+
+.resources-intro {
+  font-size: 14px;
+}
+
+.m-homepage .first-title {
+  margin-top: 70px;
+}
+
+
+

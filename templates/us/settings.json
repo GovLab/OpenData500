@@ -40,6 +40,10 @@
                 "link": "/us/roundtables/?rt=doa"
             }]
         }, {
+            "item": "International",
+            "link": "/us/international",
+            "sub-menu": []
+        }, {
             "item": "Resources",
             "link": "/us/resources/",
             "sub-menu": [{
