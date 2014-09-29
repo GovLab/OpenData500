@@ -3,7 +3,7 @@
 
 {% block body %}
 
-
+{% import re %}
 
 <section id="candidate-warnings-and-download">
     <h1>Compañías participantes en Datos Abiertos 100 México</h1>
@@ -15,10 +15,10 @@
         <div id="filters-agency" class="m-candidates-buttons button-group" data-toggle="buttons-checkbox" data-filter-group="category">
             <button data-filter="*">Borrar filtro</button>
             {% for agency in agencies %}
-                {% if len(agency.name.replace("Department", "Dept.").replace("Development", "Dev.")) > 32 and agency.abbrev %}
+                {% if len(agency.name.replace("Instituto", "Inst.")) > 32 and agency.abbrev %}
                     <button data-filter=".{{agency.prettyName}}">{{agency.abbrev}}</button>
                 {%else%}
-                    <button data-filter=".{{agency.prettyName}}">{{agency.name.replace("Department", "Dept.").replace("Development", "Dev.").replace(" and ", " & ").replace(".", "")}}</button>
+                    <button data-filter=".{{agency.prettyName}}">{{agency.name.replace("Instituto", "Inst.")}}</button>
                 {%end%}
             {%end%}
         </div>
@@ -29,7 +29,7 @@
         <div id="filters-category" class="m-candidates-buttons button-group" data-toggle="buttons-checkbox" data-filter-group="category">
             <button data-filter="*">Clear Filter</button>
             {% for category in categories %}
-                <button data-filter=".{{category.strip().replace(" ", "-").replace("/","").replace("&", "")}}">{{category}}</button>
+                <button data-filter=".{{ re.sub(r'([^\s\w])+', '', category).replace(" ", "-") }}">{{category}}</button>
             {%end%}
         </div>
     </div>

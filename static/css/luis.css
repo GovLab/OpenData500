@@ -100,12 +100,20 @@ survey/no survey hover and active states*/
     background-color: #472b74;
     color: white; }
 
+.clear-all-filters {
+    display: inline-block;
+    float: right;
+    border: 1px solid #ccc;
+    letter-spacing: .4px;
+    padding: 4px 10px;
+    color: rgba(0, 0, 0, 0.6); }
+
 
 .clear-all-filters:hover {
   background-color: #472b74;
   color: white;
   display: inline-block;
-  margin-left: 150px;
+  /*margin-left: 150px;*/
   border: 1px solid #ccc;
   letter-spacing: .4px;
   padding: 4px 10px;

@@ -20,6 +20,10 @@
             "link": "/mx/submitCompany/",
             "sub-menu": []
         }, {
+            "item": "International",
+            "link": "/mx/international/",
+            "sub-menu": []
+        }, {
             "item": "Resources",
             "link": "/mx/resources/",
             "sub-menu": []
@@ -40,6 +44,10 @@
         }, {
             "item": "Encuesta",
             "link": "/mx/submitCompany/",
+            "sub-menu": []
+        }, {
+            "item": "Internacional",
+            "link": "/mx/international/",
             "sub-menu": []
         }, {
             "item": "Recursos",

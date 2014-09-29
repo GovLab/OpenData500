@@ -50,6 +50,7 @@ class Application(tornado.web.Application):
             debug=True,
             cookie_secret=os.environ.get('COOKIE_SECRET'),
             xsrf_cookies=True,
+            re=re,
             login_url="/login"
         )
         handlers = [
