@@ -7,35 +7,38 @@
 	margin-bottom: 20px;
 }
 
+.full-list {
+	.first-title {
+		margin-bottom: 20px;
+	}
+}
+
 .m-download-data {
-	float: right;
-	padding: 20px 20px 8px 20px;
-	width: 356px;
-	border: 1px solid $purple;
-	background-color: $super_light_purple;
-	@include inner-shadow;
-
-
-	h2 {
-		font-size: 2em;
-		text-align: center;
-		border-bottom: 1px solid $super_light_purple;
-		padding-bottom: 15px;
+	padding: 10px;
+	color: $dark_gray;
+	display: block;
+	border-top: 1px solid $super_light_gray;
+	border-bottom: 1px solid $super_light_gray;
+	text-align: center;
+	margin-bottom: 30px;
+	
+	strong {
+		margin-right: 30px;
+		display: inline-block;
 	}
 
-	> div {
-		float: left;
-		width: 50%;
-		text-align: center;
+	a {
+		color: $dark_gray;
+		padding: 4px 8px;
 
-		> p {
-			font-size: 16px;
-		}	
-	}
+		&:hover {
+			background-color: $light_purple;
+			color: $white;
 
-	.m-button {
-		margin-right: 8px;
-	}
+		}
+	}	
+
+
 }
 
 .m-candidates {
@@ -211,5 +214,19 @@
 		border-left: 4px solid $purple;
 		color: $black;
 		padding: 3px 9px 3px 6px;
+	}
+}
+
+#clear-filters-menu {
+	clear: both;
+	margin-top: 20px;
+
+	.clear-all-filters {
+	  display: inline-block;
+	  float: right;
+	  border: 1px solid #ccc;
+	  letter-spacing: .4px;
+	  padding: 4px 10px;
+	  color: rgba(0, 0, 0, 0.6);
 	}
 }

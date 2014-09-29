@@ -27,8 +27,20 @@
 		margin-top: 25px;
 	}
 
+	h2 {
+		text-align: center;
+		margin-bottom:40px;
+		font-weight: 200;
+	}
+
 	.intro {
 		overflow: hidden;
+	}
+
+	.adj-title {
+		font-size: 30px !important;
+		line-height: 42px;
+
 	}
 
 	section:last-child {
@@ -75,8 +87,8 @@
 		text-align: center;
 		position: relative;
 
-		h1 {
-			margin: 20px;
+		h2 {
+			margin-bottom: 20px;
 		}
 
 		h3 {
@@ -236,5 +248,9 @@
 
 #overlay.s-active {
 	display: block;
+}
+
+.resources-intro {
+	text-align: center;
 }
 

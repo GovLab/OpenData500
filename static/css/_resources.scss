@@ -6,7 +6,11 @@
 }
 
 .resource-panel {
-	margin-top: 80px;
+	margin-top: 30px;
+
+	.first-title {
+		margin-bottom: 0;
+	}
 
 	h3 {
 		margin-bottom: 20px;

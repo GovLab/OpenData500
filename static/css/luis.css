@@ -64,7 +64,9 @@ path.chord {
   background-color: rgba(255, 255, 255, 0.7);
   border-left: 4px solid #472b74;
   color: #444444;
-  padding: 3px 9px 3px 6px; }
+  padding: 3px 9px 3px 6px; 
+  margin: 2px;
+}
 
 
 
@@ -98,14 +100,6 @@ survey/no survey hover and active states*/
     background-color: #472b74;
     color: white; }
 
-.clear-all-filters {
-  display: inline-block;
-  margin-left: 150px;
-  border: 1px solid #ccc;
-  letter-spacing: .4px;
-  padding: 4px 10px;
-  color: rgba(0, 0, 0, 0.6);
-}
 
 .clear-all-filters:hover {
   background-color: #472b74;
@@ -277,5 +271,5 @@ survey/no survey hover and active states*/
 
 .about-page h1 {
   margin-bottom: 0px;
-  margin-top: 90px;
+  /*margin-top: 90px;*/
 }

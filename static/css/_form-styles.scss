@@ -84,14 +84,14 @@ select {
 
 .m-form-half {
 	@extend .m-form-group;
-	display: inline-block;
-	width: 456px / 960px * 100%;
-	vertical-align: top;
-	margin-right: 40px;
+	// display: inline-block;
+	// width: 456px / 960px * 100%;
+	// vertical-align: top;
+	// margin-right: 40px;
 }
-.m-form-half.right {
-	margin-right: 0;
-}
+// .m-form-half.right {
+// 	margin-right: 0;
+// }
 
 
 .m-form-full {
@@ -100,7 +100,7 @@ select {
 	
 .m-form-line {
 	margin-bottom: 5px;
-	text-align: right;
+	// text-align: right;
 }
 
 .m-form-line label {
@@ -109,7 +109,7 @@ select {
 	text-align: left;
 }
 .m-form-half input[type='text'] {
-	width: 48%;
+	width: 51%;
 }
 
 .m-form-half select {

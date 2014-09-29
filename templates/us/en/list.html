@@ -5,21 +5,18 @@
 
 
 
-<section id="candidate-warnings-and-download">
-	<h1>OD500 Companies</h1>
-    <div id="download-data" class="m-download-data">
-        <h2>Download the OD500 Data</h2>
-        <div>
-            <p>All Companies</p>
-            <p><a href="/download/us_OD500_Companies.json">JSON</a> | <a href="/download/us_OD500_Companies.csv">CSV</a></p>
-        </div>
-        <div><p>Agencies and Datasets</p>
-            <p><a href="/download/us_OD500_Agencies.json">JSON</a> | <a href="/download/us_OD500_Agencies.csv">CSV</a></p>
-        </div>
-    </div>
-	<div id="candidates-warning" class="warning">
-<!--         <p><strong>How to use this page:</strong> Click on a square to expand it and read the brief company description. Click on a company's name to view more information and for a space to comment. Filter by state, company category and/or federal agency data usage.</p> -->
+<section class="full-list">
+	<h1 class="first-title">Open Data 500 Companies</h1>
+<!-- 	<div id="candidates-warning" class="warning">
+<p><strong>How to use this page:</strong> Click on a square to expand it and read the brief company description. Click on a company's name to view more information and for a space to comment. Filter by state, company category and/or federal agency data usage.</p>
     	<p><strong>Please Note:</strong> We expect to that this list may change as we learn more about how each company operates – that’s part of our open process. Many of these companies have not yet responded to our survey, so information about them may change as we receive more input from them and from others.</p>
+    </div> -->
+    <div id="download-data" class="m-download-data">
+        <strong>Download the Datasets</strong>
+        <span>All Companies</span>
+        <a href="/download/us_OD500_Companies.json">JSON</a> | <a href="/download/us_OD500_Companies.csv">CSV</a>
+        <span>Agencies and Datasets</span>
+        <a href="/download/us_OD500_Agencies.json">JSON</a> | <a href="/download/us_OD500_Agencies.csv">CSV</a>
     </div>
 </section>
 
@@ -48,13 +45,16 @@
         </div>
     </div>
     <div id="chart"></div>
-    <div class="button-group legend" id="legend" data-filter-group="survey">
+
+    <div id="clear-filters-menu" class="button-group legend" id="legend" data-filter-group="survey">
         <span>Filter by:  </span>
     	<button class="color survey" data-filter=".survey-company">Submitted Survey</button>
     	<button class="color candidate" data-filter=":not(.survey-company)">No Survey Submitted</button>
     	<button class="color all" data-filter="*">Clear Filter</button>
         <button class="clear-all-filters">Clear All Filters</button>
     </div>
+    
+    
 
     <div id="spinner"></div>
 	<div class="m-candidates isotopes-container" data-isotope-options='{ "layoutMode": "fitColumns" }'>

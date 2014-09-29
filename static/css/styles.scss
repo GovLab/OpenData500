@@ -35,6 +35,10 @@ h1 {
 	text-align: center;
 }
 
+.first-title {
+	margin-top: 90px;
+}
+
 
 // Header Module
 
@@ -198,8 +202,7 @@ header {
 		color: #fff;
 	}
 	
-	.m-main-menu-item:last-of-type,
-	.m-main-menu-item:nth-last-of-type(2) {
+	.m-main-menu-item:last-of-type {
 		border-right: 0;
 	}
 }
