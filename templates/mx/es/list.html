@@ -6,14 +6,14 @@
 
 
 <section id="candidate-warnings-and-download">
-    <h1>Compañías Open Data 100 México</h1>
+    <h1>Compañías participantes en Datos Abiertos 100 México</h1>
 </section>
 
 <div class="m-candidates">        
     <div class="m-filter-menu">
-        <h3>Federal Agency</h3>
+        <h3>Secretaría</h3>
         <div id="filters-agency" class="m-candidates-buttons button-group" data-toggle="buttons-checkbox" data-filter-group="category">
-            <button data-filter="*">Clear Filter</button>
+            <button data-filter="*">Borrar filtro</button>
             {% for agency in agencies %}
                 {% if len(agency.name.replace("Department", "Dept.").replace("Development", "Dev.")) > 32 and agency.abbrev %}
                     <button data-filter=".{{agency.prettyName}}">{{agency.abbrev}}</button>
@@ -25,7 +25,7 @@
     </div>
 
     <div class="m-filter-menu">
-        <h3>Category</h3>
+        <h3>Categoría</h3>
         <div id="filters-category" class="m-candidates-buttons button-group" data-toggle="buttons-checkbox" data-filter-group="category">
             <button data-filter="*">Clear Filter</button>
             {% for category in categories %}
@@ -35,11 +35,11 @@
     </div>
     <div id="chart"></div>
     <div class="button-group legend" id="legend" data-filter-group="survey">
-        <span>Filter by:  </span>
-        <button class="color survey" data-filter=".survey-company">Submitted Survey</button>
-        <button class="color candidate" data-filter=":not(.survey-company)">No Survey Submitted</button>
-        <button class="color all" data-filter="*">Clear Filter</button>
-        <button class="clear-all-filters">Clear All Filters</button>
+        <span>Filtrar por:  </span>
+        <button class="color survey" data-filter=".survey-company">Encuesta rellenada</button>
+        <button class="color candidate" data-filter=":not(.survey-company)">Encuesta pendiente</button>
+        <button class="color all" data-filter="*">Borrar filtro</button>
+        <button class="clear-all-filters">Borrar todos los filtros</button>
     </div>
 
     <div id="spinner"></div>
@@ -191,7 +191,7 @@
         this.LineColor = '#888';
         //Labels
         this.ChartTitle = true;
-        this.ChartTitleText = 'Filter By State';
+        this.ChartTitleText = 'Filtrar por estado';
         this.ChartTitleXLocation = 'Center';
         this.ChartTitleYLocation = 0;
         this.ChartTitleFont = 'Arial';
