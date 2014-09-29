@@ -46,7 +46,7 @@
 		"zip_code":"Código postal",
 		"type_of_company":"Tipo de compañía",
 		"year_founded":"Año de fundación",
-		"fte":"Número de empleados de tiempo completo",
+		"fte":"Número de empleados a tiempo completo",
 		"business_model":"Modelo de negocio",
 		"sources_of_revenue":"¿Cuáles de las siguientes fuentes de ingresos, son las más importantes para tu compañía?",
 		"social_impact":"¿La misión de tu compañía, ha generado un impacto social directo en alguna de las siguientes áreas?",
