@@ -12,7 +12,7 @@
                 "item": "Approach",
                 "link": "/us/about/#about-govlab-approach"
             }, {
-                "item": "International Studies",
+                "item": "International",
                 "link": "/us/about/#about-international-studies"
             }, {
                 "item": "People",
@@ -39,6 +39,10 @@
                 "item": "Dept. of Agriculture",
                 "link": "/us/roundtables/?rt=doa"
             }]
+        }, {
+            "item": "International",
+            "link": "/us/international/",
+            "sub-menu": []
         }, {
             "item": "Resources",
             "link": "/us/resources/",
