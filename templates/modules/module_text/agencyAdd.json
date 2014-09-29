@@ -19,7 +19,7 @@
 	},
 	"es":{
 		"open_data_sources":"Fuentes de datos abiertos gubernamentales",
-		"agency_add_description":"<p>Por favor cuéntanos más sobre las fuentes de datos que utiliza tu compañía.</p><p>Puedes usar la herramienta de búsqueda para seleccionar las secretarías, entidades, gobiernos estatales y municipales, o instituciones de la lista disponible.</p><p>Si no puedes encontrar en la lista la fuente que buscas, por favor envía un correo a <a href="mailto:opendata500@thegovlab.org">opendata500@thegovlab.org</a> para sugerir una nueva secretaría, entidades, organización, etc.</p>",
+		"agency_add_description":"<p>Por favor cuéntanos más sobre las fuentes de datos que utiliza tu compañía.</p><p>Puedes usar la herramienta de búsqueda para seleccionar las secretarías, entidades, gobiernos estatales y municipales, o instituciones de la lista disponible.</p><p>Si no puedes encontrar en la lista la fuente que buscas, por favor envía un correo a <a href="mailto:da100mx@datos.gob.mx">da100mx@datos.gob.mx</a> para sugerir una nueva secretaría, entidades, organización, etc.</p>",
 		"agency_add_optional":"<strong>[Opcional]:</strong> Por favor cuéntanos sobre el conjunto de datos que utiliza tu compañía, que pertenecen a las fuentes gubernamentales que seleccionaste. Por favor clasifica cada conjunto de datos en una escala de 1 a 4 (como en el siguiente ejemplo: 1 = pobre, 4 = excelente).",
 		"example":"Ver ejemplo.",
 		"search":"Buscar",
