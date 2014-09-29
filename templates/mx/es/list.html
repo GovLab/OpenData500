@@ -27,7 +27,7 @@
     <div class="m-filter-menu" style="width: 198px;">
         <h3>Categoría</h3>
         <div id="filters-category" class="m-candidates-buttons button-group" data-toggle="buttons-checkbox" data-filter-group="category">
-            <button data-filter="*">Clear Filter</button>
+            <button data-filter="*">Borrar Filtro</button>
             {% for category in categories %}
                 <button data-filter=".{{ re.sub(r'([^\s\w])+', '', category).replace(" ", "-") }}">{{category}}</button>
             {%end%}
