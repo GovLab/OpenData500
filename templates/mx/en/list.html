@@ -3,7 +3,7 @@
 
 {% block body %}
 
-
+{% import re %}
 
 <section id="candidate-warnings-and-download">
 	<h1>Open Data 100 Mexico Companies</h1>
@@ -15,10 +15,10 @@
         <div id="filters-agency" class="m-candidates-buttons button-group" data-toggle="buttons-checkbox" data-filter-group="category">
             <button data-filter="*">Clear Filter</button>
             {% for agency in agencies %}
-                {% if len(agency.name.replace("Department", "Dept.").replace("Development", "Dev.")) > 32 and agency.abbrev %}
+                {% if len(agency.name.replace("Instituto", "Inst.")) > 32 and agency.abbrev %}
                     <button data-filter=".{{agency.prettyName}}">{{agency.abbrev}}</button>
                 {%else%}
-                    <button data-filter=".{{agency.prettyName}}">{{agency.name.replace("Department", "Dept.").replace("Development", "Dev.").replace(" and ", " & ").replace(".", "")}}</button>
+                    <button data-filter=".{{agency.prettyName}}">{{agency.name.replace("Instituto", "Inst.")}}</button>
                 {%end%}
             {%end%}
         </div>
@@ -29,7 +29,7 @@
         <div id="filters-category" class="m-candidates-buttons button-group" data-toggle="buttons-checkbox" data-filter-group="category">
             <button data-filter="*">Clear Filter</button>
             {% for category in categories %}
-                <button data-filter=".{{category.strip().replace(" ", "-").replace("/","").replace("&", "")}}">{{category}}</button>
+                <button data-filter=".{{ re.sub(r'([^\s\w])+', '', category).replace(" ", "-") }}">{{category}}</button>
             {%end%}
         </div>
     </div>
@@ -47,7 +47,7 @@
 		{% for company in companies %}
             <div class="m-candidates-item{%for f in company.filters %} {{f}}{%end%}">
                 <a href="/{{company.country}}/{{company.prettyName}}"><h3><strong>{{ company.companyName }}</strong></h3></a>
-                <p class="m-homepage-list-location"> {%try%}{{ states[company.state] }}{%except%}{%end%}</p>
+                <p class="m-homepage-list-location"> {%try%}{{ states[country][company.state] }}{%except%}{%end%}</p>
                 <em> {{ company.companyCategory }}</em>
                 <p class="m-homepage-list-desc">{{ company.descriptionShort }}</p>
 			</div>
@@ -60,6 +60,8 @@
 <script src="{{ static_url("js/queue.v1.min.js") }}"></script>
 <script src="{{ static_url("js/isotope.pkgd.min.js") }}"></script>
 <script src="{{ static_url("js/spin.min.js") }}"></script>
+<script src="{{ static_url("js/colorbrewer/colorbrewer.js") }}"></script>
+<style src="{{ static_url("js/colorbrewer/colorbrewer.css") }}"></style>
 
 <script>
 (function(){
@@ -86,16 +88,16 @@
     // var spinner = new Spinner(opts).spin();
 
 
-	var $container = $('.isotopes-container').isotope({
-		layoutMode: 'fitRows',
-		resizesContainer : false,
-	});
+    var $container = $('.isotopes-container').isotope({
+        layoutMode: 'fitRows',
+        resizesContainer : false,
+    });
     var filters = [];
     var filtr = '';
 
 
-	// filter items on button click
-	$('#filters-category').on( 'click', 'button', function( event ) {
+    // filter items on button click
+    $('#filters-category').on( 'click', 'button', function( event ) {
         filtr = $(this).attr('data-filter');
         if ($(this).hasClass('s-active')) { //already active, deactivate
             $(this).removeClass('s-active');
@@ -114,7 +116,7 @@
             $(this).addClass('s-active');
         }
         $container.isotope({ filter: filters.join('') });
-	});
+    });
 
 
     //filter by agency
@@ -141,8 +143,8 @@
         $container.isotope({ filter: filters.join('') });
     });
 
-	// filter items by survey type
-	$('#legend').on( 'click', 'button', function( event ) {
+    // filter items by survey type
+    $('#legend').on( 'click', 'button', function( event ) {
         var filtr = $(this).attr('data-filter');
         if ($(this).hasClass('s-active')) {
             $(this).removeClass('s-active');
@@ -159,17 +161,18 @@
             filters.push(filtr);
             console.log(filters.join(''))
         }
-	  $container.isotope({ filter: filters.join('') });
-	});
+      $container.isotope({ filter: filters.join('') });
+    });
 
-	// $container.delegate( '.m-candidates-item', 'click', function(){
-	// 		//$('.m-candidates-item.large').removeClass('large');
-	//         $(this).toggleClass('s-active');
-	//         $container.isotope();
-	// });
+    // $container.delegate( '.m-candidates-item', 'click', function(){
+    //      //$('.m-candidates-item.large').removeClass('large');
+    //         $(this).toggleClass('s-active');
+    //         $container.isotope();
+    // });
             
     var data = [{% for s in range(0, len(stats.states)) %}{% if s == len(stats.states)-1 %}{"abbrev": "{{stats.states[s].abbrev}}","STATE":"{{stats.states[s].name}}","VALUE":"{{stats.states[s].count}}"}{%else%}{"abbrev": "{{stats.states[s].abbrev}}","STATE":"{{stats.states[s].name}}","VALUE":"{{stats.states[s].count}}"},{%end%}{%end%}]
     
+
     createChart = function(){
         var hoverDisplay = "State &amp; Value".replace('&amp;', '&')
         
@@ -185,8 +188,8 @@
         this.BackgroundColor = 'transparent';
         //States
         this.StateBaseColor = '#eeeeee';
-        this.StateMaxColor = '#4a2f76';
-        this.Range = 30;
+        this.StateMaxColor = '#472b74';
+        this.Range = 24;
         this.LineThickness = .6;
         this.LineColor = '#888';
         //Labels
@@ -302,29 +305,32 @@
                 
             group.attr('transform', 'translate(' + margin.left + ', ' + margin.top + '),scale(' + size + ', ' + size + ')');
             
+            // var white = d3.lab.rgb(255, 255, 255);
+            // var darkpurple = d3.lab.rgb(71, 43, 116);
+            //var color = d3.scale.ordinal().domain([0,range]).range(colorbrewer.PuBu[9]);
             var color = d3.scale.linear().domain([0,range]).range([stateMaxColor, stateBaseColor]);
-            
+
             var maxVal = d3.max(data, function(d) { return d.VALUE; });
             var minVal = d3.min(data, function(d) { return d.VALUE; });
             var total = maxVal - minVal;
-            
+
             var number = d3.format("0,000");
             
             function ready(error, mx, _data) {
             
                 group.selectAll('path')
-                    .data(mx.features)//.sort(function(a, b) { return d3.descending(a.properties.NAME, b.properties.NAME);})
+                    .data(mx.features)
                     .enter().append('path')
                     .attr('class', 'states')
                     .attr('d', d3.geo.path().projection(projection))
-                    //.attr('name', function(d){ return d.properties.NAME})
+                    .attr('name', function(d){ return d.properties.NAME})
                     .style('stroke', lineColor)
                     .style('stroke-width', lineThickness/size);
                     
                 var states = group.selectAll('.states')
-                    .data(data)
+                    .data(data, function(d) { return (d && d.STATE) || d3.select(this).attr("name"); })
                     .style('fill', function(d) { return color( total/d.VALUE )})
-                    .attr('name', function(d) { return d.STATE.replace(/\s+/g, ''); })
+                    .attr('abbrev', function(d) { return d.abbrev; })
                     .on("mouseover", function(d, i) {   
                         hover.transition().duration(100).style("opacity", 1)
                             .style("background-color", "#aaaaaa")
@@ -336,7 +342,7 @@
                     .on("mousemove", function(d, i) { if (hoverStates == true)hover.style("left", (d3.event.pageX) + 20 + "px").style("top", (d3.event.pageY) + "px"); });
                 
                 states.on('click', function(s) {
-                    var filtr = '.' + this.getAttribute('name');
+                    var filtr = '.' + this.getAttribute('abbrev');
                     if(this.attributes.class.value == "states s-active") { //if clicking on the same state, remove active class and remove filter from filters
                         filters.splice(filters.indexOf('.'+s.abbrev), 1);
                         d3.select(this)

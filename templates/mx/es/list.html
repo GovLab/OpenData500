@@ -170,6 +170,7 @@
             
     var data = [{% for s in range(0, len(stats.states)) %}{% if s == len(stats.states)-1 %}{"abbrev": "{{stats.states[s].abbrev}}","STATE":"{{stats.states[s].name}}","VALUE":"{{stats.states[s].count}}"}{%else%}{"abbrev": "{{stats.states[s].abbrev}}","STATE":"{{stats.states[s].name}}","VALUE":"{{stats.states[s].count}}"},{%end%}{%end%}]
     
+
     createChart = function(){
         var hoverDisplay = "State &amp; Value".replace('&amp;', '&')
         
@@ -186,7 +187,7 @@
         //States
         this.StateBaseColor = '#eeeeee';
         this.StateMaxColor = '#4a2f76';
-        this.Range = 30;
+        this.Range = 24;
         this.LineThickness = .6;
         this.LineColor = '#888';
         //Labels
@@ -322,9 +323,9 @@
                     .style('stroke-width', lineThickness/size);
                     
                 var states = group.selectAll('.states')
-                    .data(data)
+                    .data(data, function(d) { return (d && d.STATE) || d3.select(this).attr("name"); })
                     .style('fill', function(d) { return color( total/d.VALUE )})
-                    //.attr('name', function(d) { return d.STATE.replace(/\s+/g, ''); })
+                    .attr('abbrev', function(d) { return d.abbrev; })
                     .on("mouseover", function(d, i) {   
                         hover.transition().duration(100).style("opacity", 1)
                             .style("background-color", "#aaaaaa")
@@ -336,7 +337,7 @@
                     .on("mousemove", function(d, i) { if (hoverStates == true)hover.style("left", (d3.event.pageX) + 20 + "px").style("top", (d3.event.pageY) + "px"); });
                 
                 states.on('click', function(s) {
-                    var filtr = '.' + this.getAttribute('name');
+                    var filtr = '.' + this.getAttribute('abbrev');
                     if(this.attributes.class.value == "states s-active") { //if clicking on the same state, remove active class and remove filter from filters
                         filters.splice(filters.indexOf('.'+s.abbrev), 1);
                         d3.select(this)

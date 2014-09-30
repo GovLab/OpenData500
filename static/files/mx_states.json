@@ -7267,7 +7267,7 @@
         "type": "Feature",
         "properties": {
             "CVE_ENT": "16",
-            "NAME": "Michoacán de Ocampo",
+            "NAME": "Michoacán",
             "OID": 14
         },
         "geometry": {
@@ -13449,7 +13449,7 @@
         "type": "Feature",
         "properties": {
             "CVE_ENT": "30",
-            "NAME": "Veracruz de Ignacio de la Llave",
+            "NAME": "Veracruz",
             "OID": 26
         },
         "geometry": {
@@ -14789,7 +14789,7 @@
         "type": "Feature",
         "properties": {
             "CVE_ENT": "05",
-            "NAME": "Coahuila de Zaragoza",
+            "NAME": "Coahuila",
             "OID": 28
         },
         "geometry": {
