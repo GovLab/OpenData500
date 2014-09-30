@@ -20,7 +20,7 @@
             "link": "/mx/submitCompany/",
             "sub-menu": []
         }, {
-            "item": "List",
+            "item": "Companies",
             "link": "/mx/list/",
             "sub-menu": []
         }, {
@@ -50,7 +50,7 @@
             "link": "/mx/submitCompany/",
             "sub-menu": []
         }, {
-            "item": "Lista",
+            "item": "Compañías",
             "link": "/mx/list/",
             "sub-menu": []
         }, {
