@@ -20,10 +20,6 @@
             "link": "/mx/submitCompany/",
             "sub-menu": []
         }, {
-            "item": "Companies",
-            "link": "/mx/list/",
-            "sub-menu": []
-        }, {
             "item": "International",
             "link": "/mx/international/",
             "sub-menu": []
@@ -48,10 +44,6 @@
         }, {
             "item": "Encuesta",
             "link": "/mx/submitCompany/",
-            "sub-menu": []
-        }, {
-            "item": "Compañías",
-            "link": "/mx/list/",
             "sub-menu": []
         }, {
             "item": "Internacional",
