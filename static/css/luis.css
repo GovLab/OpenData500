@@ -286,3 +286,7 @@ survey/no survey hover and active states*/
   text-align: center;
   margin-top: 70px;
 }
+
+.m-main-menu .language-options {
+  left: 120px;
+}
