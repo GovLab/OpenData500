@@ -8,22 +8,22 @@
 <div class="m-list-company-full">
 		<div class="m-half">
 			<h3>Acerca de la compañía</h3>
-			<p><strong>URL: </strong>{% if company.url %}<a href="{% if 'http' in company.url %}{{company.url}}{%else%}http://{{company.url}}{%end%}">{{company.url}}{%else%}Not Available{%end%}</a></p>
-			<p><strong>Año de fundación: </strong> {% if company.yearFounded %}{{company.yearFounded}}{%else%}Not Available{%end%}</p>
+			<p><strong>URL: </strong>{% if company.url %}<a href="{% if 'http' in company.url %}{{company.url}}{%else%}http://{{company.url}}{%end%}">{{company.url}}{%else%}No disponible{%end%}</a></p>
+			<p><strong>Año de fundación: </strong> {% if company.yearFounded %}{{company.yearFounded}}{%else%}No disponible{%end%}</p>
 			<p><strong>Localización: </strong>{%if company.city %} {{company.city}}, {{company.state}}{%else%}{{company.state}}{%end%}</p>
-			<p><strong>Código postal: </strong> {%if company.zipCode %}{{company.zipCode}}{%else%}Not Available{%end%}</p>
-			<p><strong>Número de empleados a tiempo completo: </strong> {% if company.fte %} {{company.fte}}{%else%}Not Available{%end%}</p>
-			<p><strong>Tipo de compañía: </strong> {% if company.companyType %} {{company.companyType}}{%else%}Not Available{%end%}</p>
+			<p><strong>Código postal: </strong> {%if company.zipCode %}{{company.zipCode}}{%else%}No disponible{%end%}</p>
+			<p><strong>Número de empleados a tiempo completo: </strong> {% if company.fte %} {{company.fte}}{%else%}No disponible{%end%}</p>
+			<p><strong>Tipo de compañía: </strong> {% if company.companyType %} {{company.companyType}}{%else%}No disponible{%end%}</p>
 			<p><strong>Categoría: </strong> {{company.companyCategory}}</p>
-			<p><strong>Fuentes de ingresos: </strong>{% if len(company.revenueSource) > 0 %}{% if company.revenueSource[0] %}{{ ", ".join(company.revenueSource) }}{%else%}Not Available{%end%}{%else%}Not Available{%end%}</p>
-			<p><strong>Áreas de impacto social: </strong>{% if len(company.socialImpact) > 0 %}{% if company.socialImpact[0] %}{{ ", ".join(company.socialImpact) }}{%else%}Not Available{%end%}{%else%}Not Available{%end%}</p>
-			{%if company.sourceCount == "NA" %}<p><strong>Número aproximado de fuentes de datos gubernamentales usadas: </strong>Not Available
-			{% elif company.sourceCount %}<p><strong>Número aproximado de fuentes de datos gubernamentales usadas: </strong>{{company.sourceCount}} Agencies/Local Governments/Organizations
-			{% else %}<p><strong>Número aproximado de fuentes de datos gubernamentales usadas: </strong>Not Available{%end%}</p>
+			<p><strong>Fuentes de ingresos: </strong>{% if len(company.revenueSource) > 0 %}{% if company.revenueSource[0] %}{{ ", ".join(company.revenueSource) }}{%else%}No disponible{%end%}{%else%}No disponible{%end%}</p>
+			<p><strong>Áreas de impacto social: </strong>{% if len(company.socialImpact) > 0 %}{% if company.socialImpact[0] %}{{ ", ".join(company.socialImpact) }}{%else%}No disponible{%end%}{%else%}No disponible{%end%}</p>
+			{%if company.sourceCount == "NA" %}<p><strong>Número aproximado de fuentes de datos gubernamentales usadas: </strong>No disponible
+			{% elif company.sourceCount %}<p><strong>Número aproximado de fuentes de datos gubernamentales usadas: </strong>{{company.sourceCount}} fuentes de datos.
+			{% else %}<p><strong>Número aproximado de fuentes de datos gubernamentales usadas: </strong>No disponible{%end%}</p>
 		</div>
 		<div class="m-half">
 			<h3>Descripción:</h3>
-			<p>{% if company.description %}{{company.description}}{%else%}Not Available{%end%}</p>
+			<p>{% if company.description %}{{company.description}}{%else%}No disponible{%end%}</p>
 		</div>
 	<div class="m-full datasets">
 		<h3>Fuentes de datos y entidades gubernamentales</h3>
