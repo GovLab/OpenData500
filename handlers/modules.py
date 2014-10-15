@@ -18,6 +18,7 @@ class FormModule(tornado.web.UIModule):
             form=form[lan],
             country_keys=country_keys,
             companyType = companyType[lan],
+            full_time_employees=full_time_employees,
             revenueSource = revenueSource[lan],
             business_models = business_models[lan],
             social_impacts = social_impacts[lan],

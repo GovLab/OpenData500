@@ -99,8 +99,20 @@
 			data-parsley-trigger="focusout" 
 			data-parsley-pattern="(^\d{5}$)|(^\d{5}-\d{4}$)" 
 			{%if required %}required{%end%}></div>
-		{#--*****************************************************************-TYPE OF COMPANY, YEAR FOUNDED, FTE-***************************************************************** --#}
-		<div class="m-form-box"><label for="companyType">{{form['type_of_company']}}: *</label><br>
+		<div class="m-form-line"><label for="">{{form['year_founded']}}: *</label>
+			<input type="text" 
+			name="yearFounded" 
+			id="yearFounded" 
+			{%if c %}value="{{ c.yearFounded }}"{%end%} 
+			data-parsley-type="number" 
+			data-parsley-trigger="focusout" 
+			data-parsley-range="[1000, 2014]" 
+			{%if required %}required{%end%}>
+		</div>
+
+		{#--*****************************************************************-TYPE OF COMPANY-***************************************************************** --#}
+		<br>
+		<div class="m-form-line"><h3>{{form['type_of_company']}}: *</h3><br>
 			<div class="company-type-field">
 				{% for type in companyType %}
 					<input type="radio" 
@@ -121,7 +133,7 @@
 							data-parsley-trigger="change" 
 							checked 
 							{%if required %}required{%end%}>
-						<label for="other_type">{{form['other']}}</label>
+						<label for="other_type" class="other-input">{{form['other']}}</label>
 						<input type="text" id="other_company_type_field" name="othercompanyType" value ="{{ c.companyType }}">
 					{% else %}
 						<input type="radio" id="other_type" name="companyType" value="Other" 
@@ -129,7 +141,7 @@
 							data-parsley-group='companyType' 
 							data-parsley-trigger="change" 
 							{%if required %}required{%end%}>
-							<label for="other_type">{{form['other']}}</label>
+							<label for="other_type" class="other-input">{{form['other']}}</label>
 						<input type="text" id="other_company_type_field" name="othercompanyType">
 					{% end %}
 				{%else%}
@@ -138,28 +150,40 @@
 						data-parsley-group='companyType' 
 						data-parsley-trigger="change" 
 						{%if required %}required{%end%}>
-					<label for="other_type">{{form['other']}}</label>
+					<label for="other_type" class="other-input">{{form['other']}}</label>
 					<input type="text" id="other_company_type_field" name="othercompanyType">
 				{%end%}
 			</div></div>
-		<div class="m-form-line"><label for="">{{form['year_founded']}}: *</label>
-			<input type="text" 
-			name="yearFounded" 
-			id="yearFounded" 
-			{%if c %}value="{{ c.yearFounded }}"{%end%} 
-			data-parsley-type="number" 
-			data-parsley-trigger="focusout" 
-			data-parsley-range="[1000, 2014]" 
-			{%if required %}required{%end%}></div>
-		<div class="m-form-line"><label for="">{{form['fte']}}: *</label>
-			<input type="text" 
-			name="fte" 
-			id="fte" 
-			{%if c %}value="{{ c.fte }}"{%end%} 
-			data-parsley-trigger="focusout" 
-			data-parsley-type="number" 
-			{%if required %}required{%end%}></div>
-	</fieldset>
+		
+		</fieldset>
+
+		{#--*****************************************************************-FULL TIME EMPLOYEES-***************************************************************** --#}
+		<h3>{{form['fte']}}: *</h3>
+		<div class="m-form-line fte-field">
+			{% for emps in full_time_employees %}
+				<input type="radio" 
+					name="fte" 
+					id="{{emps}}" 
+					value="{{emps}}" 
+					{%if c %}
+						{% if c.fte == emps %}checked{%end%} 
+					{%end%} 
+					{%if required %}required{%end%}>
+				<label for="{{emps}}">{{emps}}</label><br>
+			{% end %}
+			{% if not required %}
+				<input type="radio" 
+					name="fte" 
+					id="NA_FTE" 
+					value="NA" 
+					{%if c %}
+						{% if c.fte == "NA" %}checked{%end%} 
+					{%end%} 
+					{%if required %}required{%end%}>
+				<label for="NA_FTE">NA</label><br>
+			{%end%}
+		</div>
+	
 
 	<fieldset class="m-form-half">	
 		{#--*****************************************************************-BUSINESS MODELS-***************************************************************** --#}

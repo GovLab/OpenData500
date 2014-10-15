@@ -47,6 +47,8 @@ data_impacts = {
                 "es": ["Eficiencia económica", "Servicios/productos nuevos o mejorados", "Crecimiento de empleo", "Crecimiento de las ganancias", "Identificación de nuevas oportunidades", "Nuevas / mejoradas Investigaciones"]
             }
 source_count = ['1-10', '11-50', '51-100', '101+']
+full_time_employees = ['1-10', '11-50', '51-200', '201-500', '501-1,000', '1,001-5,000', '5,001-10,000', '10,001+']
+
 states ={ 
             "us": {"AL": "Alabama", "AK": "Alaska", "AZ": "Arizona", "AR": "Arkansas", "CA": "California", "CO": "Colorado", "CT": "Connecticut", "DE": "Delaware", "DC": "District of Columbia", "FL": "Florida", "GA": "Georgia", "HI": "Hawaii", "ID": "Idaho", "IL": "Illinois", "IN": "Indiana", "IA": "Iowa", "KA": "Kansas", "KY": "Kentucky", "LA": "Louisiana", "ME": "Maine", "MD": "Maryland", "MA": "Massachusetts", "MI": "Michigan", "MN": "Minnesota", "MS": "Mississippi", "MO": "Missouri", "MT": "Montana", "NE": "Nebraska", "NV": "Nevada", "NH": "New Hampshire", "NJ": "New Jersey", "NM": "New Mexico", "NY": "New York", "NC": "North Carolina", "ND": "North Dakota", "OH": "Ohio", "OK": "Oklahoma", "OR": "Oregon", "PA": "Pennsylvania", "RI": "Rhode Island", "SC": "South Carolina", "SD": "South Dakota", "TN": "Tennessee", "TX": "Texas", "UT": "Utah", "VT": "Vermont", "VA": "Virginia", "WA": "Washington", "WV": "West Virginia", "WI": "Wisconsin", "WY": "Wyoming", "PR": "Puerto Rico"},
             "mx": {"AS":"Aguascalientes", "BC":"Baja California", "BS":"Baja California Sur", "CC":"Campeche", "CS":"Chiapas", "CH":"Chihuahua", "CL":"Coahuila", "CM":"Colima", "DF":"Distrito Federal", "DG":"Durango", "GT":"Guanajuato", "GR":"Guerrero", "HG":"Hidalgo", "JC":"Jalisco", "MC":"Estado de México", "MN":"Michoacán", "MS":"Morelos", "NT":"Nayarit", "NL":"Nuevo León", "OC":"Oaxaca", "PL":"Puebla", "QT":"Querétaro", "QR":"Quintana Roo", "SP":"San Luis Potosí", "SL":"Sinaloa", "SR":"Sonora", "TC":"Tabasco", "TS":"Tamaulipas", "TL":"Tlaxcala", "VZ":"Veracruz", "YN":"Yucatán", "ZS":"Zacatecas"}
@@ -66,7 +68,7 @@ available_countries = ["us", "ca", "mx"]
 country_keys = { "us":"United States", "ca":"Canada", "United States":"us", "Canada":"ca",  "Mexico":"mx", "mx":"Mexico"}
 company_fields = ['companyName', 'url', 'yearFounded', 'city', 'state', 'zipCode', 'description', 'descriptionShort', 'financialInfo', 'notes']
 company_fields_checkboxes = ['revenueSource', 'businessModel', 'socialImpact']
-company_fields_radio = ['companyCategory', 'companyType']
+company_fields_radio = ['companyCategory', 'companyType', 'fte']
 company_contact_fields = ['firstName', 'lastName', 'title', 'email', 'phone']
 company_data_fields = ['sourceCount', 'dataComments', 'exampleUses']
 company_admin_booleans = ['display', 'submittedSurvey','vetted', 'vettedByCompany', 'submittedThroughWebsite', 'locked']
@@ -188,8 +190,6 @@ class Form(object):
                     models.Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+item:arguments[item]})
             else:
                 models.Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+item:''})
-        if 'fte' in arguments:
-            c.fte = 0 if not arguments['fte'] else arguments['fte']
         c.filters = Tools.re_do_company_filter(id)
         #-------------------BOOLEANS---------------
         for item in company_admin_booleans:

@@ -25,7 +25,7 @@ class Company(Document):
 	state = StringField()
 	country = StringField()
 	zipCode = StringField()
-	fte = IntField()
+	fte = StringField()
 	companyType = StringField() #Public, Private, etc
 	companyCategory = StringField() #Categories
 	revenueSource = ListField(StringField()) #checkbox with options

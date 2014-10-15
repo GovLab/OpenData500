@@ -290,3 +290,17 @@ survey/no survey hover and active states*/
 .m-main-menu .language-options {
   left: 120px;
 }
+
+.m-form.companyForm {
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.m-form-half input[type='text'] {
+  width: 40%;
+}
+
+label.other-input {
+  width: auto;
+}
