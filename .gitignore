@@ -32,3 +32,4 @@ static/files/us_OD500_Visits.csv
 static/files/us_OD500_Companies_All.csv
 testing.ipynb
 .ipynb_checkpoints/testing-checkpoint.ipynb
+.sass-cache
