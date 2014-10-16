@@ -693,12 +693,13 @@ class FileGenerator(object):
             'url',
             'used_by',
             'used_by_category',
+            'used_by_fte',
             'dataset_name',
             'dataset_url'
             ])
         index_of_companies = {}
         for c in companies:
-            index_of_companies[str(c.id)] = [c.companyName, c.companyCategory]
+            index_of_companies[str(c.id)] = [c.companyName, c.companyCategory, c.fte]
         AD = []
         SD = []
         S = []
@@ -714,6 +715,7 @@ class FileGenerator(object):
                         a.url, 
                         index_of_companies[str(d.usedBy.id)][0],
                         index_of_companies[str(d.usedBy.id)][1],
+                        index_of_companies[str(d.usedBy.id)][2],
                         d.datasetName,
                         d.datasetURL
                     ]
@@ -735,6 +737,7 @@ class FileGenerator(object):
                             s.url, 
                             index_of_companies[str(d.usedBy.id)][0],
                             index_of_companies[str(d.usedBy.id)][1],
+                            index_of_companies[str(d.usedBy.id)][2],
                             d.datasetName,
                             d.datasetURL
                         ]
@@ -756,6 +759,7 @@ class FileGenerator(object):
                             s.url, 
                             index_of_companies[str(c.id)][0],
                             index_of_companies[str(c.id)][1],
+                            index_of_companies[str(c.id)][2],
                             "",
                             ""
                         ]
@@ -776,6 +780,7 @@ class FileGenerator(object):
                             a.url, 
                             index_of_companies[str(c.id)][0],
                             index_of_companies[str(c.id)][1],
+                            index_of_companies[str(c.id)][2],
                             "",
                             ""
                         ]
@@ -843,7 +848,7 @@ class FileGenerator(object):
         for a in agencies:
             if a.usedBy and a.source == "dataGov":
                 for c in a.usedBy:
-                    if c.companyCategory in categories and c.companyCategory not in used_agencies_categories:
+                    if c.companyCategory in categories['en'] and c.companyCategory not in used_agencies_categories:
                         used_agencies_categories.append(c.companyCategory)
         #logging.info(used_agencies_categories)
         name_key = {}
@@ -858,7 +863,7 @@ class FileGenerator(object):
         for a in agencies:
             if a.source == "dataGov":
                 for c in a.usedBy:
-                    if c.companyCategory in categories: 
+                    if c.companyCategory in categories['en']: 
                         matrix[name_key[c.companyCategory], name_key[a.name]] += 1
                         matrix[name_key[a.name], name_key[c.companyCategory]] += 1
         #make json
