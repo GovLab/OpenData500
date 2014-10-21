@@ -228,8 +228,12 @@ class ListHandler(BaseHandler):
 #--------------------------------------------------------CHART PAGE------------------------------------------------------------
 class ChartHandler(BaseHandler):
     @tornado.web.addslash
-    def get(self):
+    def get(self, country=None):
         #log visit
+        logging.info("WEFJWIREFJQEIRGJWIERJGWIERJGWIERJGIWJERGIWERJGIWEJRIGJIWERG")
+        country = self.get_argument("country", None)
+        if not country:
+            country = 'us'
         try: 
             visit = models.Visit()
             if self.request.headers.get('Referer'):
@@ -246,7 +250,7 @@ class ChartHandler(BaseHandler):
         except Exception, e:
             logging.info("Could not save visit information: " + str(e))
         finally:
-            self.render("solo_chart.html")
+            self.render("solo_chart.html", country=country)
 
 
 #--------------------------------------------------------VALIDATE COMPANY EXISTS PAGE------------------------------------------------------------

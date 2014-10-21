@@ -892,6 +892,49 @@ class FileGenerator(object):
             json.dump(data, outfile)
         logging.info("Chord Chart File Done!")
 
+
+    def generate_mex_chord_chart(self, country):
+        agencies = models.Agency.objects(Q(usedBy__not__size=0) & Q(country="mx")).order_by('name')
+        #get agencies that are used
+        used_agencies_categories = []
+        for a in agencies:
+            if a.usedBy:
+                used_agencies_categories.append(a.name)
+        #Keep track of # of categories
+        num_agencies = len(used_agencies_categories)
+        #get categories that are actually used from agencies that are used
+        for a in agencies:
+            if a.usedBy:
+                for c in a.usedBy:
+                    if c.companyCategory in categories['es'] and c.companyCategory not in used_agencies_categories:
+                        used_agencies_categories.append(c.companyCategory)
+        #logging.info(used_agencies_categories)
+        name_key = {}
+        key_name = {}
+        for i, name in enumerate(used_agencies_categories):
+            name_key[name] = i
+            key_name[str(i)] = name
+        #Make matrix
+        l = len(name_key)
+        matrix = np.matrix([[0]*l]*l)
+        #populate matrix
+        for a in agencies:
+            for c in a.usedBy:
+                if c.companyCategory in categories['es']: 
+                    matrix[name_key[c.companyCategory], name_key[a.name]] += 1
+                    matrix[name_key[a.name], name_key[c.companyCategory]] += 1
+        #make json
+        matrix = matrix.tolist()
+        data = {"matrix":matrix, "names":key_name, "num_agencies":num_agencies}
+        #abbreviate some stuff
+        for key in data['names']:
+            data['names'][key] = data['names'][key].replace('Instituto', 'Inst.')
+            data['names'][key] = data['names'][key].replace('Secretaría'.decode('utf-8'), 'Sec.')
+        #save to file
+        with open(os.path.join(os.path.dirname(__file__), 'static') + '/files/mx_matrix.json', 'w') as outfile:
+            json.dump(data, outfile)
+        logging.info("Chord Chart File Done!")
+
     def generate_visit_csv(self, country):
         #---CSV OF ALL COMPANIES----
         visits = models.Visit.objects()

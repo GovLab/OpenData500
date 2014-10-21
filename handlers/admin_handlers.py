@@ -213,6 +213,7 @@ class CompanyAdminHandler(BaseHandler):
         elif action == "vizz":
             #self.application.files.generate_sankey_json()
             self.application.files.generate_chord_chart_files(country)
+            self.application.files.generate_mex_chord_chart(country)
             self.write("success")
         elif action == 'display':
             try:
