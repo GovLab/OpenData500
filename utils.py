@@ -436,7 +436,6 @@ class FileGenerator(object):
                         ds = {
                             "datasetName":d.datasetName,
                             "datasetURL":d.datasetURL,
-                            "rating":d.rating
                         }
                         datasets_agency.append(ds)
                 subagencies = []
@@ -448,7 +447,6 @@ class FileGenerator(object):
                                 ds = {
                                     "datasetName":d.datasetName,
                                     "datasetURL":d.datasetURL,
-                                    "rating":d.rating
                                 }
                                 datasets_subagency.append(ds)
                         sub = {
@@ -461,7 +459,6 @@ class FileGenerator(object):
                 ag = {
                     "name": a.name,
                     "abbrev":a.abbrev,
-                    "prettyName":a.prettyName,
                     "url": a.url,
                     "type":a.dataType,
                     "datasets":datasets_agency,
@@ -477,20 +474,24 @@ class FileGenerator(object):
                 "company_name_id": c.prettyName,
                 "companyName": c.companyName,
                 "url": c.url,
+                "yearFounded": c.yearFounded,
                 "city": c.city,
                 "state": c.state,
+                "country": c.country,
                 "zipCode": c.zipCode,
-                "yearFounded": c.yearFounded,
                 "fte": c.fte,
                 "companyType": c.companyType,
                 "companyCategory": c.companyCategory,
-                'socialImpact': c.socialImpact,
                 "revenueSource": c.revenueSource,
-                "dataTypes": c.dataTypes,
-                "exampleUses": c.exampleUses,
-                "sourceCount": c.sourceCount,
+                "businessModel": c.businessModel,
+                'socialImpact': c.socialImpact,
                 "description": c.description,
                 "descriptionShort": c.descriptionShort,
+                "sourceCount": c.sourceCount,
+                "dataTypes": c.dataTypes,
+                "exampleUses": c.exampleUses,
+                "dataImpacts": c.dataImpacts,
+                "lastUpdated": c.lastUpdated,
                 "agencies":agencies,
                 "subagencies":subagencies
             }
@@ -509,7 +510,6 @@ class FileGenerator(object):
                 ds = {
                     "datasetName":d.datasetName,
                     "datasetURL":d.datasetURL,
-                    "rating":d.rating,
                     "usedBy":d.usedBy.prettyName
                 }
                 datasets_agency.append(ds)
@@ -522,7 +522,6 @@ class FileGenerator(object):
                     ds = {
                         "datasetName":d.datasetName,
                         "datasetURL":d.datasetURL,
-                        "rating":d.rating,
                         "usedBy": d.usedBy.prettyName
                     }
                     datasets_subagency.append(ds)
@@ -544,7 +543,6 @@ class FileGenerator(object):
             ag = {
                 "name": a.name,
                 "abbrev":a.abbrev,
-                "prettyName":a.prettyName,
                 "url": a.url,
                 "type":a.dataType,
                 "datasets":datasets_agency,
@@ -563,48 +561,50 @@ class FileGenerator(object):
             'company_name_id',
             'company_name',
             'url',
+            'year_founded',
             'city',
             'state',
+            'country',
             'zip_code',
-            'year_founded',
             'full_time_employees',
             'company_type',
             'company_category',
             'revenue_source',
             'business_model',
             'social_impact',
-            'data_types',
-            'source_count',
-            'example_uses',
-            'data_impacts',
             'description',
             'description_short',
+            'source_count',
+            'data_types',
+            'example_uses',
+            'data_impacts',
             'financial_info',
-            'sourceCount'
+            'last_updated'
             ])
         for c in companies:
             newrow = [
                 c.prettyName,
                 c.companyName,
                 c.url,
+                c.yearFounded,
                 c.city,
                 c.state,
+                c.country,
                 c.zipCode,
-                c.yearFounded,
                 c.fte,
                 c.companyType,
                 c.companyCategory,
                 ', '.join(c.revenueSource),
                 ', '.join(c.businessModel),
                 ', '.join(c.socialImpact),
-                ', '.join(c.dataTypes),
-                c.sourceCount,
-                c.exampleUses,
-                c.dataImpacts,
                 c.description,
                 c.descriptionShort,
+                c.sourceCount,
+                ', '.join(c.dataTypes),
+                c.exampleUses,
+                c.dataImpacts,
                 c.financialInfo,
-                c.sourceCount
+                c.lastUpdated
             ]
             for i in range(len(newrow)):  # For every value in our newrow
                 if hasattr(newrow[i], 'encode'):
@@ -619,17 +619,21 @@ class FileGenerator(object):
             'company_name_id',
             'company_name',
             'url',
-            'city',
-            'state',
-            'zip_code',
             'contact_first_name',
             'contact_last_name',
+            'contact_title',
             'contact_email',
+            'contact_phone',
+            'city',
+            'state',
+            'country',
+            'zip_code',
             'year_founded',
             'full_time_employees',
             'company_type',
             'company_category',
             'revenue_source',
+            'business_model',
             'social_impact',
             'description',
             'description_short',
@@ -638,13 +642,15 @@ class FileGenerator(object):
             'data_types',
             'data_comments',
             'example_uses',
-            'confidentiality',
+            'data_impacts',
             'ts',
+            'last_updated',
+            'display',
             'survey_submitted',
             'vetted',
-            'locked',
             'vettedByCompany',
-            'display',
+            'submitted_through_website',
+            'locked',
             'notes'
             ])
         for c in companies:
@@ -652,17 +658,21 @@ class FileGenerator(object):
                 c.prettyName,
                 c.companyName,
                 c.url,
-                c.city,
-                c.state,
-                c.zipCode,
                 c.contact.firstName,
                 c.contact.lastName,
+                c.contact.title,
                 c.contact.email,
+                c.contact.phone,
+                c.city,
+                c.state,
+                c.country,
+                c.zipCode,
                 c.yearFounded,
                 c.fte,
                 c.companyType,
                 c.companyCategory,
                 ', '.join(c.revenueSource),
+                ', '.join(c.businessModel),
                 ', '.join(c.socialImpact),
                 c.description,
                 c.descriptionShort,
@@ -671,13 +681,15 @@ class FileGenerator(object):
                 ', '.join(c.dataTypes),
                 c.dataComments,
                 c.exampleUses,
-                c.confidentiality,
+                c.dataImpacts,
                 c.ts,
+                c.lastUpdated,
+                c.display,
                 c.submittedSurvey,
                 c.vetted,
-                c.locked,
                 c.vettedByCompany,
-                c.display,
+                c.submittedThroughWebsite,
+                c.locked,
                 c.notes
             ]
             for i in range(len(newrow)):  # For every value in our newrow

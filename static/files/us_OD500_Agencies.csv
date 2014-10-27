@@ -11,7 +11,7 @@ Department of Labor,DOL,Federal,Bureau of Labor Statistics,BLS,http://catalog.da
 Department of Labor,DOL,Federal,Bureau of Labor Statistics,BLS,http://catalog.data.gov/organization/bls-gov,Whitby Group,Research & Consulting,11-50,Consumer Price Index,http://www.bls.gov/cpi/data.htm
 Department of Labor,DOL,Federal,Bureau of Labor Statistics,BLS,http://catalog.data.gov/organization/bls-gov,PolicyMap,Geospatial/Mapping,1-10,Local Area Unemployment Statistics (LAUS),http://www.bls.gov/lau/
 Department of Labor,DOL,Federal,Bureau of Labor Statistics,BLS,http://catalog.data.gov/organization/bls-gov,Bridgewater,Finance & Investment,"1,001-5,000",Data on inflation,
-Department of Labor,DOL,Federal,Bureau of Labor Statistics,BLS,http://catalog.data.gov/organization/bls-gov,JJ Keller,Business & Legal Services,NA,injury and illness records,
+Department of Labor,DOL,Federal,Bureau of Labor Statistics,BLS,http://catalog.data.gov/organization/bls-gov,JJ Keller,Business & Legal Services,"1,001-5,000",injury and illness records,
 Department of Labor,DOL,Federal,Bureau of Labor Statistics,BLS,http://catalog.data.gov/organization/bls-gov,Redfin,Housing/Real Estate,201-500,Bureau of Labor Statistics,
 Department of Labor,DOL,Federal,Bureau of Labor Statistics,BLS,http://catalog.data.gov/organization/bls-gov,Social Explorer,Data/Technology,11-50,Employment and Unemployment,bls.gov
 Department of Labor,DOL,Federal,Bureau of Labor Statistics,BLS,http://catalog.data.gov/organization/bls-gov,"Lumesis, Inc.",Data/Technology,11-50,Unemployment,http://www.bls.gov/webapps/legacy/cpsatab1.htm
@@ -27,7 +27,7 @@ Department of Labor,DOL,Federal,Bureau of Labor Statistics,BLS,http://catalog.da
 Department of Labor,DOL,Federal,Employee Benefits Security Administration,EBSA,http://catalog.data.gov/organization/esba-dol-gov,Abt Associates,Research & Consulting,"1,001-5,000",US Department of Labor Employee Benefits Security Administration (EBSA) Enforcement Data,http://ogesdw.dol.gov/views/data_catalogs.php
 Department of Labor,DOL,Federal,Employee Benefits Security Administration,EBSA,http://catalog.data.gov/organization/esba-dol-gov,IVES Group Inc,Data/Technology,11-50,ERISA Forms 5500,http://www.dol.gov/ebsa/5500main.html
 Department of Labor,DOL,Federal,Mine Safety and Health Administration,MSHA,http://catalog.data.gov/organization/msha-dol-gov,FindTheBest.com,Lifestyle & Consumer,51-200,,
-Department of Labor,DOL,Federal,Occupational Safety and Health Administration,OSHA,http://catalog.data.gov/organization/osha-dol-gov,JJ Keller,Business & Legal Services,NA,injury and illness records,
+Department of Labor,DOL,Federal,Occupational Safety and Health Administration,OSHA,http://catalog.data.gov/organization/osha-dol-gov,JJ Keller,Business & Legal Services,"1,001-5,000",injury and illness records,
 Department of Labor,DOL,Federal,General,,http://catalog.data.gov/dataset?q=organization:((ecab-dol-gov)+OR+(whd-dol-gov)+OR+(esba-dol-gov)+OR+(ojc-dol-gov)+OR+(eta-dol-gov)+OR+(osha-dol-gov)+OR+(oalj-dol-gov)+OR+(oasp-dol-gov)+OR+(msha-dol-gov)+OR+(bls-gov)+OR+(brb-dol-gov)),Cloudspyre,Lifestyle & Consumer,1-10,,
 Department of Labor,DOL,Federal,General,,http://catalog.data.gov/dataset?q=organization:((ecab-dol-gov)+OR+(whd-dol-gov)+OR+(esba-dol-gov)+OR+(ojc-dol-gov)+OR+(eta-dol-gov)+OR+(osha-dol-gov)+OR+(oalj-dol-gov)+OR+(oasp-dol-gov)+OR+(msha-dol-gov)+OR+(bls-gov)+OR+(brb-dol-gov)),Eat Shop Sleep,Lifestyle & Consumer,NA,,
 Department of Labor,DOL,Federal,General,,http://catalog.data.gov/dataset?q=organization:((ecab-dol-gov)+OR+(whd-dol-gov)+OR+(esba-dol-gov)+OR+(ojc-dol-gov)+OR+(eta-dol-gov)+OR+(osha-dol-gov)+OR+(oalj-dol-gov)+OR+(oasp-dol-gov)+OR+(msha-dol-gov)+OR+(bls-gov)+OR+(brb-dol-gov)),FutureAdvisor,Finance & Investment,11-50,,
@@ -913,7 +913,6 @@ Multiple government open data sources,,Other,General,,,ProPublica,Governance,11-
 Multiple government open data sources,,Other,General,,,Splunk,Data/Technology,"501-1,000",,
 Multiple government open data sources,,Other,General,,,TuvaLabs,Education,1-10,,
 Multiple government open data sources,,Other,General,,,CoolClimate,Environment & Weather,1-10,,
-Multiple government open data sources,,Other,General,,,CoreLogic,Housing/Real Estate,"1,001-5,000",,
 Multiple government open data sources,,Other,General,,,Spikes Cavell Analytic Inc,Data/Technology,11-50,,
 Multiple government open data sources,,Other,General,,,Import.io,Data/Technology,11-50,,
 Multiple government open data sources,,Other,General,,,REI Systems,Data/Technology,"501-1,000",,
