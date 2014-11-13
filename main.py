@@ -24,7 +24,6 @@ from handlers.handlers import *
 from handlers.admin_handlers import *
 from handlers.modules import *
 
-# import and define tornado-y things
 from tornado.options import define
 define("port", default=5000, help="run on the given port", type=int)
 

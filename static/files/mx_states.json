@@ -640,7 +640,7 @@
         "type": "Feature",
         "properties": {
             "CVE_ENT": "15",
-            "NAME": "México",
+            "NAME": "Estado de México",
             "OID": 3
         },
         "geometry": {
