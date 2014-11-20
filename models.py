@@ -111,7 +111,6 @@ class Visit(Document):
 	ip = StringField()
 
 
-
 # Dataset.register_delete_rule(Company, "datasets", PULL)
 # Dataset.register_delete_rule(Person, "submittedDatasets", PULL)
 # Company.register_delete_rule(Dataset, "usedBy", PULL)

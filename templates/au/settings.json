@@ -1,0 +1,73 @@
+{
+    "default_language": "en",
+    "available_languages": ["en"],
+    "logo_path":"img/od500-logo-au.png",
+    "menu": {
+        "en": [{
+            "item": "About",
+            "link": "/au/about/",
+            "sub-menu": [{
+                "item": "Goals",
+                "link": "/au/about/#about-goals"
+            }, {
+                "item": "Approach",
+                "link": "/au/about/#about-govlab-approach"
+            }, {
+                "item": "International",
+                "link": "/au/about/#about-international-studies"
+            }, {
+                "item": "People",
+                "link": "/au/about/#about-people"
+            }]
+        }, {
+            "item": "Full List",
+            "link": "/au/list/",
+            "sub-menu": []
+        }, {
+            "item": "Survey",
+            "link": "/au/submitCompany/",
+            "sub-menu": []
+        }, {
+            "item": "International",
+            "link": "/au/international/",
+            "sub-menu": []
+        }, {
+            "item": "Resources",
+            "link": "/au/resources/",
+            "sub-menu": []
+        }]
+    },
+    "page_titles": {
+        "en": {
+            "index": "Welcome to the AU OD 500",
+            "about": "About the AU OD 500",
+            "resources": "Open Data Resources - AU OD 500",
+            "list": "AU OD 500 Companies",
+            "submit": "Submit a Company to the AU OD 500",
+            "stats": "AU OD 500 By The Numbers",
+            "submitData": "Submit Agency and Data Information",
+            "thanks": "Thank You!"
+        }
+    },
+    "footer_menu": {
+        "en":[{
+            "item": "Twitter",
+            "link": "https://twitter.com/opendata500"
+        },
+        {
+            "item":"About",
+            "link":"/au/about/"
+        },
+        {
+            "item":"Contact Us",
+            "link":"mailto:opendata500@thegovlab.org"
+        }]
+    }
+}
+
+
+
+
+
+
+

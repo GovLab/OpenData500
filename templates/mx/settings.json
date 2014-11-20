@@ -1,6 +1,7 @@
 {
     "default_language": "es",
     "available_languages": ["en", "es"],
+    "logo_path":"img/od100-logo-mx.png",
     "menu": {
         "en": [{
             "item": "About",

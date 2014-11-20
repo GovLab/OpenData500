@@ -1,0 +1,43 @@
+{% extends "../../main.html" %}
+{% autoescape None %}
+
+{% block body %}
+
+<div class="m-homepage">
+    <h1 class="first-title">Open Data X Australia</h1>
+
+    <section class="m-homepage-banner">
+        <h2>Space for Banner</h2>
+    </section>
+
+    <section class="m-homepage-about">
+        <h1>About This Project</h1>
+        <p class="intro">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sit amet risus id purus rutrum pharetra. Nulla et pellentesque augue, et posuere velit. Curabitur auctor scelerisque nulla, eu bibendum nisl. Mauris id odio purus. Fusce lacinia nec metus eu iaculis. Maecenas fermentum, augue ac pellentesque maximus, neque eros venenatis quam, a ultrices massa neque vitae sem. Phasellus ultrices, mauris quis pulvinar elementum, felis leo rutrum sapien, et lobortis nisl libero in quam</p>
+        <p class="more"><a href="/mx/about/" class="m-button">Learn More</a></p> 
+    </section>
+
+    <section class="m-homepage-participate">
+        <h1>How To Participate</h1>
+        <div class="m-homepage-box">
+            <h2>1</h2>
+            <h3>If you represent an Open Data company or NGO</h3>
+            <p>Please fill out our <a href="/mx/submitCompany/">survey</a>.</p>    
+        </div>
+        <div class="m-homepage-box">
+            <h2>2</h2>
+            <h3>If you would like to recommend an Open Data company</h3>
+            <p>Please email us at <a href="">email@email.com</a>.</p>
+        </div>
+        <div class="m-homepage-box">
+            <h2>3</h2>
+            <h3>If you have general information to share about open data in Mexico</h3>
+            <p><a href="">Email us at <a href="">email@email.com</a>.</p>
+        </div>
+    </section>
+</div>
+
+
+<script>
+    $('#mc_embed_signup').removeClass('s-disabled').delay(5000).addClass('s-disabled');
+</script>
+{% end %}
