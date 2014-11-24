@@ -1,7 +1,7 @@
 {
     "default_language": "en",
     "available_languages": ["en"],
-    "logo_path":"img/od500-logo-au.png",
+    "logo_path":"img/od100-logo-au.png",
     "menu": {
         "en": [{
             "item": "About",
