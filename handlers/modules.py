@@ -1,5 +1,6 @@
 from base import *
 import json
+from utils import Tools
 
 
 
@@ -35,7 +36,7 @@ class FormModule(tornado.web.UIModule):
 class FormDataModule(tornado.web.UIModule):
     def render(self, country, lan, required, company=None):
         with open("templates/modules/module_text/formData.json") as json_file:
-                form = json.load(json_file)
+            form = json.load(json_file)
         return self.render_string(
             'modules/formData.html', 
             c=company, 
@@ -52,10 +53,13 @@ class AgencyAddModule(tornado.web.UIModule):
     def render(self, country, lan, company=None):
         with open("templates/modules/module_text/agencyAdd.json") as json_file:
                 form = json.load(json_file)
+        tools = Tools()
+        agency_list = tools.get_list_of_agencies(country)
         return self.render_string(
             'modules/agencyAdd.html', 
             c=company, 
-            country=country, 
+            country=country,
+            agency_list = json.dumps(agency_list),
             lan=lan, 
             form=form[lan]
             )

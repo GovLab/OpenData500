@@ -714,7 +714,7 @@ class DeleteCompanyHandler(BaseHandler):
                 "404.html",
                 page_title='404 - Open Data500',
                 page_heading='Oh no...',
-                error = "404 - Not Found",
+                error_message = "Company is using agencies, cannot delete. Please remove all agencies from company.",
                 lan=lan,
                 country=country
             )

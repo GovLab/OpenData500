@@ -122,6 +122,32 @@ class Tools(object):
     def prettify(self, name):
         return re.sub(r'([^\s\w])+', '', name).replace(" ", "-")
 
+    def get_list_of_agencies(self, country):
+        agencies = models.Agency.objects(country=country).only('name', 'abbrev', 'subagencies.name', 'subagencies.abbrev')
+        agency_list = []
+        for a in agencies:
+            label = [a.name, " (", a.abbrev, ")"]
+            agency = {
+                "label": ''.join(filter(None, label)),
+                "a": a.name,
+                "aa": a.abbrev,
+                "s": "",
+                "ss": ""
+            }
+            agency_list.append(agency)
+            if a.subagencies:
+                for s in a.subagencies:
+                    label = [a.name, " (", a.abbrev, ")", " - ", s.name, " (", s.abbrev, ")"]
+                    agency = {
+                        "label": ''.join(filter(None, label)),
+                        "a": a.name,
+                        "aa": a.abbrev,
+                        "s": s.name,
+                        "ss": s.abbrev
+                    }
+                    agency_list.append(agency)
+        return agency_list
+
 
 class Form(object):
     def create_new_company(self, arguments):

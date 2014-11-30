@@ -59,6 +59,12 @@
 		<h3 style="text-align:center;">Something went wrong : (</h3>
 		<br>
 		<h3 style="text-align:center;">Go <button class="l-button" onClick="goBack();">back</button> from whence you came.</h3>
+        {%try%}{%if error_message %}
+            <br>
+            <h3 style="text-align:center;">{{error_message}}</h3>
+            {%end%}
+        {%except%}
+        {%end%}
 
    </div><!-- end container -->
     </div><!-- end main -->
