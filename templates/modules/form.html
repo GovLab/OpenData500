@@ -97,7 +97,7 @@
 			id="zipCode" 
 			{%if c %}value="{{ c.zipCode }}"{%end%} 
 			data-parsley-trigger="focusout" 
-			data-parsley-pattern="(^\d{5}$)|(^\d{5}-\d{4}$)" 
+			data-parsley-pattern="{{country_settings[country]['zip_format']}}" 
 			{%if required %}required{%end%}></div>
 		<div class="m-form-line"><label for="">{{form['year_founded']}}: *</label>
 			<input type="text" 

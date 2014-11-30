@@ -8,10 +8,13 @@ class FormModule(tornado.web.UIModule):
     def render(self, country, lan, required, edit, company=None):
         with open("templates/modules/module_text/form.json") as json_file:
                 form = json.load(json_file)
+        with open("templates/modules/module_text/country_settings.json") as json_file:
+            country_settings=json.load(json_file)
         return self.render_string(
             'modules/form.html', 
             c=company, 
             country=country, 
+            country_settings=country_settings,
             lan=lan, 
             required=required, 
             edit=edit,
