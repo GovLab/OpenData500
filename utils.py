@@ -1007,35 +1007,6 @@ class FileGenerator(object):
             csvwriter.writerow(newrow)
         logging.info("Visit CSV File Done!")
 
-    def generate_agency_list(self, country):
-        agencies = models.Agency.objects(Q(country=country) & Q(source__not__exact="web")) #look into this source not exact business
-        agency_list = []
-        for a in agencies:
-            label = [a.name, " (", a.abbrev, ")"]
-            agency = {
-                "label": ''.join(filter(None, label)),
-                "a": a.name,
-                "aa": a.abbrev,
-                "s": "",
-                "ss": ""
-            }
-            agency_list.append(agency)
-            if a.subagencies:
-                for s in a.subagencies:
-                    label = [a.name, " (", a.abbrev, ")", " - ", s.name, " (", s.abbrev, ")"]
-                    agency = {
-                        "label": ''.join(filter(None, label)),
-                        "a": a.name,
-                        "aa": a.abbrev,
-                        "s": s.name,
-                        "ss": s.abbrev
-                    }
-                    agency_list.append(agency)
-        with open(os.path.join(os.path.dirname(__file__), 'static') + "/files/" + country + '/'+ country + '_Agency_List.json', 'w') as outfile:
-            json.dump(agency_list, outfile)
-        logging.info("Agency List Done!")
-
-
 
 
 

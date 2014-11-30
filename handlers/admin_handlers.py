@@ -291,10 +291,7 @@ class AgencyAdminHandler(BaseHandler):
             self.redirect("/login/")
         country = user.country
         action = self.get_argument("action", "")
-        if action == "agency_list":
-            self.application.files.generate_agency_list(country)
-            self.write({"message":"All right, I'm done."})
-        elif action == "refresh":
+        if action == "refresh":
             self.application.stats.update_total_agencies(country)
             self.write({"message":"All right, I'm done.", "total_agencies": self.application.stats.get_total_agencies(country)})
 
