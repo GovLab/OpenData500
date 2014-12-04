@@ -576,7 +576,6 @@ class AdminEditAgencyHandler(BaseHandler):
                 self.write({"error":"Could not save agency"})
                 return
             self.write({"message":"Save Successful", "id":str(new_agency.id)})
-            self.application.files.generate_agency_list(country)
             return
         #------------------------------------------EDIT SUBAGENCY----------------------------
         if action =="edit-subagency":
@@ -590,7 +589,6 @@ class AdminEditAgencyHandler(BaseHandler):
                     s.abbrev = subagency_abbrev
                     s.url = subagency_url
                     agency.save()
-                    self.application.files.generate_agency_list(country)
                     self.write({"message":"Edit Successful"})
                     return 
         #------------------------------------------ADD SUBAGENCY----------------------------
@@ -605,7 +603,6 @@ class AdminEditAgencyHandler(BaseHandler):
                 url = subagency_url)
             agency.subagencies.append(s)
             agency.save()
-            self.application.files.generate_agency_list(country)
             self.write({"message":"Subagency added!", 
                 "heading":s.name, 
                 "name":s.name, 
@@ -626,7 +623,6 @@ class AdminEditAgencyHandler(BaseHandler):
                     else:
                         agency.subagencies.remove(s)
             agency.save()
-            self.application.files.generate_agency_list(country)
             self.write({"message":"Subagency deleted :("})
             return
         #------------------------------------------EDIT AGENCY----------------------------
@@ -649,7 +645,6 @@ class AdminEditAgencyHandler(BaseHandler):
             agency.source = agency_source
             agency.notes = agency_notes
             agency.save()
-            self.application.files.generate_agency_list(country)
             self.write({"message":"Edits saved!"})
             return
         #------------------------------------------DELETE AGENCY----------------------------
@@ -665,7 +660,6 @@ class AdminEditAgencyHandler(BaseHandler):
                 return
             if agency.usedBy_count == 0 and len(agency.usedBy) == 0:
                 agency.delete()
-                self.application.files.generate_agency_list(country)
                 self.write({"message": "Agency Deleted"})
                 return
 
