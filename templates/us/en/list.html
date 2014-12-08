@@ -69,9 +69,6 @@
 	</div>
 </div>
 
-<div id="hidden" style="display:none;"><[{% for s in stats.states %}{% if s.abbrev == "PR" %}{"abbrev": "{{s.abbrev}}","STATE":"{{s.name}}","VALUE":"{{s.count}}"}{%else%}{"abbrev": "{{s.abbrev}}","STATE":"{{s.name}}","VALUE":"{{s.count}}"},{%end%}{%end%}]></[{%for s in stats.states %}{% if s.abbrev == "PR" %}{"abbrev": "{{s.abbrev}}","STATE":"{{s.name}}","VALUE":"{{s.count}}"}{%else%}{"abbrev": "{{s.abbrev}}","STATE":"{{s.name}}","VALUE":"{{s.count}}"},{%end%}{%end%}]></div>
-
-
 <script src="{{ static_url("js/d3.v3.min.js") }}"></script>
 <script src="{{ static_url("js/queue.v1.min.js") }}"></script>
 <script src="{{ static_url("js/isotope.pkgd.min.js") }}"></script>
@@ -184,10 +181,12 @@
 	//         $container.isotope();
 	// });
             
-    var userData = document.getElementById('hidden').textContent.replace('<','').replace('>','');
-    userData = JSON.parse(userData)
-    data = userData
-    
+    // var userData = document.getElementById('hidden').textContent.replace('<','').replace('>','');
+    // userData = JSON.parse(userData)
+    // data = userData
+
+    var data = {{states_for_map}}
+
     createChart = function(){
         var hoverDisplay = "State &amp; Value".replace('&amp;', '&')
         
@@ -204,9 +203,9 @@
         //States
         this.StateBaseColor = '#eeeeee';
         this.StateMaxColor = '#4a2f76';
-        this.Range = 10;
-        this.LineThickness = .6;
-        this.LineColor = '#888';
+        this.Range = 50;
+        this.LineThickness = 1;
+        this.LineColor = '#444';
         //Labels
         this.ChartTitle = true;
         this.ChartTitleText = 'Filter By State';
@@ -330,16 +329,15 @@
                     .enter().append('path')
                     .attr('class', 'states')
                     .attr('d', d3.geo.path().projection(projection))
-                    //.attr('id', function(d){return d.properties.name.replace(/\s+/g, '')})
+                    .attr('name', function(d){ return d.properties.NAME})
                     .style('stroke', lineColor)
                     .style('stroke-width', lineThickness/size);
                     
                 var states = group.selectAll('.states')
-                    .data(data)
-                    .style('fill', function(d){return color( total/d.VALUE )})
-                    .attr('name', function(d) { return d.abbrev; })
+                    .data(data, function(d) { return (d && d.STATE) || d3.select(this).attr("name"); })
+                    .style('fill', function(d) { return color( total/d.VALUE )})
+                    .attr('abbrev', function(d) { return d.abbrev; })
                     .on("mouseover", function(d, i) {   
-                        //console.log(d.VALUE + " : " + total/d.VALUE + " : " + color(d.VALUE));
                         hover.transition().duration(100).style("opacity", 1)
                             .style("background-color", "#aaaaaa")
                             .style("left", (d3.event.pageX) + 20 + "px")
@@ -348,15 +346,9 @@
                     })
                     .on("mouseout", function(d) { if (hoverStates == true) hover.style("left", -100).style("top", -100).transition().duration(100).style("opacity", 0); })
                     .on("mousemove", function(d, i) { if (hoverStates == true)hover.style("left", (d3.event.pageX) + 20 + "px").style("top", (d3.event.pageY) + "px"); });
-                    // .on('click', function(d) { 
-                    //     var filtr = "." + d.abbrev;
-                    //     $container.isotope({ filter: filtr }); 
-                    //     console.log(d.abbrev); 
-                    //     $("#filters button").removeClass('s-active');
-                    // });
                 
                 states.on('click', function(s) {
-                    var filtr = '.' + this.getAttribute('name');
+                    var filtr = '.' + this.getAttribute('abbrev');
                     if(this.attributes.class.value == "states s-active") { //if clicking on the same state, remove active class and remove filter from filters
                         filters.splice(filters.indexOf('.'+s.abbrev), 1);
                         d3.select(this)

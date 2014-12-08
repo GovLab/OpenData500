@@ -168,7 +168,7 @@
     //         $container.isotope();
     // });
             
-    var data = [{% for s in range(0, len(stats.states)) %}{% if s == len(stats.states)-1 %}{"abbrev": "{{stats.states[s].abbrev}}","STATE":"{{stats.states[s].name}}","VALUE":"{{stats.states[s].count}}"}{%else%}{"abbrev": "{{stats.states[s].abbrev}}","STATE":"{{stats.states[s].name}}","VALUE":"{{stats.states[s].count}}"},{%end%}{%end%}]
+    var data = {{states_for_map}}
     
 
     createChart = function(){
@@ -187,9 +187,9 @@
         //States
         this.StateBaseColor = '#eeeeee';
         this.StateMaxColor = '#4a2f76';
-        this.Range = 24;
-        this.LineThickness = .6;
-        this.LineColor = '#888';
+        this.Range = 50;
+        this.LineThickness = 1;
+        this.LineColor = '#444';
         //Labels
         this.ChartTitle = true;
         this.ChartTitleText = 'Filtrar por estado';

@@ -201,11 +201,9 @@ class ListHandler(BaseHandler):
         else:
             lan = settings['default_language']
         companies = models.Company.objects(Q(display=True) & Q(country=country)).order_by('prettyName')
-        if country != 'mx':
-            agencies = models.Agency.objects(Q(usedBy__not__size=0) & Q(source="dataGov") & Q(dataType="Federal") & Q(country=country)).order_by("-usedBy_count").only("name", "abbrev", "prettyName")[0:16]
-        if country == 'mx':
-            agencies = models.Agency.objects(Q(dataType="Federal") & Q(country=country)).order_by("-usedBy_count").only("name", "abbrev", "prettyName")[0:16]
+        agencies = models.Agency.objects(Q(dataType="Federal") & Q(country=country)).order_by("-usedBy_count").only("name", "abbrev", "prettyName")[0:16]
         stats = models.Stats.objects.get(country=country)
+        states_for_map = self.application.tools.states_for_map(country)
         try:
             page_title=settings['page_titles'][lan]["list"]
         except:
@@ -213,8 +211,8 @@ class ListHandler(BaseHandler):
         self.render(
             country+"/" + lan + "/list.html",
             companies = companies,
-            stats = stats,
             states = states,
+            states_for_map = json.dumps(states_for_map),
             agencies = agencies,
             categories = categories[lan],
             user = self.current_user,

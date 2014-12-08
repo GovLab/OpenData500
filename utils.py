@@ -276,7 +276,10 @@ class Tools(object):
             agency_list.append(agency)
             if a.subagencies:
                 for s in a.subagencies:
-                    label = [a.name, " (", a.abbrev, ")", " - ", s.name, " (", s.abbrev, ")"]
+                    label = [
+                        a.name, " (", a.abbrev, ")", 
+                        " - ", s.name, 
+                        " (", s.abbrev, ")"]
                     agency = {
                         "label": ''.join(filter(None, label)),
                         "a": a.name,
@@ -286,6 +289,19 @@ class Tools(object):
                     }
                     agency_list.append(agency)
         return agency_list
+
+    def states_for_map(self, country):
+        stats = models.Stats.objects.get(country=country)
+        #abbrev, STATE, VALUE
+        state_counts = []
+        state_data = []
+        for s in stats.states:
+            state_data.append({
+                "abbrev":s.abbrev.encode('utf-8'),
+                "STATE":s.name.encode('utf-8'),
+                "VALUE":s.count
+            })
+        return state_data
 
 
 class Form(object):
@@ -306,7 +322,9 @@ class Form(object):
         #-------------------DATA INFO---------------
         for item in company_data_fields:
             if item in arguments:
-                models.Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+item:arguments[item]})
+                models.Company.objects(
+                    id=bson.objectid.ObjectId(id)).update(
+                        **{'set__'+item:arguments[item]})
         #DATA TYPES
         if 'dataTypes' in arguments:
             c.dataTypes = [] if not arguments['dataTypes'] else arguments['dataTypes'].split(',')
