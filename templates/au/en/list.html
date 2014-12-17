@@ -170,7 +170,7 @@
     //         $container.isotope();
     // });
             
-    var data = [{% for s in range(0, len(stats.states)) %}{% if s == len(stats.states)-1 %}{"abbrev": "{{stats.states[s].abbrev}}","STATE":"{{stats.states[s].name}}","VALUE":"{{stats.states[s].count}}"}{%else%}{"abbrev": "{{stats.states[s].abbrev}}","STATE":"{{stats.states[s].name}}","VALUE":"{{stats.states[s].count}}"},{%end%}{%end%}]
+    var data = {{states_for_map}}
     
 
     createChart = function(){
@@ -196,7 +196,7 @@
         this.ChartTitle = true;
         this.ChartTitleText = 'Filter By State';
         this.ChartTitleXLocation = 'Center';
-        this.ChartTitleYLocation = 0;
+        this.ChartTitleYLocation = -40;
         this.ChartTitleFont = 'Arial';
         this.ChartTitleSize = 24;
         this.ChartTitleColor = '#472b74';
@@ -254,7 +254,7 @@
                 hoverValueColor = this.HoverValueColor;
                 
             var margin = {top: marginTop, right: marginRight, bottom: marginBottom, left: marginLeft},
-                w = (width*size) + margin.left + margin.right,
+                w = (width*size) + margin.left + margin.right;
                 h = (height*size) + margin.top + margin.bottom;
                 
             var bkgdColor = document.getElementsByTagName("body")[0];
@@ -294,12 +294,12 @@
             var percentFormat = function(d) { return numberFormat(d) + "%"; };
             var dollarFormat = function(d) { return "$" + numberFormat(d); };
             
-            var projection = d3.geo.conicConformal()
-                .rotate([102, 0])
-                .center([0, 24])
-                .parallels([17.5, 29.5])
-                .scale(1700)
-                .translate([w / 2 + 210, h / 2 + 30]);
+            var projection = d3.geo.mercator()
+                .rotate([0, 0])
+                .center([0, 0])
+                //.parallels([17.5, 29.5])
+                .scale(900)
+                .translate([-1600, -200 ]);
             var path = d3.geo.path()
                 .projection(projection);
                 
@@ -315,15 +315,15 @@
             var total = maxVal - minVal;
 
             var number = d3.format("0,000");
-            
-            function ready(error, mx, _data) {
+
+            function ready(error, au, _data) {
             
                 group.selectAll('path')
-                    .data(mx.features)
+                    .data(au.features)
                     .enter().append('path')
                     .attr('class', 'states')
                     .attr('d', d3.geo.path().projection(projection))
-                    .attr('name', function(d){ return d.properties.NAME})
+                    .attr('name', function(d){ return d.properties.STATE_NAME})
                     .style('stroke', lineColor)
                     .style('stroke-width', lineThickness/size);
                     
