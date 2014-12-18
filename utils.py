@@ -141,8 +141,7 @@ states ={
                 "SL":"Sinaloa", "SR":"Sonora", "TC":"Tabasco", "TS":"Tamaulipas", 
                 "TL":"Tlaxcala", "VZ":"Veracruz", "YN":"Yucatán", "ZS":"Zacatecas"},
             "au": {
-                "ACT":"Australian Capital Territory", 
-                "JBT":"Jervis Bay Territory", "NSW":"New South Wales", 
+                "ACT":"Australian Capital Territory", "NSW":"New South Wales", 
                 "NT":"Northern Territory", "QLD":"Queensland", 
                 "SA":"South Australia", "TAS":"Tasmania", "VIC":"Victoria", 
                 "WA":"Western Australia"}
@@ -158,7 +157,7 @@ stateListAbbrev = {
                 "", "AB", "BC", "MB", "NB", "NL", "NT", "NS", "NU", "ON", "PE", 
                 "QC", "SK", "YT"],
             "au": [
-                "", "ACT", "JBT", "NSW", "NT", "QLD", "SA", "TAS", "VIC", "WA"],
+                "", "ACT", "NSW", "NT", "QLD", "SA", "TAS", "VIC", "WA"],
             "mx": [
                 "", "AS", "BC", "BS", "CC", "CS", "CH", "CL", "CM", "DF", "DG", 
                 "GT", "GR", "HG", "JC", "MC", "MN", "MS", "NT", "NL", "OC", "PL", 
@@ -184,9 +183,8 @@ stateList = {
                 "Prince Edward Island", "Quebec", "Saskatchewan", "Yukon"],
             "au": [
                 "(Select Province/Territory)", "Australian Capital Territory", 
-                "Jervis Bay Territory", "New South Wales", "Northern Territory", 
-                "Queensland", "South Australia", "Tasmania", "Victoria", 
-                "Western Australia"],
+                "New South Wales", "Northern Territory", "Queensland", 
+                "South Australia", "Tasmania", "Victoria", "Western Australia"],
             "mx": [
                 "(Seleccione un Estado)", "Aguascalientes", "Baja California", 
                 "Baja California Sur", "Campeche", "Chiapas", "Chihuahua", 
