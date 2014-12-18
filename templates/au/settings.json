@@ -20,8 +20,8 @@
                 "link": "/au/about/#about-people"
             }]
         }, {
-            "item": "Full List",
-            "link": "/au/list/",
+            "item":"Companies",
+            "link":"/au/list/",
             "sub-menu": []
         }, {
             "item": "Survey",
