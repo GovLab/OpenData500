@@ -20,6 +20,10 @@
                 "link": "/au/about/#about-people"
             }]
         }, {
+            "item":"Companies",
+            "link":"/au/list/",
+            "sub-menu": []
+        }, {
             "item": "Survey",
             "link": "/au/submitCompany/",
             "sub-menu": []
