@@ -27,7 +27,7 @@ $(document).ready(function() {
             .addAsyncValidator('validateName', function(xhr) {
                 window.ParsleyUI.removeError(companyName, 'name-exists');
                 if (xhr.status === 404) {
-                    window.ParsleyUI.addError(companyName, 'name-exists', "Error:");
+                    window.ParsleyUI.addError(companyName, 'name-exists', "Error: This company has already been submitted.");
                 }
                 return xhr.status === 200;
             }, '/validate/?country=' + country + '&_xsrf=' + _xsrf);

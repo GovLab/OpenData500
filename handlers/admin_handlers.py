@@ -550,7 +550,7 @@ class AdminEditAgencyHandler(BaseHandler):
         subagency_url = self.get_argument("subagency_url", "")
         agency_new_name = self.get_argument("agency_new_name", "")
         agency_old_name = self.get_argument("agency_old_name", None)
-        agency_prettyName = re.sub(r'([^\s\w])+', '', agency_new_name).replace(" ", "-").title()
+        agency_prettyName = self.application.tools.prettify(agency_new_name)
         agency_abbrev = self.get_argument("agency_abbrev", None)
         agency_url = self.get_argument("agency_url", None)
         agency_type = self.get_argument("agency_type", None)

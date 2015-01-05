@@ -211,19 +211,6 @@ company_admin_booleans = [
     'display', 'submittedSurvey','vetted', 'vettedByCompany', 
     'submittedThroughWebsite', 'locked']
 
-
-class Validators(object):
-	def check_for_duplicates(self, companyName):
-		#check if companyName exists:
-		try: 
-			c = models.Company.objects.get(prettyName=re.sub(r'([^\s\w])+', '', companyName).replace(" ", "-").title())
-			response = {
-                "error": "This company has already been submitted. Email opendata500@thegovlab.org for questions."
-            }
-		except:
-			response = 'true'
-		return response
-
 class Tools(object):
     def re_do_filters(self, country):
         companies = models.Company.objects(country=country)
@@ -257,7 +244,7 @@ class Tools(object):
 
     @classmethod
     def prettify(self, name):
-        return re.sub(r'([^\s\w])+', '', name).replace(" ", "-")
+        return re.sub(r'([^\s\w])+', '', name).replace(" ", "-").lower()
 
     def get_list_of_agencies(self, country):
         agencies = models.Agency.objects(country=country).only('name', 'abbrev', 'subagencies.name', 'subagencies.abbrev')

@@ -263,10 +263,8 @@ class ValidateHandler(BaseHandler):
         prettyName = self.application.tools.prettify(companyName)
         try: 
             c = models.Company.objects.get(Q(country=country) & Q(prettyName=prettyName))
-            logging.info('company exists.')
             self.set_status(404)
         except:
-            logging.info('company does not exist. Carry on.')
             self.set_status(200)
 
 #--------------------------------------------------------SURVEY PAGE------------------------------------------------------------
