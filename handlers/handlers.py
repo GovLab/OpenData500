@@ -214,7 +214,7 @@ class ListHandler(BaseHandler):
             states = states,
             states_for_map = json.dumps(states_for_map),
             agencies = agencies,
-            categories = categories[lan],
+            categories = categories[lan][country],
             user = self.current_user,
             country = country,
             menu=settings['menu'][lan],

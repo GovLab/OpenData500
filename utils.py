@@ -43,22 +43,34 @@ revenueSource = {
             }
 datatypes = ['Federal Open Data', 'State Open Data', 'City/Local Open Data']
 categories = {
-                "en": [
-                    'Business & Legal Services', 'Data/Technology', 
-                    'Education', 'Energy', 'Environment & Weather', 
-                    'Finance & Investment', 'Food & Agriculture', 
-                    'Geospatial/Mapping', 'Governance', 'Healthcare', 
-                    'Housing/Real Estate', 'Insurance', 'Lifestyle & Consumer', 
-                    'Media', 'Research & Consulting', 'Scientific Research', 
-                    'Transportation'],
-                "es": [
-                    "Agricultura y Alimentación", "Vivienda/Bienes Raíces", 
-                    "Clima y Medio Ambiente", "Educación", "Energía", 
-                    "Estilos de vida y Consumidores", "Finanzas e Inversiones", 
-                    "Gobierno", "Investigación Científica", 
-                    "Investigación y Consultoría", "Mapeo/Geoespacial", 
-                    "Medios", "Salud", "Seguros", "Servicios Legales", 
-                    "Tecnología/Datos", "Transporte"]
+                "en": {
+                    "us": [
+                        'Business & Legal Services', 'Data/Technology', 
+                        'Education', 'Energy', 'Environment & Weather', 
+                        'Finance & Investment', 'Food & Agriculture', 
+                        'Geospatial/Mapping', 'Governance', 'Healthcare', 
+                        'Housing/Real Estate', 'Insurance', 'Lifestyle & Consumer', 
+                        'Media', 'Research & Consulting', 'Scientific Research', 
+                        'Transportation'],
+                    "au": [
+                        'Business & Legal Services', 'Data/Technology', 
+                        'Education', 'Energy', 'Environment & Weather', 
+                        'Finance & Investment', 'Food & Agriculture', 
+                        'Geospatial/Mapping', 'Mining/Manufacturing', 
+                        'Healthcare', 'Housing/Real Estate', 'Insurance', 
+                        'Lifestyle & Consumer', 'Media', 'Research & Consulting', 
+                        'Telecommunications / ISP\'s', 'Transportation']
+                },
+                "es": {
+                    "mx": [
+                        "Agricultura y Alimentación", "Vivienda/Bienes Raíces", 
+                        "Clima y Medio Ambiente", "Educación", "Energía", 
+                        "Estilos de vida y Consumidores", "Finanzas e Inversiones", 
+                        "Gobierno", "Investigación Científica", 
+                        "Investigación y Consultoría", "Mapeo/Geoespacial", 
+                        "Medios", "Salud", "Seguros", "Servicios Legales", 
+                        "Tecnología/Datos", "Transporte"]
+                }
             }
 social_impacts = {
                 "en": [
@@ -1038,7 +1050,7 @@ class FileGenerator(object):
         for a in agencies:
             if a.usedBy and a.source == "dataGov":
                 for c in a.usedBy:
-                    if c.companyCategory in categories['en'] and c.companyCategory not in used_agencies_categories:
+                    if c.companyCategory in categories['en']['us'] and c.companyCategory not in used_agencies_categories:
                         used_agencies_categories.append(c.companyCategory)
         #logging.info(used_agencies_categories)
         name_key = {}
@@ -1053,7 +1065,7 @@ class FileGenerator(object):
         for a in agencies:
             if a.source == "dataGov":
                 for c in a.usedBy:
-                    if c.companyCategory in categories['en']: 
+                    if c.companyCategory in categories['en']['us']: 
                         matrix[name_key[c.companyCategory], name_key[a.name]] += 1
                         matrix[name_key[a.name], name_key[c.companyCategory]] += 1
         #make json
@@ -1096,7 +1108,7 @@ class FileGenerator(object):
         for a in agencies:
             if a.usedBy:
                 for c in a.usedBy:
-                    if c.companyCategory in categories['es'] and c.companyCategory not in used_agencies_categories:
+                    if c.companyCategory in categories['es']['mx'] and c.companyCategory not in used_agencies_categories:
                         used_agencies_categories.append(c.companyCategory)
         #logging.info(used_agencies_categories)
         name_key = {}
@@ -1110,7 +1122,7 @@ class FileGenerator(object):
         #populate matrix
         for a in agencies:
             for c in a.usedBy:
-                if c.companyCategory in categories['es']: 
+                if c.companyCategory in categories['es']['mx']: 
                     matrix[name_key[c.companyCategory], name_key[a.name]] += 1
                     matrix[name_key[a.name], name_key[c.companyCategory]] += 1
         #make json
