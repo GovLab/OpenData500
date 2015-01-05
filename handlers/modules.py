@@ -61,7 +61,7 @@ class AgencyAddModule(tornado.web.UIModule):
             country=country,
             agency_list = json.dumps(agency_list),
             lan=lan, 
-            form=form[lan]
+            form=form[lan][country]
             )
 
 class AdminSettingsModule(tornado.web.UIModule):
