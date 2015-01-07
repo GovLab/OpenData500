@@ -325,7 +325,7 @@
                 var states = group.selectAll('.states')
                     .data(data, function(d) { return (d && d.STATE) || d3.select(this).attr("name"); })
                     .style('fill', function(d) { return color( total/d.VALUE )})
-                    .attr('abbrev', function(d) { return d.abbrev; })
+                    .attr('abbrev', function(d) { console.log(d); return d.abbrev; })
                     .on("mouseover", function(d, i) {   
                         hover.transition().duration(100).style("opacity", 1)
                             .style("background-color", "#aaaaaa")

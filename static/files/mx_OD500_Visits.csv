@@ -18,11 +18,11 @@ ts,referer,page,user_agent,ip
 2014-04-14 16:30:39.819405,,,,136.181.195.25
 2014-04-14 16:31:21.548234,,,,98.218.183.214
 2014-04-14 16:34:55.615183,,,,198.12.76.44
+2014-04-14 16:38:05.720904,,,,199.16.156.124
 2014-04-14 16:35:04.734542,,,,216.165.95.74
 2014-04-14 16:35:30.164994,,,,216.165.95.74
 2014-04-14 16:36:09.199524,,,,216.165.95.74
 2014-04-14 16:37:41.441981,,,,131.178.201.1
-2014-04-14 16:38:05.720904,,,,199.16.156.124
 2014-04-14 16:40:57.911679,,,,216.165.95.74
 2014-04-14 16:41:26.324086,,,,216.165.95.74
 2014-04-14 16:41:38.651202,,,,216.165.95.74
@@ -47,23 +47,23 @@ ts,referer,page,user_agent,ip
 2014-04-14 17:33:51.382598,,,,132.200.32.34
 2014-04-14 17:33:51.487414,,,,132.200.32.34
 2014-04-14 17:35:05.701171,,,,114.145.99.142
+2014-04-14 17:45:03.969235,,,,"10.210.131.32, 98.137.206.35"
 2014-04-14 17:45:03.311192,,,,46.236.26.100
-2014-04-14 17:45:03.488237,,,,199.59.148.209
 2014-04-14 17:45:03.581079,,,,173.192.79.101
 2014-04-14 17:45:03.921584,,,,"10.193.228.59, 98.137.206.35"
-2014-04-14 17:45:03.969235,,,,"10.210.131.32, 98.137.206.35"
+2014-04-14 17:45:03.488237,,,,199.59.148.209
 2014-04-14 17:45:06.496686,,,,46.236.23.248
-2014-04-14 17:45:07.474280,,,,92.222.0.136
 2014-04-14 17:45:07.721956,,,,23.29.122.195
+2014-04-14 17:45:07.474280,,,,92.222.0.136
 2014-04-14 17:45:08.208093,,,,23.29.122.222
 2014-04-14 17:45:10.507808,,,,23.29.122.222
 2014-04-14 17:45:11.508061,,,,125.209.211.209
-2014-04-14 18:03:10.841047,,,,85.10.211.143
 2014-04-14 17:56:38.334488,,,,204.107.115.11
 2014-04-14 17:58:14.688987,,,,204.107.115.11
 2014-04-14 17:58:17.882514,,,,23.21.22.111
 2014-04-14 18:01:40.667195,,,,118.33.21.173
 2014-04-14 18:02:04.881639,,,,69.164.221.186
+2014-04-14 18:03:10.841047,,,,85.10.211.143
 2014-04-14 18:04:26.432791,,,,72.21.198.68
 2014-04-14 18:14:01.788699,,,,213.98.192.63
 2014-04-14 18:19:24.721296,,,,76.18.244.5
@@ -80,11 +80,11 @@ ts,referer,page,user_agent,ip
 2014-04-14 19:46:38.535616,,,,150.70.97.96
 2014-04-14 20:01:58.368820,,,,49.98.136.114
 2014-04-14 20:03:24.935807,,,,49.98.136.114
-2014-04-14 20:23:04.538004,,,,8.28.16.254
 2014-04-14 20:23:04.549138,,,,152.120.255.251
+2014-04-14 20:23:04.538004,,,,8.28.16.254
 2014-04-14 20:27:41.634632,,,,205.254.147.8
-2014-04-14 20:27:41.768968,,,,205.254.147.8
 2014-04-14 20:27:41.927956,,,,8.28.16.254
+2014-04-14 20:27:41.768968,,,,205.254.147.8
 2014-04-14 20:33:05.974108,,,,69.181.206.134
 2014-04-14 20:37:41.210633,,,,68.180.225.49
 2014-04-14 20:44:06.407734,,,,205.254.147.8
@@ -95,6 +95,8 @@ ts,referer,page,user_agent,ip
 2014-04-14 21:16:15.295454,,,,124.47.132.150
 2014-04-14 21:21:17.239971,,,,54.224.255.55
 2014-04-14 21:21:21.325041,,,,54.224.255.55
+2014-04-14 22:10:06.163157,,,,85.10.211.143
+2014-04-15 06:36:53.975471,,,,113.140.131.158
 2014-04-14 21:24:55.531420,,,,112.198.90.68
 2014-04-14 21:31:32.294361,,,,50.178.188.31
 2014-04-14 21:31:34.484288,,,,50.178.188.31
@@ -105,7 +107,6 @@ ts,referer,page,user_agent,ip
 2014-04-14 21:49:47.846858,,,,23.22.51.111
 2014-04-14 21:55:40.496204,,,,24.68.102.1
 2014-04-14 21:55:58.142666,,,,54.205.80.217
-2014-04-14 22:10:06.163157,,,,85.10.211.143
 2014-04-14 22:10:57.207909,,,,69.251.122.171
 2014-04-14 22:25:38.526580,,,,69.113.203.164
 2014-04-14 22:26:47.604518,,,,75.149.22.10
@@ -153,8 +154,8 @@ ts,referer,page,user_agent,ip
 2014-04-15 02:23:52.429123,,,,"unknown, 31.172.155.199"
 2014-04-15 02:31:45.603926,,,,77.72.197.131
 2014-04-15 02:34:11.495007,,,,193.150.120.33
-2014-04-15 02:34:12.278639,,,,193.150.120.33
 2014-04-15 02:34:12.820427,,,,193.150.120.33
+2014-04-15 02:34:12.278639,,,,193.150.120.33
 2014-04-15 02:36:50.856490,,,,220.181.127.126
 2014-04-15 02:39:54.949777,,,,41.76.47.95
 2014-04-15 02:42:12.162589,,,,84.88.72.83
@@ -195,15 +196,14 @@ ts,referer,page,user_agent,ip
 2014-04-15 06:13:35.855128,,,,115.114.126.186
 2014-04-15 06:27:50.537979,,,,54.201.50.174
 2014-04-15 06:29:11.925784,,,,49.212.134.160
-2014-04-15 06:36:53.975471,,,,113.140.131.158
 2014-04-15 06:38:14.357103,,,,58.164.171.9
 2014-04-15 06:40:24.898952,,,,222.76.140.178
 2014-04-15 06:40:58.348808,,,,124.77.240.24
 2014-04-15 06:51:14.895976,,,,124.77.240.24
 2014-04-15 06:54:40.504365,,,,150.70.173.54
 2014-04-15 06:54:56.291314,,,,157.55.32.187
-2014-04-15 06:55:07.334825,,,,134.249.48.26
 2014-04-15 06:55:07.932825,,,,134.249.48.26
+2014-04-15 06:55:07.334825,,,,134.249.48.26
 2014-04-15 06:55:08.531574,,,,134.249.48.26
 2014-04-15 06:57:12.914780,,,,198.52.97.94
 2014-04-15 06:57:18.688122,,,,198.52.97.94
@@ -278,15 +278,14 @@ ts,referer,page,user_agent,ip
 2014-04-15 10:31:48.355326,,,,129.31.189.59
 2014-04-15 10:36:39.403102,,,,129.31.189.59
 2014-04-15 10:39:36.022809,,,,198.234.164.126
-2014-04-15 10:39:44.387821,,,,8.28.16.254
-2014-04-15 10:39:44.570886,,,,198.134.51.41
 2014-04-15 10:39:44.969964,,,,8.28.16.254
+2014-04-15 10:39:44.570886,,,,198.134.51.41
+2014-04-15 10:39:44.387821,,,,8.28.16.254
 2014-04-15 10:39:45.222020,,,,198.134.51.41
 2014-04-15 10:43:43.422726,,,,168.179.56.31
 2014-04-15 10:46:01.923592,,,,67.188.150.86
 2014-04-15 10:48:46.300717,,,,141.62.33.30
 2014-04-15 10:49:06.543638,,,,141.62.33.30
-2014-04-15 11:18:24.026133,,,,173.1.110.188
 2014-04-15 10:52:28.918425,,,,198.134.51.41
 2014-04-15 10:52:29.605956,,,,198.134.51.41
 2014-04-15 10:58:39.146318,,,,82.158.126.75
@@ -297,6 +296,7 @@ ts,referer,page,user_agent,ip
 2014-04-15 11:07:55.586459,,,,54.204.20.249
 2014-04-15 11:10:45.300627,,,,187.35.145.136
 2014-04-15 11:13:15.720524,,,,81.149.194.131
+2014-04-15 11:18:24.026133,,,,173.1.110.188
 2014-04-15 11:18:25.298575,,,,173.1.110.188
 2014-04-15 11:22:08.928616,,,,50.246.101.41
 2014-04-15 11:29:50.265607,,,,66.249.76.82
@@ -367,8 +367,8 @@ ts,referer,page,user_agent,ip
 2014-04-15 14:09:45.558568,,,,138.38.64.108
 2014-04-15 14:14:31.574813,,,,8.28.16.254
 2014-04-15 14:14:31.886829,,,,"10.6.178.150, 199.204.165.130"
-2014-04-15 14:14:32.154895,,,,8.28.16.254
 2014-04-15 14:14:32.298632,,,,"127.0.0.1, 199.204.165.130"
+2014-04-15 14:14:32.154895,,,,8.28.16.254
 2014-04-15 14:14:40.461877,,,,216.165.95.72
 2014-04-15 14:14:48.952290,,,,216.165.95.72
 2014-04-15 14:17:49.317146,,,,54.206.98.194
@@ -380,8 +380,8 @@ ts,referer,page,user_agent,ip
 2014-04-15 14:35:21.000353,,,,56.0.163.15
 2014-04-15 14:35:21.205634,,,,56.0.163.15
 2014-04-15 14:37:29.088379,,,,72.215.219.174
-2014-04-15 14:37:33.034803,,,,134.249.48.26
 2014-04-15 14:37:33.701488,,,,134.249.48.26
+2014-04-15 14:37:33.034803,,,,134.249.48.26
 2014-04-15 14:37:34.364740,,,,134.249.48.26
 2014-04-15 14:37:49.300047,,,,176.31.230.10
 2014-04-15 14:39:52.696156,,,,24.46.31.61
@@ -412,14 +412,14 @@ ts,referer,page,user_agent,ip
 2014-04-15 15:49:36.358896,,,,174.77.1.2
 2014-04-15 15:54:35.019776,,,,182.118.21.228
 2014-04-15 16:00:55.406573,,,,94.153.64.35
-2014-04-15 16:00:56.054532,,,,94.153.64.35
 2014-04-15 16:00:56.623735,,,,94.153.64.35
+2014-04-15 16:00:56.054532,,,,94.153.64.35
 2014-04-15 16:04:52.583156,,,,141.62.33.30
 2014-04-15 16:05:27.453344,,,,141.62.33.30
+2014-04-15 16:19:46.918693,,,,175.44.30.60
 2014-04-15 16:05:55.591517,,,,178.137.161.32
 2014-04-15 16:05:57.331284,,,,178.137.161.32
 2014-04-15 16:05:59.010513,,,,178.137.161.32
-2014-04-15 16:19:46.918693,,,,175.44.30.60
 2014-04-15 16:19:48.889307,,,,190.98.205.98
 2014-04-15 16:36:49.460697,,,,64.233.172.160
 2014-04-15 16:43:46.292521,,,,97.78.199.195
@@ -501,8 +501,8 @@ ts,referer,page,user_agent,ip
 2014-04-15 22:48:13.354440,,,,58.20.16.52
 2014-04-15 22:55:56.605939,,,,208.68.39.164
 2014-04-15 23:00:57.919503,,,,77.75.77.32
-2014-04-15 23:03:27.812064,,,,152.120.255.251
 2014-04-15 23:03:27.835865,,,,8.28.16.254
+2014-04-15 23:03:27.812064,,,,152.120.255.251
 2014-04-15 23:10:43.323898,,,,134.249.48.26
 2014-04-15 23:10:44.930735,,,,134.249.48.26
 2014-04-15 23:11:02.517740,,,,134.249.48.26
@@ -557,8 +557,8 @@ ts,referer,page,user_agent,ip
 2014-04-16 02:59:58.454137,,,,193.150.120.33
 2014-04-16 02:59:58.491590,,,,193.150.120.33
 2014-04-16 02:59:59.034282,,,,193.150.120.33
-2014-04-16 02:59:59.073398,,,,193.150.120.33
 2014-04-16 02:59:59.620853,,,,193.150.120.33
+2014-04-16 02:59:59.073398,,,,193.150.120.33
 2014-04-16 02:59:59.630723,,,,193.150.120.33
 2014-04-16 03:00:03.998393,,,,50.17.10.12
 2014-04-16 03:00:04.419696,,,,54.80.238.120
@@ -609,8 +609,8 @@ ts,referer,page,user_agent,ip
 2014-04-16 06:03:44.824494,,,,173.49.24.118
 2014-04-16 06:14:59.263683,,,,14.200.134.114
 2014-04-16 06:17:23.879447,,,,"192.49.16.119, 194.136.183.15"
-2014-04-16 06:20:46.382691,,,,198.45.26.30
 2014-04-16 06:20:46.578373,,,,198.45.26.30
+2014-04-16 06:20:46.382691,,,,198.45.26.30
 2014-04-16 06:33:03.780373,,,,79.97.54.17
 2014-04-16 06:35:09.844339,,,,"193.130.15.240, 176.58.92.249"
 2014-04-16 06:39:17.760131,,,,106.51.248.234
@@ -720,7 +720,6 @@ ts,referer,page,user_agent,ip
 2014-04-17 13:24:31.070847,,/chart/,Mozilla/5.0 (compatible; coccoc/1.0; +http://help.coccoc.com/),123.30.175.84
 2014-04-17 14:50:56.269196,,/chart/,Mozilla/4.0 (compatible;),207.67.123.194
 2014-04-17 16:37:36.029067,http://www.opendata500.com,/chart/,"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1500.52 Safari/537.36",5.157.36.37
-2014-05-21 12:32:24.828499,http://blogs.worldbank.org/opendata/rise-open-data-driven-businesses-emerging-markets,/,Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; Trident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; InfoPath.2),86.99.250.215
 2014-04-17 21:07:36.141537,,/chart/,Mozilla/4.0 (compatible;),15.203.233.78
 2014-04-17 21:44:06.321151,http://www.opendata500.com/,/chart/,"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.116 Safari/537.36",202.233.46.59
 2014-04-18 00:18:40.983023,http://www.opendata500.com,/chart/,"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1500.63 Safari/537.36",183.207.228.12
@@ -774,12 +773,12 @@ ts,referer,page,user_agent,ip
 2014-04-23 07:25:28.294518,http://www.opendata500.com/,/chart/,"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.116 Safari/537.36",197.253.64.174
 2014-04-23 07:52:54.417345,,/chart/,Mozilla/4.0 (compatible;),121.240.224.8
 2014-04-23 08:38:50.203023,http://www.opendata500.com/,/chart/,"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.152 Safari/537.36",159.104.212.36
-2014-04-23 10:48:08.379932,http://www.opendata500.com/,/chart/,"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.116 Safari/537.36",205.254.147.8
 2014-04-23 10:48:08.400267,,/chart/,Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; InfoPath.1; .NET CLR 2.0.50727; .NET CLR 1.1.4322; MS-RTC LM 8; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729),8.28.16.254
+2014-04-23 10:48:08.379932,http://www.opendata500.com/,/chart/,"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.116 Safari/537.36",205.254.147.8
 2014-04-23 12:58:46.388156,,/chart/,Mozilla/4.0 (compatible;),160.33.66.121
 2014-04-23 13:30:22.328060,,/chart/,Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html),180.76.6.232
-2014-04-23 16:31:38.499031,,/chart/,Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; InfoPath.1; .NET CLR 2.0.50727; .NET CLR 1.1.4322; MS-RTC LM 8; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729),8.28.16.254
 2014-04-23 16:31:38.676048,,/chart/,Mozilla/4.0 (compatible;),198.134.51.41
+2014-04-23 16:31:38.499031,,/chart/,Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; InfoPath.1; .NET CLR 2.0.50727; .NET CLR 1.1.4322; MS-RTC LM 8; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729),8.28.16.254
 2014-04-23 16:38:12.735493,,/chart/,Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; InfoPath.1; .NET CLR 2.0.50727; .NET CLR 1.1.4322; MS-RTC LM 8; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729),8.28.16.254
 2014-04-23 16:38:12.879558,http://www.opendata500.com/,/chart/,"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.107 Safari/537.36",151.151.16.19
 2014-04-23 21:27:27.881527,http://luisdaniel.com/Open-Data-Compass,/chart/,"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.116 Safari/537.36",165.124.129.146
@@ -811,15 +810,15 @@ ts,referer,page,user_agent,ip
 2014-04-26 04:30:05.552384,,/chart/,Aboundex/0.3 (http://www.aboundex.com/crawler/),173.192.34.95
 2014-04-26 12:51:26.276608,http://luisdaniel.com/Open-Data-Compass,/chart/,"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.116 Safari/537.36",94.98.104.77
 2014-04-26 12:51:49.778875,https://www.google.com.sa/,/chart/,"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.116 Safari/537.36",94.98.104.77
-2014-04-26 12:52:35.049512,,/chart/,bitlybot,50.17.151.94
 2014-04-26 12:52:35.705863,,/chart/,bitlybot,23.22.209.12
-2014-04-26 12:57:11.107599,,/chart/,Mozilla/5.0 (),74.112.131.243
+2014-04-26 12:52:35.049512,,/chart/,bitlybot,50.17.151.94
 2014-04-26 12:57:11.134868,http://api.twitter.com/1/statuses/show/460100283549618176.json,/chart/,InAGist URL Resolver (http://inagist.com),173.255.202.150
 2014-04-26 12:57:11.261366,,/chart/,Twitterbot/1.0,199.16.156.124
-2014-04-26 12:57:11.322917,,/chart/,Mozilla/5.0 (compatible; TweetmemeBot/3.0; +http://tweetmeme.com/),46.236.23.222
 2014-04-26 12:57:11.434963,,/chart/,Mozilla/5.0 (compatible; Yahoo! Slurp; http://help.yahoo.com/help/us/ysearch/slurp),"10.193.228.48, 98.137.206.35"
-2014-04-26 12:57:11.559505,,/chart/,Twitterbot/1.0,199.16.156.126
+2014-04-26 12:57:11.322917,,/chart/,Mozilla/5.0 (compatible; TweetmemeBot/3.0; +http://tweetmeme.com/),46.236.23.222
 2014-04-26 12:57:11.775644,,/chart/,ShowyouBot (http://showyou.com/crawler),173.192.79.101
+2014-04-26 12:57:11.107599,,/chart/,Mozilla/5.0 (),74.112.131.243
+2014-04-26 12:57:11.559505,,/chart/,Twitterbot/1.0,199.16.156.126
 2014-04-26 12:57:12.331827,,/chart/,Livelapbot/0.1,92.222.2.40
 2014-04-26 12:57:17.322028,,/chart/,Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; Trident/6.0),65.52.244.38
 2014-04-26 12:57:25.403318,,/chart/,grokkit-crawler (pdsupport@purediscovery.com),54.236.163.167
@@ -865,8 +864,8 @@ ts,referer,page,user_agent,ip
 2014-04-26 14:05:56.718077,,/chart/,Mozilla/5.0 (compatible; TweetmemeBot/3.0; +http://tweetmeme.com/),46.236.24.54
 2014-04-26 14:10:05.109229,,/chart/,Mozilla/5.0 (compatible; PaperLiBot/2.1; http://support.paper.li/entries/20023257-what-is-paper-li),37.59.18.43
 2014-04-26 14:38:13.249292,,/chart/,Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:28.0) Gecko/20100101 Firefox/28.0 (FlipboardProxy/1.1; +http://flipboard.com/browserproxy),54.82.177.129
-2014-04-26 14:42:45.814859,,/chart/,Mozilla/5.0 (compatible; TweetmemeBot/3.0; +http://tweetmeme.com/),46.236.23.222
 2014-04-26 14:42:45.830087,,/chart/,Livelapbot/0.1,37.187.198.241
+2014-04-26 14:42:45.814859,,/chart/,Mozilla/5.0 (compatible; TweetmemeBot/3.0; +http://tweetmeme.com/),46.236.23.222
 2014-04-26 14:42:49.824290,,/chart/,Readability/6534b2 - http://readability.com/about/,54.196.14.148
 2014-04-26 14:43:32.058703,,/chart/,Mozilla/5.0 (compatible; Embedly/0.2; +http://support.embed.ly/),54.225.104.196
 2014-04-26 15:12:51.903610,http://t.co/NQu9jJLJfZ,/chart/,"Mozilla/5.0 (iPhone; CPU iPhone OS 7_1_1 like Mac OS X) AppleWebKit/537.51.2 (KHTML, like Gecko) Mobile/11D201 Twitter for iPhone",5.108.18.131
@@ -874,8 +873,8 @@ ts,referer,page,user_agent,ip
 2014-04-26 15:24:07.130149,,/chart/,Mozilla/5.0 (compatible; TweetedTimes Bot/1.0; +http://tweetedtimes.com),5.255.228.39
 2014-04-26 15:24:07.904906,,/chart/,"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_6) AppleWebKit/534.24 (KHTML, like Gecko) (Contact: backend@getprismatic.com)",54.204.122.14
 2014-04-26 15:50:53.666869,,/chart/,Mozilla/5.0 (compatible; Yahoo! Slurp; http://help.yahoo.com/help/us/ysearch/slurp),"10.205.80.144, 98.137.206.35"
-2014-04-26 15:56:42.148203,http://t.co/NQu9jJLJfZ,/chart/,"Mozilla/5.0 (Linux; Android 4.4.2; GT-I9505 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.135 Mobile Safari/537.36",94.98.21.213
 2014-04-26 15:56:42.474727,,/chart/,Mozilla/5.0 (compatible; TweetmemeBot/3.0; +http://tweetmeme.com/),46.236.24.49
+2014-04-26 15:56:42.148203,http://t.co/NQu9jJLJfZ,/chart/,"Mozilla/5.0 (Linux; Android 4.4.2; GT-I9505 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.135 Mobile Safari/537.36",94.98.21.213
 2014-04-26 16:16:09.364475,,/chart/,Mozilla/5.0 (compatible; TweetedTimes Bot/1.0; +http://tweetedtimes.com),5.255.228.44
 2014-04-26 16:25:00.575052,http://news.google.com/,/chart/,Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.1.2) Gecko/20090729 Firefox/3.5.2 (.NET CLR 3.5.30729; Diffbot/0.1; +http://www.diffbot.com),54.202.107.101
 2014-04-26 16:32:34.142414,,/chart/,Mozilla/5.0 (compatible; TweetedTimes Bot/1.0; +http://tweetedtimes.com),5.255.228.43
@@ -883,11 +882,11 @@ ts,referer,page,user_agent,ip
 2014-04-26 17:32:23.277846,,/chart/,"Mozilla/5.0 (Linux; U; Android 4.3; en-us; GT-N7100 Build/JSS15J) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30",37.106.17.107
 2014-04-26 17:36:19.326665,,/chart/,Mozilla/5.0 (compatible; TweetedTimes Bot/1.0; +http://tweetedtimes.com),5.255.228.40
 2014-04-26 17:41:51.486149,,/chart/,Mozilla/5.0 (compatible; TweetedTimes Bot/1.0; +http://tweetedtimes.com),5.255.228.39
-2014-04-26 18:06:43.083288,http://t.co/NQu9jJLJfZ,/chart/,"Mozilla/5.0 (iPad; CPU OS 5_1_1 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Mobile/9B206 Twitter for iPhone",94.98.54.111
 2014-04-26 18:06:43.984988,,/chart/,Mozilla/5.0 (compatible; TweetmemeBot/3.0; +http://tweetmeme.com/),46.236.24.51
+2014-04-26 18:06:43.083288,http://t.co/NQu9jJLJfZ,/chart/,"Mozilla/5.0 (iPad; CPU OS 5_1_1 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Mobile/9B206 Twitter for iPhone",94.98.54.111
 2014-04-26 19:50:26.434265,,/chart/,Mozilla/5.0 (compatible; TweetedTimes Bot/1.0; +http://tweetedtimes.com),5.255.228.41
-2014-04-26 20:55:43.467507,,/chart/,Java/1.7.0_40,93.184.35.31
 2014-04-26 20:55:43.618124,,/chart/,Pearltrees,93.184.35.31
+2014-04-26 20:55:43.467507,,/chart/,Java/1.7.0_40,93.184.35.31
 2014-04-26 22:33:27.891093,,/chart/,Mozilla/5.0 (compatible; Yahoo! Slurp; http://help.yahoo.com/help/us/ysearch/slurp),"10.199.138.126, 98.137.206.35"
 2014-04-27 01:23:11.759438,,/chart/,Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko,80.90.167.242
 2014-04-27 01:23:12.143123,,/chart/,Mozilla/5.0 (compatible; TweetmemeBot/3.0; +http://tweetmeme.com/),46.236.24.53
@@ -942,8 +941,8 @@ ts,referer,page,user_agent,ip
 2014-05-02 08:53:29.792881,http://www.opendata500.com,/chart/,"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.63 Safari/537.31",192.99.34.188
 2014-05-02 12:38:25.454665,,/chart/,"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.77 Safari/537.36",65.50.203.215
 2014-05-02 22:19:04.006277,,/chart/,Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:28.0) Gecko/20100101 Firefox/28.0 (FlipboardProxy/1.1; +http://flipboard.com/browserproxy),54.80.200.163
-2014-05-03 00:10:13.183913,,/chart/,Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1),216.151.137.36
 2014-05-03 00:10:13.781326,,/chart/,Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1),216.151.137.36
+2014-05-03 00:10:13.183913,,/chart/,Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1),216.151.137.36
 2014-05-03 01:01:06.260017,,/chart/,Mozilla/5.0 (compatible; coccoc/1.0; +http://help.coccoc.com/),123.30.175.84
 2014-05-03 12:07:40.717727,http://www.opendata500.com/,/chart/,"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.110 Safari/537.36",46.249.58.105
 2014-05-03 14:42:45.361914,,/chart/,"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.77 Safari/537.36",65.50.203.200
@@ -1070,6 +1069,7 @@ ts,referer,page,user_agent,ip
 2014-05-21 12:06:24.776289,http://luisdaniel.com/Open-Data-Compass,/chart/,"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.114 Safari/537.36",216.165.95.69
 2014-05-21 12:08:16.697921,,/chart/,"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.114 Safari/537.36",::1
 2014-05-21 12:09:14.450677,http://luisdaniel.com/Open-Data-Compass,/chart/,"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.114 Safari/537.36",216.165.95.69
+2014-05-21 12:32:24.828499,http://blogs.worldbank.org/opendata/rise-open-data-driven-businesses-emerging-markets,/,Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; Trident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; InfoPath.2),86.99.250.215
 2014-05-21 15:21:02.282816,http://www.opendata500.com/,/chart/,"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.114 Safari/537.36",165.224.214.1
 2014-05-21 15:37:19.978229,http://www.opendata500.com/,/chart/,"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.137 Safari/537.36",165.224.214.1
 2014-05-21 16:20:00.787914,http://www.opendata500.com/,/chart/,"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.137 Safari/537.36",198.102.33.251
@@ -1081,8 +1081,8 @@ ts,referer,page,user_agent,ip
 2014-05-21 21:21:08.198538,,/chart/,Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1),62.210.83.64
 2014-05-21 21:21:15.126787,,/chart/,Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1),62.210.83.64
 2014-05-22 04:15:05.555894,,/chart/,"Mozilla/5.0 (iPhone; CPU iPhone OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A5376e Safari/8536.25 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)",66.249.76.222
-2014-05-22 11:45:21.348798,http://www.opendata500.com/,/chart/,"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.131 Safari/537.36",205.254.147.8
 2014-05-22 11:45:21.380858,,/chart/,Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; InfoPath.1; .NET CLR 2.0.50727; .NET CLR 1.1.4322; MS-RTC LM 8; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729),8.28.16.254
+2014-05-22 11:45:21.348798,http://www.opendata500.com/,/chart/,"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.131 Safari/537.36",205.254.147.8
 2014-05-22 14:36:34.600041,,/chart/,Mozilla/5.0 (compatible; EasouSpider; +http://www.easou.com/search/spider.html),183.60.213.106
 2014-05-22 15:36:45.769429,http://www.opendata500.com/,/chart/,"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.137 Safari/537.36",192.136.50.130
 2014-05-22 15:40:39.656522,http://www.opendata500.com/,/chart/,"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.137 Safari/537.36",198.102.41.250
@@ -1215,17 +1215,17 @@ ts,referer,page,user_agent,ip
 2014-06-01 14:04:56.071351,http://www.opendata500.com/,/chart/,"Mozilla/5.0 (iPhone; CPU iPhone OS 7_1_1 like Mac OS X) AppleWebKit/537.51.2 (KHTML, like Gecko) Mobile/11D201",75.104.69.164
 2014-06-01 14:06:08.693155,http://www.opendata500.com/,/chart/,"Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_0 like Mac OS X; en-us) AppleWebKit/532.9 (KHTML, like Gecko) Version/4.0.5 Mobile/8A293 Safari/6531.22.7",75.104.69.164
 2014-06-01 19:23:53.057631,,/chart/,Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:28.0) Gecko/20100101 Firefox/28.0 (FlipboardProxy/1.1; +http://flipboard.com/browserproxy),54.237.229.212
-2014-06-02 14:36:08.177787,,/chart/,Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; InfoPath.1; .NET CLR 2.0.50727; .NET CLR 1.1.4322; MS-RTC LM 8; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729),8.28.16.254
 2014-06-02 14:36:08.365566,http://www.opendata500.com/,/chart/,"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.137 Safari/537.36",159.189.89.165
+2014-06-02 14:36:08.177787,,/chart/,Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; InfoPath.1; .NET CLR 2.0.50727; .NET CLR 1.1.4322; MS-RTC LM 8; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729),8.28.16.254
 2014-06-02 21:08:10.797116,http://feedly.com/index.html,/chart/,"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.114 Safari/537.36",111.87.102.51
 2014-06-02 21:08:26.316920,http://feedly.com/index.html,/chart/,"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.114 Safari/537.36",111.87.102.51
 2014-06-03 05:24:47.428005,,/chart/,Mozilla/4.0 (compatible;),170.252.72.61
 2014-06-03 05:55:50.166614,,/chart/,Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html),66.249.64.70
-2014-06-03 10:18:33.534935,,/chart/,Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1),38.100.21.118
 2014-06-03 10:18:33.760414,,/chart/,Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1),38.100.21.118
-2014-06-03 11:23:27.491404,http://www.opendata500.com/,/chart/,"Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/30.0.1599.101 Safari/537.36",141.228.250.141
+2014-06-03 10:18:33.534935,,/chart/,Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1),38.100.21.118
 2014-06-03 11:23:27.539059,,/chart/,Mozilla/4.0 (compatible;),141.228.250.142
 2014-06-03 11:23:27.979777,,/chart/,Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; InfoPath.1; .NET CLR 2.0.50727; .NET CLR 1.1.4322; MS-RTC LM 8; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729),103.246.38.196
+2014-06-03 11:23:27.491404,http://www.opendata500.com/,/chart/,"Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/30.0.1599.101 Safari/537.36",141.228.250.141
 2014-06-03 13:48:11.136193,http://www.opendata500.com/,/chart/,Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; WOW64; Trident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; .NET4.0C; .NET4.0E; InfoPath.3; MS-RTC LM 8),148.177.1.215
 2014-06-03 13:59:44.730674,http://www.opendata500.com/,/chart/,Mozilla/5.0 (Windows NT 6.1; WOW64; rv:29.0) Gecko/20100101 Firefox/29.0,148.177.1.217
 2014-06-03 14:48:08.724019,http://www.opendata500.com/,/chart/,Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0),165.224.214.1
