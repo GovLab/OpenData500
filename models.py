@@ -87,6 +87,7 @@ class Users(Document):
 	username = StringField()
 	password = StringField()
 	country = StringField()
+	permissions = StringField()
 
 class States(EmbeddedDocument):
 	name = StringField()
@@ -110,17 +111,7 @@ class Visit(Document):
 	ua = StringField() #userAgent
 	ip = StringField()
 
-
-# Dataset.register_delete_rule(Company, "datasets", PULL)
-# Dataset.register_delete_rule(Person, "submittedDatasets", PULL)
-# Company.register_delete_rule(Dataset, "usedBy", PULL)
-# Company.register_delete_rule(Person, "submittedCompany", PULL)
-# Person.register_delete_rule(Company, "contact", NULLIFY)
-# Person.register_delete_rule(Company, "ceo", NULLIFY)
-
 Agency.register_delete_rule(Company, "agencies", PULL)
-# Company.register_delete_rule(Dataset, 'usedBy', NULLIFY)
-# Company.register_delete_rule(Subagency, 'usedBy', PULL)
 Company.register_delete_rule(Agency, 'usedBy', PULL)
 
 

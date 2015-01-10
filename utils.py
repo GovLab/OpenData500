@@ -259,7 +259,8 @@ class Tools(object):
         return re.sub(r'([^\s\w])+', '', name).replace(" ", "-").lower()
 
     def get_list_of_agencies(self, country):
-        agencies = models.Agency.objects(country=country).only('name', 'abbrev', 'subagencies.name', 'subagencies.abbrev')
+        agencies = models.Agency.objects(country=country).only(
+            'name', 'abbrev', 'subagencies.name', 'subagencies.abbrev')
         agency_list = []
         for a in agencies:
             label = [a.name, " (", a.abbrev, ")"]
@@ -431,7 +432,7 @@ class Form(object):
                         if d.datasetName == dataset_name:
                             s.datasets.remove(d)
         agency.save()
-        company.lastUpdated = datetime.now() #Update Company's Time of Last Edit
+        company.lastUpdated = datetime.now()
         company.save()
 
     def remove_all_datasets_from_company(self, company, agency):
@@ -994,48 +995,6 @@ class FileGenerator(object):
                     csvwriter.writerow(newrow)
         #done, wrap up csv
         logging.info("Agency CSV File Done!")
-
-
-    # def generate_sankey_json(self, country):
-    #     #get qualifying agencies
-    #     agencies = models.Agency.objects(Q(usedBy__not__size=0) & Q(source__not__exact="web") & Q(dataType="Federal")).order_by('name') #federal agencies from official list that are used by a company
-    #     #going to just make a list of all the category-agency combos
-    #     cats = [] #list of used categories
-    #     cats_agency_combo = []
-    #     for a in agencies:
-    #         for c in a.usedBy:
-    #             if c.display:
-    #                 if c.companyCategory in categories: #exclude "Other" Categories, and only displayed companies
-    #                     cats_agency_combo.append(c.companyCategory+"|"+a.name)
-    #                     cats.append(c.companyCategory)
-    #     count = list(Counter(cats_agency_combo).items()) #count repeat combos
-    #     #make dictionary
-    #     cat_v_agencies = {"nodes": [], "links": []}
-    #     #make node list
-    #     cat_agency_list = [] #keep track of category agency list, we're going to need their indeces. 
-    #     for c in categories: #Add categories to node list
-    #         if c in cats: #only add category if used
-    #             cat_v_agencies['nodes'].append({"name":c})
-    #             cat_agency_list.append(c)
-    #     for a in agencies: #add agency names to node list
-    #         used = False
-    #         for c in a.usedBy:
-    #             if c.display:
-    #                 used = True
-    #         if used:
-    #             cat_v_agencies['nodes'].append({"name":a.name})
-    #             cat_agency_list.append(a.name)
-    #     #make the links
-    #     for c in count:
-    #         link = {"source":cat_agency_list.index(c[0].split('|')[0]), "target":cat_agency_list.index(c[0].split('|')[1]), "value":c[1]} #make a link
-    #         cat_v_agencies['links'].append(link)
-    #     for n in cat_v_agencies['nodes']: #Abbreviate Department
-    #         n['name'] = n['name'].replace('Department', 'Dept.')
-    #         n['name'] = n['name'].replace('Administration', 'Admin.')
-    #         n['name'] = n['name'].replace('United States', 'US')
-    #         n['name'] = n['name'].replace('National', "Nat'l")
-    #     with open(os.path.join(os.path.dirname(__file__), 'static') + "/files/" + country + '_sankey.json', 'w') as outfile:
-    #         json.dump(cat_v_agencies, outfile)
 
     def generate_chord_chart_files(self, country):
         agencies = models.Agency.objects(Q(usedBy__not__size=0) & Q(source__not__exact="web") & Q(dataType="Federal") & Q(country="us")).order_by('name')
