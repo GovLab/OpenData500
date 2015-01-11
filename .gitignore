@@ -3,3 +3,4 @@
 *.ipynb
 venv
 static/files/*_OD500_Companies_All.csv
+*.json
