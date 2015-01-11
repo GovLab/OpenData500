@@ -3,7 +3,7 @@
 
 {% block body %}
 
-
+{% import re %}
 
 <section class="full-list">
 	<h1 class="first-title">Open Data 500 Companies</h1>
@@ -40,7 +40,7 @@
         <div id="filters-category" class="m-candidates-buttons button-group" data-toggle="buttons-checkbox" data-filter-group="category">
             <button data-filter="*">Clear Filter</button>
             {% for category in categories %}
-                <button data-filter=".{{category.strip().replace(" ", "-").replace("/","").replace("&", "")}}">{{category}}</button>
+                <button data-filter=".{{ re.sub(r'([^\s\w])+', '', category).replace(" ", "-").lower() }}">{{category}}</button>
             {%end%}
         </div>
     </div>

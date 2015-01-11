@@ -225,13 +225,14 @@ company_admin_booleans = [
 
 class Tools(object):
     def re_do_filters(self, country):
-        companies = models.Company.objects(country=country)
+        companies = models.Company.objects(country=country).only(
+            'companyCategory', 'state', 'agencies.prettyName', 
+            'submittedSurvey', 'filters')
         for c in companies:
             filters = []
             filters.append(self.prettify(c.companyCategory))
             filters.append(c.state)
-            for a in c.agencies:
-                filters.append(a.prettyName)
+            filters += [a.prettyName for a in c.agencies]
             if c.submittedSurvey:
                 filters.append("survey-company")
             c.filters = filters
@@ -241,15 +242,16 @@ class Tools(object):
     @classmethod
     def re_do_company_filter(self, id):
         try: 
-            c = models.Company.objects.get(id=bson.objectid.ObjectId(id))
+            c = models.Company.objects(id=bson.objectid.ObjectId(id)).only(
+                'companyCategory', 'state', 'agencies.prettyName', 
+                'submittedSurvey', 'filters').first()
         except Exception, e:
             logging.info("Error creating filter: " + str(e))
             return
         filters = []
         filters.append(self.prettify(c.companyCategory))
         filters.append(c.state)
-        for a in c.agencies:
-            filters.append(a.prettyName)
+        filters += [a.prettyName for a in c.agencies]
         if c.submittedSurvey:
             filters.append("survey-company")
         return filters
@@ -337,6 +339,7 @@ class Form(object):
                 del c.dataImpacts[c.dataImpacts.index('Other')]
                 c.dataImpacts.append(arguments['otherdataImpacts'])
         c.lastUpdated = datetime.now()
+        c.filters = Tools().re_do_company_filter(c.id)
         c.save()
 
 
@@ -381,6 +384,7 @@ class Form(object):
                 models.Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+item:arguments[item]})
         #-------------------SAVE---------------
         c.lastUpdated = datetime.now()
+        c.filters = Tools().re_do_company_filter(c.id)
         c.save()
         return
 

@@ -29,7 +29,7 @@
         <div id="filters-category" class="m-candidates-buttons button-group" data-toggle="buttons-checkbox" data-filter-group="category">
             <button data-filter="*">Borrar Filtro</button>
             {% for category in categories %}
-                <button data-filter=".{{ re.sub(r'([^\s\w])+', '', category).replace(" ", "-") }}">{{category}}</button>
+                <button data-filter=".{{ re.sub(r'([^\s\w])+', '', category).replace(" ", "-").lower() }}">{{category}}</button>
             {%end%}
         </div>
     </div>
