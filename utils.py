@@ -52,6 +52,14 @@ categories = {
                         'Housing/Real Estate', 'Insurance', 'Lifestyle & Consumer', 
                         'Media', 'Research & Consulting', 'Scientific Research', 
                         'Transportation'],
+                    "mx": [
+                        'Business & Legal Services', 'Data/Technology', 
+                        'Education', 'Energy', 'Environment & Weather', 
+                        'Finance & Investment', 'Food & Agriculture', 
+                        'Geospatial/Mapping', 'Governance', 'Healthcare', 
+                        'Housing/Real Estate', 'Insurance', 'Lifestyle & Consumer', 
+                        'Media', 'Research & Consulting', 'Scientific Research', 
+                        'Transportation'],
                     "au": [
                         'Business & Legal Services', 'Data/Technology', 
                         'Education', 'Energy', 'Environment & Weather', 
