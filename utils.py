@@ -53,12 +53,13 @@ categories = {
                         'Media', 'Research & Consulting', 'Scientific Research', 
                         'Transportation'],
                     "mx": [
-                        'Business & Legal Services', 'Data/Technology', 
+                        'Business Services', 'Data/Technology', 
                         'Education', 'Energy', 'Environment & Weather', 
                         'Finance & Investment', 'Food & Agriculture', 
                         'Geospatial/Mapping', 'Governance', 'Healthcare', 
-                        'Housing/Real Estate', 'Insurance', 'Lifestyle & Consumer', 
-                        'Media', 'Research & Consulting', 'Scientific Research', 
+                        'Housing/Real Estate', 'Insurance', 'Legal Services', 
+                        'Lifestyle & Consumer', 'Media & Communications', 
+                        'Research & Consulting', 'Scientific Research', 
                         'Transportation'],
                     "au": [
                         'Business & Legal Services', 'Data/Technology', 
@@ -76,7 +77,8 @@ categories = {
                         "Estilos de vida y Consumidores", "Finanzas e Inversiones", 
                         "Gobierno", "Investigación Científica", 
                         "Investigación y Consultoría", "Mapeo/Geoespacial", 
-                        "Medios", "Salud", "Seguros", "Servicios Legales", 
+                        "Medios y Comunicación", "Salud", "Seguros", 
+                        "Servicios Legales", "Servicios Empresariales", 
                         "Tecnología/Datos", "Transporte"]
                 }
             }

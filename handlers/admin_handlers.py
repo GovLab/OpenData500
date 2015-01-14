@@ -668,6 +668,11 @@ class AdminEditAgencyHandler(BaseHandler):
 class DeleteCompanyHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self, id, country=None):
+        try:
+            user = models.Users.objects.get(username=self.current_user)
+        except Exception, e:
+            logging.info("Could not get user: " + str(e))
+            self.redirect("/login/")
         if not country:
             country = "us"
         if country not in available_countries:
@@ -706,6 +711,15 @@ class DeleteCompanyHandler(BaseHandler):
                 page_title='404 - Open Data500',
                 page_heading='Oh no...',
                 error_message = "Company is using agencies, cannot delete. Please remove all agencies from company.",
+                lan=lan,
+                country=country
+            )
+        if user.country != company.country:
+            self.render(
+                "404.html",
+                page_title='404 - Open Data500',
+                page_heading='Oh no...',
+                error_message = "You do not have permission to delete this company.",
                 lan=lan,
                 country=country
             )

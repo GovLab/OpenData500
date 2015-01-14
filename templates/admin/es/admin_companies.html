@@ -46,6 +46,7 @@
 		<th>Date Updated</th>
 		<th>Via Web?</th>
 		<th>Displayed?</th>
+		<th>Delete</th>
 		<th>Notes</th>
 	</tr>
 	{% for company in needVetting %}
@@ -56,6 +57,7 @@
 			<td>{{ company.lastUpdated.strftime("%b, %d '%y @%I:%M %p") }}</td>
 			<td>{%if company.submittedThroughWebsite %} √ {%end%}</td>
 			<td><input type="checkbox" name="display" class="change_display" id="display" value="display" c_id="{{company.id}}" {%if company.display %}checked{%end%}></td>
+			<td><a href='/delete/{{company.id}}' onclick="confirmDelete(event)">Delete</a></td>
 			<td><p>{% if company.notes %}{{company.notes}}{%end%}</p></td>
 		</tr>
 	{% end %}
@@ -98,6 +100,14 @@
 {% end %}
 </div>
 <script>
+
+var confirmDelete = function(event) {
+	if (window.confirm('Estas segur@ que quieres borrar esta compañía?')) {
+		window.location.href='/delete/{{company.id}}';
+	} else {
+		event.preventDefault();
+	}
+}
 
 $(document).ready( function() {
 	$('.m-form').on('click', '.admin_utils', function() {
