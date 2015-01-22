@@ -48,6 +48,13 @@
 								{% for s in a.subagencies %}
 									{% if company in s.usedBy %}
 										<li><h3><a href="{% if 'http' in s.url %}{{s.url}}{%else%}http://{{s.url}}{%end%}">{{s.name}}</a></h3></li>
+										<ul>
+										{% for d in s.datasets %}
+											{% if company == d.usedBy %}
+												<li><a href="{% if 'http' in d.datasetURL %}{{s.url}}{%else%}http://{{d.datasetURL}}{%end%}">{{d.datasetName}}</a></li>
+											{%end%}
+										{%end%}
+										</ul>
 									{%end%}
 								{%end%}
 							</ul>

@@ -200,8 +200,13 @@ class ListHandler(BaseHandler):
             lan = self.get_cookie('lan')
         else:
             lan = settings['default_language']
-        companies = models.Company.objects(Q(display=True) & Q(country=country)).order_by('prettyName')
-        agencies = models.Agency.objects(Q(dataType="Federal") & Q(country=country)).order_by("-usedBy_count").only("name", "abbrev", "prettyName")[0:16]
+        companies = models.Company.objects(
+            Q(display=True) & Q(country=country)).order_by('prettyName').only(
+            'companyName', 'prettyName', 'filters', 'descriptionShort', 
+            'state', 'companyCategory', 'country')
+        agencies = models.Agency.objects(
+            Q(dataType="Federal") & Q(country=country)).order_by(
+            "-usedBy_count").only("name", "abbrev", "prettyName")[0:16]
         stats = models.Stats.objects.get(country=country)
         states_for_map = self.application.tools.states_for_map(country)
         try:
