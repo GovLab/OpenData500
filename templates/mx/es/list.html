@@ -185,9 +185,9 @@
         this.DataType = 'Number';
         this.BackgroundColor = 'transparent';
         //States
-        this.StateBaseColor = '#eeeeee';
-        this.StateMaxColor = '#4a2f76';
-        this.Range = 50;
+        this.StateBaseColor = 'rgb(218,218,235)';
+        this.StateMaxColor = 'rgb(63,0,125)';
+        this.Range = 61;
         this.LineThickness = 1;
         this.LineColor = '#444';
         //Labels
@@ -325,7 +325,7 @@
                 var states = group.selectAll('.states')
                     .data(data, function(d) { return (d && d.STATE) || d3.select(this).attr("name"); })
                     .style('fill', function(d) { return color( total/d.VALUE )})
-                    .attr('abbrev', function(d) { console.log(d); return d.abbrev; })
+                    .attr('abbrev', function(d) { return d.abbrev; })
                     .on("mouseover", function(d, i) {   
                         hover.transition().duration(100).style("opacity", 1)
                             .style("background-color", "#aaaaaa")
@@ -349,7 +349,6 @@
                                 var i = filters.indexOf('.'+d.abbrev)
                                 if (i > -1) { //remove all states in filter array
                                     filters.splice(i, 1);
-                                    console.log('removed: ' +d.abbrev)
                                 }
                             })
                             .filter(function(d, i) { return  d != s }) //remove active class from other states
