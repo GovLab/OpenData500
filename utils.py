@@ -237,10 +237,11 @@ class Tools(object):
     def re_do_filters(self, country):
         companies = models.Company.objects(country=country).only(
             'companyCategory', 'state', 'agencies', 
-            'submittedSurvey', 'filters')
+            'submittedSurvey', 'filters', 'companyType')
         for c in companies:
             filters = []
             filters.append(self.prettify(c.companyCategory))
+            filters.append(self.prettify(c.companyType))
             filters.append(c.state)
             filters += [a.prettyName for a in c.agencies]
             if c.submittedSurvey:
@@ -254,12 +255,13 @@ class Tools(object):
         try: 
             c = models.Company.objects(id=bson.objectid.ObjectId(id)).only(
                 'companyCategory', 'state', 'agencies', 
-                'submittedSurvey', 'filters').first()
+                'submittedSurvey', 'filters', 'companyType').first()
         except Exception, e:
             logging.info("Error creating filter: " + str(e))
             return
         filters = []
         filters.append(self.prettify(c.companyCategory))
+        filters.append(self.prettify(c.companyType))
         filters.append(c.state)
         filters += [a.prettyName for a in c.agencies]
         if c.submittedSurvey:
@@ -1069,7 +1071,8 @@ class FileGenerator(object):
 
 
     def generate_mex_chord_chart(self, country):
-        agencies = models.Agency.objects(Q(usedBy__not__size=0) & Q(country="mx")).order_by('name')
+        agencies = models.Agency.objects(
+            Q(usedBy__not__size=0) & Q(country="mx")).order_by('name')
         #get agencies that are used
         used_agencies_categories = []
         for a in agencies:

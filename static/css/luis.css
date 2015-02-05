@@ -81,31 +81,88 @@ path.chord {
 
 /*
 survey/no survey hover and active states*/
+/* --------- FILTERS-----------*/
 
-      .legend .color.candidate.s-active {
-    background-color: rgba(0, 0, 0, 0.4); }
+#legend {
+  height: 110px;
+  width: 100%;
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+}
 
-    .legend .color.candidate:hover {
-    background-color: #472b74;
-    color: white;  }
+.legend .color.candidate.s-active {
+  background-color: rgba(71, 43, 116, 0.7);
+}
 
-  .legend .color.survey {
-    background-color: rgba(71, 43, 116, 0.1); }
+.legend .color.candidate:hover {
+  background-color: #472b74;
+  color: white;  
+}
 
-    .legend .color.survey.s-active {
-    background-color: rgba(71, 43, 116, 0.5);
-    border: 2px; }
+.legend .color.survey {
+  background-color: rgba(71, 43, 116, 0.3); 
+}
 
-    .legend .color.survey:hover {
-    background-color: #472b74;
-    color: white; }
+.legend .color.survey.s-active {
+  background-color: rgba(71, 43, 116, 0.7);
+  border: 2px; 
+}
+
+.legend .color.survey:hover {
+  background-color: #472b74;
+  color: white; 
+}
+
+.legend .color.private {
+  background-color: rgba(71, 43, 116, 0.1); 
+}
+.legend .color.private:hover {
+  background-color: #472b74;
+  color: white;
+}
+
+.legend .color.private.s-active {
+  background-color: rgba(71, 43, 116, 0.7);
+  border: 2px;
+}
+
+.legend .color.public {
+  background-color: rgba(71, 43, 116, 0.1); 
+}
+
+.legend .color.public:hover {
+  background-color: #472b74;
+  color: white;
+}
+.legend .color.public.s-active {
+  background-color: rgba(71, 43, 116, 0.7);
+  border: 2px;
+}
+
+
+.legend .color.non-profit {
+  background-color: rgba(71, 43, 116, 0.1); 
+}
+
+.legend .color.non-profit:hover {
+  background-color: #472b74;
+  color: white;
+}
+.legend .color.non-profit.s-active {
+  background-color: rgba(71, 43, 116, 0.7);
+  border: 2px;
+}
+
 
 .clear-all-filters {
     display: inline-block;
-    float: right;
+    float: left;
     border: 1px solid #ccc;
     letter-spacing: .4px;
     padding: 4px 10px;
+    margin-left: 3px;
+    margin-top: 4px;
     color: rgba(0, 0, 0, 0.6); }
 
 
@@ -117,6 +174,23 @@ survey/no survey hover and active states*/
   border: 1px solid #ccc;
   letter-spacing: .4px;
   padding: 4px 10px;
+}
+
+.legend .color {
+  margin: 4px 3px;
+}
+
+.filter-by {
+  display: inline-block;
+  text-align: left;
+  margin-right: 10px;
+}
+
+.data-filters {
+  display: inline-block;
+  text-align: left;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 
@@ -310,5 +384,4 @@ label.other-input {
 #twitter-widget-0 {
   margin-top: 10px;
 }
-
 
