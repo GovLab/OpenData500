@@ -46,12 +46,23 @@
     </div>
     <div id="chart"></div>
 
-    <div class="button-group legend clear-filters-menu" id="legend" data-filter-group="survey">
-        <span>Filter by:  </span>
-    	<button class="color survey" data-filter=".survey-company">Submitted Survey</button>
-    	<button class="color candidate" data-filter=":not(.survey-company)">No Survey Submitted</button>
-    	<button class="color all" data-filter="*">Clear Filter</button>
-        <button class="clear-all-filters">Clear All Filters</button>
+    <div class="button-group legend" id="legend">
+        <div class="filter-by">
+            <span>Filter by:  </span>
+        </div>
+        <div class="data-filters"> 
+            <div class="survey-filter" data-filter-group="survey">
+                <button class="color survey" data-filter=".survey-company">Submitted Survey</button>
+                <button class="color candidate" data-filter=":not(.survey-company)">No Survey Submitted</button>
+                <button class="color all" data-filter="*">Clear Filter</button><br>
+            </div>
+            <div class="company-type-filter" data-filter-group="company-type">
+                <button class="color public" data-filter=".public">Public</button>
+                <button class="color private" data-filter=".private">Private</button>
+                <button class="color all" data-filter="*">Clear Filter</button><br>
+            </div>
+            <button class="clear-all-filters">Clear All Filters</button>
+        </div>
     </div>
     
     
@@ -154,26 +165,47 @@
         $container.isotope({ filter: filters.join('') });
     });
 
-	// filter items by survey type
-	$('#legend').on( 'click', 'button', function( event ) {
+    // filter items by survey type
+    $('.survey-filter').on( 'click', 'button', function( event ) {
         var filtr = $(this).attr('data-filter');
         if ($(this).hasClass('s-active')) {
             $(this).removeClass('s-active');
             filters.splice(filters.indexOf($(this).attr('data-filter')), 1)
         } else {
-            $('#legend button').each(function() {
+            $('.survey-filter button').each(function() {
                 var i = filters.indexOf($(this).attr('data-filter'));
                 if( i > -1) {
                     filters.splice(i, 1)
                 }
             });
-            $('#legend button').removeClass('s-active');
+            $('.survey-filter button').removeClass('s-active');
             $(this).addClass('s-active');
             filters.push(filtr);
             console.log(filters.join(''))
         }
-	  $container.isotope({ filter: filters.join('') });
-	});
+      $container.isotope({ filter: filters.join('') });
+    });
+
+    // filter items by company type
+    $('.company-type-filter').on( 'click', 'button', function( event ) {
+        var filtr = $(this).attr('data-filter');
+        if ($(this).hasClass('s-active')) {
+            $(this).removeClass('s-active');
+            filters.splice(filters.indexOf($(this).attr('data-filter')), 1)
+        } else {
+            $('.company-type-filter button').each(function() {
+                var i = filters.indexOf($(this).attr('data-filter'));
+                if( i > -1) {
+                    filters.splice(i, 1)
+                }
+            });
+            $('.company-type-filter button').removeClass('s-active');
+            $(this).addClass('s-active');
+            filters.push(filtr);
+            console.log(filters.join(''))
+        }
+      $container.isotope({ filter: filters.join('') });
+    });
 
 	// $container.delegate( '.m-candidates-item', 'click', function(){
 	// 		//$('.m-candidates-item.large').removeClass('large');
