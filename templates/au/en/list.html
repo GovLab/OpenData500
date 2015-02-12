@@ -15,10 +15,10 @@
         <div id="filters-agency" class="m-candidates-buttons button-group" data-toggle="buttons-checkbox" data-filter-group="category">
             <button data-filter="*">Clear Filter</button>
             {% for agency in agencies %}
-                {% if len(agency.name.replace("Instituto", "Inst.")) > 32 and agency.abbrev %}
-                    <button data-filter=".{{agency.prettyName}}">{{agency.abbrev}}</button>
+                {% if len(agency.name.replace("Department", "Dept.")) > 32 and agency.abbrev %}
+                    <button data-filter=".{{agency.prettyName}}">{{agency.abbrev.replace("DEEWR", "Dept. of Education")}}</button>
                 {%else%}
-                    <button data-filter=".{{agency.prettyName}}">{{agency.name.replace("Instituto", "Inst.")}}</button>
+                    <button data-filter=".{{agency.prettyName}}">{{agency.name.replace("Department", "Dept.")}}</button>
                 {%end%}
             {%end%}
         </div>
