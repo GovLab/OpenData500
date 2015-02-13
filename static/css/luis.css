@@ -115,7 +115,7 @@ survey/no survey hover and active states*/
 }
 
 .legend .color.private {
-  background-color: rgba(71, 43, 116, 0.1); 
+  background-color: #fff; 
 }
 .legend .color.private:hover {
   background-color: #472b74;
@@ -128,7 +128,7 @@ survey/no survey hover and active states*/
 }
 
 .legend .color.public {
-  background-color: rgba(71, 43, 116, 0.1); 
+  background-color: #fff; 
 }
 
 .legend .color.public:hover {
@@ -142,7 +142,7 @@ survey/no survey hover and active states*/
 
 
 .legend .color.non-profit {
-  background-color: rgba(71, 43, 116, 0.1); 
+  background-color: #fff; 
 }
 
 .legend .color.non-profit:hover {
