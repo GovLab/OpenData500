@@ -7,31 +7,12 @@ class MainHandler(BaseHandler):
     @tornado.web.addslash
     #@tornado.web.authenticated
     def get(self, country=None):
-        if not country:
-            country = "us"
-        if country not in available_countries:
-            self.redirect("/404/")
-            return
-        with open("templates/"+country+"/settings.json") as json_file:
-            settings = json.load(json_file)
-        #------------LOAD LANGUAGE
-        lan = self.get_argument("lan", None)
-        if lan:
-            if lan != self.get_cookie('lan') and lan in settings['available_languages']:
-                self.set_cookie("lan", lan)
-                self.redirect("/" + country + "/")
-                return
-            if lan not in settings['available_languages']:
-                lan = settings['default_language']
-        elif not lan and self.get_cookie('lan') in settings['available_languages']:
-            lan = self.get_cookie('lan')
-        else:
-            lan = settings['default_language']
-        #------------END LANGUAGE
+        country = self.load_country(country)
+        settings = self.load_settings(country)
+        lan = self.load_language(country, self.get_argument("lan", None), settings)
         self.render(
             country.lower()+ "/" + lan + "/index.html",
             settings = settings,
-            #menu=settings['menu'][lan],
             user=self.current_user,
             lan = lan,
             country=country
@@ -65,9 +46,7 @@ class RoundtableHandler(BaseHandler):
             self.redirect("/us/roundtables/")
             return
         rt = self.get_argument("rt", "main")
-        with open("templates/us/settings.json") as json_file:
-            settings = json.load(json_file)
-        logging.info("Country: " + country + " RT: " + rt)
+        settings = self.load_settings('us')
         self.render(
             "us/en/"+rt+"_roundtable.html",
             page_title = "Open Data Roundtables",
@@ -85,6 +64,9 @@ class StaticPageHandler(BaseHandler):
     @tornado.web.addslash
     #@tornado.web.authenticated
     def get(self, country=None, page=None):
+        country = self.load_country(country)
+        settings = self.load_settings(country)
+        lan = self.load_language(country, self.get_argument("lan", None), settings)
         #check if company page, get company if so
         try:
             company = models.Company.objects.get(Q(prettyName=page) & Q(display=True))
@@ -108,27 +90,6 @@ class StaticPageHandler(BaseHandler):
                 message = "I'm telling."
             )
             return
-        #country, language, settings for page
-        if not country:
-            country = "us" #us default country
-        if country not in available_countries:
-            self.redirect("/404/")
-            return
-        with open("templates/"+country+"/settings.json") as json_file:
-            settings = json.load(json_file)
-        #------------LOAD LANGUAGE
-        lan = self.get_argument("lan", None)
-        if lan:
-            if lan != self.get_cookie('lan') and lan in settings['available_languages']:
-                self.set_cookie("lan", lan)
-                self.redirect(self.request.uri)
-                return
-            if lan not in settings['available_languages']:
-                lan = settings['default_language']
-        elif not lan and self.get_cookie('lan') in settings['available_languages']:
-            lan = self.get_cookie('lan')
-        else:
-            lan = settings['default_language']
         if company: 
             self.render(
                 company.country + "/" + lan + "/company.html",
@@ -177,29 +138,9 @@ class ListHandler(BaseHandler):
     @tornado.web.addslash
     #@tornado.web.authenticated
     def get(self, country=None, name=None):
-        if name == "candidates":
-            self.redirect("/us/list/")
-            return 
-        if not country:
-            country = "us"
-        if country not in available_countries:
-            self.redirect("/404/")
-            return
-        with open("templates/"+country+"/settings.json") as json_file:
-                settings = json.load(json_file)
-        #------------LOAD LANGUAGE
-        lan = self.get_argument("lan", None)
-        if lan:
-            if lan != self.get_cookie('lan') and lan in settings['available_languages']:
-                self.set_cookie("lan", lan)
-                self.redirect(self.request.uri)
-                return
-            if lan not in settings['available_languages']:
-                lan = settings['default_language']
-        elif not lan and self.get_cookie('lan') in settings['available_languages']:
-            lan = self.get_cookie('lan')
-        else:
-            lan = settings['default_language']
+        country = self.load_country(country)
+        settings = self.load_settings(country)
+        lan = self.load_language(country, self.get_argument("lan", None), settings)
         companies = models.Company.objects(
             Q(display=True) & Q(country=country)).order_by('prettyName').only(
             'companyName', 'prettyName', 'filters', 'descriptionShort', 
@@ -232,11 +173,9 @@ class ListHandler(BaseHandler):
 class ChartHandler(BaseHandler):
     @tornado.web.addslash
     def get(self, country=None):
-        #log visit
-        logging.info("WEFJWIREFJQEIRGJWIERJGWIERJGWIERJGIWJERGIWERJGIWEJRIGJIWERG")
-        country = self.get_argument("country", None)
-        if not country:
-            country = 'us'
+        country = self.load_country(country)
+        settings = self.load_settings(country)
+        lan = self.load_language(country, self.get_argument("lan", None), settings)
         try: 
             visit = models.Visit()
             if self.request.headers.get('Referer'):
@@ -277,26 +216,9 @@ class SubmitCompanyHandler(BaseHandler):
     @tornado.web.addslash
     #@tornado.web.authenticated
     def get(self, country=None):
-        if not country:
-            country = "us"
-        if country not in available_countries:
-            self.redirect("/404/")
-            return
-        with open("templates/"+country+"/settings.json") as json_file:
-                settings = json.load(json_file)
-        #------------LOAD LANGUAGE
-        lan = self.get_argument("lan", None)
-        if lan:
-            if lan != self.get_cookie('lan') and lan in settings['available_languages']:
-                self.set_cookie("lan", lan)
-                self.redirect(self.request.uri)
-                return
-            if lan not in settings['available_languages']:
-                lan = settings['default_language']
-        elif not lan and self.get_cookie('lan') in settings['available_languages']:
-            lan = self.get_cookie('lan')
-        else:
-            lan = settings['default_language']
+        country = self.load_country(country)
+        settings = self.load_settings(country)
+        lan = self.load_language(country, self.get_argument("lan", None), settings)
         self.render(
             country+ "/" + lan + "/submitCompany.html",
             country=country,
@@ -338,26 +260,9 @@ class SubmitDataHandler(BaseHandler):
     @tornado.web.addslash
     #@tornado.web.authenticated
     def get(self, country, id):
-        if not country:
-            country = "us"
-        if country not in available_countries:
-            self.redirect("/404/")
-            return
-        with open("templates/"+country+"/settings.json") as json_file:
-                settings = json.load(json_file)
-        #------------LOAD LANGUAGE
-        lan = self.get_argument("lan", None)
-        if lan:
-            if lan != self.get_cookie('lan') and lan in settings['available_languages']:
-                self.set_cookie("lan", lan)
-                self.redirect(self.request.uri)
-                return
-            if lan not in settings['available_languages']:
-                lan = settings['default_language']
-        elif not lan and self.get_cookie('lan') in settings['available_languages']:
-            lan = self.get_cookie('lan')
-        else:
-            lan = settings['default_language']
+        country = self.load_country(country)
+        settings = self.load_settings(country)
+        lan = self.load_language(country, self.get_argument("lan", None), settings)
         company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
         if company.country != country or '/'+company.country+'/' not in self.request.uri:
             self.redirect(str('/'+company.country+'/addData/'+id))

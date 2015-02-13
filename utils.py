@@ -233,7 +233,48 @@ company_admin_booleans = [
     'display', 'submittedSurvey','vetted', 'vettedByCompany', 
     'submittedThroughWebsite', 'locked']
 
+abbreviations = { 
+    "us":[
+        {"Department":"Dept."},
+        {"Administration": "Admin."},
+        {"United States":"US"},
+        {"U.S.":"US"},
+        {"National":"Nat'l"},
+        {"Federal":"Fed."},
+        {"Commission":"Com."},
+        {"International":"Int'l"},
+        {"Development":"Dev."},
+        {"Corporation":"Corp"},
+        {"Institute":"Inst."},
+        {"Administrative":"Admin."},
+        {" and ":" & "},
+        {"Financial":"Fin"},
+        {"Environmental":"Env."},
+        {"Protection":"Prot."}
+    ],
+    "mx":[
+        {"Secretaría":"Sec."},
+        {"Instituto":"Inst."},
+        {"Comunicaciones":"Com."},
+        {"Federal":"Fed."},
+        {"Nacional":"Nal."},
+        {"República":"Rep."},
+        {"Comisión":"Com."},
+        {"General":"Gral."}
+    ]
+}
+
 class Tools(object):
+    @classmethod
+    def abbreviate(self, name, country):
+        for abbrev in abbreviations[country]:
+            if len(name) < 32:
+                return name
+            else:
+                logging.info(type(abbrev.keys()[0]))
+                name = re.sub(r"{}".format(abbrev.keys()[0]), abbrev.values()[0], name)
+        return name
+
     def re_do_filters(self, country):
         companies = models.Company.objects(country=country).only(
             'companyCategory', 'state', 'agencies', 
@@ -1012,84 +1053,24 @@ class FileGenerator(object):
         #done, wrap up csv
         logging.info("Agency CSV File Done!")
 
-    def generate_chord_chart_files(self, country):
-        agencies = models.Agency.objects(Q(usedBy__not__size=0) & Q(source__not__exact="web") & Q(dataType="Federal") & Q(country="us")).order_by('name')
-        #get agencies that are used
-        used_agencies_categories = []
-        for a in agencies:
-            if a.usedBy and a.source == "dataGov":
-                used_agencies_categories.append(a.name)
-        #Keep track of # of categories
-        num_agencies = len(used_agencies_categories)
-        #get categories that are actually used from agencies that are used
-        for a in agencies:
-            if a.usedBy and a.source == "dataGov":
-                for c in a.usedBy:
-                    if c.companyCategory in categories['en']['us'] and c.companyCategory not in used_agencies_categories:
-                        used_agencies_categories.append(c.companyCategory)
-        #logging.info(used_agencies_categories)
-        name_key = {}
-        key_name = {}
-        for i, name in enumerate(used_agencies_categories):
-            name_key[name] = i
-            key_name[str(i)] = name
-        #Make matrix
-        l = len(name_key)
-        matrix = np.matrix([[0]*l]*l)
-        #populate matrix
-        for a in agencies:
-            if a.source == "dataGov":
-                for c in a.usedBy:
-                    if c.companyCategory in categories['en']['us']: 
-                        matrix[name_key[c.companyCategory], name_key[a.name]] += 1
-                        matrix[name_key[a.name], name_key[c.companyCategory]] += 1
-        #make json
-        matrix = matrix.tolist()
-        data = {"matrix":matrix, "names":key_name, "num_agencies":num_agencies}
-        #abbreviate some stuff
-        for key in data['names']:
-            data['names'][key] = data['names'][key].replace('Department', 'Dept.')
-            data['names'][key] = data['names'][key].replace('Administration', 'Admin.')
-            data['names'][key] = data['names'][key].replace('United States', 'US')
-            data['names'][key] = data['names'][key].replace('U.S.', 'US')
-            data['names'][key] = data['names'][key].replace('National', "Nat'l")
-            data['names'][key] = data['names'][key].replace('Federal', "Fed.")
-            data['names'][key] = data['names'][key].replace('Commission', "Com.")
-            data['names'][key] = data['names'][key].replace('International', "Int'l")
-            data['names'][key] = data['names'][key].replace('Development', "Dev.")
-            data['names'][key] = data['names'][key].replace('Corporation', "Corp.")
-            data['names'][key] = data['names'][key].replace('Institute', "Inst.")
-            data['names'][key] = data['names'][key].replace('Administrative', "Admin.")
-            data['names'][key] = data['names'][key].replace(' and ', " & ")
-            data['names'][key] = data['names'][key].replace('Financial', "Fin.")
-            data['names'][key] = data['names'][key].replace('Protection', "Prot.")
-            data['names'][key] = data['names'][key].replace('Environmental', "Env.")
-        #save to file
-        with open(os.path.join(os.path.dirname(__file__), 'static') + '/files/' + country + '_matrix.json', 'w') as outfile:
-            json.dump(data, outfile)
-        logging.info("Chord Chart File Done!")
-
-
-    def generate_mex_chord_chart(self, country):
+    def generate_chord_chart_files(self, country, lan):
         agencies = models.Agency.objects(
-            Q(usedBy__not__size=0) & Q(country="mx")).order_by('name')
-        #get agencies that are used
-        used_agencies_categories = []
+            Q(usedBy__not__size=0) & Q(dataType="Federal") & Q(country=country)
+            ).order_by('name').only('usedBy', 'name')
+        #get agencies and categories that are actually used
+        used_agencies = [a.name for a in agencies]
+        num_agencies = len(used_agencies)
+        used_categories = []
         for a in agencies:
-            if a.usedBy:
-                used_agencies_categories.append(a.name)
-        #Keep track of # of categories
-        num_agencies = len(used_agencies_categories)
-        #get categories that are actually used from agencies that are used
-        for a in agencies:
-            if a.usedBy:
-                for c in a.usedBy:
-                    if c.companyCategory in categories['es']['mx'] and c.companyCategory not in used_agencies_categories:
-                        used_agencies_categories.append(c.companyCategory)
-        #logging.info(used_agencies_categories)
+            for c in a.usedBy:
+                if c.companyCategory in categories[lan][country]:
+                    used_categories.append(c.companyCategory)
+        used_categories = list(set(used_categories))
+        used = used_agencies + used_categories
+        #create map of names and cats
         name_key = {}
         key_name = {}
-        for i, name in enumerate(used_agencies_categories):
+        for i, name in enumerate(used):
             name_key[name] = i
             key_name[str(i)] = name
         #Make matrix
@@ -1098,7 +1079,7 @@ class FileGenerator(object):
         #populate matrix
         for a in agencies:
             for c in a.usedBy:
-                if c.companyCategory in categories['es']['mx']: 
+                if c.companyCategory in categories[lan][country]: 
                     matrix[name_key[c.companyCategory], name_key[a.name]] += 1
                     matrix[name_key[a.name], name_key[c.companyCategory]] += 1
         #make json
@@ -1106,10 +1087,9 @@ class FileGenerator(object):
         data = {"matrix":matrix, "names":key_name, "num_agencies":num_agencies}
         #abbreviate some stuff
         for key in data['names']:
-            data['names'][key] = data['names'][key].replace('Instituto', 'Inst.')
-            data['names'][key] = data['names'][key].replace('Secretaría'.decode('utf-8'), 'Sec.')
+            data['names'][key] = Tools.abbreviate(data['names'][key], country)
         #save to file
-        with open(os.path.join(os.path.dirname(__file__), 'static') + '/files/mx_matrix.json', 'w') as outfile:
+        with open(os.path.join(os.path.dirname(__file__), 'static') + '/files/' + country + '_matrix.json', 'w') as outfile:
             json.dump(data, outfile)
         logging.info("Chord Chart File Done!")
 

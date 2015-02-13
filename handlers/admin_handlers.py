@@ -4,23 +4,10 @@ import json
 #--------------------------------------------------------LOGIN PAGE------------------------------------------------------------
 class LoginHandler(BaseHandler): 
     @tornado.web.addslash
-    def get(self):
-        with open("templates/us/settings.json") as json_file:
-            settings = json.load(json_file)
-        #------------LOAD LANGUAGE
-        lan = self.get_argument("lan", None)
-        if lan:
-            if lan != self.get_cookie('lan') and lan in settings['available_languages']:
-                self.set_cookie("lan", lan)
-                self.redirect(self.request.uri)
-                return
-            if lan not in settings['available_languages']:
-                lan = settings['default_language']
-        elif not lan and self.get_cookie('lan') in settings['available_languages']:
-            lan = self.get_cookie('lan')
-        else:
-            lan = settings['default_language']
-        #------------END LANGUAGE
+    def get(self, country=None):
+        country = self.load_country(country)
+        settings = self.load_settings(country)
+        lan = self.load_language(country, self.get_argument("lan", None), settings)
         self.render(
             "admin/" + lan + "/login.html", 
             next=self.get_argument("next","/"), 
@@ -28,12 +15,12 @@ class LoginHandler(BaseHandler):
             page_title="Please Login",
             page_heading="Login to OD500" ,
             lan=lan,
-            country='us',
-            menu=settings['menu']['en'],
+            country=country,
+            menu=settings['menu'][lan],
             settings=settings
             )
 
-    def post(self):
+    def post(self, country=None):
         username = self.get_argument("username", "")
         password = self.get_argument("password", "").encode('utf-8')
         try: 
@@ -72,22 +59,8 @@ class RegisterHandler(LoginHandler):
             logging.info("Could not get user: " + str(e))
             self.redirect("/login/")
         country = user.country
-        with open("templates/" + country + "/settings.json") as json_file:
-            settings = json.load(json_file)
-        #------------LOAD LANGUAGE
-        lan = self.get_argument("lan", None)
-        if lan:
-            if lan != self.get_cookie('lan') and lan in settings['available_languages']:
-                self.set_cookie("lan", lan)
-                self.redirect(self.request.uri)
-                return
-            if lan not in settings['available_languages']:
-                lan = settings['default_language']
-        elif not lan and self.get_cookie('lan') in settings['available_languages']:
-            lan = self.get_cookie('lan')
-        else:
-            lan = settings['default_language']
-        #------------END LANGUAGE
+        settings = self.load_settings(country)
+        lan = self.load_language(country, self.get_argument("lan", None), settings)
         self.render(
                 "admin/" + lan +"/register.html", 
                 next=self.get_argument("next","/"),
@@ -147,23 +120,8 @@ class CompanyAdminHandler(BaseHandler):
             logging.info("Could not get user: " + str(e))
             self.redirect("/login/")
         country = user.country
-        logging.info("Working in: " + country)
-        with open("templates/"+user.country+"/settings.json") as json_file:
-            settings = json.load(json_file)
-        #------------LOAD LANGUAGE
-        lan = self.get_argument("lan", None)
-        if lan:
-            if lan != self.get_cookie('lan') and lan in settings['available_languages']:
-                self.set_cookie("lan", lan)
-                self.redirect(self.request.uri)
-                return
-            if lan not in settings['available_languages']:
-                lan = settings['default_language']
-        elif not lan and self.get_cookie('lan') in settings['available_languages']:
-            lan = self.get_cookie('lan')
-        else:
-            lan = settings['default_language']
-        #------------END LANGUAGE
+        settings = self.load_settings(country)
+        lan = self.load_language(country, self.get_argument("lan", None), settings)
         surveySubmitted = models.Company.objects(Q(submittedSurvey=True) & Q(vetted=True) & Q(country=country)).order_by('prettyName')
         sendSurveys = models.Company.objects(Q(submittedSurvey=False) & Q(country=country))
         needVetting = models.Company.objects(Q(submittedSurvey=True) & Q(vetted=False) & Q(country=country)).order_by('-lastUpdated', 'prettyName')
@@ -195,6 +153,8 @@ class CompanyAdminHandler(BaseHandler):
             self.redirect("/login/")
         action = self.get_argument("action", None)
         country = user.country
+        settings = self.load_settings(country)
+        lan = settings['default_language']
         if action == "refresh":
             self.application.stats.refresh_stats(country)
             self.application.files.generate_visit_csv(country)
@@ -205,15 +165,13 @@ class CompanyAdminHandler(BaseHandler):
                         "totalCompaniesDisplayed": stats.totalCompaniesDisplayed})
         elif action == "files":
             #self.application.files.generate_company_json(country)
-            self.application.files.generate_agency_json(country)
+            # self.application.files.generate_agency_json(country)
             self.application.files.generate_company_csv(country)
             self.application.files.generate_company_all_csv(country)
             self.application.files.generate_agency_csv(country)
             self.write("success")
         elif action == "vizz":
-            #self.application.files.generate_sankey_json()
-            self.application.files.generate_chord_chart_files(country)
-            self.application.files.generate_mex_chord_chart(country)
+            self.application.files.generate_chord_chart_files(country, lan)
             self.write("success")
         elif action == 'display':
             try:
@@ -251,24 +209,10 @@ class AgencyAdminHandler(BaseHandler):
             logging.info("Could not get user: " + str(e))
             self.redirect("/login/")
         country = user.country
-        with open("templates/"+user.country+"/settings.json") as json_file:
-            settings = json.load(json_file)
+        settings = self.load_settings(country)
+        lan = self.load_language(country, self.get_argument("lan", None), settings)
         agencies = models.Agency.objects(country=country).order_by('name')
         stats = models.Stats.objects.get(country=country)
-        #------------LOAD LANGUAGE
-        lan = self.get_argument("lan", None)
-        if lan:
-            if lan != self.get_cookie('lan') and lan in settings['available_languages']:
-                self.set_cookie("lan", lan)
-                self.redirect(self.request.uri)
-                return
-            if lan not in settings['available_languages']:
-                lan = settings['default_language']
-        elif not lan and self.get_cookie('lan') in settings['available_languages']:
-            lan = self.get_cookie('lan')
-        else:
-            lan = settings['default_language']
-        #------------END LANGUAGE
         self.render(
             "admin/" + lan + "/admin_agencies.html",
             page_title='Admin - Agencies - OpenData500',
@@ -307,22 +251,8 @@ class NewCompanyHandler(BaseHandler):
             self.redirect("/login/")
             return
         country = user.country
-        with open("templates/"+user.country+"/settings.json") as json_file:
-            settings = json.load(json_file)
-        #------------LOAD LANGUAGE
-        lan = self.get_argument("lan", None)
-        if lan:
-            if lan != self.get_cookie('lan') and lan in settings['available_languages']:
-                self.set_cookie("lan", lan)
-                self.redirect(self.request.uri)
-                return
-            if lan not in settings['available_languages']:
-                lan = settings['default_language']
-        elif not lan and self.get_cookie('lan') in settings['available_languages']:
-            lan = self.get_cookie('lan')
-        else:
-            lan = settings['default_language']
-        #------------END LANGUAGE
+        settings = self.load_settings(country)
+        lan = self.load_language(country, self.get_argument("lan", None), settings)
         self.render("admin/" + lan + "/admin_add_company.html",
             page_heading = "New Company",
             user=self.current_user,
@@ -370,22 +300,8 @@ class EditCompanyHandler(BaseHandler):
         if company.country != country:
             self.redirect(str('/'+company.country+'/' + page + '/'+id))
             return
-        with open("templates/"+company.country+"/settings.json") as json_file:
-            settings = json.load(json_file)
-        #------------LOAD LANGUAGE
-        lan = self.get_argument("lan", None)
-        if lan:
-            if lan != self.get_cookie('lan') and lan in settings['available_languages']:
-                self.set_cookie("lan", lan)
-                self.redirect(self.request.uri)
-                return
-            if lan not in settings['available_languages']:
-                lan = settings['default_language']
-        elif not lan and self.get_cookie('lan') in settings['available_languages']:
-            lan = self.get_cookie('lan')
-        else:
-            lan = settings['default_language']
-        #------------END LANGUAGE
+        settings = self.load_settings(country)
+        lan = self.load_language(country, self.get_argument("lan", None), settings)
         if page == 'edit':
             #non-admin edit
             if not company.locked:
@@ -473,22 +389,8 @@ class AdminEditAgencyHandler(BaseHandler):
             self.redirect("/login/")
             return
         country = user.country
-        with open("templates/"+country+"/settings.json") as json_file:
-            settings = json.load(json_file)
-        #------------LOAD LANGUAGE
-        lan = self.get_argument("lan", None)
-        if lan:
-            if lan != self.get_cookie('lan') and lan in settings['available_languages']:
-                self.set_cookie("lan", lan)
-                self.redirect(self.request.uri)
-                return
-            if lan not in settings['available_languages']:
-                lan = settings['default_language']
-        elif not lan and self.get_cookie('lan') in settings['available_languages']:
-            lan = self.get_cookie('lan')
-        else:
-            lan = settings['default_language']
-        #------------END LANGUAGE
+        settings = self.load_settings(country)
+        lan = self.load_language(country, self.get_argument("lan", None), settings)
         if id:
             try:
                 agency = models.Agency.objects.get(id=bson.objectid.ObjectId(id))
@@ -673,26 +575,9 @@ class DeleteCompanyHandler(BaseHandler):
         except Exception, e:
             logging.info("Could not get user: " + str(e))
             self.redirect("/login/")
-        if not country:
-            country = "us"
-        if country not in available_countries:
-            self.redirect("/404/")
-            return
-        with open("templates/"+country+"/settings.json") as json_file:
-            settings = json.load(json_file)
-        #------------LOAD LANGUAGE
-        lan = self.get_argument("lan", None)
-        if lan:
-            if lan != self.get_cookie('lan') and lan in settings['available_languages']:
-                self.set_cookie("lan", lan)
-                self.redirect(self.request.uri)
-                return
-            if lan not in settings['available_languages']:
-                lan = settings['default_language']
-        elif not lan and self.get_cookie('lan') in settings['available_languages']:
-            lan = self.get_cookie('lan')
-        else:
-            lan = settings['default_language']
+        country = self.load_country(country)
+        settings = self.load_settings(country)
+        lan = self.load_language(country, self.get_argument("lan", None), settings)
         try:
             company = models.Company.objects.get(id=bson.objectid.ObjectId(id)) 
         except:

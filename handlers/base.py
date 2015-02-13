@@ -28,9 +28,44 @@ class BaseHandler(tornado.web.RequestHandler):
             return tornado.escape.json_decode(user_json)
         else:
             return None
-    def get_current_country(self):
-    	country_json = self.get_secure_cookie("country")
-        if country_json:
-            return tornado.escape.json_decode(country_json)
+
+    def get_current_language(self):
+        return self.get_secure_cookie('lan')
+
+    def load_country(self, country):
+        if not country:
+            return "us"
+        if country not in available_countries:
+            self.redirect("/404/")
+            return
         else:
-            return None
+            return country
+
+    def load_settings(self, country):
+        with open("templates/"+country+"/settings.json") as json_file:
+            return json.load(json_file)
+
+    def load_language(self, country, lan, settings):
+        if lan:
+            if lan != self.get_cookie('lan') and lan in settings['available_languages']:
+                self.set_cookie("lan", lan)
+                self.redirect(self.request.uri)
+                return
+            if lan not in settings['available_languages']:
+                lan = settings['default_language']
+        elif not lan and self.get_cookie('lan') in settings['available_languages']:
+            lan = self.get_cookie('lan')
+        else:
+            lan = settings['default_language']
+        return lan
+
+
+
+
+
+
+
+
+
+
+        
