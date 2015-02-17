@@ -83,7 +83,7 @@ select {
   width: 52.8%;
   font-family: sans-serif;
   font-size: 1em;
-  color: #444444; }
+  color: #444; }
 
 .m-form-half textarea {
   width: 100%;
@@ -99,7 +99,7 @@ select {
 
 .m-form-footer {
   background-color: transparent;
-  border-top: 1px solid #aaaaaa;
+  border-top: 1px solid #aaa;
   padding: 5px;
   margin: 5px 5px 20px;
   overflow: hidden; }
@@ -153,7 +153,7 @@ select {
   margin-bottom: 30px; }
 
 body {
-  color: #444444;
+  color: #444;
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-size: 12px;
   line-height: 1.4em; }
@@ -327,7 +327,7 @@ a:hover {
     min-height: 20px;
     font-size: 13px;
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-    border: 1px solid #aaaaaa;
+    border: 1px solid #aaa;
     border-radius: 0;
     overflow: hidden; }
 
@@ -353,10 +353,10 @@ a:hover {
 #world-map .formal-agreement {
   fill: rgba(71, 43, 116, 0.4) !important; }
 #world-map .working-agreement {
-  fill: #666666 !important; }
+  fill: #666 !important; }
 #world-map .in-discussion,
 #world-map .in-discussion > path {
-  fill: #aaaaaa !important; }
+  fill: #aaa !important; }
 #world-map .project {
   fill: #472b74 !important; }
 
@@ -368,7 +368,7 @@ a:hover {
     margin-bottom: 35px;
     padding-top: 23px;
     margin-bottom: 35px;
-    border-bottom: 1px solid #aaaaaa; }
+    border-bottom: 1px solid #aaa; }
     .about-page section ul li.list-title {
       list-style: none;
       margin-top: 15px;
@@ -399,7 +399,7 @@ a:hover {
     float: right;
     margin: 0 0 30px 30px;
     padding: 10px 20px;
-    border: 1px solid #aaaaaa; }
+    border: 1px solid #aaa; }
     .about-page .about-page-toc h4 {
       margin-bottom: 25px;
       margin-top: 0;
@@ -407,7 +407,7 @@ a:hover {
       font-weight: 300;
       font-size: 1.7em;
       font-style: italic;
-      color: #444444; }
+      color: #444; }
     .about-page .about-page-toc li {
       list-style-type: none;
       margin: 8px 0 7px 0;
@@ -508,14 +508,14 @@ a:hover {
       color: #472b74; }
     .about-page .m-team-picture .m-team-member-job {
       margin: 0;
-      color: #666666; }
+      color: #666; }
   .about-page .m-team-picture:hover img {
     border-color: rgba(0, 0, 0, 0.05); }
   .about-page .m-team-picture.s-active img {
     border-color: rgba(71, 43, 116, 0.4); }
 
 .sub-sections {
-  border-bottom: 1px solid #aaaaaa;
+  border-bottom: 1px solid #aaa;
   padding-bottom: 23px;
   margin-bottom: 0; }
   .sub-sections .m-half {
@@ -605,7 +605,7 @@ a:hover {
     text-decoration: underline; }
   .datasets > h3 {
     font-size: 16px;
-    color: #666666; }
+    color: #666; }
   .datasets .company-view-agency-list h3 {
     font-size: 14px;
     line-height: 18px; }
@@ -615,7 +615,7 @@ a:hover {
   .m-list-head div {
     display: inline-block;
     padding: 10px 5px 0;
-    color: white;
+    color: #fff;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: .5px; }
@@ -632,7 +632,7 @@ a:hover {
 
 .m-list-company-full {
   padding-top: 20px;
-  border-top: 1px solid #aaaaaa;
+  border-top: 1px solid #aaa;
   box-shadow: inset 0 3px 3px -3px rgba(0, 0, 0, 0.3); }
 
 .m-preview-list-name {
@@ -695,7 +695,7 @@ a:hover {
 
 .m-download-data {
   padding: 10px;
-  color: #666666;
+  color: #666;
   display: block;
   border-top: 1px solid rgba(0, 0, 0, 0.05);
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
@@ -705,11 +705,11 @@ a:hover {
     margin-right: 30px;
     display: inline-block; }
   .m-download-data a {
-    color: #666666;
+    color: #666;
     padding: 4px 8px; }
     .m-download-data a:hover {
       background-color: #8977a7;
-      color: white; }
+      color: #fff; }
 
 .m-candidates h1 {
   font-size: 6.79em; }
@@ -735,7 +735,7 @@ a:hover {
   -moz-border-radius: 4px;
   border-radius: 4px;
   border: 0;
-  color: white;
+  color: #fff;
   cursor: pointer;
   padding: 3px 7px 5px; }
 .m-candidates-buttons button:hover {
@@ -749,7 +749,7 @@ a:hover {
   height: 165px;
   float: left;
   margin: 5px;
-  color: #444444;
+  color: #444;
   overflow: hidden;
   cursor: pointer;
   border: 1px solid #ccc; }
@@ -769,10 +769,10 @@ a:hover {
     width: 195px;
     height: 80px;
     overflow: hidden;
-    color: #444444;
+    color: #444;
     margin-top: 5px; }
   .m-candidates-item em {
-    color: #444444;
+    color: #444;
     display: block;
     height: 15px;
     margin-top: 5px;
@@ -788,7 +788,7 @@ a:hover {
 .m-candidates-item.preview-company {
   background-color: rgba(71, 43, 116, 0.9); }
   .m-candidates-item.preview-company h3, .m-candidates-item.preview-company .m-homepage-list-desc, .m-candidates-item.preview-company em {
-    color: white; }
+    color: #fff; }
 
 .m-candidates-item:hover {
   border-color: #472b74; }
@@ -809,7 +809,7 @@ a:hover {
     display: inline-block;
     margin: 0 3px;
     padding: 4px 10px;
-    color: white;
+    color: #fff;
     letter-spacing: .4px;
     border: 1px solid #ccc;
     color: rgba(0, 0, 0, 0.6); }
@@ -827,10 +827,10 @@ a:hover {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
   border-radius: 0;
-  border: 1px solid #aaaaaa;
+  border: 1px solid #aaa;
   background-color: rgba(255, 255, 255, 0.7);
   border-left: 4px solid #472b74;
-  color: #444444;
+  color: #444;
   padding: 3px 9px 3px 6px; }
 
 #clear-filters-menu {
@@ -851,7 +851,7 @@ a:hover {
   -moz-border-radius: 4px;
   border-radius: 4px;
   padding: 20px 20px 10px 0;
-  border: 1px solid #aaaaaa; }
+  border: 1px solid #aaa; }
   .login-form .m-form-line.submit {
     text-align: center;
     margin-top: 20px; }
@@ -917,7 +917,7 @@ a:hover {
 .m-press-title {
   font-size: 15px;
   line-height: 19px;
-  color: #666666; }
+  color: #666; }
 
 .m-press-meta {
   font-style: italic;
@@ -963,68 +963,67 @@ a:hover {
     font-size: 12px;
     font-weight: 400; }
 
-.consortium-homepage header {
-  margin-bottom: 15px; }
-  .consortium-homepage header .m-main-menu {
-    width: 400px; }
-    .consortium-homepage header .m-main-menu a {
-      letter-spacing: .5px; }
-.consortium-homepage #consortium-logo {
-  width: 600px; }
-.consortium-homepage .consortium-tagline {
-  width: 350px;
-  float: right;
-  font-size: 20px;
-  font-family: "Exo", sans-serif;
-  font-weight: 100;
-  font-style: italic;
-  text-align: right;
-  line-height: 26px; }
-.consortium-homepage .countries {
-  margin-top: 100px;
-  margin-bottom: 100px;
-  clear: both;
+.b-third {
+  box-sizing: border-box;
+  float: left;
+  width: calc(33.3% - 20px);
+  margin: 0 10px; }
+
+#govlab-logo {
+  height: 50px; }
+
+#international-homepage header {
+  height: 50px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.2); }
+#international-homepage .b-section {
+  margin-bottom: 40px; }
+#international-homepage .b-country-selector {
+  overflow: hidden; }
+#international-homepage .b-country {
   text-align: center; }
-.consortium-homepage .country-link-outer {
-  border: 8px solid rgba(71, 43, 116, 0.4);
-  width: 262px;
-  height: 262px;
-  display: inline-block;
-  margin-right: 60px;
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+  #international-homepage .b-country h2 {
+    font-size: 20px;
+    font-weight: 400; }
+  #international-homepage .b-country p {
+    font-size: 1.4rem;
+    line-height: 1.3;
+    font-family: "Exo", sans-serif;
+    font-weight: 100; }
+  #international-homepage .b-country.m-disabled {
+    opacity: .3;
+    pointer-events: none; }
+#international-homepage .b-flag {
+  height: 220px;
+  width: 220px;
+  margin: 0 auto 20px;
+  border: 5px solid rgba(0, 0, 0, 0.2);
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
   border-radius: 50%; }
-  .consortium-homepage .country-link-outer .country-link {
-    width: 250px;
-    height: 250px;
-    overflow: hidden;
-    text-align: center;
-    border: 6px solid #472b74;
-    cursor: pointer;
-    box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+  #international-homepage .b-flag > div {
+    height: 220px;
+    width: 220px;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
-    border-radius: 50%; }
-    .consortium-homepage .country-link-outer .country-link img {
-      opacity: .4;
-      position: relative; }
-  .consortium-homepage .country-link-outer:last-child {
-    margin-right: 0; }
-  .consortium-homepage .country-link-outer.canada img {
-    width: 150%;
-    bottom: -30px;
-    left: -25%; }
-  .consortium-homepage .country-link-outer.mexico img {
-    bottom: -17px;
-    width: 151%;
-    left: -26%; }
-  .consortium-homepage .country-link-outer.us img {
-    width: 190%;
-    left: -25%;
-    bottom: 0px; }
-  .consortium-homepage .country-link-outer:hover .country-link img {
-    opacity: 1; }
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat; }
+  #international-homepage .b-flag.m-us > div {
+    background-image: url("/static/img/us-flag.png"); }
+  #international-homepage .b-flag.m-mx > div {
+    background-image: url("/static/img/mexico-flag.png"); }
+  #international-homepage .b-flag.m-au > div {
+    background-image: url("/static/img/australia-flag.png"); }
+#international-homepage .b-country:hover .b-flag {
+  border-color: #472b74;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); }
+@media only screen and (max-width: 760px) {
+  #international-homepage .b-third {
+    box-sizing: border-box;
+    float: none;
+    width: calc(100% - 60px);
+    margin: 30px; } }
 
 #roundtables .rt-logo {
   width: 500px;
@@ -1047,7 +1046,7 @@ a:hover {
 #roundtables section {
   padding-bottom: 23px;
   margin-bottom: 35px;
-  border-bottom: 1px solid #aaaaaa; }
+  border-bottom: 1px solid #aaa; }
 #roundtables p, #roundtables li {
   font-size: 16px;
   line-height: 22px; }
@@ -1064,7 +1063,7 @@ a:hover {
   text-align: center;
   margin-bottom: 50px;
   font-style: italic;
-  color: #666666; }
+  color: #666; }
 #roundtables blockquote {
   font-size: 24px;
   line-height: 30px;
@@ -1111,13 +1110,13 @@ a:hover {
     font-size: 12px;
     line-height: 16px;
     font-style: italic;
-    color: #666666;
+    color: #666;
     border-top: 1px solid rgba(0, 0, 0, 0.15);
     background-color: rgba(255, 255, 255, 0.5); }
     #roundtables .roundtable-attendees li span {
       display: block;
       font-size: 16px;
-      color: #444444;
+      color: #444;
       font-style: normal;
       line-height: 20px; }
   #roundtables .roundtable-attendees li:nth-child(2n) {
@@ -1137,7 +1136,7 @@ a:hover {
   font-size: 86px;
   background-color: #472b74;
   font-family: "Exo", sans-serif;
-  color: white;
+  color: #fff;
   width: 80px;
   text-align: center; }
 
@@ -1170,7 +1169,7 @@ a:hover {
     left: 0;
     background-color: rgba(0, 0, 0, 0.6);
     padding: 5px 10px;
-    color: white;
+    color: #fff;
     font-family: "Exo", sans-serif;
     font-weight: 100;
     width: 300px; }
@@ -1178,7 +1177,7 @@ a:hover {
       font-size: 16px;
       line-height: 22px; }
     .event-picture-container figcaption em {
-      color: white; }
+      color: #fff; }
 
 #roundtables-first-paragraph {
   letter-spacing: -0.05px; }
@@ -1393,7 +1392,7 @@ header {
       border-color: #8977a7;
       background-color: rgba(255, 255, 255, 0.5); }
     #mc_embed_signup form input[type="email"]:focus {
-      background-color: white; }
+      background-color: #fff; }
     #mc_embed_signup form .m-button {
       width: 40px;
       display: inline-block;
@@ -1410,7 +1409,7 @@ header {
       border-radius: 0 4px 4px 0; }
     #mc_embed_signup form .m-button:hover {
       background-color: #472b74;
-      color: white;
+      color: #fff;
       border-color: #472b74; }
   #mc_embed_signup #mce-responses .response {
     position: absolute;
@@ -1482,16 +1481,16 @@ header {
     transform: rotate(-90deg); }
 
 footer {
-  background-color: #444444;
+  background-color: #444;
   padding: 20px 0;
   overflow: hidden;
   clear: both;
   margin-top: 30px;
-  color: #aaaaaa; }
+  color: #aaa; }
   footer a {
-    color: #aaaaaa; }
+    color: #aaa; }
   footer a:hover {
-    color: white; }
+    color: #fff; }
   footer .m-footer-logos {
     float: left; }
     footer .m-footer-logos img {
@@ -1528,3 +1527,5 @@ footer {
     height: auto; }
   .m-international-page .first-title {
     margin-top: 20px; }
+
+/*# sourceMappingURL=styles.css.map */
