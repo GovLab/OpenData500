@@ -93,7 +93,6 @@
         </div>
     </section>
 	<script type="text/javascript">
-
 		var data;
 		d3.json("{{ static_url('files/mx_matrix.json') }}", function(error, json) {
 		    if (error) return console.warn(error);
@@ -159,8 +158,8 @@
 		        .attr("dy", ".35em")
 		        .attr("transform", function(d) { return d.angle > Math.PI ? "rotate(180)translate(-16)" : null; })
 		        .style("text-anchor", function(d) { return d.angle > Math.PI ? "end" : null; })
-		        .text(function(d) { return abbreviate(d.label); })
-		        .filter(function(d, i) { return d.angleDiff < .027 })
+		        .text(function(d) { return d.label; })
+		        .filter(function(d, i) { return d.angleDiff < .017 })
 		        .remove();
 
 		    //var chord = svg.append("g")
@@ -207,29 +206,5 @@
 		            && p.target.index != i;
 		      });
 		    }
-			function abbreviate(name) {
-				var abbreviations = [
-			        {"Secretaría":"Sec."},
-			        {"Instituto":"Inst."},
-			        {"Comunicaciones":"Com."},
-			        {"Federal":"Fed."},
-			        {"Nacional":"Nal."},
-			        {"República":"Rep."},
-			        {"Comisión":"Com."},
-			        {"General":"Gral."},
-			        {"Consejo":"Cons."},
-			        {"Justicia":"Just."},
-			        {"Nación":"Nac."}
-			    ]
-				for (var i in abbreviations) {
-					var abb = abbreviations[i];
-					if (name.length < 25) {
-						return name;
-					} else {
-						name = name.replace(Object.keys(abb)[0], abb[Object.keys(abb)[0]]);
-					}
-				}
-				return name;
-			}
 		}
 	</script>

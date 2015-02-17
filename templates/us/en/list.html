@@ -310,9 +310,9 @@
                 .style("position", "absolute")
                 .style("z-index", "1000")
                 .style("padding", "5px")
-                .style("font-family", "Arial")
-                .style("font-size", "12px")
-                .style("color", "#000");
+                .style("font-family", hoverLabelFont)
+                .style("font-size", hoverLabelSize)
+                .style("color", hoverLabelColor);
                 
             queue()
                 .defer(d3.json, "{{ static_url("files/us_states.json") }}")

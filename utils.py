@@ -267,12 +267,25 @@ abbreviations = {
 class Tools(object):
     @classmethod
     def abbreviate(self, name, country):
+        original = name
         for abbrev in abbreviations[country]:
             if len(name) < 32:
                 return name
             else:
                 logging.info(type(abbrev.keys()[0]))
                 name = re.sub(r"{}".format(abbrev.keys()[0]), abbrev.values()[0], name)
+        if len(name) > 34:
+            try:
+                name = models.Agency.objects(name=original).only('abbrev').first().abbrev
+            except Exception, e:
+                print "Could not get abbrev for " + name
+                print "Because: " + str(e)
+        return name
+
+    @classmethod
+    def de_abbreviate(self, name, country):
+        for abbrev in abbreviations[country]:
+            name = re.sub(r"{}".format(abbrev.values()[0]), abbrev.keys()[0], name)
         return name
 
     def re_do_filters(self, country):

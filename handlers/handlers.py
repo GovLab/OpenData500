@@ -172,30 +172,31 @@ class ListHandler(BaseHandler):
             lan=lan
         )
 
-#--------------------------------------------------------CHART PAGE------------------------------------------------------------
-class ChartHandler(BaseHandler):
-    @tornado.web.addslash
-    def get(self, country=None):
-        country = self.load_country(country)
-        settings = self.load_settings(country)
-        lan = self.load_language(country, self.get_argument("lan", None), settings)
-        try: 
-            visit = models.Visit()
-            if self.request.headers.get('Referer'):
-                visit.r = self.request.headers.get('Referer')
-                logging.info("Chart requested from: " + self.request.headers.get('Referer'))
-            else:
-                visit.r = ''
-                logging.info("Chart requested from: Cannot get referer")
-            visit.p = "/chart/"
-            visit.ua = self.request.headers.get('User-Agent')
-            visit.ip = self.request.headers.get('X-Forwarded-For', self.request.headers.get('X-Real-Ip', self.request.remote_ip))
-            if visit.r != "http://www.opendata500.com/" or visit.r != "http://www.opendata500.com":
-                visit.save()
-        except Exception, e:
-            logging.info("Could not save visit information: " + str(e))
-        finally:
-            self.render("solo_chart.html", country=country)
+# #--------------------------------------------------------CHART PAGE------------------------------------------------------------
+# class ChartHandler(BaseHandler):
+#     @tornado.web.addslash
+#     def get(self, country=None):
+#         logging.info("asdwefwreg")
+#         country = self.load_country(country)
+#         settings = self.load_settings(country)
+#         lan = self.load_language(country, self.get_argument("lan", None), settings)
+#         try: 
+#             visit = models.Visit()
+#             if self.request.headers.get('Referer'):
+#                 visit.r = self.request.headers.get('Referer')
+#                 logging.info("Chart requested from: " + self.request.headers.get('Referer'))
+#             else:
+#                 visit.r = ''
+#                 logging.info("Chart requested from: Cannot get referer")
+#             visit.p = "/chart/"
+#             visit.ua = self.request.headers.get('User-Agent')
+#             visit.ip = self.request.headers.get('X-Forwarded-For', self.request.headers.get('X-Real-Ip', self.request.remote_ip))
+#             if visit.r != "http://www.opendata500.com/" or visit.r != "http://www.opendata500.com":
+#                 visit.save()
+#         except Exception, e:
+#             logging.info("Could not save visit information: " + str(e))
+#         finally:
+#             self.render("solo_chart.html", country=country)
 
 
 #--------------------------------------------------------VALIDATE COMPANY EXISTS PAGE------------------------------------------------------------
