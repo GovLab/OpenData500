@@ -272,7 +272,6 @@ class Tools(object):
             if len(name) < 32:
                 return name
             else:
-                logging.info(type(abbrev.keys()[0]))
                 name = re.sub(r"{}".format(abbrev.keys()[0]), abbrev.values()[0], name)
         if len(name) > 34:
             try:
