@@ -23,6 +23,9 @@ class TestHandler(BaseHandler):
     @tornado.web.addslash
     #@tornado.web.authenticated
     def get(self, number):
+        country = self.load_country('us')
+        settings = self.load_settings('us')
+        lan = self.load_language(country, self.get_argument("lan", None), settings)
         with open("templates/us/settings.json") as json_file:
             settings = json.load(json_file)
         self.render(
