@@ -194,7 +194,7 @@
         this.StateBaseColor = 'rgb(218,218,235)';
         this.StateMaxColor = 'rgb(63,0,125)';
         this.Range = 61;
-        this.LineThickness = "1px";
+        this.LineThickness = "1.5px";
         this.LineColor = '#888';
         //Labels
         this.ChartTitle = true;
@@ -310,13 +310,11 @@
             group.attr('transform', 'translate(' + margin.left + ', ' + margin.top + '),scale(' + size + ', ' + size + ')');
             
 
-            var colors = ['#fff', '#efedf5', '#dadaeb', '#bcbddc', 
-                            '#9e9ac8', '#807dba', '#6a51a3', '#54278f',
-                            '#3f007d']
+            var colors = ['#fff','#9e9ac8', '#807dba', '#6a51a3', '#54278f', '#3f007d']
             var maxVal = d3.max(data, function(d) { return d.VALUE; });
             var minVal = d3.min(data, function(d) { return d.VALUE; });
             var color = d3.scale.threshold()
-                .domain([1, 2, maxVal/7, 2*maxVal/7, 3*maxVal/7, 4*maxVal/7, 5*maxVal/7, 6*maxVal/7, maxVal+1 ])
+                .domain([1, 2, maxVal/colors.length, 2*maxVal/colors.length, 3*maxVal/colors.length, maxVal+1 ])
                 .range(colors);
             
             var number = d3.format("0,000");
