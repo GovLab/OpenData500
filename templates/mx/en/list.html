@@ -340,6 +340,7 @@
             group.attr('transform', 'translate(' + margin.left + ', ' + margin.top + '),scale(' + size + ', ' + size + ')');
             
             var colors = ['#fff','#9e9ac8', '#807dba', '#6a51a3', '#54278f', '#3f007d']
+            // var colors = ['#fff', '#c7e9c0', '#a1d99b', '#74c476', '#31a354', '#006d2c']
             var maxVal = d3.max(data, function(d) { return d.VALUE; });
             var minVal = d3.min(data, function(d) { return d.VALUE; });
             var color = d3.scale.threshold()
