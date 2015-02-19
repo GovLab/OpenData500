@@ -159,8 +159,12 @@
 		        .attr("transform", function(d) { return d.angle > Math.PI ? "rotate(180)translate(-16)" : null; })
 		        .style("text-anchor", function(d) { return d.angle > Math.PI ? "end" : null; })
 		        .text(function(d) { return d.label; })
-		        .filter(function(d, i) { return d.angleDiff < .027 })
+		        .filter(function(d, i) { return d.angleDiff < .022 })
 		        .remove();
+
+		    // ticks.on('mouseover', function(d) {
+
+		    // });
 
 		    //var chord = svg.append("g")
 		    var chord = svg.selectAll(".chord")
