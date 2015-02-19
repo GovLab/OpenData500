@@ -1,0 +1,704 @@
+agency_name,agency_abbrev,agency_type,subagency_name,subagency_abbrev,url,used_by,used_by_category,used_by_fte,dataset_name,dataset_url
+Comisión Federal de Electricidad,CFE,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=cfe,Exponential Knowledge,Investigación y Consultoría,1-10,Proveedores,http://www.cfe.gob.mx/Proveedores/4_Informaciongeneral/Paginas/Proveedoes.aspx
+Comisión Federal de Electricidad,CFE,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=cfe,Data4,Tecnología/Datos,1-10,,
+Comisión Federal de Electricidad,CFE,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=cfe,El Instituto Mexicano para la Competitividad A.C. (IMCO),Investigación y Consultoría,11-50,,
+Comisión Federal de Electricidad,CFE,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=cfe,Atlantia Search,Tecnología/Datos,1-10,,
+Comisión Federal de Electricidad,CFE,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=cfe,McKinsey & Company,Investigación y Consultoría,"10,001+",,
+Comisión Federal de Electricidad,CFE,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=cfe,Telefónica,Medios y Comunicación,"10,001+",,
+Comisión Federal de Electricidad,CFE,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=cfe,Banorte-Ixe,Finanzas e Inversiones,"10,001+",,
+Comisión Federal de Electricidad,CFE,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=cfe,Marcos y Asociados,Energía,11-50,,
+Comisión Federal de Electricidad,CFE,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=cfe,Cámara Mexicana de la Industria de la Construcción,,,,
+Comisión Federal de Electricidad,CFE,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=cfe,Centro de Investigación para el Desarrollo (CIDAC),Investigación y Consultoría,11-50,,
+Comisión Federal de Electricidad,CFE,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=cfe,Centro de Estudios Jurídicos y Ambientales (CEJA),Clima y Medio Ambiente,,,
+Nacional Financiera,NAFIN,Federal,General,,http://catalogo.datos.gob.mx/organization/nafin,CREA,Educación,11-50,,
+Nacional Financiera,NAFIN,Federal,General,,http://catalogo.datos.gob.mx/organization/nafin,Centro de Investigación para el Desarrollo (CIDAC),Investigación y Consultoría,11-50,,
+ProMéxico,,Federal,General,,http://catalogo.datos.gob.mx/organization/promexico,Deloitte,Investigación y Consultoría,"501-1,000",Estudios Sectoriales,
+ProMéxico,,Federal,General,,http://catalogo.datos.gob.mx/organization/promexico,Atlantia Search,Tecnología/Datos,1-10,,
+ProMéxico,,Federal,General,,http://catalogo.datos.gob.mx/organization/promexico,Accenture,Investigación y Consultoría,"10,001+",,
+Secretaría de la Defensa Nacional,SEDENA,Federal,General,,,Cuadra Urbanismo,Investigación y Consultoría,11-50,,
+Secretaría de la Defensa Nacional,SEDENA,Federal,General,,,DVVIMSS,Salud,1-10,,
+Secretaría de la Defensa Nacional,SEDENA,Federal,General,,,Fundar Centro de Análisis e Investigación,Investigación y Consultoría,11-50,,
+Instituto Nacional Electoral,INE,Federal,General,,http://www.ine.mx/es/web/portal/inicio,MapData,Mapeo/Geoespacial,11-50,Resultados Electorales,http://www.ine.mx/archivos3/portal/historico/contenido/Historico_de_Resultados_Electorales/
+Instituto Nacional Electoral,INE,Federal,General,,http://www.ine.mx/es/web/portal/inicio,Cartográfica,Mapeo/Geoespacial,1-10,Cómputos Distritales 1991-2012,http://www.ine.mx/archivos3/portal/historico/contenido/Historico_de_Resultados_Electorales/
+Instituto Nacional Electoral,INE,Federal,General,,http://www.ine.mx/es/web/portal/inicio,kubo.financiero,Finanzas e Inversiones,11-50,Consulta de validez,http://listanominal.ife.org.mx/
+Instituto Nacional Electoral,INE,Federal,Instituto Estatal Electoral de Aguascalientes,IEEAGS,http://www.ieeags.org.mx/,Telus,Investigación y Consultoría,1-10,,
+Instituto Nacional Electoral,INE,Federal,Instituto Estatal Electoral de Aguascalientes,IEEAGS,http://www.ieeags.org.mx/,Confederación Patronal de la República Mexicana (COPARMEX),Servicios Empresariales,51-200,,
+Instituto Nacional Electoral,INE,Federal,Instituto Estatal Electoral Baja California,IIEBC,www.ieebc.org.mx,Telus,Investigación y Consultoría,1-10,,
+Instituto Nacional Electoral,INE,Federal,Instituto Estatal Electoral Baja California,IIEBC,www.ieebc.org.mx,Confederación Patronal de la República Mexicana (COPARMEX),Servicios Empresariales,51-200,,
+Instituto Nacional Electoral,INE,Federal,Instituto Electoral del Estado de Campeche,IEEC,www.ieec.org.mx,Telus,Investigación y Consultoría,1-10,,
+Instituto Nacional Electoral,INE,Federal,Instituto Electoral del Estado de Campeche,IEEC,www.ieec.org.mx,Confederación Patronal de la República Mexicana (COPARMEX),Servicios Empresariales,51-200,,
+Instituto Nacional Electoral,INE,Federal,Instituto Estatal Electoral de Chiapas,IEE-CHIAPAS,www.iee-chiapas.org.mx,Telus,Investigación y Consultoría,1-10,,
+Instituto Nacional Electoral,INE,Federal,Instituto Estatal Electoral de Chiapas,IEE-CHIAPAS,www.iee-chiapas.org.mx,Confederación Patronal de la República Mexicana (COPARMEX),Servicios Empresariales,51-200,,
+Instituto Nacional Electoral,INE,Federal,Instituto Estatal Electoral Chihuahua,www.ieechihuahua.org.mx,IEECHIHUAHUA,Telus,Investigación y Consultoría,1-10,,
+Instituto Nacional Electoral,INE,Federal,Instituto Estatal Electoral Chihuahua,www.ieechihuahua.org.mx,IEECHIHUAHUA,Confederación Patronal de la República Mexicana (COPARMEX),Servicios Empresariales,51-200,,
+Instituto Nacional Electoral,INE,Federal,Instituto Electoral y de Participación Ciudadana de Coahuila,IEPCC,www.iepcc.org.mx,Telus,Investigación y Consultoría,1-10,,
+Instituto Nacional Electoral,INE,Federal,Instituto Electoral y de Participación Ciudadana de Coahuila,IEPCC,www.iepcc.org.mx,Confederación Patronal de la República Mexicana (COPARMEX),Servicios Empresariales,51-200,,
+Instituto Nacional Electoral,INE,Federal,Instituto Electoral del Estado de Colima,IEECOLIMA,www.ieecolima.org.mx,Telus,Investigación y Consultoría,1-10,,
+Instituto Nacional Electoral,INE,Federal,Instituto Electoral del Estado de Colima,IEECOLIMA,www.ieecolima.org.mx,Confederación Patronal de la República Mexicana (COPARMEX),Servicios Empresariales,51-200,,
+Instituto Nacional Electoral,INE,Federal,Instituto Electoral del Distrito Federal,IEDF,www.iedf.org.mx,Data4,Tecnología/Datos,1-10,polígonos de colonias,
+Instituto Nacional Electoral,INE,Federal,Instituto Electoral del Distrito Federal,IEDF,www.iedf.org.mx,Telus,Investigación y Consultoría,1-10,,
+Instituto Nacional Electoral,INE,Federal,Instituto Electoral del Distrito Federal,IEDF,www.iedf.org.mx,Confederación Patronal de la República Mexicana (COPARMEX),Servicios Empresariales,51-200,,
+Instituto Nacional Electoral,INE,Federal,Instituto Estatal Electoral Durango,IEEDGO,www.ieedgo.org.mx,Telus,Investigación y Consultoría,1-10,,
+Instituto Nacional Electoral,INE,Federal,Instituto Estatal Electoral Durango,IEEDGO,www.ieedgo.org.mx,Confederación Patronal de la República Mexicana (COPARMEX),Servicios Empresariales,51-200,,
+Instituto Nacional Electoral,INE,Federal,Instituto Electoral del Estado de México,IEEM,www.ieem.org.mx,Telus,Investigación y Consultoría,1-10,,
+Instituto Nacional Electoral,INE,Federal,Instituto Electoral del Estado de México,IEEM,www.ieem.org.mx,Confederación Patronal de la República Mexicana (COPARMEX),Servicios Empresariales,51-200,,
+Instituto Nacional Electoral,INE,Federal,Instituto Electoral del Estado de Guanajuato,IEEG,www.ieeg.org.mx,Telus,Investigación y Consultoría,1-10,,
+Instituto Nacional Electoral,INE,Federal,Instituto Electoral del Estado de Guanajuato,IEEG,www.ieeg.org.mx,Confederación Patronal de la República Mexicana (COPARMEX),Servicios Empresariales,51-200,,
+Instituto Nacional Electoral,INE,Federal,Consejo Estatal Electoral en Guerrero,CEEGRO,www.ceegro.org.mx,Telus,Investigación y Consultoría,1-10,,
+Instituto Nacional Electoral,INE,Federal,Consejo Estatal Electoral en Guerrero,CEEGRO,www.ceegro.org.mx,Confederación Patronal de la República Mexicana (COPARMEX),Servicios Empresariales,51-200,,
+Instituto Nacional Electoral,INE,Federal,Instituto Estatal Electoral del Estado de Hidalgo,IEEHIDALGO,www.ieehidalgo.org.mx,Telus,Investigación y Consultoría,1-10,,
+Instituto Nacional Electoral,INE,Federal,Instituto Estatal Electoral del Estado de Hidalgo,IEEHIDALGO,www.ieehidalgo.org.mx,Confederación Patronal de la República Mexicana (COPARMEX),Servicios Empresariales,51-200,,
+Instituto Nacional Electoral,INE,Federal,Instituto Electoral del Estado de Jalisco,CEEJ,www.ceej.org.mx,Telus,Investigación y Consultoría,1-10,,
+Instituto Nacional Electoral,INE,Federal,Instituto Electoral del Estado de Jalisco,CEEJ,www.ceej.org.mx,Zapopan Lab,Tecnología/Datos,1-10,,
+Instituto Nacional Electoral,INE,Federal,Instituto Electoral del Estado de Jalisco,CEEJ,www.ceej.org.mx,Confederación Patronal de la República Mexicana (COPARMEX),Servicios Empresariales,51-200,,
+Instituto Nacional Electoral,INE,Federal,Instituto Electoral de Michoacán,IEM,www.iem.org.mx,Telus,Investigación y Consultoría,1-10,,
+Instituto Nacional Electoral,INE,Federal,Instituto Electoral de Michoacán,IEM,www.iem.org.mx,Confederación Patronal de la República Mexicana (COPARMEX),Servicios Empresariales,51-200,,
+Instituto Nacional Electoral,INE,Federal,Instituto Estatal Electoral Morelos,IEEMORELOS,www.ieemorelos.org.mx,Telus,Investigación y Consultoría,1-10,,
+Instituto Nacional Electoral,INE,Federal,Instituto Estatal Electoral Morelos,IEEMORELOS,www.ieemorelos.org.mx,Confederación Patronal de la República Mexicana (COPARMEX),Servicios Empresariales,51-200,,
+Instituto Nacional Electoral,INE,Federal,Consejo Estatal Electoral de Nayarit,CEEN,www.ceen.uan.edu.mx,Telus,Investigación y Consultoría,1-10,,
+Instituto Nacional Electoral,INE,Federal,Consejo Estatal Electoral de Nayarit,CEEN,www.ceen.uan.edu.mx,Confederación Patronal de la República Mexicana (COPARMEX),Servicios Empresariales,51-200,,
+Instituto Nacional Electoral,INE,Federal,Comisión Estatal Electoral de Nuevo León,CEE-NL,www.cee-nl.org.mx,Telus,Investigación y Consultoría,1-10,,
+Instituto Nacional Electoral,INE,Federal,Comisión Estatal Electoral de Nuevo León,CEE-NL,www.cee-nl.org.mx,Confederación Patronal de la República Mexicana (COPARMEX),Servicios Empresariales,51-200,,
+Instituto Nacional Electoral,INE,Federal,Instituto Estatal Electoral de Oaxaca,IEE-OAX,www.iee-oax.org.mx,Telus,Investigación y Consultoría,1-10,,
+Instituto Nacional Electoral,INE,Federal,Instituto Estatal Electoral de Oaxaca,IEE-OAX,www.iee-oax.org.mx,Confederación Patronal de la República Mexicana (COPARMEX),Servicios Empresariales,51-200,,
+Instituto Nacional Electoral,INE,Federal,Instituto Electoral del Estado de Puebla,IEEPUEBLA,www.ieepuebla.org.mx,Telus,Investigación y Consultoría,1-10,,
+Instituto Nacional Electoral,INE,Federal,Instituto Electoral del Estado de Puebla,IEEPUEBLA,www.ieepuebla.org.mx,Confederación Patronal de la República Mexicana (COPARMEX),Servicios Empresariales,51-200,,
+Instituto Nacional Electoral,INE,Federal,Instituto Electoral de Querétaro,IEQ,www.ieq.org.mx,Telus,Investigación y Consultoría,1-10,,
+Instituto Nacional Electoral,INE,Federal,Instituto Electoral de Querétaro,IEQ,www.ieq.org.mx,Confederación Patronal de la República Mexicana (COPARMEX),Servicios Empresariales,51-200,,
+Instituto Nacional Electoral,INE,Federal,Instituto Electoral de Quintana Roo,IEQROO,www.ieqroo.org.mx,Telus,Investigación y Consultoría,1-10,,
+Instituto Nacional Electoral,INE,Federal,Instituto Electoral de Quintana Roo,IEQROO,www.ieqroo.org.mx,Confederación Patronal de la República Mexicana (COPARMEX),Servicios Empresariales,51-200,,
+Instituto Nacional Electoral,INE,Federal,Consejo Estatal Electoral de San Luis Potosí,CEE-SLP,www.cee-slp.org,Telus,Investigación y Consultoría,1-10,,
+Instituto Nacional Electoral,INE,Federal,Consejo Estatal Electoral de San Luis Potosí,CEE-SLP,www.cee-slp.org,Confederación Patronal de la República Mexicana (COPARMEX),Servicios Empresariales,51-200,,
+Instituto Nacional Electoral,INE,Federal,Consejo Estatal Electoral de Sinaloa,CEE-SINALOA,www.cee-sinaloa.org,Telus,Investigación y Consultoría,1-10,,
+Instituto Nacional Electoral,INE,Federal,Consejo Estatal Electoral de Sinaloa,CEE-SINALOA,www.cee-sinaloa.org,Confederación Patronal de la República Mexicana (COPARMEX),Servicios Empresariales,51-200,,
+Instituto Nacional Electoral,INE,Federal,Consejo Estatal Electoral del Estado de Sonora,CEESONORA,www.ceesonora.org.mx,Telus,Investigación y Consultoría,1-10,,
+Instituto Nacional Electoral,INE,Federal,Instituto Electoral y de Participación Ciudadana de Tabasco,IEPCT,www.iepct.org.mx,Telus,Investigación y Consultoría,1-10,,
+Instituto Nacional Electoral,INE,Federal,Instituto Electoral y de Participación Ciudadana de Tabasco,IEPCT,www.iepct.org.mx,Confederación Patronal de la República Mexicana (COPARMEX),Servicios Empresariales,51-200,,
+Instituto Nacional Electoral,INE,Federal,Instituto Estatal Electoral de Tamaulipas,IEETAM,www.ieetam.org.mx,Telus,Investigación y Consultoría,1-10,,
+Instituto Nacional Electoral,INE,Federal,Instituto Estatal Electoral de Tamaulipas,IEETAM,www.ieetam.org.mx,Confederación Patronal de la República Mexicana (COPARMEX),Servicios Empresariales,51-200,,
+Instituto Nacional Electoral,INE,Federal,Instituto Electoral de Tlaxcala,IETLAX,www.ietlax.org.mx,Telus,Investigación y Consultoría,1-10,,
+Instituto Nacional Electoral,INE,Federal,Instituto Electoral de Tlaxcala,IETLAX,www.ietlax.org.mx,Confederación Patronal de la República Mexicana (COPARMEX),Servicios Empresariales,51-200,,
+Instituto Nacional Electoral,INE,Federal,Instituto Electoral Veracruzano,IEV,www.iev.org.mx,Telus,Investigación y Consultoría,1-10,,
+Instituto Nacional Electoral,INE,Federal,Instituto Electoral Veracruzano,IEV,www.iev.org.mx,Confederación Patronal de la República Mexicana (COPARMEX),Servicios Empresariales,51-200,,
+Instituto Nacional Electoral,INE,Federal,Instituto Electoral del Estado de Yucatán,IEEY,www.ieey.org.mx,Telus,Investigación y Consultoría,1-10,,
+Instituto Nacional Electoral,INE,Federal,Instituto Electoral del Estado de Yucatán,IEEY,www.ieey.org.mx,Confederación Patronal de la República Mexicana (COPARMEX),Servicios Empresariales,51-200,,
+Instituto Nacional Electoral,INE,Federal,Instituto Electoral del Estado de Zacatecas,IEEZ,www.ieez.org.mx,Telus,Investigación y Consultoría,1-10,,
+Instituto Nacional Electoral,INE,Federal,Instituto Electoral del Estado de Zacatecas,IEEZ,www.ieez.org.mx,Confederación Patronal de la República Mexicana (COPARMEX),Servicios Empresariales,51-200,,
+Instituto Nacional Electoral,INE,Federal,General,,http://www.ine.mx/es/web/portal/inicio,Kueski,Finanzas e Inversiones,11-50,,
+Instituto Nacional Electoral,INE,Federal,General,,http://www.ine.mx/es/web/portal/inicio,Aspiria,Finanzas e Inversiones,1-10,,
+Instituto Nacional Electoral,INE,Federal,General,,http://www.ine.mx/es/web/portal/inicio,Abison Burke,Investigación y Consultoría,51-200,,
+Instituto Nacional Electoral,INE,Federal,General,,http://www.ine.mx/es/web/portal/inicio,Fundar Centro de Análisis e Investigación,Investigación y Consultoría,11-50,,
+Universidad Nacional Autónoma de México,UNAM,University/Institution,General,,http://www.unam.mx,Cartográfica,Mapeo/Geoespacial,1-10,Alumnos que solicitaron ingreso y fueron adminitidos,http://www.estadistica.unam.mx/
+Universidad Autónoma Metropolitana,UAM,University/Institution,General,,http://www.uam.mx,Cartográfica,Mapeo/Geoespacial,1-10,Alumnos que solicitaron ingreso y fueron adminitidos,http://www.uam.mx/transparencia/
+Servicio Sismológico Nacional,SSN,Federal,General,,http://www.ssn.unam.mx,Cartográfica,Mapeo/Geoespacial,1-10,Sismos registrados en México entre 1998 y la actualidad,http://www.ssn.unam.mx/
+Cámara de Diputados,,Federal,General,,http://www.diputados.gob.mx,Cartográfica,Mapeo/Geoespacial,1-10,Número de artículos de la Constitución mexicana reformados anualmente,http://www.diputados.gob.mx/LeyesBiblio/ref/cpeum_per.htm
+Cámara de Diputados,,Federal,General,,http://www.diputados.gob.mx,Cartográfica,Mapeo/Geoespacial,1-10,Votaciones de la Cámara de Diputados,gaceta.diputados.gob.mx
+Cámara de Diputados,,Federal,General,,http://www.diputados.gob.mx,Exponential Knowledge,Investigación y Consultoría,1-10,Sistema de Información Legislativa,http://sil.gobernacion.gob.mx/portal
+Cámara de Diputados,,Federal,General,,http://www.diputados.gob.mx,México Evalua,Investigación y Consultoría,1-10,Indicadores y Estadísticas Históricas,http://www3.diputados.gob.mx/camara/001_diputados/006_centros_de_estudio/02_centro_de_estudios_de_finanzas_publicas__1/005_indicadores_y_estadisticas/01_historicas
+Cámara de Diputados,,Federal,Auditoria Superior de la Federación,ASF,http://www.asf.gob.mx/Default/Index,Exponential Knowledge,Investigación y Consultoría,1-10,Cuentas Públicas,http://www.asf.gob.mx/Section/58_Informes_de_auditoria
+Cámara de Diputados,,Federal,General,,http://www.diputados.gob.mx,Instituto Mexicano de Ejecutivos de Finanzas (IMEF),Finanzas e Inversiones,201-500,,
+Cámara de Senadores,,Federal,General,,http://www.senado.gob.mx,Cartográfica,Mapeo/Geoespacial,1-10,Votaciones de la Cámara de Senadores,http://www.senado.gob.mx/index.php?ver=sp&mn=2&sm=1
+Secretaría de Desarrollo Económico del DF,SEDECO,City/County,General,,http://www.sedecodf.gob.mx/sedeco/,"Abt Associates, Inc",Investigación y Consultoría,1-10,Beneficiarios Fondeso,
+"Municipio de Lerma, Estado de México",,City/County,General,,,"Abt Associates, Inc",Investigación y Consultoría,1-10,,
+"Municipio de Chalco, Estado de México",,City/County,General,,,"Abt Associates, Inc",Investigación y Consultoría,1-10,,
+"Municipio de Tenango del Valle, Estado de México",,City/County,General,,,"Abt Associates, Inc",Investigación y Consultoría,1-10,,
+"Municipio de Toluca, Estado de México",,City/County,General,,,"Abt Associates, Inc",Investigación y Consultoría,1-10,,
+"Municipio de Huixquilucan, Estado de México",,City/County,General,,,"Abt Associates, Inc",Investigación y Consultoría,1-10,,
+"Municipio de Metepec, Estado de México",,City/County,General,,,"Abt Associates, Inc",Investigación y Consultoría,1-10,,
+"Municipio de Xalapa, Estado de Veracruz",,None,General,,,"Abt Associates, Inc",Investigación y Consultoría,1-10,,
+"Municipio de Zapopan, Estado de Jalisco",,City/County,General,,,"Abt Associates, Inc",Investigación y Consultoría,1-10,,
+"Municipio de Zapopan, Estado de Jalisco",,City/County,General,,,Zapopan Lab,Tecnología/Datos,1-10,,
+"Municipio de Zapopan, Estado de Jalisco",,City/County,General,,,Morlan,Tecnología/Datos,1-10,,
+Gobierno de Morelos,,State,General,,,"Abt Associates, Inc",Investigación y Consultoría,1-10,,
+"Municipio de San Luis Potosí, San Luis Potosí",,City/County,General,,,"Abt Associates, Inc",Investigación y Consultoría,1-10,,
+Suprema Corte de Justicia de la Nación,SCJN,Federal,Poder Judicial de la Federación de los Estados Unidos Mexicanos,,,Confederación Patronal de la República Mexicana (COPARMEX),Servicios Empresariales,51-200,Notas,http://www.te.gob.mx/gobernadores/bcs/data/notas.html
+Suprema Corte de Justicia de la Nación,SCJN,Federal,Poder Judicial de la Federación de los Estados Unidos Mexicanos,,,Buholegal,Servicios Legales,1-10,,
+Suprema Corte de Justicia de la Nación,SCJN,Federal,General,,https://www.scjn.gob.mx/Paginas/Inicio.aspx,El Instituto Mexicano para la Competitividad A.C. (IMCO),Investigación y Consultoría,11-50,,
+Poder Judicial del Estado de México,,State,General,,http://www.pjedomex.gob.mx/web2/,Buholegal,Servicios Legales,1-10,,
+Poder Judicial del Estado de Veracruz,,State,General,,https://www.pjeveracruz.gob.mx/,Buholegal,Servicios Legales,1-10,,
+Fideicomisos Instituidos en Relación con la Agricultura,FIRA,Federal,General,,http://www.fira.gob.mx/Nd/index.jsp,Agroclima,Seguros,1-10,,
+Instituto Federal de Telecomunicaciones,IFETEL,Federal,General,,http://www.ift.org.mx/iftweb/,"Asociación Mexicana de Internet, A.C.",Medios y Comunicación,11-50,,
+Presidencia de la República,,None,General,,http://en.presidencia.gob.mx,Fundar Centro de Análisis e Investigación,Investigación y Consultoría,11-50,Quinto Informe de Gobierno 2005,
+Presidencia de la República,,None,General,,http://en.presidencia.gob.mx,Ayoui,Tecnología/Datos,1-10,Trámites federales,http://www.datos.gob.mx/
+Presidencia de la República,,None,Programa Nacional de Infraestructura,PNI,http://presidencia.gob.mx/pni/fuentes-financiamiento.php?p=1,El Instituto Mexicano para la Competitividad A.C. (IMCO),Investigación y Consultoría,11-50,,
+Presidencia de la República,,None,Programa Nacional de Infraestructura,PNI,http://presidencia.gob.mx/pni/fuentes-financiamiento.php?p=1,Banorte-Ixe,Finanzas e Inversiones,"10,001+",,
+Presidencia de la República,,None,Programa Nacional de Infraestructura,PNI,http://presidencia.gob.mx/pni/fuentes-financiamiento.php?p=1,Marcos y Asociados,Energía,11-50,,
+Gobierno del Estado de Tabasco,,None,General,,http://www.tabasco.gob.mx/,Spectron Desarrollo,Investigación y Consultoría,1-10,,
+Instituto Mexicano del Seguro Social,IMSS,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=imss,Banamex,Finanzas e Inversiones,"10,001+",Empleo Formal,www.imss.com.mx
+Instituto Mexicano del Seguro Social,IMSS,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=imss,Banamex,Finanzas e Inversiones,"10,001+",Nómina Salarial y Salarios,www.imss.com.mx
+Instituto Mexicano del Seguro Social,IMSS,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=imss,Banamex,Finanzas e Inversiones,"10,001+",Empleo Formal por estrato salarial,www.imss.com.mx
+Instituto Mexicano del Seguro Social,IMSS,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=imss,Movimiento Congruencia,"Other,Recursos Humanos",1-10,Incentivos Fiscales (vía INFOMEX),
+Instituto Mexicano del Seguro Social,IMSS,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=imss,PLM Latinoamérica,Salud,51-200,Guías de Práctica Clínica,http://www.imss.gob.mx/profesionales-salud/gpc
+Instituto Mexicano del Seguro Social,IMSS,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=imss,El Instituto Mexicano para la Competitividad A.C. (IMCO),Investigación y Consultoría,11-50,,
+Instituto Mexicano del Seguro Social,IMSS,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=imss,Banorte-Ixe,Finanzas e Inversiones,"10,001+",,
+Instituto Mexicano del Seguro Social,IMSS,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=imss,Consejo Nacional Empresarial Turístico,Estilos de vida y Consumidores,11-50,,
+Instituto Mexicano del Seguro Social,IMSS,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=imss,DVVIMSS,Salud,1-10,,
+Instituto Mexicano del Seguro Social,IMSS,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=imss,Spectron Desarrollo,Investigación y Consultoría,1-10,,
+Instituto Mexicano del Seguro Social,IMSS,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=imss,EY,Servicios Empresariales,"10,001+",,
+Instituto Mexicano del Seguro Social,IMSS,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=imss,Cámara Mexicana de la Industria de la Construcción,,,,
+Instituto Mexicano del Seguro Social,IMSS,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=imss,TIS Consulting Group,Investigación y Consultoría,1-10,,
+Instituto Mexicano del Seguro Social,IMSS,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=imss,Transparencia Mexicana,Investigación y Consultoría,11-50,,
+Comisión de Cooperación Económica Fronteriza,COCEF,None,General,,http://www.cocef.org/,El Narval Mundial,Investigación y Consultoría,1-10,Emisiones de GEI en Nuevo León y proyecciones de casos de referencia,http://www.cocef.org/uploads/files/inventario_emisiones_gei_nuevo_leon_junio_2010.pdf
+Instituto de Seguridad y Servicios Sociales de los Trabajadores del Estado,ISSTE,Federal,Fondo de la Vivienda del Instituto de Seguridad y Servicios Sociales de los Trabajadores del Estado,FOVISSSTE,http://www.fovissste.gob.mx/,Cámara Mexicana de la Industria de la Construcción,,,,
+Instituto de Seguridad y Servicios Sociales de los Trabajadores del Estado,ISSTE,Federal,General,,,El Instituto Mexicano para la Competitividad A.C. (IMCO),Investigación y Consultoría,11-50,,
+Instituto de Seguridad y Servicios Sociales de los Trabajadores del Estado,ISSTE,Federal,General,,,Atlantia Search,Tecnología/Datos,1-10,,
+Instituto de Seguridad y Servicios Sociales de los Trabajadores del Estado,ISSTE,Federal,General,,,DVVIMSS,Salud,1-10,,
+Instituto de Seguridad y Servicios Sociales de los Trabajadores del Estado,ISSTE,Federal,General,,,México Evalua,Investigación y Consultoría,1-10,,
+Instituto de Seguridad y Servicios Sociales de los Trabajadores del Estado,ISSTE,Federal,General,,,Transparencia Mexicana,Investigación y Consultoría,11-50,,
+Sociedad Hipotecaria Federal,SHF,None,General,,http://www.shf.gob.mx/,Cámara Mexicana de la Industria de la Construcción,,,,
+"Secretaría de Agricultura, Ganadería, Desarrollo Rural, Pesca y Alimentación",SAGARPA,Federal,Servicio de Información Agroalimentaria y Pesquera,SIAP,http://www.siap.gob.mx/,TIS Consulting Group,Investigación y Consultoría,1-10,Produccion Anual,http://www.siap.gob.mx/agricultura-produccion-anual/
+"Secretaría de Agricultura, Ganadería, Desarrollo Rural, Pesca y Alimentación",SAGARPA,Federal,Servicio de Información Agroalimentaria y Pesquera,SIAP,http://www.siap.gob.mx/,Agroclima,Seguros,1-10,,
+"Secretaría de Agricultura, Ganadería, Desarrollo Rural, Pesca y Alimentación",SAGARPA,Federal,Servicio de Información Agroalimentaria y Pesquera,SIAP,http://www.siap.gob.mx/,Consejo Mexicano de la Carne,Agricultura y Alimentación,1-10,,
+"Secretaría de Agricultura, Ganadería, Desarrollo Rural, Pesca y Alimentación",SAGARPA,Federal,Instituto Nacional de Investigaciones Forestales Agrícolas y Pecuarias,INIFAP,http://www.inifap.gob.mx/SitePages/default.aspx,Agroclima,Seguros,1-10,,
+"Secretaría de Agricultura, Ganadería, Desarrollo Rural, Pesca y Alimentación",SAGARPA,Federal,Instituto Nacional de Investigaciones Forestales Agrícolas y Pecuarias,INIFAP,http://www.inifap.gob.mx/SitePages/default.aspx,InTA México,Agricultura y Alimentación,1-10,,
+"Secretaría de Agricultura, Ganadería, Desarrollo Rural, Pesca y Alimentación",SAGARPA,Federal,Comisión Nacional de Acuacultura y Pesca,CONAPESCA,http://www.conapesca.gob.mx/,TIS Consulting Group,Investigación y Consultoría,1-10,,
+"Secretaría de Agricultura, Ganadería, Desarrollo Rural, Pesca y Alimentación",SAGARPA,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=sagarpa,El Instituto Mexicano para la Competitividad A.C. (IMCO),Investigación y Consultoría,11-50,,
+"Secretaría de Agricultura, Ganadería, Desarrollo Rural, Pesca y Alimentación",SAGARPA,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=sagarpa,Axesat México,Tecnología/Datos,51-200,,
+"Secretaría de Agricultura, Ganadería, Desarrollo Rural, Pesca y Alimentación",SAGARPA,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=sagarpa,Atlantia Search,Tecnología/Datos,1-10,,
+"Secretaría de Agricultura, Ganadería, Desarrollo Rural, Pesca y Alimentación",SAGARPA,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=sagarpa,MITEF Mexico,Tecnología/Datos,1-10,,
+"Secretaría de Agricultura, Ganadería, Desarrollo Rural, Pesca y Alimentación",SAGARPA,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=sagarpa,Grupo Bimbo,Agricultura y Alimentación,"10,001+",,
+"Secretaría de Agricultura, Ganadería, Desarrollo Rural, Pesca y Alimentación",SAGARPA,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=sagarpa,Fundar Centro de Análisis e Investigación,Investigación y Consultoría,11-50,,
+"Secretaría de Agricultura, Ganadería, Desarrollo Rural, Pesca y Alimentación",SAGARPA,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=sagarpa,Thomson Reuters,Medios y Comunicación,"10,001+",,
+"Secretaría de Agricultura, Ganadería, Desarrollo Rural, Pesca y Alimentación",SAGARPA,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=sagarpa,TNS ,Servicios Empresariales,"10,001+",,
+"Secretaría de Agricultura, Ganadería, Desarrollo Rural, Pesca y Alimentación",SAGARPA,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=sagarpa,ANTAD,Servicios Empresariales,,,
+"Secretaría de Agricultura, Ganadería, Desarrollo Rural, Pesca y Alimentación",SAGARPA,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=sagarpa,Transparencia Mexicana,Investigación y Consultoría,11-50,,
+"Secretaría de Agricultura, Ganadería, Desarrollo Rural, Pesca y Alimentación",SAGARPA,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=sagarpa,Noorcus Innovation,Investigación y Consultoría,1-10,,
+Comisión Nacional de los Derechos Humanos,CNDH,None,General,,http://www.cndh.org.mx/,Fundar Centro de Análisis e Investigación,Investigación y Consultoría,11-50,"Sistema Nacional de Alerta de los	 Derechos Humanos, Enero–Agosto 2014",http://200.33.14.34:1001/
+Comisión Nacional de los Derechos Humanos,CNDH,None,General,,http://www.cndh.org.mx/,México Evalua,Investigación y Consultoría,1-10,Resultados preliminares de la Tercera Visitaduría,
+Comisión Nacional de los Derechos Humanos,CNDH,None,General,,http://www.cndh.org.mx/,México Evalua,Investigación y Consultoría,1-10,Diagnóstico Nacional de Supervisión Penitenciaria,http://www.cndh.org.mx/node/908131
+Secretaría de Energía,SENER,Federal,General,,,Exponential Knowledge,Investigación y Consultoría,1-10,Sistema de Información Energética,http://sie.energia.gob.mx/
+Secretaría de Energía,SENER,Federal,General,,,Marcos y Asociados,Energía,11-50,Secretaría de Energía,
+Secretaría de Energía,SENER,Federal,General,,,Marcos y Asociados,Energía,11-50,Secretaría de Hacienda y Crédito Público,
+Secretaría de Energía,SENER,Federal,General,,,Centro de Investigación para el Desarrollo (CIDAC),Investigación y Consultoría,11-50,Balance Nacional de Energía,http://sener.gob.mx/res/PE_y_DT/pub/2012/BNE_2011.pdf
+Secretaría de Energía,SENER,Federal,General,,,Centro de Investigación para el Desarrollo (CIDAC),Investigación y Consultoría,11-50,Prospectiva del Mercado de Gas Natural 2012-2026,http://sener.gob.mx/res/PE_y_DT/pub/2012/PGN_2012_2026.pdf
+Secretaría de Energía,SENER,Federal,General,,,Centro de Investigación para el Desarrollo (CIDAC),Investigación y Consultoría,11-50,Prospectiva de Petróleo Crudo 2012-2026,http://sener.gob.mx/res/PE_y_DT/pub/2012/PPCI_2012_2026.pdf
+Secretaría de Energía,SENER,Federal,Comisión Nacional de Hidrocarburos,CNH,,Centro de Investigación para el Desarrollo (CIDAC),Investigación y Consultoría,11-50,Índice de Hidrocarburos,
+Secretaría de Energía,SENER,Federal,Comisión Nacional de Hidrocarburos,CNH,,Centro de Investigación para el Desarrollo (CIDAC),Investigación y Consultoría,11-50,Reporte de Indicadores,http://www.cnh.gob.mx/_docs/Infornme_Inv/reporte_financiero_2013.pdf
+Secretaría de Energía,SENER,Federal,Comisión Nacional de Hidrocarburos,CNH,,Fundar Centro de Análisis e Investigación,Investigación y Consultoría,11-50,Mapas,http://www.energia.gob.mx/rondacero/9700.html
+Secretaría de Energía,SENER,Federal,Comisión Nacional de Hidrocarburos,CNH,,El Instituto Mexicano para la Competitividad A.C. (IMCO),Investigación y Consultoría,11-50,,
+Secretaría de Energía,SENER,Federal,Comisión Nacional de Hidrocarburos,CNH,,Atlantia Search,Tecnología/Datos,1-10,,
+Secretaría de Energía,SENER,Federal,Comisión Nacional de Hidrocarburos,CNH,,Marcos y Asociados,Energía,11-50,,
+Secretaría de Energía,SENER,Federal,Sistema de Información Energética,SIE,,El Instituto Mexicano para la Competitividad A.C. (IMCO),Investigación y Consultoría,11-50,,
+Secretaría de Energía,SENER,Federal,Sistema de Información Energética,SIE,,Atlantia Search,Tecnología/Datos,1-10,,
+Secretaría de Energía,SENER,Federal,Sistema de Información Energética,SIE,,Marcos y Asociados,Energía,11-50,,
+Secretaría de Energía,SENER,Federal,Comisión Reguladora de Energía,CRE,,El Instituto Mexicano para la Competitividad A.C. (IMCO),Investigación y Consultoría,11-50,,
+Secretaría de Energía,SENER,Federal,Comisión Reguladora de Energía,CRE,,Atlantia Search,Tecnología/Datos,1-10,,
+Secretaría de Energía,SENER,Federal,Comisión Reguladora de Energía,CRE,,Marcos y Asociados,Energía,11-50,,
+Secretaría de Energía,SENER,Federal,General,,,Fundación Invictus,Energía,1-10,,
+Secretaría de Energía,SENER,Federal,General,,,Banorte-Ixe,Finanzas e Inversiones,"10,001+",,
+Secretaría de Energía,SENER,Federal,General,,,Spectron Desarrollo,Investigación y Consultoría,1-10,,
+Secretaría de Energía,SENER,Federal,General,,,Cámara Mexicana de la Industria de la Construcción,,,,
+Secretaría de Energía,SENER,Federal,General,,,PricewaterhouseCoopers (PwC),Servicios Empresariales,"1,001-5,000",,
+Secretaría de Energía,SENER,Federal,General,,,KPMG Cárdenas Dosal,Servicios Empresariales,"10,001+",,
+Secretaría de Energía,SENER,Federal,General,,,Thomson Reuters,Medios y Comunicación,"10,001+",,
+Secretaría de Energía,SENER,Federal,General,,,ANTAD,Servicios Empresariales,,,
+Secretaría de Hacienda y Crédito Público,SHCP,Federal,General,,,Gobierno Fácil,Gobierno,1-10,Recursos del Ramo 23 para Entidades Federativas y Municipios 2014,http://www.transparenciapresupuestaria.gob.mx/es/PTP/Entidades_Federativas
+Secretaría de Hacienda y Crédito Público,SHCP,Federal,General,,,The Institute for Transportation and Development Policy (ITDP) Mexico,Transporte,11-50,Inversión y gasto público en proyectos de intfraestructura,http://www.shcp.gob.mx/Paginas/default.aspx
+Secretaría de Hacienda y Crédito Público,SHCP,Federal,General,,,Integralia Consultores,Investigación y Consultoría,11-50,Estadísticas oportunas de Finanzas Públicas,http://www.shcp.gob.mx/POLITICAFINANCIERA/FINANZASPUBLICAS/Estadisticas_Oportunas_Finanzas_Publicas/Paginas/unica2.aspx
+Secretaría de Hacienda y Crédito Público,SHCP,Federal,General,,,Aporta,Tecnología/Datos,1-10,Servicio de Administración Tributaria (SAT),http://www.sat.gob.mx/Paginas/Inicio.aspx
+Secretaría de Hacienda y Crédito Público,SHCP,Federal,General,,,Exponential Knowledge,Investigación y Consultoría,1-10,Sistema de Transparencia Presupuestaria,http://www.transparenciapresupuestaria.gob.mx/
+Secretaría de Hacienda y Crédito Público,SHCP,Federal,General,,,Banamex,Finanzas e Inversiones,"10,001+",INDICADORES DE DEUDA SUBNACIONAL Y AFECTACIÓN DE PARTICIPACIONES,http://www.shcp.gob.mx/Estados/Deuda_Publica_EFM/Paginas/Presentacion.aspx
+Secretaría de Hacienda y Crédito Público,SHCP,Federal,General,,,Fundar Centro de Análisis e Investigación,Investigación y Consultoría,11-50,Presupuesto de Egresos de la Federación 2010,http://www.shcp.gob.mx/EGRESOS/PEF/pef/pef_2010/index.html
+Secretaría de Hacienda y Crédito Público,SHCP,Federal,General,,,Fundar Centro de Análisis e Investigación,Investigación y Consultoría,11-50,Presupuesto de Egresos de la Federación 2011,
+Secretaría de Hacienda y Crédito Público,SHCP,Federal,General,,,Fundar Centro de Análisis e Investigación,Investigación y Consultoría,11-50,Anexo 2 Ajustes al gasto público federal en los términos del artículo 21 fracción III de la Ley de Presupuesto y Responsabilidad Hacendaria,
+Secretaría de Hacienda y Crédito Público,SHCP,Federal,General,,,Fundar Centro de Análisis e Investigación,Investigación y Consultoría,11-50,"Segundo Informe Trimestral sobre la Situación Económica, las Finanzas Públicas y la Deuda 2009",
+Secretaría de Hacienda y Crédito Público,SHCP,Federal,General,,,México Evalua,Investigación y Consultoría,1-10,Estadísticas Oportunas  de Finanzas Públicas,http://www.shcp.gob.mx/POLITICAFINANCIERA/FINANZASPUBLICAS/Estadisticas_Oportunas_Finanzas_Publicas/Paginas/unica2.aspx
+Secretaría de Hacienda y Crédito Público,SHCP,Federal,General,,,México Evalua,Investigación y Consultoría,1-10,Transparencia Presupuestaria,http://www.transparenciapresupuestaria.gob.mx/
+Secretaría de Hacienda y Crédito Público,SHCP,Federal,General,,,México Evalua,Investigación y Consultoría,1-10,Cuenta Pública Federal Ciudadana,http://www.shcp.gob.mx/EGRESOS/Paginas/CuentaPublicaCiudadana.aspx
+Secretaría de Hacienda y Crédito Público,SHCP,Federal,General,,,México Evalua,Investigación y Consultoría,1-10,Presupuesto de Egresos de la Federación,http://www.shcp.gob.mx/EGRESOS/PEF/Paginas/DocumentosRecientes.aspx
+Secretaría de Hacienda y Crédito Público,SHCP,Federal,Comisión Nacional Bancaria y de Valores,CNBV,,Exponential Knowledge,Investigación y Consultoría,1-10,Portafolio de Información,http://portafoliodeinformacion.cnbv.gob.mx/Paginas/default.aspx
+Secretaría de Hacienda y Crédito Público,SHCP,Federal,Comisión Nacional Bancaria y de Valores,CNBV,,El Instituto Mexicano para la Competitividad A.C. (IMCO),Investigación y Consultoría,11-50,,
+Secretaría de Hacienda y Crédito Público,SHCP,Federal,Comisión Nacional Bancaria y de Valores,CNBV,,McKinsey & Company,Investigación y Consultoría,"10,001+",,
+Secretaría de Hacienda y Crédito Público,SHCP,Federal,Comisión Nacional Bancaria y de Valores,CNBV,,Banorte-Ixe,Finanzas e Inversiones,"10,001+",,
+Secretaría de Hacienda y Crédito Público,SHCP,Federal,Comisión Nacional Bancaria y de Valores,CNBV,,"Asociación Mexicana de Internet, A.C.",Medios y Comunicación,11-50,,
+Secretaría de Hacienda y Crédito Público,SHCP,Federal,Comisión Nacional Bancaria y de Valores,CNBV,,PricewaterhouseCoopers (PwC),Servicios Empresariales,"1,001-5,000",,
+Secretaría de Hacienda y Crédito Público,SHCP,Federal,Comisión Nacional Bancaria y de Valores,CNBV,,J.P. Morgan,Finanzas e Inversiones,"10,001+",,
+Secretaría de Hacienda y Crédito Público,SHCP,Federal,Comisión Nacional Bancaria y de Valores,CNBV,,Moody's Analytics,Finanzas e Inversiones,"1,001-5,000",,
+Secretaría de Hacienda y Crédito Público,SHCP,Federal,Comisión Nacional Bancaria y de Valores,CNBV,,Unipagos,Finanzas e Inversiones,11-50,,
+Secretaría de Hacienda y Crédito Público,SHCP,Federal,Servicio de Administracion Tributaria,SAT,https://tramitesdigitales.sat.gob.mx/InformativaDeTerceros.Internet/Login.aspx?ReturnUrl=%2fInformativaDeTerceros.Internet%2fDefault.aspx,Centro Mexicano para la Filantropía (CEMEFI),Servicios Empresariales,11-50,Donatarias Autorizadas,http://www.sat.gob.mx/terceros_autorizados/donatarias_donaciones/Paginas/directorio_donatarias.aspx
+Secretaría de Hacienda y Crédito Público,SHCP,Federal,Servicio de Administracion Tributaria,SAT,https://tramitesdigitales.sat.gob.mx/InformativaDeTerceros.Internet/Login.aspx?ReturnUrl=%2fInformativaDeTerceros.Internet%2fDefault.aspx,El Instituto Mexicano para la Competitividad A.C. (IMCO),Investigación y Consultoría,11-50,,
+Secretaría de Hacienda y Crédito Público,SHCP,Federal,Servicio de Administracion Tributaria,SAT,https://tramitesdigitales.sat.gob.mx/InformativaDeTerceros.Internet/Login.aspx?ReturnUrl=%2fInformativaDeTerceros.Internet%2fDefault.aspx,Alternativas y Capacidades,Servicios Empresariales,11-50,,
+Secretaría de Hacienda y Crédito Público,SHCP,Federal,Servicio de Administracion Tributaria,SAT,https://tramitesdigitales.sat.gob.mx/InformativaDeTerceros.Internet/Login.aspx?ReturnUrl=%2fInformativaDeTerceros.Internet%2fDefault.aspx,SIGNOT,Tecnología/Datos,1-10,,
+Secretaría de Hacienda y Crédito Público,SHCP,Federal,Servicio de Administracion Tributaria,SAT,https://tramitesdigitales.sat.gob.mx/InformativaDeTerceros.Internet/Login.aspx?ReturnUrl=%2fInformativaDeTerceros.Internet%2fDefault.aspx,Consejo Mexicano de la Carne,Agricultura y Alimentación,1-10,,
+Secretaría de Hacienda y Crédito Público,SHCP,Federal,Servicio de Administracion Tributaria,SAT,https://tramitesdigitales.sat.gob.mx/InformativaDeTerceros.Internet/Login.aspx?ReturnUrl=%2fInformativaDeTerceros.Internet%2fDefault.aspx,EY,Servicios Empresariales,"10,001+",,
+Secretaría de Hacienda y Crédito Público,SHCP,Federal,Dirección General de Aduanas,,http://www.aduanas.sat.gob.mx/,Consejo Mexicano de la Carne,Agricultura y Alimentación,1-10,,
+Secretaría de Hacienda y Crédito Público,SHCP,Federal,Dirección General de Aduanas,,http://www.aduanas.sat.gob.mx/,Asociación Mexicana de la Industria Automotríz (AMIA),Investigación y Consultoría,,,
+Secretaría de Hacienda y Crédito Público,SHCP,Federal,Sistema Nacional de Coordinación Fiscal,SNCF,http://sncf.gob.mx/,EY,Servicios Empresariales,"10,001+",,
+Secretaría de Hacienda y Crédito Público,SHCP,Federal,Fondo de Capitalización e Inversión del Sector Rural,FOCIR,http://www.focir.gob.mx/,Instituto Mexicano de Ejecutivos de Finanzas (IMEF),Finanzas e Inversiones,201-500,,
+Secretaría de Hacienda y Crédito Público,SHCP,Federal,Comisión Nacional del Sistema de Ahorro para el Retiro,CONSAR,http://www.consar.gob.mx/,Fundar Centro de Análisis e Investigación,Investigación y Consultoría,11-50,,
+Secretaría de Hacienda y Crédito Público,SHCP,Federal,Comisión Nacional del Sistema de Ahorro para el Retiro,CONSAR,http://www.consar.gob.mx/,Banamex,Finanzas e Inversiones,"10,001+",,
+Secretaría de Hacienda y Crédito Público,SHCP,Federal,Unidad de Planeación Económica,,,México Evalua,Investigación y Consultoría,1-10,,
+Secretaría de Hacienda y Crédito Público,SHCP,Federal,Banco Nacional de Comercio Exterior,BANCOMEXT,http://www.bancomext.com/,Noorcus Innovation,Investigación y Consultoría,1-10,,
+Secretaría de Hacienda y Crédito Público,SHCP,Federal,Banco Nacional de Comercio Exterior,BANCOMEXT,http://www.bancomext.com/,Asociación Nacional de la Industria Química (ANIQ),Investigación Científica,51-200,,
+Secretaría de Hacienda y Crédito Público,SHCP,Federal,General,,,Kueski,Finanzas e Inversiones,11-50,,
+Secretaría de Hacienda y Crédito Público,SHCP,Federal,General,,,Atlantia Search,Tecnología/Datos,1-10,,
+Secretaría de Hacienda y Crédito Público,SHCP,Federal,General,,,Aspiria,Finanzas e Inversiones,1-10,,
+Secretaría de Hacienda y Crédito Público,SHCP,Federal,General,,,Marcos y Asociados,Energía,11-50,,
+Secretaría de Hacienda y Crédito Público,SHCP,Federal,General,,,Cámara Mexicana de la Industria de la Construcción,,,,
+Secretaría de Hacienda y Crédito Público,SHCP,Federal,General,,,Centro de Investigación para el Desarrollo (CIDAC),Investigación y Consultoría,11-50,,
+Secretaría de Hacienda y Crédito Público,SHCP,Federal,General,,,KPMG Cárdenas Dosal,Servicios Empresariales,"10,001+",,
+Secretaría de Hacienda y Crédito Público,SHCP,Federal,General,,,Confederación Patronal de la República Mexicana (COPARMEX),Servicios Empresariales,51-200,,
+Secretaría de Hacienda y Crédito Público,SHCP,Federal,General,,,Thomson Reuters,Medios y Comunicación,"10,001+",,
+Secretaría de Hacienda y Crédito Público,SHCP,Federal,General,,,ANTAD,Servicios Empresariales,,,
+Secretaría de Hacienda y Crédito Público,SHCP,Federal,General,,,Transparencia Mexicana,Investigación y Consultoría,11-50,,
+Petróleos Mexicanos,PEMEX,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=pemex,Codeando México,Tecnología/Datos,1-10,catalogo.datos.gob.mx,http://catalogo.datos.gob.mx/dataset?organization=pemex
+Petróleos Mexicanos,PEMEX,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=pemex,México Evalua,Investigación y Consultoría,1-10,Anuarios estadísticos,http://www.pemex.com/acerca/informes_publicaciones/Documents/anuario_estadistico/Anuario-Estadistico-2003-2013.pdf
+Petróleos Mexicanos,PEMEX,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=pemex,México Evalua,Investigación y Consultoría,1-10,Estados Financieros,http://www.pemex.com/informes/informe_anual/estados_financieros/index.html
+Petróleos Mexicanos,PEMEX,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=pemex,Spaceship Labs,Tecnología/Datos,11-50,,
+Petróleos Mexicanos,PEMEX,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=pemex,El Instituto Mexicano para la Competitividad A.C. (IMCO),Investigación y Consultoría,11-50,,
+Petróleos Mexicanos,PEMEX,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=pemex,Axesat México,Tecnología/Datos,51-200,,
+Petróleos Mexicanos,PEMEX,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=pemex,Fundación Invictus,Energía,1-10,,
+Petróleos Mexicanos,PEMEX,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=pemex,Atlantia Search,Tecnología/Datos,1-10,,
+Petróleos Mexicanos,PEMEX,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=pemex,Banorte-Ixe,Finanzas e Inversiones,"10,001+",,
+Petróleos Mexicanos,PEMEX,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=pemex,Marcos y Asociados,Energía,11-50,,
+Petróleos Mexicanos,PEMEX,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=pemex,DVVIMSS,Salud,1-10,,
+Petróleos Mexicanos,PEMEX,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=pemex,EY,Servicios Empresariales,"10,001+",,
+Petróleos Mexicanos,PEMEX,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=pemex,Cámara Mexicana de la Industria de la Construcción,,,,
+Petróleos Mexicanos,PEMEX,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=pemex,Centro de Investigación para el Desarrollo (CIDAC),Investigación y Consultoría,11-50,,
+Petróleos Mexicanos,PEMEX,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=pemex,Thomson Reuters,Medios y Comunicación,"10,001+",,
+Petróleos Mexicanos,PEMEX,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=pemex,oooES,Tecnología/Datos,1-10,,
+Petróleos Mexicanos,PEMEX,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=pemex,Asociación Nacional de la Industria Química (ANIQ),Investigación Científica,51-200,,
+Secretaría de Gobernación,SEGOB,Federal,General,,http://www.segob.gob.mx/,MapData,Mapeo/Geoespacial,11-50,Información de Seguridad,http://secretariadoejecutivo.gob.mx/
+Secretaría de Gobernación,SEGOB,Federal,General,,http://www.segob.gob.mx/,Fundar Centro de Análisis e Investigación,Investigación y Consultoría,11-50,Cuenta de la Hacienda Pública Federal 2012,http://www.apartados.hacienda.gob.mx/contabilidad/documentos/informe_cuenta/2012/
+Secretaría de Gobernación,SEGOB,Federal,General,,http://www.segob.gob.mx/,México Evalua,Investigación y Consultoría,1-10,Estadísticas del Sistema Penitenciario Nacional 2013,
+Secretaría de Gobernación,SEGOB,Federal,General,,http://www.segob.gob.mx/,Centro de Estudios Jurídicos y Ambientales (CEJA),Clima y Medio Ambiente,,CATÁLOGO SISTEMA URBANO NACIONAL 2012,http://www.conapo.gob.mx/en/CONAPO/Catalogo_Sistema_Urbano_Nacional_2012
+Secretaría de Gobernación,SEGOB,Federal,General,,http://www.segob.gob.mx/,Confederación Patronal de la República Mexicana (COPARMEX),Servicios Empresariales,51-200,Incidencia Delictiva,http://www.estadisticadelictiva.secretariadoejecutivo.gob.mx/mondrian/testpage.jsp?query=delito_municipal_global
+Secretaría de Gobernación,SEGOB,Federal,General,,http://www.segob.gob.mx/,Data4,Tecnología/Datos,1-10,Registro Nacional de Datos de Personas Extraviadas o Desaparecidas (RNPED),https://rnped.segob.gob.mx/
+Secretaría de Gobernación,SEGOB,Federal,Instituto Nacional de Migración,INM,http://www.inm.gob.mx/,Fundar Centro de Análisis e Investigación,Investigación y Consultoría,11-50,Estadísticas Migratorias,www.inm.gob.mx/estadisticas/2003/01/cuadro1.9.xls
+Secretaría de Gobernación,SEGOB,Federal,Instituto Nacional de Migración,INM,http://www.inm.gob.mx/,Data4,Tecnología/Datos,1-10,Migrantes no acompañados,
+Secretaría de Gobernación,SEGOB,Federal,Instituto Nacional de Migración,INM,http://www.inm.gob.mx/,Consejo Nacional Empresarial Turístico,Estilos de vida y Consumidores,11-50,,
+Secretaría de Gobernación,SEGOB,Federal,Consejo Nacional de Población,CONAPO,http://www.conapo.gob.mx/,El Narval Mundial,Investigación y Consultoría,1-10,"Índice de Marginación Urbana 2010, Anexo A: Mapas de marginación urbana de las zonas metropolitanas y ciudades de 100 mil o más habitantes, 2010",http://www.conapo.gob.mx/work/models/CONAPO/indices_margina/marginacion_urbana/AnexoA/Documento/04A_AGEB.pdf
+Secretaría de Gobernación,SEGOB,Federal,Consejo Nacional de Población,CONAPO,http://www.conapo.gob.mx/,MapData,Mapeo/Geoespacial,11-50,Indicadores pobreza,www.conapo.gob.mx
+Secretaría de Gobernación,SEGOB,Federal,Consejo Nacional de Población,CONAPO,http://www.conapo.gob.mx/,OPI,Tecnología/Datos,11-50,Proyecciones de la Población Nacional 2010-2050,http://www.conapo.gob.mx/es/CONAPO/Proyecciones_Datos
+Secretaría de Gobernación,SEGOB,Federal,Consejo Nacional de Población,CONAPO,http://www.conapo.gob.mx/,Cartográfica,Mapeo/Geoespacial,1-10,Marginación municipal,http://www.conapo.gob.mx/es/CONAPO/Indices_de_Marginacion_2010_por_entidad_federativa_y_municipio
+Secretaría de Gobernación,SEGOB,Federal,Consejo Nacional de Población,CONAPO,http://www.conapo.gob.mx/,Banamex,Finanzas e Inversiones,"10,001+",Proyecciones de la población de México,http://www.conapo.gob.mx/es/CONAPO/Proyecciones
+Secretaría de Gobernación,SEGOB,Federal,Consejo Nacional de Población,CONAPO,http://www.conapo.gob.mx/,Cámara Mexicana de la Industria de la Construcción,,,Índices de Marginación,http://www.conapo.gob.mx/en/CONAPO/Indices_de_Marginacion_Publicaciones
+Secretaría de Gobernación,SEGOB,Federal,Consejo Nacional de Población,CONAPO,http://www.conapo.gob.mx/,Moody's Analytics,Finanzas e Inversiones,"1,001-5,000",Índices de Marginación,http://www.conapo.gob.mx/es/CONAPO/Indices_de_Marginacion
+Secretaría de Gobernación,SEGOB,Federal,Consejo Nacional de Población,CONAPO,http://www.conapo.gob.mx/,Confederación Patronal de la República Mexicana (COPARMEX),Servicios Empresariales,51-200,Indicadores demográficos básicos 1990-2030,http://www.portal.conapo.gob.mx/index.php?option=com_content&view=article&id=125&Itemid=230
+Secretaría de Gobernación,SEGOB,Federal,Consejo Nacional de Población,CONAPO,http://www.conapo.gob.mx/,Fundación MetLife,Educación,,Índices de Marginación,http://www.conapo.gob.mx/en/CONAPO/Indices_de_Marginacion_Publicaciones
+Secretaría de Gobernación,SEGOB,Federal,Consejo Nacional de Población,CONAPO,http://www.conapo.gob.mx/,Buendía & Laredo,Investigación y Consultoría,11-50,,
+Secretaría de Gobernación,SEGOB,Federal,Consejo Nacional de Población,CONAPO,http://www.conapo.gob.mx/,Data4,Tecnología/Datos,1-10,,
+Secretaría de Gobernación,SEGOB,Federal,Consejo Nacional de Población,CONAPO,http://www.conapo.gob.mx/,Integralia Consultores,Investigación y Consultoría,11-50,,
+Secretaría de Gobernación,SEGOB,Federal,Consejo Nacional de Población,CONAPO,http://www.conapo.gob.mx/,Telus,Investigación y Consultoría,1-10,,
+Secretaría de Gobernación,SEGOB,Federal,Consejo Nacional de Población,CONAPO,http://www.conapo.gob.mx/,Nielsen IBOPE,Investigación del consumidor y medios,"501-1,000",,
+Secretaría de Gobernación,SEGOB,Federal,Consejo Nacional de Población,CONAPO,http://www.conapo.gob.mx/,Accenture,Investigación y Consultoría,"10,001+",,
+Secretaría de Gobernación,SEGOB,Federal,Consejo Nacional de Población,CONAPO,http://www.conapo.gob.mx/,DVVIMSS,Salud,1-10,,
+Secretaría de Gobernación,SEGOB,Federal,Consejo Nacional de Población,CONAPO,http://www.conapo.gob.mx/,"Asociación Mexicana de Internet, A.C.",Medios y Comunicación,11-50,,
+Secretaría de Gobernación,SEGOB,Federal,Consejo Nacional de Población,CONAPO,http://www.conapo.gob.mx/,PricewaterhouseCoopers (PwC),Servicios Empresariales,"1,001-5,000",,
+Secretaría de Gobernación,SEGOB,Federal,Consejo Nacional de Población,CONAPO,http://www.conapo.gob.mx/,Centro de Investigación para el Desarrollo (CIDAC),Investigación y Consultoría,11-50,,
+Secretaría de Gobernación,SEGOB,Federal,Consejo Nacional de Población,CONAPO,http://www.conapo.gob.mx/,México Evalua,Investigación y Consultoría,1-10,,
+Secretaría de Gobernación,SEGOB,Federal,Consejo Nacional de Población,CONAPO,http://www.conapo.gob.mx/,Centro de Estudios Jurídicos y Ambientales (CEJA),Clima y Medio Ambiente,,,
+Secretaría de Gobernación,SEGOB,Federal,Consejo Nacional de Población,CONAPO,http://www.conapo.gob.mx/,Conurba,Gobierno,,,
+Secretaría de Gobernación,SEGOB,Federal,Consejo Nacional de Población,CONAPO,http://www.conapo.gob.mx/,InTA México,Agricultura y Alimentación,1-10,,
+Secretaría de Gobernación,SEGOB,Federal,Consejo Nacional de Población,CONAPO,http://www.conapo.gob.mx/,Verne42,Tecnología/Datos,1-10,,
+Secretaría de Gobernación,SEGOB,Federal,Secretariado Ejecutivo del Sistema Nacional de Seguridad Pública,,http://secretariadoejecutivo.gob.mx/,OPI,Tecnología/Datos,11-50,Secretariado Ejecutivo del Sistema Nacional de Seguridad Pública - Incidencia Delictiva,http://www.secretariadoejecutivosnsp.gob.mx/es/SecretariadoEjecutivo/Incidencia_Delictiva
+Secretaría de Gobernación,SEGOB,Federal,Secretariado Ejecutivo del Sistema Nacional de Seguridad Pública,,http://secretariadoejecutivo.gob.mx/,Integralia Consultores,Investigación y Consultoría,11-50,Secretariado Ejecutivo del Sistema Nacional de Seguridad Pública,http://www.secretariadoejecutivosnsp.gob.mx/
+Secretaría de Gobernación,SEGOB,Federal,Secretariado Ejecutivo del Sistema Nacional de Seguridad Pública,,http://secretariadoejecutivo.gob.mx/,Centro de Investigación para el Desarrollo (CIDAC),Investigación y Consultoría,11-50,,
+Secretaría de Gobernación,SEGOB,Federal,Secretariado Ejecutivo del Sistema Nacional de Seguridad Pública,,http://secretariadoejecutivo.gob.mx/,Fundar Centro de Análisis e Investigación,Investigación y Consultoría,11-50,,
+Secretaría de Gobernación,SEGOB,Federal,Secretariado Ejecutivo del Sistema Nacional de Seguridad Pública,,http://secretariadoejecutivo.gob.mx/,México Evalua,Investigación y Consultoría,1-10,,
+Secretaría de Gobernación,SEGOB,Federal,Secretariado Ejecutivo del Sistema Nacional de Seguridad Pública,,http://secretariadoejecutivo.gob.mx/,Confederación Patronal de la República Mexicana (COPARMEX),Servicios Empresariales,51-200,,
+Secretaría de Gobernación,SEGOB,Federal,Secretariado Ejecutivo del Sistema Nacional de Seguridad Pública,,http://secretariadoejecutivo.gob.mx/,Data4,Tecnología/Datos,1-10,,
+Secretaría de Gobernación,SEGOB,Federal,Comisionado Nacional de Seguridad,SSP,http://www.ssp.gob.mx/portalWebApp/wlp.c?__c=7d1,El Instituto Mexicano para la Competitividad A.C. (IMCO),Investigación y Consultoría,11-50,,
+Secretaría de Gobernación,SEGOB,Federal,Comisionado Nacional de Seguridad,SSP,http://www.ssp.gob.mx/portalWebApp/wlp.c?__c=7d1,Verne42,Tecnología/Datos,1-10,,
+Secretaría de Gobernación,SEGOB,Federal,General,,http://www.segob.gob.mx/,Kueski,Finanzas e Inversiones,11-50,,
+Secretaría de Gobernación,SEGOB,Federal,General,,http://www.segob.gob.mx/,Atlantia Search,Tecnología/Datos,1-10,,
+Secretaría de Gobernación,SEGOB,Federal,General,,http://www.segob.gob.mx/,Aspiria,Finanzas e Inversiones,1-10,,
+Secretaría de Gobernación,SEGOB,Federal,General,,http://www.segob.gob.mx/,Thomson Reuters,Medios y Comunicación,"10,001+",,
+Banco del Ahorro Nacional y Servicios Financieros,BANSEFI,None,General,,http://www.bansefi.gob.mx/,Transparencia Mexicana,Investigación y Consultoría,11-50,,
+Comisión Nacional para el Desarrollo de los Pueblos Indígenas,CDI,None,General,,http://www.cdi.gob.mx/,Transparencia Mexicana,Investigación y Consultoría,11-50,,
+Secretaría de Salud,SALUD,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=salud,OPI,Tecnología/Datos,11-50,Nacimientos ocurridos (INEGI / REG. CIVIL),
+Secretaría de Salud,SALUD,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=salud,OPI,Tecnología/Datos,11-50,Nacimientos registrados (INEGI / REG. CIVIL),
+Secretaría de Salud,SALUD,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=salud,OPI,Tecnología/Datos,11-50,Egresos Hospitalarios SECRETARÍA DE SALUD,
+Secretaría de Salud,SALUD,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=salud,OPI,Tecnología/Datos,11-50,Egresos Hospitalarios INSTITUCIONES DEL SECTOR SALUD,
+Secretaría de Salud,SALUD,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=salud,OPI,Tecnología/Datos,11-50,Defunciones Generales (INEGI/SALUD),
+Secretaría de Salud,SALUD,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=salud,OPI,Tecnología/Datos,11-50,Defunciones Generales (INEGI/SALUD),
+Secretaría de Salud,SALUD,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=salud,MapData,Mapeo/Geoespacial,11-50,Datos generales,http://www.sinais.salud.gob.mx/basesdedatos/index.html
+Secretaría de Salud,SALUD,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=salud,McKinsey & Company,Investigación y Consultoría,"10,001+",Encuesta Nacional de Salud y Nutrición (ENSANUT),http://ensanut.insp.mx/
+Secretaría de Salud,SALUD,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=salud,MITEF Mexico,Tecnología/Datos,1-10,Mapa georreferenciado de recursos en salud,http://catalogo.datos.gob.mx/dataset/recursos-en-salud/resource/b00791ab-cb18-4d78-9979-48b94beef859
+Secretaría de Salud,SALUD,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=salud,MITEF Mexico,Tecnología/Datos,1-10,Registro de Nacimientos 2013,http://www.dgis.salud.gob.mx/descargas/datosabiertos/clues.kmz
+Secretaría de Salud,SALUD,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=salud,MITEF Mexico,Tecnología/Datos,1-10,Clinicas y hospitales del sector salud,https://www.dropbox.com/sh/zgk7womlutpz1tm/AACWxJiKeRExIMrIGKbW-HYba/Secretaria%20de%20Salud/Instituto%20Nacional%20de%20Salud%20Publica/Clinicas%20y%20hospitales%20del%20sector%20salud.kmz?dl=1
+Secretaría de Salud,SALUD,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=salud,MITEF Mexico,Tecnología/Datos,1-10,Rezago social estatal,http://web.coneval.gob.mx/Informes/Pobreza/Datos_abiertos/Rezago-social-2000-2005-2010_edos_DA.csv
+Secretaría de Salud,SALUD,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=salud,Fundar Centro de Análisis e Investigación,Investigación y Consultoría,11-50,Informe de Resultados 2011 del Sistema de Protección Social en Salud,
+Secretaría de Salud,SALUD,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=salud,Fundar Centro de Análisis e Investigación,Investigación y Consultoría,11-50,Egresos Hospitalarios,http://www.sinais.salud.gob.mx/egresoshospitalarios/index.html
+Secretaría de Salud,SALUD,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=salud,Asociación Mexicana de la Industria Automotríz (AMIA),Investigación y Consultoría,,"DIAGNÓSTICO SITUACIONAL DE LAS LESIONES CAUSADAS POR ACCIDENTES EN MOTOCICLETA EN MÉXICO, 2012",
+Secretaría de Salud,SALUD,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=salud,MetLife,Seguros,"10,001+",Reporte Anual de Enfermedades,
+Secretaría de Salud,SALUD,Federal,Centro Nacional para la Prevención y el Control del VIH y el sida,CENSIDA,http://www.censida.salud.gob.mx/,DVVIMSS,Salud,1-10,,
+Secretaría de Salud,SALUD,Federal,Comisión Nacional de Protección Social en Salud,CNPSS,http://www.seguro-popular.salud.gob.mx/,Fundar Centro de Análisis e Investigación,Investigación y Consultoría,11-50,,
+Secretaría de Salud,SALUD,Federal,Comisión Federal para la Protección contra Riesgos Sanitarios,COFEPRIS,http://www.cofepris.gob.mx/,PLM Latinoamérica,Salud,51-200,Base de Datos de Licencias Sanitarias,http://www.cofepris.gob.mx/AS/Paginas/Establecimientos%20y%20productos%20biologicos/Bases-de-datos-de-.aspx
+Secretaría de Salud,SALUD,Federal,Comisión Federal para la Protección contra Riesgos Sanitarios,COFEPRIS,http://www.cofepris.gob.mx/,Fondo para la Comunicación y Educación Ambiental (FCEA),Educación,1-10,,
+Secretaría de Salud,SALUD,Federal,Dirección General de Evaluación del Desempeño,DGED,http://www.dged.salud.gob.mx/,Fundar Centro de Análisis e Investigación,Investigación y Consultoría,11-50,Rendición de cuentas en salud 2010,http://www.dged.salud.gob.mx/contenidos/dedss/descargas/rcs/rcs_2010.pdf
+Secretaría de Salud,SALUD,Federal,Centro Nacional de Equidad de Género y Salud Reproductiva,CNEGSR,http://cnegsr.salud.gob.mx/#,Fundar Centro de Análisis e Investigación,Investigación y Consultoría,11-50,,
+Secretaría de Salud,SALUD,Federal,Sistema Nacional para el Desarrollo Integral de la Familia,DIF,http://sn.dif.gob.mx/,Transparencia Mexicana,Investigación y Consultoría,11-50,,
+Secretaría de Salud,SALUD,Federal,Consejo Nacional para la Prevención de Accidentes,CONAPRA,http://conapra.salud.gob.mx/,Asociación Mexicana de la Industria Automotríz (AMIA),Investigación y Consultoría,,,
+Secretaría de Salud,SALUD,Federal,Sistema Nacional de Información en la Salud,SINAIS,http://sinais.salud.gob.mx/,Confederación Patronal de la República Mexicana (COPARMEX),Servicios Empresariales,51-200,Sistema de Cuentas en Salud a Nivel Federal y Estatal (SICUENTAS),http://sinais.salud.gob.mx/recursosfinancieros/
+Secretaría de Salud,SALUD,Federal,Sistema Nacional de Información en la Salud,SINAIS,http://sinais.salud.gob.mx/,Data4,Tecnología/Datos,1-10,,
+Secretaría de Salud,SALUD,Federal,Instituto Nacional de Salud Pública,INSP,http://www.insp.mx/,Data4,Tecnología/Datos,1-10,,
+Secretaría de Salud,SALUD,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=salud,El Instituto Mexicano para la Competitividad A.C. (IMCO),Investigación y Consultoría,11-50,,
+Secretaría de Salud,SALUD,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=salud,Agencia de Estadística de Mercados S.C. (AEM),Investigación y Consultoría,NA,,
+Secretaría de Salud,SALUD,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=salud,Consejo Mexicano de la Carne,Agricultura y Alimentación,1-10,,
+Secretaría de Salud,SALUD,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=salud,Previta,Salud,201-500,,
+Secretaría de Salud,SALUD,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=salud,Cámara Mexicana de la Industria de la Construcción,,,,
+Secretaría de Salud,SALUD,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=salud,TNS ,Servicios Empresariales,"10,001+",,
+Secretaría de Salud,SALUD,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=salud,Verne42,Tecnología/Datos,1-10,,
+Secretaría de Economía,SE,Federal,General,,,Deloitte,Investigación y Consultoría,"501-1,000",Inversión Extranjera Directa,
+Secretaría de Economía,SE,Federal,General,,,TIS Consulting Group,Investigación y Consultoría,1-10,Sistema Nacional de Información de Mercados,"http://www.economia-sniim.gob.mx/nuevo/mapa.asp?br=Mozilla/5.0%20(Macintosh;%20Intel%20Mac%20OS%20X%2010_10_1)%20AppleWebKit/537.36%20(KHTML,%20like%20Gecko)%20Chrome/40.0.2214.91%20Safari/537.36"
+Secretaría de Economía,SE,Federal,General,,,KPMG Cárdenas Dosal,Servicios Empresariales,"10,001+",Índice Estadístico sobre el Comportamiento de la Inversión Extranjera Directa en México (enero-diciembre de 2013),http://www.economia.gob.mx/comunidad-negocios/competitividad-normatividad/inversion-extranjera-directa/estadistica-oficial-de-ied-en-mexico
+Secretaría de Economía,SE,Federal,Sistema Geológico Mexicano,SGM,,El Instituto Mexicano para la Competitividad A.C. (IMCO),Investigación y Consultoría,11-50,,
+Secretaría de Economía,SE,Federal,Sistema Geológico Mexicano,SGM,,Marcos y Asociados,Energía,11-50,,
+Secretaría de Economía,SE,Federal,Sistema Geológico Mexicano,SGM,,Centro de Investigación para el Desarrollo (CIDAC),Investigación y Consultoría,11-50,,
+Secretaría de Economía,SE,Federal,Sistema de Información Empresarial Mexicano,SIEM,http://www.siem.gob.mx/siem/,Banorte-Ixe,Finanzas e Inversiones,"10,001+",,
+Secretaría de Economía,SE,Federal,Sistema de Información Empresarial Mexicano,SIEM,http://www.siem.gob.mx/siem/,Marcos y Asociados,Energía,11-50,,
+Secretaría de Economía,SE,Federal,Coordinación General de Minería,,,El Narval Mundial,Investigación y Consultoría,1-10,Anuario Estadístico de la Minería Mexicana 2012,http://www.economia.gob.mx/files/comunidad_negocios/industria_comercio/informacionSectorial/minero/anuario_mineria_mexicana_2012_ed2013.pdf
+Secretaría de Economía,SE,Federal,Subsecretaría de Industria y Comercio,,,Centro de Investigación para el Desarrollo (CIDAC),Investigación y Consultoría,11-50,,
+Secretaría de Economía,SE,Federal,Instituto Mexicano de la Propiedad Industrial,IMPI,http://www.impi.gob.mx/,Noorcus Innovation,Investigación y Consultoría,1-10,,
+Secretaría de Economía,SE,Federal,General,,,CREA,Educación,11-50,,
+Secretaría de Economía,SE,Federal,General,,,Atlantia Search,Tecnología/Datos,1-10,,
+Secretaría de Economía,SE,Federal,General,,,Consejo Mexicano de la Carne,Agricultura y Alimentación,1-10,,
+Secretaría de Economía,SE,Federal,General,,,Accenture,Investigación y Consultoría,"10,001+",,
+Secretaría de Economía,SE,Federal,General,,,"Asociación Mexicana de Internet, A.C.",Medios y Comunicación,11-50,,
+Secretaría de Economía,SE,Federal,General,,,Instituto Mexicano de Ejecutivos de Finanzas (IMEF),Finanzas e Inversiones,201-500,,
+Secretaría de Economía,SE,Federal,General,,,Fundar Centro de Análisis e Investigación,Investigación y Consultoría,11-50,,
+Secretaría de Economía,SE,Federal,General,,,J.P. Morgan,Finanzas e Inversiones,"10,001+",,
+Secretaría de Economía,SE,Federal,General,,,Asociación Mexicana de la Industria Automotríz (AMIA),Investigación y Consultoría,,,
+Secretaría de Economía,SE,Federal,General,,,Thomson Reuters,Medios y Comunicación,"10,001+",,
+Secretaría de Economía,SE,Federal,General,,,Transparencia Mexicana,Investigación y Consultoría,11-50,,
+Secretaría de Economía,SE,Federal,General,,,Asociación Nacional de la Industria Química (ANIQ),Investigación Científica,51-200,,
+Secretaría de Economía,SE,Federal,General,,,Unipagos,Finanzas e Inversiones,11-50,,
+Secretaría de Economía,SE,Federal,General,,,Verne42,Tecnología/Datos,1-10,,
+Secretaría del Trabajo y Previsión Social,STPS,Federal,General,,,Movimiento Congruencia,"Other,Recursos Humanos",1-10,Incentivos Fiscales (vía INFOMEX),
+Secretaría del Trabajo y Previsión Social,STPS,Federal,General,,,Banorte-Ixe,Finanzas e Inversiones,"10,001+",Global de Productividad laboral de la Economía,
+Secretaría del Trabajo y Previsión Social,STPS,Federal,General,,,Fundar Centro de Análisis e Investigación,Investigación y Consultoría,11-50,Encuesta Nacional de Ocupación y Empleo (ENOE),http://www.stps.gob.mx/bp/secciones/conoce/areas_atencion/areas_atencion/web/enoe_trim.htm
+Secretaría del Trabajo y Previsión Social,STPS,Federal,General,,,Banamex,Finanzas e Inversiones,"10,001+",Salarios,http://www.stps.gob.mx/bp/secciones/conoce/areas_atencion/areas_atencion/web/menu_infsector.html
+Secretaría del Trabajo y Previsión Social,STPS,Federal,General,,,El Instituto Mexicano para la Competitividad A.C. (IMCO),Investigación y Consultoría,11-50,,
+Secretaría del Trabajo y Previsión Social,STPS,Federal,General,,,Atlantia Search,Tecnología/Datos,1-10,,
+Secretaría del Trabajo y Previsión Social,STPS,Federal,General,,,Consejo Nacional Empresarial Turístico,Estilos de vida y Consumidores,11-50,,
+Secretaría del Trabajo y Previsión Social,STPS,Federal,General,,,Confederación Patronal de la República Mexicana (COPARMEX),Servicios Empresariales,51-200,,
+Secretaría del Trabajo y Previsión Social,STPS,Federal,General,,,Transparencia Mexicana,Investigación y Consultoría,11-50,,
+Secretaría de Comunicaciones y Transporte,SCT,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=sct,Fundar Centro de Análisis e Investigación,Investigación y Consultoría,11-50,Distribución de Frecuencias,
+Secretaría de Comunicaciones y Transporte,SCT,Federal,Coordinación General de Puertos y Marina Mercante,,,Asociación Mexicana de la Industria Automotríz (AMIA),Investigación y Consultoría,,Estadísticas de Movimiento Portuario,http://www.sct.gob.mx/puertos-y-marina/direccion-general-de-puertos/estadisticas/mensuales/
+Secretaría de Comunicaciones y Transporte,SCT,Federal,Coordinación General de Puertos y Marina Mercante,,,Consejo Nacional Empresarial Turístico,Estilos de vida y Consumidores,11-50,,
+Secretaría de Comunicaciones y Transporte,SCT,Federal,Coordinación General de Puertos y Marina Mercante,,,TIS Consulting Group,Investigación y Consultoría,1-10,,
+Secretaría de Comunicaciones y Transporte,SCT,Federal,Dirección General de Aeronáutica Civil,,http://www.sct.gob.mx/transporte-y-medicina-preventiva/aeronautica-civil/inicio/,Consejo Nacional Empresarial Turístico,Estilos de vida y Consumidores,11-50,,
+Secretaría de Comunicaciones y Transporte,SCT,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=sct,El Instituto Mexicano para la Competitividad A.C. (IMCO),Investigación y Consultoría,11-50,,
+Secretaría de Comunicaciones y Transporte,SCT,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=sct,Aspiria,Finanzas e Inversiones,1-10,,
+Secretaría de Comunicaciones y Transporte,SCT,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=sct,Telefónica,Medios y Comunicación,"10,001+",,
+Secretaría de Comunicaciones y Transporte,SCT,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=sct,SkyAlert,"Other,Telecomunicación",11-50,,
+Secretaría de Comunicaciones y Transporte,SCT,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=sct,Banorte-Ixe,Finanzas e Inversiones,"10,001+",,
+Secretaría de Comunicaciones y Transporte,SCT,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=sct,"Asociación Mexicana de Internet, A.C.",Medios y Comunicación,11-50,,
+Secretaría de Comunicaciones y Transporte,SCT,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=sct,KPMG Cárdenas Dosal,Servicios Empresariales,"10,001+",,
+Secretaría de Comunicaciones y Transporte,SCT,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=sct,Confederación Patronal de la República Mexicana (COPARMEX),Servicios Empresariales,51-200,,
+Secretaría de Comunicaciones y Transporte,SCT,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=sct,TNS ,Servicios Empresariales,"10,001+",,
+Secretaría de Comunicaciones y Transporte,SCT,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=sct,Propiedades.com,Vivienda/Bienes Raíces,11-50,,
+Comisión Nacional para el Conocimiento y Uso de la Biodiversidad,CONABIO,None,General,,http://www.conabio.gob.mx/,Conurba,Gobierno,,,
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Gobierno Fácil,Gobierno,1-10,Web Service,http://www.inegi.org.mx/inegi/contenidos/serviciosWEB/
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,El Instituto Mexicano para la Competitividad A.C. (IMCO),Investigación y Consultoría,11-50,CEMABE,http://cemabe.inegi.org.mx
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,OPI,Tecnología/Datos,11-50,Estadisticas Judiciales en Materia Penal,http://www.inegi.org.mx/est/contenidos/Proyectos/registros/sociales/judiciales/
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,OPI,Tecnología/Datos,11-50,Censo Nacional de Población y Vivienda,http://www.censo2010.org.mx/
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,OPI,Tecnología/Datos,11-50,Estadística de Finanzas Públicas Estatales y Municipales,http://www.inegi.org.mx/est/contenidos/Proyectos/registros/economicas/finanzas/default.aspx
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,OPI,Tecnología/Datos,11-50,"Censo de Escuelas, Maestros y Alumnos de Educación Básica y Especial",
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,OPI,Tecnología/Datos,11-50,Descargas masivas,
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,OPI,Tecnología/Datos,11-50,Banco de información económica,
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,OPI,Tecnología/Datos,11-50,Encuesta Nacional de Ingresos y Gastos de los Hogares (ENIGH),
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,OPI,Tecnología/Datos,11-50,Encuesta Nacional de Victimización y Percepción sobre Seguridad Pública (ENVIPE),
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,OPI,Tecnología/Datos,11-50,Encuesta Nacional sobre Cultura Política y Prácticas Ciudadanas (ENCUP),
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,OPI,Tecnología/Datos,11-50,Encuesta Nacional sobre la Dinámica de las Relaciones en los Hogares (ENDIREH),
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,The Institute for Transportation and Development Policy (ITDP) Mexico,Transporte,11-50,Censo de población y vivienda,http://www.inegi.org.mx/est/contenidos/proyectos/ccpv/default.aspx
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,The Institute for Transportation and Development Policy (ITDP) Mexico,Transporte,11-50,Directorio Estadístico Nacional de Unidades Económicas,http://www3.inegi.org.mx/sistemas/mapa/denue/default.aspx
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,The Institute for Transportation and Development Policy (ITDP) Mexico,Transporte,11-50,Contínuo de Elevaciones Mexicano,http://www.inegi.org.mx/geo/contenidos/datosrelieve/continental/default.aspx
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Cartográfica,Mapeo/Geoespacial,1-10,Censo de Población y Vivienda 2010,http://www.inegi.org.mx/sistemas/consulta_resultados/ageb_urb2010.aspx?c=28111
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Cartográfica,Mapeo/Geoespacial,1-10,Marco Geoestadístico México,http://www.inegi.org.mx/geo/contenidos/geoestadistica/m_geoestadistico.aspx
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,MapData,Mapeo/Geoespacial,11-50,Censo,http://www.inegi.org.mx/
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,"Abt Associates, Inc",Investigación y Consultoría,1-10,Encuesta sobre investigación y desarrollo tecnológico (ESIDET),http://www.inegi.org.mx/est/contenidos/proyectos/accesomicrodatos/esidet/Default.aspx
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Deloitte,Investigación y Consultoría,"501-1,000",Datos Macroeconomicos,
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Centro de Integración Ciudadana,Mapeo/Geoespacial,11-50,AGEBS perimetros,
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Centro de Integración Ciudadana,Mapeo/Geoespacial,11-50,Estadistica AGEBS,
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Partido Surrealista,Tecnología/Datos,1-10,Servidores GEO,https://gist.github.com/diegovalle/5864549
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,El Narval Mundial,Investigación y Consultoría,1-10,POBLACION,
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,El Narval Mundial,Investigación y Consultoría,1-10,ECONOMIA,
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,El Narval Mundial,Investigación y Consultoría,1-10,MEDIO AMBIENTE,
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Ubícalas,Mapeo/Geoespacial,11-50,Directorio Estadístico Nacional de Unidades Económicas,http://www3.inegi.org.mx/sistemas/mapa/denue/default.aspx
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Integralia Consultores,Investigación y Consultoría,11-50,Ocupación y Empleo,http://www3.inegi.org.mx/sistemas/temas/default.aspx?s=est&c=25433&t=1
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Integralia Consultores,Investigación y Consultoría,11-50,Seguridad Pública y justicia,http://www3.inegi.org.mx/sistemas/temas/default.aspx?s=est&c=21702
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,eGob (Blue Ocean Technologies),Gobierno,51-200,Catastro,http://www.inegi.org.mx/geo/contenidos/catastro/
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,CREA,Educación,11-50,Encuesta Nacional de Ocupación y Empleo (ENOE),http://www.inegi.org.mx/est/contenidos/Proyectos/encuestas/hogares/regulares/enoe/
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,CREA,Educación,11-50,Encuesta Nacional de Micronegocios (ENAMIN),http://www.inegi.org.mx/est/contenidos/proyectos/encuestas/hogares/modulos/enamin/default.aspx
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,CREA,Educación,11-50,Censos Económicos,http://www.inegi.org.mx/est/contenidos/proyectos/ce/ce2014/
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Cuadra Urbanismo,Investigación y Consultoría,11-50,Marco Geoestadístico Nacional,http://www.inegi.org.mx/geo/contenidos/geoestadistica/M_Geoestadistico.aspx
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Descifra ,Investigación y Consultoría,1-10,Censos Económicos,http://www.inegi.org.mx/est/contenidos/proyectos/ce/ce2014/
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Exponential Knowledge,Investigación y Consultoría,1-10,ENIGH,
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Exponential Knowledge,Investigación y Consultoría,1-10,ENOE,http://www.inegi.org.mx/est/contenidos/Proyectos/encuestas/hogares/regulares/enoe/
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Transparencia Mexicana,Investigación y Consultoría,11-50,Censo de Población y Vivienda,http://www.inegi.org.mx/inegi/default.aspx?pred=1&c=2756
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,McKinsey & Company,Investigación y Consultoría,"10,001+",Censos Económicos,http://www.inegi.org.mx/est/contenidos/proyectos/ce/ce2014/
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,McKinsey & Company,Investigación y Consultoría,"10,001+",Encuesta Nacional de Ocupación y Empleo (ENOE),http://www.inegi.org.mx/est/contenidos/Proyectos/encuestas/hogares/regulares/enoe/
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,McKinsey & Company,Investigación y Consultoría,"10,001+",Encuesta Nacional de Ingresos y Gastos de los Hogares,http://www.inegi.org.mx/est/contenidos/Proyectos/encuestas/hogares/regulares/enigh/
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,McKinsey & Company,Investigación y Consultoría,"10,001+",Encuesta Nacional de Salud y Nutrición (ENSANUT),http://ensanut.insp.mx/
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Banamex,Finanzas e Inversiones,"10,001+",Censo General de Población y Vivienda 2010,http://www.inegi.org.mx/est/contenidos/proyectos/ccpv/cpv2010/
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Banamex,Finanzas e Inversiones,"10,001+",Producto Interno Bruto (PIB),http://www.inegi.org.mx/est/contenidos/proyectos/cn/
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Banamex,Finanzas e Inversiones,"10,001+",Población Económicamente Activa (PEA),http://www.inegi.org.mx/inegi/default.aspx?s=est&c=6874&e=&i=
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Banamex,Finanzas e Inversiones,"10,001+",Producto Interno Bruto por Entidad Federativa,http://www.inegi.org.mx/est/contenidos/Proyectos/SCN/C_Anuales/pib_ef/default.aspx
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Banamex,Finanzas e Inversiones,"10,001+",Indicador Trimestral de Actividad Económica Estatal (ITAEE),http://www.inegi.org.mx/est/contenidos/Proyectos/SCN/c_corto_plazo/calculos_est/itaee/default.aspx
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Banamex,Finanzas e Inversiones,"10,001+",Indicadores de ocupación y empleo,http://www3.inegi.org.mx/sistemas/temas/default.aspx?s=est&c=25433&t=1
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Banamex,Finanzas e Inversiones,"10,001+",Series desestacionalizadas del índice de los ingresos por suministro de bienes y servicios al por mayor y al por menor en las empresas comerciales,http://www.inegi.org.mx/sistemas/bie/cuadrosestadisticos/GeneraCuadro.aspx?s=est&nc=528&esq=BIEPUB&c=24905
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Banamex,Finanzas e Inversiones,"10,001+",Índices de Precios al Consumidor,http://www.inegi.org.mx/sistemas/indiceprecios/Estructura.aspx?idEstructura=112000100010&T=%C3%8Dndices%20de%20Precios%20al%20Consumidor&ST=Principales%20%C3%ADndices
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Movimiento Congruencia,"Other,Recursos Humanos",1-10,Censo de Población y Vivienda,http://www.inegi.org.mx/inegi/default.aspx?pred=1&c=2756
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Movimiento Congruencia,"Other,Recursos Humanos",1-10,Censos Económicos,http://www.inegi.org.mx/est/contenidos/proyectos/ce/ce2014/
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Banorte-Ixe,Finanzas e Inversiones,"10,001+",Global de Productividad laboral de la Economía,
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Consejo Nacional Empresarial Turístico,Estilos de vida y Consumidores,11-50,Cuenta Satélite del Turismo de México,http://www.inegi.org.mx/est/contenidos/proyectos/cn/tur/presentacion.aspx
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Consejo Nacional Empresarial Turístico,Estilos de vida y Consumidores,11-50,Encuesta Nacional de Servicios,http://www.inegi.org.mx/est/contenidos/espanol/proyectos/metadatos/encuestas/ems_225.asp?c=10603
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Spectron Desarrollo,Investigación y Consultoría,1-10,Encuesta Nacional de Ingresos y Gastos de los Hogares (ENIGH),http://www.inegi.org.mx/est/contenidos/Proyectos/encuestas/hogares/regulares/enigh/
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,AMAI,Investigación y Consultoría,"5,001-10,000",Encuesta Nacional de Ingresos y Gastos de los Hogares (ENIGH),http://www.inegi.org.mx/est/contenidos/Proyectos/encuestas/hogares/regulares/enigh/
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,AMAI,Investigación y Consultoría,"5,001-10,000",Censo de Población y Vivienda,http://www.inegi.org.mx/est/contenidos/Proyectos/ccpv/
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,AMAI,Investigación y Consultoría,"5,001-10,000",Directorio Estadístico Nacional de Unidades Económicas DENUE,http://www3.inegi.org.mx/sistemas/mapa/denue/default.aspx
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Instituto Mexicano de Ejecutivos de Finanzas (IMEF),Finanzas e Inversiones,201-500,Censos Económicos,http://www.inegi.org.mx/est/contenidos/proyectos/ce/
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Instituto Mexicano de Ejecutivos de Finanzas (IMEF),Finanzas e Inversiones,201-500,Encuesta Nacional de Ocupación y Empleo (ENOE),http://www.inegi.org.mx/est/contenidos/Proyectos/encuestas/hogares/regulares/enoe/
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,AMAI,Investigación y Consultoría,"5,001-10,000",Inventario Nacional de Viviendas,http://www3.inegi.org.mx/sistemas/mapa/inv/Default.aspx
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,TIS Consulting Group,Investigación y Consultoría,1-10,Directorio Estadístico Nacional de Unidades Económicas (DENUE),http://www.inegi.org.mx/sistemas/denue/
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Centro de Investigación para el Desarrollo (CIDAC),Investigación y Consultoría,11-50,Censo de Población y Vivienda 2010,http://www.inegi.org.mx/est/contenidos/proyectos/ccpv/cpv2010/Default.aspx
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Fundar Centro de Análisis e Investigación,Investigación y Consultoría,11-50,Encuesta Nacional de Empleo Urbano (ENUE),http://www.inegi.org.mx/est/contenidos/proyectos/encuestas/hogares/historicas/eneu/default.aspx
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Fundar Centro de Análisis e Investigación,Investigación y Consultoría,11-50,Mortalidad,http://www.inegi.org.mx/est/contenidos/proyectos/registros/vitales/mortalidad/
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Fundar Centro de Análisis e Investigación,Investigación y Consultoría,11-50,Encuesta Nacional sobre la Dinámica de las Relaciones en los Hogares (ENDIREH),http://www.inegi.org.mx/est/contenidos/Proyectos/encuestas/hogares/especiales/endireh/
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Fundar Centro de Análisis e Investigación,Investigación y Consultoría,11-50,Censo de Población y Vivienda 2000,http://www.inegi.org.mx/est/contenidos/proyectos/ccpv/cpv2010/Default.aspx
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,México Evalua,Investigación y Consultoría,1-10,"Censo de Escuelas, Maestros y Alumnos de Educación Básica y Especial",http://cemabe.inegi.org.mx/
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,México Evalua,Investigación y Consultoría,1-10,Atlas educativo,www.Censo.sep.gob.mx
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,México Evalua,Investigación y Consultoría,1-10,Encuesta Nacional de Ocupación y Empleo (ENOE),http://www.inegi.org.mx/est/contenidos/Proyectos/encuestas/hogares/regulares/enoe/
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,México Evalua,Investigación y Consultoría,1-10,Estadísticas judiciales en materia penal,http://www.inegi.org.mx/est/contenidos/proyectos/registros/sociales/judiciales/default.aspx
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,México Evalua,Investigación y Consultoría,1-10,"Censo Nacional de Gobierno, Seguridad Pública y Sistema Penitenciario Estatales",http://www.inegi.org.mx/est/contenidos/proyectos/censosgobierno/cngspspe2014/default.aspx
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Asociación Mexicana de Profesionales Inmobiliarios (AMPI),Vivienda/Bienes Raíces,1-10,Indicador Global de la Actividad Económica,http://www.inegi.org.mx/inegi/contenidos/espanol/prensa/Boletines/Boletin/boletin11.asp?s=inegi&c=296
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Asociación Mexicana de Profesionales Inmobiliarios (AMPI),Vivienda/Bienes Raíces,1-10,Censos Económicos,http://www.inegi.org.mx/est/contenidos/proyectos/ce/
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Morlan,Tecnología/Datos,1-10,Censo de Población y Vivienda 2010,http://www.inegi.org.mx/est/contenidos/proyectos/ccpv/cpv2010/
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Investigación de Mercado Grupo IDM,Investigación y Consultoría,NA,Marco Geoestadístico Nacional,http://www.inegi.org.mx/geo/contenidos/geoestadistica/M_Geoestadistico.aspx
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Investigación de Mercado Grupo IDM,Investigación y Consultoría,NA,Directorio Estadístico Nacional de Unidades Económicas (DENUE),http://www3.inegi.org.mx/sistemas/mapa/denue/default.aspx
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Investigación de Mercado Grupo IDM,Investigación y Consultoría,NA,Encuesta Nacional de Ingresos y Gastos de los Hogares (ENIGH),http://www.inegi.org.mx/est/contenidos/Proyectos/encuestas/hogares/regulares/enigh/
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,KPMG Cárdenas Dosal,Servicios Empresariales,"10,001+","Índice Nacional de Precios al Consumidor y sus Componentes, México, 2013",http://www.inegi.org.mx/sistemas/IndicePrecios/Cuadro.aspx?nc=CA55&T=%C3%8Dndices%20de%20Precios%20al%20Consumidor&ST=%C3%8Dndice%20Nacional%20de%20Precios%20al%20Consumidor%20y%20sus%20componentes
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,KPMG Cárdenas Dosal,Servicios Empresariales,"10,001+",Índice de confianza del consumidor,http://www.inegi.org.mx/inegi/contenidos/espanol/prensa/Boletines/Boletin/boletin17.asp?s=inegi&c=414
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,KPMG Cárdenas Dosal,Servicios Empresariales,"10,001+",Indicadores oportunos de ocupación y empleo. Cifras preliminares durante noviembre de 2013,http://www.inegi.org.mx/inegi/contenidos/espanol/prensa/Boletines/Boletin/Comunicados/Indicadores%20de%20ocupacion%20y%20empleo/2014/diciembre/comunica.pdf
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Asociación Mexicana de la Industria Automotríz (AMIA),Investigación y Consultoría,,Índice de confianza del consumidor en México,http://www.inegi.org.mx/inegi/contenidos/espanol/prensa/Boletines/Boletin/boletin17.asp?s=inegi&c=414
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Centro de Estudios Jurídicos y Ambientales (CEJA),Clima y Medio Ambiente,,Sistema de consultas estadísticas ambientales,http://mapserver.inegi.org.mx/ambiental/map/indexV3FFM.html
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Centro de Estudios Jurídicos y Ambientales (CEJA),Clima y Medio Ambiente,,Accidentes de tránsito terrestre en zonas urbanas y suburbanas,http://www.inegi.org.mx/est/contenidos/proyectos/registros/economicas/accidentes/
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Moody's Analytics,Finanzas e Inversiones,"1,001-5,000",Índice de Confianza del Consumidor,http://www.inegi.org.mx/inegi/contenidos/espanol/prensa/Boletines/Boletin/boletin17.asp?s=inegi&c=414
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Conurba,Gobierno,,Uso de suelo y vegetación,http://www.inegi.org.mx/geo/contenidos/recnat/usosuelo/
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Conurba,Gobierno,,Domicilios Geográficos,http://www.inegi.org.mx/geo/contenidos/normastecnicas/dom_geo.aspx
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Confederación Patronal de la República Mexicana (COPARMEX),Servicios Empresariales,51-200,Encuesta Continua sobre la Percepción de la Seguridad Pública (ECOSEP),http://www.inegi.org.mx/est/contenidos/proyectos/encuestas/hogares/regulares/ecosep/default.aspx
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Confederación Patronal de la República Mexicana (COPARMEX),Servicios Empresariales,51-200,Censo de Población y Vivienda 2010,http://www.inegi.org.mx/est/contenidos/proyectos/ccpv/cpv2010/
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Confederación Patronal de la República Mexicana (COPARMEX),Servicios Empresariales,51-200,Encuesta Nacional de Ocupación y Empleo (ENOE),http://www.inegi.org.mx/est/contenidos/Proyectos/encuestas/hogares/regulares/enoe/
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Confederación Patronal de la República Mexicana (COPARMEX),Servicios Empresariales,51-200,Módulo de Condiciones Socioeconómicas (MCS),http://www.inegi.org.mx/est/contenidos/proyectos/encuestas/hogares/modulos/mcs/default.aspx
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Confederación Patronal de la República Mexicana (COPARMEX),Servicios Empresariales,51-200,Anuario de Estadísticas por Entidad Federativa 2011,http://www.inegi.org.mx/prod_serv/contenidos/espanol/bvinegi/productos/integracion/pais/aepef/2011/Aepef2011.pdf
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Confederación Patronal de la República Mexicana (COPARMEX),Servicios Empresariales,51-200,Sistema de Cuentas Nacionales de México,http://www.inegi.org.mx/est/contenidos/proyectos/scn/
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Confederación Patronal de la República Mexicana (COPARMEX),Servicios Empresariales,51-200,Estadística de finanzas públicas estatales y municipales,http://www.inegi.org.mx/est/contenidos/proyectos/registros/economicas/finanzas/
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Confederación Patronal de la República Mexicana (COPARMEX),Servicios Empresariales,51-200,Encuesta Nacional de Victimización y Percepción sobre Seguridad Pública (ENVIPE),http://www.inegi.org.mx/est/contenidos/proyectos/encuestas/hogares/regulares/envipe/
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Confederación Patronal de la República Mexicana (COPARMEX),Servicios Empresariales,51-200,Indicador Trimestral de la Actividad Económica Estatal,http://www.inegi.org.mx/est/contenidos/proyectos/cn/itaee/default.aspx
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Centro Mexicano para la Filantropía (CEMEFI),Servicios Empresariales,11-50,Sistema de Cuentas Nacionales de México. Cuenta satélite de las instituciones sin fines de lucro de México. 2008-2010,http://www3.inegi.org.mx/sistemas/productos/default.aspx?c=265&s=inegi&upc=702825003839&pf=Prod&ef=&f=2&cl=0&tg=0&pg=0
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Centro Mexicano para la Filantropía (CEMEFI),Servicios Empresariales,11-50,Censos Económicos,http://www.inegi.org.mx/est/contenidos/proyectos/ce/
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,TNS ,Servicios Empresariales,"10,001+",Censo de Población y Vivienda 2010,http://www.inegi.org.mx/est/contenidos/proyectos/ccpv/cpv2010/
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,ANTAD,Servicios Empresariales,,Censo de Población y Vivienda 2010,http://www.inegi.org.mx/est/contenidos/proyectos/ccpv/cpv2010/
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,ANTAD,Servicios Empresariales,,SCNM. Cuentas por sectores institucionales. Cuenta Satélite del Subsector Informal de los Hogares 1998-2003,http://www3.inegi.org.mx/sistemas/biblioteca/detalle.aspx?c=17200&upc=702825001261&s=est&tg=0&f=2&pf=Cue
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,ANTAD,Servicios Empresariales,,Censos Agropecuarios,http://www.inegi.org.mx/est/contenidos/proyectos/agro/
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,ANTAD,Servicios Empresariales,,Censos Económicos,http://www.inegi.org.mx/est/contenidos/proyectos/ce/
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Noorcus Innovation,Investigación y Consultoría,1-10,valores económicos,
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Asociación Nacional de la Industria Química (ANIQ),Investigación Científica,51-200,Censos Económicos,http://www.inegi.org.mx/est/contenidos/proyectos/ce/
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Asociación Nacional de la Industria Química (ANIQ),Investigación Científica,51-200,Índice de Precios al Productor,http://www.inegi.org.mx/sistemas/indiceprecios/Estructura.aspx?idEstructura=1120008000200020&T=%C3%8Dndices%20de%20Precios%20al%20Productor&ST=Por%20destino
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,AMK Technologies,Tecnología/Datos,11-50,Directorio Estadístico Nacional de Unidades Económicas (DENUE),http://www3.inegi.org.mx/sistemas/mapa/denue/default.aspx
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Ayoui,Tecnología/Datos,1-10,Censos Económicos,http://www.inegi.org.mx/est/contenidos/proyectos/ce/
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Data4,Tecnología/Datos,1-10,Encuesta Nacional de Ingresos y Gastos de los Hogares (ENIGH),http://www.inegi.org.mx/est/contenidos/Proyectos/encuestas/hogares/regulares/enigh/
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Data4,Tecnología/Datos,1-10,Encuesta Nacional de Ocupación y Empleo (ENOE),http://www.inegi.org.mx/est/contenidos/Proyectos/encuestas/hogares/regulares/enoe/
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Data4,Tecnología/Datos,1-10,Encuesta Anual de Transportes,http://www.inegi.org.mx/prod_serv/contenidos/espanol/bvinegi/productos/integracion/encues-trans/2011/EAT1_2011.pdf
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Buendía & Laredo,Investigación y Consultoría,11-50,,
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,INNKU,Tecnología/Datos,11-50,,
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Icalia Labs,Tecnología/Datos,1-10,,
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,El Universal,Medios y Comunicación,"1,001-5,000",,
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Spaceship Labs,Tecnología/Datos,11-50,,
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Kueski,Finanzas e Inversiones,11-50,,
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,C230 Consultores,Investigación y Consultoría,11-50,,
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Agencia de Estadística de Mercados S.C. (AEM),Investigación y Consultoría,NA,,
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,kubo.financiero,Finanzas e Inversiones,11-50,,
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Axesat México,Tecnología/Datos,51-200,,
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Fractal,Tecnología/Datos,1-10,,
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Buholegal,Servicios Legales,1-10,,
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Konfío,Finanzas e Inversiones,11-50,,
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,IGNIA Partners,Finanzas e Inversiones,11-50,,
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Fundación Invictus,Energía,1-10,,
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Atlantia Search,Tecnología/Datos,1-10,,
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Telus,Investigación y Consultoría,1-10,,
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Nielsen IBOPE,Investigación del consumidor y medios,"501-1,000",,
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Google,Tecnología/Datos,"10,001+",,
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Aspiria,Finanzas e Inversiones,1-10,,
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Akko Group,Vivienda/Bienes Raíces,11-50,,
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Zapopan Lab,Tecnología/Datos,1-10,,
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Agroclima,Seguros,1-10,,
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Abison Burke,Investigación y Consultoría,51-200,,
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Carrot México,Transporte,1-10,,
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Consejo Mexicano de la Carne,Agricultura y Alimentación,1-10,,
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Telefónica,Medios y Comunicación,"10,001+",,
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Grupo Bimbo,Agricultura y Alimentación,"10,001+",,
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Accenture,Investigación y Consultoría,"10,001+",,
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Marcos y Asociados,Energía,11-50,,
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,"Asociación Mexicana de Internet, A.C.",Medios y Comunicación,11-50,,
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,PricewaterhouseCoopers (PwC),Servicios Empresariales,"1,001-5,000",,
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,PLM Latinoamérica,Salud,51-200,,
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,EY,Servicios Empresariales,"10,001+",,
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Propiedades.com,Vivienda/Bienes Raíces,11-50,,
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,J.P. Morgan,Finanzas e Inversiones,"10,001+",,
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Banregio,Finanzas e Inversiones,"1,001-5,000",,
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Fondo para la Comunicación y Educación Ambiental (FCEA),Educación,1-10,,
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Thomson Reuters,Medios y Comunicación,"10,001+",,
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,oooES,Tecnología/Datos,1-10,,
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Fundación MetLife,Educación,,,
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,MetLife,Seguros,"10,001+",,
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Unipagos,Finanzas e Inversiones,11-50,,
+Instituto Nacional de Estadística y Geografía,INEGI,Federal,General,,http://www.inegi.org.mx/,Verne42,Tecnología/Datos,1-10,,
+Registro Único de Vivienda,RUV,None,General,,http://www.ruv.org.mx/PortalMiCasa/Controller?action=ruv,Moody's Analytics,Finanzas e Inversiones,"1,001-5,000",,
+Secretaría de Desarrollo Agrario Territorial y Urbano,SEDATU,Federal,General,,http://www.sedatu.gob.mx/,Moody's Analytics,Finanzas e Inversiones,"1,001-5,000",Sistema Nacional de Información e Indicadores de Vivienda,http://www.conavi.gob.mx/introduccion
+Secretaría de Desarrollo Agrario Territorial y Urbano,SEDATU,Federal,General,,http://www.sedatu.gob.mx/,Conurba,Gobierno,,Guías Metodológicas,
+Secretaría de Desarrollo Agrario Territorial y Urbano,SEDATU,Federal,Comisión Nacional de Vivienda,CONAVI,http://www.conavi.gob.mx/,Cámara Mexicana de la Industria de la Construcción,,,,
+Secretaría de Desarrollo Agrario Territorial y Urbano,SEDATU,Federal,Comisión Nacional de Vivienda,CONAVI,http://www.conavi.gob.mx/,Moody's Analytics,Finanzas e Inversiones,"1,001-5,000",,
+Secretaría de Desarrollo Agrario Territorial y Urbano,SEDATU,Federal,Comisión Nacional de Vivienda,CONAVI,http://www.conavi.gob.mx/,Transparencia Mexicana,Investigación y Consultoría,11-50,,
+Secretaría de Desarrollo Agrario Territorial y Urbano,SEDATU,Federal,General,,http://www.sedatu.gob.mx/,El Instituto Mexicano para la Competitividad A.C. (IMCO),Investigación y Consultoría,11-50,,
+Secretaría de Desarrollo Agrario Territorial y Urbano,SEDATU,Federal,General,,http://www.sedatu.gob.mx/,Cuadra Urbanismo,Investigación y Consultoría,11-50,,
+Secretaría de Desarrollo Agrario Territorial y Urbano,SEDATU,Federal,General,,http://www.sedatu.gob.mx/,Atlantia Search,Tecnología/Datos,1-10,,
+Secretaría de Desarrollo Agrario Territorial y Urbano,SEDATU,Federal,General,,http://www.sedatu.gob.mx/,Telus,Investigación y Consultoría,1-10,,
+Secretaría de Medio Ambiente y Recursos Naturales,SEMARNAT,Federal,General,,http://www.semarnat.gob.mx/temas/estadisticas-ambientales/badesniar,El Narval Mundial,Investigación y Consultoría,1-10,CLIMA,
+Secretaría de Medio Ambiente y Recursos Naturales,SEMARNAT,Federal,General,,http://www.semarnat.gob.mx/temas/estadisticas-ambientales/badesniar,El Narval Mundial,Investigación y Consultoría,1-10,ATMOSFERA,
+Secretaría de Medio Ambiente y Recursos Naturales,SEMARNAT,Federal,General,,http://www.semarnat.gob.mx/temas/estadisticas-ambientales/badesniar,Conurba,Gobierno,,Inventario Nacional Forestal,http://www.conafor.gob.mx/biblioteca/Inventario-Nacional-Forestal-y-de-Suelos.pdf
+Secretaría de Medio Ambiente y Recursos Naturales,SEMARNAT,Federal,General,,http://www.semarnat.gob.mx/temas/estadisticas-ambientales/badesniar,Propiedades.com,Vivienda/Bienes Raíces,11-50,Sistema Nacional de Indicadores Ambientales (SNIA),http://www.semarnat.gob.mx/temas/estadisticas-ambientales/snia
+Secretaría de Medio Ambiente y Recursos Naturales,SEMARNAT,Federal,Comisión Nacional del Agua,CONAGUA,http://catalogo.datos.gob.mx/dataset?organization=conagua,Fondo para la Comunicación y Educación Ambiental (FCEA),Educación,1-10,Bancos del Agua en México 2012,http://www.conagua.gob.mx/bancosdelagua/SGAA-4-12-BAM-12.pdf
+Secretaría de Medio Ambiente y Recursos Naturales,SEMARNAT,Federal,Comisión Nacional del Agua,CONAGUA,http://catalogo.datos.gob.mx/dataset?organization=conagua,Fondo para la Comunicación y Educación Ambiental (FCEA),Educación,1-10,estadísticas del agua en México 2013,http://www.conagua.gob.mx/CONAGUA07/Noticias/SGP-2-14Web.pdf
+Secretaría de Medio Ambiente y Recursos Naturales,SEMARNAT,Federal,Comisión Nacional del Agua,CONAGUA,http://catalogo.datos.gob.mx/dataset?organization=conagua,Fondo para la Comunicación y Educación Ambiental (FCEA),Educación,1-10,Programa Nacional Hídrico,http://www.conagua.gob.mx/Contenido.aspx?n1=1&n2=28
+Secretaría de Medio Ambiente y Recursos Naturales,SEMARNAT,Federal,Comisión Nacional del Agua,CONAGUA,http://catalogo.datos.gob.mx/dataset?organization=conagua,El Instituto Mexicano para la Competitividad A.C. (IMCO),Investigación y Consultoría,11-50,,
+Secretaría de Medio Ambiente y Recursos Naturales,SEMARNAT,Federal,Comisión Nacional del Agua,CONAGUA,http://catalogo.datos.gob.mx/dataset?organization=conagua,Smartplace,Tecnología/Datos,1-10,,
+Secretaría de Medio Ambiente y Recursos Naturales,SEMARNAT,Federal,Comisión Nacional del Agua,CONAGUA,http://catalogo.datos.gob.mx/dataset?organization=conagua,Google,Tecnología/Datos,"10,001+",,
+Secretaría de Medio Ambiente y Recursos Naturales,SEMARNAT,Federal,Comisión Nacional del Agua,CONAGUA,http://catalogo.datos.gob.mx/dataset?organization=conagua,Atlantia Search,Tecnología/Datos,1-10,,
+Secretaría de Medio Ambiente y Recursos Naturales,SEMARNAT,Federal,Comisión Nacional del Agua,CONAGUA,http://catalogo.datos.gob.mx/dataset?organization=conagua,SkyAlert,"Other,Telecomunicación",11-50,,
+Secretaría de Medio Ambiente y Recursos Naturales,SEMARNAT,Federal,Comisión Nacional del Agua,CONAGUA,http://catalogo.datos.gob.mx/dataset?organization=conagua,Centro de Estudios Jurídicos y Ambientales (CEJA),Clima y Medio Ambiente,,,
+Secretaría de Medio Ambiente y Recursos Naturales,SEMARNAT,Federal,Comisión Nacional Forestal,CONAFOR,,El Instituto Mexicano para la Competitividad A.C. (IMCO),Investigación y Consultoría,11-50,,
+Secretaría de Medio Ambiente y Recursos Naturales,SEMARNAT,Federal,Comisión Nacional Forestal,CONAFOR,,Conurba,Gobierno,,,
+Secretaría de Medio Ambiente y Recursos Naturales,SEMARNAT,Federal,Instituto Nacional de Ecología y Cambio Climático,INECC,,Fondo para la Comunicación y Educación Ambiental (FCEA),Educación,1-10,Sistema de Consulta de Cuencas Hidrográficas,http://cuencas.inecc.gob.mx/cuenca/
+Secretaría de Medio Ambiente y Recursos Naturales,SEMARNAT,Federal,Instituto Nacional de Ecología y Cambio Climático,INECC,,Fondo para la Comunicación y Educación Ambiental (FCEA),Educación,1-10,Adaptación al cambio climático en México,http://www.adaptacion.inecc.gob.mx/
+Secretaría de Medio Ambiente y Recursos Naturales,SEMARNAT,Federal,Instituto Nacional de Ecología y Cambio Climático,INECC,,El Instituto Mexicano para la Competitividad A.C. (IMCO),Investigación y Consultoría,11-50,,
+Secretaría de Medio Ambiente y Recursos Naturales,SEMARNAT,Federal,Servicio Meteorológico Nacional,SMN,http://smn.cna.gob.mx/,Fondo para la Comunicación y Educación Ambiental (FCEA),Educación,1-10,Pronóstico General,http://smn.cna.gob.mx/index.php?option=com_content&view=article&id=54&Itemid=57
+Secretaría de Medio Ambiente y Recursos Naturales,SEMARNAT,Federal,Servicio Meteorológico Nacional,SMN,http://smn.cna.gob.mx/,Fondo para la Comunicación y Educación Ambiental (FCEA),Educación,1-10,Pronóstico extendido,http://smn.cna.gob.mx/index.php?option=com_content&view=article&id=55&Itemid=58
+Secretaría de Medio Ambiente y Recursos Naturales,SEMARNAT,Federal,Servicio Meteorológico Nacional,SMN,http://smn.cna.gob.mx/,SkyAlert,"Other,Telecomunicación",11-50,,
+Secretaría de Medio Ambiente y Recursos Naturales,SEMARNAT,Federal,Servicio Meteorológico Nacional,SMN,http://smn.cna.gob.mx/,Agroclima,Seguros,1-10,,
+Secretaría de Medio Ambiente y Recursos Naturales,SEMARNAT,Federal,Sistema Nacional de Información Ambiental y de Recursos Naturales,SNIARN,http://www.semarnat.gob.mx/temas/estadisticas-ambientales,El Narval Mundial,Investigación y Consultoría,1-10,Informe de la Situación del Medio Ambiente en México,http://app1.semarnat.gob.mx/dgeia/informe_12/01_poblacion/cap1_2.html
+Secretaría de Medio Ambiente y Recursos Naturales,SEMARNAT,Federal,Sistema Nacional de Información Ambiental y de Recursos Naturales,SNIARN,http://www.semarnat.gob.mx/temas/estadisticas-ambientales,Fondo para la Comunicación y Educación Ambiental (FCEA),Educación,1-10,Sistema Nacional de Indicadores Ambientales,http://www.semarnat.gob.mx/temas/estadisticas-ambientales/snia?De=SNIARN
+Secretaría de Medio Ambiente y Recursos Naturales,SEMARNAT,Federal,Sistema Nacional de Información Ambiental y de Recursos Naturales,SNIARN,http://www.semarnat.gob.mx/temas/estadisticas-ambientales,Fondo para la Comunicación y Educación Ambiental (FCEA),Educación,1-10,Infografías Ambientales,http://www.semarnat.gob.mx/temas/estadisticas-ambientales/infografias?De=SNIARN
+Secretaría de Medio Ambiente y Recursos Naturales,SEMARNAT,Federal,Instituto Mexicano de Tecnología del Agua,IMTA,https://www.imta.gob.mx/,Fondo para la Comunicación y Educación Ambiental (FCEA),Educación,1-10,Centro de Consulta del Agua,https://cenca.imta.mx/
+Secretaría de Medio Ambiente y Recursos Naturales,SEMARNAT,Federal,Instituto Mexicano de Tecnología del Agua,IMTA,https://www.imta.gob.mx/,Fondo para la Comunicación y Educación Ambiental (FCEA),Educación,1-10,Biblioteca Digital,https://www.imta.gob.mx/biblioteca-digital
+Secretaría de Medio Ambiente y Recursos Naturales,SEMARNAT,Federal,Instituto Mexicano de Tecnología del Agua,IMTA,https://www.imta.gob.mx/,Fondo para la Comunicación y Educación Ambiental (FCEA),Educación,1-10,Canal IMTA TV,https://www.youtube.com/channel/UC4kWn-4VriseOZ5CdvESs0Q
+Secretaría de Medio Ambiente y Recursos Naturales,SEMARNAT,Federal,General,,http://www.semarnat.gob.mx/temas/estadisticas-ambientales/badesniar,Spaceship Labs,Tecnología/Datos,11-50,,
+Secretaría de Medio Ambiente y Recursos Naturales,SEMARNAT,Federal,General,,http://www.semarnat.gob.mx/temas/estadisticas-ambientales/badesniar,Cuadra Urbanismo,Investigación y Consultoría,11-50,,
+Secretaría de Medio Ambiente y Recursos Naturales,SEMARNAT,Federal,General,,http://www.semarnat.gob.mx/temas/estadisticas-ambientales/badesniar,Transparencia Mexicana,Investigación y Consultoría,11-50,,
+Consejo Nacional de Evaluación de la Política de Desarrollo Social,CONEVAL,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=coneval,OPI,Tecnología/Datos,11-50,Medición de la pobreza,http://www.coneval.gob.mx/medicion/Paginas/Medici%C3%B3n/Pobreza%202012/Pobreza-2012.aspx
+Consejo Nacional de Evaluación de la Política de Desarrollo Social,CONEVAL,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=coneval,Exponential Knowledge,Investigación y Consultoría,1-10,Evaluación de la Política Social,http://www.coneval.gob.mx/evaluacion/Paginas/Evaluacion.aspx
+Consejo Nacional de Evaluación de la Política de Desarrollo Social,CONEVAL,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=coneval,El Narval Mundial,Investigación y Consultoría,1-10,Informe de Pobreza en México 2012,http://www.coneval.gob.mx/Medicion/Paginas/Informe-de-Pobreza-2012.aspx
+Consejo Nacional de Evaluación de la Política de Desarrollo Social,CONEVAL,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=coneval,Fundar Centro de Análisis e Investigación,Investigación y Consultoría,11-50,Medición de la pobreza 2010,http://www.coneval.gob.mx/Medicion/Paginas/Medici%C3%B3n/Medicion-de-la-pobreza-municipal-2010.aspx
+Consejo Nacional de Evaluación de la Política de Desarrollo Social,CONEVAL,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=coneval,México Evalua,Investigación y Consultoría,1-10,Análisis y Medición de la Pobreza,http://web.coneval.gob.mx/Medicion/Paginas/Medición/MedicionWdeWlaWpobrezaWmunicipalW2010.aspx
+Consejo Nacional de Evaluación de la Política de Desarrollo Social,CONEVAL,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=coneval,Morlan,Tecnología/Datos,1-10,"Índice de Rezago Social,2000,2005 y 2010 (nacional,estatal,municipal y localidad)",http://catalogo.datos.gob.mx/dataset/indice-de-rezago-social20002005-y-2010-nacionalestatalmunicipal-y-localidad
+Consejo Nacional de Evaluación de la Política de Desarrollo Social,CONEVAL,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=coneval,Confederación Patronal de la República Mexicana (COPARMEX),Servicios Empresariales,51-200,Medición de la Pobreza,http://www.coneval.gob.mx/medicion/Paginas/Medici%C3%B3n/Pobreza-2010.aspx
+Consejo Nacional de Evaluación de la Política de Desarrollo Social,CONEVAL,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=coneval,Data4,Tecnología/Datos,1-10,Índice de Marginación,http://www.conapo.gob.mx/es/CONAPO/Indice_de_Marginacion_por_Localidad_2010
+Consejo Nacional de Evaluación de la Política de Desarrollo Social,CONEVAL,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=coneval,El Instituto Mexicano para la Competitividad A.C. (IMCO),Investigación y Consultoría,11-50,,
+Consejo Nacional de Evaluación de la Política de Desarrollo Social,CONEVAL,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=coneval,CREA,Educación,11-50,,
+Consejo Nacional de Evaluación de la Política de Desarrollo Social,CONEVAL,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=coneval,Telus,Investigación y Consultoría,1-10,,
+Consejo Nacional de Evaluación de la Política de Desarrollo Social,CONEVAL,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=coneval,Consejo Mexicano de la Carne,Agricultura y Alimentación,1-10,,
+Consejo Nacional de Evaluación de la Política de Desarrollo Social,CONEVAL,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=coneval,Banorte-Ixe,Finanzas e Inversiones,"10,001+",,
+Consejo Nacional de Evaluación de la Política de Desarrollo Social,CONEVAL,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=coneval,Spectron Desarrollo,Investigación y Consultoría,1-10,,
+Consejo Nacional de Evaluación de la Política de Desarrollo Social,CONEVAL,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=coneval,Centro de Investigación para el Desarrollo (CIDAC),Investigación y Consultoría,11-50,,
+Consejo Nacional de Evaluación de la Política de Desarrollo Social,CONEVAL,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=coneval,Thomson Reuters,Medios y Comunicación,"10,001+",,
+Consejo Nacional de Evaluación de la Política de Desarrollo Social,CONEVAL,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=coneval,Fundación MetLife,Educación,,,
+Instituto Nacional de las Mujeres,INMUJERES,University/Institution,General,,http://www.inmujeres.gob.mx/,Confederación Patronal de la República Mexicana (COPARMEX),Servicios Empresariales,51-200,"Feminicidio en México. Aproximación, tendencias y cambios 1985–2009",http://cedoc.inmujeres.gob.mx/documentos_download/00_feminicMx1985-2009.pdf
+Instituto Nacional de las Mujeres,INMUJERES,University/Institution,General,,http://www.inmujeres.gob.mx/,CREA,Educación,11-50,,
+Instituto Nacional de las Mujeres,INMUJERES,University/Institution,General,,http://www.inmujeres.gob.mx/,Fundar Centro de Análisis e Investigación,Investigación y Consultoría,11-50,,
+Instituto Nacional de las Mujeres,INMUJERES,University/Institution,General,,http://www.inmujeres.gob.mx/,Transparencia Mexicana,Investigación y Consultoría,11-50,,
+Secretaría de Educación Pública,SEP,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=sep,OPI,Tecnología/Datos,11-50,"Encuesta de Exclusión, Intolerancia y Violencia en la Educación Media Superior",
+Secretaría de Educación Pública,SEP,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=sep,OPI,Tecnología/Datos,11-50,Encuesta Nacional de Deserción en la Educación Media Superior,
+Secretaría de Educación Pública,SEP,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=sep,MapData,Mapeo/Geoespacial,11-50,Censo Escuelas y Maestros,http://cemabe.inegi.org.mx/
+Secretaría de Educación Pública,SEP,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=sep,Buholegal,Servicios Legales,1-10,Cédulas Profesionales,http://www.cedulaprofesional.sep.gob.mx/cedula/indexAvanzada.action
+Secretaría de Educación Pública,SEP,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=sep,Movimiento Congruencia,"Other,Recursos Humanos",1-10,Nivel Educativo de la Población con Discapacidad (No disponible),
+Secretaría de Educación Pública,SEP,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=sep,Fundar Centro de Análisis e Investigación,Investigación y Consultoría,11-50,Estadísticas,www.sep.gob.mx/wb2/sep/sep_estadisticas
+Secretaría de Educación Pública,SEP,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=sep,México Evalua,Investigación y Consultoría,1-10,Atlas educativo,www.Censo.sep.gob.mx
+Secretaría de Educación Pública,SEP,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=sep,México Evalua,Investigación y Consultoría,1-10,"Censo de Escuelas, Maestros y Alumnos de Educación Básica y Especial",http://cemabe.inegi.org.mx/
+Secretaría de Educación Pública,SEP,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=sep,PLM Latinoamérica,Salud,51-200,Registro Nacional de Profesionistas,http://www.cedulaprofesional.sep.gob.mx/cedula/indexAvanzada.action
+Secretaría de Educación Pública,SEP,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=sep,Confederación Patronal de la República Mexicana (COPARMEX),Servicios Empresariales,51-200,Principales Cifras Ciclo Escolar 2010-2011,http://www.sep.gob.mx/work/models/sep1/Resource/1899/2/images/principales_cifras_2010_2011.pdf
+Secretaría de Educación Pública,SEP,Federal,Sistema Nacional de Información Estadística Educativa,SNIEE,http://www.snie.sep.gob.mx/,Confederación Patronal de la República Mexicana (COPARMEX),Servicios Empresariales,51-200,,
+Secretaría de Educación Pública,SEP,Federal,Evaluación Nacional del Logro Académico en Centros Escolares,ENLACE,http://www.enlace.sep.gob.mx/,Data4,Tecnología/Datos,1-10,,
+Secretaría de Educación Pública,SEP,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=sep,El Instituto Mexicano para la Competitividad A.C. (IMCO),Investigación y Consultoría,11-50,,
+Secretaría de Educación Pública,SEP,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=sep,Spaceship Labs,Tecnología/Datos,11-50,,
+Secretaría de Educación Pública,SEP,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=sep,Atlantia Search,Tecnología/Datos,1-10,,
+Secretaría de Educación Pública,SEP,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=sep,McKinsey & Company,Investigación y Consultoría,"10,001+",,
+Secretaría de Educación Pública,SEP,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=sep,Cámara Mexicana de la Industria de la Construcción,,,,
+Secretaría de Educación Pública,SEP,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=sep,TIS Consulting Group,Investigación y Consultoría,1-10,,
+Secretaría de Educación Pública,SEP,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=sep,Centro de Investigación para el Desarrollo (CIDAC),Investigación y Consultoría,11-50,,
+Secretaría de Educación Pública,SEP,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=sep,TNS ,Servicios Empresariales,"10,001+",,
+Secretaría de Educación Pública,SEP,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=sep,Propiedades.com,Vivienda/Bienes Raíces,11-50,,
+Secretaría de Educación Pública,SEP,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=sep,Transparencia Mexicana,Investigación y Consultoría,11-50,,
+Secretaría de Educación Pública,SEP,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=sep,Verne42,Tecnología/Datos,1-10,,
+Procuraduría General de la República,PGR,Federal,General,,,Confederación Patronal de la República Mexicana (COPARMEX),Servicios Empresariales,51-200,Quinto Informe de Labores,http://www.desarrollopolitico.gob.mx/work/models/Desarrollo_Politico/Resource/98/1/images/5to%20INFORME%20DE%20LABORES%20PGR.pdf
+Procuraduría General de la República,PGR,Federal,General,,,El Instituto Mexicano para la Competitividad A.C. (IMCO),Investigación y Consultoría,11-50,,
+Procuraduría General de la República,PGR,Federal,General,,,Fundar Centro de Análisis e Investigación,Investigación y Consultoría,11-50,,
+Procuraduría General de la República,PGR,Federal,General,,,México Evalua,Investigación y Consultoría,1-10,,
+Banco de México,BANXICO,Federal,General,,,Exponential Knowledge,Investigación y Consultoría,1-10,Estadísticas,http://www.banxico.org.mx/estadisticas/index.html
+Banco de México,BANXICO,Federal,General,,,Banamex,Finanzas e Inversiones,"10,001+",Crédito de la Banca Comercial,http://www.banxico.org.mx/SieInternet/consultarDirectorioInternetAction.do?accion=consultarCuadro&idCuadro=CF246&sector=19&locale=es
+Banco de México,BANXICO,Federal,General,,,Consejo Nacional Empresarial Turístico,Estilos de vida y Consumidores,11-50,Balance de Pagos,http://www.banxico.org.mx/SieInternet/consultarDirectorioInternetAction.do?accion=consultarDirectorioCuadros§or=1§orDescripcion=Balanza
+Banco de México,BANXICO,Federal,General,,,KPMG Cárdenas Dosal,Servicios Empresariales,"10,001+",Encuesta sobre las Expectativas de los Especialistas en Economía del Sector Privado: Diciembre de 2013,http://www.banxico.org.mx/dyn/informacion-para-la-prensa/comunicados/resultados-de-encuestas/expectativas-de-los-especialistas/index.html
+Banco de México,BANXICO,Federal,General,,,Asociación Mexicana de la Industria Automotríz (AMIA),Investigación y Consultoría,,Encuesta sobre las expectativas de los especialistas en economía del sector privado,http://www.banxico.org.mx/dyn/informacion-para-la-prensa/comunicados/resultados-de-encuestas/expectativas-de-los-especialistas/index.html
+Banco de México,BANXICO,Federal,General,,,Moody's Analytics,Finanzas e Inversiones,"1,001-5,000",Ingresos por remesas,http://www.banxico.org.mx/SieInternet/consultarDirectorioInternetAction.do?accion=consultarCuadro&idCuadro=CE81&sector=1&locale=es
+Banco de México,BANXICO,Federal,General,,,TNS ,Servicios Empresariales,"10,001+",Índice de confianza del consumidor,http://www.banxico.org.mx/SieInternet/consultarDirectorioInternetAction.do?accion=consultarCuadro&idCuadro=CR89&sector=2&locale=es
+Banco de México,BANXICO,Federal,General,,,Noorcus Innovation,Investigación y Consultoría,1-10,Proyecciones macroeconómicas,
+Banco de México,BANXICO,Federal,General,,,El Instituto Mexicano para la Competitividad A.C. (IMCO),Investigación y Consultoría,11-50,,
+Banco de México,BANXICO,Federal,General,,,Zapopan Lab,Tecnología/Datos,1-10,,
+Banco de México,BANXICO,Federal,General,,,McKinsey & Company,Investigación y Consultoría,"10,001+",,
+Banco de México,BANXICO,Federal,General,,,Banorte-Ixe,Finanzas e Inversiones,"10,001+",,
+Banco de México,BANXICO,Federal,General,,,"Asociación Mexicana de Internet, A.C.",Medios y Comunicación,11-50,,
+Banco de México,BANXICO,Federal,General,,,Instituto Mexicano de Ejecutivos de Finanzas (IMEF),Finanzas e Inversiones,201-500,,
+Banco de México,BANXICO,Federal,General,,,PricewaterhouseCoopers (PwC),Servicios Empresariales,"1,001-5,000",,
+Banco de México,BANXICO,Federal,General,,,Centro de Investigación para el Desarrollo (CIDAC),Investigación y Consultoría,11-50,,
+Banco de México,BANXICO,Federal,General,,,TIS Consulting Group,Investigación y Consultoría,1-10,,
+Banco de México,BANXICO,Federal,General,,,J.P. Morgan,Finanzas e Inversiones,"10,001+",,
+Banco de México,BANXICO,Federal,General,,,Thomson Reuters,Medios y Comunicación,"10,001+",,
+Banco de México,BANXICO,Federal,General,,,Asociación Nacional de la Industria Química (ANIQ),Investigación Científica,51-200,,
+Banco de México,BANXICO,Federal,General,,,Unipagos,Finanzas e Inversiones,11-50,,
+Secretaría de Turismo,SECTUR,Federal,General,,,Gobierno Fácil,Gobierno,1-10,Compendio Estadístico del Turismo en México 2013 de la Secretaría de Turismo,
+Secretaría de Turismo,SECTUR,Federal,Consejo de Promocion Turistica de Mexico,CPTM,www.cptm.com.mx/,TIS Consulting Group,Investigación y Consultoría,1-10,Sistema Integral de Información de Mercados Turísticos (SIIMT),http://www.siimt.com/
+Secretaría de Turismo,SECTUR,Federal,Consejo de Promocion Turistica de Mexico,CPTM,www.cptm.com.mx/,Consejo Nacional Empresarial Turístico,Estilos de vida y Consumidores,11-50,,
+Secretaría de Turismo,SECTUR,Federal,DATATUR,,http://www.datatur.beta.sectur.gob.mx/SitePages/Inicio.aspx,TIS Consulting Group,Investigación y Consultoría,1-10,,
+Secretaría de Turismo,SECTUR,Federal,General,,,El Instituto Mexicano para la Competitividad A.C. (IMCO),Investigación y Consultoría,11-50,,
+Secretaría de Turismo,SECTUR,Federal,General,,,Atlantia Search,Tecnología/Datos,1-10,,
+Secretaría de Turismo,SECTUR,Federal,General,,,Cámara Mexicana de la Industria de la Construcción,,,,
+Secretaría de Turismo,SECTUR,Federal,General,,,TNS ,Servicios Empresariales,"10,001+",,
+Secretaría de Turismo,SECTUR,Federal,General,,,Verne42,Tecnología/Datos,1-10,,
+Secretaría de Educación y Cultura de Sonora,SEC Sonora,State,General,,www.sec-sonora.gob.mx/,Prosoftware Red de Innovación,Tecnología/Datos,1-10,,
+Consejo Nacional de Ciencia y Tecnología,CONACYT,Federal,General,,http://www.conacyt.mx/,Noorcus Innovation,Investigación y Consultoría,1-10,Estadísticas Centros de Investigación Conacyt,http://www.conacyt.gob.mx/index.php/estadisticas-centros-de-investigacion-conacyt
+Consejo Nacional de Ciencia y Tecnología,CONACYT,Federal,General,,http://www.conacyt.mx/,Spectron Desarrollo,Investigación y Consultoría,1-10,,
+Consejo Nacional de Ciencia y Tecnología,CONACYT,Federal,General,,http://www.conacyt.mx/,"Asociación Mexicana de Internet, A.C.",Medios y Comunicación,11-50,,
+Consejo Nacional de Ciencia y Tecnología,CONACYT,Federal,General,,http://www.conacyt.mx/,Transparencia Mexicana,Investigación y Consultoría,11-50,,
+Secretaría de Movilidad del Distrito Federal,SEMOVI,City/County,General,,http://www.semovi.df.gob.mx/,Ayoui,Tecnología/Datos,1-10,Catálogo de verificentros en el Distrito Federal,http://datos.labplc.mx/datasets/view/verificentros
+Secretaría de Relaciones Exteriores,SRE,Federal,Instituto de los Mexicanos en el Exterior,IME,http://www.ime.gob.mx/,Data4,Tecnología/Datos,1-10,Estadísticas de Mexicanos en el Exterior,http://www.ime.gob.mx/en/agenda-de-informacion/estadisticas-de-mexicanos-en-el-exterior
+Secretaría de Relaciones Exteriores,SRE,Federal,General,,http://www.sre.gob.mx/,Atlantia Search,Tecnología/Datos,1-10,,
+Secretaría de la Función Pública,SFP,Federal,General,,,El Instituto Mexicano para la Competitividad A.C. (IMCO),Investigación y Consultoría,11-50,Compranet,
+Secretaría de la Función Pública,SFP,Federal,Fondo de Desastres Naturales,FONDEN,,Data4,Tecnología/Datos,1-10,,
+Secretaría de la Función Pública,SFP,Federal,General,,,Fundar Centro de Análisis e Investigación,Investigación y Consultoría,11-50,,
+Secretaría de Desarrollo Social,SEDESOL,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=sedesol,Exponential Knowledge,Investigación y Consultoría,1-10,Padrón de Beneficiarios,http://www.sedesol.gob.mx/es/SEDESOL/Padron_de_Beneficiarios
+Secretaría de Desarrollo Social,SEDESOL,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=sedesol,Centro de Estudios Jurídicos y Ambientales (CEJA),Clima y Medio Ambiente,,Delimitación de las zonas metropolitanas de México,http://www.conapo.gob.mx/es/CONAPO/Delimitacion_de_las_zonas_metropolitanas_de_Mexico
+Secretaría de Desarrollo Social,SEDESOL,Federal,Liconsa Abasto Social de Leche,LICONSA,http://www.liconsa.gob.mx/,Data4,Tecnología/Datos,1-10,,
+Secretaría de Desarrollo Social,SEDESOL,Federal,Instituto Nacional de Desarrollo Social,INDESOL,http://indesol.gob.mx/,Alternativas y Capacidades,Servicios Empresariales,11-50,,
+Secretaría de Desarrollo Social,SEDESOL,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=sedesol,El Instituto Mexicano para la Competitividad A.C. (IMCO),Investigación y Consultoría,11-50,,
+Secretaría de Desarrollo Social,SEDESOL,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=sedesol,El Narval Mundial,Investigación y Consultoría,1-10,,
+Secretaría de Desarrollo Social,SEDESOL,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=sedesol,Telus,Investigación y Consultoría,1-10,,
+Secretaría de Desarrollo Social,SEDESOL,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=sedesol,Spectron Desarrollo,Investigación y Consultoría,1-10,,
+Secretaría de Desarrollo Social,SEDESOL,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=sedesol,Fundar Centro de Análisis e Investigación,Investigación y Consultoría,11-50,,
+Secretaría de Desarrollo Social,SEDESOL,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=sedesol,México Evalua,Investigación y Consultoría,1-10,,
+Secretaría de Desarrollo Social,SEDESOL,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=sedesol,Conurba,Gobierno,,,
+Secretaría de Desarrollo Social,SEDESOL,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=sedesol,Transparencia Mexicana,Investigación y Consultoría,11-50,,
+Secretaría de Desarrollo Social,SEDESOL,Federal,General,,http://catalogo.datos.gob.mx/dataset?organization=sedesol,Unipagos,Finanzas e Inversiones,11-50,,
+Correos de México,,None,General,,http://www.correosdemexico.com.mx/Paginas/Inicio.aspx,Data4,Tecnología/Datos,1-10,,
+Contraloría del Distrito Federal,,City/County,General,,http://www.contraloria.df.gob.mx/,Data4,Tecnología/Datos,1-10,,
+Heroico Cuerpo de Bomberos del Distrito Federal,,City/County,General,,www.bomberos.df.gob.mx/,Data4,Tecnología/Datos,1-10,,
+Procuraduría Ambiental y del Ordenamiento Territorial del Distrito Federal,PAOT,City/County,General,,www.paot.org.mx/,Data4,Tecnología/Datos,1-10,,
+Procuraduría Ambiental y del Ordenamiento Territorial del Distrito Federal,PAOT,City/County,General,,www.paot.org.mx/,Verne42,Tecnología/Datos,1-10,,
+Sistema de Transporte Colectivo de la Ciudad de México,Metro DF,City/County,General,,http://www.metro.df.gob.mx/,Data4,Tecnología/Datos,1-10,,
+Ciudad de México,,City/County,General,,http://df.gob.mx,Cartográfica,Mapeo/Geoespacial,1-10,Calidad del aire de la Ciudad de México entre 1986 y 2013,http://datos.labplc.mx/datasets/view/rama
+Ciudad de México,,City/County,ECOBICI,,www.ecobici.df.gob.mx,Data4,Tecnología/Datos,1-10,,
+Ciudad de México,,City/County,Secretaría del Medio Ambiente del DF,SEDEMA,http://www.sedema.df.gob.mx/sedema/,Cartográfica,Mapeo/Geoespacial,1-10,,
+Ciudad de México,,City/County,Secretaría del Medio Ambiente del DF,SEDEMA,http://www.sedema.df.gob.mx/sedema/,Data4,Tecnología/Datos,1-10,,
+Ciudad de México,,City/County,Secretaría de Obras y Servicios del DF,SOBSE,http://www.obras.df.gob.mx/,Data4,Tecnología/Datos,1-10,obras de CFE en el DF,
+Instituto del Fondo Nacional de la Vivienda para los Trabajadores,INFONAVIT,None,General,,infonavit.org.mx,kubo.financiero,Finanzas e Inversiones,11-50,Datos de empleo,
+Instituto del Fondo Nacional de la Vivienda para los Trabajadores,INFONAVIT,None,General,,infonavit.org.mx,Cámara Mexicana de la Industria de la Construcción,,,,

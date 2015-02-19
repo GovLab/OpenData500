@@ -393,6 +393,28 @@ class SubmitDataHandler(BaseHandler):
                 logging.info("Error deleting dataset: " + str(e))
                 self.write(response)
 
+class FileDownloadHandler(BaseHandler):
+    def get(self, country, file_name):
+        file_name = file_name.encode('utf8')
+        if "_all.csv" in file_name:
+            try:
+                user = models.Users.objects.get(username=self.current_user)
+            except Exception, e:
+                logging.info("Could not get user: " + str(e))
+                self.redirect("/login/")
+                return
+        buf_size = 4096
+        self.set_header('Content-Type', 'application/octet-stream')
+        self.set_header('Content-Disposition', 'attachment; filename=' + file_name)
+        with open(os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..', 'static')) + "/files/" + country + "/" + file_name, 'r') as f:
+            while True:
+                data = f.read(buf_size)
+                if not data:
+                    break
+                self.write(data)
+        self.finish()
+
+
 class NotFoundHandler(BaseHandler):
     def get(self):
         self.render('404.html',

@@ -2,6 +2,8 @@
 .ipynb_checkpoints
 *.ipynb
 venv
-static/files/*_OD500_Companies_All.csv
+static/files/us/us_companies_all.csv
+static/files/mx/mx_companies_all.csv
+static/files/au/au_companies_all.csv
 *.json
 .sass-cache/*

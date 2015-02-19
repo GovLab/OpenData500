@@ -752,7 +752,7 @@ class FileGenerator(object):
                 "subagencies":subagencies
             }
             companiesJSON.append(company)
-        with open(os.path.join(os.path.dirname(__file__), 'static') + "/files/" + country + '_OD500_Companies.json', 'w') as outfile:
+        with open(os.path.join(os.path.dirname(__file__), 'static') + "/files/" + country + "/" + country + '_companies.json', 'w') as outfile:
             json.dump(companiesJSON, outfile)
         logging.info("Company JSON File Done!")
     def generate_agency_json(self, country):
@@ -806,13 +806,14 @@ class FileGenerator(object):
                 "usedBy":usedBy
             }
             agenciesJSON.append(ag)
-        with open(os.path.join(os.path.dirname(__file__), 'static') + "/files/" + country + '_OD500_Agencies.json', 'w') as outfile:
+        with open(os.path.join(os.path.dirname(__file__), 'static') + "/files/" + country + "/" + country + '_agencies.json', 'w') as outfile:
             json.dump(agenciesJSON, outfile)
         logging.info("Agency JSON File Done!")
+
     def generate_company_csv(self, country):
         #---CSV OF ALL COMPANIES----
         companies = models.Company.objects(Q(display=True) & Q(country=country))
-        csvwriter = csv.writer(open(os.path.join(os.path.dirname(__file__), 'static') + "/files/" + country + "_OD500_Companies.csv", "w"))
+        csvwriter = csv.writer(open(os.path.join(os.path.dirname(__file__), 'static') + "/files/" + country + "/" + country + "_companies.csv", "w"))
         csvwriter.writerow([
             'company_name_id',
             'company_name',
@@ -870,7 +871,7 @@ class FileGenerator(object):
     def generate_company_all_csv(self, country):
         #---CSV OF ALL COMPANIES----
         companies = models.Company.objects(country=country)
-        csvwriter = csv.writer(open(os.path.join(os.path.dirname(__file__), 'static') + "/files/" + country + "_OD500_Companies_All.csv", "w"))
+        csvwriter = csv.writer(open(os.path.join(os.path.dirname(__file__), 'static') + "/files/" + country + "/" + country + "_companies_all.csv", "w"))
         csvwriter.writerow([
             'company_name_id',
             'company_name',
@@ -899,7 +900,7 @@ class FileGenerator(object):
             'data_comments',
             'example_uses',
             'data_impacts',
-            'ts',
+            'date_created',
             'last_updated',
             'display',
             'survey_submitted',
@@ -957,7 +958,7 @@ class FileGenerator(object):
     def generate_agency_csv(self, country):
         companies = models.Company.objects(Q(country=country) & Q(display=True))
         agencies = models.Agency.objects(country=country)
-        csvwriter = csv.writer(open(os.path.join(os.path.dirname(__file__), 'static') + "/files/" + country + "_OD500_Agencies.csv", "w"))
+        csvwriter = csv.writer(open(os.path.join(os.path.dirname(__file__), 'static') + "/files/" + country + "/" + country + "_agencies.csv", "w"))
         csvwriter.writerow([
             'agency_name',
             'agency_abbrev',
@@ -993,7 +994,7 @@ class FileGenerator(object):
                         d.datasetName,
                         d.datasetURL
                     ]
-                    AD.append(str(d.usedBy.companyName + "|"+ a.name))
+                    AD.append(d.usedBy.companyName.encode('utf8') + "|"+ a.name.encode('utf8'))
                     #write csv row here
                     for i in range(len(newrow)):  # For every value in our newrow
                         if hasattr(newrow[i], 'encode'):
@@ -1015,15 +1016,15 @@ class FileGenerator(object):
                             d.datasetName,
                             d.datasetURL
                         ]
-                        SD.append(str(d.usedBy.companyName + "|"+ s.name))
-                        SD.append(str(d.usedBy.companyName + "|"+ a.name))
+                        SD.append(d.usedBy.companyName.encode('utf8') + "|"+ s.name.encode('utf8'))
+                        SD.append(d.usedBy.companyName.encode('utf8') + "|"+ a.name.encode('utf8'))
                         #write csv row here
                         for i in range(len(newrow)):  # For every value in our newrow
                             if hasattr(newrow[i], 'encode'):
                                 newrow[i] = newrow[i].encode('utf8')
                         csvwriter.writerow(newrow)
                 for c in s.usedBy:
-                    if str(c.companyName + "|"+s.name) not in SD and c.display:
+                    if c.companyName.encode('utf8') + "|"+s.name.encode('utf8') not in SD and c.display:
                         newrow = [
                             a.name, 
                             a.abbrev, 
@@ -1037,14 +1038,14 @@ class FileGenerator(object):
                             "",
                             ""
                         ]
-                        S.append(str(c.companyName + "|"+a.name))
+                        S.append(c.companyName.encode('utf8') + "|"+a.name.encode('utf8'))
                         #write csv row
                         for i in range(len(newrow)):  # For every value in our newrow
                             if hasattr(newrow[i], 'encode'):
                                 newrow[i] = newrow[i].encode('utf8')
                         csvwriter.writerow(newrow)
             for c in a.usedBy:
-                if str(c.companyName + "|"+a.name) not in SD+AD+S and c.display:
+                if c.companyName.encode('utf8') + "|"+a.name.encode('utf8') not in SD+AD+S and c.display:
                     newrow = [
                             a.name, 
                             a.abbrev, 

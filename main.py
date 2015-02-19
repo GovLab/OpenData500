@@ -67,7 +67,7 @@ class Application(tornado.web.Application):
             (r"/validate/?", ValidateHandler),
             (r"/admin/agency-edit/(?:([a-zA-Z0-9]{24})?)/?", AdminEditAgencyHandler),
             (r"/admin/company-add/?", NewCompanyHandler),
-            (r'/download/(.*)/?',tornado.web.StaticFileHandler, {'path':os.path.join(os.path.dirname(__file__), 'static')+"/files/"}),
+            (r'/(?:([A-Za-z]{2})/)?download/(.*)/?', FileDownloadHandler),
             (r'/(?:([A-Za-z]{2})/)?login/?', LoginHandler),
             (r'/logout/?', LogoutHandler),
             (r'/register/?', RegisterHandler),

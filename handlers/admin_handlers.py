@@ -145,6 +145,8 @@ class CompanyAdminHandler(BaseHandler):
             lan=lan
         )
 
+    @tornado.web.addslash
+    @tornado.web.authenticated
     def post(self, country=None, page=None):
         try:
             user = models.Users.objects.get(username=self.current_user)
@@ -262,6 +264,8 @@ class NewCompanyHandler(BaseHandler):
             lan = lan
         )
 
+    @tornado.web.addslash
+    @tornado.web.authenticated
     def post(self):
         logging.info(self.request.arguments)
         form_values = {k:','.join(v) for k,v in self.request.arguments.iteritems()}
