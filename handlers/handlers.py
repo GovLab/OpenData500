@@ -7,7 +7,10 @@ class MainHandler(BaseHandler):
     @tornado.web.addslash
     #@tornado.web.authenticated
     def get(self, country=None):
-        country = self.load_country(country)
+        if not country:
+            country = self.load_country(None)
+            self.redirect("/"+country+"/")
+            return
         settings = self.load_settings(country)
         lan = self.load_language(country, self.get_argument("lan", None), settings)
         self.render(
