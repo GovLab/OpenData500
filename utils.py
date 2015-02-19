@@ -260,7 +260,9 @@ abbreviations = {
         {"Nacional":"Nal."},
         {"República":"Rep."},
         {"Comisión":"Com."},
-        {"General":"Gral."}
+        {"General":"Gral."},
+        {"Ambiente":"Amb."},
+        {"Consumidores":"Cons."}
     ]
 }
 
@@ -1075,7 +1077,7 @@ class FileGenerator(object):
         used_categories = []
         for a in agencies:
             for c in a.usedBy:
-                if c.companyCategory in categories[lan][country]:
+                if c.companyCategory.encode('utf8') in categories[lan][country]:
                     used_categories.append(c.companyCategory)
         used_categories = list(set(used_categories))
         used = used_agencies + used_categories
@@ -1091,7 +1093,7 @@ class FileGenerator(object):
         #populate matrix
         for a in agencies:
             for c in a.usedBy:
-                if c.companyCategory in categories[lan][country]: 
+                if c.companyCategory.encode('utf8') in categories[lan][country]: 
                     matrix[name_key[c.companyCategory], name_key[a.name]] += 1
                     matrix[name_key[a.name], name_key[c.companyCategory]] += 1
         #make json
