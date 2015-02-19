@@ -124,7 +124,7 @@
 		        .attr("height", height)
 		        .attr("id", "circle")
 		      .append("g")
-		        .attr("transform", "translate(335, 375)");
+		        .attr("transform", "translate(355, 375)");
 		        // .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 		    
 		    var circle = svg.append("circle")
@@ -159,7 +159,7 @@
 		        .attr("transform", function(d) { return d.angle > Math.PI ? "rotate(180)translate(-16)" : null; })
 		        .style("text-anchor", function(d) { return d.angle > Math.PI ? "end" : null; })
 		        .text(function(d) { return d.label; })
-		        .filter(function(d, i) { return d.angleDiff < .017 })
+		        .filter(function(d, i) { return d.angleDiff < .027 })
 		        .remove();
 
 		    //var chord = svg.append("g")
