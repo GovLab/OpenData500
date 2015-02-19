@@ -3,3 +3,5 @@ Mongoengine
 unidecode
 py-bcrypt
 numpy
+python-geoip
+python-geoip-geolite2

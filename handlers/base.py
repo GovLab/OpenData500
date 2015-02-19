@@ -18,6 +18,7 @@ import re
 import bcrypt
 from datetime import datetime
 from utils import *
+from geoip import geolite2
 
 class BaseHandler(tornado.web.RequestHandler): 
     def get_login_url(self):
@@ -34,7 +35,17 @@ class BaseHandler(tornado.web.RequestHandler):
 
     def load_country(self, country):
         if not country:
-            return "us"
+            ip = self.request.remote_ip
+            logging.info(ip)
+            try:
+                match = geolite2.lookup(ip)
+                country = match.country.lower()
+                logging.info("Got: " + country)
+                if country in available_countries:
+                    return country
+            except Exception, e:
+                logging.info("Could not get country because: " + str(e))
+                return "us"
         if country not in available_countries:
             self.redirect("/404/")
             return
@@ -68,4 +79,3 @@ class BaseHandler(tornado.web.RequestHandler):
 
 
 
-        
