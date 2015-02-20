@@ -7,21 +7,21 @@
 video#bgvid {
     position: fixed; right: 0; bottom: 0;
     /*min-width: 100%; min-height: 100%;*/
-    width: auto; height: auto; z-index: -100;
-    background: url(/img/video-cover.png) no-repeat;
-    background-size: cover;
+    width: auto; height: 100vh; z-index: -100;
+    /*background: url(/img/video-cover.png) no-repeat;*/
+    /*background-size: cover;*/
 }
 </style>
 
+<video loop poster="{{ static_url("img/mx/video-cover.png") }}" id="bgvid">
+    <source src="{{ static_url("files/mx/intro-video.mp4") }}" type="video/mp4">
+</video>
 
 <div class="m-homepage">
 <!--     <div class="m-country-flag s-mx">
         <img src="{{ static_url("img/mexico-flag.png") }}" alt="">
     </div> -->
     <h1 class="first-title">Datos Abiertos 100 México</h1>
-    <video loop poster="{{ static_url("img/video-cover.png") }}" id="bgvid">
-        <source src="intro-video.mp4" type="video/mp4">
-    </video>
     <!-- <section id="od100-video">
         <iframe width="960" height="540" src="https://www.youtube.com/embed/BJLUP3grhlE" frameborder="0" allowfullscreen></iframe>
     </section> -->
