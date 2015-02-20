@@ -1,5 +1,21 @@
 $(document).ready(function() {
 
+    //-----PLAY MEX VIDEO
+    // var winHeight = $(window).height();
+    // $('.video-container').css({  'height': winHeight, 'width': '100%'});
+    var introVideo = $('#bgvid');
+    var playing = false;
+    $('body').on('click', '.video-container', function() {
+        if (playing) {
+            introVideo.get(0).pause();
+            $(this).find('.video-header').fadeIn(1000);
+            playing = false;
+        } else {
+            introVideo.get(0).play();
+            $(this).find('.video-header').fadeOut(1000);
+            playing = true;
+        }
+    });
 
     var country = $('#country').attr('country');
     if (country == undefined) {

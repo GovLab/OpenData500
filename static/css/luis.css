@@ -385,3 +385,31 @@ label.other-input {
   margin-top: 10px;
 }
 
+
+
+.video-container {
+  text-align: center;
+
+  width: 100vw;
+  position: relative;
+  left: calc(-50vw + 50%);
+}
+
+video#bgvid {
+    position: relative;
+    top: -70px;
+    width: 100%;
+    height: auto;
+    z-index: -1;
+}
+
+.video-header {
+  position: absolute;
+  top: 0px;
+  left: 27%;
+}
+
+.play-button img {
+  width: 200px;
+  height: 200px;
+}
