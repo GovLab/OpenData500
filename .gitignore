@@ -7,5 +7,3 @@ static/files/mx/mx_companies_all.csv
 static/files/au/au_companies_all.csv
 *.json
 .sass-cache/*
-static/files/mx/intro-video.mp4
-static/img/mx/video-cover.png
