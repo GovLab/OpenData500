@@ -9,8 +9,18 @@
     </div> -->
     <h1 class="first-title">Open Data 100 Mexico</h1>
 
-    <section class="m-homepage-banner">
-        <img src="/static/img/mx/datosgobmx_banner.jpg">
+    <script src="{{ static_url("js/d3.v3.min.js") }}"></script>
+    <section id="chord-chart-container">
+        <iframe src="http://www.opendata500.com/mx/chart/?lan=en" width="960" height="860" marginwidth="0" marginheight="50" scrolling="no" frameborder="0"></iframe>
+        <div class="embed-chart-info">
+            <span id="embed-chart-trigger" class="expand-trigger">Embed Chart</span>
+            <div class="embed-chart-info-content">
+                <p>To embed this chart on your website, just copy and paste this code onto your page:</p>
+                <textarea class="embed-code" readonly="readonly">
+                    <iframe src="http://www.opendata500.com/mx/chart/?lan=en" width="960" height="860" marginwidth="0" marginheight="50" scrolling="no" frameborder="0"></iframe>
+                </textarea>
+            </div>
+        </div>
     </section>
 
     <section class="m-homepage-about">

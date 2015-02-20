@@ -8,10 +8,14 @@
         <img src="{{ static_url("img/mexico-flag.png") }}" alt="">
     </div> -->
     <h1 class="first-title">Datos Abiertos 100 México</h1>
-
-    <section class="m-homepage-banner">
-        <img src="/static/img/mx/datosgobmx_banner.jpg">
+    <script src="{{ static_url("js/d3.v3.min.js") }}"></script>
+    <section id="chord-chart-container">
+        <iframe src="http://www.opendata500.com/mx/chart/?lan=es" width="960" height="860" marginwidth="0" marginheight="50" scrolling="no" frameborder="0"></iframe>
     </section>
+
+<!--     <section class="m-homepage-banner">
+        <img src="/static/img/mx/datosgobmx_banner.jpg">
+    </section> -->
 
     <section class="m-homepage-about">
         <h1>Acerca de esta iniciativa</h1>
