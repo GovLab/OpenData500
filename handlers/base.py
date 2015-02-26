@@ -43,9 +43,11 @@ class BaseHandler(tornado.web.RequestHandler):
                 logging.info("Got: " + country)
                 if country in available_countries:
                     return country
+                else:
+                    return 'us'
             except Exception, e:
                 logging.info("Could not get country because: " + str(e))
-                return "us"
+                return 'us'
         if country not in available_countries:
             self.redirect("/404/")
             return
