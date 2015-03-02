@@ -74,6 +74,8 @@ class StaticPageHandler(BaseHandler):
         country = self.load_country(country)
         settings = self.load_settings(country)
         lan = self.load_language(country, self.get_argument("lan", None), settings)
+        logging.info(country)
+        logging.info(lan)
         #check if company page, get company if so
         try:
             company = models.Company.objects.get(Q(prettyName=page) & Q(display=True))
@@ -109,7 +111,6 @@ class StaticPageHandler(BaseHandler):
                 country=country,
                 lan=lan
             )
-            return
         else:
             try:
                 page_title=settings['page_titles'][lan][page]
@@ -137,7 +138,6 @@ class StaticPageHandler(BaseHandler):
                     error=e
                 )
                 return
-
 
 
 #--------------------------------------------------------FULL LIST PAGE------------------------------------------------------------
