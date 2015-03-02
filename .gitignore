@@ -8,3 +8,4 @@ static/files/au/au_companies_all.csv
 *.json
 .sass-cache/*
 .env
+*.pyc
