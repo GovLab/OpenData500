@@ -1015,6 +1015,12 @@ a:hover {
     background-image: url("/static/img/mexico-flag.png"); }
   #international-homepage .b-flag.m-au > div {
     background-image: url("/static/img/australia-flag.png"); }
+  #international-homepage .b-flag.m-kr > div {
+    background-image: url("/static/img/southkorea-flag.png"); }
+  #international-homepage .b-flag.m-it > div {
+    background-image: url("/static/img/italy-flag.png"); }
+  #international-homepage .b-flag.m-ru > div {
+    background-image: url("/static/img/russia-flag.png"); }
 #international-homepage .b-country:hover .b-flag {
   border-color: #472b74;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); }
