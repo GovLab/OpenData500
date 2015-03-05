@@ -13,8 +13,8 @@
                 "item": "Approach",
                 "link": "/au/about/#about-govlab-approach"
             }, {
-                "item": "International",
-                "link": "/au/about/#about-international-studies"
+                "item": "Open Data Policy",
+                "link": "/au/about/#open-data-policy"
             }, {
                 "item": "People",
                 "link": "/au/about/#about-people"
@@ -60,7 +60,7 @@
         },
         {
             "item":"Contact Us",
-            "link":"mailto:opendata500@thegovlab.org"
+            "link":"mailto:opendata@communications.gov.au"
         }]
     }
 }

@@ -20,7 +20,7 @@
 		},
 		"au": {
 			"open_data_sources":"Open Data Sources",
-			"agency_add_description":"<p>Please tell us more about the open data sources your company uses.</p><p>Use the search bar to find and select government agencies, subagencies, city and state governments, or government-funded research programs from the list provided.</p><p>If you can't find your data provider on the list, please fill out the form <a href=\"/#suggest\">below</a> to suggest an agency, subagency, organization, etc.</p>",
+			"agency_add_description":"<p>Please tell us more about the open data sources your company uses.</p><p>Use the search bar to find and select government agencies, subagencies, city and state governments, or government-funded research programs from the list provided.</p><p>If you can't find your data provider on the list, please email us at <a href=\"mailto:opendata@communications.gov.au\">opendata@communications.gov.au</a> to suggest an agency, subagency, organization, etc.</p>",
 			"agency_add_optional":"<strong>[Optional]:</strong> Please tell us which datasets your company uses from the agencies, city, or state governments you select, and please score each dataset on a scale of 1 to 4 (i.e. 1 = Poor; 4 = Excellent)",
 			"example":"See Example.",
 			"search":"Search",
