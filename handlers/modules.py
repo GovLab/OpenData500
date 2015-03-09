@@ -25,10 +25,10 @@ class FormModule(tornado.web.UIModule):
             full_time_employees=full_time_employees,
             revenueSource = revenueSource[lan],
             business_models = business_models[lan],
-            social_impacts = social_impacts[lan],
+            social_impacts = social_impacts[lan][country],
             source_count = source_count,
             categories=categories[lan][country],
-            data_types = data_types[lan],
+            data_types = data_types[lan][country],
             stateList = stateList,
             stateListAbbrev=stateListAbbrev
             )
@@ -45,8 +45,8 @@ class FormDataModule(tornado.web.UIModule):
             required=required, 
             form=form[lan][country],
             source_count = source_count,
-            data_types = data_types[lan],
-            data_impacts = data_impacts[lan]
+            data_types = data_types[lan][country],
+            data_impacts = data_impacts[lan][country]
             )
 
 class AgencyAddModule(tornado.web.UIModule):
