@@ -1,22 +1,5 @@
 $(document).ready(function() {
 
-    //-----PLAY MEX VIDEO
-    // var winHeight = $(window).height();
-    // $('.video-container').css({  'height': winHeight, 'width': '100%'});
-    var introVideo = $('#bgvid');
-    var playing = false;
-    $('body').on('click', '.video-container', function() {
-        if (playing) {
-            introVideo.get(0).pause();
-            $(this).find('.video-header').fadeIn(1000);
-            playing = false;
-        } else {
-            introVideo.get(0).play();
-            $(this).find('.video-header').fadeOut(1000);
-            playing = true;
-        }
-    });
-
     var country = $('#country').attr('country');
     if (country == undefined) {
         var url = document.URL;
@@ -35,50 +18,9 @@ $(document).ready(function() {
     var is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
     var is_firefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
 
-    //--*****************************************************************-VALIDATE & SUBMIT COMPANY FORM-*****************************************************************--//
-    if ($(location).attr('pathname').indexOf('/submitCompany/') > -1) {
-        var _xsrf = $("[name='_xsrf']").val();
-        var error_message = $('.company-form-error-message');
-        var companyName = $("#companyName").parsley()
-            .addAsyncValidator('validateName', function(xhr) {
-                window.ParsleyUI.removeError(companyName, 'name-exists');
-                if (xhr.status === 404) {
-                    window.ParsleyUI.addError(companyName, 'name-exists', "Error: This company has already been submitted.");
-                }
-                return xhr.status === 200;
-            }, '/validate/?country=' + country + '&_xsrf=' + _xsrf);
-        $("#submitCompany").parsley();
-
-        $("#submitCompany").submit(function(event) {
-            $(this).parsley("validate");
-            if ($(this).parsley("isValid")) {
-                $('.message-form').text('Saving...');
-                $('.message-form').show();
-                var data = $('.companyForm').serializeArray();
-                $.ajax({
-                    type: 'POST',
-                    url: '/' + country + '/submitCompany/',
-                    data: data,
-                    error: function(error) {
-                        console.debug(JSON.stringify(error));
-                        error_message.text('Oops... Something went wrong :/').show().delay(5000).fadeOut();
-                    },
-                    beforeSend: function(xhr, settings) {
-                        //$(event.target).attr('disabled', 'disabled'); 
-                        error_message.text('Saving...').show();
-                    },
-                    success: function(data) {
-                        document.location.href = '/' + country + '/addData/' + data['id'];
-                    }
-                });
-            } else {
-                error_message.text('You still need to fix some items.').show().delay(5000).fadeOut();
-            }
-            event.preventDefault();
-        });
-    }
-
     //--*****************************************************************-FINISH ADDING DATA-*****************************************************************--//
+    //This submits infor from two different form modules (formData and AddAgency), so it's included in the main script.js file.
+    //This is because parsely has to validate fields from both forms. 
     var safe_to_submit = false;
     var rm = $('.response-message');
     $("#company-data-comment-form").parsley();
@@ -132,25 +74,5 @@ $(document).ready(function() {
         }
     });
 
-    //--*****************************************************************-ACCORDIONS-*****************************************************************--//
-    $(function() {
-        $("#accordionUnvetted").accordion({
-            collapsible: true,
-            autoHeight: false
-        });
-    });
-
-    $(function() {
-        $("#accordionVetted").accordion({
-            collapsible: true
-        });
-    });
-
-    $(function() {
-        $("#accordionSubmitted").accordion({
-            collapsible: true,
-            autoHeight: false
-        });
-    });
 
 });

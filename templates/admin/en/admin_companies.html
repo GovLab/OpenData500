@@ -90,7 +90,7 @@
 <br>
 <hr>
 <h2>Submitted Survey, Vetted, and Displayed</h2>
-<div id="accordionUnvetted">
+<div id="accordionVetted">
 {% for company in surveySubmitted %}
 	<h3><strong>{{ company.companyName }}</strong> Submitted: {{company.ts}}</h3> 
 	<div>
@@ -111,6 +111,14 @@ var confirmDelete = function(event) {
 
 
 $(document).ready( function() {
+	$(function() {
+        $("#accordionVetted").accordion({
+            collapsible: true,
+            autoHeight: false
+        });
+    });
+
+
 	$('.m-form').on('click', '.admin_utils', function() {
 		action = this.id;
 		console.log(action)

@@ -21,7 +21,7 @@
 <p class="disclaimer-text warning">Your responses will become part of a public database of information on Open Data companies. By submitting this form you are agreeing that, other than personal contact and financial information, responses will be part of a publicly available database. Contact and financial information will be confidential.</p>
 <form method="post" id="submitCompany" class="m-form companyForm" data-parsley-validate>
 
-	{% module Form(country, "en", True, False) %}
+	{% module Form(country, settings['default_language'], True, False) %}
 
 	{% raw xsrf_form_html() %}
 	

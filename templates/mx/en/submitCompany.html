@@ -20,7 +20,7 @@
 </section>
 <form method="post" id="submitCompany" class="m-form companyForm" data-parsley-validate>
 
-	{% module Form(country, "es", True, False) %}
+	{% module Form(country, settings['default_language'], True, False) %}
 
 	{% raw xsrf_form_html() %}
 

@@ -24,7 +24,7 @@ class LoginHandler(BaseHandler):
         username = self.get_argument("username", "")
         password = self.get_argument("password", "").encode('utf-8')
         try: 
-            user = models.Users.objects.get(username=username)
+            user = Users.objects.get(username=username)
         except Exception, e:
             logging.info('unsuccessful login')
             error_msg = u"?error=" + tornado.escape.url_escape("User does not exist")
@@ -54,7 +54,7 @@ class RegisterHandler(LoginHandler):
     @tornado.web.authenticated
     def get(self):
         try:
-            user = models.Users.objects.get(username=self.current_user)
+            user = Users.objects.get(username=self.current_user)
         except Exception, e:
             logging.info("Could not get user: " + str(e))
             self.redirect("/login/")
@@ -78,7 +78,7 @@ class RegisterHandler(LoginHandler):
     def post(self):
         username = self.get_argument("username", "")
         try:
-            user = models.Users.objects.get(username=username)
+            user = Users.objects.get(username=username)
         except:
             user = ''
         if user:
@@ -88,7 +88,7 @@ class RegisterHandler(LoginHandler):
             password = self.get_argument("password", "")
             hashedPassword = bcrypt.hashpw(password, bcrypt.gensalt(8))
             country = self.get_argument("country", None)
-            newUser = models.Users(
+            newUser = Users(
                 username=username,
                 password = hashedPassword,
                 country=country
@@ -115,22 +115,22 @@ class CompanyAdminHandler(BaseHandler):
             self.redirect("/admin/companies/")
             return
         try:
-            user = models.Users.objects.get(username=self.current_user)
+            user = Users.objects.get(username=self.current_user)
         except Exception, e:
             logging.info("Could not get user: " + str(e))
             self.redirect("/login/")
         country = user.country
         settings = self.load_settings(country)
         lan = self.load_language(country, self.get_argument("lan", None), settings)
-        surveySubmitted = models.Company.objects(Q(submittedSurvey=True) & Q(vetted=True) & Q(country=country)).order_by('prettyName')
-        sendSurveys = models.Company.objects(Q(submittedSurvey=False) & Q(country=country))
-        needVetting = models.Company.objects(Q(submittedSurvey=True) & Q(vetted=False) & Q(country=country)).order_by('-lastUpdated', 'prettyName')
+        surveySubmitted = Company.objects(Q(submittedSurvey=True) & Q(vetted=True) & Q(country=country)).order_by('prettyName')
+        sendSurveys = Company.objects(Q(submittedSurvey=False) & Q(country=country))
+        needVetting = Company.objects(Q(submittedSurvey=True) & Q(vetted=False) & Q(country=country)).order_by('-lastUpdated', 'prettyName')
         try: 
-            stats = models.Stats.objects.get(country=country)
+            stats = Stats.objects.get(country=country)
         except Exception, e:
             logging.info("Error: " + str(e))
             self.application.stats.create_new_stats(country)
-            stats = models.Stats.objects.get(country=country)
+            stats = Stats.objects.get(country=country)
         self.render(
             "admin/" + lan + "/admin_companies.html",
             page_title='OpenData500',
@@ -149,7 +149,7 @@ class CompanyAdminHandler(BaseHandler):
     @tornado.web.authenticated
     def post(self, country=None, page=None):
         try:
-            user = models.Users.objects.get(username=self.current_user)
+            user = Users.objects.get(username=self.current_user)
         except Exception, e:
             logging.info("Could not get user: " + str(e))
             self.redirect("/login/")
@@ -160,7 +160,7 @@ class CompanyAdminHandler(BaseHandler):
         if action == "refresh":
             self.application.stats.refresh_stats(country)
             self.application.files.generate_visit_csv(country)
-            stats = models.Stats.objects.get(country=country)
+            stats = Stats.objects.get(country=country)
             self.write({"totalCompanies": stats.totalCompanies, 
                         "totalCompaniesWeb":stats.totalCompaniesWeb, 
                         "totalCompaniesSurvey":stats.totalCompaniesSurvey,
@@ -178,7 +178,7 @@ class CompanyAdminHandler(BaseHandler):
         elif action == 'display':
             try:
                 id = self.get_argument("id", None)
-                c = models.Company.objects.get(id=bson.objectid.ObjectId(id))
+                c = Company.objects.get(id=bson.objectid.ObjectId(id))
             except Exception, e:
                 logging.info("Error: " + str(e))
                 self.write(str(e))
@@ -206,15 +206,15 @@ class AgencyAdminHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self, country=None, page=None):
         try:
-            user = models.Users.objects.get(username=self.current_user)
+            user = Users.objects.get(username=self.current_user)
         except Exception, e:
             logging.info("Could not get user: " + str(e))
             self.redirect("/login/")
         country = user.country
         settings = self.load_settings(country)
         lan = self.load_language(country, self.get_argument("lan", None), settings)
-        agencies = models.Agency.objects(country=country).order_by('name')
-        stats = models.Stats.objects.get(country=country)
+        agencies = Agency.objects(country=country).order_by('name')
+        stats = Stats.objects.get(country=country)
         self.render(
             "admin/" + lan + "/admin_agencies.html",
             page_title='Admin - Agencies - OpenData500',
@@ -231,7 +231,7 @@ class AgencyAdminHandler(BaseHandler):
     @tornado.web.authenticated
     def post(self, country=None, page=None):
         try:
-            user = models.Users.objects.get(username=self.current_user)
+            user = Users.objects.get(username=self.current_user)
         except Exception, e:
             logging.info("Could not get user: " + str(e))
             self.redirect("/login/")
@@ -247,7 +247,7 @@ class NewCompanyHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self):
         try:
-            user = models.Users.objects.get(username=self.current_user)
+            user = Users.objects.get(username=self.current_user)
         except Exception, e:
             logging.info("Could not get user: " + str(e))
             self.redirect("/login/")
@@ -296,7 +296,7 @@ class EditCompanyHandler(BaseHandler):
     @tornado.web.addslash
     def get(self, country=None, page=None, id=None):
         try: 
-            company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
+            company = Company.objects.get(id=bson.objectid.ObjectId(id))
         except Exception, e:
             logging.info("Could not get company: " + str(e))
             self.redirect("/404/")
@@ -334,7 +334,7 @@ class EditCompanyHandler(BaseHandler):
                 return
         if page == 'admin-edit':
             try:
-                user = models.Users.objects.get(username=self.current_user)
+                user = Users.objects.get(username=self.current_user)
             except Exception, e:
                 logging.info("Could not get user: " + str(e))
                 self.redirect("/login/")
@@ -387,7 +387,7 @@ class AdminEditAgencyHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self, id=None):
         try:
-            user = models.Users.objects.get(username=self.current_user)
+            user = Users.objects.get(username=self.current_user)
         except Exception, e:
             logging.info("Could not get user: " + str(e))
             self.redirect("/login/")
@@ -397,7 +397,7 @@ class AdminEditAgencyHandler(BaseHandler):
         lan = self.load_language(country, self.get_argument("lan", None), settings)
         if id:
             try:
-                agency = models.Agency.objects.get(id=bson.objectid.ObjectId(id))
+                agency = Agency.objects.get(id=bson.objectid.ObjectId(id))
             except Exception, e:
                 logging.info("Could not get agency: " + str(e))
                 self.redirect('/404/')
@@ -413,7 +413,7 @@ class AdminEditAgencyHandler(BaseHandler):
                 lan=settings['default_language']
             )
         else:
-            blank_agency = models.Agency(name="", 
+            blank_agency = Agency(name="", 
                 abbrev="", 
                 url="", 
                 source="", 
@@ -437,7 +437,7 @@ class AdminEditAgencyHandler(BaseHandler):
     @tornado.web.authenticated
     def post(self, id):
         try:
-            user = models.Users.objects.get(username=self.current_user)
+            user = Users.objects.get(username=self.current_user)
         except Exception, e:
             logging.info("Could not get user: " + str(e))
             self.redirect("/login/")
@@ -445,7 +445,7 @@ class AdminEditAgencyHandler(BaseHandler):
         action = self.get_argument("action", "")
         if action != "add-agency":
             try:
-                agency = models.Agency.objects.get(id=bson.objectid.ObjectId(id))
+                agency = Agency.objects.get(id=bson.objectid.ObjectId(id))
             except Exception, e:
                 logging.info("Could not get agency: " + str(e))
                 self.write({"error":"Agency not found."})
@@ -464,7 +464,7 @@ class AdminEditAgencyHandler(BaseHandler):
         agency_notes = self.get_argument("agency_notes", None)
         #------------------------------------------ADD NEW AGENCY----------------------------
         if action == "add-agency":
-            new_agency = models.Agency()
+            new_agency = Agency()
             new_agency.name = agency_new_name
             new_agency.prettyName = agency_prettyName
             new_agency.abbrev = agency_abbrev
@@ -503,7 +503,7 @@ class AdminEditAgencyHandler(BaseHandler):
                 if s.name.lower() == subagency_new_name.lower() and s.name.lower() != subagency_old_name.lower():
                     self.write({"message":"Another Subagency already has this name.", "error":""})
                     return
-            s = models.Subagency(
+            s = Subagency(
                 name = subagency_new_name,
                 abbrev = subagency_abbrev,
                 url = subagency_url)
@@ -536,7 +536,7 @@ class AdminEditAgencyHandler(BaseHandler):
             if agency_new_name != agency_old_name:
                 logging.info("name changed")
                 try:
-                    agency_exists = models.Agency.objects.get(name=agency_new_name)
+                    agency_exists = Agency.objects.get(name=agency_new_name)
                 except Exception, e:
                     logging.info("Could not find agency, therefore not duplicate name, carry on: " + str(e))
                     agency_exists = False
@@ -575,12 +575,12 @@ class DeleteCompanyHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self, id, country=None):
         try:
-            user = models.Users.objects.get(username=self.current_user)
+            user = Users.objects.get(username=self.current_user)
         except Exception, e:
             logging.info("Could not get user: " + str(e))
             self.redirect("/login/")
         try:
-            company = models.Company.objects.get(id=bson.objectid.ObjectId(id)) 
+            company = Company.objects.get(id=bson.objectid.ObjectId(id)) 
         except:
             self.render(
                 "404.html",

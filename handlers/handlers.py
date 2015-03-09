@@ -78,14 +78,14 @@ class StaticPageHandler(BaseHandler):
         logging.info(lan)
         #check if company page, get company if so
         try:
-            company = models.Company.objects.get(Q(prettyName=page) & Q(display=True))
+            company = Company.objects.get(Q(prettyName=page) & Q(display=True))
             if company.country != country:
                 self.redirect("/" + company.country + "/" + company.prettyName + "/")
                 return
         except DoesNotExist:
             company = None
         except MultipleObjectsReturned:
-            company = models.Company.objects(Q(prettyName=page) & Q(country=country) & Q(display=True))[0]
+            company = Company.objects(Q(prettyName=page) & Q(country=country) & Q(display=True))[0]
             if company.country != country:
                 self.redirect("/" + company.country + "/" + company.prettyName + "/")
                 return
@@ -148,14 +148,14 @@ class ListHandler(BaseHandler):
         country = self.load_country(country)
         settings = self.load_settings(country)
         lan = self.load_language(country, self.get_argument("lan", None), settings)
-        companies = models.Company.objects(
+        companies = Company.objects(
             Q(display=True) & Q(country=country)).order_by('prettyName').only(
             'companyName', 'prettyName', 'filters', 'descriptionShort', 
             'state', 'companyCategory', 'country')
-        agencies = models.Agency.objects(
+        agencies = Agency.objects(
             Q(dataType="Federal") & Q(country=country)).order_by(
             "-usedBy_count").only("name", "abbrev", "prettyName")[0:16]
-        stats = models.Stats.objects.get(country=country)
+        stats = Stats.objects.get(country=country)
         states_for_map = self.application.tools.states_for_map(country)
         try:
             page_title=settings['page_titles'][lan]["list"]
@@ -176,32 +176,6 @@ class ListHandler(BaseHandler):
             lan=lan
         )
 
-# #--------------------------------------------------------CHART PAGE------------------------------------------------------------
-# class ChartHandler(BaseHandler):
-#     @tornado.web.addslash
-#     def get(self, country=None):
-#         logging.info("asdwefwreg")
-#         country = self.load_country(country)
-#         settings = self.load_settings(country)
-#         lan = self.load_language(country, self.get_argument("lan", None), settings)
-#         try: 
-#             visit = models.Visit()
-#             if self.request.headers.get('Referer'):
-#                 visit.r = self.request.headers.get('Referer')
-#                 logging.info("Chart requested from: " + self.request.headers.get('Referer'))
-#             else:
-#                 visit.r = ''
-#                 logging.info("Chart requested from: Cannot get referer")
-#             visit.p = "/chart/"
-#             visit.ua = self.request.headers.get('User-Agent')
-#             visit.ip = self.request.headers.get('X-Forwarded-For', self.request.headers.get('X-Real-Ip', self.request.remote_ip))
-#             if visit.r != "http://www.opendata500.com/" or visit.r != "http://www.opendata500.com":
-#                 visit.save()
-#         except Exception, e:
-#             logging.info("Could not save visit information: " + str(e))
-#         finally:
-#             self.render("solo_chart.html", country=country)
-
 
 #--------------------------------------------------------VALIDATE COMPANY EXISTS PAGE------------------------------------------------------------
 #------SHOULD MOVE TO UTILS-------
@@ -214,7 +188,7 @@ class ValidateHandler(BaseHandler):
         companyName = self.get_argument("companyName", None)
         prettyName = self.application.tools.prettify(companyName)
         try: 
-            c = models.Company.objects.get(Q(country=country) & Q(prettyName=prettyName))
+            c = Company.objects.get(Q(country=country) & Q(prettyName=prettyName))
             self.set_status(404)
         except:
             self.set_status(200)
@@ -271,7 +245,7 @@ class SubmitDataHandler(BaseHandler):
         country = self.load_country(country)
         settings = self.load_settings(country)
         lan = self.load_language(country, self.get_argument("lan", None), settings)
-        company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
+        company = Company.objects.get(id=bson.objectid.ObjectId(id))
         if company.country != country or '/'+company.country+'/' not in self.request.uri:
             self.redirect(str('/'+company.country+'/addData/'+id))
             return
@@ -294,7 +268,7 @@ class SubmitDataHandler(BaseHandler):
         #logging.info("Submitting Data: "+ self.get_argument("action", None))
         logging.info(self.request.arguments)
         try:
-            company = models.Company.objects.get(id=bson.objectid.ObjectId(id))
+            company = Company.objects.get(id=bson.objectid.ObjectId(id))
         except Exception, e:
             logging.info("Could not get company: " + str(e))
             self.set_status(400)
@@ -318,7 +292,7 @@ class SubmitDataHandler(BaseHandler):
         action = self.get_argument("action", None)
         if action != 'submit-form':
             try:
-                agency = models.Agency.objects.get(Q(name=agency_name) & Q(country=company.country))
+                agency = Agency.objects.get(Q(name=agency_name) & Q(country=company.country))
             except Exception, e:
                 logging.info("Error: " + str(e))
                 self.set_status(400)
@@ -402,7 +376,7 @@ class FileDownloadHandler(BaseHandler):
         file_name = file_name.encode('utf8')
         if "_all.csv" in file_name:
             try:
-                user = models.Users.objects.get(username=self.current_user)
+                user = Users.objects.get(username=self.current_user)
             except Exception, e:
                 logging.info("Could not get user: " + str(e))
                 self.redirect("/login/")

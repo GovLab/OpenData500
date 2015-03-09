@@ -58,6 +58,23 @@
 
 
 <script>
-    $('#mc_embed_signup').removeClass('s-disabled').delay(5000).addClass('s-disabled');
+
+    $(document).ready(function() {
+        $('#mc_embed_signup').removeClass('s-disabled').delay(5000).addClass('s-disabled');
+
+        var introVideo = $('#bgvid');
+        var playing = false;
+        $('body').on('click', '.video-container', function() {
+            if (playing) {
+                introVideo.get(0).pause();
+                $(this).find('.video-header').fadeIn(1000);
+                playing = false;
+            } else {
+                introVideo.get(0).play();
+                $(this).find('.video-header').fadeOut(1000);
+                playing = true;
+            }
+        });
+    });
 </script>
 {% end %}

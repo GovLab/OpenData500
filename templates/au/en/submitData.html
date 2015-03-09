@@ -8,7 +8,7 @@
 
 	<form class="m-form" id="company-data-form" data-parsley-validate>
 		
-		{% module FormData(country, "en", True, company) %}
+		{% module FormData(country, settings['default_language'], True, company) %}
 		{% raw xsrf_form_html() %}
 
 	</form>

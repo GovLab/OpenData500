@@ -1,6 +1,6 @@
 #coding: utf8 
 from mongoengine import *
-import models
+from models import *
 from datetime import datetime
 import logging
 import os
@@ -11,8 +11,6 @@ import numpy as np
 import re
 import bson
 from constants import *
-
-#Just some global varbs. 
 
 class Tools(object):
     @classmethod
@@ -25,7 +23,7 @@ class Tools(object):
                 name = re.sub(r"{}".format(abbrev.keys()[0]), abbrev.values()[0], name)
         if len(name) > 34:
             try:
-                name = models.Agency.objects(name=original).only('abbrev').first().abbrev
+                name = Agency.objects(name=original).only('abbrev').first().abbrev
             except Exception, e:
                 print "Could not get abbrev for " + name
                 print "Because: " + str(e)
@@ -38,7 +36,7 @@ class Tools(object):
         return name
 
     def re_do_filters(self, country):
-        companies = models.Company.objects(country=country).only(
+        companies = Company.objects(country=country).only(
             'companyCategory', 'state', 'agencies', 
             'submittedSurvey', 'filters', 'companyType')
         for c in companies:
@@ -56,7 +54,7 @@ class Tools(object):
     @classmethod
     def re_do_company_filter(self, id):
         try: 
-            c = models.Company.objects(id=bson.objectid.ObjectId(id)).only(
+            c = Company.objects(id=bson.objectid.ObjectId(id)).only(
                 'companyCategory', 'state', 'agencies', 
                 'submittedSurvey', 'filters', 'companyType').first()
         except Exception, e:
@@ -76,7 +74,7 @@ class Tools(object):
         return re.sub(r'([^\s\w])+', '', name).replace(" ", "-").lower()
 
     def get_list_of_agencies(self, country):
-        agencies = models.Agency.objects(country=country).only(
+        agencies = Agency.objects(country=country).only(
             'name', 'abbrev', 'subagencies.name', 'subagencies.abbrev')
         agency_list = []
         for a in agencies:
@@ -106,7 +104,7 @@ class Tools(object):
         return agency_list
 
     def states_for_map(self, country):
-        stats = models.Stats.objects.get(country=country)
+        stats = Stats.objects.get(country=country)
         #abbrev, STATE, VALUE
         state_counts = []
         state_data = []
@@ -121,7 +119,7 @@ class Tools(object):
 
 class Form(object):
     def create_new_company(self, arguments):
-        company = models.Company(
+        company = Company(
             companyName = arguments['companyName'],
             state = arguments['state'],
             country = country_keys[arguments['country']])
@@ -130,29 +128,34 @@ class Form(object):
 
     def process_company_data_info(self, arguments, id):
         try: 
-            c = models.Company.objects.get(id=bson.objectid.ObjectId(id))
+            c = Company.objects.get(id=bson.objectid.ObjectId(id))
         except Exception, e:
             logging.info("Error processing company: " + str(e))
             return
-        #-------------------DATA INFO---------------
+        #-------------------DATA FORM TEXT FIELDS---------------
         for item in company_data_fields:
             if item in arguments:
-                models.Company.objects(
+                Company.objects(
                     id=bson.objectid.ObjectId(id)).update(
                         **{'set__'+item:arguments[item]})
-        #DATA TYPES
-        if 'dataTypes' in arguments:
-            c.dataTypes = [] if not arguments['dataTypes'] else arguments['dataTypes'].split(',')
-            if 'Other' in c.dataTypes:
-                del c.dataTypes[c.dataTypes.index('Other')]
-                c.dataTypes.append(arguments['otherDataType'])
-        else:
-            c.dataTypes = []
-        if 'dataImpacts' in arguments:
-            c.dataImpacts = [] if not arguments['dataImpacts'] else arguments['dataImpacts'].split(',')
-            if 'Other' in c.dataImpacts:
-                del c.dataImpacts[c.dataImpacts.index('Other')]
-                c.dataImpacts.append(arguments['otherdataImpacts'])
+        #-------------------DATA FORM CHECKBOXES---------------
+        for item in company_data_checkboxes:
+            if item in arguments:
+                Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+item:arguments[item].split(',')})
+                if 'Other' in arguments[item]:
+                    Company.objects(id=bson.objectid.ObjectId(id)).update(**{'pull__'+item:'Other'})
+                    Company.objects(id=bson.objectid.ObjectId(id)).update(**{'push__'+item:arguments['other'+item]})
+            else:
+                Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+item:[]})
+        #-------------------DATA FORM RADIO BUTTONS---------------
+        for item in company_data_radio_buttons:
+            if item in arguments:
+                if arguments[item] == 'Other':
+                    Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+item:arguments['other' +item]})
+                else:
+                    Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+item:arguments[item]})
+            else:
+                Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+item:''})
         c.lastUpdated = datetime.now()
         c.filters = Tools().re_do_company_filter(c.id)
         c.save()
@@ -160,43 +163,43 @@ class Form(object):
 
     def process_company(self, arguments, id):
         try: 
-            c = models.Company.objects.get(id=bson.objectid.ObjectId(id))
+            c = Company.objects.get(id=bson.objectid.ObjectId(id))
         except Exception, e:
             logging.info("Error processing company: " + str(e))
             return
         #-------------------CONTACT INFO---------------
         for item in company_contact_fields:
             if item in arguments:
-                models.Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__contact__'+item:arguments[item]})
+                Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__contact__'+item:arguments[item]})
         #-------------------TEXTFIELDS---------------
         for item in company_fields:
             if item in arguments:
-                models.Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+item:arguments[item]})
+                Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+item:arguments[item]})
         c.prettyName = Tools.prettify(c.companyName)
         c.country = country_keys[arguments['country']]
         #-------------------CHECKBOXES---------------
         for item in company_fields_checkboxes:
             if item in arguments:
-                models.Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+item:arguments[item].split(',')})
+                Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+item:arguments[item].split(',')})
                 if 'Other' in arguments[item]:
-                    models.Company.objects(id=bson.objectid.ObjectId(id)).update(**{'pull__'+item:'Other'})
-                    models.Company.objects(id=bson.objectid.ObjectId(id)).update(**{'push__'+item:arguments['other'+item]})
+                    Company.objects(id=bson.objectid.ObjectId(id)).update(**{'pull__'+item:'Other'})
+                    Company.objects(id=bson.objectid.ObjectId(id)).update(**{'push__'+item:arguments['other'+item]})
             else:
-                models.Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+item:[]})
+                Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+item:[]})
         #-------------------RADIO BUTTONS---------------
-        for item in company_fields_radio:
+        for item in company_fields_radio_buttons:
             if item in arguments:
                 if arguments[item] == 'Other':
-                    models.Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+item:arguments['other' +item]})
+                    Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+item:arguments['other' +item]})
                 else:
-                    models.Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+item:arguments[item]})
+                    Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+item:arguments[item]})
             else:
-                models.Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+item:''})
+                Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+item:''})
         c.filters = Tools.re_do_company_filter(id)
         #-------------------BOOLEANS---------------
         for item in company_admin_booleans:
             if item in arguments:
-                models.Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+item:arguments[item]})
+                Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+item:arguments[item]})
         #-------------------SAVE---------------
         c.lastUpdated = datetime.now()
         c.filters = Tools().re_do_company_filter(c.id)
@@ -204,7 +207,7 @@ class Form(object):
         return
 
     def company_update_one(self, id, dictField, value):
-        return models.Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+dictField:value})
+        return Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+dictField:value})
 
     def company_has_agency(self, company, agency):
         return company in agency.usedBy
@@ -321,7 +324,7 @@ class Form(object):
         agency.save()
 
     def add_dataset(self, company, agency, subagency_name, dataset_name, dataset_url, rating):
-        dataset = models.Dataset(
+        dataset = Dataset(
                 datasetName = dataset_name,
                 datasetURL = dataset_url,
                 rating = rating,
@@ -336,7 +339,7 @@ class Form(object):
 
 class StatsGenerator(object):
     def create_new_stats(self, country):
-        stats = models.Stats()
+        stats = Stats()
         stats.country = country
         stats.lastUpdate = datetime.now()
         stats.totalCompanies = 0
@@ -348,56 +351,56 @@ class StatsGenerator(object):
         self.update_all_state_counts(country)
 
     def get_total_companies(self, country):
-        return models.Stats.objects.get(country=country).totalCompanies
+        return Stats.objects.get(country=country).totalCompanies
     
     def get_total_companies_web(self, country):
-        return models.Stats.objects.get(country=country).totalCompaniesWeb
+        return Stats.objects.get(country=country).totalCompaniesWeb
     
     def get_total_companies_surveys(self, country):
-        return models.Stats.objects.get(country=country).totalCompaniesSurvey
+        return Stats.objects.get(country=country).totalCompaniesSurvey
 
     def get_total_displayed_companies(self, country):
-        return models.Stats.objects.get(country=country).totalCompaniesDisplayed
+        return Stats.objects.get(country=country).totalCompaniesDisplayed
 
     def get_total_agencies(self, country):
-        return models.Stats.objects.get(country=country).totalAgencies
+        return Stats.objects.get(country=country).totalAgencies
 
     def update_total_agencies(self, country):
-        s = models.Stats.objects.get(country=country)
-        s.totalAgencies = models.Agency.objects(country=country).count()
+        s = Stats.objects.get(country=country)
+        s.totalAgencies = Agency.objects(country=country).count()
         s.save()
 
     def update_totals_companies(self, country):
-        s = models.Stats.objects.get(country=country)
-        s.totalCompanies = models.Company.objects(country=country).count()
-        s.totalCompaniesWeb = models.Company.objects(Q(submittedThroughWebsite = True) & Q(country=country)).count()
-        s.totalCompaniesSurvey = models.Company.objects(Q(submittedSurvey = True) & Q(country=country)).count()
-        s.totalCompaniesDisplayed = models.Company.objects(Q(displayed=True) & Q(country=country)).count()
+        s = Stats.objects.get(country=country)
+        s.totalCompanies = Company.objects(country=country).count()
+        s.totalCompaniesWeb = Company.objects(Q(submittedThroughWebsite = True) & Q(country=country)).count()
+        s.totalCompaniesSurvey = Company.objects(Q(submittedSurvey = True) & Q(country=country)).count()
+        s.totalCompaniesDisplayed = Company.objects(Q(displayed=True) & Q(country=country)).count()
         s.save()
     
     def increase_individual_state_count(self, state, country):
-        stats = models.Stats.objects.get(country=country)
+        stats = Stats.objects.get(country=country)
         for s in stats.states:
             if s.abbrev == state:
                 s.count = s.count + 1
         stats.save()
 
     def decrease_individual_state_count(self, state, country):
-        stats = models.Stats.objects.get(country=country)
+        stats = Stats.objects.get(country=country)
         for s in stats.states:
             if s.abbrev == state:
                 s.count = s.count - 1
         stats.save()
 
     def update_all_state_counts(self, country):
-        stats = models.Stats.objects(country=country).only('states').first()
-        companies  = models.Company.objects(
+        stats = Stats.objects(country=country).only('states').first()
+        companies  = Company.objects(
             Q(display=True) & 
             Q(country=country)).only('state')
         total_states = Counter([c.state for c in companies])
         stats.states = []
         for key in states[country]:
-            s = models.States(
+            s = States(
                 name= states[country][key],
                 abbrev = key,
                 count = total_states[key] if key in total_states else 0
@@ -406,18 +409,18 @@ class StatsGenerator(object):
         stats.save()
 
     def refresh_stats(self, country):
-        stats = models.Stats.objects.get(country=country)
-        stats.totalCompanies = models.Company.objects(country=country).count()
-        stats.totalCompaniesWeb = models.Company.objects(Q(submittedThroughWebsite = True) & Q(country=country)).count()
-        stats.totalCompaniesSurvey = models.Company.objects(Q(submittedSurvey = True) & Q(country=country)).count()
-        stats.totalCompaniesDisplayed = models.Company.objects(Q(display=True) & Q(country=country)).count()
-        companies  = models.Company.objects(Q(display=True) & Q(country=country))
+        stats = Stats.objects.get(country=country)
+        stats.totalCompanies = Company.objects(country=country).count()
+        stats.totalCompaniesWeb = Company.objects(Q(submittedThroughWebsite = True) & Q(country=country)).count()
+        stats.totalCompaniesSurvey = Company.objects(Q(submittedSurvey = True) & Q(country=country)).count()
+        stats.totalCompaniesDisplayed = Company.objects(Q(display=True) & Q(country=country)).count()
+        companies  = Company.objects(Q(display=True) & Q(country=country))
         stateCount = []
         for c in companies:
             stateCount.append(c.state)
         stats.states = []
         for i in range(1, len(stateList[country])):
-            s = models.States(
+            s = States(
                 name = stateList[country][i],
                 abbrev = stateListAbbrev[country][i],
                 count = stateCount.count(stateListAbbrev[country][i]))
@@ -429,7 +432,7 @@ class StatsGenerator(object):
 class FileGenerator(object):
     def generate_company_json(self, country):
         #------COMPANIES JSON---------
-        companies = models.Company.objects(Q(display=True) & Q(country=country))
+        companies = Company.objects(Q(display=True) & Q(country=country))
         companiesJSON = []
         for c in companies:
             agencies = []
@@ -505,7 +508,7 @@ class FileGenerator(object):
         logging.info("Company JSON File Done!")
     def generate_agency_json(self, country):
         #--------------JSON OF AGENCIES------------
-        agencies = models.Agency.objects(country=country)
+        agencies = Agency.objects(country=country)
         agenciesJSON = []
         for a in agencies:
             #--------DATASETS AT AGENCY LEVEL------
@@ -560,7 +563,7 @@ class FileGenerator(object):
 
     def generate_company_csv(self, country):
         #---CSV OF ALL COMPANIES----
-        companies = models.Company.objects(Q(display=True) & Q(country=country))
+        companies = Company.objects(Q(display=True) & Q(country=country))
         csvwriter = csv.writer(open(os.path.join(os.path.dirname(__file__), 'static') + "/files/" + country + "/" + country + "_companies.csv", "w"))
         csvwriter.writerow([
             'company_name_id',
@@ -618,7 +621,7 @@ class FileGenerator(object):
         logging.info("Company CSV File Done!")
     def generate_company_all_csv(self, country):
         #---CSV OF ALL COMPANIES----
-        companies = models.Company.objects(country=country)
+        companies = Company.objects(country=country)
         csvwriter = csv.writer(open(os.path.join(os.path.dirname(__file__), 'static') + "/files/" + country + "/" + country + "_companies_all.csv", "w"))
         csvwriter.writerow([
             'company_name_id',
@@ -704,8 +707,8 @@ class FileGenerator(object):
         logging.info("All Companies CSV File Done!")
 
     def generate_agency_csv(self, country):
-        companies = models.Company.objects(Q(country=country) & Q(display=True))
-        agencies = models.Agency.objects(country=country)
+        companies = Company.objects(Q(country=country) & Q(display=True))
+        agencies = Agency.objects(country=country)
         csvwriter = csv.writer(open(os.path.join(os.path.dirname(__file__), 'static') + "/files/" + country + "/" + country + "_agencies.csv", "w"))
         csvwriter.writerow([
             'agency_name',
@@ -817,7 +820,7 @@ class FileGenerator(object):
         logging.info("Agency CSV File Done!")
 
     def generate_chord_chart_files(self, country, lan):
-        agencies = models.Agency.objects(
+        agencies = Agency.objects(
             Q(usedBy__not__size=0) & Q(dataType="Federal") & Q(country=country)
             ).order_by('name').only('usedBy', 'name')
         #get agencies and categories that are actually used
@@ -858,7 +861,7 @@ class FileGenerator(object):
 
     def generate_visit_csv(self, country):
         #---CSV OF ALL COMPANIES----
-        visits = models.Visit.objects()
+        visits = Visit.objects()
         csvwriter = csv.writer(open(os.path.join(os.path.dirname(__file__), 'static') + "/files/" + country + "_OD500_Visits.csv", "w"))
         csvwriter.writerow([
             'ts',

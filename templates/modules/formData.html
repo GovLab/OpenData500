@@ -17,21 +17,21 @@
 				{% for count in source_count %}
 					<input type="radio" 
 						name="sourceCount" 
-						id="{{count}}" 
+						id="sourceCount_{{count}}" 
 						value="{{count}}" 
 						{% if c %}
 							{% if c.sourceCount == count %}checked{%end%} 
 						{%end%}
-						{%if required %}required{%end%}><label for="{{count}}">{{count}}</label><br>
+						{%if required %}required{%end%}><label for="sourceCount_{{count}}">{{count}}</label><br>
 				{%end %}
 				{% if not required %}
 					<input type="radio" 
 						name="sourceCount" 
-						id="NA" value="NA" 
+						id="sourceCount_NA" value="NA" 
 						{% if c %}
 							{% if c.sourceCount == "NA" %}checked{%end%}
 						{%end%} 
-						{%if required %}required{%end%}><label for="NA">NA</label><br>
+						{%if required %}required{%end%}><label for="sourceCount_NA">NA</label><br>
 				{%end%}
 			</div>
 		</fieldset>
@@ -57,20 +57,20 @@
 							data-parsley-mincheck="1" 
 							data-parsley-group='dataTypes' 
 							data-parsley-trigger="change"><label for="Other">{{form['other']}}</label>
-						<input type="text" name="otherDataType" id="other_data_type_text_field" value="{{ [e for e in c.dataTypes if e.encode('utf-8') not in data_types][0] }}" />
+						<input type="text" name="otherdataTypes" id="other_data_type_text_field" value="{{ [e for e in c.dataTypes if e.encode('utf-8') not in data_types][0] }}" />
 					{% else %}
 						<input type="checkbox" id="other_data_type" name="dataTypes" value="Other" 
 							data-parsley-mincheck="1" 
 							data-parsley-group='dataTypes' 
 							data-parsley-trigger="change"><label for="Other">{{form['other']}}</label>
-						<input type="text" name="otherDataType" id="other_data_type_text_field" />
+						<input type="text" name="otherdataTypes" id="other_data_type_text_field" />
 					{% end %}
 				{%else%}
 					<input type="checkbox" id="other_data_type" name="dataTypes" value="Other" 
 						data-parsley-mincheck="1" 
 						data-parsley-group='dataTypes' 
 						data-parsley-trigger="change"><label for="Other">{{form['other']}}</label>
-					<input type="text" name="otherDataType" id="other_data_type_text_field" />
+					<input type="text" name="otherdataTypes" id="other_data_type_text_field" />
 				{% end %}
 			</div>
 		</fieldset>
@@ -122,7 +122,7 @@
 		            <h3>{{form['data_wishlist']}}<br><em>{{form['word_limit_250']}}</em></h3>
 		            <textarea rows="10" cols="59" name="dataWishlist" id="dataWishlist" 
 		            parsley-trigger="keyup" 
-		            data-parsley-maxwords="250">{%if c.dataWishlist %}{{ c.dataWishlist }}{% end %}</textarea><br>
+		            data-parsley-maxwords="250">{% if c %}{%if c.dataWishlist %}{{ c.dataWishlist }}{% end %}{% end %}</textarea><br>
 		    </fieldset>
 		{%end%}
 

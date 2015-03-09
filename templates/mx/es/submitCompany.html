@@ -18,7 +18,7 @@
 </section>
 <form method="post" id="submitCompany" class="m-form companyForm" data-parsley-validate>
 
-	{% module Form(country, lan, True, False) %}
+	{% module Form(country, settings['default_language'], True, False) %}
 	{% raw xsrf_form_html() %}
 
 	<p class="disclaimer-text warning">Tus respuestas serán incluidas en una base de datos públicos que expone información sobre compañías que utilizan datos gubernamentales abiertos. Al enviar este formulario, estás aceptando que - con excepción de tu información de contacto personal - la información será accesible al público.</p>

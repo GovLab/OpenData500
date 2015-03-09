@@ -163,7 +163,7 @@ data_impacts = {
                         "Nuevas / mejoradas Investigaciones"]
                 }
             }
-            
+
 source_count = ['1-10', '11-50', '51-100', '101+']
 full_time_employees = [
                     '1-10', '11-50', '51-200', '201-500', '501-1,000', 
@@ -259,13 +259,17 @@ available_countries = ["us", "au", "mx", "fr"]
 country_keys = { 
     "us":"United States", "au":"Australia", "United States":"us", 
     "Australia":"au",  "Mexico":"mx", "mx":"Mexico"}
+
+# "fields" include text fields, textareas, drop-down menus
+company_contact_fields = ['firstName', 'lastName', 'title', 'email', 'phone']
 company_fields = [
     'companyName', 'url', 'yearFounded', 'city', 'state', 'zipCode', 
     'description', 'descriptionShort', 'financialInfo', 'notes']
 company_fields_checkboxes = ['revenueSource', 'businessModel', 'socialImpact']
-company_fields_radio = ['companyCategory', 'companyType', 'fte']
-company_contact_fields = ['firstName', 'lastName', 'title', 'email', 'phone']
-company_data_fields = ['sourceCount', 'dataComments', 'exampleUses', 'dataWishlist']
+company_fields_radio_buttons = ['companyCategory', 'companyType', 'fte']
+company_data_fields = ['dataComments', 'exampleUses', 'dataWishlist']
+company_data_checkboxes = ['dataTypes', 'dataImpacts']
+company_data_radio_buttons = ['sourceCount']
 company_admin_booleans = [
     'display', 'submittedSurvey','vetted', 'vettedByCompany', 
     'submittedThroughWebsite', 'locked']
