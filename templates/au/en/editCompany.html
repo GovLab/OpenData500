@@ -14,9 +14,9 @@
 <h2>{{ page_heading }}</h2>
 <form method="post" id="company_form_edit" class="m-form company_form_edit" data-parsley-validate>
 
-	{% module Form(country, "es", True, True, company) %}
+	{% module Form(country, "en", True, True, company) %}
 
-	{% module FormData(country, "es", True, company) %}
+	{% module FormData(country, "en", True, company) %}
 	{% raw xsrf_form_html() %}
 
 </form>

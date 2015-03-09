@@ -365,7 +365,7 @@ survey/no survey hover and active states*/
   left: 120px;
 }
 
-.m-form.companyForm, .m-form.company_form_admin, .m-form#company-data-form, .m-form#company-data-comment-form, .m-form.company_form_edit {
+.m-form.companyForm, .m-form.company_form_admin, .m-form#company-data-form, .m-form#company-data-comment-form, .m-form#company-data-wishlist-form, .m-form.company_form_edit {
   width: 60%;
   margin-left: auto;
   margin-right: auto;

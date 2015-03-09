@@ -43,7 +43,7 @@ class FormDataModule(tornado.web.UIModule):
             country=country, 
             lan=lan, 
             required=required, 
-            form=form[lan],
+            form=form[lan][country],
             source_count = source_count,
             data_types = data_types[lan],
             data_impacts = data_impacts[lan]

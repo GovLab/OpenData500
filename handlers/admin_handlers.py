@@ -579,9 +579,6 @@ class DeleteCompanyHandler(BaseHandler):
         except Exception, e:
             logging.info("Could not get user: " + str(e))
             self.redirect("/login/")
-        country = self.load_country(country)
-        settings = self.load_settings(country)
-        lan = self.load_language(country, self.get_argument("lan", None), settings)
         try:
             company = models.Company.objects.get(id=bson.objectid.ObjectId(id)) 
         except:
@@ -593,8 +590,11 @@ class DeleteCompanyHandler(BaseHandler):
                 lan=lan,
                 country=country
             )
+        country = company.country
         logging.info("deleting: " + company.companyName)
         if len(company.agencies) !=0:
+            settings = self.load_settings(country)
+            lan = self.load_language(country, self.get_argument("lan", None), settings)
             self.render(
                 "404.html",
                 page_title='404 - Open Data500',
@@ -604,6 +604,8 @@ class DeleteCompanyHandler(BaseHandler):
                 country=country
             )
         if user.country != company.country:
+            settings = self.load_settings(country)
+            lan = self.load_language(country, self.get_argument("lan", None), settings)
             self.render(
                 "404.html",
                 page_title='404 - Open Data500',

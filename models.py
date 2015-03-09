@@ -38,6 +38,7 @@ class Company(Document):
 	dataComments = StringField() #Please give comments, good or bad....
 	exampleUses = StringField()
 	dataImpacts = ListField(StringField())
+	dataWishlist = StringField()
 	agencies = ListField(ReferenceField('Agency'))
 	ts = ComplexDateTimeField(default=datetime.now())
 	lastUpdated = ComplexDateTimeField()

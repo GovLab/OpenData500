@@ -90,18 +90,17 @@
 			{% end %}<!-- END OF AGENCIES !-->
 		</div><br>
 	</div>
+
+    {#--*****************************************************************-DATA COMMENTS-***************************************************************** --#}
+    <form class="m-form"  id="company-data-comment-form">
+        <fieldset class="m-form-half right">
+                <h3>{{form['data_comments']}}<br><em>{{form['word_limit_250']}}</em></h3>
+                <textarea rows="10" cols="59" name="dataComments" id="dataComments" 
+                parsley-trigger="keyup" 
+                data-parsley-maxwords="250">{%if c.dataComments %}{{ c.dataComments }}{% end %}</textarea><br>
+        </fieldset>
+    </form>
 </div>
-
-{#--*****************************************************************-DATA COMMENTS-***************************************************************** --#}
-<form class="m-form"  id="company-data-comment-form">
-	<fieldset class="m-form-half right">
-			<h3>{{form['data_comments']}}<br><em>{{form['word_limit_250']}}</em></h3>
-			<textarea rows="10" cols="59" name="dataComments" id="dataComments" 
-			parsley-trigger="keyup" 
-			data-parsley-maxwords="250">{%if c.dataComments %}{{ c.dataComments }}{% end %}</textarea><br>
-	</fieldset>
-</form>
-
 
 
 <script>

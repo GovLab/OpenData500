@@ -228,7 +228,7 @@ company_fields = [
 company_fields_checkboxes = ['revenueSource', 'businessModel', 'socialImpact']
 company_fields_radio = ['companyCategory', 'companyType', 'fte']
 company_contact_fields = ['firstName', 'lastName', 'title', 'email', 'phone']
-company_data_fields = ['sourceCount', 'dataComments', 'exampleUses']
+company_data_fields = ['sourceCount', 'dataComments', 'exampleUses', 'dataWishlist']
 company_admin_booleans = [
     'display', 'submittedSurvey','vetted', 'vettedByCompany', 
     'submittedThroughWebsite', 'locked']

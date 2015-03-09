@@ -116,6 +116,16 @@
 			</div>
 		</fieldset>
 
+		{% if country == 'au' %}
+		    {#--*****************************************************************-DATA WISHLIST-***************************************************************** --#}
+		    <fieldset class="m-form-half right">
+		            <h3>{{form['data_wishlist']}}<br><em>{{form['word_limit_250']}}</em></h3>
+		            <textarea rows="10" cols="59" name="dataWishlist" id="dataWishlist" 
+		            parsley-trigger="keyup" 
+		            data-parsley-maxwords="250">{%if c.dataWishlist %}{{ c.dataWishlist }}{% end %}</textarea><br>
+		    </fieldset>
+		{%end%}
+
 		{% if c %}
 			<input type="hidden" name="id" id="companyID" value="{{c.id}}">
 		{%end%}

@@ -75,7 +75,7 @@
 			id="city"
 			{%if c %}value="{{ c.city }}"{%end%}></div>
 		<div class="m-form-line">
-			<label for="state">{{form['state']}}:</label>
+			<label for="state">{{form['state']}}:*</label>
 			<select name='state' id="state" required>
 				{% for i in range(0, len(stateList[country])) %}
 					<option name="state" 
