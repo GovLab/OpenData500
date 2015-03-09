@@ -4,6 +4,10 @@
     "logo_path":"img/od100-logo-mx.png",
     "menu": {
         "en": [{
+            "item": "OD100 MX",
+            "link": "/mx/",
+            "sub-menu": []
+        }, {
             "item": "About",
             "link": "/mx/about/",
             "sub-menu": [{
@@ -25,15 +29,15 @@
             "link": "/mx/list/",
             "sub-menu": []
         }, {
-            "item": "International",
-            "link": "/mx/international/",
-            "sub-menu": []
-        }, {
             "item": "Resources",
             "link": "/mx/resources/",
             "sub-menu": []
         }],
         "es": [{
+            "item": "OD100 MX",
+            "link": "/mx/",
+            "sub-menu": []
+        }, {
             "item": "Acerca de",
             "link": "/mx/about/",
             "sub-menu": [{
@@ -53,10 +57,6 @@
         }, {
             "item": "Compañías",
             "link": "/mx/list/",
-            "sub-menu": []
-        }, {
-            "item": "Internacional",
-            "link": "/mx/international/",
             "sub-menu": []
         }, {
             "item": "Recursos",

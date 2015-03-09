@@ -4,6 +4,10 @@
     "logo_path":"img/od500-logo-us.png",
     "menu": {
         "en": [{
+            "item": "OD500 US",
+            "link": "/us/",
+            "sub-menu": []
+        }, {
             "item": "About",
             "link": "/us/about/",
             "sub-menu": [{
@@ -40,10 +44,6 @@
                 "item": "Dept. of Agriculture",
                 "link": "/us/roundtables/?rt=doa"
             }]
-        }, {
-            "item": "International",
-            "link": "/us/international/",
-            "sub-menu": []
         }, {
             "item": "Resources",
             "link": "/us/resources/",

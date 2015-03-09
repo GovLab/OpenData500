@@ -4,6 +4,10 @@
     "logo_path":"img/au/od500-logo-au.png",
     "menu": {
         "en": [{
+            "item": "OD500 AU",
+            "link": "/au/",
+            "sub-menu": []
+        }, {
             "item": "About",
             "link": "/au/about/",
             "sub-menu": [{
@@ -22,10 +26,6 @@
         }, {
             "item": "Survey",
             "link": "/au/submitCompany/",
-            "sub-menu": []
-        }, {
-            "item": "International",
-            "link": "/au/international/",
             "sub-menu": []
         }, {
             "item": "Resources",
