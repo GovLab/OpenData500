@@ -9,3 +9,4 @@ static/files/au/au_companies_all.csv
 .sass-cache/*
 .env
 *.pyc
+.ruby-version

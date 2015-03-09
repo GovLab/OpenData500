@@ -963,10 +963,10 @@ a:hover {
     font-size: 12px;
     font-weight: 400; }
 
-.b-third {
+.b-quarter {
   box-sizing: border-box;
   float: left;
-  width: calc(33.3% - 20px);
+  width: calc(25% - 20px);
   margin: 0 10px; }
 
 #govlab-logo {
@@ -985,24 +985,24 @@ a:hover {
     font-size: 20px;
     font-weight: 400; }
   #international-homepage .b-country p {
-    font-size: 1.4rem;
-    line-height: 1.3;
+    font-size: 1.2rem;
+    line-height: 1.4;
     font-family: "Exo", sans-serif;
     font-weight: 100; }
   #international-homepage .b-country.m-disabled {
     opacity: .3;
     pointer-events: none; }
 #international-homepage .b-flag {
-  height: 220px;
-  width: 220px;
+  height: 110px;
+  width: 110px;
   margin: 0 auto 20px;
   border: 5px solid rgba(0, 0, 0, 0.2);
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
   border-radius: 50%; }
   #international-homepage .b-flag > div {
-    height: 220px;
-    width: 220px;
+    height: 110px;
+    width: 110px;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     border-radius: 50%;
@@ -1021,11 +1021,13 @@ a:hover {
     background-image: url("/static/img/italy-flag.png"); }
   #international-homepage .b-flag.m-ru > div {
     background-image: url("/static/img/russia-flag.png"); }
+  #international-homepage .b-flag.m-in-your-country > div {
+    background-image: url("/static/img/od500-in-your-country.png"); }
 #international-homepage .b-country:hover .b-flag {
   border-color: #472b74;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); }
 @media only screen and (max-width: 760px) {
-  #international-homepage .b-third {
+  #international-homepage .b-quarter {
     box-sizing: border-box;
     float: none;
     width: calc(100% - 60px);
@@ -1236,6 +1238,14 @@ header {
   float: left;
   margin-top: -5px;
   padding: 0; }
+
+.poly-logo {
+  text-align: right;
+  float: right;
+  background-image: url(/static/img/poly_logo.png);
+  background-size: cover;
+  width: 297px;
+  height: 40px; }
 
 .m-country-flag {
   text-align: center;

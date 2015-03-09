@@ -37,3 +37,14 @@ Use Foreman to start.  The site should be available [on port 5000][].
   [on port 5000]: http://localhost:5000
 
     foreman start web
+
+#### Development
+
+If you make styling changes, you'll need to install the Ruby gem `sass`.
+
+    gem install sass
+
+Then, as you develop, you need to make sure to watch the css directory to
+re-compile on the fly:
+
+    sass --watch static/css

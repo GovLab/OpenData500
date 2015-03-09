@@ -43,62 +43,55 @@
     <div class="parallax-bg" id="background-3" data-stellar-ratio="-0.02"></div>   -->
     <header>
         <div class="l-centered">
-          <a href="http://thegovlab.org" target="_blank"><img id="govlab-logo" src="/static/img/govlab-logo-white.png"></a>
+            <a class="logo" href="/">
+                <img src="{{ static_url(settings['logo_path']) }}" alt=""></a>
+
+            <a class="b-poly-logo" href="http://engineering.nyu.edu/">
+              <div class="poly-logo"> </div></a>
         </div>
     </header><!-- end header -->
-    
+
     <div id="main" class="l-centered">
         <div id="container">
           <div class="b-section">
-            <h1>The GovLab Open Data 500 Network</h1>
-            <div class="b-country"><p>The Open Data 500 Network is the first
-            comprehensive study of companies and NGOs using open data in
-            countries around the world.</p></div>
+            <h1>The OD 500 Global Network</h1>
+            <div class="b-country"><p>The OD500 Global Network is an
+              international network of organizations that seek to study the use
+              and impact of open data. Coordinated by the Governance Lab
+              (GovLab) the OD500 Network enables participating organizations to
+              analyze open data in their country in a manner that is both
+              globally comparative and domestically specific. The OD500 Network
+              starts from the assumption that only by mapping the use of open
+              data within and across countries, can new approaches for
+              understanding the economic and social impact of open government
+              data be generated.</p></div>
 						<div class="b-country-selector">
-							<a href="#" class="b-country b-third">
+							<a href="/au/" class="b-country b-quarter">
+								<div class="b-flag m-au">
+									<div></div>
+								</div>
+								<h2>Australia</h2>
+							</a>
+							<a href="/mx/" class="b-country b-quarter">
+								<div class="b-flag m-mx">
+									<div></div>
+								</div>
+								<h2>M&eacute;xico</h2>
+								<p></p>
+							</a>
+							<a href="/us/" class="b-country b-quarter">
 								<div class="b-flag m-us">
 									<div></div>
 								</div>
 								<h2>United States</h2>
 								<p></p>
 							</a>
-							<a href="#" class="b-country b-third">
-								<div class="b-flag m-mx">
+							<a href="mailto:opendata500@thegovlab.org" class="b-country b-quarter">
+								<div class="b-flag m-in-your-country">
 									<div></div>
 								</div>
-								<h2>Mexico</h2>
+								<h2>OD500 in Your Country</h2>
 								<p></p>
-							</a>
-							<a href="#" class="b-country b-third m-disabled">
-								<div class="b-flag m-au">
-									<div></div>
-								</div>
-								<h2>Australia</h2>
-                <p>Coming soon.</p>
-							</a>
-						</div>
-
-						<div class="b-country-selector">
-							<a href="#" class="b-country b-third m-disabled">
-								<div class="b-flag m-kr">
-									<div></div>
-								</div>
-                <h2>South Korea</h2>
-								<p>Coming soon.</p>
-							</a>
-							<a href="#" class="b-country b-third m-disabled">
-								<div class="b-flag m-it">
-									<div></div>
-								</div>
-								<h2>Italy</h2>
-                <p>Coming soon.</p>
-							</a>
-							<a href="#" class="b-country b-third m-disabled">
-								<div class="b-flag m-ru">
-									<div></div>
-								</div>
-								<h2>Russia</h2>
-                <p>Coming soon.</p>
 							</a>
 						</div>
 					</div>
