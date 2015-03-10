@@ -1342,7 +1342,7 @@ header {
   font-weight: 100; }
 
 .parallax-bg {
-  position: fixed;
+  position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
@@ -1352,7 +1352,7 @@ header {
   z-index: -2; }
 
 #background {
-  top: -500px;
+  top: -450px;
   background: url(../img/bg-element-2.png) no-repeat center; }
 
 #background-2 {
