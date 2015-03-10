@@ -67,7 +67,10 @@
 		&.m-kr > div { background-image: url("/static/img/southkorea-flag.png"); }
 		&.m-it > div { background-image: url("/static/img/italy-flag.png"); }
 		&.m-ru > div { background-image: url("/static/img/russia-flag.png"); }
-		&.m-in-your-country > div { background-image: url("/static/img/od500-in-your-country.png"); }
+		&.m-in-your-country > div {
+			background-image: url("/static/img/od500-in-your-country.png");
+			background-size: 80%;
+		}
 	}
 
 	.b-country:hover {
