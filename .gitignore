@@ -10,3 +10,4 @@ static/files/au/au_companies_all.csv
 .env
 *.pyc
 .ruby-version
+*bkup.css

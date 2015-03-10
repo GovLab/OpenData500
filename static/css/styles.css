@@ -1352,8 +1352,8 @@ header {
   z-index: -2; }
 
 #background {
-  top: -450px;
-  background: url(../img/bg-element-2.png) no-repeat center; }
+  top: -320px;
+  background: url(../img/bg-element-2.png) no-repeat center 0; }
 
 #background-2 {
   top: -380px;
