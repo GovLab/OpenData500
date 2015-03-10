@@ -10,7 +10,7 @@
 <!--[if (gte IE 9)|!(IE)]><!--> <html lang="{{lan_}}" class="no-js"> <!--<![endif]-->
 <head>
     <meta name="description" content="{% if 'meta_description' in settings %}{{ settings['meta_description'] }}{% else %}The Open Data 500 is the first comprehensive study of U.S. companies that use open government data to generate new business and develop new products and services.{% end %}">
-    <meta name="keywords" content="Open Data, Open Data 500, OD500 Global Network, NYU Governance Lab, NYU GovLab, GovLab, Companies, Government Open Data, Open Government Data, Big Data, Data, Open, {{settings['meta_keywords']}}">
+    <meta name="keywords" content="Open Data, Open Data 500, OD500 Global Network, NYU Governance Lab, NYU GovLab, GovLab, Companies, Government Open Data, Open Government Data, Big Data, Data, Open, {{settings.get('meta_keywords', '')}}">
     <meta name="author" content="{% if 'meta_author' in settings %}{{ settings['meta_author'] }}{ % else %}NYU Governance Lab{% end %}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
@@ -45,7 +45,8 @@
     <header>
         <div class="l-centered">
             <a class="logo" href="/">
-                <img src="{{ static_url(settings['logo_path']) }}" alt=""></a>
+                <img src="{{ static_url('img/od500-logo.png') }}" alt=""></a>
+                <!--<img src="{{ static_url(settings['logo_path']) }}" alt=""></a>-->
             <div id="mainMenu" class="m-main-menu">
                 {% for item in settings['menu'][lan_] %}        
                     <div class="m-main-menu-item">
