@@ -23,10 +23,11 @@ Add at the end of survey:
 **Note**: html tag `name` needs to match variable name used in models.py
 
 
-**Add question text: `templates` > `modules` > `module_text` > `formData.json`**
+**Add question text: `templates` > `modules` > `module_text` > `formData.json`**  
 `"data_wishlist":"What type of data or particular government datasets would be of value to your organisation if made public?"`
 
 
-**add question to `utils.py`**
-When form is submitted and processed, it'll look for the following fields:
+**add question to `utils.py`**  
+
+When form is submitted and processed, it'll look for the following fields:  
 `company_data_fields = ['sourceCount', 'dataComments', 'exampleUses', 'dataWishlist']`
