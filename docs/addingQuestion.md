@@ -1,12 +1,12 @@
 Adding a question to survey
 ----------
-**Note:** This is for a textfield. If this where a multiple choice questions, not only would the HTML be obviously different, but you would have to include all the answer options in `constants.py`.
+**Note:** This is for a textfield. If this where a multiple choice questions, not only would the HTML be obviously different, but you would have to include all the answer options in `constants.py`.  
 
-**add variable to `models.py` under Company class**
+**add variable to `models.py` under Company class**  
 `dataWishlist = StringField()`
 
 
-**Add question to survey: `templates` > `modules` > `formData.html`**
+**Add question to survey: `templates` > `modules` > `formData.html`**  
 Add at the end of survey:    
 ```
 {% if country == 'au' %}
