@@ -226,7 +226,7 @@ header {
 // Background
 
 .parallax-bg {
-	position: fixed;
+	position:absolute;
 	top: 0;
 	right: 0;
 	bottom: 0;
@@ -237,8 +237,8 @@ header {
 }
 
 #background {
-	top: -500px; // 450px;
-	background: url(../img/bg-element-2.png) no-repeat center;
+	top: -320px; // 450px;
+	background: url(../img/bg-element-2.png) no-repeat center 0;
 }
 
 #background-2 {

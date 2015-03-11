@@ -1,6 +1,19 @@
 from base import *
 import json
 
+#--------------------------------------------------------INDEX PAGE------------------------------------------------------------
+class IndexHandler(BaseHandler):
+    @tornado.web.addslash
+    def get(self):
+        # TODO -- don't default to US settings
+        settings = self.load_settings('us')
+        self.render(
+            "index.html",
+            user=self.current_user,
+            settings=settings,
+            lan='en',
+            country='us'
+        )
 
 #--------------------------------------------------------MAIN PAGE------------------------------------------------------------
 class MainHandler(BaseHandler):

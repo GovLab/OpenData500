@@ -54,6 +54,7 @@ class Application(tornado.web.Application):
         )
         handlers = [
             (r'/(favicon.ico)', tornado.web.StaticFileHandler, {"path": ""}),
+            (r"/?", IndexHandler),
             (r"/(?:([A-Za-z]{2})/)?", MainHandler),
             (r"/(?:([A-Za-z]{2})/)?submitCompany/?", SubmitCompanyHandler),
             (r"/(?:([A-Za-z]{2})/)?(edit|admin-edit)/([a-zA-Z0-9]{24})/?", EditCompanyHandler),

@@ -32,7 +32,8 @@ select {
   font-size: 14px;
   font-weight: 600;
   letter-spacing: .6px;
-  cursor: pointer; }
+  cursor: pointer;
+  display: inline-block; }
 
 .m-button:hover {
   background-color: #472b74;
@@ -1022,7 +1023,8 @@ a:hover {
   #international-homepage .b-flag.m-ru > div {
     background-image: url("/static/img/russia-flag.png"); }
   #international-homepage .b-flag.m-in-your-country > div {
-    background-image: url("/static/img/od500-in-your-country.png"); }
+    background-image: url("/static/img/od500-in-your-country.png");
+    background-size: 80%; }
 #international-homepage .b-country:hover .b-flag {
   border-color: #472b74;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); }
@@ -1340,7 +1342,7 @@ header {
   font-weight: 100; }
 
 .parallax-bg {
-  position: fixed;
+  position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
@@ -1350,8 +1352,8 @@ header {
   z-index: -2; }
 
 #background {
-  top: -500px;
-  background: url(../img/bg-element-2.png) no-repeat center; }
+  top: -320px;
+  background: url(../img/bg-element-2.png) no-repeat center 0; }
 
 #background-2 {
   top: -380px;

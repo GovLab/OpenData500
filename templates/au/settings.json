@@ -45,6 +45,9 @@
             "thanks": "Thank You!"
         }
     },
+    "meta_keywords": "Australia, Open Data Australia, NGOs, AU Government Data, Open Data 500 Australia",
+    "meta_description": "The Open Data 500 Australia is the first comprehensive study of Australian companies and NGOs that use open government data to generate new business and develop new products and services.",
+    "meta_author": "NYU Governance Lab, Open Data 500 Australia, OD500 Global Network",
     "footer_menu": {
         "en":[{
             "item": "Twitter",
