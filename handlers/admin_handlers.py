@@ -5,8 +5,9 @@ import json
 class LoginHandler(BaseHandler): 
     @tornado.web.addslash
     def get(self, country=None):
-        country = self.load_country(country)
-        settings = self.load_settings(country)
+        # TODO -- don't default to US settings
+        country = 'us'
+        settings = self.load_settings('us')
         lan = self.load_language(country, self.get_argument("lan", None), settings)
         self.render(
             "admin/" + lan + "/login.html", 
@@ -59,6 +60,7 @@ class RegisterHandler(LoginHandler):
             logging.info("Could not get user: " + str(e))
             self.redirect("/login/")
         country = user.country
+        logging.info(country)
         settings = self.load_settings(country)
         lan = self.load_language(country, self.get_argument("lan", None), settings)
         self.render(
