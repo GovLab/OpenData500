@@ -72,6 +72,7 @@ class Application(tornado.web.Application):
             (r'/(?:([A-Za-z]{2})/)?login/?', LoginHandler),
             (r'/logout/?', LogoutHandler),
             (r'/register/?', RegisterHandler),
+            (r'/404/?', NotFoundHandler),
             (r"/(?:([A-Za-z]{2})/)?([^/]+)/?", StaticPageHandler),
             (r'/.*', NotFoundHandler)
         ]
