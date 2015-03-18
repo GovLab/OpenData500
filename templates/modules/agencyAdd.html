@@ -22,10 +22,10 @@
 	<div class="agencyList">
 		<div id="accordionAgency">
 			{% for agency in c.agencies %}
-				<h3 class="agency" name='{{agency.name.replace(" ", "-") }}'><a href="#">{{agency.name}}</a>
-					<span style="float:right; display: none;" class="toolbar ui-corner-all ui-icon ui-icon-circle-close red" subagency="" agency="{{agency.name.replace(" ","-")}}"></span>
+				<h3 class="agency" data-agency-name="{{agency.name}}"><a href="#">{{agency.name}}</a>
+					<span style="float:right; display: none;" class="toolbar ui-corner-all ui-icon ui-icon-circle-close red" data-subagency-name="" data-agency-name="{{agency.name}}"></span>
 				</h3>
-				<div id="{{agency.name.replace(" ","-")}}Accordion">
+				<div id="{{agency.name.replace(" ","-")}}Accordion" data-agency-name="{{agency.name}}"> <!-- ## !-->
 					<br><h3>{{form['agency_level_datasets']}}</h3><br>
 					<table class="datasetTable">
 						<tr>
@@ -35,15 +35,15 @@
 							<th class="table-header-buttons"></th>
 						</tr>
 						{% for d in agency.datasets %}{% if c == d.usedBy %}
-							<tr class="dataset-row" name="{{d.datasetName}}" subagency="" agency="{{agency.name.replace(" ","-")}}">
-								<td><input type="text" name="datasetName" id="datasetName" {% if (d.datasetName) %} value="{{d.datasetName}}" {% end %} ></td>
+							<tr class="dataset-row" data-dataset-name="{{d.datasetName}}" data-subagency-name="" data-agency-name="{{agency.name}}" name="{{d.datasetName}}" subagency="" agency="{{agency.name.replace(" ","-")}}">
+								<td><input type="text" data-dataset-name="{{d.datasetName}}" name="datasetName" id="datasetName" {% if (d.datasetName) %} value="{{d.datasetName}}" {% end %} ></td>
 								<td><input type="text" name="datasetURL" id="datasetURL" {% if (d.datasetURL) %} value="{{d.datasetURL}}" {% end %}></td>
 								<td><input type="text" name="rating" id="rating" size="3" {% if (d.rating) %} value="{{d.rating}}" {% end %}></td>
 								<td><input type="button" class="l-button" id="saveDataset" value="{{form['save_button']}}"><input type="button" class="l-button" id="deleteDataset" value="{{form['delete_button']}}">
 									<span class="dataset-error-message" style="display:inline-block;"></span></td>
 							</tr>
 						{% end %}{% end %}
-						<tr class="dataset-row" subagency="" agency="{{agency.name.replace(" ","-")}}" >
+						<tr class="dataset-row" data-subagency-name="" data-agency-name="{{agency.name}}" subagency="" agency="{{agency.name.replace(" ","-")}}" >
 							<td><input type="text" name="datasetName" id="datasetName" placeholder="Agency-Level Dataset" value=""></td>
 							<td><input type="text" name="datasetURL" id="datasetURL" value=""></td>
 							<td><input type="text" name="rating" id="rating" size="3" value=""></td>
@@ -53,12 +53,12 @@
 					</table>	<!---END DATASETS FROM JUST AGENCY !-->
 					<!-- ROLL THROUGH SUBAGENCIES !-->
 					{% if agency.subagencies %}<br><h3>{{form['subagencies']}}</h3><br>{% end %}
-					<div id="accordionSubAgency" class="{{agency.name.replace(" ", "-") }}Subagencies">
+					<div id="accordionSubAgency" class="{{agency.name.replace(" ", "-") }}Subagencies" data-agency-name="{{agency.name}}">
 						{% for sub in agency.subagencies %}{% if c in sub.usedBy %}
-							<h3 class="subagency" name="{{sub.name.replace(" ", "-") }}"><a href="#">{{sub.name}}</a>
-								<span style="float:right; display: none;" class="toolbar ui-corner-all ui-icon ui-icon-circle-close red" subagency="{{sub.name.replace(" ","-")}}" agency="{{agency.name.replace(" ","-")}}"></span>
+							<h3 class="subagency" data-subagency-name="{{sub.name}}"><a href="#">{{sub.name}}</a>
+								<span style="float:right; display: none;" class="toolbar ui-corner-all ui-icon ui-icon-circle-close red" data-agency-name="{{agency.name}}" data-subagency-name="{{sub.name}}"></span>
 							</h3>
-							<div class="{{ sub.name.replace(" ", "-") }}">
+							<div class="{{ sub.name.replace(" ", "-") }}" data-subagency-name="{{sub.name}}">
 								<table class="subagencyDatasetTable">
 									<tr>
 										<th class="table-header-name">{{form['dataset_name']}}</th>
@@ -67,15 +67,15 @@
 										<th class="table-header-buttons"></th>
 									</tr>
 									{% for d in sub.datasets %}{%if c == d.usedBy %}
-										<tr class="dataset-row" name="{{d.datasetName}}" subagency="{{ sub.name.replace(" ", "-") }}" agency="{{agency.name.replace(" ","-")}}">
-											<td><input type="text" name="datasetName" id="datasetName" {% if (d.datasetName) %} value="{{d.datasetName}}" {% end %}></td>
+										<tr class="dataset-row" data-dataset-name="{{d.datasetName}}" data-subagency-name="{{sub.name}}" data-agency-name="{{agency.name}}">
+											<td><input type="text" data-dataset-name="{{d.datasetName}}" name="datasetName" id="datasetName" {% if (d.datasetName) %} value="{{d.datasetName}}" {% end %}></td>
 											<td><input type="text" name="datasetURL" id="datasetURL" {% if (d.datasetURL) %} value="{{d.datasetURL}}" {% end %}></td>
 											<td><input type="text" name="rating" id="rating" size="3" {% if (d.rating) %} value="{{d.rating}}" {% end %}></td>
 											<td><input type="button" class="l-button" id="saveDataset" value="{{form['save_button']}}"><input type="button" class="l-button" id="deleteDataset" value="{{form['delete_button']}}">
 												<span class="dataset-error-message" style="display:inline-block;"></span></td>
 										</tr>
 									{% end %}{% end %}
-									<tr class="dataset-row" subagency="{{ sub.name.replace(" ", "-") }}" agency="{{agency.name.replace(" ","-")}}">
+									<tr class="dataset-row" data-subagency-name="{{sub.name}}" data-agency-name="{{agency.name}}">
 										<td><input type="text" name="datasetName" id="datasetName" placeholder="Subagency-Level Dataset" value=""></td>
 										<td><input type="text" name="datasetURL" id="datasetURL" value=""></td>
 										<td><input type="text" name="rating" id="rating" size="3" value=""></td>
@@ -159,16 +159,14 @@ $(document).ready( function () {
     $('#accordionAgency, #accordionSubAgency').on('click', '.toolbar', function(event) {
         var error_message = $('.agency-search-error-message');
         var this_form = $(this);
-        var agency = this_form.attr('agency').replace("delete", "").replace(/-/g, " ");
-        var a_id = this_form.attr('a_id');
-        var subagency = this_form.attr('subagency').replace("delete", "").replace(/-/g, " ");
+        var agency = this_form.data('agency-name');
+        var subagency = this_form.data('subagency-name');
         var action = subagency == '' ? 'delete agency' : 'delete subagency';
         this_form.parent().next().remove();
         this_form.closest('h3').remove();
         data = {
             "agency": agency,
             "subagency": subagency,
-            "a_id": a_id,
             "action": action,
             "_xsrf": $("[name='_xsrf']").val()
         };
@@ -210,8 +208,8 @@ $(document).ready( function () {
         });
     });
     {#--*****************************************************************-ADD/EDIT DATASET-*****************************************************************--#}
-    var new_dataset_template = '<tr class="dataset-row" name="" subagency="<%= subagency %>" agency="<%= agency %>">' +
-        '<td><input type="text" name="<%= dataset_name %>" id="datasetName" value=""></td>' +
+    var new_dataset_template = '<tr class="dataset-row" name="" data-dataset-name="" data-subagency-name="<%= subagency %>" data-agency-name="<%= agency %>">' +
+        '<td><input type="text" name="datasetName" id="datasetName" value="" placeholder=""></td>' +
         '<td><input type="text" name="datasetURL" id="datasetURL" value=""></td>' +
         '<td><input type="text" name="rating" id="rating" size="3" value=""></td>' +
         '<td><input type="button" class="l-button" id="saveDataset" value="Save"><input type="button" class="l-button" id="deleteDataset" value="Delete" style="display:none">' +
@@ -219,20 +217,15 @@ $(document).ready( function () {
         '</tr>';
     $('.agencyList').on('click', '#saveDataset', function(event) {
         var currentDatasetForm = $(this).parent().parent();
-        if (currentDatasetForm.parent().find('tr').last().find('#datasetName').val() == '') {
-            action = "edit dataset";
-            previous_dataset_name = currentDatasetForm.attr('name');
-        } else {
-            action = "add dataset";
-            previous_dataset_name = '';
-        }
         var dataset_name = currentDatasetForm.find('#datasetName').val();
+        var previous_dataset_name = currentDatasetForm.data('dataset-name');
         var dataset_url = currentDatasetForm.find('#datasetURL').val();
         var rating = currentDatasetForm.find('#rating').val() == "" ? 0 : currentDatasetForm.find('#rating').val();
-        var agency = currentDatasetForm.attr('agency').replace(/-/g, " ");;
-        var subagency = currentDatasetForm.attr('subagency').replace(/-/g, " ");
+        var agency = currentDatasetForm.data('agency-name');
+        var subagency = currentDatasetForm.data('subagency-name');
         var error_message = currentDatasetForm.find('.dataset-error-message');
         var validForm = true;
+        var action = previous_dataset_name ? 'edit dataset':"add dataset";
         data = {
             "agency": agency,
             "subagency": subagency,
@@ -259,7 +252,6 @@ $(document).ready( function () {
                 'opacity': 0
             }, 500);
         }
-        console.log(data);
         if (validForm) {
             error_message.text('');
             $.ajax({
@@ -289,12 +281,11 @@ $(document).ready( function () {
                         if (action == "add dataset") {
                             var new_dataset = _.template(new_dataset_template);
                             currentDatasetForm.parent().append(new_dataset(data));
-                            currentDatasetForm.attr('name', dataset_name);
-                            currentDatasetForm.find('#datasetName').attr('name', dataset_name);
+                            currentDatasetForm.data('dataset-name', dataset_name);
                             currentDatasetForm.next().find('#datasetName').focus();
                             currentDatasetForm.find('#deleteDataset').show();
                         } else {
-                            currentDatasetForm.attr('name', dataset_name);
+                            currentDatasetForm.data('dataset-name', dataset_name);
                         }
                         console.log(response);
                     }
@@ -307,9 +298,9 @@ $(document).ready( function () {
     {#--*****************************************************************-DELETE DATASET-*****************************************************************--#}
     $('.agencyList').on('click', '#deleteDataset', function(event) {
         var currentDatasetForm = $(this).parent().parent();
-        var dataset_name = currentDatasetForm.find('#datasetName').val();
-        var agency = currentDatasetForm.attr('agency').replace(/-/g, " ");
-        var subagency = currentDatasetForm.attr('subagency').replace(/-/g, " ");
+        var dataset_name = currentDatasetForm.data('dataset-name');
+        var agency = currentDatasetForm.data('agency-name');
+        var subagency = currentDatasetForm.data('subagency-name');
         var error_message = currentDatasetForm.find('.dataset-error-message');
         data = {
             "agency": agency,
@@ -318,31 +309,29 @@ $(document).ready( function () {
             "action": "delete dataset",
             "_xsrf": $("[name='_xsrf']").val()
         };
-        if (dataset_name != '') {
-            $.ajax({
-                type: 'POST',
-                url: '/' + country + '/addData/' + companyID,
-                data: data,
-                error: function(error) {
-                    console.debug(JSON.stringify(error));
-                    error_message.text('Oops... Something went wrong.').css('opacity', 1).delay(5000).animate({
-                        'opacity': 0
-                    }, 500);
-                },
-                beforeSend: function(xhr, settings) {},
-                success: function(response) {
-                    currentDatasetForm.remove();
-                    console.log(response);
-                }
-            });
-        }
+        $.ajax({
+            type: 'POST',
+            url: '/' + country + '/addData/' + companyID,
+            data: data,
+            error: function(error) {
+                console.debug(JSON.stringify(error));
+                error_message.text('Oops... Something went wrong.').css('opacity', 1).delay(5000).animate({
+                    'opacity': 0
+                }, 500);
+            },
+            beforeSend: function(xhr, settings) {},
+            success: function(response) {
+                currentDatasetForm.remove();
+                console.log(response);
+            }
+        });
     });
 
     {#--*****************************************************************-TEMPLATES FOR AGENCY/DATA FORM-*****************************************************************--#}
-    var new_agency_template = '<h3 class="agency" name="<%= agency_pretty %>"><a href="#"><%= agency %></a>' +
-        '<span style="float:right; display:none;" class="toolbar ui-corner-all ui-icon ui-icon-circle-close red" subagency="" agency="<%= agency_pretty %>"></span>' +
+    var new_agency_template = '<h3 class="agency" data-agency-name="<%= agency %>"><a href="#"><%= agency %></a>' +
+        '<span style="float:right; display:none;" class="toolbar ui-corner-all ui-icon ui-icon-circle-close red" data-subagency-name="" data-agency-name="<%= agency %>"></span>' +
         '</h3>' +
-        '<div id="<%= agency_pretty %>Accordion">' +
+        '<div id="<%= agency_slug %>Accordion">' +
         '<br><h3>Agency Level Datasets</h3><br>' +
         '<table class="datasetTable">' +
         '<tr>' +
@@ -351,7 +340,7 @@ $(document).ready( function () {
         '<th class="table-header-rating">Rating (1-4)</th>' +
         '<th class="table-header-buttons"></th>' +
         '</tr>' +
-        '<tr class="dataset-row" name="" subagency="" agency="<%= agency %>">' +
+        '<tr class="dataset-row" data-agency-name="<%= agency %>" data-subagency-name="">' +
         '<td><input type="text" name="datasetName" id="datasetName" value="" ></td>' +
         '<td><input type="text" name="datasetURL" id="datasetURL" value="" ></td>' +
         '<td><input type="text" name="rating" id="rating" size="3" value="" ></td>' +
@@ -360,10 +349,10 @@ $(document).ready( function () {
         '</tr>' +
         '</div>';
 
-    var new_subagency_template = '<h3 class="subagency" name="<%= subagency_pretty %>"><a href="#"><%= subagency %></a>' +
-        '<span style="float:right; display:none;" class="toolbar ui-corner-all ui-icon ui-icon-circle-close red" subagency="<%= subagency_pretty %>" agency="<%= agency_pretty %>"></span>' +
+    var new_subagency_template = '<h3 class="subagency" data-subagency-name="<%= subagency %>"><a href="#"><%= subagency %></a>' +
+        '<span style="float:right; display:none;" class="toolbar ui-corner-all ui-icon ui-icon-circle-close red" data-subagency-name="<%= subagency %>" data-agency-name="<%= agency %>"></span>' +
         '</h3>' +
-        '<div class="<%= subagency_pretty %>Accordion">' +
+        '<div class="<%= subagency_slug %>Accordion">' +
         '<table class="subagencyDatasetTable">' +
         '<tr>' +
         '<th class="table-header-name">Dataset Name</th>' +
@@ -371,7 +360,7 @@ $(document).ready( function () {
         '<th class="table-header-rating">Rating (1-4)</th>' +
         '<th class="table-header-buttons"></th>' +
         '</tr>' +
-        '<tr class="dataset-row" name="" subagency="<%= subagency %>" agency="<%= agency %>">' +
+        '<tr class="dataset-row" data-subagency-name="<%= subagency %>" data-agency-name="<%= agency %>">' +
         '<td><input type="text" name="datasetName" id="datasetName" value=""></td>' +
         '<td><input type="text" name="datasetURL" id="datasetURL" value=""></td>' +
         '<td><input type="text" name="rating" id="rating" size="3" value=""></td>' +
@@ -386,26 +375,23 @@ $(document).ready( function () {
         var a = $('#searchval').val().trim().split(" - ");
         var agency = a[0];
         var subagency = a[1] != undefined ? a[1] : '';
-        var agency_pretty = agency.replace(/ /g, "-");
-        var subagency_pretty = subagency.replace(/ /g, "-");
+        console.log(agency)
+        console.log(subagency)
+        var agency_slug = agency.replace(/ /g, "-").replace("'", "");
+        var subagency_slug = subagency.replace(/ /g, "-").replace("'", "");
         var data = {
             "agency": agency,
             "subagency": subagency,
-            "agency_pretty": agency_pretty,
-            "subagency_pretty": subagency_pretty,
+            "agency_slug": agency_slug,
+            "subagency_slug": subagency_slug,
             "action": 'add',
             "_xsrf": $("[name='_xsrf']").val()
         };
-        var agency_exists = $('.agency').find('*:contains("' + agency + '")').parent().length != 0;
-        var subagency_exists = $('#' + agency_pretty + 'Accordion').find('*:contains("' + subagency + '")').length != 0;
-        var response = {
-            "message": "",
-            "agency": 0,
-            "subagency": 0
-        };
+        var agency_exists = !!$('.agency[data-agency-name="'+agency+'"]').length;
+        var subagency_exists = !!$('.agency[data-agency-name="'+agency+'"]').parent().find('.subagency[data-subagency-name="'+subagency+'"]').length;
         var new_agency = _.template(new_agency_template);
         var new_subagency = _.template(new_subagency_template);
-        if (agency_exists && subagency_exists) {
+        if ((agency_exists && subagency == '') || subagency_exists) {
             error_message.text('This item is already on the list.').css('opacity', 1).delay(5000).animate({
                 'opacity': 0
             }, 500);
@@ -424,11 +410,13 @@ $(document).ready( function () {
                         'opacity': 0
                     }, 500);
                 },
-                beforeSend: function(xhr, settings) {},
-                success: function(_response) {
+                beforeSend: function(xhr, settings) {
+                    error_message.text('Working on it...').css('opacity', 1)
+                },
+                success: function(response) {
                     $('#agencyTags').val('');
-                    response = _response;
-                    console.log(_response);
+                    error_message.text('Working on it...').css('opacity', 0)
+                    console.log(response);
                     if (response['agency'] == 1) {
                         $('#accordionAgency').append(new_agency(data)).accordion('destroy').accordion({
                             active: false,
@@ -438,11 +426,11 @@ $(document).ready( function () {
                         });
                     }
                     if (response['agency'] == 0 && response['subagency'] == 1) {
-                        if ($('#' + agency_pretty + 'Accordion').find('#accordionSubAgency').length == 0) { //first subagency? then add headers
-                            $('#' + agency_pretty + 'Accordion').append('<br><h3>Sub-Agencies</h3><br>');
-                            $('#' + agency_pretty + 'Accordion').append('<div id="accordionSubAgency" class="' + agency.replace(/ /g, "-") + 'Subagencies">');
+                        if ($('#' + agency_slug + 'Accordion').find('#accordionSubAgency').length == 0) { //first subagency? then add headers
+                            $('#' + agency_slug + 'Accordion').append('<br><h3>Sub-Agencies</h3><br>');
+                            $('#' + agency_slug + 'Accordion').append('<div id="accordionSubAgency" class="' + agency.replace(/ /g, "-") + 'Subagencies">');
                         }
-                        $('.' + agency_pretty + 'Subagencies').append(new_subagency(data)).accordion('destroy').accordion({
+                        $('.' + agency_slug + 'Subagencies').append(new_subagency(data)).accordion('destroy').accordion({
                             active: false,
                             collapsible: true,
                             autoHeight: false,
@@ -450,9 +438,9 @@ $(document).ready( function () {
                         });
                     }
                     if (response['agency'] == 1 && response['subagency'] == 1) {
-                        $('#' + agency_pretty + 'Accordion').append('<br><h3>Sub-Agencies</h3><br>');
-                        $('#' + agency_pretty + 'Accordion').append('<div id="accordionSubAgency" class="' + agency_pretty + 'Subagencies">');
-                        $('.' + agency_pretty + 'Subagencies').append(new_subagency(data)).accordion({
+                        $('#' + agency_slug + 'Accordion').append('<br><h3>Sub-Agencies</h3><br>');
+                        $('#' + agency_slug + 'Accordion').append('<div id="accordionSubAgency" class="' + agency_slug + 'Subagencies">');
+                        $('.' + agency_slug + 'Subagencies').append(new_subagency(data)).accordion({
                             active: false,
                             collapsible: true,
                             autoHeight: false,

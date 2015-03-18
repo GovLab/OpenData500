@@ -71,7 +71,9 @@ class Tools(object):
 
     @classmethod
     def prettify(self, name):
-        return re.sub(r'([^\s\w])+', '', name).replace(" ", "-").lower()
+        name = re.sub(r'([^\s\w])+', '', name).replace(" ", "-").lower()
+        name = name.replace("'","")
+        return name
 
     def get_list_of_agencies(self, country):
         agencies = Agency.objects(country=country).only(
@@ -141,21 +143,28 @@ class Form(object):
         #-------------------DATA FORM CHECKBOXES---------------
         for item in company_data_checkboxes:
             if item in arguments:
-                Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+item:arguments[item].split(',')})
+                Company.objects(id=bson.objectid.ObjectId(id)).update(
+                    **{'set__'+item:arguments[item].split(',')})
                 if 'Other' in arguments[item]:
-                    Company.objects(id=bson.objectid.ObjectId(id)).update(**{'pull__'+item:'Other'})
-                    Company.objects(id=bson.objectid.ObjectId(id)).update(**{'push__'+item:arguments['other'+item]})
+                    Company.objects(id=bson.objectid.ObjectId(id)).update(
+                        **{'pull__'+item:'Other'})
+                    Company.objects(id=bson.objectid.ObjectId(id)).update(
+                        **{'push__'+item:arguments['other'+item]})
             else:
-                Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+item:[]})
+                Company.objects(id=bson.objectid.ObjectId(id)).update(
+                    **{'set__'+item:[]})
         #-------------------DATA FORM RADIO BUTTONS---------------
         for item in company_data_radio_buttons:
             if item in arguments:
                 if arguments[item] == 'Other':
-                    Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+item:arguments['other' +item]})
+                    Company.objects(id=bson.objectid.ObjectId(id)).update(
+                        **{'set__'+item:arguments['other' +item]})
                 else:
-                    Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+item:arguments[item]})
+                    Company.objects(id=bson.objectid.ObjectId(id)).update(
+                        **{'set__'+item:arguments[item]})
             else:
-                Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+item:''})
+                Company.objects(id=bson.objectid.ObjectId(id)).update(
+                    **{'set__'+item:''})
         c.lastUpdated = datetime.now()
         c.filters = Tools().re_do_company_filter(c.id)
         c.save()
@@ -227,6 +236,7 @@ class Form(object):
             agency.usedBy.append(company)
             agency.usedBy_count = len(agency.usedBy)
         agency.save()
+        company.lastUpdated = datetime.now()
         company.save()
         return
 
@@ -240,43 +250,77 @@ class Form(object):
                 if company not in s.usedBy:
                     s.usedBy.append(company)
         agency.save()
+        company.lastUpdated = datetime.now()
         company.save()
 
     def remove_specific_dataset_from_company(self, company, agency, subagency_name, dataset_name):
-        if subagency_name == '':
+        if not subagency_name:
             for d in agency.datasets:
-                if d.datasetName == dataset_name:
+                if d.datasetName == dataset_name and d.usedBy == company:
                     agency.datasets.remove(d)
         else:
             for s in agency.subagencies:
                 if s.name == subagency_name:
                     for d in s.datasets:
-                        if d.datasetName == dataset_name:
+                        if d.datasetName == dataset_name and d.usedBy == company:
                             s.datasets.remove(d)
         agency.save()
         company.lastUpdated = datetime.now()
         company.save()
 
-    def remove_all_datasets_from_company(self, company, agency):
+    def remove_company_datasets_from_agency(self, company, agency):
+        """
+            Removes from a particular agency all agency-level 
+            datasets from a company 
+        """
+        datasets_to_delete = []
         for d in agency.datasets:
             if company == d.usedBy:
-                self.remove_specific_dataset_from_company(company, agency, '', d.datasetName)
-        for s in agency.subagencies:
-            for d in s.datasets:
-                if company == d.usedBy:
-                    self.remove_specific_dataset_from_company(company, agency, s.name, d.datasetName)
+                datasets_to_delete.append(d)
+        for d in datasets_to_delete:
+            agency.datasets.remove(d)
         company.lastUpdated = datetime.now()
         company.save()
         agency.save()
 
+    def remove_company_datasets_from_all_subagencies(self, company, agency):
+        """
+            Removes from all subagencies in a particular agency all 
+            of a company's datasets
+        """
+        datasets_to_delete = []
+        for s in agency.subagencies:
+            for d in s.datasets:
+                if company == d.usedBy:
+                    datasets_to_delete.append(d)
+            for d in datasets_to_delete:
+                if d in s.datasets:
+                    s.datasets.remove(d)
+        company.lastUpdated = datetime.now()
+        company.save()
+        agency.save()
+
+    def remove_all_datasets_from_company(self, company, agency):
+        """
+            removes all datasets belonging to a company from a 
+            specific agency. First removes from agencies, then subagencies
+        """
+        self.remove_company_datasets_from_agency(company, agency)
+        self.remove_company_datasets_from_all_subagencies(company, agency)
+        
+
     def remove_subagency_datasets_from_company(self, company, agency, subagency_name):
-        temp = []
+        """
+            removes all of a company's datasets from a specific sub-agency
+        """
+        datasets_to_delete = []
         for s in agency.subagencies:
             if s.name == subagency_name:
                 for d in s.datasets:
-                    if company != d.usedBy:
-                        temp.append(d)
-                s.datasets = temp
+                    if company == d.usedBy:
+                        datasets_to_delete.append(d)
+                for d in datasets_to_delete:
+                    s.datasets.remove(d)
         agency.save()
         company.lastUpdated = datetime.now()
         company.save()
@@ -306,8 +350,7 @@ class Form(object):
         company.save()
 
     def edit_dataset(self, agency, subagency_name, dataset_name, previous_dataset_name, dataset_url, rating):
-        logging.info("rating: " + str(rating) + " " + str(type(rating)))
-        if subagency_name:
+        if subagency_name: #dataset is in subagency level
             for s in agency.subagencies:
                 if s.name == subagency_name:
                     for d in s.datasets:
@@ -315,7 +358,7 @@ class Form(object):
                             d.datasetName = dataset_name
                             d.datasetURL = dataset_url
                             d.rating = rating
-        if subagency_name == '':
+        else: #dataset is in agency level
             for d in agency.datasets:
                 if d.datasetName == previous_dataset_name:
                     d.datasetName = dataset_name
@@ -329,8 +372,8 @@ class Form(object):
                 datasetURL = dataset_url,
                 rating = rating,
                 usedBy = company)
-        if subagency_name == '':
-                agency.datasets.append(dataset)
+        if not subagency_name:
+            agency.datasets.append(dataset)
         else:
             for s in agency.subagencies:
                 if subagency_name == s.name:

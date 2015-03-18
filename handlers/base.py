@@ -35,19 +35,8 @@ class BaseHandler(tornado.web.RequestHandler):
 
     def load_country(self, country):
         if not country:
-            ip = self.request.remote_ip
-            logging.info(ip)
-            try:
-                match = geolite2.lookup(ip)
-                country = match.country.lower()
-                logging.info("Got: " + country)
-                if country in available_countries:
-                    return country
-                else:
-                    return 'us'
-            except Exception, e:
-                logging.info("Could not get country because: " + str(e))
-                return 'us'
+            self.redirect("/404/")
+            return
         if country not in available_countries:
             self.redirect("/404/")
             return
@@ -59,11 +48,12 @@ class BaseHandler(tornado.web.RequestHandler):
             return json.load(json_file)
 
     def load_language(self, country, lan, settings):
+        current_language = self.get_cookie('lan')
         if lan:
-            if lan != self.get_cookie('lan') and lan in settings['available_languages']:
+            if lan != current_language and lan in settings['available_languages']:
                 self.set_cookie("lan", lan)
                 self.redirect(self.request.uri)
-                return
+                return False
             if lan not in settings['available_languages']:
                 lan = settings['default_language']
         elif not lan and self.get_cookie('lan') in settings['available_languages']:

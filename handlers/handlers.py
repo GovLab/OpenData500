@@ -27,6 +27,8 @@ class MainHandler(BaseHandler):
             return
         settings = self.load_settings(country)
         lan = self.load_language(country, self.get_argument("lan", None), settings)
+        if not lan:
+            return
         self.render(
             country.lower()+ "/" + lan + "/index.html",
             settings = settings,
@@ -87,8 +89,8 @@ class StaticPageHandler(BaseHandler):
         country = self.load_country(country)
         settings = self.load_settings(country)
         lan = self.load_language(country, self.get_argument("lan", None), settings)
-        logging.info(country)
-        logging.info(lan)
+        if not lan:
+            return
         #check if company page, get company if so
         try:
             company = Company.objects.get(Q(prettyName=page) & Q(display=True))
@@ -161,6 +163,8 @@ class ListHandler(BaseHandler):
         country = self.load_country(country)
         settings = self.load_settings(country)
         lan = self.load_language(country, self.get_argument("lan", None), settings)
+        if not lan:
+            return
         companies = Company.objects(
             Q(display=True) & Q(country=country)).order_by('prettyName').only(
             'companyName', 'prettyName', 'filters', 'descriptionShort', 
@@ -196,8 +200,6 @@ class ValidateHandler(BaseHandler):
     def post(self):
         #check if companyName exists:
         country = self.get_argument("country", None)
-        if not country:
-            country = 'us'
         companyName = self.get_argument("companyName", None)
         prettyName = self.application.tools.prettify(companyName)
         try: 
@@ -214,6 +216,8 @@ class SubmitCompanyHandler(BaseHandler):
         country = self.load_country(country)
         settings = self.load_settings(country)
         lan = self.load_language(country, self.get_argument("lan", None), settings)
+        if not lan:
+            return
         self.render(
             country+ "/" + lan + "/submitCompany.html",
             country=country,
@@ -258,6 +262,8 @@ class SubmitDataHandler(BaseHandler):
         country = self.load_country(country)
         settings = self.load_settings(country)
         lan = self.load_language(country, self.get_argument("lan", None), settings)
+        if not lan:
+            return
         company = Company.objects.get(id=bson.objectid.ObjectId(id))
         if company.country != country or '/'+company.country+'/' not in self.request.uri:
             self.redirect(str('/'+company.country+'/addData/'+id))
@@ -278,7 +284,6 @@ class SubmitDataHandler(BaseHandler):
 
     #@tornado.web.authenticated
     def post(self, country, id):
-        #logging.info("Submitting Data: "+ self.get_argument("action", None))
         logging.info(self.request.arguments)
         try:
             company = Company.objects.get(id=bson.objectid.ObjectId(id))
@@ -325,10 +330,12 @@ class SubmitDataHandler(BaseHandler):
                 if not self.application.form.company_has_agency(company, agency):
                     self.application.form.add_agency_to_company(company, agency)
                     response["agency"] = 1
+                    response['message'] = "Agency Added"
                 if subagency_name:
                     if not self.application.form.company_has_subagency(company, agency, subagency_name):
                         self.application.form.add_subagency_to_company(company, agency, subagency_name)
                         response['subagency'] = 1
+                        response['message'] = "Subagency Added"
                 self.write(response)
             except Exception, e:
                 logging.info("Could not add agency/subagency: " + str(e))
@@ -339,6 +346,7 @@ class SubmitDataHandler(BaseHandler):
             try: 
                 self.application.form.remove_agency_from_company(company, agency)
                 response['agency'] = -1
+                response['message'] = "Agency Deleted"
                 self.write(response)
             except Exception, e:
                 logging.info("Could not delete agency: " + str(e))
@@ -348,6 +356,7 @@ class SubmitDataHandler(BaseHandler):
         if action == 'delete subagency':
             try: 
                 self.application.form.remove_subagency_from_company(company, agency, subagency_name)
+                response['message'] = "Subagency Deleted"
                 response['subagency'] = -1
                 self.write(response)
             except Exception, e:
@@ -358,6 +367,7 @@ class SubmitDataHandler(BaseHandler):
         if action == "add dataset":
             try:
                 self.application.form.add_dataset(company, agency, subagency_name, dataset_name, dataset_url, rating)
+                response['message'] = "Dataset Added"
                 response['dataset'] = 1
                 self.write(response)
             except Exception, e:
@@ -368,6 +378,7 @@ class SubmitDataHandler(BaseHandler):
         if action == "edit dataset":
             try: 
                 self.application.form.edit_dataset(agency, subagency_name, dataset_name, previous_dataset_name, dataset_url, rating)
+                response['message'] = "Dataset Edited"
                 response['dataset'] = 2
                 self.write(response)
             except Exception, e:
@@ -379,6 +390,7 @@ class SubmitDataHandler(BaseHandler):
             try:
                 self.application.form.remove_specific_dataset_from_company(company, agency, subagency_name, dataset_name)
                 response['dataset'] = -1
+                response['message'] = "Dataset Deleted"
                 self.write(response)
             except Exception, e:
                 logging.info("Error deleting dataset: " + str(e))

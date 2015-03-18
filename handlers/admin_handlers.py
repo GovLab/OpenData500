@@ -579,6 +579,7 @@ class DeleteCompanyHandler(BaseHandler):
         except Exception, e:
             logging.info("Could not get user: " + str(e))
             self.redirect("/login/")
+            return
         try:
             company = Company.objects.get(id=bson.objectid.ObjectId(id)) 
         except:
@@ -603,7 +604,7 @@ class DeleteCompanyHandler(BaseHandler):
                 lan=lan,
                 country=country
             )
-        if user.country != company.country:
+        elif user.country != company.country:
             settings = self.load_settings(country)
             lan = self.load_language(country, self.get_argument("lan", None), settings)
             self.render(
