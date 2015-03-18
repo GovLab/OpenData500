@@ -51,11 +51,11 @@
                 "item": "Press",
                 "link": "/us/resources/#resources-press"
             }, {
+                "item": "GovLab Digest",
+                "link": "/us/resources/#resources-digest"
+            }, {
                 "item": "GovLab Academy",
                 "link": "/us/resources/#resources-academy"
-            }, {
-                "item": "GovLab Blog",
-                "link": "/us/resources/#resources-blog"
             }]
         }]
     },

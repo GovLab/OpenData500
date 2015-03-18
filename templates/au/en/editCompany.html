@@ -12,6 +12,8 @@
 <br>
 <br>
 <h2>{{ page_heading }}</h2>
+
+<input type="hidden" id="companyName" value="{{ company.companyName }}" />
 <form method="post" id="company_form_edit" class="m-form company_form_edit" data-parsley-validate>
 
 	{% module Form(country, "en", True, True, company) %}
@@ -59,7 +61,7 @@ $(document).ready( function () {
 		        success: function(success) {
 		          $("#submit_form_edit_button").prop("disabled", false); 
 		          rm.text("Saved!").show().delay(5000).fadeOut();
-		          document.location.href = '/{{company.country}}/thanks/';
+		          document.location.href = '/{{company.country}}/thanks/?company=' + $("#companyName").val();
 		          console.log("regular saved!");
 		        }
 		      });

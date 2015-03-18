@@ -1,4 +1,5 @@
 from base import *
+import urllib
 import json
 
 #--------------------------------------------------------INDEX PAGE------------------------------------------------------------
@@ -132,6 +133,8 @@ class StaticPageHandler(BaseHandler):
             except:
                 page_title="OD500"
             try: 
+                company = self.request.arguments.get('company')
+                company = company[0] if company else None
                 self.render(
                     country + "/" + lan + "/" + page + ".html",
                     user=self.current_user,
@@ -139,6 +142,7 @@ class StaticPageHandler(BaseHandler):
                     menu=settings['menu'][lan],
                     settings=settings,
                     page_title=page_title,
+                    company=company,
                     lan=lan
                 )
                 return
@@ -320,9 +324,11 @@ class SubmitDataHandler(BaseHandler):
             try:
                 form_values = {k:','.join(v) for k,v in self.request.arguments.iteritems()}
                 self.application.form.process_company_data_info(form_values, id)
-                self.write({"response":"success", "redirect":"/"+ country + "/thanks/"})
+                self.write({"response":"success",
+                            "redirect":u"/{}/thanks/?company={}".format(country,
+                                                                        urllib.quote_plus(company.companyName))})
             except Exception, e:
-                logging.info("Error: " + str(e))
+                logging.info(u"Error: %s", e)
                 self.write({"response":"error"})
         #------------------------------------ADDING AGENCY/SUBAGENCY------------------------
         if action == 'add':

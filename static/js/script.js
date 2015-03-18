@@ -62,7 +62,7 @@ $(document).ready(function() {
                 },
                 success: function(data) {
                     if (data['response'] != 'error') {
-                        document.location.href = '/' + country + '/thanks/';
+                        document.location.href = '/' + country + '/thanks/?company=' + $('#companyName').val();
                     } else {
                         rm.text('Oops... something went wrong').css('opacity', 1).delay(5000).animate({
                             'opacity': 0
