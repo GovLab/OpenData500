@@ -38,8 +38,8 @@
 			id="phone" 
 			{%if c %}value="{{ c.contact.phone }}"{%end%}
 			data-parsley-trigger="focusout" 
-			data-parsley-pattern="(^\d{3}(-|\s)\d{3}(-|\s)\d{4}$)|(^\d{10})"
-			data-parsley-error-message="Phone must be in format: ###-###-####"></div>
+			data-parsley-pattern="{{country_settings[country]['phone_format']}}"
+			data-parsley-error-message="{{country_settings[country]['phone_error_message']}}"></div>
 	</fieldset>
 
 	{#--*****************************************************************-COMPANY INFO-***************************************************************** --#}
