@@ -33,7 +33,8 @@ select {
   font-weight: 600;
   letter-spacing: .6px;
   cursor: pointer;
-  display: inline-block; }
+  display: inline-block;
+  background-color: #472b74; }
 
 .m-button:hover {
   background-color: #472b74;
