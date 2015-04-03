@@ -2,6 +2,7 @@
     "default_language": "es",
     "available_languages": ["en", "es"],
     "logo_path":"img/od100-logo-mx.png",
+    "locked": true,
     "menu": {
         "en": [{
             "item": "OD100 MX",

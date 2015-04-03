@@ -23,6 +23,7 @@ from geoip import geolite2
 class BaseHandler(tornado.web.RequestHandler): 
     def get_login_url(self):
         return u"/login"
+
     def get_current_user(self):
         user_json = self.get_secure_cookie("user")
         if user_json:
@@ -62,12 +63,11 @@ class BaseHandler(tornado.web.RequestHandler):
             lan = settings['default_language']
         return lan
 
-
-
-
-
-
-
-
-
-
+    def prepare(self):
+        # Hacky -- check if this is a country URL.  If that country is locked,
+        # require a login.
+        if (re.match(r"/(?:([A-Za-z]{2})/)", self.request.uri)):
+            country_settings = self.load_settings(self.request.uri[1:3])
+            if country_settings.get(u"locked"):
+                if not self.current_user:
+                    self.redirect(self.get_login_url())

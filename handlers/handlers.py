@@ -429,6 +429,3 @@ class NotFoundHandler(BaseHandler):
         self.render('404.html',
             lan='english',
             country='us')
-
-
-
