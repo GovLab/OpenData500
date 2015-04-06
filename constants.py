@@ -265,6 +265,9 @@ company_contact_fields = ['firstName', 'lastName', 'title', 'email', 'phone']
 company_fields = [
     'companyName', 'url', 'yearFounded', 'city', 'state', 'zipCode', 
     'description', 'descriptionShort', 'financialInfo', 'notes']
+company_fields_validators = {
+    'yearFounded': lambda x: int(x) >= 1000
+}
 company_fields_checkboxes = ['revenueSource', 'businessModel', 'socialImpact']
 company_fields_radio_buttons = ['companyCategory', 'companyType', 'fte']
 company_data_fields = ['dataComments', 'exampleUses', 'dataWishlist']

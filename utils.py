@@ -183,6 +183,15 @@ class Form(object):
         #-------------------TEXTFIELDS---------------
         for item in company_fields:
             if item in arguments:
+                validator = company_fields_validators.get(item)
+                if validator:
+                    try:
+                        if not validator(arguments[item]):
+                            raise Exception()
+                    except Exception:
+                        raise Exception(u'invalid input for {}: {}'.format(
+                            item, arguments[item]))
+
                 Company.objects(id=bson.objectid.ObjectId(id)).update(**{'set__'+item:arguments[item]})
         c.prettyName = Tools.prettify(c.companyName)
         c.country = country_keys[arguments['country']]
