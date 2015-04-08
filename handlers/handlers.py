@@ -245,7 +245,7 @@ class SubmitCompanyHandler(BaseHandler):
         form_values['locked'] = False
         form_values['display'] = False
         try:
-            self.application.form.process_company(form_values, id)
+            self.application.form.process_company(form_values, id, validate=True)
         except Exception, e:
             logging.info("Could not save company: " + str(e))
             logging.info("Aborting")

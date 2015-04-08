@@ -170,7 +170,7 @@ class Form(object):
         c.save()
 
 
-    def process_company(self, arguments, id):
+    def process_company(self, arguments, id, validate=False):
         try: 
             c = Company.objects.get(id=bson.objectid.ObjectId(id))
         except Exception, e:
@@ -184,7 +184,7 @@ class Form(object):
         for item in company_fields:
             if item in arguments:
                 validator = company_fields_validators.get(item)
-                if validator:
+                if validator and validate:
                     try:
                         if not validator(arguments[item]):
                             raise Exception()
