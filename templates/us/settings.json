@@ -43,6 +43,9 @@
             }, {
                 "item": "Dept. of Agriculture",
                 "link": "/us/roundtables/?rt=doa"
+            }, {
+                "item": "Patent and Trademark Office",
+                "link": "/us/roundtables/?rt=uspto"
             }]
         }, {
             "item": "Resources",
