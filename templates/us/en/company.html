@@ -14,6 +14,7 @@
 			<p><strong>Zip Code: </strong> {%if company.zipCode %}{{company.zipCode}}{%else%}Not Available{%end%}</p>
 			<p><strong>Full-Time Employees: </strong> {% if company.fte %} {{company.fte}}{%else%}Not Available{%end%}</p>
 			<p><strong>Type of Company: </strong> {% if company.companyType %} {{company.companyType}}{%else%}Not Available{%end%}</p>
+			<p><strong>Target Markets: </strong>{% if company.businessModel %}{{', '.join(company.businessModel)}}{%else%}Not Available{%end%}</p>
 			<p><strong>Category: </strong> {{company.companyCategory}}</p>
 			<p><strong>Sources of Revenue: </strong>{% if len(company.revenueSource) > 0 %}{% if company.revenueSource[0] %}{{ ", ".join(company.revenueSource) }}{%else%}Not Available{%end%}{%else%}Not Available{%end%}</p>
 			<p><strong>Areas of social impact: </strong>{% if len(company.socialImpact) > 0 %}{% if company.socialImpact[0] %}{{ ", ".join(company.socialImpact) }}{%else%}Not Available{%end%}{%else%}Not Available{%end%}</p>
