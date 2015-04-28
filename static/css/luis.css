@@ -413,3 +413,9 @@ video#bgvid {
   width: 200px;
   height: 200px;
 }
+
+@media print {
+  #mc_embed_signup, #mc_embed_signup *, footer ul {
+    display: none !important;
+  }
+}
