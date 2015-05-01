@@ -2,6 +2,7 @@
 .ipynb_checkpoints
 *.ipynb
 venv
+env
 static/files/us/us_companies_all.csv
 static/files/mx/mx_companies_all.csv
 static/files/au/au_companies_all.csv
