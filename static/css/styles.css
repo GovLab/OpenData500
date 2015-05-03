@@ -26,7 +26,7 @@ select {
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
-  color: #fff;
+  color: white;
   font-family: "Exo", sans-serif;
   text-transform: uppercase;
   font-size: 14px;
@@ -85,7 +85,7 @@ select {
   width: 52.8%;
   font-family: sans-serif;
   font-size: 1em;
-  color: #444; }
+  color: #444444; }
 
 .m-form-half textarea {
   width: 100%;
@@ -101,7 +101,7 @@ select {
 
 .m-form-footer {
   background-color: transparent;
-  border-top: 1px solid #aaa;
+  border-top: 1px solid #aaaaaa;
   padding: 5px;
   margin: 5px 5px 20px;
   overflow: hidden; }
@@ -155,7 +155,7 @@ select {
   margin-bottom: 30px; }
 
 body {
-  color: #444;
+  color: #444444;
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-size: 12px;
   line-height: 1.4em; }
@@ -329,7 +329,7 @@ a:hover {
     min-height: 20px;
     font-size: 13px;
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-    border: 1px solid #aaa;
+    border: 1px solid #aaaaaa;
     border-radius: 0;
     overflow: hidden; }
 
@@ -355,10 +355,10 @@ a:hover {
 #world-map .formal-agreement {
   fill: rgba(71, 43, 116, 0.4) !important; }
 #world-map .working-agreement {
-  fill: #666 !important; }
+  fill: #666666 !important; }
 #world-map .in-discussion,
 #world-map .in-discussion > path {
-  fill: #aaa !important; }
+  fill: #aaaaaa !important; }
 #world-map .project {
   fill: #472b74 !important; }
 
@@ -370,7 +370,7 @@ a:hover {
     margin-bottom: 35px;
     padding-top: 23px;
     margin-bottom: 35px;
-    border-bottom: 1px solid #aaa; }
+    border-bottom: 1px solid #aaaaaa; }
     .about-page section ul li.list-title {
       list-style: none;
       margin-top: 15px;
@@ -401,7 +401,7 @@ a:hover {
     float: right;
     margin: 0 0 30px 30px;
     padding: 10px 20px;
-    border: 1px solid #aaa; }
+    border: 1px solid #aaaaaa; }
     .about-page .about-page-toc h4 {
       margin-bottom: 25px;
       margin-top: 0;
@@ -409,7 +409,7 @@ a:hover {
       font-weight: 300;
       font-size: 1.7em;
       font-style: italic;
-      color: #444; }
+      color: #444444; }
     .about-page .about-page-toc li {
       list-style-type: none;
       margin: 8px 0 7px 0;
@@ -510,14 +510,14 @@ a:hover {
       color: #472b74; }
     .about-page .m-team-picture .m-team-member-job {
       margin: 0;
-      color: #666; }
+      color: #666666; }
   .about-page .m-team-picture:hover img {
     border-color: rgba(0, 0, 0, 0.05); }
   .about-page .m-team-picture.s-active img {
     border-color: rgba(71, 43, 116, 0.4); }
 
 .sub-sections {
-  border-bottom: 1px solid #aaa;
+  border-bottom: 1px solid #aaaaaa;
   padding-bottom: 23px;
   margin-bottom: 0; }
   .sub-sections .m-half {
@@ -607,7 +607,7 @@ a:hover {
     text-decoration: underline; }
   .datasets > h3 {
     font-size: 16px;
-    color: #666; }
+    color: #666666; }
   .datasets .company-view-agency-list h3 {
     font-size: 14px;
     line-height: 18px; }
@@ -617,7 +617,7 @@ a:hover {
   .m-list-head div {
     display: inline-block;
     padding: 10px 5px 0;
-    color: #fff;
+    color: white;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: .5px; }
@@ -634,7 +634,7 @@ a:hover {
 
 .m-list-company-full {
   padding-top: 20px;
-  border-top: 1px solid #aaa;
+  border-top: 1px solid #aaaaaa;
   box-shadow: inset 0 3px 3px -3px rgba(0, 0, 0, 0.3); }
 
 .m-preview-list-name {
@@ -697,7 +697,7 @@ a:hover {
 
 .m-download-data {
   padding: 10px;
-  color: #666;
+  color: #666666;
   display: block;
   border-top: 1px solid rgba(0, 0, 0, 0.05);
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
@@ -707,11 +707,11 @@ a:hover {
     margin-right: 30px;
     display: inline-block; }
   .m-download-data a {
-    color: #666;
+    color: #666666;
     padding: 4px 8px; }
     .m-download-data a:hover {
       background-color: #8977a7;
-      color: #fff; }
+      color: white; }
 
 .m-candidates h1 {
   font-size: 6.79em; }
@@ -737,7 +737,7 @@ a:hover {
   -moz-border-radius: 4px;
   border-radius: 4px;
   border: 0;
-  color: #fff;
+  color: white;
   cursor: pointer;
   padding: 3px 7px 5px; }
 .m-candidates-buttons button:hover {
@@ -751,7 +751,7 @@ a:hover {
   height: 165px;
   float: left;
   margin: 5px;
-  color: #444;
+  color: #444444;
   overflow: hidden;
   cursor: pointer;
   border: 1px solid #ccc; }
@@ -771,10 +771,10 @@ a:hover {
     width: 195px;
     height: 80px;
     overflow: hidden;
-    color: #444;
+    color: #444444;
     margin-top: 5px; }
   .m-candidates-item em {
-    color: #444;
+    color: #444444;
     display: block;
     height: 15px;
     margin-top: 5px;
@@ -790,7 +790,7 @@ a:hover {
 .m-candidates-item.preview-company {
   background-color: rgba(71, 43, 116, 0.9); }
   .m-candidates-item.preview-company h3, .m-candidates-item.preview-company .m-homepage-list-desc, .m-candidates-item.preview-company em {
-    color: #fff; }
+    color: white; }
 
 .m-candidates-item:hover {
   border-color: #472b74; }
@@ -811,7 +811,7 @@ a:hover {
     display: inline-block;
     margin: 0 3px;
     padding: 4px 10px;
-    color: #fff;
+    color: white;
     letter-spacing: .4px;
     border: 1px solid #ccc;
     color: rgba(0, 0, 0, 0.6); }
@@ -829,10 +829,10 @@ a:hover {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
   border-radius: 0;
-  border: 1px solid #aaa;
+  border: 1px solid #aaaaaa;
   background-color: rgba(255, 255, 255, 0.7);
   border-left: 4px solid #472b74;
-  color: #444;
+  color: #444444;
   padding: 3px 9px 3px 6px; }
 
 #clear-filters-menu {
@@ -853,7 +853,7 @@ a:hover {
   -moz-border-radius: 4px;
   border-radius: 4px;
   padding: 20px 20px 10px 10px;
-  border: 1px solid #aaa; }
+  border: 1px solid #aaaaaa; }
   .login-form .m-form-line.submit {
     text-align: center;
     margin-top: 20px; }
@@ -919,7 +919,7 @@ a:hover {
 .m-press-title {
   font-size: 15px;
   line-height: 19px;
-  color: #666; }
+  color: #666666; }
 
 .m-press-meta {
   font-style: italic;
@@ -965,10 +965,10 @@ a:hover {
     font-size: 12px;
     font-weight: 400; }
 
-.b-quarter {
+.b-third {
   box-sizing: border-box;
   float: left;
-  width: calc(25% - 20px);
+  width: calc(33% - 20px);
   margin: 0 10px; }
 
 #govlab-logo {
@@ -1030,7 +1030,7 @@ a:hover {
   border-color: #472b74;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); }
 @media only screen and (max-width: 760px) {
-  #international-homepage .b-quarter {
+  #international-homepage .b-third {
     box-sizing: border-box;
     float: none;
     width: calc(100% - 60px);
@@ -1057,7 +1057,7 @@ a:hover {
 #roundtables section {
   padding-bottom: 23px;
   margin-bottom: 35px;
-  border-bottom: 1px solid #aaa; }
+  border-bottom: 1px solid #aaaaaa; }
 #roundtables p, #roundtables li {
   font-size: 16px;
   line-height: 22px; }
@@ -1074,7 +1074,7 @@ a:hover {
   text-align: center;
   margin-bottom: 50px;
   font-style: italic;
-  color: #666; }
+  color: #666666; }
 #roundtables blockquote {
   font-size: 24px;
   line-height: 30px;
@@ -1121,13 +1121,13 @@ a:hover {
     font-size: 12px;
     line-height: 16px;
     font-style: italic;
-    color: #666;
+    color: #666666;
     border-top: 1px solid rgba(0, 0, 0, 0.15);
     background-color: rgba(255, 255, 255, 0.5); }
     #roundtables .roundtable-attendees li span {
       display: block;
       font-size: 16px;
-      color: #444;
+      color: #444444;
       font-style: normal;
       line-height: 20px; }
   #roundtables .roundtable-attendees li:nth-child(2n) {
@@ -1147,7 +1147,7 @@ a:hover {
   font-size: 86px;
   background-color: #472b74;
   font-family: "Exo", sans-serif;
-  color: #fff;
+  color: white;
   width: 80px;
   text-align: center; }
 
@@ -1180,7 +1180,7 @@ a:hover {
     left: 0;
     background-color: rgba(0, 0, 0, 0.6);
     padding: 5px 10px;
-    color: #fff;
+    color: white;
     font-family: "Exo", sans-serif;
     font-weight: 100;
     width: 300px; }
@@ -1188,7 +1188,7 @@ a:hover {
       font-size: 16px;
       line-height: 22px; }
     .event-picture-container figcaption em {
-      color: #fff; }
+      color: white; }
 
 #roundtables-first-paragraph {
   letter-spacing: -0.05px; }
@@ -1413,7 +1413,7 @@ header {
       border-color: #8977a7;
       background-color: rgba(255, 255, 255, 0.5); }
     #mc_embed_signup form input[type="email"]:focus {
-      background-color: #fff; }
+      background-color: white; }
     #mc_embed_signup form .m-button {
       width: 40px;
       display: inline-block;
@@ -1430,7 +1430,7 @@ header {
       border-radius: 0 4px 4px 0; }
     #mc_embed_signup form .m-button:hover {
       background-color: #472b74;
-      color: #fff;
+      color: white;
       border-color: #472b74; }
   #mc_embed_signup #mce-responses .response {
     position: absolute;
@@ -1502,16 +1502,16 @@ header {
     transform: rotate(-90deg); }
 
 footer {
-  background-color: #444;
+  background-color: #444444;
   padding: 20px 0;
   overflow: hidden;
   clear: both;
   margin-top: 30px;
-  color: #aaa; }
+  color: #aaaaaa; }
   footer a {
-    color: #aaa; }
+    color: #aaaaaa; }
   footer a:hover {
-    color: #fff; }
+    color: white; }
   footer .m-footer-logos {
     float: left; }
     footer .m-footer-logos img {
@@ -1548,5 +1548,3 @@ footer {
     height: auto; }
   .m-international-page .first-title {
     margin-top: 20px; }
-
-/*# sourceMappingURL=styles.css.map */

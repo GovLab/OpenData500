@@ -1,6 +1,7 @@
 from base import *
 import urllib
 import json
+import constants
 
 #--------------------------------------------------------INDEX PAGE------------------------------------------------------------
 class IndexHandler(BaseHandler):
@@ -13,7 +14,8 @@ class IndexHandler(BaseHandler):
             user=self.current_user,
             settings=settings,
             lan='en',
-            country='us'
+            country='us',
+            constants=constants
         )
 
 #--------------------------------------------------------MAIN PAGE------------------------------------------------------------

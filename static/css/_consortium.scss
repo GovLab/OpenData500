@@ -1,7 +1,7 @@
-.b-quarter {
+.b-third {
 	box-sizing: border-box;
 	float: left;
-	width: calc(25% - 20px);
+	width: calc(33% - 20px);
 	margin: 0 10px;
 }
 
@@ -81,7 +81,7 @@
 	}
 
 @media only screen and (max-width : 760px) {
-.b-quarter {
+.b-third {
 	box-sizing: border-box;
 	float: none;
 	width: calc(100% - 60px);
