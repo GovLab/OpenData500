@@ -1,0 +1,58 @@
+{
+    "default_language": "it",
+    "available_languages": ["en", "it"],
+    "logo_path":"img/od100-logo-it.png",
+    "menu": {
+        "en": [{
+            "item": "OD500 IT",
+            "link": "/it/",
+            "sub-menu": []
+        }],
+        "it": [{
+            "item": "OD500 IT",
+            "link": "/it/",
+            "sub-menu": []
+        }]
+    },
+    "page_titles": {
+        "en": {
+            "index": "Welcome to the OD500",
+            "about": "About the OD500",
+            "resources": "Open Data Resources - OD500",
+            "list": "Open Data 500 Companies",
+            "submit": "Submit a Company to the OD500",
+            "stats": "OD500 By The Numbers",
+            "roundtables": "Open Data Roundtables",
+            "submitData": "Submit Agency and Data Information",
+            "thanks": "Thank You!"
+        },
+        "es": {}
+    },
+    "footer_menu": {
+        "en":[{
+            "item": "Twitter",
+            "link": "https://twitter.com/PresidenciaMX"
+        },
+        {
+            "item":"Contact Us",
+            "link":"mailto:OD100MX@datos.gob.mx"
+        }],
+        "it":[{
+            "item": "Twitter",
+            "link": "https://twitter.com/PresidenciaMX"
+        },
+        {
+            "item":"Contacto",
+            "link":"mailto:OD100MX@datos.gob.mx"
+        }]
+    }
+}
+
+
+
+
+
+
+
+
+
