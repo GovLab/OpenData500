@@ -1,0 +1,37 @@
+{% extends "../../main.html" %}
+{% autoescape None %}
+
+{% block body %}
+
+
+
+<section class="submitDescription">
+	<h1>Open Data 100 Mexico <br>Company Survey</h1>
+	<div class="survey-instructions">
+		<p><strong>To qualify for the Open Data 100 Mexico, a company must:</strong></p>
+		<ul>
+			<li><strong>Be Mexico-based</strong> (or have a significant portion of operations in Mexico),</li>
+			<li><strong>Earn revenue from its products and services</strong> (non-profits may qualify if they have a sustainable revenue stream), and</li>
+			<li><strong>Use publicly available government data as a key business or operational resource</strong> (This includes any information or statistics from government agencies).</li>
+		</ul>
+		<p>If your company meets these criteria, please take a few minutes to fill out this short online form. Thank you again for your participation.</p>
+		<p><em>The fields marked with * are required</em></p>
+	</div>
+</section>
+<form method="post" id="submitCompany" class="m-form companyForm" data-parsley-validate>
+
+	{% module Form(country, settings['default_language'], True, False) %}
+
+	{% raw xsrf_form_html() %}
+
+	<p class="disclaimer-text warning">Your responses will become part of a public database of information on Open Data companies. By submitting this form you are agreeing that, other than personal contact information, this information will be part of a publicly available database.</p>
+	<div class="saveCompanyForm-new">	
+		<input type="hidden" class="companyID" name="companyID" value="">
+		<input type="submit" class="m-button" id="formSave" name="formSave" value="Next">
+		<span class="company-form-error-message error-message" style="display:none"></span>
+	</div>
+</form>
+
+
+
+{% end %}

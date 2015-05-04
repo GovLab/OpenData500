@@ -255,7 +255,8 @@ stateList = {
                 "Tlaxcala", "Veracruz", "Yucatán", "Zacatecas"]
             }
 agency_types = ['Federal','State','City/County','University/Institution']
-available_countries = ["us", "au", "mx", "fr", "it"]
+available_countries = ["us", "au", "mx", "fr", "it", "kr"]
+disabled_countries = []
 country_keys = { 
     "us":"United States", "au":"Australia", "United States":"us", 
     "Australia":"au",  "Mexico":"mx", "mx":"Mexico"}

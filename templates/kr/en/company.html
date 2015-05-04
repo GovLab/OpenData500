@@ -1,0 +1,72 @@
+{% extends "../../main.html" %}
+{% autoescape None %}
+
+{% block body %}
+
+<h1><a href="{% if 'http' in company.url %}{{company.url}}{%else%}http://{{company.url}}{%end%}">{{ page_heading }}</a></h1>
+
+<div class="m-list-company-full">
+		<div class="m-half">
+			<h3>Acerca de la compañía</h3>
+			<p><strong>URL: </strong>{% if company.url %}<a href="{% if 'http' in company.url %}{{company.url}}{%else%}http://{{company.url}}{%end%}">{{company.url}}{%else%}Not Available{%end%}</a></p>
+			<p><strong>Año de fundación: </strong> {% if company.yearFounded %}{{company.yearFounded}}{%else%}Not Available{%end%}</p>
+			<p><strong>Localización: </strong>{%if company.city %} {{company.city}}, {{company.state}}{%else%}{{company.state}}{%end%}</p>
+			<p><strong>Código postal: </strong> {%if company.zipCode %}{{company.zipCode}}{%else%}Not Available{%end%}</p>
+			<p><strong>Número de empleados a tiempo completo: </strong> {% if company.fte %} {{company.fte}}{%else%}Not Available{%end%}</p>
+			<p><strong>Tipo de compañía: </strong> {% if company.companyType %} {{company.companyType}}{%else%}Not Available{%end%}</p>
+			<p><strong>Categoría: </strong> {{company.companyCategory}}</p>
+			<p><strong>Fuentes de ingresos: </strong>{% if len(company.revenueSource) > 0 %}{% if company.revenueSource[0] %}{{ ", ".join(company.revenueSource) }}{%else%}Not Available{%end%}{%else%}Not Available{%end%}</p>
+			<p><strong>Áreas de impacto social: </strong>{% if len(company.socialImpact) > 0 %}{% if company.socialImpact[0] %}{{ ", ".join(company.socialImpact) }}{%else%}Not Available{%end%}{%else%}Not Available{%end%}</p>
+			{%if company.sourceCount == "NA" %}<p><strong>Número aproximado de fuentes de datos gubernamentales usadas: </strong>Not Available
+			{% elif company.sourceCount %}<p><strong>Número aproximado de fuentes de datos gubernamentales usadas: </strong>{{company.sourceCount}} Agencies/Local Governments/Organizations
+			{% else %}<p><strong>Número aproximado de fuentes de datos gubernamentales usadas: </strong>Not Available{%end%}</p>
+		</div>
+		<div class="m-half">
+			<h3>Descripción:</h3>
+			<p>{% if company.description %}{{company.description}}{%else%}Not Available{%end%}</p>
+		</div>
+	<div class="m-full datasets">
+		<h3>Fuentes de datos y entidades gubernamentales</h3>
+		{% if company.agencies %}
+			{%for a in company.agencies %}
+				<div class="company-view-agency-list">
+					<ul>
+						<li><h3>{%if a.url %}<a href="{% if 'http' in a.url %}{{a.url}}{%else%}http://{{a.url}}{%end%}">{{a.name}}</a>{%else%}{{a.name}}{%end%}</h3></li>
+						<div class="company-view-agency-name">
+							{% for d in a.datasets %} 
+								{% if d.usedBy == company %}
+									<ul>
+										{% if d.datasetURL %}
+											<li><a href="{% if 'http' in d.datasetURL %}{{d.datasetURL}}{%else%}http://{{d.datasetURL}}{%end%}">{{ d.datasetName }}</a></li>
+										{% else %}
+											<li>{{ d.datasetName }}</li>
+										{% end %}
+									</ul>
+								{%end%}
+							{% end %}
+							<ul>
+								{% for s in a.subagencies %}
+									{% if company in s.usedBy %}
+										<li><h3><a href="{% if 'http' in s.url %}{{s.url}}{%else%}http://{{s.url}}{%end%}">{{s.name}}</a></h3></li>
+										<ul>
+											{% for d in s.datasets %}
+												{% if company == d.usedBy %}
+													<li><a href="{% if 'http' in d.datasetURL %}{{s.url}}{%else%}http://{{d.datasetURL}}{%end%}">{{d.datasetName}}</a></li>
+												{%end%}
+											{%end%}
+										</ul>
+									{%end%}
+								{%end%}
+							</ul>
+						</div>
+					</ul>
+				</div>
+			{% end %}
+		{%else%}
+			<p>None Available</p>
+		{% end %}
+	</div>
+</div>	
+<br>
+
+{% end %}

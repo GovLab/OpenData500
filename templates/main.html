@@ -48,17 +48,19 @@
                 <img src="{{ static_url('img/od500-logo.png') }}" alt=""></a>
                 <!--<img src="{{ static_url(settings['logo_path']) }}" alt=""></a>-->
             <div id="mainMenu" class="m-main-menu">
-                {% for item in settings['menu'][lan_] %}        
-                    <div class="m-main-menu-item">
-                        <a href="{{item['link']}}">{{item['item']}}</a>
-                        {% if item['sub-menu'] %}
-                            <ul id="submenu-about" class="m-main-menu-sub-menu">
-                                {% for sub_item in item['sub-menu'] %}
-                                    <li><a class="m-main-menu-sub-menu-item" href="{{sub_item['link']}}">{{sub_item['item']}}</a></li>
-                                {%end%}
-                            </ul>
-                        {%end%}
-                    </div>
+                {% if len(settings['menu'][lan_]) > 1 %}
+                    {% for item in settings['menu'][lan_] %}        
+                        <div class="m-main-menu-item">
+                            <a href="{{item['link']}}">{{item['item']}}</a>
+                            {% if item['sub-menu'] %}
+                                <ul id="submenu-about" class="m-main-menu-sub-menu">
+                                    {% for sub_item in item['sub-menu'] %}
+                                        <li><a class="m-main-menu-sub-menu-item" href="{{sub_item['link']}}">{{sub_item['item']}}</a></li>
+                                    {%end%}
+                                </ul>
+                            {%end%}
+                        </div>
+                    {%end%}
                 {%end%}
                 {%try%} {% if user %} 
                     <div class="m-main-menu-item">

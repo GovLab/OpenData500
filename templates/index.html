@@ -88,13 +88,29 @@
 							</a>
 						</div>
 						<div class="b-country-selector">
+							{% if "it" in constants.disabled_countries %}
+							<div class="b-country b-third">
+							</div>
+							{% else %}
 							<a href="/it/" class="b-country b-third">
 								<div class="b-flag m-it">
 									<div></div>
 								</div>
 								<h2>Italy</h2>
 							</a>
-							<a href="mailto:opendata500@thegovlab.org?subject=OD500+in+my+country" class="b-country b-quarter">
+							{% end %}
+							{% if "sk" in constants.disabled_countries %}
+							<div class="b-country b-third">
+							</div>
+							{% else %}
+							<a href="/kr/" class="b-country b-third">
+								<div class="b-flag m-kr">
+									<div></div>
+								</div>
+								<h2>South Korea</h2>
+							</a>
+							{% end %}
+							<a href="mailto:opendata500@thegovlab.org?subject=OD500+in+my+country" class="b-country b-third">
 								<div class="b-flag m-in-your-country">
 									<div></div>
 								</div>
