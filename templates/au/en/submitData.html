@@ -5,9 +5,11 @@
 
 <h1>{{ page_heading }}</h1>
 
+
 <input type="hidden" id="companyName" value="{{ company.companyName }}" />
 
 	<form class="m-form" id="company-data-form" data-parsley-validate>
+		<h3><i>Please press "Save and Finish" below before exiting this page.</i></h3>
 		
 		{% module FormData(country, settings['default_language'], True, company) %}
 		{% raw xsrf_form_html() %}
@@ -18,8 +20,10 @@
 	
 	</form>
 
-	<fieldset class="m-form-half">
-		<input type="button" id="submit-all-forms" class="m-button" value="Save And Finish">
+	<fieldset class="m-form-half pull-right text-right">
+		<h3><i>Please press "Save and Finish" below to complete the survey.</i></h3>
+		<br />
+		<input type="button" id="submit-all-forms" class="m-button pull-right" value="Save And Finish">
 		<span class="response-message"></span>
 	</fieldset>
 
