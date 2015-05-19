@@ -160,20 +160,22 @@ select {
 body {
   color: #444444;
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  font-size: 16px;
+  font-size: 18px; //**changed from 12px **//
   line-height: 1.4em; }
 
 h1 {
   font-family: 'Exo', sans-serif; /*changed from Exo TEST */
   font-weight: 300; /*changed from 300 TEST */
-  font-size: 4.5em;
+  font-size: 3.5em;
   line-height: 1.2em;
-  margin-bottom: 30px; } /*changed from 30px */
+  margin-bottom: 30px;
+  text-align: center;
+  } /*changed from 30px */
 
 h2 {
   font-family: 'Exo', sans-serif; /*changed from Exo TEST*/
   font-weight: 500; /*changed from 500 TEST */
-  font-size: 3em;
+  font-size: 2em;
   line-height: 1em; }
 
 h3 {
@@ -192,7 +194,7 @@ a:hover {
   font-family: "Exo", sans-serif;
   font-weight: 100;
   font-style: italic;
-  font-size: 1.8em;
+  font-size: 1.3em;
   line-height: 1.5em; }
 
 .warning {
@@ -369,8 +371,9 @@ a:hover {
   fill: #472b74 !important; }
 
 .about-page {
-  font-size: 14px;
-  line-height: 20px; }
+  font-size: 16px;
+  line-height: 20px;
+  font-weight:100; }
   .about-page section {
     padding-bottom: 23px;
     margin-bottom: 35px;
