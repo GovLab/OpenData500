@@ -1,3 +1,6 @@
+@import url(http://fonts.googleapis.com/css?family=Quicksand|Ubuntu|Muli|Roboto);
+
+/*added by robyn to new fonts */
 @charset "UTF-8";
 input[type="text"],
 input[type="password"],
@@ -157,19 +160,19 @@ select {
 body {
   color: #444444;
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  font-size: 12px;
+  font-size: 16px;
   line-height: 1.4em; }
 
 h1 {
-  font-family: "Exo", sans-serif;
-  font-weight: 100;
+  font-family: 'Exo', sans-serif; /*changed from Exo TEST */
+  font-weight: 300; /*changed from 300 TEST */
   font-size: 4.5em;
   line-height: 1.2em;
-  margin-bottom: 30px; }
+  margin-bottom: 30px; } /*changed from 30px */
 
 h2 {
-  font-family: "Exo", sans-serif;
-  font-weight: 500;
+  font-family: 'Exo', sans-serif; /*changed from Exo TEST*/
+  font-weight: 500; /*changed from 500 TEST */
   font-size: 3em;
   line-height: 1em; }
 
@@ -215,19 +218,22 @@ a:hover {
   margin-bottom: 25px; }
 .m-homepage #chord-chart-container {
   text-align: center;
-  position: relative; }
+  position: relative;
+
+}
   .m-homepage #chord-chart-container h3 {
     font-weight: 100;
     font-family: "Exo", sans-serif;
     font-size: 2em;
-    margin-top: 15px; }
+    margin-top: 15px; 
+    }
   .m-homepage #chord-chart-container .chord-legend {
     font-weight: 400;
     font-family: "Exo", sans-serif;
     font-size: 18px;
     position: absolute;
     color: #472b74;
-    top: 440px; }
+    top: 460px; }
   .m-homepage #chord-chart-container .chord-legend.companies {
     -webkit-transform: rotate(-90deg);
     -moz-transform: rotate(-90deg);
@@ -545,7 +551,8 @@ a:hover {
 .m-preview h3 {
   font-family: "Exo", sans-serif;
   font-weight: 100;
-  margin-top: 15px; }
+  margin-top: 15px; 
+  padding-bottom:20px;}
 .m-preview ul {
   padding: 0;
   background-color: rgba(255, 255, 255, 0.7); }
@@ -986,12 +993,12 @@ a:hover {
   #international-homepage .b-country h2 {
     font-size: 20px;
     font-weight: 400; }
-  #international-homepage .b-country p {
+  #international-homepage .b-country p { 
     font-size: 1.2rem;
     line-height: 1.4;
-    font-family: "Exo", sans-serif;
-    font-weight: 100; }
-  #international-homepage .b-country.m-disabled {
+    font-family: 'Exo', sans-serif; /*changed from Exo TEST */
+    font-weight: 100; } /*changed from 100 TEST */
+  #international-homepage .b-country.m-disabled { 
     opacity: .3;
     pointer-events: none; }
 #international-homepage .b-flag {
