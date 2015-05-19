@@ -30,7 +30,7 @@ select {
   -moz-border-radius: 4px;
   border-radius: 4px;
   color: white;
-  font-family: "Exo", sans-serif;
+  font-family: "HelveticaNeue-Light", sans-serif;
   text-transform: uppercase;
   font-size: 14px;
   font-weight: 600;
@@ -158,14 +158,15 @@ select {
   margin-bottom: 30px; }
 
 body {
-  color: #444444;
+  color: #6B6B6B; /**changed from #444444 **/
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  font-size: 18px; //**changed from 12px **//
-  line-height: 1.4em; }
+  font-weight:lighter;
+  font-size: 16px; /**changed from 12px **/
+  line-height: 1.8em; }
 
 h1 {
-  font-family: 'Exo', sans-serif; /*changed from Exo TEST */
-  font-weight: 300; /*changed from 300 TEST */
+  font-family: 'HelveticaNeue-Light', sans-serif; /*changed from Exo TEST */
+  font-weight: 100; /*changed from 300 TEST */
   font-size: 3.5em;
   line-height: 1.2em;
   margin-bottom: 30px;
@@ -173,9 +174,9 @@ h1 {
   } /*changed from 30px */
 
 h2 {
-  font-family: 'Exo', sans-serif; /*changed from Exo TEST*/
-  font-weight: 500; /*changed from 500 TEST */
-  font-size: 2em;
+  font-family: 'HelveticaNeue-Light', sans-serif; /*changed from Exo TEST*/
+  font-weight: 100; /*changed from 500 TEST */
+  font-size: 2.5em;
   line-height: 1em; }
 
 h3 {
@@ -191,10 +192,10 @@ a:hover {
   color: #472b74; }
 
 .intro {
-  font-family: "Exo", sans-serif;
+  font-family: "HelveticaNeue-Light", sans-serif;
   font-weight: 100;
-  font-style: italic;
-  font-size: 1.3em;
+  font-style: normal;
+  font-size: 1.5em;
   line-height: 1.5em; }
 
 .warning {
@@ -217,21 +218,23 @@ a:hover {
 .m-homepage section {
   padding-bottom: 24px;
   border-bottom: 1px solid #472b74;
-  margin-bottom: 25px; }
+  margin-bottom: 25px; 
+  }
 .m-homepage #chord-chart-container {
   text-align: center;
   position: relative;
+font-size: 10px;
 
 }
   .m-homepage #chord-chart-container h3 {
     font-weight: 100;
-    font-family: "Exo", sans-serif;
-    font-size: 2em;
+    font-family: "HelveticaNeue-Light", sans-serif;
+    font-size: 2em; /**changed from 2em **/
     margin-top: 15px; 
     }
   .m-homepage #chord-chart-container .chord-legend {
     font-weight: 400;
-    font-family: "Exo", sans-serif;
+    font-family: "HelveticaNeue-Light", sans-serif;
     font-size: 18px;
     position: absolute;
     color: #472b74;
@@ -260,7 +263,8 @@ a:hover {
     z-index: -1; }
 
 .m-homepage-about .more {
-  text-align: right; }
+  text-align: right; 
+}
 
 .m-homepage-participate {
   overflow: hidden; }
@@ -268,7 +272,7 @@ a:hover {
     float: left;
     width: 280px;
     margin-right: 26px;
-    font-family: "Exo", sans-serif;
+    font-family: "HelveticaNeue-Light", sans-serif;
     border: 1px solid #8977a7;
     padding: 10px; }
     .m-homepage-participate .m-homepage-box h2 {
@@ -387,7 +391,8 @@ a:hover {
       .about-page section ul li.list-title h3 {
         font-size: 16px; }
   .about-page h1 {
-    margin-top: 25px; }
+    margin-top: 50px; 
+  }
   .about-page h2 {
     text-align: center;
     margin-bottom: 40px;
@@ -414,7 +419,7 @@ a:hover {
     .about-page .about-page-toc h4 {
       margin-bottom: 25px;
       margin-top: 0;
-      font-family: "Exo", sans-serif;
+      font-family: "HelveticaNeue-Light", sans-serif;
       font-weight: 300;
       font-size: 1.7em;
       font-style: italic;
@@ -431,7 +436,7 @@ a:hover {
     .about-page #about-people h3 {
       margin: 20px 0;
       font-size: 42px;
-      font-family: "Exo", sans-serif;
+      font-family: "HelveticaNeue-Light", sans-serif;
       font-weight: 100; }
     .about-page #about-people .m-half li {
       list-style: none;
@@ -512,7 +517,7 @@ a:hover {
       border: 4px solid rgba(255, 255, 255, 0.5); }
     .about-page .m-team-picture .m-team-member-name {
       margin: 0;
-      font-family: "Exo", sans-serif;
+      font-family: "HelveticaNeue-Light", sans-serif;
       font-size: 18px;
       font-weight: 400;
       font-style: italic;
@@ -552,7 +557,7 @@ a:hover {
 .m-preview h2 {
   font-size: 2em; }
 .m-preview h3 {
-  font-family: "Exo", sans-serif;
+  font-family: "HelveticaNeue-Light", sans-serif;
   font-weight: 100;
   margin-top: 15px; 
   padding-bottom:20px;}
@@ -691,7 +696,7 @@ a:hover {
   margin-top: 0; }
 .submitDescription .adj-title {
   font-size: 30px;
-  font-family: "Exo", sans-serif;
+  font-family: "HelveticaNeue-Light", sans-serif;
   text-align: center;
   color: #8977a7;
   margin-top: 90px;
@@ -769,7 +774,7 @@ a:hover {
     color: #472b74;
     margin-top: 0;
     font-weight: 300;
-    font-family: "Exo", sans-serif;
+    font-family: "HelveticaNeue-Light", sans-serif;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -877,7 +882,7 @@ a:hover {
     margin-bottom: 0; }
   .resource-panel h3 {
     margin-bottom: 20px;
-    font-family: "Exo", sans-serif;
+    font-family: "HelveticaNeue-Light", sans-serif;
     font-weight: 100;
     font-style: italic; }
   .resource-panel ul {
@@ -999,7 +1004,7 @@ a:hover {
   #international-homepage .b-country p { 
     font-size: 1.2rem;
     line-height: 1.4;
-    font-family: 'Exo', sans-serif; /*changed from Exo TEST */
+    font-family: 'HelveticaNeue-Light', sans-serif; /*changed from Exo TEST */
     font-weight: 100; } /*changed from 100 TEST */
   #international-homepage .b-country.m-disabled { 
     opacity: .3;
@@ -1088,7 +1093,7 @@ a:hover {
 #roundtables blockquote {
   font-size: 24px;
   line-height: 30px;
-  font-family: "Exo", sans-serif;
+  font-family: "HelveticaNeue-Light", sans-serif;
   font-weight: 100;
   font-style: italic;
   text-align: left;
@@ -1143,7 +1148,7 @@ a:hover {
   #roundtables .roundtable-attendees li:nth-child(2n) {
     margin-right: 0; }
 #roundtables .invitation-disclaimer {
-  font-family: "Exo", sans-serif;
+  font-family: "HelveticaNeue-Light", sans-serif;
   font-weight: 100;
   font-size: 18px;
   line-height: 25px; }
@@ -1156,7 +1161,7 @@ a:hover {
   padding: 5px;
   font-size: 86px;
   background-color: #472b74;
-  font-family: "Exo", sans-serif;
+  font-family: "HelveticaNeue-Light", sans-serif;
   color: white;
   width: 80px;
   text-align: center; }
@@ -1191,7 +1196,7 @@ a:hover {
     background-color: rgba(0, 0, 0, 0.6);
     padding: 5px 10px;
     color: white;
-    font-family: "Exo", sans-serif;
+    font-family: "HelveticaNeue-Light", sans-serif;
     font-weight: 100;
     width: 300px; }
     .event-picture-container figcaption div {
@@ -1500,7 +1505,7 @@ header {
     top: -13px;
     width: 88px;
     padding: 5px;
-    font-family: "Exo", sans-serif;
+    font-family: "HelveticaNeue-Light", sans-serif;
     font-weight: 400;
     text-align: center;
     font-size: 18px;
