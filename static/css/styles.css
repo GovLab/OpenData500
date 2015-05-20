@@ -30,7 +30,7 @@ select {
   -moz-border-radius: 4px;
   border-radius: 4px;
   color: white;
-  font-family: "HelveticaNeue-Light", sans-serif;
+  font-family: "Exo", sans-serif;
   text-transform: uppercase;
   font-size: 14px;
   font-weight: 600;
@@ -165,7 +165,7 @@ body {
   line-height: 1.8em; }
 
 h1 {
-  font-family: 'HelveticaNeue-Light', sans-serif; /*changed from Exo TEST */
+  font-family: "Exo", sans-serif; /*changed from Exo TEST */
   font-weight: 100; /*changed from 300 TEST */
   font-size: 3.5em;
   line-height: 1.2em;
@@ -174,7 +174,7 @@ h1 {
   } /*changed from 30px */
 
 h2 {
-  font-family: 'HelveticaNeue-Light', sans-serif; /*changed from Exo TEST*/
+  font-family: "Exo", sans-serif; /*changed from Exo TEST*/
   font-weight: 100; /*changed from 500 TEST */
   font-size: 2.5em;
   line-height: 1em; }
@@ -192,7 +192,7 @@ a:hover {
   color: #472b74; }
 
 .intro {
-  font-family: "HelveticaNeue-Light", sans-serif;
+  font-family: "Exo", sans-serif;
   font-weight: 100;
   font-style: normal;
   font-size: 1.5em;
@@ -228,13 +228,13 @@ font-size: 10px;
 }
   .m-homepage #chord-chart-container h3 {
     font-weight: 100;
-    font-family: "HelveticaNeue-Light", sans-serif;
+    font-family: "Exo", sans-serif;
     font-size: 2em; /**changed from 2em **/
     margin-top: 15px; 
     }
   .m-homepage #chord-chart-container .chord-legend {
     font-weight: 400;
-    font-family: "HelveticaNeue-Light", sans-serif;
+    font-family: "Exo", sans-serif;
     font-size: 18px;
     position: absolute;
     color: #472b74;
@@ -291,7 +291,8 @@ font-size: 10px;
       border-radius: 50%; }
     .m-homepage-participate .m-homepage-box h3 {
       margin-top: 15px;
-      font-weight: 400; }
+      font-weight: 400;
+      text-align: center; }
     .m-homepage-participate .m-homepage-box p {
       font-size: 16px;
       font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
@@ -419,7 +420,7 @@ font-size: 10px;
     .about-page .about-page-toc h4 {
       margin-bottom: 25px;
       margin-top: 0;
-      font-family: "HelveticaNeue-Light", sans-serif;
+      font-family: "Exo", sans-serif;
       font-weight: 300;
       font-size: 1.7em;
       font-style: italic;
@@ -436,7 +437,7 @@ font-size: 10px;
     .about-page #about-people h3 {
       margin: 20px 0;
       font-size: 42px;
-      font-family: "HelveticaNeue-Light", sans-serif;
+      font-family: "Exo", sans-serif;
       font-weight: 100; }
     .about-page #about-people .m-half li {
       list-style: none;
@@ -517,7 +518,7 @@ font-size: 10px;
       border: 4px solid rgba(255, 255, 255, 0.5); }
     .about-page .m-team-picture .m-team-member-name {
       margin: 0;
-      font-family: "HelveticaNeue-Light", sans-serif;
+      font-family: "Exo", sans-serif;
       font-size: 18px;
       font-weight: 400;
       font-style: italic;
@@ -557,7 +558,7 @@ font-size: 10px;
 .m-preview h2 {
   font-size: 2em; }
 .m-preview h3 {
-  font-family: "HelveticaNeue-Light", sans-serif;
+  font-family: "Exo", sans-serif;
   font-weight: 100;
   margin-top: 15px; 
   padding-bottom:20px;}
@@ -696,7 +697,7 @@ font-size: 10px;
   margin-top: 0; }
 .submitDescription .adj-title {
   font-size: 30px;
-  font-family: "HelveticaNeue-Light", sans-serif;
+  font-family: "Exo", sans-serif;
   text-align: center;
   color: #8977a7;
   margin-top: 90px;
@@ -774,7 +775,7 @@ font-size: 10px;
     color: #472b74;
     margin-top: 0;
     font-weight: 300;
-    font-family: "HelveticaNeue-Light", sans-serif;
+    font-family: "Exo", sans-serif;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -882,7 +883,7 @@ font-size: 10px;
     margin-bottom: 0; }
   .resource-panel h3 {
     margin-bottom: 20px;
-    font-family: "HelveticaNeue-Light", sans-serif;
+    font-family: "Exo", sans-serif;
     font-weight: 100;
     font-style: italic; }
   .resource-panel ul {
@@ -1004,7 +1005,7 @@ font-size: 10px;
   #international-homepage .b-country p { 
     font-size: 1.2rem;
     line-height: 1.4;
-    font-family: 'HelveticaNeue-Light', sans-serif; /*changed from Exo TEST */
+    font-family: 'Exo', sans-serif; /*changed from Exo TEST */
     font-weight: 100; } /*changed from 100 TEST */
   #international-homepage .b-country.m-disabled { 
     opacity: .3;
@@ -1093,7 +1094,7 @@ font-size: 10px;
 #roundtables blockquote {
   font-size: 24px;
   line-height: 30px;
-  font-family: "HelveticaNeue-Light", sans-serif;
+  font-family: "Exo", sans-serif;
   font-weight: 100;
   font-style: italic;
   text-align: left;
@@ -1148,7 +1149,7 @@ font-size: 10px;
   #roundtables .roundtable-attendees li:nth-child(2n) {
     margin-right: 0; }
 #roundtables .invitation-disclaimer {
-  font-family: "HelveticaNeue-Light", sans-serif;
+  font-family: "Exo", sans-serif;
   font-weight: 100;
   font-size: 18px;
   line-height: 25px; }
@@ -1161,7 +1162,7 @@ font-size: 10px;
   padding: 5px;
   font-size: 86px;
   background-color: #472b74;
-  font-family: "HelveticaNeue-Light", sans-serif;
+  font-family: "Exo", sans-serif;
   color: white;
   width: 80px;
   text-align: center; }
@@ -1196,7 +1197,7 @@ font-size: 10px;
     background-color: rgba(0, 0, 0, 0.6);
     padding: 5px 10px;
     color: white;
-    font-family: "HelveticaNeue-Light", sans-serif;
+    font-family: "Exo", sans-serif;
     font-weight: 100;
     width: 300px; }
     .event-picture-container figcaption div {
@@ -1505,7 +1506,7 @@ header {
     top: -13px;
     width: 88px;
     padding: 5px;
-    font-family: "HelveticaNeue-Light", sans-serif;
+    font-family: "Exo", sans-serif;
     font-weight: 400;
     text-align: center;
     font-size: 18px;
