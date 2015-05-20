@@ -158,7 +158,7 @@ select {
   margin-bottom: 30px; }
 
 body {
-  color: #6B6B6B; /**changed from #444444 **/
+  color: #444444; /**changed from #444444 **/
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight:lighter;
   font-size: 16px; /**changed from 12px **/
@@ -166,7 +166,7 @@ body {
 
 h1 {
   font-family: "Exo", sans-serif; /*changed from Exo TEST */
-  font-weight: 100; /*changed from 300 TEST */
+  font-weight: 300; /*changed from 300 TEST */
   font-size: 3.5em;
   line-height: 1.2em;
   margin-bottom: 30px;
@@ -175,7 +175,7 @@ h1 {
 
 h2 {
   font-family: "Exo", sans-serif; /*changed from Exo TEST*/
-  font-weight: 100; /*changed from 500 TEST */
+  font-weight: 500; /*changed from 500 TEST */
   font-size: 2.5em;
   line-height: 1em; }
 
@@ -223,7 +223,7 @@ a:hover {
 .m-homepage #chord-chart-container {
   text-align: center;
   position: relative;
-font-size: 10px;
+font-size: 12px;
 
 }
   .m-homepage #chord-chart-container h3 {
