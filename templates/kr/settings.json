@@ -1,9 +1,14 @@
 {
     "default_language": "en",
-    "available_languages": ["en"],
+    "available_languages": ["en", "kr"],
     "logo_path":"img/od100-logo-kr.png",
     "menu": {
         "en": [{
+            "item": "OD500 KR",
+            "link": "/kr/",
+            "sub-menu": []
+        }],
+         "kr": [{
             "item": "OD500 KR",
             "link": "/kr/",
             "sub-menu": []
