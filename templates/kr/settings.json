@@ -22,14 +22,14 @@
             "thanks": "Thank You!"
         }
     },
-    "footer_menu": {
+     "footer_menu": {
         "en":[{
-            "item": "Twitter",
+            "item": "",
             "link": "https://twitter.com/PresidenciaMX"
         },
         {
             "item":"Contact Us",
-            "link":"mailto:OD100MX@datos.gob.mx"
+            "link":"mailto:yslee@nia.or.kr"
         }]
     }
 }
