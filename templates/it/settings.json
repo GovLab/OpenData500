@@ -16,17 +16,9 @@
     },
     "page_titles": {
         "en": {
-            "index": "Welcome to the OD500",
-            "about": "About the OD500",
-            "resources": "Open Data Resources - OD500",
-            "list": "Open Data 500 Companies",
-            "submit": "Submit a Company to the OD500",
-            "stats": "OD500 By The Numbers",
-            "roundtables": "Open Data Roundtables",
-            "submitData": "Submit Agency and Data Information",
-            "thanks": "Thank You!"
+            "index": "Welcome to the OD500"
         },
-        "es": {}
+        "it": {}
     },
     "footer_menu": {
         "en":[{

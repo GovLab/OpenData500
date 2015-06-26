@@ -255,11 +255,11 @@ stateList = {
                 "Tlaxcala", "Veracruz", "Yucatán", "Zacatecas"]
             }
 agency_types = ['Federal','State','City/County','University/Institution']
-available_countries = ["us", "au", "mx", "fr", "kr"]
+available_countries = ["us", "au", "mx", "fr", "kr", "it"]
 disabled_countries = ["it"]
 country_keys = { 
     "us":"United States", "au":"Australia", "United States":"us", 
-    "Australia":"au",  "Mexico":"mx", "mx":"Mexico"}
+    "Australia":"au",  "Mexico":"mx", "mx":"Mexico", "it": "Italy"}
 
 # "fields" include text fields, textareas, drop-down menus
 company_contact_fields = ['firstName', 'lastName', 'title', 'email', 'phone']
