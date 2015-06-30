@@ -23,19 +23,19 @@
     "footer_menu": {
         "en":[{
             "item": "Twitter",
-            "link": "https://twitter.com/OpenData500"
+            "link": "https://twitter.com/Opendata500"
         },
         {
             "item":"Contact Us",
-            "link":"mailto:opendata500@thegovlab.org"
+            "link":"mailto:francesca@thegovlab.org"
         }],
         "it":[{
             "item": "Twitter",
-            "link": "https://twitter.com/OpenData500"
+            "link": "https://twitter.com/Opendata500"
         },
         {
             "item":"Contact Us",
-            "link":"mailto:opendata500@thegovlab.org"
+            "link":"mailto:francesca@thegovlab.org"
         }]
     }
 }
