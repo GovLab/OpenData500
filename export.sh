@@ -5,7 +5,7 @@ DB=$(echo $MONGOLAB_URI | cut -d '/' -f 4)
 USER=$(echo $MONGOLAB_URI | cut -d '/' -f 3 | cut -d ':' -f 1)
 PASSWORD=$(echo $MONGOLAB_URI | cut -d '/' -f 3 | cut -d ':' -f 2 | cut -d '@' -f 1)
 
-for COLLECTION in agency company; do
+for COLLECTION in agency company stats; do
   mongoexport --jsonArray -h $HOST -d $DB -c $COLLECTION -u $USER -p $PASSWORD -o $COLLECTION.json
 done
 
