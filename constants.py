@@ -256,7 +256,7 @@ stateList = {
             }
 agency_types = ['Federal','State','City/County','University/Institution']
 available_countries = ["us", "au", "mx", "fr", "kr", "it"]
-disabled_countries = ["it"]
+disabled_countries = []
 country_keys = { 
     "us":"United States", "au":"Australia", "United States":"us", 
     "Australia":"au",  "Mexico":"mx", "mx":"Mexico", "it": "Italy"}
