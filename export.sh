@@ -24,6 +24,9 @@ mongoexport --jsonArray -h $HOST -d $DB -c agency -u $USER -p $PASSWORD \
   -o agency.json
   #-f $PUBLIC_AGENCY_FIELDS \
 
+mongoexport --jsonArray -h $HOST -d $DB -c stats -u $USER -p $PASSWORD \
+  -o stats.json
+
 #COMPANY_FIELDS=companyName,prettyName,url,contact,ceo,yearFounded,city,state,country,zipCode,fte,companyType,companyCategory,revenueSource,businessModel,socialImpact,description,descriptionShort,financialInfo,sourceCount,dataTypes,dataComments,exampleUses,dataImpacts,dataWishlist,agencies,ts,lastUpdated,display,submittedSurvey,vetted,vettedByCompany,submittedThroughWebsite,locked,notes,filters
 #
 #mongoexport --csv -h $HOST -d $DB -c company -u $USER -p $PASSWORD \
