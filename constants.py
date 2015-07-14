@@ -21,6 +21,13 @@ revenueSource = {
                     "Membership fees", "Philanthropic grants", 
                     "Software licensing", "Subscriptions", 
                     "User fees for web or mobile access"],
+                "au": [
+                    "Advertising", "Consulting", "Contributions/Donations", 
+                    "Data analysis for clients", "Database licensing", 
+                    "Government contract", "Lead generation to other businesses", 
+                    "Membership fees", "Philanthropic grants", 
+                    "Software licensing", "Subscriptions", 
+                    "User fees for web or mobile access"],
                 "es": [
                     "Análisis de datos", "Consultoría", 
                     "Contratos gubernamentales", "Contribuciones/Donaciones", 
