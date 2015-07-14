@@ -51,6 +51,7 @@
             <div id="mainMenu" class="m-main-menu">
                 {% if len(settings['menu'][lan_]) > 1 %}
                     {% for item in settings['menu'][lan_] %}        
+                    {% if not item.get('disabled', False) %}
                         <div class="m-main-menu-item">
                             <a href="{{item['link']}}">{{item['item']}}</a>
                             {% if item['sub-menu'] %}
@@ -61,6 +62,7 @@
                                 </ul>
                             {%end%}
                         </div>
+                    {%end%}
                     {%end%}
                 {%end%}
                 {%try%} {% if user %} 

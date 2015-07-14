@@ -24,6 +24,7 @@
                 "link": "/au/about/#about-people"
             }]
         }, {
+            "disabled": true,
             "item": "Full List",
             "link": "/au/list/",
             "sub-menu": []
