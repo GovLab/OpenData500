@@ -308,5 +308,23 @@ abbreviations = {
         {"General":"Gral."},
         {"Ambiente":"Amb."},
         {"Consumidores":"Cons."}
-    ]
+    ],
+    "au":[
+        {"Department":"Dept."},
+        {"Administration": "Admin."},
+        {"United States":"US"},
+        {"U.S.":"US"},
+        {"National":"Nat'l"},
+        {"Federal":"Fed."},
+        {"Commission":"Com."},
+        {"International":"Int'l"},
+        {"Development":"Dev."},
+        {"Corporation":"Corp"},
+        {"Institute":"Inst."},
+        {"Administrative":"Admin."},
+        {" and ":" & "},
+        {"Financial":"Fin"},
+        {"Environmental":"Env."},
+        {"Protection":"Prot."}
+    ],
 }
