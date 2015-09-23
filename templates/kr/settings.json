@@ -7,6 +7,10 @@
             "item": "OD500 KR",
             "link": "/kr/",
             "sub-menu": []
+        }, {
+            "item": "Full List",
+            "link": "/kr/list/",
+            "sub-menu": []
         }]
         },
     "page_titles": {

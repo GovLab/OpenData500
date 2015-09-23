@@ -63,7 +63,15 @@ categories = {
                         'Geospatial/Mapping', 'Mining/Manufacturing', 
                         'Healthcare', 'Housing/Real Estate', 'Insurance', 
                         'Lifestyle & Consumer', 'Media', 'Research & Consulting', 
-                        'Telecommunications / ISP\'s', 'Transportation']
+                        'Telecommunications / ISP\'s', 'Transportation'],
+                    "kr": [
+                        'Business & Legal Services', 'Data/Technology', 
+                        'Education', 'Energy', 'Environment & Weather', 
+                        'Finance & Investment', 'Food & Agriculture', 
+                        'Geospatial/Mapping', 'Governance', 'Healthcare', 
+                        'Housing/Real Estate', 'Insurance', 'Lifestyle & Consumer', 
+                        'Media', 'Research & Consulting', 'Scientific Research', 
+                        'Transportation']
                 },
                 "es": {
                     "mx": [
@@ -92,6 +100,12 @@ social_impacts = {
                         'Food access and supply', 'Good governance', 
                         'Healthcare access', 'Housing access', 'Public safety'],
                     "mx": [
+                        'Citizen engagement and participation', 
+                        'Consumer empowerment', 'Educational opportunity', 
+                        'Environment and climate change', 'Financial access', 
+                        'Food access and supply', 'Good governance', 
+                        'Healthcare access', 'Housing access', 'Public safety'],
+                    "kr":  [
                         'Citizen engagement and participation', 
                         'Consumer empowerment', 'Educational opportunity', 
                         'Environment and climate change', 'Financial access', 
@@ -133,6 +147,14 @@ data_types = {
                         "Government Operations", "Health/Healthcare", "Housing", 
                         "International/Global Development", "Legal", "Manufacturing", 
                         "Science and Research", "Public Safety", "Tourism", 
+                        "Transportation", "Weather"],
+                    "kr":[
+                        "Agriculture & Food", "Business", "Consumer", 
+                        "Demographics & Social", "Economics", "Education", 
+                        "Energy", "Environment", "Finance", "Geospatial/Mapping", 
+                        "Government Operations", "Health/Healthcare", "Housing", 
+                        "International/Global Development", "Legal", "Manufacturing", 
+                        "Science and Research", "Public Safety", "Tourism", 
                         "Transportation", "Weather"]
                 },
                 "es": {
@@ -160,6 +182,10 @@ data_impacts = {
                         "Cost efficiency", "New or improved product/service", 
                         "Job growth", "Revenue growth", "Identify new opportunities", 
                         "New/improved research"],
+                    "kr": [
+                        "Cost efficiency", "New or improved product/service", 
+                        "Job growth", "Revenue growth", "Identify new opportunities", 
+                        "New/improved research"]
                 },
                 "es": {
                     "mx": [
@@ -265,8 +291,8 @@ agency_types = ['Federal','State','City/County','University/Institution']
 available_countries = ["us", "au", "mx", "fr", "kr", "it"]
 disabled_countries = []
 country_keys = { 
-    "us":"United States", "au":"Australia", "United States":"us", 
-    "Australia":"au",  "Mexico":"mx", "mx":"Mexico", "it": "Italy"}
+    "us":"United States", "au":"Australia", "United States":"us", "Korea": "kr",
+    "Australia":"au",  "Mexico":"mx", "mx":"Mexico", "it": "Italy", "kr": "Korea"}
 
 # "fields" include text fields, textareas, drop-down menus
 company_contact_fields = ['firstName', 'lastName', 'title', 'email', 'phone']
@@ -334,4 +360,22 @@ abbreviations = {
         {"Environmental":"Env."},
         {"Protection":"Prot."}
     ],
+     "kr":[
+        {"Department":"Dept."},
+        {"Administration": "Admin."},
+        {"United States":"US"},
+        {"U.S.":"US"},
+        {"National":"Nat'l"},
+        {"Federal":"Fed."},
+        {"Commission":"Com."},
+        {"International":"Int'l"},
+        {"Development":"Dev."},
+        {"Corporation":"Corp"},
+        {"Institute":"Inst."},
+        {"Administrative":"Admin."},
+        {" and ":" & "},
+        {"Financial":"Fin"},
+        {"Environmental":"Env."},
+        {"Protection":"Prot."}
+    ]
 }
