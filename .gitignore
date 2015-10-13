@@ -11,3 +11,4 @@ static/files/au/au_companies_all.csv
 *.pyc
 .ruby-version
 *bkup.css
+.DS_Store

@@ -36,7 +36,7 @@ Use Foreman to start.  The site should be available [on port 5000][].
 
   [on port 5000]: http://localhost:5000
 
-    foreman start web
+   Heroku local web
 
 #### Development
 
