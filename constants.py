@@ -34,7 +34,8 @@ revenueSource = {
                     "Tarifas para el servicio móvil/internet", "Filantropía", 
                     "Generación de clientes", "Licencias de software", 
                     "Licencias de bases de datos", "Cuotas de membresía", 
-                    "Publicidad", "Suscripciones"]
+                    "Publicidad", "Suscripciones"],
+                "kr": [] # TODO
             }
 datatypes = ['Federal Open Data', 'State Open Data', 'City/Local Open Data']
 categories = {
@@ -236,7 +237,25 @@ states ={
                 "ACT":"Australian Capital Territory", "NSW":"New South Wales", 
                 "NT":"Northern Territory", "QLD":"Queensland", 
                 "SA":"South Australia", "TAS":"Tasmania", "VIC":"Victoria", 
-                "WA":"Western Australia"}
+                "WA":"Western Australia"},
+            "kr": {
+                u'Busan': u'Busan',
+                u'Chungcheongbuk-do': u'Chungcheongbuk-do',
+                u'Chungcheongnam-do': u'Chungcheongnam-do',
+                u'Daegu': u'Daegu',
+                u'Daejeon': u'Daejeon',
+                u'Gangwon-do': u'Gangwon-do',
+                u'Gwangju':u'Gwangju',
+                u'Gyeonggi-do': u'Gyeonggi-do',
+                u'Gyeongsangbuk-do': u'Gyeongsangbuk-do',
+                u'Gyeongsangnam-do': u'Gyeongsangnam-do',
+                u'Incheon': u'Incheon',
+                u'Jeju': u'Jeju',
+                u'Jeollabuk-do': u'Jeollabuk-do',
+                u'Jeollanam-do': u'Jeollanam-do',
+                u'Seoul': u'Seoul',
+                u'Ulsan': u'Ulsan',
+            }
         }
 stateListAbbrev = { 
             "us": [
@@ -253,7 +272,12 @@ stateListAbbrev = {
             "mx": [
                 "", "AS", "BC", "BS", "CC", "CS", "CH", "CL", "CM", "DF", "DG", 
                 "MC", "GT", "GR", "HG", "JC", "MN", "MS", "NT", "NL", "OC", "PL", 
-                "QT", "QR", "SP", "SL", "SR", "TC", "TS", "TL", "VZ", "YN", "ZS"]
+                "QT", "QR", "SP", "SL", "SR", "TC", "TS", "TL", "VZ", "YN", "ZS"],
+            "kr": [u'Busan', u'Chungcheongbuk-do', u'Chungcheongnam-do', 
+                   u'Daegu', u'Daejeon', u'Gangwon-do', u'Gwangju', 
+                   u'Gyeonggi-do', u'Gyeongsangbuk-do', u'Gyeongsangnam-do', 
+                   u'Incheon', u'Jeju', u'Jeollabuk-do', u'Jeollanam-do', 
+                   u'Seoul', u'Ulsan']
             }
 stateList = {
             "us": [
@@ -285,7 +309,12 @@ stateList = {
                 "Jalisco", "Michoacán", "Morelos", "Nayarit", "Nuevo León", 
                 "Oaxaca", "Puebla", "Querétaro", "Quintana Roo", 
                 "San Luis Potosí", "Sinaloa", "Sonora", "Tabasco", "Tamaulipas", 
-                "Tlaxcala", "Veracruz", "Yucatán", "Zacatecas"]
+                "Tlaxcala", "Veracruz", "Yucatán", "Zacatecas"],
+            "kr": [u'Busan', u'Chungcheongbuk-do', u'Chungcheongnam-do', 
+                   u'Daegu', u'Daejeon', u'Gangwon-do', u'Gwangju', 
+                   u'Gyeonggi-do', u'Gyeongsangbuk-do', u'Gyeongsangnam-do', 
+                   u'Incheon', u'Jeju', u'Jeollabuk-do', u'Jeollanam-do', 
+                   u'Seoul', u'Ulsan']
             }
 agency_types = ['Federal','State','City/County','University/Institution']
 available_countries = ["us", "au", "mx", "fr", "kr", "it"]
