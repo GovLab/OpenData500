@@ -315,14 +315,17 @@
                 .style("color", hoverLabelColor);
                 
             queue()
-                .defer(d3.json, "{{ static_url("files/us_states.json") }}")
+                .defer(d3.json, "{{ static_url("files/kr_states.json") }}")
                 .await(ready);
                 
             var numberFormat = d3.format("0,000");
             var percentFormat = function(d) { return numberFormat(d) + "%"; };
             var dollarFormat = function(d) { return "$" + numberFormat(d); };
             
-            var projection = d3.geo.albersUsa();
+            var projection = d3.geo.mercator()
+                .center([127, 36.5])
+                .scale(4500);
+
             var path = d3.geo.path()
                 .projection(projection);
                 
@@ -346,7 +349,7 @@
                     .enter().append('path')
                     .attr('class', 'states')
                     .attr('d', d3.geo.path().projection(projection))
-                    .attr('name', function(d){ return d.properties.NAME})
+                    .attr('name', function(d){ return d.properties.NAME_1; })
                     .style('stroke', lineColor)
                     .style('stroke-width', lineThickness);
                     
@@ -365,6 +368,7 @@
                     .on("mousemove", function(d, i) { if (hoverStates == true)hover.style("left", (d3.event.pageX) + 20 + "px").style("top", (d3.event.pageY) + "px"); });
                 
                 states.on('click', function(s) {
+                    debugger;
                     var filtr = '.' + this.getAttribute('abbrev');
                     if(this.attributes.class.value == "states s-active") { //if clicking on the same state, remove active class and remove filter from filters
                         filters.splice(filters.indexOf('.'+s.abbrev), 1);
