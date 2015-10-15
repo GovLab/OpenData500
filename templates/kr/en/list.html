@@ -351,7 +351,7 @@
                     .enter().append('path')
                     .attr('class', 'states')
                     .attr('d', d3.geo.path().projection(projection))
-                    .attr('name', function(d){ return d.properties.NAME_1; })
+                    .attr('name', function(d){ return d.properties.NAME_1; }) // this is where you find the name of the property which is the territory name
                     .style('stroke', lineColor)
                     .style('stroke-width', lineThickness);
                     
