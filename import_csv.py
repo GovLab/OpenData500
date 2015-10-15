@@ -1,7 +1,7 @@
 
 #Mongo
 from mongoengine import *
-from utils import StatsGenerator, Tools
+from utils import StatsGenerator, Tools, FileGenerator
 import models
 import csv
 import utils
@@ -55,9 +55,6 @@ for rownum, row in enumerate(reader):
     if company.companyType.lower() == 'nonprofit':
         company.companyType = 'Non-profit'
 
-    if not company.url.startswith('http'):
-        company.url = 'http://' + company.url
-
     if company.fte == '10-Jan':
         company.fte = '1 - 10'
     elif company.fte == 'Nov-50':
@@ -103,3 +100,7 @@ for rownum, row in enumerate(reader):
 stats.create_new_stats('kr')
 stats.refresh_stats('kr')
 Tools().re_do_filters('kr')
+FileGenerator().generate_company_csv('kr')
+FileGenerator().generate_company_all_csv('kr')
+FileGenerator().generate_agency_csv('kr')
+FileGenerator().generate_chord_chart_files('kr','en')
