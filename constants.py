@@ -66,13 +66,16 @@ categories = {
                         'Lifestyle & Consumer', 'Media', 'Research & Consulting', 
                         'Telecommunications / ISP\'s', 'Transportation'],
                     "kr": [
-                        'Business & Legal Services', 'Data/Technology', 
-                        'Education', 'Energy', 'Environment & Weather', 
-                        'Finance & Investment', 'Food & Agriculture', 
-                        'Geospatial/Mapping', 'Governance', 'Healthcare', 
-                        'Housing/Real Estate', 'Insurance', 'Lifestyle & Consumer', 
-                        'Media', 'Research & Consulting', 'Scientific Research', 
-                        'Transportation']
+                        u'Fianace/Investment', u'S/W licensing', u'Media',
+                        u'Travel', u'Book sales', u'Commission', u'Information security',
+                        u'MICE', u'Research/Consulting', u'Government contract',
+                        u'Transportation', u'Geospatial/Mapping', u'Discount store',
+                        u'Housing/Real Estate', u'Data/Technology', u'Lifestyle/Consumer',
+                        u'Pharmacy/Medical', u'System construction',
+                        u'Advertising', u'Product production and sale', u'Consulting',
+                        u'Energy', u'Environment/Weather', u'Information and Communication',
+                        u'Food/Agriculture', u'Business/Legal Services', u'Education',
+                        u'Data analysis for clients', u'Pet Care service'],
                 },
                 "es": {
                     "mx": [

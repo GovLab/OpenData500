@@ -178,12 +178,8 @@ class ListHandler(BaseHandler):
         agencies = Agency.objects(
             Q(dataType="Federal") & Q(country=country)).order_by(
             "-usedBy_count").only("name", "abbrev", "prettyName")[0:16]
-        if (country =="kr"):
-            stats = Stats.objects.get(country="us")
-            states_for_map = self.application.tools.states_for_map("us")
-        else:
-            stats = Stats.objects.get(country=country)
-            states_for_map = self.application.tools.states_for_map(country)
+        stats = Stats.objects.get(country=country)
+        states_for_map = self.application.tools.states_for_map(country)
 
         try:
             page_title=settings['page_titles'][lan]["list"]
