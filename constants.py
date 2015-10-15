@@ -67,15 +67,13 @@ categories = {
                         'Telecommunications / ISP\'s', 'Transportation'],
                     "kr": [
                         u'Fianace/Investment', u'S/W licensing', u'Media',
-                        u'Travel', u'Book sales', u'Commission', u'Information security',
-                        u'MICE', u'Research/Consulting', u'Government contract',
-                        u'Transportation', u'Geospatial/Mapping', u'Discount store',
+                        u'Travel', u'Book sales', u'Information security',
+                        u'Research/Consulting', u'Transportation', u'Geospatial/Mapping',
                         u'Housing/Real Estate', u'Data/Technology', u'Lifestyle/Consumer',
-                        u'Pharmacy/Medical', u'System construction',
-                        u'Advertising', u'Product production and sale', u'Consulting',
-                        u'Energy', u'Environment/Weather', u'Information and Communication',
+                        u'Pharmacy/Medical', u'Advertising', u'Consulting',
+                        u'Energy', u'Environment/Weather',
                         u'Food/Agriculture', u'Business/Legal Services', u'Education',
-                        u'Data analysis for clients', u'Pet Care service'],
+                        u'Data analysis for clients'],
                 },
                 "es": {
                     "mx": [
