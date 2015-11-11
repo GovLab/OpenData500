@@ -12,7 +12,7 @@ import codecs
 #Connect to mongo `export MONGOLAB_URI=$MONGOLAB_URI`
 connect('db', host=os.environ.get('MONGOLAB_URI'))
 
-csvfile = open('Korea_raw.csv', 'rU')
+csvfile = open('Korea_Raw_2.csv', 'rU')
 reader = csv.DictReader(csvfile, dialect=csv.excel)
 Form = utils.Form()
 
@@ -37,18 +37,19 @@ for rownum, row in enumerate(reader):
     company = Form.create_new_company(arguments={
         'country': 'Korea', # this will be stored as 'kr'
         'companyName': row['company_name'].decode('utf8', errors='ignore'),
-        'state': row['State'].decode('utf8', errors='ignore')
+        'state': row['state'].decode('utf8', errors='ignore')
     })
     company.url = row['url'].decode('utf8', errors='ignore')
     company.yearFounded = row['year_founded'].decode('utf8', errors='ignore')
     company.city = row['city'].decode('utf8', errors='ignore')
-    company.zipCode = row['zip_code'].decode('utf8', errors='ignore')
+    company.zipCode = row['zip_code'].decode('utf8', errors='ignore').zfill(5) 
     company.companyCategory = row['company_category'].decode('utf8', errors='ignore')
     company.companyType = row['company_type'].decode('utf8', errors='ignore')
     company.fte = row['full_time_employees'].decode('utf8', errors='ignore')
     company.revenueSource = row['revenue_source'].decode('utf8', errors='ignore').split(', ')
     company.businessModels = row['business_model'].decode('utf8', errors='ignore')
     company.socialImpact = row['social_impact'].decode('utf8', errors='ignore').split(', ')
+    company.description = row['description'].decode('utf8', errors='ignore')
     company.prettyName = Tools.prettify(company['companyName'])
     company.filters = []
 
