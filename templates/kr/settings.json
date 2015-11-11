@@ -1,15 +1,15 @@
 {
     "default_language": "en",
     "available_languages": ["en"],
-    "logo_path":"img/od500-logo-us.png",
+    "logo_path":"img/od100-logo-kr.png",
     "menu": {
         "en": [{
-            "item": "OD500 US",
-            "link": "/us/",
+            "item": "OD500 KR",
+            "link": "/kr/",
             "sub-menu": []
         }, {
             "item": "Full List",
-            "link": "/us/list/",
+            "link": "/kr/list/",
             "sub-menu": []
         }]
     },
