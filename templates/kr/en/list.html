@@ -78,7 +78,7 @@
                 <a href="/{{company.country}}/{{company.prettyName}}"><h3><strong>{{ company.companyName }}</strong></h3></a>
                 <p class="m-homepage-list-location"> {%try%}{{ states[country][company.state] }}{%except%}{%end%}</p>
                 <em> {{ company.companyCategory }}</em>
-                <p class="m-homepage-list-desc">{%try%}{{ company.description }}{%except%}{%end%}</p>
+                <!--<p class="m-homepage-list-desc">{%try%}{{ company.description }}{%except%}{%end%}</p>-->
 			</div>
 		{%end%}
 	</div>
