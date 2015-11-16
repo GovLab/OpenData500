@@ -8,8 +8,8 @@
             "link": "/it/",
             "sub-menu": []
         }, {
-            "item": "Full List",
-            "link": "/us/list/",
+            "item": "Survey",
+            "link": "http://opendata200.it",
             "sub-menu": []
         }],
         "it": [{
@@ -17,8 +17,8 @@
             "link": "/it/",
             "sub-menu": []
         }, {
-            "item": "Full List",
-            "link": "/us/list/",
+            "item": "Survey",
+            "link": "http://opendata200.it",
             "sub-menu": []
         }]
     },
