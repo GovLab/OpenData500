@@ -12,7 +12,12 @@
             "item": "OD500 IT",
             "link": "/it/",
             "sub-menu": []
-        }]
+        }],
+        "survey": [{
+            "item": "OD500 IT",
+            "link": "http://opendata200.it",
+            "sub-menu": []
+            }]
     },
     "page_titles": {
         "en": {
