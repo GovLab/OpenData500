@@ -7,17 +7,20 @@
             "item": "OD500 IT",
             "link": "/it/",
             "sub-menu": []
+        }, {
+            "item": "Full List",
+            "link": "/us/list/",
+            "sub-menu": []
         }],
         "it": [{
             "item": "OD500 IT",
             "link": "/it/",
             "sub-menu": []
-        }],
-        "survey": [{
-            "item": "OD500 IT",
-            "link": "http://opendata200.it",
+        }, {
+            "item": "Full List",
+            "link": "/us/list/",
             "sub-menu": []
-            }]
+        }]
     },
     "page_titles": {
         "en": {
