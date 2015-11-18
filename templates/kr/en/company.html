@@ -38,7 +38,7 @@
 								{% if d.usedBy == company %}
 									<ul>
 										{% if d.datasetURL %}
-											<li><a href="{% if 'http' in d.datasetURL %}{{d.datasetURL}}{%else%}http://{{d.datasetURL}}{%end%}">{{ d.datasetName }}</a></li>
+											<li><a href="http://data.go.kr">{{ d.datasetName }}</a></li>
 										{% else %}
 											<li>{{ d.datasetName }}</li>
 										{% end %}
@@ -48,7 +48,7 @@
 							<ul>
 								{% for s in a.subagencies %}
 									{% if company in s.usedBy %}
-										<li><h3><a href="{% if 'http' in s.url %}{{s.url}}{%else%}http://{{s.url}}{%end%}">{{s.name}}</a></h3></li>
+										<li><h3><a href="http://data.go.kr">{{s.name}}</a></h3></li>
 										<ul>
 											{% for d in s.datasets %}
 												{% if company == d.usedBy %}
