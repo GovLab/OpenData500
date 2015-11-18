@@ -32,7 +32,7 @@
 			{%for a in company.agencies %}
 				<div class="company-view-agency-list">
 					<ul>
-						<li><h3>{%if a.url %}<a href="{% if 'http' in a.url %}{{a.url}}{%else%}http://{{a.url}}{%end%}">{{a.name}}</a>{%else%}{{a.name}}{%end%}</h3></li>
+						<li><h3><a href="http://data.go.kr">{{a.name}}</a></h3></li>
 						<div class="company-view-agency-name">
 							{% for d in a.datasets %} 
 								{% if d.usedBy == company %}
