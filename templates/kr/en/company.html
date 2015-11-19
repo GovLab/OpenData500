@@ -32,13 +32,13 @@
 			{%for a in company.agencies %}
 				<div class="company-view-agency-list">
 					<ul>
-						<li><h3><a href="http://data.go.kr">{{a.name}}</a></h3></li>
+						<li><h3><a href="http://data.go.kr" target="_blank">{{a.name}}</a></h3></li>
 						<div class="company-view-agency-name">
 							{% for d in a.datasets %} 
 								{% if d.usedBy == company %}
 									<ul>
 										{% if d.datasetURL %}
-											<li><a href="http://data.go.kr">{{ d.datasetName }}</a></li>
+											<li><a href="http://data.go.kr" target="_blank">{{ d.datasetName }}</a></li>
 										{% else %}
 											<li>{{ d.datasetName }}</li>
 										{% end %}
@@ -48,7 +48,7 @@
 							<ul>
 								{% for s in a.subagencies %}
 									{% if company in s.usedBy %}
-										<li><h3><a href="http://data.go.kr">{{s.name}}</a></h3></li>
+										<li><h3><a href="http://data.go.kr" target="_blank">{{s.name}}</a></h3></li>
 										<ul>
 											{% for d in s.datasets %}
 												{% if company == d.usedBy %}
