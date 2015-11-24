@@ -9,7 +9,7 @@
             "sub-menu": []
         }, {
             "item": "Survey",
-            "link": "http://opendata200.it",
+            "link": "http://www.opendata200.it/survey",
             "sub-menu": []
         }],
         "it": [{
@@ -18,7 +18,7 @@
             "sub-menu": []
         }, {
             "item": "Survey",
-            "link": "http://opendata200.it",
+            "link": "http://www.opendata200.it/survey",
             "sub-menu": []
         }]
     },
