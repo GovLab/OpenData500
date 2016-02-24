@@ -24,10 +24,6 @@
     },
      "footer_menu": {
         "en":[{
-            "item": "",
-            "link": "https://twitter.com/PresidenciaMX"
-        },
-        {
             "item":"Contact Us",
             "link":"mailto:admin@thegovlab.org"
         }]
