@@ -1,0 +1,381 @@
+{% extends "../../main.html" %}
+{% autoescape None %}
+
+{% block body %}
+
+<div class="m-homepage">
+
+    <h1 class="first-title">Open Data 150 Canada</h1>
+    // <script src="{{ static_url("js/d3.v3.min.js") }}"></script>
+<!--     <section id="chord-chart-container">
+        <h2>Open Data Compass</h2>
+        <h3>What types of companies use which agencies' data?</h3>
+        <p></p>
+        <br />
+
+        <div id="chord-chart">
+            <span class="chord-legend companies">Company Categories</span>
+            <span class="chord-legend agencies">Government Agencies</span>
+        </div>
+
+    </section> -->
+
+    <section class="m-homepage-about">
+        <h1>About this Project</h1>
+        <p class="intro"> The Open Data 150 is a joint project between <a href="http://www.thegovlab.org"> The Govlab</a> and Canada’s Open Data Exchange (ODX), supported by the Federal Economic Development Agency for Southern Ontario and ThomsonReuters. It is the first comprehensive, internationally comparable mapping of Canadian companies that use open data to: launch new products and services; create commercial and nonprofit ventures, optimize their business processes, do research, make data-driven decisions, and solve complex problems.</p>
+    </section>
+</div>
+
+<div class="about-page">
+
+
+<section id="about-goals">
+	<h2>Study Objectives</h2>
+<p>
+	The primary objective of this project is to understand how companies are using open data, and raise awareness of the possibilities that exist for Canadian entrepreneurs to take advantage of the value of open data. Additional objectives include:</p>
+
+
+	<ul>
+		<li>Increasing the number of open data companies in Canada</li>
+		<li>Improving access to open data in breadth and number</li>
+		<li>Exploring new business models or methods for extracting value from data</li>
+		<li>Creating a community of stakeholders ODX can reach out to in an effort to better understand the unique challenges faced by open data companies</li>
+		<li>Establish a better understanding of the skills required to take advantage of open data</li>
+	</ul>
+</section>
+
+<section id="about-govlab-approach">
+	<h2>Approach</h2>
+	<p>The Open Data 150 is a collaborative project intended to identify and analyze Canada’s private sector capacity to create value from open data. The project was initiated by ODX and the information gathered by this project will give ODX and its partners deeper insight into the open data landscape that currently exists, as well as a view of what challenges need to be overcome in order to make Canadian open data companies more competitive.</p>
+
+</section>
+
+<div class="sub-sections">
+	<section id="about-identify" class="m-half">
+		<h2 class="m-page-title">Company Identification</h2>
+		<p>The Open Data 150 Canada team will compile the list of companies and NGOs through (1) outreach campaigns and open calls, (2) curation and identification by experts and professional organizations, and (3) additional research methods. The results of the study will culminate in an online platform at www.opendata500.com/ca which will highlight the companies and their use of open data in Canada.</p>
+	</section>
+
+	<section id="about-what-study-is-not" class="m-half">
+		<h2 class="m-page-title">What The Study Is Not</h2>
+		<p>The Open Data 150 Canada is not a rating or ranking of companies. It covers companies and entities of different sizes and categories, using various kinds of data. The Open Data 150
+Canada is not a competition, but an attempt to give a broad, inclusive view of the field. The study also does not provide a random sample for definitive statistical analysis. Since this is the first thorough scan of companies and entities in the field, it is not yet possible to determine the exact landscape of open data companies and entities.
+</p>
+	</section>
+</div>
+
+<section id="federal-open-data">
+	<h2>Federal Open Data/h2>
+	<ul>
+		<li>In 2011 the Federal Government’s open data portal was launched, and subsequently updated in 2013</li>
+		<li>In April 2012 Canada’s 3-year Action Plan on Open Government was initiated</li>
+		<li>In October 2014 the Government issued the Directive on Open Government making ‘open by default’ the standard for government publications and data</li>
+		<li>In November 2014 the second Action Plan on Open Government was announced, which among other initiatives, committed to the creation of ODX</li>
+		<li>In 2015, ODX was formed. ODX is a public-private-academic partnership based in Waterloo Region with the goal of becoming Canada’s central and national marketplace to access data innovation for economic prosperity.</li>
+	</ul>
+</section>
+<section id="about-people">
+	<h2>Team</h2>
+	<!-- <h3 class="adj-title">Open Data Center (ODC) at the </h3> -->
+	<!-- <h3 class= "adj-title"><a href="http://www.nia.or.kr/">National Information Society Agency (NIA)</a></h3> -->
+	<div class="m-team">
+		
+		<div id="team-person-one" class="m-team-picture">
+			<div>
+				<img src="{{static_url ("img/ca/Kevin-Tuer.PNG")}}" alt="NIA Team Member">
+				<p class="m-team-member-name">Kevin Tuer</p>
+				<p class="m-team-member-job">Managing Director, Canadian Open Data Exchange (ODX)<br>Vice President Strategic Initiatives, Communitech </p>
+			</div>
+		</div>	
+	
+		<div id="team-person-two" class="m-team-picture">
+			<div>
+				<img src="{{static_url ("img/ca/Michael-Chan.PNG")}}" alt="NIA Team Member">
+				<p class="m-team-member-name">Michael Chan</p>
+				<p class="m-team-member-job">Business Development Manager, ODX</p>
+			</div>
+		</div>
+		<div id="team-person-three" class="m-team-picture">
+			<div>
+				<img src="{{static_url ("")}}" alt="NIA Team Member">
+				<p class="m-team-member-name">Andrew Robertson</p>
+				<p class="m-team-member-job">Manager of Research Projects, Communitech<br></p>
+			</div>
+		</div>	
+		<div id="team-person-zero" class="m-team-picture">
+			<div>
+				<img src="{{static_url ("img/ca/Jean-Landry.PNG")}}" alt="NIA Team Member">
+				<p class="m-team-member-name">Jean-Noe Landry</p>
+				<p class="m-team-member-job">Executive Director, Open North</p>
+			</div>
+		</div>
+		
+		
+	
+		<div class="m-team-bios">
+			<div class="m-team-bio-person-one">
+				<h3>Kevin Tuer</h3>
+				<p>KEVIN TUER is Managing Director of the Canadian Open Data Exchange, a national initiative launched in May 2015 with a mandate to help the private sector adopt and commercialize data from public and private sources for the purpose of enhancing their current products or creating new products. As Vice President Strategic Initiatives for Communitech, Kevin leads cluster building activities including open data, big data and the Internet of Things (IoT), for the purpose of creating or accelerating new opportunities in emerging fields to the private sector. Previously, Kevin was the founding Managing Director of the Canadian Digital Media Network (CDMN), a federal Centre of Excellence for Commercialization and Research, which is dedicated to establishing Canada as a world leader in Digital Media by enabling connections and collaboration of people across the country and bringing more digital solutions to market. He led the design and deployment of the Communitech Hub, a world leading innovation centre located in the Waterloo Region as well as the CDMN’s national network and associated programming strategy. Prior to launching the CDMN, Kevin held several engineering and senior management positions in the high tech industry including Senior Research Engineer with Computing Devices Canada (now General Dynamics Canada), VP Engineering for Control Advancements Inc., as well as co‐founder and CTO of Handshake VR. Kevin holds a BASc (Honours) in Mechanical Engineering, a MASc in Mechanical Engineering, and a PhD in Electrical Engineering from the University of Waterloo. Further information can be found at <a href="https://www.linkedin.com/in/kevintuer/">ca.linkedin.com/in/kevintuer/.</a></p>
+
+
+			</div>
+			<div class="m-team-bio-person-two">
+				<h3>Michael Chan</h3>
+				<p>Michael Chan is the Business Development Manager of Canada’s Open Data Exchange (ODX).
+Canada’s Open Data Exchange (ODX) is a public‐private partnership. Its goal is to make it simple to drive innovation and economic wealth through the use of open data. ODX is building open data programs and partnerships that create an open data ecosystem and support data discovery, skills development and commercialization.</p>
+<p>Michael has held several senior management positions in the high tech industry over the past 15 years including Director of Enterprise Pricing, Market Research and New Product Introduction at BlackBerry Ltd., as well as VP of Business Development at Instrumar Ltd., a startup based out of St. John’s Newfoundland. Michael holds a BASc (Honours) in Mechnical Engineering from the University of Waterloo and a MBA for Wilfrid Laurier University.</p>
+
+			
+			</div>
+			<div class="m-team-bio-person-three">
+				<h3>Jean­Noé Landry</h3>
+				<p>Jean­Noé Landry, Executive Director of Open North, heads Canada’s leading civil society organization specialized in open data and civic technology. Open North’s work focuses on open data standards and infrastructure, civil society advocacy efforts, and technological products and services that make governments more transparent, engaging and accountable.</p>
+
+			</div>
+		
+		</div>	
+	
+	
+
+<!-- 
+
+	<section id="about-people">
+	
+	<h3 class="adj-title">Public Data Policy Division at the </h3>
+	<h3 class= "adj-title"><a href="http://www.mogaha.go.kr/">Ministry of Government Administration and Home Affairs (MOGAHA)</a></h3>
+	<div class="m-team">
+		<div id="team-person-eight" class="m-team-picture">
+			<div>
+				<img src="{{static_url ("img/kr/mogaha-YB-PARK.png")}}" alt="NIA Team Member">
+				<p class="m-team-member-name">Yeon-Byoung PARK</p>
+				<p class="m-team-member-job">Director <br></p>
+			</div>
+		</div>	
+	
+		<div id="team-person-nine" class="m-team-picture">
+			<div>
+				<img src="{{static_url ("img/kr/mogaha-JH-SHIM.png")}}" alt="NIA Team Member">
+				<p class="m-team-member-name">Jun-Hyung SHIM</p>
+				<p class="m-team-member-job">Deputy Director <br></p>
+			</div>
+		</div>
+		<div id="team-person-ten" class="m-team-picture">
+			<div>
+				<img src="{{static_url ("img/kr/mogaha-YS-OH.png")}}" alt="NIA Team Member">
+				<p class="m-team-member-name">Yeon-Soon OH</p>
+				<p class="m-team-member-job">Assistant Director <br></p>
+			</div>
+		</div>	
+ -->
+	<h3>The GovLab</h3>
+	<div class="m-team">
+		<div id="team-beth-noveck" class="m-team-picture">
+			<div>
+				<img src="/static/img/us/beth-noveck.jpg" alt="">
+				<p class="m-team-member-name">Beth Simone Noveck</p>
+				<p class="m-team-member-job">Founder &amp; Director, <br>The GovLab</p>
+			</div>
+		</div>
+		<div id="team-stefaan-verhulst" class="m-team-picture">
+			<div>
+				<img src="/static/img/us/stefaan-verhulst.jpg" alt="">
+				<p class="m-team-member-name">Stefaan Verhulst</p>
+				<p class="m-team-member-job">Co-Founder and Chief of Research and Development, The GovLab; Director of GovLab's Open Data Project</p>
+			</div>
+		</div>
+		<div id="team-julia-root" class="m-team-picture">
+			<div>
+				<img src="/static/img/us/julia-root.jpg" alt="">
+				<p class="m-team-member-name">Julia Root</p>
+				<p class="m-team-member-job">Project Lead</p>
+			</div>
+		</div>
+		<div class="m-team-bios">
+			<div class="m-team-bio-beth-noveck">
+				<h3>Beth Simone Noveck</h3>
+				<p>Beth Simone Noveck directs The Governance Lab and its MacArthur Research Network on Opening Governance.  Funded by the John D. and Catherine T. MacArthur Foundation,  the John S. and James L. Knight Foundation and Google.org, the GovLab strives to improve people’s lives by changing how we govern. The GovLab designs and tests technology, policy and strategies for fostering more open and collaborative approaches to strengthen the ability of people and institutions to work together to solve problems, make decisions, resolve conflict and govern themselves more effectively and legitimately.</p>
+				<p>The Jacob K. Javits Visiting Professor at New York University’s Robert F. Wagner Graduate School of Public Service and a visiting professor at the MIT Media Lab, Beth is a professor of law at New York Law School. She served in the White House as the first United States Deputy Chief Technology Officer and director of the White House Open Government Initiative (2009-2011). UK Prime Minister David Cameron appointed her senior advisor for Open Government, and she served on the Obama-Biden transition team. Among projects she’s designed or collaborated on are Unchat, The Do Tank, Peer To Patent, Data.gov, Challenge.gov and the Gov Lab’s Living Labs and training platform, The Academy.</p>
+				<p>A graduate of Harvard University and Yale Law School, she serves on the Global Commission on Internet Governance and chairs the ICANN Strategy Panel on Multi-Stakeholder Innovation. She was named one of the “Foreign Policy 100″ by Foreign Policy, one of the “100 Most Creative People in Business” by Fast Company and one of the “Top Women in Technology” by Huffington Post. She has also been honored by both the National Democratic Institute and Public Knowledge for her work in civic technology.</p>
+				<p>Beth is the author of Wiki Government: How Technology Can Make Government Better, Democracy Stronger and Citizens More Powerful, which has also appeared in Arabic, Russian, Chinese and in an audio edition, and co-editor of The State of Play: Law, Games and Virtual Worlds. Her next book The Networked State will appear with Harvard University Press. She tweets <a href="https://twitter.com/bethnoveck" target="_blank">@bethnoveck</a>.</p>
+			</div>
+			<div class="m-team-bio-stefaan-verhulst">
+				<h3>Stefaan G. Verhulst</h3>
+				<p>Stefaan G. Verhulst is Co-Founder and Chief Research and Development Officer of the Governance Laboratory @NYU (GovLab) where he is responsible for building a research foundation on how to transform governance using advances in science and technology.</p>
+				<p>Verhulst’s latest scholarship centers on how technology can improve people’s lives and the creation of more effective and collaborative forms of governance. Specifically, he is interested in the perils and promise of collaborative technologies and how to harness the unprecedented volume of information to advance the public good.</p>
+			</div>
+			<div class="m-team-bio-julia-root">
+				<h3>Julia Root</h3>
+				<p>Julia Root is the project lead for GovLab’s Open NYU and Open Data 500 Global Network. She has worked across organizational and urban themes, as well as across sectors, as an inspired strategist, idea connector and network builder. Areas of expertise include open data and urban informatics; expert networks; cross-sector network building; higher education strategy; civic innovation; and intercultural business performance. Previously she was with NYU CUSP (Center for Urban Science + Progress) as the assistant director for student services. Prior to joining NYU, she had worked as a consultant with a boutique international consulting firm focused on advising higher education, public sector and engineering clients on urban issues and cross sector network building. She has contributed research and writing for academic and policy institutes and has consulted with organizations on business development, marketing and organizational development.</p>
+				<p>Prior to arriving to New York City she was the associate director of development for the largest health and human service provider in New Orleans and the Gulf Coast and was a field office manager for an advocacy nonprofit located in Los Angeles. Julia has lived and/or worked in Los Angeles, San Diego, Barcelona, New Orleans and New York City.  She has a B.A. from the University of California, San Diego and an M.P.A from NYU’s Robert F. Wagner Graduate School of Public Service.</p>
+			</div>
+		</div>
+		<div id="team-anupama-sharma" class="m-team-picture">
+			<div>
+				<img src="/static/img/us/anupama-sharma.jpg" alt="">
+				<p class="m-team-member-name">Anupama Sharma</p>
+				<p class="m-team-member-job">Developer</p>
+			</div>
+		</div>
+		<div id="team-claudio-mendonca" class="m-team-picture">
+			<div>
+				<img src="/static/img/us/claudio-mendonca.jpg" alt="">
+				<p class="m-team-member-name">Claudio Mendonca</p>
+				<p class="m-team-member-job">Designer</p>
+			</div>
+		</div>
+			<div class="m-team-bios">
+			<div class="m-team-bio-john-krauss">
+				<h3>John Krauss</h3>
+				<p>John Krauss is a technical research fellow at the GovLab @ NYU. He’s active in New York City’s civic hacking scene, working to standardize and visualize transportation, safety, and housing data. John joins the GovLab after several years freelancing in the startup scene, where he experimented with scraping and continuous integration while building open data tools like <a href="http://nyc.crashmapper.com/">Crashmapper</a> on the side. His background is in architecture and housing; he received his B.A. in architecture and history from Columbia University and went on to consult on data and web design for NYU’s Furman Center for Real Estate and Urban Policy. In his spare time, John likes to bike, and once cycled from Santiago de Compostela to Berlin. He occasionally <a href="http://blog.johnkrauss.com/">blogs</a>, almost never <a href="https://twitter.com/recessionporn">tweets</a>, but often <a href="https://github.com/talos/">codes</a>.</p>
+			</div>
+			<div class="m-team-bio-claudio-mendonca">
+				<h3>Claudio Mendonca</h3>
+				<p>Claudio Mendonca is the graphic designer at The GovLab. Working as a graphic artist for more than 10 years, he earned his Bachelor's degree in Graphic Design in 2005. He has extensive experience in branding and interaction design.</p>
+				<p>Claudio's previous experience includes 3 years developing graphical material for several government institutions in Brazil, publications and interface design for startups.</p>
+				<p>He also designs webapps for the Centre of Direct Democracy and works as a design consultant at the World Bank Institute on several open gov projects such as Open Government, Open Contracting, Open Development and Technology Alliance, ICT4Gov.</p>
+				<p>At The GovLab, Claudio is responsible for branding and interaction design for The GovLab projects. He can be found at <a href="http://www.claudiomendonca.com" target="_blank">claudiomendonca.com</a>.</p>
+			</div>
+			
+		</div>
+	</div>	
+</section>
+</div>
+
+
+<script type="text/javascript">
+
+
+$('.m-homepage').css('text-align', 'left' );
+var data;
+d3.json("{{ static_url('files/kr_matrix.json') }}", function(error, json) {
+    if (error) return console.warn(error);
+    data = json;
+    draw_diagram();
+})
+
+function draw_diagram() {
+    var chord = d3.layout.chord()
+        .padding(0.01)
+        .sortSubgroups(d3.descending)
+        .matrix(data.matrix);
+
+    var width = 730,
+        height = 750,
+        innerRadius = Math.min(width, height) * .25,
+        outerRadius = innerRadius * 1.14;
+
+    var maxColor = '#4a2f76'
+    var baseColor = '#eeeeee';
+    var baseColor2 = '#a9db6c';
+    var range = 50;
+    var maxVal = d3.max(chord.groups, function(d) { return d.value; });
+    var minVal = d3.min(chord.groups, function(d) { return d.value; });
+    var fill_agencies = d3.scale.linear().domain([0,range]).range([maxColor, baseColor]);
+    var fill_categories = d3.scale.linear().domain([0,range]).range([maxColor, baseColor2]);
+
+    var svg = d3.select("#chord-chart").append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .attr("id", "circle")
+      .append("g")
+        .attr("transform", "translate(335, 375)");
+        // .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+    
+    var circle = svg.append("circle")
+        .attr("r", outerRadius);
+
+    var nodes = svg.append("g").selectAll("path")
+        .data(chord.groups)
+        .enter().append("path")
+        .style("fill", function(d) { 
+            if (data.num_agencies > d.index) {
+                return fill_agencies(d.index);
+            } else {
+                return fill_categories(d.index);
+            }
+        })
+        .attr("d", d3.svg.arc().innerRadius(innerRadius).outerRadius(outerRadius))
+        .on("mouseover", mouseover);
+
+    var ticks = svg.append("g").selectAll("g")
+        .data(chord.groups)
+        .enter().append("g").selectAll("g")
+        .data(groupTicks)
+        .enter().append("g")
+        .attr("transform", function(d) {
+          return "rotate(" + (d.angle * 180 / Math.PI - 90) + ")"
+              + "translate(" + outerRadius + ",0)";
+        });
+
+    ticks.append("text")
+        .attr("x", 8)
+        .attr("dy", ".35em")
+        .attr("transform", function(d) { return d.angle > Math.PI ? "rotate(180)translate(-16)" : null; })
+        .style("text-anchor", function(d) { return d.angle > Math.PI ? "end" : null; })
+        .text(function(d) { return d.label; })
+        .filter(function(d, i) { return d.angleDiff < .017 })
+        .remove();
+
+    //var chord = svg.append("g")
+    var chord = svg.selectAll(".chord")
+      //.selectAll("path")
+        .data(chord.chords)
+      .enter().append("path")
+        .attr("class", "chord")
+        .attr("d", d3.svg.chord().radius(innerRadius))
+        .style("fill", "rgba(0,0,0,0.2)"); 
+        // .style("fill", function(d) { 
+        //     return fill_agencies(d.target.index); 
+        // });
+
+    chord.on("mouseover", function(d) {
+        d3.select(this).style("fill", "rgba(0,0,0,0.4)");
+    }).on("mouseout", function(d) {
+        d3.select(this).style("fill", "rgba(0,0,0,0.1)");
+        // d3.select(this).style("fill", function(d) {
+        //     return fill_agencies(d.target.index);
+        // });
+    });
+
+    chord.append("title")
+        .text(function(d) { return data.names[d.source.index] + "->" + data.names[d.target.index] + "\n" + d.target.value + " companies"});
+
+    // nodes.append("title")
+    //     .text(function(d) { return data.names[d.index] + "\n" + d.value + " companies"});
+
+    function groupTicks(d) {
+      var k = (d.endAngle - d.startAngle) / d.value;
+      return d3.range(0, d.value, 1000).map(function(v, i) {
+        return {
+          angle: v * k + d.startAngle + (d.endAngle - d.startAngle)/2,
+          label: data.names[d.index],
+          angleDiff: d.endAngle - d.startAngle
+        };
+      });
+    }
+
+    function mouseover(d, i) {
+      chord.classed("fade", function(p) {
+        return p.source.index != i
+            && p.target.index != i;
+      });
+    }
+}
+
+</script>
+
+<script>
+    $('#mc_embed_signup').removeClass('s-disabled').delay(5000).addClass('s-disabled');
+</script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-70626555-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+{% end %}
