@@ -12,7 +12,7 @@ import codecs
 #Connect to mongo `export MONGOLAB_URI=$MONGOLAB_URI`
 connect('db', host=os.environ.get('MONGOLAB_URI'))
 
-csvfile = open('Korea_Raw_2.csv', 'rU')
+csvfile = open('korea_Raw4.csv', 'rU')
 reader = csv.DictReader(csvfile, dialect=csv.excel)
 Form = utils.Form()
 
@@ -27,7 +27,7 @@ models.Agency.objects(Q(country='kr')).delete()
 #  * Company description is missing.  what should we show instead?
 #  * Company category column has several categories, we can only show one.  Please pick one category for each company. Right now we're just showing the first listed category.
 
-MAX_ROWS = 10000 # CHANGE ME WHEN YOU RUN FOR REAL!!!!
+# MAX_ROWS = 10000 # CHANGE ME WHEN YOU RUN FOR REAL!!!!
 
 output=[]
 for rownum, row in enumerate(reader):
@@ -92,8 +92,8 @@ for rownum, row in enumerate(reader):
     for agency in agencies:
         Form.add_agency_to_company(company, agency)
 
-    if rownum > MAX_ROWS:
-        break
+    # if rownum > MAX_ROWS:
+    #     break
 
     #print u'saved: {}'.format(company.companyName)
 # print output

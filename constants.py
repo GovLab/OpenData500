@@ -74,6 +74,15 @@ categories = {
                         u'Energy', u'Environment/Weather',
                         u'Food/Agriculture', u'Business/Legal Services', u'Education',
                         u'Data analysis for clients'],
+                    "ca": [
+                        u'Fianace/Investment', u'S/W licensing', u'Media',
+                        u'Travel', u'Book sales', u'Information security',
+                        u'Research/Consulting', u'Transportation', u'Geospatial/Mapping',
+                        u'Housing/Real Estate', u'Data/Technology', u'Lifestyle/Consumer',
+                        u'Pharmacy/Medical', u'Advertising', u'Consulting',
+                        u'Energy', u'Environment/Weather',
+                        u'Food/Agriculture', u'Business/Legal Services', u'Education',
+                        u'Data analysis for clients'],
                 },
                 "es": {
                     "mx": [
@@ -112,7 +121,13 @@ social_impacts = {
                         'Consumer empowerment', 'Educational opportunity', 
                         'Environment and climate change', 'Financial access', 
                         'Food access and supply', 'Good governance', 
-                        'Healthcare access', 'Housing access', 'Public safety']
+                        'Healthcare access', 'Housing access', 'Public safety'],
+                    "ca":  [
+                        'Citizen engagement and participation', 
+                        'Consumer empowerment', 'Educational opportunity', 
+                        'Environment and climate change', 'Financial access', 
+                        'Food access and supply', 'Good governance', 
+                        'Healthcare access', 'Housing access', 'Public safety'],
                 },
                 "es": {
                     "mx":[
@@ -157,6 +172,14 @@ data_types = {
                         "Government Operations", "Health/Healthcare", "Housing", 
                         "International/Global Development", "Legal", "Manufacturing", 
                         "Science and Research", "Public Safety", "Tourism", 
+                        "Transportation", "Weather"],
+                     "ca":[
+                        "Agriculture & Food", "Business", "Consumer", 
+                        "Demographics & Social", "Economics", "Education", 
+                        "Energy", "Environment", "Finance", "Geospatial/Mapping", 
+                        "Government Operations", "Health/Healthcare", "Housing", 
+                        "International/Global Development", "Legal", "Manufacturing", 
+                        "Science and Research", "Public Safety", "Tourism", 
                         "Transportation", "Weather"]
                 },
                 "es": {
@@ -185,6 +208,10 @@ data_impacts = {
                         "Job growth", "Revenue growth", "Identify new opportunities", 
                         "New/improved research"],
                     "kr": [
+                        "Cost efficiency", "New or improved product/service", 
+                        "Job growth", "Revenue growth", "Identify new opportunities", 
+                        "New/improved research"],
+                    "ca": [
                         "Cost efficiency", "New or improved product/service", 
                         "Job growth", "Revenue growth", "Identify new opportunities", 
                         "New/improved research"]
@@ -318,11 +345,11 @@ stateList = {
                    u'Seoul', u'Ulsan']
             }
 agency_types = ['Federal','State','City/County','University/Institution']
-available_countries = ["us", "au", "mx", "fr", "kr", "it"]
+available_countries = ["us", "au", "mx", "fr", "kr", "it", "ca"]
 disabled_countries = []
 country_keys = { 
-    "us":"United States", "au":"Australia", "United States":"us", "Korea": "kr",
-    "Australia":"au",  "Mexico":"mx", "mx":"Mexico", "it": "Italy", "kr": "Korea"}
+    "us":"United States", "au":"Australia", "United States":"us", "Korea": "kr","Canada":"ca",
+    "Australia":"au",  "Mexico":"mx", "mx":"Mexico", "it": "Italy", "kr": "Korea","ca":"Canada"}
 
 # "fields" include text fields, textareas, drop-down menus
 company_contact_fields = ['firstName', 'lastName', 'title', 'email', 'phone']
