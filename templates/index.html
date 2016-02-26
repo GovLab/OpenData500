@@ -110,14 +110,28 @@
 								<h2>Korea</h2>
 							</a>
 							{% end %}
-							<a href="mailto:opendata500@thegovlab.org?subject=OD500+in+my+country" class="b-country b-third">
-								<div class="b-flag m-in-your-country">
-									<div></div>
-								</div>
-								<h2>OD500 in Your Country</h2>
-								<p></p>
-							</a>
+                            {% if "ca" in constants.disabled_countries %}
+                            <div class="b-country b-third">
+                            </div>
+                            {% else %}
+                            <a href="/ca/" class="b-country b-third">
+                                <div class="b-flag m-ca">
+                                    <div></div>
+                                </div>
+                                <h2>Canada</h2>
+                            </a>
+                            {% end %}
+							
 						</div>
+                        <div class="b-country-selector">
+                            <a href="mailto:opendata500@thegovlab.org?subject=OD500+in+my+country" class="b-country b-third">
+                                <div class="b-flag m-in-your-country">
+                                    <div></div>
+                                </div>
+                                <h2>OD500 in Your Country</h2>
+                                <p></p>
+                            </a>
+                        </div>
 					</div>
 
           <div class="b-country"><p>
