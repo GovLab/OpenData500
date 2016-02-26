@@ -1039,6 +1039,8 @@ font-size: 12px;
     background-image: url("/static/img/italy-flag.png"); }
   #international-homepage .b-flag.m-ru > div {
     background-image: url("/static/img/russia-flag.png"); }
+  #international-homepage .b-flag.m-ca > div {
+    background-image: url("/static/img/canada-flag.png"); }
   #international-homepage .b-flag.m-in-your-country > div {
     background-image: url("/static/img/od500-in-your-country.png");
     background-size: 80%; }
