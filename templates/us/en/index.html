@@ -35,22 +35,22 @@
     <section class="m-homepage-about">
         <h1>About This Project</h1>
         <p class="intro">The Open Data 500, funded by the <a href="http://www.knightfoundation.org/" target="_blank">John S. and James L. Knight Foundation</a> and conducted by <a href="http://thegovlab.org/" target="_blank">the GovLab</a>, is the first comprehensive study of U.S. companies that use open government data to generate new business and develop new products and services.</p>
-        <p class="more"><a href="http://www.opendata500.com/us/about/" class="m-button">Learn More</a></p> 
+        <p class="more"><a href="http://www.opendata500.com/us/about/" class="m-button">Learn More</a></p>
     </section>
 
     <section class="m-homepage-participate">
         <h1>How To Participate</h1>
-        <div class="m-homepage-box">
+        <div class="m-homepage-box m-big">
             <h2>1</h2>
             <h3>Take the Survey</h3>
-            <p>Fill out the <a href="http://www.opendata500.com/us/submitCompany/">survey</a> and tell us about your company's use of open data.</p>    
+            <p>Fill out the <a href="http://www.opendata500.com/us/submitCompany/">survey</a> and tell us about your company's use of open data.</p>
         </div>
-        <div class="m-homepage-box">
+        <div class="m-homepage-box m-big">
             <h2>2</h2>
             <h3>Edit a Profile</h3>
             <p>If you'd like to edit your company's profile, send us an <a href="mailto:opendata500@thegovlab.org">email</a>.
         </div>
-        <div class="m-homepage-box">
+        <div class="m-homepage-box m-big">
             <h2>3</h2>
             <h3>Join the Conversation</h3>
             <p><a href="http://www.opendata500.com/us/about/#disqus_thread">Comment using Disqus</a>, follow us on <a href="http://www.twitter.com/opendata500">Twitter</a>, or send us an <a href="mailto:opendata500@thegovlab.org">email</a>.</p>
@@ -95,14 +95,14 @@ function draw_diagram() {
       .append("g")
         .attr("transform", "translate(335, 375)");
         // .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-    
+
     var circle = svg.append("circle")
         .attr("r", outerRadius);
 
     var nodes = svg.append("g").selectAll("path")
         .data(chord.groups)
         .enter().append("path")
-        .style("fill", function(d) { 
+        .style("fill", function(d) {
             if (data.num_agencies > d.index) {
                 return fill_agencies(d.index);
             } else {
@@ -138,9 +138,9 @@ function draw_diagram() {
       .enter().append("path")
         .attr("class", "chord")
         .attr("d", d3.svg.chord().radius(innerRadius))
-        .style("fill", "rgba(0,0,0,0.2)"); 
-        // .style("fill", function(d) { 
-        //     return fill_agencies(d.target.index); 
+        .style("fill", "rgba(0,0,0,0.2)");
+        // .style("fill", function(d) {
+        //     return fill_agencies(d.target.index);
         // });
 
     chord.on("mouseover", function(d) {
