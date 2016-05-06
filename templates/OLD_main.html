@@ -1,0 +1,382 @@
+<!doctype html> 
+{% try %}
+    {% set lan_ = lan %}
+{% except NameError %}
+    {% set lan_ = 'en' %}
+{% end %}
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]>     <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>     <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html lang="{{lan_}}" class="no-js"> <!--<![endif]-->
+<head>
+    <meta name="description" content="{% if 'meta_description' in settings %}{{ settings['meta_description'] }}{% else %}The Open Data 500 is the first comprehensive study of U.S. companies that use open government data to generate new business and develop new products and services.{% end %}">
+    <meta name="keywords" content="Open Data, Open Data 500, OD500 Global Network, NYU Governance Lab, NYU GovLab, GovLab, Companies, Government Open Data, Open Government Data, Big Data, Data, Open, {{settings.get('meta_keywords', '')}}">
+    <meta name="author" content="{% if 'meta_author' in settings %}{{ settings['meta_author'] }}{ % else %}NYU Governance Lab{% end %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>{%try%} {{ page_title }}{%except%}Open Data 500{%end%}</title>
+    <!-- Load jQuery -->
+    <script src="{{ static_url("js/jquery-2.1.0.min.js") }}"></script>
+    <script src="{{ static_url("js/jquery-ui-1.10.4.custom.min.js") }}"></script>
+    <script>!window.jQuery && document.write('<script src="{{ static_url("js/jquery-2.1.0.min.js") }}"><\/script>')</script>
+    <link rel="stylesheet" href="{{ static_url("css/style.css") }}" />
+    <link rel="stylesheet" href="{{ static_url("css/styles.css") }}" />
+    <link rel="stylesheet" href="{{ static_url("css/luis.css") }}" />
+    <link rel="stylesheet" href="{{ static_url("css/parsley.css") }}" />
+    <!-- <link rel="stylesheet" href="{{ static_url("css/bootstrap.css") }}" /> -->
+    <link rel="stylesheet" href="{{ static_url("css/libs/normalize/normalize.css") }}" />
+    <link rel="stylesheet" href="{{ static_url("css/jquery-ui-1.10.4.custom.min.css") }}" />
+    <link href='http://fonts.googleapis.com/css?family=Exo:100,500,100italic,500italic' rel='stylesheet' type='text/css'>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <link href="<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,200italic,300italic,400italic|PT+Sans:400,400italic|Open+Sans:300italic,400italic,600italic,400,300,600|Raleway:400,100,200,300,500,600|Titillium+Web:400,200,200italic,300,300italic,400italic,600,600italic' rel='stylesheet' type='text/css'>">
+    <script src="{{ static_url("js/modernizr.custom.39528.js") }}"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+
+
+</head>
+<body>
+    <!-- <div class="parallax-bg" id="background" data-stellar-ratio="-0.01"></div> -->
+    <!-- <div class="parallax-bg" id="background-2" data-stellar-ratio="-0.015"></div>  
+    <div class="parallax-bg" id="background-3" data-stellar-ratio="-0.02"></div>   -->
+    <header>
+        <div class="l-centered">
+            <a class="logo" href="/">
+                <img src="{{ static_url('img/od500-logo.png') }}" alt=""></a>
+                <!--<img src="{{ static_url(settings['logo_path']) }}" alt=""></a>-->
+            <div id="mainMenu" class="m-main-menu">
+                {% if len(settings['menu'][lan_]) > 1 %}
+                    {% for item in settings['menu'][lan_] %}        
+                    {% if not item.get('disabled', False) %}
+                        <div class="m-main-menu-item">
+                            <a href="{{item['link']}}">{{item['item']}}</a>
+                            {% if item['sub-menu'] %}
+                                <ul id="submenu-about" class="m-main-menu-sub-menu">
+                                    {% for sub_item in item['sub-menu'] %}
+                                        <li><a class="m-main-menu-sub-menu-item" href="{{sub_item['link']}}">{{sub_item['item']}}</a></li>
+                                    {%end%}
+                                </ul>
+                            {%end%}
+                        </div>
+                    {%end%}
+                    {%end%}
+                {%end%}
+                {%try%} {% if user %} 
+                    <div class="m-main-menu-item">
+                        <a href="/admin/companies/">Admin</a>
+                        <ul id="submenu-about" class="m-main-menu-sub-menu">
+                            <li><a class="m-main-menu-sub-menu-item" href="/admin/companies/">Companies</a></li>
+                            <li><a class="m-main-menu-sub-menu-item" href="/admin/agencies/">Agencies</a></li>
+                        </ul>
+                    </div>
+                {% end %}{%except%}{%end%}
+                {%try%} {% if user %} <div class="m-main-menu-item"><a href="/logout/">Logout</a></div>{% end %}{%except%}{%end%}
+                {% if len(settings['available_languages']) > 1 %}
+                    <div class="m-main-menu-item">
+                        <div class="language-options">
+                            {% for language in settings['available_languages'] %}
+                                <a href="?lan={{language}}">{{language.upper()}}</a>
+                            {%end%}
+                        </div>
+                    </div>
+                {%end%}
+            </div>
+
+        </div>
+    </header><!-- end header -->
+    
+    <div id="main" class="l-centered">
+        <div id="container">
+            {% block body %}{% end %}
+        </div><!-- end container -->
+    </div><!-- end main -->
+    
+    <!-- Mailchimp Subscribe -->
+    <div id="mc_embed_signup" class="s-disabled">
+        <span class="signup-handle"></span>
+        <form action="http://openinggovernment.us6.list-manage.com/subscribe/post?u=1a990feb5c&amp;id=691b1fcbc9" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+            <h2 class="m-page-title">Subscribe</h2>
+            <p>Subscribe for email updates</p>
+            <div class="mc-field-group">
+                <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL" placeholder="Email"><input type="submit" value="OK" name="subscribe" id="mc-embedded-subscribe" class="m-button">
+            </div>
+            <div style="position: absolute; left: -5000px;"><input type="text" name="b_1a990feb5c_691b1fcbc9" value=""></div>
+            <div id="mce-responses">
+                <div class="response" id="mce-error-response" style="display:none"></div>
+                <div class="response" id="mce-success-response" style="display:none"></div>
+            </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+        </form>
+    </div>
+
+    <footer>
+        <div class="l-centered">
+            <div class="m-footer-logos">
+                <a href="http://thegovlab.org/"><img id="govlab-logo" src="{{ static_url("img/govlab-logo.png") }}" alt="The GovLab"></a>
+            </div>
+            <ul>
+                {% for i in range(0, len(settings['footer_menu'][lan_])) %}
+                    {% if i == len(settings['footer_menu'][lan_])-1 %}
+                        <li class="footer-menu-item last"><a href="{{settings['footer_menu'][lan_][i]['link']}}" target="_blank">{{settings['footer_menu'][lan_][i]['item']}}</a></li> 
+                    {%else%}
+                        <li class="footer-menu-item"><a href="{{settings['footer_menu'][lan_][i]['link']}}" target="_blank">{{settings['footer_menu'][lan_][i]['item']}}</a></li> 
+                    {%end%}
+                {%end%}
+            </ul>
+            <p class="creative-commons-license"><a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Dataset" property="dct:title" rel="dct:type">The Open Data 500</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://thegovlab.org/" property="cc:attributionName" rel="cc:attributionURL">The GovLab</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.<br />Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="https://github.com/luisdaniel/OpenData500" rel="dct:source">https://github.com/luisdaniel/OpenData500</a>.</p>
+        </div>
+    </footer><!-- end footer -->
+    <script type="text/javascript">
+        //------------------------------MAIL CHIMP SIGNUP------------------------------------------
+        var fnames = new Array();var ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';
+        try {
+            var jqueryLoaded=jQuery;
+            jqueryLoaded=true;
+        } catch(err) {
+            var jqueryLoaded=false;
+        }
+        var head= document.getElementsByTagName('head')[0];
+        if (!jqueryLoaded) {
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = '//ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js';
+            head.appendChild(script);
+            if (script.readyState && script.onload!==null){
+                script.onreadystatechange= function () {
+                      if (this.readyState == 'complete') mce_preload_check();
+                }    
+            }
+        }
+
+        var err_style = '';
+        try{
+            err_style = mc_custom_error_style;
+        } catch(e){
+            err_style = '#mc_embed_signup input.mce_inline_error{border-color:#6B0505;} #mc_embed_signup div.mce_inline_error{margin: 0 0 1em 0; padding: 5px 10px; background-color:#6B0505; font-weight: bold; z-index: 1; color:#fff;}';
+        }
+        var head= document.getElementsByTagName('head')[0];
+        var style= document.createElement('style');
+        style.type= 'text/css';
+        if (style.styleSheet) {
+          style.styleSheet.cssText = err_style;
+        } else {
+          style.appendChild(document.createTextNode(err_style));
+        }
+        head.appendChild(style);
+        setTimeout('mce_preload_check();', 250);
+
+        var mce_preload_checks = 0;
+        function mce_preload_check(){
+            if (mce_preload_checks>40) return;
+            mce_preload_checks++;
+            try {
+                var jqueryLoaded=jQuery;
+            } catch(err) {
+                setTimeout('mce_preload_check();', 250);
+                return;
+            }
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = 'http://downloads.mailchimp.com/js/jquery.form-n-validate.js';
+            head.appendChild(script);
+            try {
+                var validatorLoaded=jQuery("#fake-form").validate({});
+            } catch(err) {
+                setTimeout('mce_preload_check();', 250);
+                return;
+            }
+            mce_init_form();
+        }
+        function mce_init_form(){
+            jQuery(document).ready( function($) {
+              var options = { errorClass: 'mce_inline_error', errorElement: 'div', onkeyup: function(){}, onfocusout:function(){}, onblur:function(){}  };
+              var mce_validator = $("#mc-embedded-subscribe-form").validate(options);
+              $("#mc-embedded-subscribe-form").unbind('submit');//remove the validator so we can get into beforeSubmit on the ajaxform, which then calls the validator
+              options = { url: 'http://openinggovernment.us6.list-manage.com/subscribe/post-json?u=1a990feb5c&id=691b1fcbc9&c=?', type: 'GET', dataType: 'json', contentType: "application/json; charset=utf-8",
+                            beforeSubmit: function(){
+                                $('#mce_tmp_error_msg').remove();
+                                $('.datefield','#mc_embed_signup').each(
+                                    function(){
+                                        var txt = 'filled';
+                                        var fields = new Array();
+                                        var i = 0;
+                                        $(':text', this).each(
+                                            function(){
+                                                fields[i] = this;
+                                                i++;
+                                            });
+                                        $(':hidden', this).each(
+                                            function(){
+                                                var bday = false;
+                                                if (fields.length == 2){
+                                                    bday = true;
+                                                    fields[2] = {'value':1970};//trick birthdays into having years
+                                                }
+                                                if ( fields[0].value=='MM' && fields[1].value=='DD' && (fields[2].value=='YYYY' || (bday && fields[2].value==1970) ) ){
+                                                    this.value = '';
+                                                } else if ( fields[0].value=='' && fields[1].value=='' && (fields[2].value=='' || (bday && fields[2].value==1970) ) ){
+                                                    this.value = '';
+                                                } else {
+                                                    if (/\[day\]/.test(fields[0].name)){
+                                                        this.value = fields[1].value+'/'+fields[0].value+'/'+fields[2].value;                                           
+                                                    } else {
+                                                        this.value = fields[0].value+'/'+fields[1].value+'/'+fields[2].value;
+                                                    }
+                                                }
+                                            });
+                                    });
+                                $('.phonefield-us','#mc_embed_signup').each(
+                                    function(){
+                                        var fields = new Array();
+                                        var i = 0;
+                                        $(':text', this).each(
+                                            function(){
+                                                fields[i] = this;
+                                                i++;
+                                            });
+                                        $(':hidden', this).each(
+                                            function(){
+                                                if ( fields[0].value.length != 3 || fields[1].value.length!=3 || fields[2].value.length!=4 ){
+                                                    this.value = '';
+                                                } else {
+                                                    this.value = 'filled';
+                                                }
+                                            });
+                                    });
+                                return mce_validator.form();
+                            }, 
+                            success: mce_success_cb
+                        };
+              $('#mc-embedded-subscribe-form').ajaxForm(options);
+              
+              
+            });
+        }
+        function mce_success_cb(resp){
+            $('#mce-success-response').hide();
+            $('#mce-error-response').hide();
+            if (resp.result=="success"){
+                $('#mce-'+resp.result+'-response').show();
+                $('#mce-'+resp.result+'-response').html(resp.msg);
+                $('#mc-embedded-subscribe-form').each(function(){
+                    this.reset();
+                });
+            } else {
+                var index = -1;
+                var msg;
+                try {
+                    var parts = resp.msg.split(' - ',2);
+                    if (parts[1]==undefined){
+                        msg = resp.msg;
+                    } else {
+                        i = parseInt(parts[0]);
+                        if (i.toString() == parts[0]){
+                            index = parts[0];
+                            msg = parts[1];
+                        } else {
+                            index = -1;
+                            msg = resp.msg;
+                        }
+                    }
+                } catch(e){
+                    index = -1;
+                    msg = resp.msg;
+                }
+                try{
+                    if (index== -1){
+                        $('#mce-'+resp.result+'-response').show();
+                        $('#mce-'+resp.result+'-response').html(msg);            
+                    } else {
+                        err_id = 'mce_tmp_error_msg';
+                        html = '<div id="'+err_id+'" style="'+err_style+'"> '+msg+'</div>';
+                        
+                        var input_id = '#mc_embed_signup';
+                        var f = $(input_id);
+                        if (ftypes[index]=='address'){
+                            input_id = '#mce-'+fnames[index]+'-addr1';
+                            f = $(input_id).parent().parent().get(0);
+                        } else if (ftypes[index]=='date'){
+                            input_id = '#mce-'+fnames[index]+'-month';
+                            f = $(input_id).parent().parent().get(0);
+                        } else {
+                            input_id = '#mce-'+fnames[index];
+                            f = $().parent(input_id).get(0);
+                        }
+                        if (f){
+                            $(f).append(html);
+                            $(input_id).focus();
+                        } else {
+                            $('#mce-'+resp.result+'-response').show();
+                            $('#mce-'+resp.result+'-response').html(msg);
+                        }
+                    }
+                } catch(e){
+                    $('#mce-'+resp.result+'-response').show();
+                    $('#mce-'+resp.result+'-response').html(msg);
+                }
+            }
+        }
+
+        </script>
+        <!--End mc_embed_signup-->
+    <!-- plugins -->
+    <script src="{{ static_url("js/plugins.js") }}"></script>
+    <script src="{{ static_url("js/underscore-min.js") }}"></script>
+    
+    <!-- Parallax Effect -->
+    <script src="{{ static_url("js/libs/jquery.stellar.min.js") }}"></script>
+    <!-- parsley.js (for form validation) -->
+    <script src="{{ static_url("js/es.js") }}"></script>
+    <script src="{{ static_url("js/parsley.js") }}"></script>
+    <script src="{{ static_url("js/parsley.extras.js") }}"></script>
+    <script src="{{ static_url("js/parsley.remote.js") }}"></script>
+    {% if lan == 'es' %}
+        <script type="text/javascript">
+          window.ParsleyValidator.setLocale('es');
+        </script>
+    {%end%}
+    <!-- main script -->
+    <script src="{{ static_url("js/script.js") }}"></script>
+    <script src="{{ static_url("js/ui-scripts.js") }}"></script>
+    
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-46511610-1', 'opendata500.com');
+      ga('send', 'pageview');
+
+    </script>
+
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-70626555-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+    <script type="text/javascript">
+        function switchLanguage(lan) {
+            console.log("changing language");
+            cookie = document.cookie.split("; ");
+            for (var i = 0; i < cookie.length; i++) {
+                if (cookie[i].split("=")[0] == "lan") {
+                    cookie[i] = "lan=" + lan;
+                }
+            }
+            y = cookie.join("; ");
+            document.cookie = y;
+            console.log(document.cookie);
+        }
+    </script>
+    </body>
+</html>
