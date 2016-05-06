@@ -37,64 +37,47 @@
     <![endif]-->
 
 
+    <!-- BOILERPLATE HEAD LINKS -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="vendor/normalize.css">
+    <link rel="stylesheet" href="vendor/slick.css">
+    <link rel="stylesheet" href="vendor/prism.css" />
+    <link rel="stylesheet" href="styles/styles.css">
+    <!-- END BOILERPLATE HEAD LINKS -->
 
 </head>
 <body>
-    <!-- <div class="parallax-bg" id="background" data-stellar-ratio="-0.01"></div> -->
-    <!-- <div class="parallax-bg" id="background-2" data-stellar-ratio="-0.015"></div>  
-    <div class="parallax-bg" id="background-3" data-stellar-ratio="-0.02"></div>   -->
-    <header>
-        <div class="l-centered">
-            <a class="logo" href="/">
-                <img src="{{ static_url('img/od500-logo.png') }}" alt=""></a>
-                <!--<img src="{{ static_url(settings['logo_path']) }}" alt=""></a>-->
-            <div id="mainMenu" class="m-main-menu">
-                {% if len(settings['menu'][lan_]) > 1 %}
-                    {% for item in settings['menu'][lan_] %}        
-                    {% if not item.get('disabled', False) %}
-                        <div class="m-main-menu-item">
-                            <a href="{{item['link']}}">{{item['item']}}</a>
-                            {% if item['sub-menu'] %}
-                                <ul id="submenu-about" class="m-main-menu-sub-menu">
-                                    {% for sub_item in item['sub-menu'] %}
-                                        <li><a class="m-main-menu-sub-menu-item" href="{{sub_item['link']}}">{{sub_item['item']}}</a></li>
-                                    {%end%}
-                                </ul>
-                            {%end%}
-                        </div>
-                    {%end%}
-                    {%end%}
-                {%end%}
-                {%try%} {% if user %} 
-                    <div class="m-main-menu-item">
-                        <a href="/admin/companies/">Admin</a>
-                        <ul id="submenu-about" class="m-main-menu-sub-menu">
-                            <li><a class="m-main-menu-sub-menu-item" href="/admin/companies/">Companies</a></li>
-                            <li><a class="m-main-menu-sub-menu-item" href="/admin/agencies/">Agencies</a></li>
-                        </ul>
-                    </div>
-                {% end %}{%except%}{%end%}
-                {%try%} {% if user %} <div class="m-main-menu-item"><a href="/logout/">Logout</a></div>{% end %}{%except%}{%end%}
-                {% if len(settings['available_languages']) > 1 %}
-                    <div class="m-main-menu-item">
-                        <div class="language-options">
-                            {% for language in settings['available_languages'] %}
-                                <a href="?lan={{language}}">{{language.upper()}}</a>
-                            {%end%}
-                        </div>
-                    </div>
-                {%end%}
-            </div>
 
+
+    <header class="b-top-nav">
+        <div class="e-nav-group m-left">
+            <span class="e-nav-item js-nav-trigger e-nav-trigger">
+                <i class="material-icons">menu</i>
+            </span>
         </div>
-    </header><!-- end header -->
+        <div class="e-nav-group m-right e-social-media">
+            <a href="https://twitter.com/TheGovLab" class="e-nav-item" target="_blank"><i class="e-social-media-item fa fa-twitter"></i></a>
+            <a href="https://www.youtube.com/user/TheGovLab" class="e-nav-item" target="_blank"><i class="e-social-media-item fa fa-youtube-play"></i></a>
+        </div>
+        <a class="e-logo" href="./">
+            <img src="{{ static_url('img/govlab-logo-white.png')}}" alt="">
+        </a>
+    </header>
     
-    <div id="main" class="l-centered">
-        <div id="container">
-            {% block body %}{% end %}
-        </div><!-- end container -->
-    </div><!-- end main -->
-    
+
+    {% block main_menu %}
+        <nav class="b-main-menu">
+            <a href="./">Home</a>
+            <a href="./about">About</a>
+        </nav>
+    {% end %}
+
+    <main role="main">
+        {% block body %}{% end %}
+    </main>
+
+
     <!-- Mailchimp Subscribe -->
     <div id="mc_embed_signup" class="s-disabled">
         <span class="signup-handle"></span>
@@ -112,271 +95,307 @@
         </form>
     </div>
 
-    <footer>
-        <div class="l-centered">
-            <div class="m-footer-logos">
-                <a href="http://thegovlab.org/"><img id="govlab-logo" src="{{ static_url("img/govlab-logo.png") }}" alt="The GovLab"></a>
+    <footer class='b-footer'>
+        <div class="row">
+            <div class="large-10 large-centered columns">
+                <div class="row">
+                    <div class="e-content m-sections medium-4 column">
+                        <h4>Sections</h4>
+                        {# LIST MENU ITEMS #}
+                        <ul>
+                            {% for i in range(0, len(settings['footer_menu'][lan_])) %}
+                                {% if i == len(settings['footer_menu'][lan_])-1 %}
+                                    <li><a href="{{settings['footer_menu'][lan_][i]['link']}}" target="_blank">{{settings['footer_menu'][lan_][i]['item']}}</a></li> 
+                                {%else%}
+                                    <li><a href="{{settings['footer_menu'][lan_][i]['link']}}" target="_blank">{{settings['footer_menu'][lan_][i]['item']}}</a></li> 
+                                {%end%}
+                            {%end%}
+                        </ul>
+                        {# END LIST MENU ITEMS #}
+                    </div>
+                    <div class="e-content medium-4 column">
+                    </div>
+                    <div class="e-content medium-4 column">
+                        <h4>Based at</h4>
+                        <a class="e-partner-logo" href="http://engineering.nyu.edu/tandon" tagret="_blank"><img src="img/partners/nyu.png" alt="NYU Tandon School of Engineering - New York University"></a>
+                        <a class="e-partner-logo" href="http://thegovlab.org/"><img id="govlab-logo" src="{{ static_url("img/govlab-logo.png") }}" alt="The GovLab"></a>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <ul>
-                {% for i in range(0, len(settings['footer_menu'][lan_])) %}
-                    {% if i == len(settings['footer_menu'][lan_])-1 %}
-                        <li class="footer-menu-item last"><a href="{{settings['footer_menu'][lan_][i]['link']}}" target="_blank">{{settings['footer_menu'][lan_][i]['item']}}</a></li> 
-                    {%else%}
-                        <li class="footer-menu-item"><a href="{{settings['footer_menu'][lan_][i]['link']}}" target="_blank">{{settings['footer_menu'][lan_][i]['item']}}</a></li> 
-                    {%end%}
-                {%end%}
-            </ul>
-            <p class="creative-commons-license"><a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Dataset" property="dct:title" rel="dct:type">The Open Data 500</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://thegovlab.org/" property="cc:attributionName" rel="cc:attributionURL">The GovLab</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.<br />Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="https://github.com/luisdaniel/OpenData500" rel="dct:source">https://github.com/luisdaniel/OpenData500</a>.</p>
         </div>
-    </footer><!-- end footer -->
-    <script type="text/javascript">
-        //------------------------------MAIL CHIMP SIGNUP------------------------------------------
-        var fnames = new Array();var ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';
-        try {
-            var jqueryLoaded=jQuery;
-            jqueryLoaded=true;
-        } catch(err) {
-            var jqueryLoaded=false;
-        }
-        var head= document.getElementsByTagName('head')[0];
-        if (!jqueryLoaded) {
-            var script = document.createElement('script');
-            script.type = 'text/javascript';
-            script.src = '//ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js';
-            head.appendChild(script);
-            if (script.readyState && script.onload!==null){
-                script.onreadystatechange= function () {
-                      if (this.readyState == 'complete') mce_preload_check();
-                }    
-            }
-        }
+    </footer>
 
-        var err_style = '';
-        try{
-            err_style = mc_custom_error_style;
-        } catch(e){
-            err_style = '#mc_embed_signup input.mce_inline_error{border-color:#6B0505;} #mc_embed_signup div.mce_inline_error{margin: 0 0 1em 0; padding: 5px 10px; background-color:#6B0505; font-weight: bold; z-index: 1; color:#fff;}';
-        }
-        var head= document.getElementsByTagName('head')[0];
-        var style= document.createElement('style');
-        style.type= 'text/css';
-        if (style.styleSheet) {
-          style.styleSheet.cssText = err_style;
-        } else {
-          style.appendChild(document.createTextNode(err_style));
-        }
-        head.appendChild(style);
-        setTimeout('mce_preload_check();', 250);
+    <div class="b-copyright">
+        <div class="row">
+            <div class="large-10 large-centered columns">
+                <a class="e-cc-badge" rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a>
+                <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Dataset" property="dct:title" rel="dct:type">The Open Data 500</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://thegovlab.org/" property="cc:attributionName" rel="cc:attributionURL">The GovLab</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.<br />Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="https://github.com/luisdaniel/OpenData500" rel="dct:source">https://github.com/luisdaniel/OpenData500</a>..
+            </div>
+        </div>
+    </div>
 
-        var mce_preload_checks = 0;
-        function mce_preload_check(){
-            if (mce_preload_checks>40) return;
-            mce_preload_checks++;
+    {# STYLEGUIDE SCRIPTS #}
+        <div id="overlay"></div>
+        <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script src="vendor/slick.min.js"></script>
+        <script src="vendor/prism.js"></script>
+        <script src="js/scripts.js"></script>
+        <script src="https://cdn.firebase.com/js/client/2.4.0/firebase.js"></script>
+        <script src="{{ static_url("js/libs/styleguide-scripts.js") }}"></script>
+    <!-- END STYLEGUIDE SCRIPTS-->
+
+    <!-- ORIGINAL OD500 SCRIPTS -->
+        <script type="text/javascript">
+            //------------------------------MAIL CHIMP SIGNUP------------------------------------------
+            var fnames = new Array();var ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';
             try {
                 var jqueryLoaded=jQuery;
+                jqueryLoaded=true;
             } catch(err) {
-                setTimeout('mce_preload_check();', 250);
-                return;
+                var jqueryLoaded=false;
             }
-            var script = document.createElement('script');
-            script.type = 'text/javascript';
-            script.src = 'http://downloads.mailchimp.com/js/jquery.form-n-validate.js';
-            head.appendChild(script);
-            try {
-                var validatorLoaded=jQuery("#fake-form").validate({});
-            } catch(err) {
-                setTimeout('mce_preload_check();', 250);
-                return;
+            var head= document.getElementsByTagName('head')[0];
+            if (!jqueryLoaded) {
+                var script = document.createElement('script');
+                script.type = 'text/javascript';
+                script.src = '//ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js';
+                head.appendChild(script);
+                if (script.readyState && script.onload!==null){
+                    script.onreadystatechange= function () {
+                          if (this.readyState == 'complete') mce_preload_check();
+                    }    
+                }
             }
-            mce_init_form();
-        }
-        function mce_init_form(){
-            jQuery(document).ready( function($) {
-              var options = { errorClass: 'mce_inline_error', errorElement: 'div', onkeyup: function(){}, onfocusout:function(){}, onblur:function(){}  };
-              var mce_validator = $("#mc-embedded-subscribe-form").validate(options);
-              $("#mc-embedded-subscribe-form").unbind('submit');//remove the validator so we can get into beforeSubmit on the ajaxform, which then calls the validator
-              options = { url: 'http://openinggovernment.us6.list-manage.com/subscribe/post-json?u=1a990feb5c&id=691b1fcbc9&c=?', type: 'GET', dataType: 'json', contentType: "application/json; charset=utf-8",
-                            beforeSubmit: function(){
-                                $('#mce_tmp_error_msg').remove();
-                                $('.datefield','#mc_embed_signup').each(
-                                    function(){
-                                        var txt = 'filled';
-                                        var fields = new Array();
-                                        var i = 0;
-                                        $(':text', this).each(
-                                            function(){
-                                                fields[i] = this;
-                                                i++;
-                                            });
-                                        $(':hidden', this).each(
-                                            function(){
-                                                var bday = false;
-                                                if (fields.length == 2){
-                                                    bday = true;
-                                                    fields[2] = {'value':1970};//trick birthdays into having years
-                                                }
-                                                if ( fields[0].value=='MM' && fields[1].value=='DD' && (fields[2].value=='YYYY' || (bday && fields[2].value==1970) ) ){
-                                                    this.value = '';
-                                                } else if ( fields[0].value=='' && fields[1].value=='' && (fields[2].value=='' || (bday && fields[2].value==1970) ) ){
-                                                    this.value = '';
-                                                } else {
-                                                    if (/\[day\]/.test(fields[0].name)){
-                                                        this.value = fields[1].value+'/'+fields[0].value+'/'+fields[2].value;                                           
-                                                    } else {
-                                                        this.value = fields[0].value+'/'+fields[1].value+'/'+fields[2].value;
-                                                    }
-                                                }
-                                            });
-                                    });
-                                $('.phonefield-us','#mc_embed_signup').each(
-                                    function(){
-                                        var fields = new Array();
-                                        var i = 0;
-                                        $(':text', this).each(
-                                            function(){
-                                                fields[i] = this;
-                                                i++;
-                                            });
-                                        $(':hidden', this).each(
-                                            function(){
-                                                if ( fields[0].value.length != 3 || fields[1].value.length!=3 || fields[2].value.length!=4 ){
-                                                    this.value = '';
-                                                } else {
-                                                    this.value = 'filled';
-                                                }
-                                            });
-                                    });
-                                return mce_validator.form();
-                            }, 
-                            success: mce_success_cb
-                        };
-              $('#mc-embedded-subscribe-form').ajaxForm(options);
-              
-              
-            });
-        }
-        function mce_success_cb(resp){
-            $('#mce-success-response').hide();
-            $('#mce-error-response').hide();
-            if (resp.result=="success"){
-                $('#mce-'+resp.result+'-response').show();
-                $('#mce-'+resp.result+'-response').html(resp.msg);
-                $('#mc-embedded-subscribe-form').each(function(){
-                    this.reset();
-                });
+
+            var err_style = '';
+            try{
+                err_style = mc_custom_error_style;
+            } catch(e){
+                err_style = '#mc_embed_signup input.mce_inline_error{border-color:#6B0505;} #mc_embed_signup div.mce_inline_error{margin: 0 0 1em 0; padding: 5px 10px; background-color:#6B0505; font-weight: bold; z-index: 1; color:#fff;}';
+            }
+            var head= document.getElementsByTagName('head')[0];
+            var style= document.createElement('style');
+            style.type= 'text/css';
+            if (style.styleSheet) {
+              style.styleSheet.cssText = err_style;
             } else {
-                var index = -1;
-                var msg;
+              style.appendChild(document.createTextNode(err_style));
+            }
+            head.appendChild(style);
+            setTimeout('mce_preload_check();', 250);
+
+            var mce_preload_checks = 0;
+            function mce_preload_check(){
+                if (mce_preload_checks>40) return;
+                mce_preload_checks++;
                 try {
-                    var parts = resp.msg.split(' - ',2);
-                    if (parts[1]==undefined){
-                        msg = resp.msg;
-                    } else {
-                        i = parseInt(parts[0]);
-                        if (i.toString() == parts[0]){
-                            index = parts[0];
-                            msg = parts[1];
-                        } else {
-                            index = -1;
-                            msg = resp.msg;
-                        }
-                    }
-                } catch(e){
-                    index = -1;
-                    msg = resp.msg;
+                    var jqueryLoaded=jQuery;
+                } catch(err) {
+                    setTimeout('mce_preload_check();', 250);
+                    return;
                 }
-                try{
-                    if (index== -1){
-                        $('#mce-'+resp.result+'-response').show();
-                        $('#mce-'+resp.result+'-response').html(msg);            
-                    } else {
-                        err_id = 'mce_tmp_error_msg';
-                        html = '<div id="'+err_id+'" style="'+err_style+'"> '+msg+'</div>';
-                        
-                        var input_id = '#mc_embed_signup';
-                        var f = $(input_id);
-                        if (ftypes[index]=='address'){
-                            input_id = '#mce-'+fnames[index]+'-addr1';
-                            f = $(input_id).parent().parent().get(0);
-                        } else if (ftypes[index]=='date'){
-                            input_id = '#mce-'+fnames[index]+'-month';
-                            f = $(input_id).parent().parent().get(0);
-                        } else {
-                            input_id = '#mce-'+fnames[index];
-                            f = $().parent(input_id).get(0);
-                        }
-                        if (f){
-                            $(f).append(html);
-                            $(input_id).focus();
-                        } else {
-                            $('#mce-'+resp.result+'-response').show();
-                            $('#mce-'+resp.result+'-response').html(msg);
-                        }
-                    }
-                } catch(e){
+                var script = document.createElement('script');
+                script.type = 'text/javascript';
+                script.src = 'http://downloads.mailchimp.com/js/jquery.form-n-validate.js';
+                head.appendChild(script);
+                try {
+                    var validatorLoaded=jQuery("#fake-form").validate({});
+                } catch(err) {
+                    setTimeout('mce_preload_check();', 250);
+                    return;
+                }
+                mce_init_form();
+            }
+            function mce_init_form(){
+                jQuery(document).ready( function($) {
+                  var options = { errorClass: 'mce_inline_error', errorElement: 'div', onkeyup: function(){}, onfocusout:function(){}, onblur:function(){}  };
+                  var mce_validator = $("#mc-embedded-subscribe-form").validate(options);
+                  $("#mc-embedded-subscribe-form").unbind('submit');//remove the validator so we can get into beforeSubmit on the ajaxform, which then calls the validator
+                  options = { url: 'http://openinggovernment.us6.list-manage.com/subscribe/post-json?u=1a990feb5c&id=691b1fcbc9&c=?', type: 'GET', dataType: 'json', contentType: "application/json; charset=utf-8",
+                                beforeSubmit: function(){
+                                    $('#mce_tmp_error_msg').remove();
+                                    $('.datefield','#mc_embed_signup').each(
+                                        function(){
+                                            var txt = 'filled';
+                                            var fields = new Array();
+                                            var i = 0;
+                                            $(':text', this).each(
+                                                function(){
+                                                    fields[i] = this;
+                                                    i++;
+                                                });
+                                            $(':hidden', this).each(
+                                                function(){
+                                                    var bday = false;
+                                                    if (fields.length == 2){
+                                                        bday = true;
+                                                        fields[2] = {'value':1970};//trick birthdays into having years
+                                                    }
+                                                    if ( fields[0].value=='MM' && fields[1].value=='DD' && (fields[2].value=='YYYY' || (bday && fields[2].value==1970) ) ){
+                                                        this.value = '';
+                                                    } else if ( fields[0].value=='' && fields[1].value=='' && (fields[2].value=='' || (bday && fields[2].value==1970) ) ){
+                                                        this.value = '';
+                                                    } else {
+                                                        if (/\[day\]/.test(fields[0].name)){
+                                                            this.value = fields[1].value+'/'+fields[0].value+'/'+fields[2].value;                                           
+                                                        } else {
+                                                            this.value = fields[0].value+'/'+fields[1].value+'/'+fields[2].value;
+                                                        }
+                                                    }
+                                                });
+                                        });
+                                    $('.phonefield-us','#mc_embed_signup').each(
+                                        function(){
+                                            var fields = new Array();
+                                            var i = 0;
+                                            $(':text', this).each(
+                                                function(){
+                                                    fields[i] = this;
+                                                    i++;
+                                                });
+                                            $(':hidden', this).each(
+                                                function(){
+                                                    if ( fields[0].value.length != 3 || fields[1].value.length!=3 || fields[2].value.length!=4 ){
+                                                        this.value = '';
+                                                    } else {
+                                                        this.value = 'filled';
+                                                    }
+                                                });
+                                        });
+                                    return mce_validator.form();
+                                }, 
+                                success: mce_success_cb
+                            };
+                  $('#mc-embedded-subscribe-form').ajaxForm(options);
+                  
+                  
+                });
+            }
+            function mce_success_cb(resp){
+                $('#mce-success-response').hide();
+                $('#mce-error-response').hide();
+                if (resp.result=="success"){
                     $('#mce-'+resp.result+'-response').show();
-                    $('#mce-'+resp.result+'-response').html(msg);
+                    $('#mce-'+resp.result+'-response').html(resp.msg);
+                    $('#mc-embedded-subscribe-form').each(function(){
+                        this.reset();
+                    });
+                } else {
+                    var index = -1;
+                    var msg;
+                    try {
+                        var parts = resp.msg.split(' - ',2);
+                        if (parts[1]==undefined){
+                            msg = resp.msg;
+                        } else {
+                            i = parseInt(parts[0]);
+                            if (i.toString() == parts[0]){
+                                index = parts[0];
+                                msg = parts[1];
+                            } else {
+                                index = -1;
+                                msg = resp.msg;
+                            }
+                        }
+                    } catch(e){
+                        index = -1;
+                        msg = resp.msg;
+                    }
+                    try{
+                        if (index== -1){
+                            $('#mce-'+resp.result+'-response').show();
+                            $('#mce-'+resp.result+'-response').html(msg);            
+                        } else {
+                            err_id = 'mce_tmp_error_msg';
+                            html = '<div id="'+err_id+'" style="'+err_style+'"> '+msg+'</div>';
+                            
+                            var input_id = '#mc_embed_signup';
+                            var f = $(input_id);
+                            if (ftypes[index]=='address'){
+                                input_id = '#mce-'+fnames[index]+'-addr1';
+                                f = $(input_id).parent().parent().get(0);
+                            } else if (ftypes[index]=='date'){
+                                input_id = '#mce-'+fnames[index]+'-month';
+                                f = $(input_id).parent().parent().get(0);
+                            } else {
+                                input_id = '#mce-'+fnames[index];
+                                f = $().parent(input_id).get(0);
+                            }
+                            if (f){
+                                $(f).append(html);
+                                $(input_id).focus();
+                            } else {
+                                $('#mce-'+resp.result+'-response').show();
+                                $('#mce-'+resp.result+'-response').html(msg);
+                            }
+                        }
+                    } catch(e){
+                        $('#mce-'+resp.result+'-response').show();
+                        $('#mce-'+resp.result+'-response').html(msg);
+                    }
                 }
             }
-        }
+
+            </script>
+            <!--End mc_embed_signup-->
+        <!-- plugins -->
+        <script src="{{ static_url("js/plugins.js") }}"></script>
+        <script src="{{ static_url("js/underscore-min.js") }}"></script>
+        
+        <!-- Parallax Effect -->
+        <script src="{{ static_url("js/libs/jquery.stellar.min.js") }}"></script>
+        <!-- parsley.js (for form validation) -->
+        <script src="{{ static_url("js/es.js") }}"></script>
+        <script src="{{ static_url("js/parsley.js") }}"></script>
+        <script src="{{ static_url("js/parsley.extras.js") }}"></script>
+        <script src="{{ static_url("js/parsley.remote.js") }}"></script>
+        {% if lan == 'es' %}
+            <script type="text/javascript">
+              window.ParsleyValidator.setLocale('es');
+            </script>
+        {%end%}
+        <!-- main script -->
+        <script src="{{ static_url("js/script.js") }}"></script>
+        <script src="{{ static_url("js/ui-scripts.js") }}"></script>
+        {# STYLEGUIDE JS #}
+        <script src="{{ static_url("js/libs/styleguide-scripts.js") }}"></script>
+
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-46511610-1', 'opendata500.com');
+          ga('send', 'pageview');
 
         </script>
-        <!--End mc_embed_signup-->
-    <!-- plugins -->
-    <script src="{{ static_url("js/plugins.js") }}"></script>
-    <script src="{{ static_url("js/underscore-min.js") }}"></script>
-    
-    <!-- Parallax Effect -->
-    <script src="{{ static_url("js/libs/jquery.stellar.min.js") }}"></script>
-    <!-- parsley.js (for form validation) -->
-    <script src="{{ static_url("js/es.js") }}"></script>
-    <script src="{{ static_url("js/parsley.js") }}"></script>
-    <script src="{{ static_url("js/parsley.extras.js") }}"></script>
-    <script src="{{ static_url("js/parsley.remote.js") }}"></script>
-    {% if lan == 'es' %}
-        <script type="text/javascript">
-          window.ParsleyValidator.setLocale('es');
-        </script>
-    {%end%}
-    <!-- main script -->
-    <script src="{{ static_url("js/script.js") }}"></script>
-    <script src="{{ static_url("js/ui-scripts.js") }}"></script>
-    
-    <script>
+
+        <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-      ga('create', 'UA-46511610-1', 'opendata500.com');
+      ga('create', 'UA-70626555-1', 'auto');
       ga('send', 'pageview');
 
     </script>
 
-    <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-70626555-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
-
-    <script type="text/javascript">
-        function switchLanguage(lan) {
-            console.log("changing language");
-            cookie = document.cookie.split("; ");
-            for (var i = 0; i < cookie.length; i++) {
-                if (cookie[i].split("=")[0] == "lan") {
-                    cookie[i] = "lan=" + lan;
+        <script type="text/javascript">
+            function switchLanguage(lan) {
+                console.log("changing language");
+                cookie = document.cookie.split("; ");
+                for (var i = 0; i < cookie.length; i++) {
+                    if (cookie[i].split("=")[0] == "lan") {
+                        cookie[i] = "lan=" + lan;
+                    }
                 }
+                y = cookie.join("; ");
+                document.cookie = y;
+                console.log(document.cookie);
             }
-            y = cookie.join("; ");
-            document.cookie = y;
-            console.log(document.cookie);
-        }
-    </script>
+        </script>
     </body>
 </html>

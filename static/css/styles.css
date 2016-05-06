@@ -8584,21 +8584,6 @@ h1 {
 .first-title {
   margin-top: 90px; }
 
-header {
-  background-color: #523080;
-  border-bottom: 5px solid #8977a7;
-  padding: 10px 0;
-  height: 30px;
-  text-align: center; }
-
-.l-centered {
-  width: 100%;
-  max-width: 960px;
-  margin: 0 auto; }
-
-#container {
-  min-height: 460px; }
-
 .logo {
   border: 0;
   float: left;
