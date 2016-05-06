@@ -1,0 +1,16 @@
+.b-breadcrumbs {
+    @include wrap;
+    padding-bottom: 20px;
+
+    a, 
+    span {
+        margin-top: -2px;
+        display: inline-block;
+        vertical-align: top;
+    }
+       
+    span,
+    .material-icons { color: $white-40; }
+    a { color: $white-90; }
+    a:hover {text-decoration: underline;}
+}

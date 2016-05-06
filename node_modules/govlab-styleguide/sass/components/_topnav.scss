@@ -1,0 +1,63 @@
+.b-top-nav {
+    background-color: $black;
+    color: $white;
+    padding: 5px;
+    position: relative;
+
+    @include breakpoint($tablet) { padding: 10px 20px; }
+
+
+    a { color: currentColor; }
+
+    .e-logo {
+        padding: 5px 0 0 0;
+        text-align: center;
+        display: block;
+
+        img {
+            max-width: 100px;
+            @include breakpoint($tablet) { max-width: 140px; }
+        }
+    }
+
+    .e-nav-group { 
+        position: absolute; 
+        top: 0;
+
+        &.m-left { left: 0; }
+        &.m-right { right: 0; }
+    }
+
+    .e-nav-item {
+        padding: 11px;
+        display: inline-block;
+        @include breakpoint($tablet) { padding: 20px; }
+    }
+
+    .e-nav-item.m-container { padding: 0; }
+}
+
+.b-top-nav {
+    .e-social-media { display: none; }
+    .e-search-container {
+        @include breakpoint($mobile-only) { display: none; }
+    }
+
+    @include breakpoint($tablet) {
+        .e-social-media { display: block; }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

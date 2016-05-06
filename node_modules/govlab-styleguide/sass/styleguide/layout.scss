@@ -1,0 +1,53 @@
+/*
+Layout
+
+We use foundation grid for responsive layout. Usually this should be wrapped in a <code>
+b-page-section</code> or other page module from the styleguide.
+
+Markup:
+<!-- #fullwidth -->
+<div class="b-page-section b-grid-example">
+    <div class="row">
+        <div class="large-12 columns gray-30">.large-12</div>
+    </div>
+    <div class="row">
+        <div class="large-6 columns gray-30">.large-6</div>
+        <div class="large-6 columns gray-30">.large-6</div>
+    </div>
+    <div class="row">
+        <div class="large-4 columns">.large-4</div>
+        <div class="large-4 columns">.large-4</div>
+        <div class="large-4 columns">.large-4</div>
+    </div>
+    <div class="row">
+        <div class="large-3 columns">.large-3</div>
+        <div class="large-3 columns">.large-3</div>
+        <div class="large-3 columns">.large-3</div>
+        <div class="large-3 columns">.large-3</div>
+    </div>
+    <div class="row">
+        <div class="large-2 columns">.large-2</div>
+        <div class="large-2 columns">.large-2</div>
+        <div class="large-2 columns">.large-2</div>
+        <div class="large-2 columns">.large-2</div>
+        <div class="large-2 columns">.large-2</div>
+        <div class="large-2 columns">.large-2</div>
+    </div>
+    <div class="row">
+        <div class="large-1 columns">.large-1</div>
+        <div class="large-1 columns">.large-1</div>
+        <div class="large-1 columns">.large-1</div>
+        <div class="large-1 columns">.large-1</div>
+        <div class="large-1 columns">.large-1</div>
+        <div class="large-1 columns">.large-1</div>
+        <div class="large-1 columns">.large-1</div>
+        <div class="large-1 columns">.large-1</div>
+        <div class="large-1 columns">.large-1</div>
+        <div class="large-1 columns">.large-1</div>
+        <div class="large-1 columns">.large-1</div>
+        <div class="large-1 columns">.large-1</div>
+    </div>
+</div>
+
+Styleguide 1.3
+*/

@@ -1,0 +1,181 @@
+{
+    "name" : "studies",
+    "children" : [
+    {
+        "title" : "Brazil’s Open Budget Transparency Portal",
+        "location" : "sa",
+        "impact" : "government",
+        "sector" : "public"
+    }
+    ,
+    {
+        "title" : "Open Education Information In Tanzania",
+        "location" : "af",
+        "impact" : "citizens",
+        "sector" : "education"
+    }
+    ,
+    {
+        "title" : "Kenya's Open Duka",
+        "location" : "af",
+        "impact" : "citizens",
+        "sector" : "public"
+    }
+    ,
+    {
+        "title" : "Mexico’s Mejora Tu Escuela",
+        "location" : "na",
+        "impact" : "citizens",
+        "sector" : "education"
+    }
+    ,
+    {
+        "title" : "Uruguay's A Tu Servicio",
+        "location" : "sa",
+        "impact" : "citizens",
+        "sector" : "health"
+    }
+    ,
+    {
+        "title" : "Openaid In Sweden",
+        "location" : "eu",
+        "impact" : "government",
+        "sector" : "philantropy"
+    }
+    ,
+    {
+        "title" : "Open Contracting And Procurement In Slovakia",
+        "location" : "eu",
+        "impact" : "government",
+        "sector" : "public"
+    }
+    ,
+    {
+        "title" : "Indonesia’s Kawal Pemilu",
+        "location" : "as",
+        "impact" : "government",
+        "sector" : "politics"
+    }
+    ,
+    {
+        "title" : "Denmark’s Open Address Data Set",
+        "location" : "eu",
+        "impact" : "government",
+        "sector" : "geospatial"
+    }
+    ,
+    {
+        "title" : "Opening Canada’s T3010 Charity Information Return Data",
+        "location" : "na",
+        "impact" : "government",
+        "sector" : "philantropy"
+    }
+    ,
+    {
+        "title" : "United Kingdom's TheyWorkForYou",
+        "location" : "eu",
+        "impact" : "government",
+        "sector" : "public"
+    }
+    ,
+    {
+        "title" : "United Kingdom's Open Public Services Network",
+        "location" : "eu",
+        "impact" : "government",
+        "sector" : "education"
+    }
+    ,
+    {
+        "title" : "United Kingdom's OpenCorporates",
+        "location" : "eu",
+        "impact" : "government",
+        "sector" : "business"
+    }
+    ,
+    {
+        "title" : "Battling Ebola in Sierra Leone",
+        "location" : "af",
+        "impact" : "public",
+        "sector" : "health"
+    }
+    ,
+    {
+        "title" : "New Zealand's Christchurch Earthquake Clusters",
+        "location" : "oc",
+        "impact" : "public",
+        "sector" : "emergency"
+    }
+    ,
+    {
+        "title" : "Singapore's Dengue Cluster Map",
+        "location" : "as",
+        "impact" : "public",
+        "sector" : "health"
+    }
+    ,
+    {
+        "title" : "United States' Eightmaps",
+        "location" : "na",
+        "impact" : "public",
+        "sector" : "politics"
+    }
+    ,
+    {
+        "title" : "Kennedy vs. the City of Zanesville, United States",
+        "location" : "na",
+        "impact" : "public",
+        "sector" : "law"
+    }
+    ,
+    {
+        "title" : "United Kingdom's Coeliac UK and Brandbank",
+        "location" : "eu",
+        "impact" : "public",
+        "sector" : "health"
+    }
+    ,
+    {
+        "title" : "United Kingdom's Ordnance Survey OpenData",
+        "location" : "eu",
+        "impact" : "economic",
+        "sector" : "geospatial"
+    }
+    ,
+    {
+        "title" : "United States' New York City Business Atlas",
+        "location" : "na",
+        "impact" : "economic",
+        "sector" : "business"
+    }
+    ,
+    {
+        "title" : "United States' NOAA: Opening Up Global Weather Data in Collaboration with Businesses",
+        "location" : "na",
+        "impact" : "economic",
+        "sector" : "weather"
+    }
+    ,
+    {
+        "title" : "United Kingdom's Transport for London",
+        "location" : "eu",
+        "impact" : "economic",
+        "sector" : "transportation"
+    }
+    ,
+    {
+        "title" : "United States Opening GPS Data for Civilian Use",
+        "location" : "na",
+        "impact" : "economic",
+        "sector" : "geospatial"
+    }
+    ,
+    {
+        "title" : "United Kingdom's HM Land Registry Price Paid Data",
+        "location" : "eu",
+        "impact" : "economic",
+        "sector" : "geospatial"
+    }
+
+
+    ]
+}

@@ -1,0 +1,42 @@
+.b-main-menu {
+    position: fixed;
+    left: -100%;
+    top: 0;
+    bottom: 0;
+    right: 100%;
+    z-index: 100;
+    box-shadow: 0 0 20px $gray-40;
+    background-color: $black;
+    -webkit-flex-flow: column;
+    flex-flow: column;
+
+    @include breakpoint($tablet) { left: -48%; }
+    @include breakpoint($desktop) { left: -28%; }
+
+    @include transition;
+
+    &.m-active {
+        left: 0;
+        right: 70px;
+
+        @include breakpoint($tablet) { right: 52%; }
+        @include breakpoint($desktop) { right: 72%; }
+    }
+
+    a {
+        display: block;
+        font-size: 18px;
+        padding: 30px;
+        color: $white-70;
+        text-align: right;
+        border-bottom: 1px solid $white-10;
+        text-transform: uppercase;
+        font-weight: 600;
+        letter-spacing: 1px;
+
+        &:hover { 
+            background-color: $gray-10; 
+            color: $white;
+        }
+    }
+}

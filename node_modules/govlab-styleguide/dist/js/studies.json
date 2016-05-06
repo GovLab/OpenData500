@@ -1,0 +1,172 @@
+{
+    "name" : "studies",
+    "children" : [
+    {
+        "title" : "case study 1",
+        "location" : "westEurope",
+        "sector" : "public",
+        "impact" : "government"
+    }
+    ,
+    {
+        "title" : "case study 2",
+        "location" : "subSaharanAfrica",
+        "sector" : "public",
+        "impact" : "government"
+    }
+    ,
+    {
+        "title" : "case study 3",
+        "location" : "subSaharanAfrica",
+        "sector" : "public",
+        "impact" : "government"
+    }
+    ,
+    {
+        "title" : "case study 4",
+        "location" : "westEurope",
+        "sector" : "public",
+        "impact" : "government"
+    }
+    ,
+    {
+        "title" : "case study 5",
+        "location" : "westEurope",
+        "sector" : "public",
+        "impact" : "government"
+    }
+    ,
+    {
+        "title" : "case study 5",
+        "location" : "westEurope",
+        "sector" : "public",
+        "impact" : "government"
+    }
+    ,
+    {
+        "title" : "case study 5",
+        "location" : "latinAmerica",
+        "sector" : "public",
+        "impact" : "government"
+    }
+    ,
+    {
+        "title" : "case study 5",
+        "location" : "eastAsia",
+        "sector" : "public",
+        "impact" : "opportunity"
+    }
+    ,
+    {
+        "title" : "case study 5",
+        "location" : "eastAsia",
+        "sector" : "public",
+        "impact" : "citizens"
+    }
+    ,
+    {
+        "title" : "case study 5",
+        "location" : "eastAsia",
+        "sector" : "public",
+        "impact" : "citizens"
+    }
+    ,
+    {
+        "title" : "case study 5",
+        "location" : "midEastNorthAfrica",
+        "sector" : "public",
+        "impact" : "problems"
+    }
+    ,
+    {
+        "title" : "case study 5",
+        "location" : "midEastNorthAfrica",
+        "sector" : "public",
+        "impact" : "opportunity"
+    }
+    ,
+    {
+        "title" : "case study 5",
+        "location" : "midEastNorthAfrica",
+        "sector" : "public",
+        "impact" : "government"
+    }
+    ,
+    {
+        "title" : "case study 5",
+        "location" : "northAmerica",
+        "sector" : "public",
+        "impact" : "opportunity"
+    }
+    ,
+    {
+        "title" : "case study 5",
+        "location" : "northAmerica",
+        "sector" : "public",
+        "impact" : "opportunity"
+    }
+    ,
+    {
+        "title" : "case study 5",
+        "location" : "northAmerica",
+        "sector" : "public",
+        "impact" : "opportunity"
+    }
+    ,
+    {
+        "title" : "case study 5",
+        "location" : "southAsia",
+        "sector" : "public",
+        "impact" : "opportunity"
+    }
+    ,
+    {
+        "title" : "case study 5",
+        "location" : "southAsia",
+        "sector" : "public",
+        "impact" : "opportunity"
+    }
+    ,
+    {
+        "title" : "case study 5",
+        "location" : "southAsia",
+        "sector" : "public",
+        "impact" : "opportunity"
+    }
+    ,
+    {
+        "title" : "case study 5",
+        "location" : "southAsia",
+        "sector" : "public",
+        "impact" : "opportunity"
+    }
+    ,
+    {
+        "title" : "case study 5",
+        "location" : "southAsia",
+        "sector" : "public",
+        "impact" : "problems"
+    }
+    ,
+    {
+        "title" : "case study 5",
+        "location" : "euCentralAsia",
+        "sector" : "public",
+        "impact" : "problems"
+    }
+    ,
+    {
+        "title" : "case study 5",
+        "location" : "euCentralAsia",
+        "sector" : "public",
+        "impact" : "government"
+    }
+    ,
+    {
+        "title" : "case study 5",
+        "location" : "euCentralAsia",
+        "sector" : "public",
+        "impact" : "citizens"
+    }
+    ]
+}

@@ -1,0 +1,73 @@
+/*
+Modal
+
+A modal can be used to provide a temporary alert or warn the user about performing a certain action.
+The modal has two parts, a button open the modal, and the modal itself.  The modal makes use of an overlay
+element to allow it to be dismissed by clicking outside the modal.
+
+Markup:
+<!-- button -->
+<a class="b-button js-open-modal" href="#">Open Modal</a>
+<!-- modal window -->
+<div class="b-modal">
+    <div class="e-content">
+        <h2>Title for modal</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo ratione, reprehenderit veniam veritatis voluptatem perferendis nulla? Sint eveniet necessitatibus vel saepe, consequuntur veritatis laborum perspiciatis, reprehenderit, esse rem aut omnis.</p>
+        <h3>Title for modal</h3>
+        <p>Sint eveniet necessitatibus vel saepe, consequuntur veritatis laborum perspiciatis, reprehenderit, esse rem aut omnis.</p>
+        <h4>Title for modal</h4>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo ratione, reprehenderit veniam veritatis voluptatem perferendis nulla?</p>
+        <p><a class="b-button js-close-modal" href="#">OK</a></p>
+    </div>
+</div>
+
+.js-open-modal - Add this class to the trigger element to open the modal
+.js-close-modal - Add this class to the trigger element to close the modal
+
+Styleguide 3.2
+*/
+.b-modal {
+    background: $white;
+    position: fixed;
+    width: 50%;
+    top: 12vh;
+    left: 50%;
+    margin: 0 0 0 -25%;
+
+    /* Embiggen */
+    transform: scale(1.5); /* prefix me */
+
+    /* Hidden */
+    opacity: 0;
+    pointer-events: none;
+    box-shadow: 0 0 10px $gray-50;
+
+    padding: 30px 45px;
+    @include transition;
+    z-index: 11;
+
+    .e-content {
+        max-height: 70vh;
+        overflow-y: scroll;
+
+        :first-child { margin-top: 0; }
+
+        h2 { font-size: 20px; }
+        h3 { font-size: 18px; }
+        h4 { font-size: 16px; }
+    }
+}
+
+.b-modal.m-active {
+
+  /* Regular size and visible */
+  transform: scale(1); /* prefix me */
+  opacity: 1;
+  @include transition;
+
+  /* Clickable */
+  pointer-events: auto;
+
+}
+
+

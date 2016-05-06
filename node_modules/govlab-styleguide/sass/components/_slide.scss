@@ -1,0 +1,111 @@
+/*
+Slide
+
+Slides can be used to display information about a specific topic; for example, a project or
+article.
+
+Markup:
+<!-- #fullwidth -->
+<section id="slide-id" class="b-slide">
+    <header>
+        <h4>Featured Project</h4>
+    </header>
+    <div class="row e-content">
+        <div class="medium-6 column">
+            <h2 class="e-project-name">Project Title</h2>
+            <h3 class="e-question">Lorem ipsum dolor sit amet, consectetur adipisicing elit, enim adipisci dicta.</h3>
+        </div>
+        <div class="medium-6 column">
+            <p>Project description Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint recusandae nostrum eos saepe officia vero illum fuga quae at, corporis unde quas sit adipisci neque doloremque fugiat possimus nisi minima.</p>
+            <p>Project description Lorem ipsum dolor sit amet, <a href="#">consectetur</a> adipisicing elit. Sint recusandae nostrum eos saepe officia vero illum fuga quae at, corporis unde quas sit adipisci neque doloremque fugiat possimus nisi minima.</p>
+        </div>
+    </div>
+    <div class="row e-content">
+        <div class="medium-6 column">
+            <div class="e-action">
+                <a class="b-button m-naked" href="./projects.html">All Projects<i class="material-icons">arrow_forward</i></a>
+            </div>
+        </div>
+        <div class="medium-6 column">
+            <div class="e-action">
+                <a class="b-button m-naked" href="#">Find out more<i class="material-icons">arrow_forward</i></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+.m-purple - $purple background
+.m-blue - $blue background
+.m-orange - $orange background
+.m-teal - $teal background
+
+Styleguide 3.5
+*/
+.b-slide {
+    background-color: $black;
+    color: $white;
+    padding: 20px 0;
+
+    > header {
+        padding: 20px 0;
+        @include breakpoint($mobile-only) { text-align: center; }
+    }
+
+    > header > h4 {
+        font-weight: 300;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+
+        @include breakpoint($tablet) { margin-top: 0; }
+    }
+
+    p { font-weight: 300;}
+    p a { text-decoration: underline; }
+
+
+
+    .e-slider-index {
+        > span {
+            @include circle;
+            height: 8px;
+            width: 8px;
+            background-color: $white-20;
+            display: inline-block;
+        }
+
+        .m-active { background-color: $white-50; }
+    }
+
+    .e-content {
+        padding: 20px 0;
+
+        h2,
+        h3 {
+            font-weight: 100;
+            line-height: 1.2;
+            text-transform: none;
+        }
+
+        h2 {
+            font-size: 32px;
+
+
+        }
+        h3 { font-size: 20px; }
+        h3 strong { font-weight: 600; }
+
+    }
+
+    .e-action-group {
+
+    }
+
+    .e-action {
+        @include breakpoint($mobile-only) { margin-bottom: 10px; }
+    }
+}
+
+.b-slide.m-purple { background-color: $purple; }
+.b-slide.m-blue { background-color: $blue; }
+.b-slide.m-orange { background-color: $orange; }
+.b-slide.m-teal { background-color: $teal; }

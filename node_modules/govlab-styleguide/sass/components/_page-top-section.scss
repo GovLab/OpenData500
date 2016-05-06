@@ -1,0 +1,361 @@
+/*
+Page Top Section
+
+A modified page section made specifically for the top section of a page.  Has a number of color and style
+options.
+
+Markup:
+<!-- #fullwidth -->
+<header class="b-top-section m-purple">
+    <div class="row">
+        <div class="column small-12">
+            <h2>Page Top Section</h2>
+            <h3>This is the top section of a page. Generally speaking, each page should start with this section.</h3>
+        </div>
+    </div>
+</header>
+
+.m-purple
+.m-teal
+.m-orange
+.m-blue
+
+Styleguide 5.2
+*/
+.b-top-section {
+    background-color: $black;
+    color: $white-80;
+    padding-top: 70px;
+    padding-bottom: 30px;
+
+    h2 {
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: 100;
+        font-size: 30px;
+        margin-top: 0;
+    }
+
+    h3 {
+        text-align: center;
+        margin-bottom: 30px;
+        text-transform: none;
+        font-size: 22px;
+        font-weight: 100;
+    }
+}
+
+.b-top-section.m-orange  { background-color: $orange; }
+.b-top-section.m-purple  { background-color: $purple; }
+.b-top-section.m-blue    { background-color: $blue;   }
+.b-top-section.m-teal    { background-color: $teal;   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// .b-single-landing {
+//     background-color: $blue;
+
+//     header {
+//         background-color: $gray-10;
+//         padding-top: 40px;
+//         padding-bottom: 20px;
+
+//         @include breakpoint($desktop) {padding: 0;}
+//     }
+
+//     .e-tags {
+//         list-style-type: none;
+//         padding-left: 0;
+//         margin-top: 0;
+
+//         h5 {
+//             font-size: 14px;
+//             text-transform: uppercase;
+//             font-weight: 600;
+//             letter-spacing: 1px;
+//             margin: 0;
+//             color: $white-30;
+
+//             &:not(:first-child) {
+//                 margin-top: 15px;
+//             }
+//         }
+
+//         .e-tag {
+//             display: inline-block;
+//             margin-bottom: 4px;
+//             color: $white-80;
+//             background-color: $gray-10;
+//             padding: 2px 8px;
+//             font-size: 14px;
+//             letter-spacing: .6px;
+//         }
+//     }
+
+//     .e-wrap {
+//         @include wrap;
+//         display: -webkit-flex;
+//         display: flex;
+//         -webkit-flex-wrap: wrap;
+//         flex-wrap: wrap;
+//         padding-bottom: 30px;
+//     }
+
+//     .e-half {
+//         -webkit-flex: 1;
+//         flex: 1;
+//         min-width: 350px;
+
+//         &:nth-of-type(2n) {
+//             @include breakpoint($desktop) { padding-right: 30px; }
+//         }
+//     }
+
+//     footer {
+//         display: block;
+//         width: 100%;
+//     }
+
+//     h2 {
+//         line-height: 1.3;
+//         color: $white-90;
+//     }
+
+//     .e-project-name {
+//         font-size: 36px;
+//         font-weight: 100;
+//         margin: 20px 0;
+//         display: block;
+//         width: 100%;
+//         @include wrap;
+
+//         @include breakpoint($desktop) { font-size: 48px; }
+//     }
+
+//     .e-project-tagline {
+//         font-weight: 200;
+//         font-style: italic;
+//         font-size: 26px;
+//         margin: 0;
+//         color: $white-60;
+//         line-height: 1.4;
+//     }
+
+//     .e-question {
+//         color: $white-80;
+//         font-weight: 400;
+//         margin: 0;
+//         font-size: 18px;
+//         line-height: 1.35;
+//         @include wrap;
+
+//         @include breakpoint($desktop) { font-size: 22px; }
+//     }
+
+//     .e-project-link {
+//         text-transform: uppercase;
+//         font-size: 16px;
+//         letter-spacing: 1px;
+//         color: $white-70;
+//         font-weight: 600;
+//         padding: 15px 0;
+//         margin: 15px 0;
+//         display: inline-block;
+//         position: relative;
+
+//         i {
+//             position: absolute;
+//             right: -40px;
+//             transform: rotate(-45deg);
+//         }
+//     }
+
+//     .e-content {
+//         h4 {
+//             text-transform: uppercase;
+//             font-size: 16px;
+//             letter-spacing: 1px;
+//             color: $white-70;
+//             font-weight: 600;
+//             margin: 30px 0;
+
+//         }
+
+//         p, li { color: $white-70; }
+//     }
+
+//     .e-location {
+//         @include breakpoint($desktop) { margin-right: 100px; }
+//         h4 { margin-bottom: 10px; }
+
+//         .e-place {
+//             display: inline-block;
+//             background-color: $gray-10;
+//             padding: 5px 18px;
+//             margin-bottom: 4px;
+//             color: $white-60;
+
+//             @include breakpoint($desktop) {
+//                 display: inline-block;
+//                 font-size: 16px;
+//                 padding: 3px 9px;
+//             }
+//         }
+//     }
+
+//     .e-partners {
+//         h4 { margin-bottom: 10px; }
+
+//         .e-partner {
+//             display: inline-block;
+//             padding: 5px 0;
+//             margin-bottom: 4px;
+//             color: $white-60;
+
+//             @include breakpoint($desktop) {
+//                 display: inline-block;
+//                 font-size: 16px;
+//                 padding: 3px 0;
+//             }
+//         }
+//     }
+
+//     .e-progress {
+//         @include breakpoint($mobile-only) {
+//             border: 1px solid $white-40;
+//             padding: 3px 0;
+//             display: block;
+//             width: 100%;
+//             text-align: center;
+//             margin-top: 20px;
+//         }
+
+//         @include breakpoint($desktop) {
+//             width: 100%;
+//             border-bottom: 1px solid $white-20;
+//             margin-top: 70px;
+//             margin-bottom: 20px;
+//             margin-left: 120px;
+//             position: relative;
+//         }
+
+//         &:before {
+//             @include breakpoint($mobile-only) {
+//                 color: $white-60;
+//                 content: 'Progress: ';
+//             }
+
+//             @include breakpoint($desktop) {
+//                 color: $white-30;
+//                 content: 'Progress';
+//                 position: absolute;
+//                 bottom: -13px;
+//                 left: -120px;
+//                 text-transform: uppercase;
+//                 letter-spacing: 1px;
+//                 font-weight: 600;
+//             }
+//         }
+
+//         &:after {
+//             @include breakpoint($desktop) {
+//                 position: absolute;
+//                 content: "";
+//                 border-bottom: 1px solid $white-50;
+//                 left: 0;
+//                 top: 0;
+//             }
+//         }
+
+//         span:before {
+//             color: $white-60;
+//             display: none;
+
+//             @include breakpoint($desktop) {
+//                 position: absolute;
+//                 margin-top: -35px;
+//                 display: block;
+//                 color: $white-30;
+//             }
+//         }
+
+//         span:nth-child(1):before {
+//             content: "Define";
+//             @include breakpoint($desktop) { right: 90%; }
+//         }
+//         span:nth-child(2):before {
+//             content: "Prototype";
+//             @include breakpoint($desktop) { right: 65%; }
+//         }
+//         span:nth-child(3):before {
+//             content: "Test & Iteration";
+//             @include breakpoint($desktop) { right: 30%; }
+//         }
+//         span:nth-child(4):before {
+//             content: "Complete";
+//             @include breakpoint($desktop) { right: 0; }
+//         }
+
+//         &.m-define span:nth-child(1):before,
+//         &.m-prototype span:nth-child(2):before,
+//         &.m-test span:nth-child(3):before,
+//         &.m-complete span:nth-child(4):before {
+//             color: $white-90;
+
+//             @include breakpoint($mobile-only) {
+//                 display: inline-block;
+//                 font-weight: 600;
+//             }
+//         }
+
+//         &.m-define:after {width: 10%;}
+//         &.m-prototype:after { width: 35%; }
+//         &.m-test:after { width: 70%; }
+//         &.m-complete:after { width: 100%; }
+//     }
+
+//     .e-social-media {
+//         padding: 20px 0;
+
+//         h4 {
+//             text-transform: uppercase;
+//             font-size: 16px;
+//             letter-spacing: 1px;
+//             color: $white-70;
+//             font-weight: 600;
+//             margin: 0;
+//             margin-right: 50px;
+
+//             @include breakpoint($desktop) { display: inline-block; }
+//         }
+
+//         a {
+//             color: $white-40;
+//             font-size: 22px;
+//             line-height: 16px;
+//             display: inline-block;
+//             padding: 10px;
+//             @include transition;
+
+//             &:hover {
+//                 color: $white;
+//                 transform: scale(1.5);
+//                 @include transition;
+//             }
+//         }
+//     }
+// }
