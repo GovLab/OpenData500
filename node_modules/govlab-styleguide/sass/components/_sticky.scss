@@ -1,0 +1,83 @@
+/*
+Sticky
+
+A sticky can be used to convey an error or some information when the page
+first loads.
+
+Markup:
+<!-- #fullwidth -->
+<div class="b-page-section">
+    <div class="row">
+        <p>This produces the sticky at the bottom of the window <i class="material-icons">arrow_downward</i></p>
+    </div>
+</div>
+<div class="b-sticky m-purple">
+    <div class="row">
+        <div class="column small-12">
+            <i class="material-icons e-close js-close-sticky">close</i>
+            <h3 class="e-title">Something went wrong</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi, in, nobis. Repudiandae <a href="#">ipsum alias enim officiis</a> et consectetur expedita commodi nobis suscipit deleniti. Recusandae architecto minima rerum modi suscipit doloremque!</p>
+        </div>
+    </div>
+</div>
+
+.m-error - error style
+.m-red - red style
+.m-success - success style
+.m-green - green style
+.m-alert - alert style
+.m-orange - orange style
+.m-purple - purple style
+.m-blue - blue style
+.m-teal - teal style
+
+Styleguide 6.1
+*/
+.b-sticky {
+    background-color: #333;
+    padding: 25px 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    box-shadow: 0 0 10px $gray-20;
+    z-index: 1;
+
+    .row {
+        color: $white-60;
+
+        .e-title {
+            margin: 0;
+            padding: 0;
+            font-weight: 600;
+            font-size: 20px;
+
+            @include breakpoint($mobile-only) { font-size: 16px; }
+        }
+
+        p { margin: 10px 0; }
+
+        p a { color: $white-90; }
+        p a:hover { text-decoration: underline; }
+
+        .e-close {
+            float: right;
+            margin-right: 10px;
+            opacity: .6;
+            cursor: pointer;
+
+            &:hover { opacity: 1; }
+        }
+    }
+}
+
+.b-sticky.m-error,
+.b-sticky.m-red     { background-color: $red;    }
+.b-sticky.m-success,
+.b-sticky.m-green   { background-color: $green;  }
+.b-sticky.m-alert,
+.b-sticky.m-orange  { background-color: $orange; }
+.b-sticky.m-purple  { background-color: $purple; }
+.b-sticky.m-blue    { background-color: $blue;   }
+.b-sticky.m-teal    { background-color: $teal;   }

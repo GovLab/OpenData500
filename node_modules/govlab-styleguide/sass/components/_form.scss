@@ -1,0 +1,303 @@
+/*
+Form
+
+Forms should be used to collect information from users.
+See the <a href="./search.html">search</a> and <a href="./buttons.html">button</a>
+components for other uses.
+
+Guidelines:
+<ul>
+<li>Mark fields as required</li>
+<li>Use the correct HTML5 input type for the purpose, not just <code>text</code></li>
+<li>Add help text when needed, such as if purpose or required format of the input is non-obvious
+</ul>
+
+Markup:
+<!-- #fullwidth -->
+<div class="b-page-section">
+    <div class="row">
+        <div class="column small-12">
+            <form action="" class="b-form">
+                <input type="text" id="name" placeholder="Name" />
+                <input type="email" id="mail" placeholder="Email"/>
+                <textarea id="msg" placeholder="Message"></textarea>
+                <input type="submit" value="Send">
+            </form>
+        </div>
+    </div>
+</div>
+<!-- inverted -->
+<div class="b-page-section m-black">
+    <div class="row">
+        <div class="column small-12">
+            <form action="" class="b-form m-negative">
+                <input type="text" id="name" placeholder="Name"/>
+                <input type="email" id="mail" placeholder="Email"/>
+                <textarea id="msg" placeholder="Message"></textarea>
+                <input type="submit" value="Send">
+            </form>
+        </div>
+    </div>
+</div>
+
+.m-negative - inverted color scheme for dark backgrounds
+
+Styleguide 4.1
+*/
+
+/*
+Multi-Column
+
+Forms can be used in conjunction with the <code>.b-grid-container</code>
+component for multi-column form layouts.
+
+Markup:
+<form action="" class="b-form">
+    <div class="row">
+        <div class="large-6 columns">
+            <input type="text" id="name" placeholder="Name"/>
+            <input type="email" id="mail" placeholder="Email"/>
+            <input type="email" id="password" placeholder="Password"/>
+            <textarea id="msg" placeholder="Message"></textarea>
+            <input type="submit" value="Send">
+        </div>
+        <div class="large-6 columns">
+            <div class="e-select">
+                <select>
+                    <option>One</option>
+                    <option>Two</option>
+                    <option>Three</option>
+                </select>
+            </div>
+            <div class="e-checkbox">
+                <input type="checkbox" id="checkbox-1"><label for="checkbox-1">I agree with the terms of service</label>
+            </div>
+            <div class="e-checkbox">
+                <input type="checkbox" id="checkbox-2"><label for="checkbox-2">Send me updates about open data</label>
+            </div>
+        </div>
+    </div>
+</form>
+
+Styleguide 4.2
+*/
+
+/*
+Input / Textarea
+
+Supports HTML5 form types. (<code>text</code>, <code>email</code>, <code>password</code>, etc.)
+Field names should be included as <code>placeholder</code> attribute where possible
+Doesn't need a parent element, simply include in <code>.b-form</code>
+
+Markup:
+<form action="" class="b-form">
+    <input type="text" placeholder="Text Input" />
+    <textarea id="msg" placeholder="Message"></textarea>
+</form>
+
+Styleguide 4.3
+*/
+
+/*
+Checkbox
+
+Markup:
+<form action="" class="b-form">
+    <div class="e-checkbox">
+        <input type="checkbox" id="one-checkbox"><label for="one-checkbox">I'm a Checkbox</label>
+    </div>
+    <div class="e-checkbox">
+        <input type="checkbox" id="another-checkbox" disabled><label for="another-checkbox">I'm Disabled</label>
+    </div>
+</form>
+
+Styleguide 4.4
+*/
+
+/*
+Radio
+
+Radio buttons should be inside a <code>.e-radio</code> element.
+
+Markup:
+<form action="" class="b-form">
+    <div class="e-radio">
+        <input type="radio" id="radio-1" name="guide"><label for="radio-1">I'm a Radio</label>
+    </div>
+    <div class="e-radio">
+        <input type="radio" id="radio-2" name="guide"><label for="radio-2">Me Too</label>
+    </div>
+    <div class="e-radio">
+        <input type="radio" id="radio-3" name="guide" disabled><label for="radio-3">Disabled</label>
+    </div>
+</form>
+
+Styleguide 4.5
+*/
+
+/*
+Select
+
+Select controls should be wrapped in an <code>.e-select</code> parent element.
+
+Markup:
+<form action="" class="b-form">
+    <div class="e-select">
+        <select>
+            <option>One</option>
+            <option>Two</option>
+            <option>Three</option>
+        </select>
+    </div>
+</form>
+
+Styleguide 4.6
+*/
+.b-form {
+    padding: 10px 0;
+
+    ::-webkit-input-placeholder {
+        color: $black;
+        text-align: left;
+    }
+    :-moz-placeholder {
+        color: $black;
+        text-align: left;
+    } /* Firefox 18- */
+    ::-moz-placeholder {
+        color: $black;
+        text-align: left;
+    } /* Firefox 19+ */
+    :-ms-input-placeholder {
+        color: $black;
+        text-align: left;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    textarea {
+        text-align: left;
+        border: 0;
+        background-color: $gray-10;
+        width: 100%;
+        padding: 10px 15px;
+        margin-bottom: 15px;
+        @include transition;
+    }
+
+
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="password"]:focus,
+    textarea:focus {
+        background-color: $gray-20;
+        @include transition;
+    }
+
+    input[type="submit"] {
+        @extend .b-button;
+        border: 0;
+    }
+
+    textarea { resize: vertical; }
+
+    input[type="checkbox"],
+    input[type="radio"] {
+        display: none;
+    }
+
+    .e-checkbox,
+    .e-radio {
+        padding:7px 10px;
+        margin-bottom: 15px;
+    }
+
+    input[type="checkbox"] + label:before,
+    input[type="radio"] + label:before {
+        vertical-align: -6px;
+        margin-right: 15px;
+    }
+
+    input[type="checkbox"] + label:before {
+        @include material-icons;
+        content: 'check_box_outline_blank';
+    }
+
+    input[type="checkbox"]:checked + label:before {
+        @include material-icons;
+        content: 'check_box';
+    }
+
+    input[type="radio"] + label:before {
+        @include material-icons;
+        content: 'radio_button_unchecked';
+    }
+    input[type="radio"]:checked + label:before {
+        @include material-icons;
+        content: 'radio_button_checked';
+    }
+
+    input:disabled + label {
+        opacity: .4;
+    }
+
+    .e-select {
+        background-color: $gray-10;
+        text-align: left;
+        padding: 0 15px;
+        margin-bottom: 15px;
+        position: relative;
+        @include transition;
+
+        &::before {
+            @include material-icons;
+            content: 'keyboard_arrow_down';
+            position: absolute;
+            right: 0;
+            padding-top: 10px;
+            margin: 0 auto 0 auto;
+            width: 42px;
+            height: 32px;
+            color: $black;
+            z-index: -1
+        }
+
+        select {
+            height: 42px;
+            border: 0;
+            border-radius: 0;
+            margin: 0;
+            background-color: transparent;
+            width: 100%;
+            -webkit-appearance: none;
+            background-image: none;
+            &:focus {
+            }
+        }
+
+        &:hover {
+            background-color: $gray-20;
+            @include transition;
+        }
+    }
+
+    &.m-negative {
+        input { color: $white; }
+
+        input[type='text'], input[type='email'], input[type='submit'], textarea {
+            background-color: $white-10;
+            @include placeholder {
+                color: $white;
+            }
+            &:focus {
+                background-color: $white-20;
+                @include transition;
+            }
+        }
+
+        input[type="submit"]:hover {
+            background-color: $white-20;
+        }
+    }
+}

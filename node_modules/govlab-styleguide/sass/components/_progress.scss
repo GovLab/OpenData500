@@ -1,0 +1,94 @@
+.b-progress {
+    @include breakpoint($mobile-only) {
+        border: 1px solid $white-40;
+        padding: 3px 0;
+        display: block;
+        width: 100%;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    @include breakpoint($desktop) {
+        width: 100%;
+        border-bottom: 1px solid $white-20;
+        margin-top: 70px;
+        margin-bottom: 20px;
+        padding-left: 120px;
+        position: relative;
+    }
+
+    &:before {
+        @include breakpoint($mobile-only) {
+            color: $white-60;
+            content: 'Progress: ';
+        }
+
+        @include breakpoint($desktop) {
+            color: $white-30;
+            content: 'Progress';
+            position: absolute;
+            bottom: -13px;
+            left: -120px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+    }
+
+    &:after {
+        @include breakpoint($desktop) {
+            position: absolute;
+            content: "";
+            border-bottom: 1px solid $white-50;
+            left: 0;
+            top: 0;
+        }
+    }
+
+    span:before {
+        color: $white-60;
+        display: none;
+
+        @include breakpoint($desktop) {
+            position: absolute;
+            margin-top: -35px;
+            display: block;
+            color: $white-30;
+        }
+    }
+
+    span:nth-child(1):before {
+        content: "Define";
+        @include breakpoint($desktop) { right: 90%; }
+    }
+    span:nth-child(2):before {
+        content: "Prototype";
+        @include breakpoint($desktop) { right: 65%; }
+    }
+    span:nth-child(3):before {
+        content: "Test & Iteration";
+        @include breakpoint($desktop) { right: 30%; }
+    }
+    span:nth-child(4):before {
+        content: "Complete";
+        @include breakpoint($desktop) { right: 0; }
+    }
+
+    &.m-define    span:nth-child(1):before,
+    &.m-prototype span:nth-child(2):before,
+    &.m-test      span:nth-child(3):before,
+    &.m-complete  span:nth-child(4):before {
+        color: $white-90;
+
+        @include breakpoint($mobile-only) {
+            display: inline-block;
+            font-weight: 600;
+        }
+    }
+
+    &.m-define:after    { width: 10%;  }
+    &.m-prototype:after { width: 35%;  }
+    &.m-test:after      { width: 70%;  }
+    &.m-complete:after  { width: 100%; }
+}
+

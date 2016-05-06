@@ -1,0 +1,32 @@
+input[type="text"],
+input[type="email"],
+input[type="password"] { 
+    border: 0;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
+// .b-landing-questions,
+// .b-featured-content > *,
+// .b-single-landing > *,
+// .b-single-description > *,
+// .b-single-results > *,
+// .b-single-related-content > *,
+// .b-projects-landing > *,
+// .b-footer {
+//     @include breakpoint($mobile-only) {
+//         padding-left: 10px;
+//         padding-right: 10px;
+//     }
+// }
+
+// .b-top-section.b-top-section {
+//   padding-top: 90px;
+//   @include breakpoint($desktop) {padding-top: 100px;}
+// }
+

@@ -1,0 +1,89 @@
+.sandbox {
+    min-height: 800px;
+    padding-top: 100px;
+
+    .wrap {
+        @include wrap;
+    }
+
+    .question { background-color: $black;}
+    p  { color: white; }  
+}
+
+
+
+
+
+
+
+
+/* Header */
+// .large-header {
+//     position: relative;
+//     width: 100%;
+//     background: #333;
+//     overflow: hidden;
+//     background-size: cover;
+//     background-position: center center;
+//     z-index: 1;
+
+//     canvas {
+//         position: absolute;
+//         top: 0;
+//         bottom: 0;
+//         left: 0;
+//         right: 0;
+//     }
+
+//     .e-question {
+//     }
+// }
+
+
+
+
+
+
+
+
+
+
+
+// .wrapper {
+//     height: 700px;
+//     padding: 100px;
+//     background-color: $teal;
+
+// }
+
+// .circle {
+//     margin: 20px;
+//     width: 40px;
+//     height: 40px;
+//     border-radius: 50%; 
+//     line-height: 0;
+//     overflow: hidden;
+//     // border: 1px solid $white-80;
+
+//     > div {
+//         background-color: $white-20;
+//         height: 50%;
+//         width: 50%;
+//         display: inline-block;
+//     }
+
+//     &.m-idea > div:nth-child(2),
+//     &.m-design > div:nth-child(2),
+//     &.m-design > div:nth-child(4),
+//     &.m-prototype > div:nth-child(2),
+//     &.m-prototype > div:last-child,
+//     &.m-prototype > div:nth-child(3),
+//     &.m-production > div:first-child,
+//     &.m-production > div:nth-child(2),
+//     &.m-production > div:last-child,
+//     &.m-production > div:nth-child(3) { background-color: $white-50; }
+    
+// }
+
+
+

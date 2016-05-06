@@ -1,0 +1,107 @@
+/*
+Boilerplate
+
+Basic boilerplate to get started quickly.
+
+Markup:
+<!-- #fullwidth -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The Govlab</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script src="//use.typekit.net/zez3buj.js"></script>
+    <script>try{Typekit.load();}catch(e){}</script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="vendor/normalize.css">
+    <link rel="stylesheet" href="vendor/slick.css">
+    <link rel="stylesheet" href="vendor/prism.css" />
+    <link rel="stylesheet" href="styles/styles.css">
+</head>
+<body id="">
+    <header class="b-top-nav">
+        <div class="e-nav-group m-left">
+            <span class="e-nav-item js-nav-trigger e-nav-trigger">
+                <i class="material-icons">menu</i>
+            </span>
+        </div>
+        <div class="e-nav-group m-right e-social-media">
+            <a href="https://twitter.com/TheGovLab" class="e-nav-item" target="_blank"><i class="e-social-media-item fa fa-twitter"></i></a>
+            <a href="https://www.youtube.com/user/TheGovLab" class="e-nav-item" target="_blank"><i class="e-social-media-item fa fa-youtube-play"></i></a>
+        </div>
+        <a class="e-logo" href="./">
+            <img src="img/govlab-logo-white.png" alt="">
+        </a>
+    </header>
+    <!-- Main Menu (Off Canvas) -->
+    <nav class="b-main-menu">
+        <!-- generated content here for side menu -->
+    </nav>
+    <main role="main">
+        <!-- main content starts here -->
+        <div class="b-top-section m-purple">
+            <h1>Top Section</h1>
+            <h3>Subtitle</h3>
+        </div>
+        <div class="b-page-section">
+            <div class="row">
+                <div class="large-10 large-centered columns">
+                    <div class="row">
+                        <!-- 1st section content -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main><!--@main-->
+    <footer class='b-footer'>
+        <div class="row">
+            <div class="large-10 large-centered columns">
+                <div class="row">
+                    <div class="e-content m-sections medium-4 column">
+                        <h4>Sections</h4>
+                        <!-- Add generated sections here -->
+                    </div>
+                    <div class="e-content medium-4 column">
+                        <h4>Lead Supporters</h4>
+                        <a class="e-partner-logo" href="https://www.macfound.org/" tagret="_blank"><img src="img/partners/macarthur-logo-white.png" alt="MacArthur Foundation"></a>
+                        <a class="e-partner-logo" href="http://knightfoundation.org/" tagret="_blank"><img src="img/partners/knight-logo-white.png" alt="Knight Foundation"></a>
+                        <a class="e-partner-logo m-google" href="http://google.org/" tagret="_blank"><img src="img/partners/google-org.png" alt="Google.org"></a>
+                    </div>
+                    <div class="e-content medium-4 column">
+                        <h4>Based at</h4>
+                        <a class="e-partner-logo" href="http://engineering.nyu.edu/tandon" tagret="_blank"><img src="img/partners/nyu.png" alt="NYU Tandon School of Engineering - New York University"></a>
+                        <a class="e-partner-logo m-mit" href="https://www.media.mit.edu/" tagret="_blank"><img src="img/partners/mit-logo-white.png" alt="MIT Media Lab"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <div class="b-copyright">
+        <div class="row">
+            <div class="large-10 large-centered columns">
+                <a class="e-cc-badge" rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a>
+                This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a> <br> <a href="#">Copyright Infringement Information</a>.
+            </div>
+        </div>
+    </div>
+    <div id="overlay"></div>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="vendor/slick.min.js"></script>
+    <script src="vendor/prism.js"></script>
+    <script src="js/scripts.js"></script>
+    <script src="https://cdn.firebase.com/js/client/2.4.0/firebase.js"></script>
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', '', 'auto');
+ga('send', 'pageview');
+</script>
+</body>
+</html>
+
+Styleguide 1.1
+*/

@@ -1,0 +1,246 @@
+/*
+Data Visualization
+
+Styleguide 6.3
+*/
+
+/*
+Bubble map
+
+Data driven bubble map via D3, loosely based on several examples from Mike Bostock <a href="http://bl.ocks.org/mbostock">http://bl.ocks.org/mbostock</a>
+
+Markup:
+<div class="b-map"></div>
+<!-- ----------------------------------------- -->
+<!-- ignore, just used to link to example page -->
+<a class="b-button" href="map1.html">Map I</a>
+<!-- ----------------------------------------- -->
+
+Styleguide 6.3.1
+*/
+.b-map {
+  .background {
+    fill: none;
+    pointer-events: all;
+  }
+
+  .feature {
+    fill: #ccc;
+    cursor: pointer;
+    &.active {
+      fill: orange;
+    }
+  }
+
+  .country {
+    fill: none;
+    stroke: #fff;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .node {
+    &.fade circle {
+      opacity: .15;
+      transition: opacity 0.5s;
+    }
+
+    circle {
+      opacity: .75;
+      cursor: pointer;
+      transition: opacity 0.5s;
+      &.active {
+        opacity: .9;
+        fill: rgb(0, 138, 179) !important; // !important needed to override js-inserted element styles
+        transition: opacity 0.1s;
+      }
+    }
+
+    text {
+      fill: #fff;
+      cursor: pointer;
+    }
+  }
+
+  .region {
+    fill: #ddd;
+    cursor: pointer;
+    transition: fill 0.1s;
+    &.active {
+      fill: #bbb;
+      transition: fill 0.1s;
+    }
+  }
+
+}
+
+/*
+Packlayout map
+
+D3 based bubble map that uses packlayout to nest collections of bubbles into region bounding boxes.
+
+Markup:
+<div class="b-pack-map"></div>
+<!-- ----------------------------------------- -->
+<!-- ignore, just used to link to example page -->
+<a class="b-button" href="map2.html">Map II</a>
+<!-- ----------------------------------------- -->
+
+Styleguide 6.3.2
+*/
+
+.b-pack-map {
+  .background {
+    fill: none;
+    pointer-events: all;
+  }
+
+  .feature {
+    fill: #ccc;
+    cursor: pointer;
+    &.active {
+      fill: orange;
+    }
+  }
+
+  .country {
+    fill: none;
+    // stroke: #fff;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .parent {
+    &.fade circle {
+      opacity: .15;
+      transition: opacity 0.2s;
+    }
+    circle {
+      opacity: .6;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      &.active {
+        opacity: 1;
+        transition: opacity 0.2s;
+      }
+    }
+    &.sector circle {
+      opacity: .5;
+    }
+    text {
+      font-size: 22px;
+    }
+    &.invisible {
+      text {
+        visibility: hidden;
+      }
+      circle {
+        opacity: 0;
+        visibility: visible;
+      }
+      &.sector circle {
+        opacity: .2;
+      }
+    }
+  }
+
+  .node {
+    &.fade circle {
+      opacity: .15;
+      transition: opacity 0.5s;
+    }
+
+    circle {
+      opacity: 1;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      &.active {
+        opacity: 1;
+        transition: opacity 0.2s;
+      }
+    }
+
+    text {
+      font-size: 26px;
+      &.sector-text {
+        font-size: 16px;
+      }
+    }
+    &.study {
+      &.fade circle {
+        opacity: .8;
+        transition: opacity 0.5s;
+        &.active {
+          opacity: 1;
+          transition: opacity 0.2s;
+        }
+      }
+      text {
+        fill: $gray-60;
+        font-size: 16px;
+      }
+      display: none;
+      &.show {
+        display: initial;
+      }
+    }
+  }
+
+  .region {
+    fill: #ddd;
+    cursor: pointer;
+    transition: fill 0.2s;
+    &.active {
+      fill: #bbb;
+      transition: fill 0.2s;
+    }
+  }
+
+  text {
+    fill: #fff;
+    cursor: pointer;
+  }
+
+  .parent {
+    opacity: 0;
+    visibility: hidden;
+    &.show {
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.5s;
+    }
+  }
+
+  .node {
+    opacity: 0;
+    visibility: hidden;
+    &.show {
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.5s;
+    }
+  }
+}
+
+.map-ui {
+  .b-button {
+    color: #fff;
+    background-color: rgba(0, 138, 179, 0.4);
+
+    &.m-active {
+      background-color: rgba(0, 138, 179, 1);
+    }
+  }
+}
+
+.tooltip {
+  color: $white;
+  font-size: 16px;
+  border-color: $gray-50;
+  background-color: $gray-50;
+  transition: opacity 0.02s;
+  width: 200px;
+  &::before {
+    border-bottom-color: $gray-50;
+  }
+}

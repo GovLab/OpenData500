@@ -1,0 +1,186 @@
+/*
+Footer
+
+Standard footer for govlab pages.  Usually contains some generated information on
+the sections of the page as well as affiliate information.
+
+Markup:
+<!-- #fullwidth -->
+<footer class='b-footer'>
+    <div class="row">
+        <div class="large-10 large-centered columns">
+            <div class="row">
+                <div class="e-content m-sections medium-4 column">
+                    <h4>Sections</h4>
+                    <!-- Generated Content -->
+                </div>
+                <div class="e-content medium-4 column">
+                    <h4>Lead Supporters</h4>
+                    <a class="e-partner-logo" href="https://www.macfound.org/" tagret="_blank"><img src="img/partners/macarthur-logo-white.png" alt="MacArthur Foundation"></a>
+                    <a class="e-partner-logo" href="http://knightfoundation.org/" tagret="_blank"><img src="img/partners/knight-logo-white.png" alt="Knight Foundation"></a>
+                    <a class="e-partner-logo m-google" href="http://google.org/" tagret="_blank"><img src="img/partners/google-org.png" alt="Google.org"></a>
+                </div>
+                <div class="e-content medium-4 column">
+                    <h4>Based at</h4>
+                    <a class="e-partner-logo" href="http://engineering.nyu.edu/tandon" tagret="_blank"><img src="img/partners/nyu.png" alt="NYU Tandon School of Engineering - New York University"></a>
+                    <a class="e-partner-logo m-mit" href="https://www.media.mit.edu/" tagret="_blank"><img src="img/partners/mit-logo-white.png" alt="MIT Media Lab"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<div class="b-copyright">
+    <div class="row">
+        <div class="large-10 large-centered columns">
+            <a class="e-cc-badge" rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a>
+            This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a> <br> <a href="#">Copyright Infringement Information</a>.
+        </div>
+    </div>
+</div>
+
+Styleguide 5.3
+*/
+.b-footer {
+    background-color: $gray-80;
+    color: $white-80;
+    padding-top: 1px;
+    padding-bottom: 10px;
+    font-size: 16px;
+
+    @include breakpoint($desktop) {
+        padding: 45px 0;
+    }
+
+    .e-content {
+        @include breakpoint($mobile-only) { text-align: center; }
+
+        h4 {
+            margin: 40px 0 0;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: $white;
+            text-align: left;
+        }
+
+        .e-partner-logo {
+            display: block;
+            text-align: left;
+
+            > img {
+                max-width: 90%;
+                padding: 10px 0;
+                max-height: 60px;
+                opacity: .5;
+                @include transition;
+
+                &:hover {
+                    opacity: 1;
+                    @include transition;
+                }
+            }
+
+            &.m-google img {
+                max-height: 50px;
+                max-width: 70%;
+            }
+
+            &.m-mit img {
+                max-height: 70px;
+            }
+        }
+    }
+
+.e-content.m-sections {
+    a {
+        display: block;
+        box-sizing: border-box;
+        color: $white-70;
+        padding: 5px 10px;
+        text-decoration: none;
+        margin-left: -10px;
+        margin-right: 10px;
+        @include transition;
+        text-align: left;
+
+
+        @include breakpoint($desktop) {
+            display: inline-block;
+            width: 49%;
+        }
+
+        &:hover {
+            color: $white;
+            background-color: $white-10;
+            @include transition;
+
+        }
+    }
+}
+
+.b-build-team {
+    background-color: $gray-70;
+    padding: 20px;
+    text-align: center;
+
+
+    @include breakpoint($desktop) {
+        text-align: left;
+        padding: 20px 0;
+    }
+
+    .e-social-media {
+        text-align: center;
+
+        @include breakpoint($desktop) { float: right; }
+
+        a {
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+    }
+
+    a {
+        color: $white-70;
+        font-weight: 400;
+
+        &:hover { color: $white; }
+    }
+
+    p {
+        margin: 0;
+        color: $white-60;
+    }
+}
+
+}
+
+.b-copyright {
+    background-color: $gray-90;
+    text-align: center;
+    padding: 20px;
+    color: $white-70;
+    font-size: 14px;
+
+    @include breakpoint($desktop) {
+        padding: 20px;
+        text-align: left;
+    }
+
+    .e-cc-badge {
+        margin-right: 25px;
+        margin-top: 5px;
+        @include breakpoint($mobile-only) { display: block; }
+        @include breakpoint($desktop) { float: left; }
+    }
+
+    a {
+        margin: 0;
+        line-height: 1.2;
+        color: $white-70;
+
+        &:hover {
+            color: $white;
+        }
+    }
+}
+

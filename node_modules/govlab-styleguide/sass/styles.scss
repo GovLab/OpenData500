@@ -1,0 +1,60 @@
+/* Importing Foundation Stuff */
+@import 'foundation-components';
+@include foundation-everything;
+
+/* Our Custom Components */
+@import 'components/variables';
+@import 'components/resets';
+
+/* importing aux */
+@import 'components/aux';
+
+/* importing base */
+@import 'components/base';
+
+// components
+
+@import 'components/typography';
+@import 'components/button';
+@import 'components/form';
+@import 'components/search';
+@import 'components/off-canvas';
+@import 'components/topnav';
+@import 'components/footer';
+@import 'components/divider';
+@import 'components/slide';
+@import 'components/slider';
+@import 'components/sticky';
+@import 'components/page-top-section';
+@import 'components/page-section';
+@import 'components/progress';
+@import 'components/breadcrumbs';
+@import 'components/modal';
+@import 'components/card';
+@import 'components/firebase';
+@import 'components/map';
+
+// our custom styles
+@import 'custom';
+
+
+body {
+    // background-color: red;
+    // background-color: $purple;
+}
+
+.sandbox {
+    min-height: 400px;
+}
+
+@media (max-width: 600px) {
+  .sandbox { background-color: red; }
+}
+
+@media (min-width: 601px) {
+ .sandbox { background-color: green; }
+}
+
+@media (min-width: 1021px) {
+  .sandbox { background-color: blue; }
+}
