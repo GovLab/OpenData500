@@ -4,81 +4,58 @@
 {% block body %}
 
 <div class="m-homepage">
+<!--     <div class="m-country-flag">
+        <img src="{{ static_url("img/us-flag.png") }}" alt="">
+    </div> -->
+    <h1 class="first-title">Open Data 500 U.S.</h1>
+    <script src="{{ static_url("js/d3.v3.min.js") }}"></script>
+    <section id="chord-chart-container">
+        <h2>Open Data Compass</h2>
+        <h3>What types of companies use which agencies' data?</h3>
+        <p></p>
+        <br />
 
-    <div class="b-top-section m-purple">
-        <h1>Open Data 500 U.S.</h1>
-    </div>
-
-    <div class="b-page-section">
-        <script src="{{ static_url("js/d3.v3.min.js") }}"></script>
-        <div id="chord-chart-container">
-            <h2>Open Data Compass</h2>
-            <h3>What types of companies use which agencies' data?</h3>
-            <p></p>
-            <br />
-
-            <div id="chord-chart">
-                <span class="chord-legend companies">Company Categories</span>
-                <span class="chord-legend agencies">Federal Agencies</span>
-            </div>
-
-            <div class="embed-chart-info">
-
-                <a class="b-button js-open-modal" href="#">Embed Link</a>
-                <div class="b-modal">
-                    <div class="e-content">
-                    <p>To embed this chart on your website, just copy and paste this code onto your page:</p>
-                        <textarea class="embed-code" readonly="readonly">
-                            <iframe src="http://www.opendata500.com/chart/" width="960" height="860" marginwidth="0" marginheight="50" scrolling="no" frameborder="0"></iframe>
-                        </textarea>
-                        <p><a class="b-button js-close-modal" href="#">Close</a></p>
-                    </div>
-                </div>
-
+    	<div id="chord-chart">
+            <span class="chord-legend companies">Company Categories</span>
+            <span class="chord-legend agencies">Federal Agencies</span>
+        </div>
+        <div class="embed-chart-info">
+            <span id="embed-chart-trigger" class="expand-trigger">Embed Chart</span>
+            <div class="embed-chart-info-content">
+                <p>To embed this chart on your website, just copy and paste this code onto your page:</p>
+                <textarea class="embed-code" readonly="readonly">
+                    <iframe src="http://www.opendata500.com/chart/" width="960" height="860" marginwidth="0" marginheight="50" scrolling="no" frameborder="0"></iframe>
+                </textarea>
             </div>
         </div>
-    </div>
+
+    </section>
+
 
     <section class="m-homepage-about">
-        <div class="b-divider">
-            <h1>About This Project</h1>
-        </div>
-        <div class="b-page-section">
-            <div class="row">
-                <div class="large-10 large-centered columns">
-                    <p>The Open Data 500, funded by the <a href="http://www.knightfoundation.org/" target="_blank">John S. and James L. Knight Foundation</a> and conducted by <a href="http://thegovlab.org/" target="_blank">the GovLab</a>, is the first comprehensive study of U.S. companies that use open government data to generate new business and develop new products and services.</p>
-                    <a href="http://www.opendata500.com/us/about/" class="b-button">Learn More</a>
-                </div>
-            </div>
-        </div>
+        <h1>About This Project</h1>
+        <p class="intro">The Open Data 500, funded by the <a href="http://www.knightfoundation.org/" target="_blank">John S. and James L. Knight Foundation</a> and conducted by <a href="http://thegovlab.org/" target="_blank">the GovLab</a>, is the first comprehensive study of U.S. companies that use open government data to generate new business and develop new products and services.</p>
+        <p class="more"><a href="http://www.opendata500.com/us/about/" class="m-button">Learn More</a></p>
     </section>
 
     <section class="m-homepage-participate">
-        <div class="b-divider">
-            <h1>How To Participate</h1>
+        <h1>How To Participate</h1>
+        <div class="m-homepage-box m-big">
+            <h2>1</h2>
+            <h3>Take the Survey</h3>
+            <p>Fill out the <a href="http://www.opendata500.com/us/submitCompany/">survey</a> and tell us about your company's use of open data.</p>
         </div>
-        <div class="b-page-section">
-            <div class="row">
-                <div class="medium-4 column">
-                    <h2>1</h2>
-                    <h3>Take the Survey</h3>
-                    <p>Fill out the <a href="http://www.opendata500.com/us/submitCompany/">survey</a> and tell us about your company's use of open data.</p>
-                </div>
-                 <div class="medium-4 column">
-                    <h2>2</h2>
-                    <h3>Edit a Profile</h3>
-                    <p>If you'd like to edit your company's profile, send us an <a href="mailto:opendata500@thegovlab.org">email</a>.
-                </div>
-                <div class="medium-4 column">
-                    <h2>3</h2>
-                    <h3>Join the Conversation</h3>
-                    <p><a href="http://www.opendata500.com/us/about/#disqus_thread">Comment using Disqus</a>, follow us on <a href="http://www.twitter.com/opendata500">Twitter</a>, or send us an <a href="mailto:opendata500@thegovlab.org">email</a>.</p>
-                </div>
-            </div>
+        <div class="m-homepage-box m-big">
+            <h2>2</h2>
+            <h3>Edit a Profile</h3>
+            <p>If you'd like to edit your company's profile, send us an <a href="mailto:opendata500@thegovlab.org">email</a>.
+        </div>
+        <div class="m-homepage-box m-big">
+            <h2>3</h2>
+            <h3>Join the Conversation</h3>
+            <p><a href="http://www.opendata500.com/us/about/#disqus_thread">Comment using Disqus</a>, follow us on <a href="http://www.twitter.com/opendata500">Twitter</a>, or send us an <a href="mailto:opendata500@thegovlab.org">email</a>.</p>
         </div>
     </section>
-
-
 </div>
 <script type="text/javascript">
 
