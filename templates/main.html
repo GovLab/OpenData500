@@ -60,7 +60,7 @@
             <a href="https://twitter.com/TheGovLab" class="e-nav-item" target="_blank"><i class="e-social-media-item fa fa-twitter"></i></a>
             <a href="https://www.youtube.com/user/TheGovLab" class="e-nav-item" target="_blank"><i class="e-social-media-item fa fa-youtube-play"></i></a>
         </div>
-        <a class="e-logo" href="./">
+        <a class="e-logo" href="/">
             <img src="{{ static_url('img/govlab-logo-white.png')}}" alt="">
         </a>
     </header>
@@ -68,8 +68,42 @@
 
     {% block main_menu %}
         <nav class="b-main-menu">
-            <a href="./">Home</a>
-            <a href="./about">About</a>
+        {% if len(settings['menu'][lan_]) > 1 %}
+            {% for item in settings['menu'][lan_] %}        
+            {% if not item.get('disabled', False) %}
+                    <a href="{{item['link']}}">{{item['item']}}</a>
+                    {% if item['sub-menu'] %}
+                        <ul id="submenu-about" class="e-submenu">
+                            {% for sub_item in item['sub-menu'] %}
+                                <li><a class="e-submenu-item" href="{{sub_item['link']}}">{{sub_item['item']}}</a></li>
+                            {%end%}
+                        </ul>
+                    {%end%}
+            {%end%}
+            {%end%}
+        {%end%}
+
+        <!-- ADMIN  -->
+        {%try%} {% if user %} 
+            <div>
+                <a href="/admin/companies/">Admin</a>
+                <ul id="submenu-about" class="e-submenu">
+                    <li><a class="e-submenu-item" href="/admin/companies/">Companies</a></li>
+                    <li><a class="e-submenu-item" href="/admin/agencies/">Agencies</a></li>
+                </ul>
+            </div>
+        {% end %}{%except%}{%end%}
+        {%try%} {% if user %} <div><a href="/logout/">Logout</a></div>{% end %}{%except%}{%end%}
+        {% if len(settings['available_languages']) > 1 %}
+            <div>
+                <div class="language-options">
+                    {% for language in settings['available_languages'] %}
+                        <a href="?lan={{language}}">{{language.upper()}}</a>
+                    {%end%}
+                </div>
+            </div>
+        {%end%}
+
         </nav>
     {% end %}
 
@@ -142,7 +176,7 @@
         <script src="vendor/prism.js"></script>
         <script src="js/scripts.js"></script>
         <script src="https://cdn.firebase.com/js/client/2.4.0/firebase.js"></script>
-        <script src="{{ static_url("js/libs/styleguide-scripts.js") }}"></script>
+        <script src="{{ static_url("js/styleguide-scripts.js") }}"></script>
     <!-- END STYLEGUIDE SCRIPTS-->
 
     <!-- ORIGINAL OD500 SCRIPTS -->
@@ -360,6 +394,7 @@
         <script src="{{ static_url("js/ui-scripts.js") }}"></script>
         {# STYLEGUIDE JS #}
         <script src="{{ static_url("js/libs/styleguide-scripts.js") }}"></script>
+        <!-- <script src="{{ static_url("js/custom-sg.js") }}"></script> -->
 
         <script>
           (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
