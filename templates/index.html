@@ -1,4 +1,4 @@
-<!doctype html> 
+<!doctype html>
 {% try %}
     {% set lan_ = lan %}
 {% except NameError %}
@@ -84,7 +84,123 @@
 
     <div class="parallax-bg" id="background"></div>
 
-    <div id="main" class="l-centered">
+
+
+    <div class="b-top-section m-purple">
+      <div class="row">
+        <div class="column small-12">
+            <h2 class="e-title">The OG500 Global Network</h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="b-page-section">
+      <div class="row">
+        <div class="column small-10 small-offset-1 column">
+            <p>The OD500 Global Network is an
+              international network of organizations that seek to study the use
+              and impact of open data. Coordinated by the <a href="http://thegovlab.org/">Governance Lab
+                (GovLab)</a> the OD500 Global Network enables participating organizations to
+              analyze open data in their country in a manner that is both
+              globally comparative and domestically specific. The OD500 Global Network
+              starts from the assumption that only by mapping the use of open
+              data within and across countries, can new approaches for
+              understanding the economic and social impact of open government
+              data be generated.</p>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="b-divider">
+      <h1></h1>
+      <h2>Countries in the Network</h2>
+    </div>
+
+  <div class="b-page-section">
+    <div class="b-country-selector">
+      <a href="/au/" class="b-country b-third">
+        <div class="b-flag m-au">
+          <div></div>
+        </div>
+        <h2>Australia</h2>
+      </a>
+      <a href="/mx/" class="b-country b-third">
+        <div class="b-flag m-mx">
+          <div></div>
+        </div>
+        <h2>M&eacute;xico</h2>
+        <p></p>
+      </a>
+      <a href="/us/" class="b-country b-third">
+        <div class="b-flag m-us">
+          <div></div>
+        </div>
+        <h2>United States</h2>
+        <p></p>
+      </a>
+    </div>
+    <div class="b-country-selector">
+      {% if "it" in constants.disabled_countries %}
+      <div class="b-country b-third">
+      </div>
+      {% else %}
+      <a href="/it/" class="b-country b-third">
+        <div class="b-flag m-it">
+          <div></div>
+        </div>
+        <h2>Italy</h2>
+      </a>
+      {% end %}
+      {% if "kr" in constants.disabled_countries %}
+      <div class="b-country b-third">
+      </div>
+      {% else %}
+      <a href="/kr/" class="b-country b-third">
+        <div class="b-flag m-kr">
+          <div></div>
+        </div>
+        <h2>Korea</h2>
+      </a>
+      {% end %}
+                    {% if "ca" in constants.disabled_countries %}
+                    <div class="b-country b-third">
+                    </div>
+                    {% else %}
+                    <a href="/ca/" class="b-country b-third">
+                        <div class="b-flag m-ca">
+                            <div></div>
+                        </div>
+                        <h2>Canada</h2>
+                    </a>
+                    {% end %}
+
+    </div>
+  </div>
+</div>
+
+<div class="b-divider">
+  <h1></h1>
+  <h2>Will you be the Next Country to Join OD500?</h2>
+</div>
+
+<div class="b-page-section">
+    <div class="row">
+        <div class="column small-10 small-offset-1 column">
+          <p>
+          To find out how to conduct a study in your country, please contact us at <a href="mailto:opendata500@thegovlab.org">The GovLab</a> at NYU.</p>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+    <!-- <div id="main" class="l-centered">
         <div id="container">
           <div class="b-section">
             <h1>The OD500 Global Network</h1>
@@ -173,7 +289,7 @@
             please contact us at The GovLab at NYU.</a></p></div>
 
         </div><!-- end container -->
-    </div><!-- end main -->
+    <!-- </div><!-- end main -->
 
     <!-- Mailchimp Subscribe -->
     <div id="mc_embed_signup" class="s-disabled">
