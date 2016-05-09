@@ -203,16 +203,6 @@ a:hover {
   font-size: 16px;
   line-height: 20px; }
 
-.m-homepage h1 {
-  margin: 15px 0 50px 0;
-  font-size: 3.8em; }
-.m-homepage .first-title {
-  margin: 25px 0 30px 0;
-  font-size: 5.5em; }
-.m-homepage section {
-  padding-bottom: 24px;
-  border-bottom: 1px solid #472b74;
-  margin-bottom: 25px; }
 .m-homepage #chord-chart-container {
   text-align: center;
   position: relative; }
@@ -243,105 +233,17 @@ a:hover {
     -o-transform: rotate(90deg);
     transform: rotate(90deg);
     right: -30px; }
-.m-homepage .m-banner-slider {
-  margin-bottom: 50px;
-  height: 347px;
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2); }
-  .m-homepage .m-banner-slider img {
-    position: relative;
-    z-index: -1; }
 
-.m-homepage-about .more {
-  text-align: right; }
-
-.m-homepage-participate {
+.embed-chart-info textarea {
+  max-width: 100%;
+  min-width: 100%;
+  max-height: 10rem;
+  min-height: 10rem;
+  font-size: 1rem;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  border: 1px solid #aaa;
+  border-radius: 0;
   overflow: hidden; }
-  .m-homepage-participate .m-homepage-box {
-    float: left;
-    width: 280px;
-    margin-right: 26px;
-    font-family: "Exo", sans-serif;
-    border: 1px solid #8977a7;
-    padding: 10px; }
-    .m-homepage-participate .m-homepage-box h2 {
-      text-align: center;
-      font-size: 36px;
-      vertical-align: middle;
-      font-weight: 100;
-      color: #8977a7;
-      padding: 7px 4px 2px 6px;
-      width: 40px;
-      height: 40px;
-      margin: -35px auto 0;
-      background-color: #472b74;
-      -webkit-border-radius: 50%;
-      -moz-border-radius: 50%;
-      border-radius: 50%; }
-    .m-homepage-participate .m-homepage-box h3 {
-      margin-top: 15px;
-      font-weight: 400; }
-    .m-homepage-participate .m-homepage-box p {
-      font-size: 16px;
-      font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-      line-height: 1.5em;
-      font-weight: 300; }
-    .m-homepage-participate .m-homepage-box.m-big {
-      width: 400px; }
-
-.m-homepage-box:last-of-type {
-  margin-right: 0; }
-
-.b-homepage-box-container {
-  display: block; }
-  .b-homepage-box-container .m-homepage-box {
-    float: none;
-    display: inline-block; }
-  .b-homepage-box-container.m-center {
-    text-align: center; }
-
-.embed-chart-info {
-  margin-top: 50px;
-  text-align: right; }
-  .embed-chart-info .expand-trigger {
-    display: inline-block;
-    font-size: 16px;
-    cursor: pointer;
-    color: #472b74;
-    padding: 5px;
-    position: relative; }
-    .embed-chart-info .expand-trigger:hover {
-      text-decoration: underline; }
-    .embed-chart-info .expand-trigger::after {
-      content: "";
-      width: 0;
-      height: 0;
-      border-right: 8px solid #472b74;
-      border-top: 8px solid transparent;
-      border-bottom: 8px solid transparent;
-      border-left: 0;
-      position: absolute;
-      right: -10px; }
-  .embed-chart-info .embed-chart-info-content {
-    display: none; }
-  .embed-chart-info.s-active .expand-trigger::after {
-    border-top: 8px solid #472b74;
-    border-right: 8px solid transparent;
-    border-left: 8px solid transparent;
-    border-bottom: 0;
-    right: -16px;
-    top: 8px; }
-  .embed-chart-info.s-active .embed-chart-info-content {
-    display: block; }
-  .embed-chart-info textarea {
-    max-width: 940px;
-    min-width: 940px;
-    max-height: 20px;
-    min-height: 20px;
-    font-size: 13px;
-    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-    border: 1px solid #aaa;
-    border-radius: 0;
-    overflow: hidden; }
 
 #consortium-landing-page header {
   height: 30px;
@@ -8569,6 +8471,24 @@ code.m-negative {
   font-size: 25px;
   margin-top: 10px;
   vertical-align: -6px; }
+
+.b-main-menu {
+  overflow-y: auto; }
+  .b-main-menu li {
+    list-style: none; }
+  .b-main-menu .e-submenu {
+    position: relative;
+    text-align: left; }
+  .b-main-menu .e-submenu-item {
+    display: block;
+    border: 0;
+    font-size: 14px;
+    color: #6f5d8b;
+    padding: 3px 18px 0px 35px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    letter-spacing: 1px; }
+    .b-main-menu .e-submenu-item .a:hover {
+      color: white; }
 
 body {
   margin: 0; }
