@@ -69,7 +69,7 @@
         <a class="e-logo" href="./">
             <img src="{{ static_url('img/govlab-logo-white.png')}}" alt="">
         </a>
-    </header> 
+    </header>
 <!-- END NEW HEADER -->
 
 <!-- ADD SIDE NAV MENU -->
@@ -154,7 +154,7 @@
                                 <h2>Canada</h2>
                             </a>
                             {% end %}
-							
+
 						</div>
                         <div class="b-country-selector">
                             <a href="mailto:opendata500@thegovlab.org?subject=OD500+in+my+country" class="b-country b-third">
@@ -174,7 +174,7 @@
 
         </div><!-- end container -->
     </div><!-- end main -->
-    
+
     <!-- Mailchimp Subscribe -->
     <div id="mc_embed_signup" class="s-disabled">
         <span class="signup-handle"></span>
@@ -200,9 +200,9 @@
             <ul>
                 {% for i in range(0, len(settings['footer_menu'][lan_])) %}
                     {% if i == len(settings['footer_menu'][lan_])-1 %}
-                        <li class="footer-menu-item last"><a href="{{settings['footer_menu'][lan_][i]['link']}}" target="_blank">{{settings['footer_menu'][lan_][i]['item']}}</a></li> 
+                        <li class="footer-menu-item last"><a href="{{settings['footer_menu'][lan_][i]['link']}}" target="_blank">{{settings['footer_menu'][lan_][i]['item']}}</a></li>
                     {%else%}
-                        <li class="footer-menu-item"><a href="{{settings['footer_menu'][lan_][i]['link']}}" target="_blank">{{settings['footer_menu'][lan_][i]['item']}}</a></li> 
+                        <li class="footer-menu-item"><a href="{{settings['footer_menu'][lan_][i]['link']}}" target="_blank">{{settings['footer_menu'][lan_][i]['item']}}</a></li>
                     {%end%}
                 {%end%}
             </ul>
@@ -227,7 +227,7 @@
             if (script.readyState && script.onload!==null){
                 script.onreadystatechange= function () {
                       if (this.readyState == 'complete') mce_preload_check();
-                }    
+                }
             }
         }
 
@@ -301,7 +301,7 @@
                                                     this.value = '';
                                                 } else {
                                                     if (/\[day\]/.test(fields[0].name)){
-                                                        this.value = fields[1].value+'/'+fields[0].value+'/'+fields[2].value;                                           
+                                                        this.value = fields[1].value+'/'+fields[0].value+'/'+fields[2].value;
                                                     } else {
                                                         this.value = fields[0].value+'/'+fields[1].value+'/'+fields[2].value;
                                                     }
@@ -327,12 +327,12 @@
                                             });
                                     });
                                 return mce_validator.form();
-                            }, 
+                            },
                             success: mce_success_cb
                         };
               $('#mc-embedded-subscribe-form').ajaxForm(options);
-              
-              
+
+
             });
         }
         function mce_success_cb(resp){
@@ -368,11 +368,11 @@
                 try{
                     if (index== -1){
                         $('#mce-'+resp.result+'-response').show();
-                        $('#mce-'+resp.result+'-response').html(msg);            
+                        $('#mce-'+resp.result+'-response').html(msg);
                     } else {
                         err_id = 'mce_tmp_error_msg';
                         html = '<div id="'+err_id+'" style="'+err_style+'"> '+msg+'</div>';
-                        
+
                         var input_id = '#mc_embed_signup';
                         var f = $(input_id);
                         if (ftypes[index]=='address'){
@@ -405,7 +405,7 @@
     <!-- plugins -->
     <script src="{{ static_url("js/plugins.js") }}"></script>
     <script src="{{ static_url("js/underscore-min.js") }}"></script>
-    
+
     <!-- Parallax Effect -->
     <script src="{{ static_url("js/libs/jquery.stellar.min.js") }}"></script>
     <!-- parsley.js (for form validation) -->
@@ -422,7 +422,7 @@
     <script src="{{ static_url("js/script.js") }}"></script>
     <script src="{{ static_url("js/ui-scripts.js") }}"></script>
     <script src="{{ static_url("js/libs/styleguide-scripts.js") }}"></script>
-    
+
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
