@@ -47,16 +47,16 @@
 		border-bottom: 0;
 	}
 
-	.m-half {
-		width: calc(50% - 70px);
-		padding-right: 60px;
-		display: inline-block;
-		vertical-align: top;
-	}
+	// .m-half {
+	// 	width: calc(50% - 70px);
+	// 	padding-right: 60px;
+	// 	display: inline-block;
+	// 	vertical-align: top;
+	// }
 
-	ul.m-half {
-		width: calc(50% - 105px);
-	}
+	// ul.m-half {
+	// 	width: calc(50% - 105px);
+	// }
 	
 	.about-page-toc {
 		float: right;
@@ -224,16 +224,16 @@
 // 	}
 // }
 
-.sub-sections {
-	border-bottom: 1px solid $light_gray;
-	padding-bottom: 23px;
-	margin-bottom: 0;
+// .sub-sections {
+// 	border-bottom: 1px solid $light_gray;
+// 	padding-bottom: 23px;
+// 	margin-bottom: 0;
 
-	.m-half {
-		border-bottom: 0;
-		padding-bottom: 0;
-	}
-}
+// 	.m-half {
+// 		border-bottom: 0;
+// 		padding-bottom: 0;
+// 	}
+// }
 
 #overlay {
 	position: fixed;

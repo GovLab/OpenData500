@@ -302,13 +302,6 @@ a:hover {
     line-height: 42px; }
   .about-page section:last-child {
     border-bottom: 0; }
-  .about-page .m-half {
-    width: calc(50% - 70px);
-    padding-right: 60px;
-    display: inline-block;
-    vertical-align: top; }
-  .about-page ul.m-half {
-    width: calc(50% - 105px); }
   .about-page .about-page-toc {
     float: right;
     margin: 0 0 30px 30px;
@@ -427,14 +420,6 @@ a:hover {
     border-color: rgba(0, 0, 0, 0.05); }
   .about-page .m-team-picture.s-active img {
     border-color: rgba(71, 43, 116, 0.4); }
-
-.sub-sections {
-  border-bottom: 1px solid #aaa;
-  padding-bottom: 23px;
-  margin-bottom: 0; }
-  .sub-sections .m-half {
-    border-bottom: 0;
-    padding-bottom: 0; }
 
 #overlay {
   position: fixed;
@@ -8489,6 +8474,11 @@ code.m-negative {
     letter-spacing: 1px; }
     .b-main-menu .e-submenu-item .a:hover {
       color: white; }
+
+.e-card .e-card-inner {
+  background-color: #523080; }
+.e-card.m-purple {
+  font-size: 14px; }
 
 body {
   margin: 0; }
