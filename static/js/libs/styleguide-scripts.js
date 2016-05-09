@@ -85,7 +85,7 @@ $(document).ready(function($) {
     $(".js-open-modal").click(function() {
         // targeting data-open attr to find jQuery element to add class to single element
         $($(this).attr('data-open')).addClass("m-active");
-        $(".b-modal").addClass("m-active");
+        // $(".b-modal").addClass("m-active");
         $overlay.addClass('m-active');
     });
 
