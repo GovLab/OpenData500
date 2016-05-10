@@ -1,6 +1,6 @@
 // About
 .about-page {
-	
+
 	font-size: 14px;
 	line-height: 20px;
 
@@ -57,7 +57,7 @@
 	ul.m-half {
 		width: calc(50% - 105px);
 	}
-	
+
 	.about-page-toc {
 		float: right;
 		margin: 0 0 30px 30px;
@@ -73,7 +73,7 @@
 			font-style: italic;
 			color: $black;
 		}
-		
+
 		li {
 			list-style-type: none;
 			margin: 8px 0 7px 0;
@@ -82,7 +82,7 @@
 		}
 	}
 
-	
+
 	#about-people {
 		text-align: center;
 		position: relative;
@@ -185,10 +185,10 @@
 			background-color: $lighter_gray;
 			@include circle;
 			@include inner_shadow;
-			border: 4px solid $white_alpha_50;	
+			border: 4px solid $white_alpha_50;
 
 		}
-		
+
 		.m-team-member-name {
 			margin: 0;
 			font-family: $fancy_type;
@@ -215,7 +215,7 @@
 		img {
 			border-color: $purple_alpha_40;
 		}
-	}	
+	}
 }
 
 // #about-govlab-approach {
@@ -253,4 +253,3 @@
 .resources-intro {
 	text-align: center;
 }
-
