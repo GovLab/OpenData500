@@ -8379,6 +8379,15 @@ code.m-negative {
 .e-card.m-purple {
   font-size: 14px; }
 
+#sponsor-aws img {
+  max-width: 150px;
+  top: 400px;
+  display: inline; }
+
+#sponsor-pwc img {
+  max-width: 150px;
+  display: inline; }
+
 body {
   margin: 0; }
 
