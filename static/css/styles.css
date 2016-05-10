@@ -781,8 +781,7 @@ a:hover {
     width: 120px; }
 #roundtables section {
   padding-bottom: 23px;
-  margin-bottom: 35px;
-  border-bottom: 1px solid #aaa; }
+  margin-bottom: 35px; }
 #roundtables p, #roundtables li {
   font-size: 16px;
   line-height: 22px; }
@@ -798,20 +797,7 @@ a:hover {
   font-weight: 100;
   text-align: center;
   margin-bottom: 50px;
-  font-style: italic;
-  color: #666; }
-#roundtables blockquote {
-  font-size: 24px;
-  line-height: 30px;
-  font-family: "Exo", sans-serif;
-  font-weight: 100;
-  font-style: italic;
-  text-align: left;
-  color: #472b74;
-  background-color: rgba(0, 0, 0, 0.05);
-  padding: 20px 30px;
-  border-left: 3px solid #472b74;
-  margin: 0; }
+  font-style: italic; }
 #roundtables .roundtables-series-sponsors,
 #roundtables .roundtables-event-sponsors {
   text-align: center; }
@@ -845,14 +831,10 @@ a:hover {
     padding: 5px 10px;
     font-size: 12px;
     line-height: 16px;
-    font-style: italic;
-    color: #666;
-    border-top: 1px solid rgba(0, 0, 0, 0.15);
-    background-color: rgba(255, 255, 255, 0.5); }
+    font-style: italic; }
     #roundtables .roundtable-attendees li span {
       display: block;
       font-size: 16px;
-      color: #444;
       font-style: normal;
       line-height: 20px; }
   #roundtables .roundtable-attendees li:nth-child(2n) {
@@ -8314,6 +8296,22 @@ code.m-negative {
 #sponsor-pwc img {
   max-width: 150px;
   display: inline; }
+
+.project-photo-slider .b-slider {
+  border: 1px solid rgba(0, 0, 0, 0.15); }
+  .project-photo-slider .b-slider .m-white {
+    background-color: white; }
+  .project-photo-slider .b-slider .slider-img {
+    max-height: 400px;
+    text-align: center;
+    margin: 0 auto; }
+  .project-photo-slider .b-slider figcaption {
+    color: black;
+    text-align: center; }
+.project-photo-slider .b-slider .slick-arrow:before, .project-photo-slider .b-slider .slick-arrow:after {
+  color: rgba(0, 0, 0, 0.15);
+  font-size: 60px;
+  transition: all .4s ease; }
 
 body {
   margin: 0; }
