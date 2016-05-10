@@ -8297,6 +8297,10 @@ code.m-negative {
   max-width: 150px;
   display: inline; }
 
+#sponsor-dtc img {
+  max-width: 150px;
+  display: inline; }
+
 .project-photo-slider .b-slider {
   border: 1px solid rgba(0, 0, 0, 0.15); }
   .project-photo-slider .b-slider .m-white {
