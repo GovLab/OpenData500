@@ -471,18 +471,6 @@ a:hover {
   position: relative;
   top: 6px; }
 
-.submitDescription .first-title {
-  clear: both;
-  margin-bottom: 60px;
-  margin-top: 0; }
-.submitDescription .adj-title {
-  font-size: 30px;
-  font-family: "Exo", sans-serif;
-  text-align: center;
-  color: #8977a7;
-  margin-top: 90px;
-  margin-bottom: 10px; }
-
 #candidates-warning {
   width: 500px;
   padding: 1px 15px;
