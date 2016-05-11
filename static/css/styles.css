@@ -452,6 +452,10 @@ a:hover {
 .resources-intro {
   text-align: center; }
 
+.it-partner-image, .it-partner-collaboration {
+  width: 150px;
+  margin: 0 40%; }
+
 .m-preview h2 {
   font-size: 2em; }
 .m-preview h3 {
