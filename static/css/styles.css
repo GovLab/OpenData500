@@ -456,6 +456,9 @@ a:hover {
   width: 150px;
   margin: 0 40%; }
 
+#ca-en-button, #ca-fr-button {
+  margin: 0 21%; }
+
 .m-preview h2 {
   font-size: 2em; }
 .m-preview h3 {
