@@ -455,6 +455,16 @@ a:hover {
 .resources-intro {
   text-align: center; }
 
+.it-partner-image, .it-partner-collaboration {
+  width: 150px;
+  margin: 0 40%; }
+
+.it-partner-collaboration {
+  font-size: 37px; }
+
+#ca-en-button, #ca-fr-button {
+  margin: 0 21%; }
+
 .m-preview h2 {
   font-size: 2em; }
 .m-preview h3 {
