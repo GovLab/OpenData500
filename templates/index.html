@@ -42,30 +42,13 @@
     <link rel="stylesheet" href="vendor/slick.css">
     <link rel="stylesheet" href="vendor/prism.css" />
     <link rel="stylesheet" href="styles/styles.css">
-
     <!-- SLICK -->
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.5.9/slick.css"/>
     <!-- END BOILERPLATE HEAD LINKS -->
-
 </head>
+
 <body id="international-homepage">
-    <!--<div class="parallax-bg" id="background-2" data-stellar-ratio="-0.015"></div>-->
 
-<!-- OLD HEADER -->
-<!--     <header>
-        <div class="l-centered">
-            <a class="logo" href="/">
-                <img src="{{ static_url(settings['logo_path']) }}" alt=""></a>
-
-            <a class="b-poly-logo" href="http://engineering.nyu.edu/">
-              <div class="poly-logo"> </div></a>
-        </div>
-    </header> --><!-- end header -->
-    <!--<div class="parallax-bg" id="background-3" data-stellar-ratio="-0.02"></div>-->
-
-<!-- OLD HEADER -->
-
-<!-- NEW HEADER -->
     <header class="b-top-nav">
         <div class="e-nav-group m-left">
             <span class="e-nav-item js-nav-trigger e-nav-trigger">
@@ -81,17 +64,12 @@
         </a>
     </header>
 
-<!-- END NEW HEADER -->
-
-<!-- ADD SIDE NAV MENU -->
 <!-- Main Menu (Off Canvas) -->
     <nav class="b-main-menu">
         <a href="./">Home</a>
         <a href="/us/about">About</a>
     </nav>
 
-
-    <!-- <div class="parallax-bg" id="background"></div> -->
 
     <div id="main">
         <div class="b-top-section m-purple">
@@ -117,8 +95,8 @@
 
         <div class="b-page-section">
             <div class="row">
-                <div class="large-12 large-centered columns">
-            <!-- AUSTRALIA -->
+                <div class="large-11 offset-1 large-centered columns">
+             <!-- AUSTRALIA -->
                 <div class="e-card m-purple">
                     <a href="/au/">
                         <div class="e-card-inner">
@@ -151,56 +129,56 @@
 
 
                 {% if "it" in constants.disabled_countries %}
-                <div class="b-country b-third">
-                </div>
+                    <div class="b-country b-third">
+                    </div>
                 {% else %}
-                <!-- Italy -->
-                <div class="e-card m-purple">
-                    <a href="/it/">
-                        <div class="e-card-inner">
-                            <div class="e-card-image" style="background-image: url('{{ static_url("img/italy-flag.png") }}')"></div>
-                            <p class="e-card-name">Italy</p>
-                            <!-- <p class="e-card-description">Project Description</p> -->
-                        </div>
-                    </a>
-                </div>
+                <!-- ITALY -->
+                    <div class="e-card m-purple">
+                        <a href="/it/">
+                            <div class="e-card-inner">
+                                <div class="e-card-image" style="background-image: url('{{ static_url("img/italy-flag.png") }}')"></div>
+                                <p class="e-card-name">Italy</p>
+                                <!-- <p class="e-card-description">Project Description</p> -->
+                            </div>
+                        </a>
+                    </div>
                 {% end %}
 
 
                 {% if "kr" in constants.disabled_countries %}
-                <div class="b-country b-third">
-                </div>
+                    <div class="b-country b-third">
+                    </div>
                 {% else %}
-                <!-- Korea -->
-                <div class="e-card m-purple">
-                    <a href="/kr/">
-                        <div class="e-card-inner">
-                            <div class="e-card-image" style="background-image: url('{{ static_url("img/southkorea-flag.png") }}')"></div>
-                            <p class="e-card-name">Korea</p>
-                            <!-- <p class="e-card-description">Project Description</p> -->
-                        </div>
-                    </a>
-                </div>
+                <!-- KOREA -->
+                    <div class="e-card m-purple">
+                        <a href="/kr/">
+                            <div class="e-card-inner">
+                                <div class="e-card-image" style="background-image: url('{{ static_url("img/southkorea-flag.png") }}')"></div>
+                                <p class="e-card-name">Korea</p>
+                                <!-- <p class="e-card-description">Project Description</p> -->
+                            </div>
+                        </a>
+                    </div>
                 {% end %}
 
 
                 {% if "ca" in constants.disabled_countries %}
-                <div class="b-country b-third">
-                </div>
+                    <div class="b-country b-third">
+                    </div>
                 {% else %}
-                <!-- Canada -->
-                <div class="e-card m-purple">
-                    <a href="/ca/">
-                        <div class="e-card-inner">
-                            <div class="e-card-image" style="background-image: url('{{ static_url("img/canada-flag.png") }}')"></div>
-                            <p class="e-card-name">Canada</p>
-                            <!-- <p class="e-card-description">Project Description</p> -->
-                        </div>
-                    </a>
-                </div>
+                    <!-- CANADA -->
+                    <div class="e-card m-purple">
+                        <a href="/ca/">
+                            <div class="e-card-inner">
+                                <div class="e-card-image" style="background-image: url('{{ static_url("img/canada-flag.png") }}')"></div>
+                                <p class="e-card-name">Canada</p>
+                                <!-- <p class="e-card-description">Project Description</p> -->
+                            </div>
+                        </a>
+                    </div>
                 {% end %}
 
-                <!-- In Your Country -->
+                <!-- IN YOUR COUNTRY -->
                 <div class="e-card m-purple">
                     <a href="mailto:opendata500@thegovlab.org?subject=OD500+in+my+country">
                         <div class="e-card-inner">
@@ -210,8 +188,8 @@
                         </div>
                     </a>
                 </div>
-
             </div>
+        </div>
         
     </div><!-- end main -->
 
@@ -275,13 +253,9 @@
                 This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a> <br> <a href="#">Copyright Infringement Information</a>.
             </div>
         </div>
-    </div>
+    </div>d
 
     <div id="overlay"></div>
-    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="vendor/slick.min.js"></script>
-    <script src="vendor/prism.js"></script>
-    <script src="js/scripts.js"></script>
     <script src="https://cdn.firebase.com/js/client/2.4.0/firebase.js"></script>
 
     <script type="text/javascript">
