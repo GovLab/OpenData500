@@ -35,7 +35,17 @@
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
+    <!-- BOILERPLATE HEAD LINKS -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="vendor/normalize.css">
+    <link rel="stylesheet" href="vendor/slick.css">
+    <link rel="stylesheet" href="vendor/prism.css" />
+    <link rel="stylesheet" href="styles/styles.css">
 
+    <!-- SLICK -->
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.5.9/slick.css"/>
+    <!-- END BOILERPLATE HEAD LINKS -->
 
 </head>
 <body id="international-homepage">
@@ -66,114 +76,153 @@
             <a href="https://twitter.com/TheGovLab" class="e-nav-item" target="_blank"><i class="e-social-media-item fa fa-twitter"></i></a>
             <a href="https://www.youtube.com/user/TheGovLab" class="e-nav-item" target="_blank"><i class="e-social-media-item fa fa-youtube-play"></i></a>
         </div>
-        <a class="e-logo" href="./">
+        <a class="e-logo" href="/">
             <img src="{{ static_url('img/govlab-logo-white.png')}}" alt="">
         </a>
     </header>
+
 <!-- END NEW HEADER -->
 
 <!-- ADD SIDE NAV MENU -->
 <!-- Main Menu (Off Canvas) -->
-<nav class="b-main-menu">
-    <a href="./">Home</a>
-    <a href="#">link</a>
-    <a href="#">link</a>
-    <a href="#" target="_blank">link</a>
-</nav>
+    <nav class="b-main-menu">
+        <a href="./">Home</a>
+        <a href="#">link</a>
+        <a href="#">link</a>
+        <a href="#" target="_blank">link</a>
+    </nav>
 
 
-    <div class="parallax-bg" id="background"></div>
+    <!-- <div class="parallax-bg" id="background"></div> -->
 
-    <div id="main" class="l-centered">
-        <div id="container">
-          <div class="b-section">
+    <div id="main">
+        <div class="b-top-section m-purple">
             <h1>The OD500 Global Network</h1>
-            <div class="b-country"><p>The OD500 Global Network is an
-              international network of organizations that seek to study the use
-              and impact of open data. Coordinated by the <a href="http://thegovlab.org/">Governance Lab
-                (GovLab)</a> the OD500 Global Network enables participating organizations to
-              analyze open data in their country in a manner that is both
-              globally comparative and domestically specific. The OD500 Global Network
-              starts from the assumption that only by mapping the use of open
-              data within and across countries, can new approaches for
-              understanding the economic and social impact of open government
-              data be generated.</p></div>
-						<div class="b-country-selector">
-							<a href="/au/" class="b-country b-third">
-								<div class="b-flag m-au">
-									<div></div>
-								</div>
-								<h2>Australia</h2>
-							</a>
-							<a href="/mx/" class="b-country b-third">
-								<div class="b-flag m-mx">
-									<div></div>
-								</div>
-								<h2>M&eacute;xico</h2>
-								<p></p>
-							</a>
-							<a href="/us/" class="b-country b-third">
-								<div class="b-flag m-us">
-									<div></div>
-								</div>
-								<h2>United States</h2>
-								<p></p>
-							</a>
-						</div>
-						<div class="b-country-selector">
-							{% if "it" in constants.disabled_countries %}
-							<div class="b-country b-third">
-							</div>
-							{% else %}
-							<a href="/it/" class="b-country b-third">
-								<div class="b-flag m-it">
-									<div></div>
-								</div>
-								<h2>Italy</h2>
-							</a>
-							{% end %}
-							{% if "kr" in constants.disabled_countries %}
-							<div class="b-country b-third">
-							</div>
-							{% else %}
-							<a href="/kr/" class="b-country b-third">
-								<div class="b-flag m-kr">
-									<div></div>
-								</div>
-								<h2>Korea</h2>
-							</a>
-							{% end %}
-                            {% if "ca" in constants.disabled_countries %}
-                            <div class="b-country b-third">
-                            </div>
-                            {% else %}
-                            <a href="/ca/" class="b-country b-third">
-                                <div class="b-flag m-ca">
-                                    <div></div>
-                                </div>
-                                <h2>Canada</h2>
-                            </a>
-                            {% end %}
+        </div>
 
-						</div>
-                        <div class="b-country-selector">
-                            <a href="mailto:opendata500@thegovlab.org?subject=OD500+in+my+country" class="b-country b-third">
-                                <div class="b-flag m-in-your-country">
-                                    <div></div>
-                                </div>
-                                <h2>OD500 in Your Country</h2>
-                                <p></p>
-                            </a>
+        <div class="b-page-section">
+            <div class="row">
+                <div class="large-10 large-centered columns">
+                    <p>The OD500 Global Network is an
+                    international network of organizations that seek to study the use
+                    and impact of open data. Coordinated by the <a href="http://thegovlab.org/">Governance Lab
+                    (GovLab)</a> the OD500 Global Network enables participating organizations to
+                    analyze open data in their country in a manner that is both
+                    globally comparative and domestically specific. The OD500 Global Network
+                    starts from the assumption that only by mapping the use of open
+                    data within and across countries, can new approaches for
+                    understanding the economic and social impact of open government
+                    data be generated.</p>
+                  </div>
+            </div>
+        </div>
+
+        <div class="b-page-section">
+            <div class="row">
+                <div class="large-12 large-centered columns">
+            <!-- AUSTRALIA -->
+                <div class="e-card m-purple">
+                    <a href="/au/">
+                        <div class="e-card-inner">
+                            <div class="e-card-image" style="background-image: url('{{ static_url("img/australia-flag.png") }}')"></div>
+                            <p class="e-card-name">Australia</p>
+                            <!-- <p class="e-card-description">Project Description</p> -->
                         </div>
-					</div>
+                    </a>
+                </div>
+            <!-- MEXICO -->
+                <div class="e-card m-purple">
+                    <a href="/mx/">
+                        <div class="e-card-inner">
+                            <div class="e-card-image" style="background-image: url('{{ static_url("img/mexico-flag.png") }}')"></div>
+                            <p class="e-card-name">M&eacute;xico</p>
+                            <!-- <p class="e-card-description">Project Description</p> -->
+                        </div>
+                    </a>
+                </div>
+                <!-- UNITED STATES -->
+                <div class="e-card m-purple">
+                    <a href="/us/">
+                        <div class="e-card-inner">
+                            <div class="e-card-image" style="background-image: url('{{ static_url("img/us-flag.png") }}')"></div>
+                            <p class="e-card-name">United States</p>
+                            <!-- <p class="e-card-description">Project Description</p> -->
+                        </div>
+                    </a>
+                </div>
 
-          <div class="b-country"><p>
-            <a class="m-button" href="mailto:opendata500@thegovlab.org"</a>
-            To find out how to conduct a study in your country,<br />
-            please contact us at The GovLab at NYU.</a></p></div>
 
-        </div><!-- end container -->
+                {% if "it" in constants.disabled_countries %}
+                <div class="b-country b-third">
+                </div>
+                {% else %}
+                <!-- Italy -->
+                <div class="e-card m-purple">
+                    <a href="/it/">
+                        <div class="e-card-inner">
+                            <div class="e-card-image" style="background-image: url('{{ static_url("img/italy-flag.png") }}')"></div>
+                            <p class="e-card-name">Italy</p>
+                            <!-- <p class="e-card-description">Project Description</p> -->
+                        </div>
+                    </a>
+                </div>
+                {% end %}
+
+
+                {% if "kr" in constants.disabled_countries %}
+                <div class="b-country b-third">
+                </div>
+                {% else %}
+                <!-- Korea -->
+                <div class="e-card m-purple">
+                    <a href="/kr/">
+                        <div class="e-card-inner">
+                            <div class="e-card-image" style="background-image: url('{{ static_url("img/southkorea-flag.png") }}')"></div>
+                            <p class="e-card-name">Korea</p>
+                            <!-- <p class="e-card-description">Project Description</p> -->
+                        </div>
+                    </a>
+                </div>
+                {% end %}
+
+
+                {% if "ca" in constants.disabled_countries %}
+                <div class="b-country b-third">
+                </div>
+                {% else %}
+                <!-- Canada -->
+                <div class="e-card m-purple">
+                    <a href="/ca/">
+                        <div class="e-card-inner">
+                            <div class="e-card-image" style="background-image: url('{{ static_url("img/canada-flag.png") }}')"></div>
+                            <p class="e-card-name">Canada</p>
+                            <!-- <p class="e-card-description">Project Description</p> -->
+                        </div>
+                    </a>
+                </div>
+                {% end %}
+
+                <!-- In Your Country -->
+                <div class="e-card m-purple">
+                    <a href="mailto:opendata500@thegovlab.org?subject=OD500+in+my+country">
+                        <div class="e-card-inner">
+                            <div class="e-card-image" style="background-image: url('{{ static_url("img/od500-in-your-country.png") }}')"></div>
+                            <p class="e-card-name">OD500 in Your Country</p>
+                            <!-- <p class="e-card-description">Project Description</p> -->
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        
     </div><!-- end main -->
+
+            
+    <div class="b-divider"><p>
+        <h3>To find out how to conduct a study in your country,please contact us at The GovLab at NYU.</h3>
+        <a class="b-button" href="mailto:opendata500@thegovlab.org">Contact Us</a>
+    </div>
+
 
     <!-- Mailchimp Subscribe -->
     <div id="mc_embed_signup" class="s-disabled">
@@ -192,23 +241,51 @@
         </form>
     </div>
 
-    <footer>
-        <div class="l-centered">
-            <div class="m-footer-logos">
-                <a href="http://thegovlab.org/"><img id="govlab-logo" src="{{ static_url("img/govlab-logo.png") }}" alt="The GovLab"></a>
+    <footer class='b-footer'>
+        <div class="row">
+            <div class="large-10 large-centered columns">
+                <div class="row">
+                    <div class="e-content m-sections medium-4 column">
+                        <h4>Sections</h4>
+                        <ul>
+                            {% for i in range(0, len(settings['footer_menu'][lan_])) %}
+                                {% if i == len(settings['footer_menu'][lan_])-1 %}
+                                    <li><a href="{{settings['footer_menu'][lan_][i]['link']}}" target="_blank">{{settings['footer_menu'][lan_][i]['item']}}</a></li> 
+                                {%else%}
+                                    <li><a href="{{settings['footer_menu'][lan_][i]['link']}}" target="_blank">{{settings['footer_menu'][lan_][i]['item']}}</a></li> 
+                                {%end%}
+                            {%end%}
+                        </ul>
+                    </div>
+                    <div class="e-content medium-4 column">
+                    </div>
+                    <div class="e-content medium-4 column">
+                        <h4>Based at</h4>
+                        <a class="e-partner-logo" href="http://engineering.nyu.edu/tandon" tagret="_blank"><img src="img/partners/nyu.png" alt="NYU Tandon School of Engineering - New York University"></a>
+                        <a class="e-partner-logo" href="http://thegovlab.org/"><img id="govlab-logo" src="{{ static_url("img/govlab-logo.png") }}" alt="The GovLab"></a>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <ul>
-                {% for i in range(0, len(settings['footer_menu'][lan_])) %}
-                    {% if i == len(settings['footer_menu'][lan_])-1 %}
-                        <li class="footer-menu-item last"><a href="{{settings['footer_menu'][lan_][i]['link']}}" target="_blank">{{settings['footer_menu'][lan_][i]['item']}}</a></li>
-                    {%else%}
-                        <li class="footer-menu-item"><a href="{{settings['footer_menu'][lan_][i]['link']}}" target="_blank">{{settings['footer_menu'][lan_][i]['item']}}</a></li>
-                    {%end%}
-                {%end%}
-            </ul>
-            <p class="creative-commons-license"><a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Dataset" property="dct:title" rel="dct:type">The Open Data 500</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://thegovlab.org/" property="cc:attributionName" rel="cc:attributionURL">The GovLab</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.<br />Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="https://github.com/luisdaniel/OpenData500" rel="dct:source">https://github.com/luisdaniel/OpenData500</a>.</p>
         </div>
-    </footer><!-- end footer -->
+    </footer>
+
+    <div class="b-copyright">
+        <div class="row">
+            <div class="large-10 large-centered columns">
+                <a class="e-cc-badge" rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a>
+                This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a> <br> <a href="#">Copyright Infringement Information</a>.
+            </div>
+        </div>
+    </div>
+
+    <div id="overlay"></div>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="vendor/slick.min.js"></script>
+    <script src="vendor/prism.js"></script>
+    <script src="js/scripts.js"></script>
+    <script src="https://cdn.firebase.com/js/client/2.4.0/firebase.js"></script>
+
     <script type="text/javascript">
         //------------------------------MAIL CHIMP SIGNUP------------------------------------------
         var fnames = new Array();var ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';
