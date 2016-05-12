@@ -3,22 +3,30 @@
 
 {% block body %}
 <div class="resources-page">
-	<h1 class="first-title">Open Data Resources</h1>
+	<div class="b-top-section">
+		<h1>Open Data Resources</h1>
+	</div>
+
 	<section id="resources-blog" class="resource-panel">
-		<div class="resources-intro">
-			<p>Resources on open data policy and open government initatives in Australia:</p>
+		<div class="b-page-section">
+			<div class="row">
+				<div class="large-10 large-centered columns">
+					<h3>Resources on open data policy and open government initatives in Australia:</h3>
+					<ul>
+						<li><a href="http://www.data.gov.au" target="_blank">data.gov.au</a></li>
+						<li><a href="http://www.nationalmap.gov.au" target="_blank">The National Map</a></li>
+						<li><a href="http://www.malcolmturnbull.com.au/assets/Coalitions_Policy_for_E-Government_and_the_Digital_Economy_(2).pdf" target="_blank">The Coalition's Policy for E-Government and the Digital Economy</a></li>
+						<li><a href="https://www.omidyar.com/sites/default/files/file_archive/insights/ON%20Report_061114_FNL.pdf" target="_blank">Open for Business: How Open Data can Help Achieve the G20 Growth Target</a></li>
+					</ul>
+					<ul>
+						<li><a href="https://www.anzsog.edu.au/media/upload/publication/94_2-Houghton-and-Gruen-Transparency-and-Productivity.pdf" target="_blank">Transparency and Productivity</a></li>
+						<li><a href="{{ static_url('files/au/au-report.pdf') }}" target="_blank">OD500 Australia Interim Report - August 2015</a></li>
+					</ul>
+				</div>
+			</div>
 		</div>
-		<ul>
-			<li><a href="http://www.data.gov.au" target="_blank">data.gov.au</a></li>
-			<li><a href="http://www.nationalmap.gov.au" target="_blank">The National Map</a></li>
-			<li><a href="http://www.malcolmturnbull.com.au/assets/Coalitions_Policy_for_E-Government_and_the_Digital_Economy_(2).pdf" target="_blank">The Coalition's Policy for E-Government and the Digital Economy</a></li>
-			<li><a href="https://www.omidyar.com/sites/default/files/file_archive/insights/ON%20Report_061114_FNL.pdf" target="_blank">Open for Business: How Open Data can Help Achieve the G20 Growth Target</a></li>
-		</ul>
-		<ul>
-			<li><a href="https://www.anzsog.edu.au/media/upload/publication/94_2-Houghton-and-Gruen-Transparency-and-Productivity.pdf" target="_blank">Transparency and Productivity</a></li>
-			<li><a href="{{ static_url('files/au/au-report.pdf') }}" target="_blank">OD500 Australia Interim Report - August 2015</a></li>
-		</ul>
 	</section>
+
 </div>
 
 {% end %}
