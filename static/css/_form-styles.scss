@@ -2,14 +2,14 @@ input[type="text"],
 input[type="password"],
 input[type="email"] {
 	padding: 5px 10px;
-	@include rounded;
+	// @include rounded;
 	border: 1px solid #ccc;
 }
 
 textarea {
 	padding: 5px 10px;
 	background-color: $white-90;
-	@include rounded;
+	// @include rounded;
 	border: 1px solid #ccc;	
 }
 
@@ -25,7 +25,7 @@ select {
 .m-button {
 	padding: 5px 14px 4px 14px;
 	border: 1px solid $purple-20k;	
-	@include rounded;
+	// @include rounded;
 	color: $white;
 	// font-family: $fancy_type;
 	text-transform: uppercase;
@@ -47,7 +47,7 @@ select {
 .m-form {
 	.m-button {
 		border: 1px solid #fff;	
-		@include rounded;
+		// @include rounded;
 		color: #fff;
 	}
 
@@ -178,13 +178,13 @@ select {
 	list-style: none;
 	background-color: $orange;
 	padding: 5px 10px;
-	@include rounded;
+	// @include rounded;
 	border: 1px solid $red;
 	color: $red;
 	font-weight: bold;
 	text-align: center;
 	position: relative;
-	@include drop_shadow;
+	// @include drop_shadow;
 }
 
 

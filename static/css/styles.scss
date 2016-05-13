@@ -96,7 +96,7 @@
 
 	img {
 		height: 80px;
-		@include drop_shadow;
+		// @include drop_shadow;
 		
 	}
 }
@@ -153,7 +153,7 @@
 		padding: 0;
 		cursor: pointer;
 		border: 1px solid $purple;
-		@include drop-shadow;
+		// @include drop-shadow;
 
 		li {
 			list-style: none;
@@ -351,8 +351,8 @@
 			border: 1px solid $purple;
 			top: 89px;
 			color: $purple;
-			@inlcude rounded;
-			@include drop-shadow;
+			// @inlcude rounded;
+			// @include drop-shadow;
 		}
 
 		.response:after {
@@ -382,8 +382,8 @@
 		border: 1px solid $red;
 		top: 124px;
 		color: $red !important;
-		@inlcude rounded;
-		@include drop-shadow;
+		// @inlcude rounded;
+		// @include drop-shadow;
 	}
 
 	div.mce_inline_error:after {

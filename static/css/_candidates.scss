@@ -1,5 +1,10 @@
 // Candidates Page
 
+@mixin circle { 
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	border-radius: 50%;
+}
 
 #candidates-warning {
 	width: 500px;
@@ -73,7 +78,7 @@
 	button {
 		background-color: $purple-20k;
 		font-size: 11px;
-		@include rounded;
+		// @include rounded;
 		border: 0;
 		color: $white;
 		cursor: pointer;
