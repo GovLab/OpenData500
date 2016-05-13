@@ -1,5 +1,13 @@
 .m-homepage {
 
+	@mixin rotate($angle) {
+		-webkit-transform: rotate($angle);
+		-moz-transform: rotate($angle);
+		-ms-transform: rotate($angle);
+		-o-transform: rotate($angle);
+		transform: rotate($angle);
+	}
+	
 	// h1 {
 	// 	margin: 15px 0 50px 0;
 	// 	font-size: 3.8em;
@@ -19,17 +27,18 @@
 	#chord-chart-container {
 		text-align: center;
 		position: relative;
-
+		font-size: 12px;
+		line-height: 1.4em;
 		h3 {
 			font-weight: 100;
-			font-family: $fancy_type;
+			// font-family: $fancy_type;
 			font-size: 2em;
 			margin-top: 15px;
 		}
 
 		.chord-legend {
 			font-weight: 400;
-			font-family: $fancy_type;
+			// font-family: $fancy_type;
 			font-size: 18px;
 			position: absolute;
 			color: $purple;
@@ -182,7 +191,7 @@
 		max-height: 10rem;
 		min-height: 10rem;
 		font-size: 1rem;
-		font-family: $regular_type;
+		// font-family: $regular_type;
 		border: 1px solid $light_gray;
 		border-radius: 0;
 		overflow: hidden;
