@@ -27,7 +27,7 @@ select {
 	border: 1px solid $light_purple;	
 	@include rounded;
 	color: $white;
-	font-family: $fancy_type;
+	// font-family: $fancy_type;
 	text-transform: uppercase;
 	font-size: 14px;
 	font-weight: 600;

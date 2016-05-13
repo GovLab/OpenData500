@@ -27,7 +27,6 @@ select {
   -moz-border-radius: 4px;
   border-radius: 4px;
   color: #fff;
-  font-family: "Exo", sans-serif;
   text-transform: uppercase;
   font-size: 14px;
   font-weight: 600;
@@ -161,12 +160,10 @@ select {
   line-height: 1.4em; }
   .m-homepage #chord-chart-container h3 {
     font-weight: 100;
-    font-family: "Exo", sans-serif;
     font-size: 2em;
     margin-top: 15px; }
   .m-homepage #chord-chart-container .chord-legend {
     font-weight: 400;
-    font-family: "Exo", sans-serif;
     font-size: 18px;
     position: absolute;
     color: #472b74;
@@ -230,7 +227,6 @@ select {
 .m-preview h2 {
   font-size: 2em; }
 .m-preview h3 {
-  font-family: "Exo", sans-serif;
   font-weight: 100;
   margin-top: 15px; }
 .m-preview ul {
@@ -434,7 +430,6 @@ select {
     color: #472b74;
     margin-top: 0;
     font-weight: 300;
-    font-family: "Exo", sans-serif;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -7970,20 +7965,6 @@ code.m-negative {
   font-size: 60px;
   transition: all .4s ease; }
 
-body {
-  margin: 0; }
-
-h1, h2, h3, h4 {
-  margin: 0; }
-
-h1 {
-  margin-top: 65px;
-  margin-bottom: 65px;
-  text-align: center; }
-
-.first-title {
-  margin-top: 90px; }
-
 .logo {
   border: 0;
   float: left;
@@ -8234,7 +8215,6 @@ h1 {
     top: -13px;
     width: 88px;
     padding: 5px;
-    font-family: "Exo", sans-serif;
     font-weight: 400;
     text-align: center;
     font-size: 18px;

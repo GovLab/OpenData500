@@ -21,25 +21,25 @@
 @import 'custom';
 // Reset
 
-body {
-	margin: 0;
-}
+// body {
+// 	margin: 0;
+// }
 
 // === Base Styles
 
-h1, h2, h3, h4 {
-	margin: 0;
-}
+// h1, h2, h3, h4 {
+// 	margin: 0;
+// }
 
-h1 {
-	margin-top: 65px;
-	margin-bottom: 65px;
-	text-align: center;
-}
+// h1 {
+// 	margin-top: 65px;
+// 	margin-bottom: 65px;
+// 	text-align: center;
+// }
 
-.first-title {
-	margin-top: 90px;
-}
+// .first-title {
+// 	margin-top: 90px;
+// }
 
 
 // // Header Module
@@ -411,7 +411,7 @@ h1 {
 		top: -13px;
 		width: 88px;
 		padding: 5px;
-		font-family: $fancy_type;
+		// font-family: $fancy_type;
 		font-weight: 400;
 		text-align: center;
 		font-size: 18px;
