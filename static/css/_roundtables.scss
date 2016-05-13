@@ -138,7 +138,7 @@
 	}
 
 	.invitation-disclaimer {
-		font-family: $fancy-type;
+		// font-family: $fancy-type;
 		font-weight: 100;
 		font-size: 18px;
 		line-height: 25px;
@@ -153,7 +153,7 @@
 	padding: 5px;
 	font-size: 86px;
 	background-color: $purple;
-	font-family: $fancy-type;
+	// font-family: $fancy-type;
 	color: $white;
 	width: 80px;
 	text-align: center;
@@ -194,10 +194,10 @@
 		min-height: 38px;
 		bottom: 4px;
 		left: 0;
-		background-color: $dark_gray_alpha;
+		background-color: $black;
 		padding: 5px 10px;
 		color: $white;
-		font-family: $fancy-type;
+		// font-family: $fancy-type;
 		font-weight: 100;
 		width: 300px;
 
