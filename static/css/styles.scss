@@ -1,21 +1,21 @@
 @import 'variables';
 @import 'form-styles';
-@import 'layout';
+// @import 'layout'; //to delete
 @import 'typography';
 @import 'homepage';
 @import 'international-homepage';
-@import 'about';
+// @import 'about'; //to delete
 @import 'preview';
-@import 'submitcompany';
+// @import 'submitcompany'; //to delete
 @import 'candidates';
-@import 'download';
+// @import 'download'; // to delete
 @import 'login';
-@import 'resources';
-@import 'press';
+// @import 'resources'; //to delete
+@import 'press'; //to delete
 @import 'findings';
-@import 'consortium';
-@import 'roundtables';
-@import 'country-homepage';
+// @import 'consortium'; //to delete
+// @import 'roundtables'; // to delete
+// @import 'country-homepage'; //to delete
 // Importing Styleguide
 @import '../../node_modules/govlab-styleguide/sass/styles'; // govlab-styleguide sass
 @import 'custom';
