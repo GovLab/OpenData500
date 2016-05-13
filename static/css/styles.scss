@@ -1,3 +1,6 @@
+@import '../../node_modules/govlab-styleguide/sass/styles'; // govlab-styleguide sass
+@import 'custom';
+
 @import 'variables';
 @import 'form-styles';
 // @import 'layout'; //to delete
@@ -17,8 +20,6 @@
 // @import 'roundtables'; // to delete
 // @import 'country-homepage'; //to delete
 // Importing Styleguide
-@import '../../node_modules/govlab-styleguide/sass/styles'; // govlab-styleguide sass
-@import 'custom';
 // Reset
 
 // body {
@@ -46,7 +47,7 @@
 
 // header {
 // 	background-color: $purple;
-// 	border-bottom: 5px solid $light_purple;
+// 	border-bottom: 5px solid $purple-20k;
 // 	padding: 10px 0;
 // 	height: 30px;
 //     text-align: center;
@@ -107,7 +108,7 @@
 #country-selector {
 	font-size: 12px;
 	padding: 5px 0 4px;
-	color: $light_purple;
+	color: $purple-20k;
 	text-transform: uppercase;
 	display: inline-block;
 	// position: absolute;
@@ -131,7 +132,7 @@
 		text-transform: uppercase;
 		display: inline-block;
 		position: relative;
-		border-right: 2px solid $light_purple;
+		border-right: 2px solid $purple-20k;
 	}
 
 	.m-main-menu-item a {
@@ -144,7 +145,7 @@
 	.m-main-menu-sub-menu {
 		display: none;
 		position: absolute;
-		background-color: $light_purple;
+		background-color: $purple-20k;
 		margin-top: 4px;
 		top: 21px;
 		left: -2px;
@@ -183,7 +184,7 @@
 			padding-left: 4px;
 
 			&:first-child {
-				border-right: 2px solid $light_purple;
+				border-right: 2px solid $purple-20k;
 			}
 		}
 	}
@@ -209,7 +210,7 @@
 	}
 
 	.m-main-menu-item a:hover {
-		background-color: $light_purple;
+		background-color: $purple-20k;
 		color: #fff;
 	}
 	
@@ -261,8 +262,8 @@
 // Subscribe 
 #mc_embed_signup {
 	position: fixed;
-	border: 1px solid $light_purple;
-	background-color: $super_light_purple_matte;
+	border: 1px solid $purple-20k;
+	background-color: $purple-20k;
 	padding: 13px 15px 13px 20px;
 	z-index: 10;
 	right: -1px;
@@ -309,8 +310,8 @@
 			border-radius: 4px 0 0 4px;
 			border-right: 0;
 			padding: 6px 10px 5px;
-			border-color: $light_purple;
-			background-color: $white_alpha_50;
+			border-color: $purple-20k;
+			background-color: $gray-15;
 		}
 
 		input[type="email"]:focus {
@@ -324,9 +325,9 @@
 			margin-top: 1px;
 			// font-family: $regular_type;
 			font-size: 12px;
-			background-color: $white_alpha_50;
+			background-color: $gray-15;
 			color: $purple;
-			border-color: $light_purple;
+			border-color: $purple-20k;
 			margin-left: 0;
 			-webkit-border-radius: 0 4px 4px 0;
 			-moz-border-radius: 0 4px 4px 0;
@@ -346,7 +347,7 @@
 			position: absolute;
 			width: 175px;
 			padding: 10px;
-			background-color: $light_purple;
+			background-color: $purple-20k;
 			border: 1px solid $purple;
 			top: 89px;
 			color: $purple;
@@ -377,7 +378,7 @@
 		left: -31px;
 		width: 200px;
 		padding: 10px;
-		background-color: $lighter_gray !important;
+		background-color: $white-30 !important;
 		border: 1px solid $red;
 		top: 124px;
 		color: $red !important;
@@ -404,7 +405,7 @@
 
 	.signup-handle:before {
 		content:"Subscribe";
-		background-color: $light_purple;
+		background-color: $purple-20k;
 		position: absolute;
 		border: 1px solid $purple;
 		left: -78px;

@@ -8,7 +8,7 @@ input[type="email"] {
 
 textarea {
 	padding: 5px 10px;
-	background-color: $white_alpha;
+	background-color: $white-90;
 	@include rounded;
 	border: 1px solid #ccc;	
 }
@@ -24,7 +24,7 @@ select {
 
 .m-button {
 	padding: 5px 14px 4px 14px;
-	border: 1px solid $light_purple;	
+	border: 1px solid $purple-20k;	
 	@include rounded;
 	color: $white;
 	// font-family: $fancy_type;
@@ -72,7 +72,7 @@ select {
 }
 
 .m-form h3 {
-	border-bottom: 1px solid $light_purple;
+	border-bottom: 1px solid $purple-20k;
 	padding-bottom: 5px;
 	margin-bottom: 10px;
 	font-size: 1.2em;
@@ -176,7 +176,7 @@ select {
 
 .parsley-error-list {
 	list-style: none;
-	background-color: $light_red;
+	background-color: $orange;
 	padding: 5px 10px;
 	@include rounded;
 	border: 1px solid $red;
