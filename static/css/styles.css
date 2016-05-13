@@ -190,7 +190,6 @@ select {
   max-height: 10rem;
   min-height: 10rem;
   font-size: 1rem;
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   border: 1px solid #aaa;
   border-radius: 0;
   overflow: hidden; }
@@ -8146,7 +8145,6 @@ code.m-negative {
       display: inline-block;
       padding: 5px 5px 4px;
       margin-top: 1px;
-      font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
       font-size: 12px;
       background-color: rgba(255, 255, 255, 0.5);
       color: #523080;
