@@ -39,6 +39,30 @@
     </div>
   </section>
 
+	<div class="b-divider">
+			<h1></h1>
+			<h2>How to Participate</h2>
+	</div>
+
+	<div class="b-divider m-blue">
+			<h1></h1>
+			<h2>If you represent an open data company or organization, please respond to the survey.</h2>
+	</div>
+
+	<div class="b-page-section">
+			<div class="row">
+					<div class="column small-12">
+						<section class="m-homepage-participate center">
+							<!-- <h1>How To Participate</h1> -->
+							<div id="kr-en-survey" class="column small-5 small-offset-1 column">
+								<a href="#" id="kr-en-survey-button" class="b-button m-purple" target="_blank">Take the Survey <i class="material-icons">arrow_forward</i></a>
+							</div>
+						</section>
+
+					</div>
+			</div>
+	</div>
+
 
 <div class="about-page">
 	<section id="about-goals">
@@ -144,7 +168,7 @@
 					<p class="e-card-name">Ji Hye PARK</p>
 					<p class="e-card-description">Researcher Project Manager for Open Data 500 Korea</p>
 				</div>
-			</div>	
+			</div>
 
 			<div class="e-card m-purple js-tooltip-trigger js-open-modal" data-open="#modal">
 			  <div class="e-card-inner">
@@ -152,7 +176,7 @@
 					<p class="e-card-name">Jae Young YOU</p>
 					<p class="e-card-description">Researcher</p>
 				</div>
-			</div>	
+			</div>
 
 			<div class="e-card m-purple js-tooltip-trigger js-open-modal" data-open="#modal">
 			  <div class="e-card-inner">
@@ -160,7 +184,7 @@
 					<p class="e-card-name">YS LEE</p>
 					<p class="e-card-description">Executive Principal, POC for Open Data 500 Korea</p>
 				</div>
-			</div>	
+			</div>
 
 			<div class="e-card m-purple js-tooltip-trigger js-open-modal" data-open="#modal">
 				<div class="e-card-inner">
@@ -168,7 +192,7 @@
 					<p class="e-card-name">Han Woo PARK</p>
 					<p class="e-card-description">Professor, YeungNam University</p>
 				</div>
-			</div>	
+			</div>
 
 			<div class="e-card m-purple js-tooltip-trigger js-open-modal" data-open="#modal">
 			  <div class="e-card-inner">
@@ -176,7 +200,7 @@
 					<p class="e-card-name">Kyujin JUNG</p>
 					<p class="e-card-description">Professor, Tennessee State University</p>
 				</div>
-			</div>	
+			</div>
 
 			<div class="e-card m-purple js-tooltip-trigger js-open-modal" data-open="#modal">
 			  <div class="e-card-inner">
@@ -184,7 +208,7 @@
 					<p class="e-card-name">Jiyoung PARK</p>
 					<p class="e-card-description">Researcher, YeungNam University</p>
 				</div>
-			</div>	
+			</div>
 
 			<div class="e-card m-purple js-tooltip-trigger js-open-modal" data-open="#modal">
 			  <div class="e-card-inner">
@@ -299,7 +323,7 @@
 						<p><a class="b-button js-close-modal" href="#">OK</a></p>
 					</div>
 				</div>
-				
+
 
 				<div class="b-modal" id="modal-stefaan-verhulst">
 					<div class="e-content">
@@ -379,14 +403,14 @@ function draw_diagram() {
       .append("g")
         .attr("transform", "translate(335, 375)");
         // .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-    
+
     var circle = svg.append("circle")
         .attr("r", outerRadius);
 
     var nodes = svg.append("g").selectAll("path")
         .data(chord.groups)
         .enter().append("path")
-        .style("fill", function(d) { 
+        .style("fill", function(d) {
             if (data.num_agencies > d.index) {
                 return fill_agencies(d.index);
             } else {
@@ -422,9 +446,9 @@ function draw_diagram() {
       .enter().append("path")
         .attr("class", "chord")
         .attr("d", d3.svg.chord().radius(innerRadius))
-        .style("fill", "rgba(0,0,0,0.2)"); 
-        // .style("fill", function(d) { 
-        //     return fill_agencies(d.target.index); 
+        .style("fill", "rgba(0,0,0,0.2)");
+        // .style("fill", function(d) {
+        //     return fill_agencies(d.target.index);
         // });
 
     chord.on("mouseover", function(d) {
