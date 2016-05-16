@@ -7402,6 +7402,18 @@ code.m-negative {
   font-size: 60px;
   transition: all .4s ease; }
 
+footer #nyu-logo {
+  margin-left: 0; }
+footer #govlab-logo {
+  margin-left: 3px; }
+footer ul {
+  list-style: none; }
+  footer ul li {
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    display: block; }
+
 input[type="text"],
 input[type="password"],
 input[type="email"] {
@@ -8186,53 +8198,5 @@ select {
     -ms-transform: rotate(-90deg);
     -o-transform: rotate(-90deg);
     transform: rotate(-90deg); }
-
-footer {
-  background-color: #333;
-  padding: 20px 0;
-  overflow: hidden;
-  clear: both;
-  margin-top: 30px;
-  color: #ccc; }
-  footer a {
-    color: #ccc; }
-  footer a:hover {
-    color: white; }
-  footer .m-footer-logos {
-    float: left; }
-    footer .m-footer-logos img {
-      height: 37px;
-      margin-right: 30px;
-      opacity: .4; }
-    footer .m-footer-logos a:hover img {
-      opacity: 1; }
-    footer .m-footer-logos #govlab-logo {
-      height: 30px;
-      vertical-align: 2px; }
-  footer ul {
-    text-align: right; }
-  footer .footer-menu-item {
-    display: inline-block;
-    padding: 2px 10px;
-    border-right: 1px solid #888;
-    margin-top: 10px; }
-  footer .footer-menu-item.last {
-    border-right: 0; }
-  footer .creative-commons-license {
-    margin-top: 30px;
-    font-size: 11px; }
-    footer .creative-commons-license img {
-      float: left;
-      margin-right: 10px; }
-
-.m-international-page {
-  font-size: 14px;
-  line-height: 20px; }
-  .m-international-page .m-country-flag.s-international img {
-    box-shadow: 0 0 0;
-    width: 300px;
-    height: auto; }
-  .m-international-page .first-title {
-    margin-top: 20px; }
 
 /*# sourceMappingURL=styles.css.map */

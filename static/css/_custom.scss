@@ -41,7 +41,6 @@
 // TEMP TEAM CARDS
 
 .e-card {
-
   .e-card-inner {
     background-color: $purple;
   }
@@ -96,3 +95,25 @@
             transition: all .4s ease;
         }
     }
+
+
+// FOOTER 
+
+footer {
+  #nyu-logo {
+    margin-left: 0;
+  }
+  #govlab-logo {
+    margin-left: 3px;
+  }
+  ul {
+    list-style: none;
+    li {
+      margin: 0;
+      padding: 0;
+      text-align: left;
+      display: block;
+    }
+  }
+
+}
