@@ -7343,6 +7343,9 @@ code.m-negative {
 @media (min-width: 1021px) {
   .sandbox {
     background-color: blue; } }
+.m-centered {
+  text-align: center; }
+
 .e-logo::after {
   content: " Open Data 500";
   text-transform: uppercase;
