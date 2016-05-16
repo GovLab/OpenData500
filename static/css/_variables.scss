@@ -1,71 +1,71 @@
 // === Colors
 
-$purple: #472b74;
-$purple_alpha: rgba(71, 43, 116, .9);
-$purple_alpha_40: rgba(71, 43, 116, .4);
-$light_purple: #8977a7;
-$super_light_purple: rgba(71, 43, 116, .1);
-$super_light_purple_matte: #ece9f0;
-$black: #444;
-$dark_gray: #666;
-$light_gray: #aaa;
-$dark_gray_alpha: rgba(0,0,0,0.6);
-$light_gray_alpha: rgba(0,0,0,0.2);
-$lighter_gray: rgba(0,0,0,0.15);
-$super_light_gray: rgba(0,0,0,.05);
-$white: #fff;
-$white_alpha: rgba(255,255,255,.7);
-$white_alpha_50: rgba(255,255,255,.5);
-$light_red: rgba(214, 17, 17, .1);
-$red: rgba(214, 17, 17, 1);
-$blue: #00adef;
-$blue_alpha: rgba(0,173,239,.9);
-$light_blue: #b9dfef;
+// $purple: #472b74;
+// $purple_alpha: rgba(71, 43, 116, .9); //changed to $purple-20k
+// $purple_alpha_40: rgba(71, 43, 116, .4); //changed to $purple-40k
+// $light_purple: #8977a7; //changed to $purple-20k
+// $super_light_purple: rgba(71, 43, 116, .1); //changed to $purple-20k
+// $super_light_purple_matte: #ece9f0;
+// $black: #444;
+// $dark_gray: #666;
+// $light_gray: #aaa;
+// $dark_gray_alpha: rgba(0,0,0,0.6); //changed to $gray-70
+// $light_gray_alpha: rgba(0,0,0,0.2);
+// $lighter_gray: rgba(0,0,0,0.15); //changed to $white-30
+// $super_light_gray: rgba(0,0,0,.05); //changed to $white-60
+// $white: #fff;
+// $white_alpha: rgba(255,255,255,.7); //changed to $white-90
+// $white_alpha_50: rgba(255,255,255,.5); /changed to $gray-15
+// $light_red: rgba(214, 17, 17, .1); //change to $orange
+// $red: rgba(214, 17, 17, 1);
+// $blue: #00adef;
+// $blue_alpha: rgba(0,173,239,.9);
+// $light_blue: #b9dfef;
 
 // === Type
 
-$fancy_type: 'Exo', sans-serif;
-$regular_type: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+// $fancy_type: 'Exo', sans-serif;
+// $regular_type: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
 
 
 // === Mixins
 
-@mixin rounded { 
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
-}
+// @mixin rounded { 
+// 	-webkit-border-radius: 4px;
+// 	-moz-border-radius: 4px;
+// 	border-radius: 4px;
+// }
 
-@mixin circle { 
-	-webkit-border-radius: 50%;
-	-moz-border-radius: 50%;
-	border-radius: 50%;
-}
+// @mixin circle { 
+// 	-webkit-border-radius: 50%;
+// 	-moz-border-radius: 50%;
+// 	border-radius: 50%;
+// }
 
-@mixin drop_shadow {
-	box-shadow: 0 0 6px rgba(0,0,0,0.2);
-}
+// @mixin drop_shadow {
+// 	box-shadow: 0 0 6px rgba(0,0,0,0.2);
+// }
 
-@mixin inner_shadow {
-	box-shadow: inset 0 0 6px rgba(0,0,0,0.2);
-}
+// @mixin inner_shadow {
+// 	box-shadow: inset 0 0 6px rgba(0,0,0,0.2);
+// }
 
-@mixin transition {
-	-webkit-transition: all 0.4s ease;
-	-moz-transition: all 0.4s ease;
-	transition: all 0.4s ease;
-}
+// @mixin transition {
+// 	-webkit-transition: all 0.4s ease;
+// 	-moz-transition: all 0.4s ease;
+// 	transition: all 0.4s ease;
+// }
 
-@mixin transition_alpha {
-	-webkit-transition: opacity 0.4s ease;
-	-moz-transition: opacity 0.4s ease;
-	transition: opacity 0.4s ease;
-}
+// @mixin transition_alpha {
+// 	-webkit-transition: opacity 0.4s ease;
+// 	-moz-transition: opacity 0.4s ease;
+// 	transition: opacity 0.4s ease;
+// }
 
-@mixin rotate($angle) {
-	-webkit-transform: rotate($angle);
-	-moz-transform: rotate($angle);
-	-ms-transform: rotate($angle);
-	-o-transform: rotate($angle);
-	transform: rotate($angle);
-}
+// @mixin rotate($angle) {
+// 	-webkit-transform: rotate($angle);
+// 	-moz-transform: rotate($angle);
+// 	-ms-transform: rotate($angle);
+// 	-o-transform: rotate($angle);
+// 	transform: rotate($angle);
+// }

@@ -1,52 +1,53 @@
+@import '../../node_modules/govlab-styleguide/sass/styles'; // govlab-styleguide sass
+@import 'custom';
+
 @import 'variables';
 @import 'form-styles';
-@import 'layout';
+// @import 'layout'; //to delete
 @import 'typography';
 @import 'homepage';
 @import 'international-homepage';
-@import 'about';
+// @import 'about'; //to delete
 @import 'preview';
-@import 'submitcompany';
+// @import 'submitcompany'; //to delete
 @import 'candidates';
-@import 'download';
+// @import 'download'; // to delete
 @import 'login';
-@import 'resources';
-@import 'press';
+// @import 'resources'; //to delete
+@import 'press'; //to delete
 @import 'findings';
-@import 'consortium';
-@import 'roundtables';
-@import 'country-homepage';
+// @import 'consortium'; //to delete
+// @import 'roundtables'; // to delete
+// @import 'country-homepage'; //to delete
 // Importing Styleguide
-@import '../../node_modules/govlab-styleguide/sass/styles'; // govlab-styleguide sass
-@import 'custom';
 // Reset
 
-body {
-	margin: 0;
-}
+// body {
+// 	margin: 0;
+// }
 
 // === Base Styles
 
-h1, h2, h3, h4 {
-	margin: 0;
-}
+// h1, h2, h3, h4 {
+// 	margin: 0;
+// }
 
-h1 {
-	margin-top: 65px;
-	margin-bottom: 65px;
-	text-align: center;
-}
+// h1 {
+// 	margin-top: 65px;
+// 	margin-bottom: 65px;
+// 	text-align: center;
+// }
 
-.first-title {
-	margin-top: 90px;
-}
+// .first-title {
+// 	margin-top: 90px;
+// }
 
 
 // // Header Module
 
 // header {
 // 	background-color: $purple;
-// 	border-bottom: 5px solid $light_purple;
+// 	border-bottom: 5px solid $purple-20k;
 // 	padding: 10px 0;
 // 	height: 30px;
 //     text-align: center;
@@ -95,7 +96,7 @@ h1 {
 
 	img {
 		height: 80px;
-		@include drop_shadow;
+		// @include drop_shadow;
 
 	}
 }
@@ -107,7 +108,7 @@ h1 {
 #country-selector {
 	font-size: 12px;
 	padding: 5px 0 4px;
-	color: $light_purple;
+	color: $purple-20k;
 	text-transform: uppercase;
 	display: inline-block;
 	// position: absolute;
@@ -131,7 +132,7 @@ h1 {
 		text-transform: uppercase;
 		display: inline-block;
 		position: relative;
-		border-right: 2px solid $light_purple;
+		border-right: 2px solid $purple-20k;
 	}
 
 	.m-main-menu-item a {
@@ -144,7 +145,7 @@ h1 {
 	.m-main-menu-sub-menu {
 		display: none;
 		position: absolute;
-		background-color: $light_purple;
+		background-color: $purple-20k;
 		margin-top: 4px;
 		top: 21px;
 		left: -2px;
@@ -152,7 +153,7 @@ h1 {
 		padding: 0;
 		cursor: pointer;
 		border: 1px solid $purple;
-		@include drop-shadow;
+		// @include drop-shadow;
 
 		li {
 			list-style: none;
@@ -183,7 +184,7 @@ h1 {
 			padding-left: 4px;
 
 			&:first-child {
-				border-right: 2px solid $light_purple;
+				border-right: 2px solid $purple-20k;
 			}
 		}
 	}
@@ -209,7 +210,7 @@ h1 {
 	}
 
 	.m-main-menu-item a:hover {
-		background-color: $light_purple;
+		background-color: $purple-20k;
 		color: #fff;
 	}
 
@@ -261,8 +262,8 @@ h1 {
 // Subscribe
 #mc_embed_signup {
 	position: fixed;
-	border: 1px solid $light_purple;
-	background-color: $super_light_purple_matte;
+	border: 1px solid $purple-20k;
+	background-color: $purple-20k;
 	padding: 13px 15px 13px 20px;
 	z-index: 10;
 	right: -1px;
@@ -309,8 +310,8 @@ h1 {
 			border-radius: 4px 0 0 4px;
 			border-right: 0;
 			padding: 6px 10px 5px;
-			border-color: $light_purple;
-			background-color: $white_alpha_50;
+			border-color: $purple-20k;
+			background-color: $gray-15;
 		}
 
 		input[type="email"]:focus {
@@ -322,11 +323,11 @@ h1 {
 			display: inline-block;
 			padding: 5px 5px 4px;
 			margin-top: 1px;
-			font-family: $regular_type;
+			// font-family: $regular_type;
 			font-size: 12px;
-			background-color: $white_alpha_50;
+			background-color: $gray-15;
 			color: $purple;
-			border-color: $light_purple;
+			border-color: $purple-20k;
 			margin-left: 0;
 			-webkit-border-radius: 0 4px 4px 0;
 			-moz-border-radius: 0 4px 4px 0;
@@ -346,12 +347,12 @@ h1 {
 			position: absolute;
 			width: 175px;
 			padding: 10px;
-			background-color: $light_purple;
+			background-color: $purple-20k;
 			border: 1px solid $purple;
 			top: 89px;
 			color: $purple;
-			@inlcude rounded;
-			@include drop-shadow;
+			// @inlcude rounded;
+			// @include drop-shadow;
 		}
 
 		.response:after {
@@ -377,12 +378,12 @@ h1 {
 		left: -31px;
 		width: 200px;
 		padding: 10px;
-		background-color: $lighter_gray !important;
+		background-color: $white-30 !important;
 		border: 1px solid $red;
 		top: 124px;
 		color: $red !important;
-		@inlcude rounded;
-		@include drop-shadow;
+		// @inlcude rounded;
+		// @include drop-shadow;
 	}
 
 	div.mce_inline_error:after {
@@ -404,14 +405,14 @@ h1 {
 
 	.signup-handle:before {
 		content:"Subscribe";
-		background-color: $light_purple;
+		background-color: $purple-20k;
 		position: absolute;
 		border: 1px solid $purple;
 		left: -78px;
 		top: -13px;
 		width: 88px;
 		padding: 5px;
-		font-family: $fancy_type;
+		// font-family: $fancy_type;
 		font-weight: 400;
 		text-align: center;
 		font-size: 18px;

@@ -1,5 +1,10 @@
 // Candidates Page
 
+@mixin circle { 
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	border-radius: 50%;
+}
 
 #candidates-warning {
 	width: 500px;
@@ -17,8 +22,8 @@
 	padding: 10px;
 	color: $dark_gray;
 	display: block;
-	border-top: 1px solid $super_light_gray;
-	border-bottom: 1px solid $super_light_gray;
+	border-top: 1px solid $white-60;
+	border-bottom: 1px solid $white-60;
 	text-align: center;
 	margin-bottom: 30px;
 	
@@ -32,7 +37,7 @@
 		padding: 4px 8px;
 
 		&:hover {
-			background-color: $light_purple;
+			background-color: $purple-20k;
 			color: $white;
 
 		}
@@ -49,7 +54,7 @@
 	.m-filter-menu {
 		width: 200px;
 		float: right;
-		border-left: 1px solid $lighter_gray;
+		border-left: 1px solid $white-30;
 		padding-left: 75px;
 		
 		h3 {
@@ -71,9 +76,9 @@
 .m-candidates-buttons {
 
 	button {
-		background-color: $light_purple;
+		background-color: $purple-20k;
 		font-size: 11px;
-		@include rounded;
+		// @include rounded;
 		border: 0;
 		color: $white;
 		cursor: pointer;
@@ -88,7 +93,7 @@
 .m-candidates-item {
 	list-style-type: none;
 	padding:15px;
-	background-color: $super_light_gray;
+	background-color: $white-60;
 	width: 198px / 960px * 100%;
 	height: 165px;
 	float: left;
@@ -103,7 +108,7 @@
 		color: $purple;
 		margin-top: 0;
 		font-weight: 300;
-		font-family: $fancy_type;
+		// font-family: $fancy_type;
 		overflow: hidden;
 		white-space: nowrap;
 		text-overflow: ellipsis;
@@ -138,13 +143,13 @@
 }
 
 .m-candidates-item.survey-company {
-	background-color: $super_light_purple;
+	background-color: $purple-20k;
 	h3, .m-homepage-list-desc, em {
 	}
 }
 
 .m-candidates-item.preview-company {
-	background-color: $purple_alpha;
+	background-color: $purple_20k;
 
 	h3, .m-homepage-list-desc, em {
 		color: $white;
@@ -169,7 +174,7 @@
 
 .legend {
 	text-align: center;
-	border: 1px solid $super_light_gray;
+	border: 1px solid $white-60;
 	margin-bottom: 20px;
 	padding: 5px;
 	font-weight: 300;
@@ -182,21 +187,21 @@
 		color: $white;
 		letter-spacing: .4px;
 		border: 1px solid #ccc;
-		color: $dark_gray_alpha;
+		color: $gray-70;
 
 	}
 
 
 	.color.candidate {
-		background-color: $super_light_gray;
+		background-color: $white-60;
 	}
 
 	.color.survey {
-		background-color: $super_light_purple;
+		background-color: $purple-20k;
 	}
 
 	.color.preview {
-		background-color: $purple_alpha;
+		background-color: $purple_20k;
 	}
 }
 
@@ -210,7 +215,7 @@
 		-moz-border-radius: 0;
 		border-radius: 0;
 		border: 1px solid $light_gray;
-		background-color: $white_alpha;
+		background-color: $white-90;
 		border-left: 4px solid $purple;
 		color: $black;
 		padding: 3px 9px 3px 6px;
