@@ -6,13 +6,13 @@
 
 
 // TEMP HEADER STYLING
-.e-logo::after {
-    content:" Open Data 500";
-    text-transform: uppercase;
-    font-size: 25px;
-    margin-top: 10px;
-    vertical-align: -6px;
-}
+// .e-logo::after {
+//     content:" Open Data 500";
+//     text-transform: uppercase;
+//     font-size: 25px;
+//     margin-top: 10px;
+//     vertical-align: -6px;
+// }
 
 
 // TEMP NAV BAR STYLING
@@ -59,22 +59,27 @@
 
 // TEMP ROUNDTABLES and SPONSORS STYLING
 
-    #sponsor-aws img {
-      max-width: 150px;
-      top: 400px;
-      display: inline;
-    }
+#sponsor-aws img {
+  max-width: 150px;
+  margin-top: 48px;
+  top: 400px;
+  display: inline;
+}
 
-    #sponsor-pwc img {
-      max-width: 150px;
-      display:inline;
-    }
+#sponsor-pwc img {
+  max-width: 150px;
+  display:inline;
+  vertical-align: -100px;
+}
 
-    #sponsor-dtc img {
-      max-width: 150px;
-      display:inline;
-    }
+#sponsor-dtc img {
+  max-width: 150px;
+  display:inline;
+}
 
+#usda-logo {
+  max-width: 200px;
+}
 
 
 

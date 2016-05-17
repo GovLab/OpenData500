@@ -7346,13 +7346,6 @@ code.m-negative {
 .m-centered {
   text-align: center; }
 
-.e-logo::after {
-  content: " Open Data 500";
-  text-transform: uppercase;
-  font-size: 25px;
-  margin-top: 10px;
-  vertical-align: -6px; }
-
 .b-main-menu {
   overflow-y: auto; }
   .b-main-menu li {
@@ -7378,16 +7371,21 @@ code.m-negative {
 
 #sponsor-aws img {
   max-width: 150px;
+  margin-top: 48px;
   top: 400px;
   display: inline; }
 
 #sponsor-pwc img {
   max-width: 150px;
-  display: inline; }
+  display: inline;
+  vertical-align: -100px; }
 
 #sponsor-dtc img {
   max-width: 150px;
   display: inline; }
+
+#usda-logo {
+  max-width: 200px; }
 
 .project-photo-slider .b-slider {
   border: 1px solid rgba(0, 0, 0, 0.15); }
