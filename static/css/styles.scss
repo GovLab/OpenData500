@@ -430,77 +430,84 @@
 
 // Footer
 
-footer {
-	background-color: $black;
-	padding: 20px 0;
-	overflow: hidden;
-	clear: both;
-	margin-top: 30px;
-	color: $light_gray;
+// footer {
+// 	background-color: $black;
+// 	padding: 20px 0;
+// 	overflow: hidden;
+// 	clear: both;
+// 	margin-top: 30px;
+// 	color: $light_gray;
 
-	a {
-			color: $light_gray;
-		}
+// 	a {
+// 			color: $light_gray;
+// 		}
 
-	a:hover {
-		color: $white;
-	}
+// 	a:hover {
+// 		color: $white;
+// 	}
 
-	.m-footer-logos {
-		float: left;
+// 	.m-footer-logos {
+// 		float: left;
 
-		img {
-			height: 37px;
-			margin-right: 30px;
-			opacity: .4;
-		}
+// 		img {
+// 			height: 37px;
+// 			margin-right: 30px;
+// 			opacity: .4;
+// 		}
 
-		a:hover img {
-			opacity: 1;
-		}
+// 		a:hover img {
+// 			opacity: 1;
+// 		}
 
-		#govlab-logo {
-			height: 30px;
-			vertical-align: 2px;
-		}
-	}
+// 		#govlab-logo {
+// 			height: 30px;
+// 			vertical-align: 2px;
+// 		}
 
-	ul {
-		text-align: right;
-	}
-	.footer-menu-item {
-		display: inline-block;
-		padding: 2px 10px;
-		border-right: 1px solid #888;
-		margin-top: 10px;
-	}
+// 		#nyu-logo {
+// 			margin-left: 10px;
+// 		}
+// 	}
 
-	.footer-menu-item.last {
-		border-right: 0;
-	}
+// 	ul {
+// 		text-align: right;
+// 	}
+// 	.footer-menu-item {
+// 		display: inline-block;
+// 		padding: 2px 10px;
+// 		border-right: 1px solid #888;
+// 		margin-top: 10px;
+// 	}
 
-	.creative-commons-license {
-		margin-top: 30px;
-		font-size: 11px;
+// 	.footer-menu-item.last {
+// 		border-right: 0;
+// 	}
 
-		img {
-			float: left;
-			margin-right: 10px;
-		}
-	}
-}
+// 	.creative-commons-license {
+// 		margin-top: 30px;
+// 		font-size: 11px;
 
-.m-international-page {
-	font-size: 14px;
-	line-height: 20px;
+// 		img {
+// 			float: left;
+// 			margin-right: 10px;
+// 		}
+// 	}
+// }
 
-	.m-country-flag.s-international img {
-		box-shadow: 0 0 0;
-		width: 300px;
-		height: auto;
-	}
+// .m-international-page {
+// 	font-size: 14px;
+// 	line-height: 20px;
 
-	.first-title {
-		margin-top: 20px;
-	}
-}
+// 	.m-country-flag.s-international img {
+// 		box-shadow: 0 0 0;
+// 		width: 300px;
+// 		height: auto;
+// 	}
+
+
+// 	.first-title {
+// 		margin-top: 20px;
+// 	}
+// }
+
+
