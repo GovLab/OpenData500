@@ -5,20 +5,35 @@
 
 
 <section class="submitDescription">
-	<h1>Open Data 500 Australia <br>Company Survey</h1>
-	<div class="survey-instructions">
-		<p><strong>To qualify for the Open Data 500 Australia, a company must:</strong></p>
-		<ul>
-			<li>Have an operating presence in Australia</li>
-			<li>Earn revenue from its products and services (non-profits may qualify if they have a sustainable revenue stream)</li>
-			<li>Use open data as a business or operation resource</li>
-		</ul>
-		<p>If your company meets these criteria, please take a few minutes to fill out this short online form. Thank you again for your participation.</p>
-		<p><em>The fields marked with * are required</em></p>
+	<div class="b-top-section m-purple">
+		<h1>Open Data 500 Australia</h1>
+		<h2>Company Survey</h2>
+	</div>
+
+	<div class="b-page-section">
+		<div class="row">
+			<div class="large-10 large-centered columns">
+				<p><strong>To qualify for the Open Data 500 Australia, a company must:</strong></p>
+					<ul>
+						<li>Have an operating presence in Australia</li>
+						<li>Earn revenue from its products and services (non-profits may qualify if they have a sustainable revenue stream)</li>
+						<li>Use open data as a business or operation resource</li>
+					</ul>
+				<p>If your company meets these criteria, please take a few minutes to fill out this short online form. Thank you again for your participation.</p>
+				<p><em>The fields marked with * are required</em></p>
+			</div>
+		</div>
 	</div>
 </section>
-<p class="disclaimer-text warning">Your responses will become part of a public database of information on Open Data companies. By submitting this form you are agreeing that, other than personal contact and financial information, responses will be part of a publicly available database. Contact and financial information will be confidential.</p>
-<form method="post" id="submitCompany" class="m-form companyForm" data-parsley-validate>
+
+<div class="b-page-section">
+	<div class="row">
+		<div class="large-10 large-centered columns">
+			<p class="disclaimer-text warning">Your responses will become part of a public database of information on Open Data companies. By submitting this form you are agreeing that, other than personal contact and financial information, responses will be part of a publicly available database. Contact and financial information will be confidential.</p>
+		</div>
+	</div>
+
+	<form method="post" id="submitCompany" class="m-form companyForm" data-parsley-validate>
 
 	{% module Form(country, settings['default_language'], True, False) %}
 
@@ -29,8 +44,9 @@
 		<input type="submit" class="m-button" id="formSave" name="formSave" value="Proceed to next page">
 		<span class="company-form-error-message error-message" style="display:none"></span>
 	</div>
-</form>
+	</form>
 
+</div>
 
 
 {% end %}

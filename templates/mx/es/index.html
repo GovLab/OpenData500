@@ -2,37 +2,746 @@
 {% autoescape None %}
 
 {% block body %}
+<header class="b-top-section m-purple">
+    <div class="row">
+        <div class="column small-12">
+            <h2>Datos Abiertos 100 México</h2>
+        </div>
+    </div>
+</header>
 
-<div class="m-homepage">
+<div class="b-page-section">
+    <div class="row">
+        <div class="column small-5 small-offset-1 column">
+          <p>Como parte de la <a href="http://datos.gob.mx/">política de Datos Abiertos</a>, el Gobierno de la República colabora con The GovLab de la Universidad de Nueva York para realizar Datos Abiertos 100 México. Esta iniciativa es el primer estudio de las compañías y ONGs mexicanas que utilizan datos gubernamentales abiertos para crecer sus negocios, desarrollar nuevos productos y servicios, o impulsar el valor social.</p>
+        </div>
+        <div class="column small-5 small-offset-1 column">
+          <p>Datos Abiertos 100 México forma parte de la iniciativa de Datos Abiertos del Gobierno de la República, y es el primer estudio sobre empresas y ONGs mexicanas que utilizan datos gubernamentales abiertos para crecer sus negocios, desarrollar nuevos productos y servicios o crear valor social. Los Datos Abiertos son datos públicos y gratuitos que pueden ser utilizados, reutilizados y redistribuidos para lanzar nuevas iniciativas comerciales o filantrópicas, para realizar investigaciones, tomar decisiones basadas en datos, y resolver problemas complicados.</p>
+        </div>
+    </div>
+</div>
+
+<div class="b-divider">
+    <h1></h1>
+    <h2>Datos en Accion</h2>
+</div>
+
+<div class="b-page-section">
+    <div class="row">
+        <div class="column small-10 small-offset-1 column">
+          <script src="{{ static_url("js/d3.v3.min.js") }}"></script>
+          <section id="chord-chart-container">
+              <iframe src="http://www.opendata500.com/mx/chart/?lan=es" width="960" height="860" marginwidth="0" marginheight="50" scrolling="no" frameborder="0"></iframe>
+          </section>
+
+        </div>
+    </div>
+</div>
+
+<div class="b-divider">
+    <h1></h1>
+    <h2>Mas Acerca de Datos Abiertos 100 Mexico </h2>
+</div>
+
+<div class="b-page-section">
+    <div class="row">
+        <div class="column small-10 small-offset-1 column">
+          <section id="od100-video">
+              <iframe width="960" height="540" src="https://www.youtube.com/embed/ljuclmBfAQQ" frameborder="0" allowfullscreen></iframe>
+          </section>
+        </div>
+    </div>
+</div>
+
+<div class="b-divider">
+    <h1></h1>
+    <h2>CÓMO PARTICIPAR</h2>
+</div>
+
+<div class="b-divider m-blue">
+    <h1></h1>
+    <h2>Si representas una compañía u ONG que trabaja con Datos Abiertos, por favor responde la encuesta.</h2>
+</div>
+
+<div class="b-page-section">
+    <div class="row">
+        <div class="column small-12">
+					<section class="m-homepage-participate center">
+						<!-- <h1>How To Participate</h1> -->
+						<div id="mx-es-survey" class="column small-5 small-offset-1 column">
+							<a href="/mx/submitCompany/" id="mx-es-survey-button" class="b-button m-purple" target="_blank">Ir a la encuesta <i class="material-icons">arrow_forward</i></a>
+						</div>
+					</section>
+
+        </div>
+    </div>
+</div>
+
+<div class="b-divider m-blue">
+    <h1></h1>
+    <h2>Si tienes información general que quieras compartir sobre los Datos Abiertos en México, por favor envía un correo a DA100MX@datos.gob.mx.</h2>
+</div>
+
+<div class="b-page-section">
+    <div class="row">
+        <div class="column small-12">
+					<section class="m-homepage-participate center">
+						<!-- <h1>How To Participate</h1> -->
+						<div id="mx-es-email" class="column small-5 small-offset-1 column">
+							<a href="mailto:DA100MX@datos.gob.mx" id="mx-es-email-button" class="b-button m-purple" target="_blank">Envía un correo <i class="material-icons">send</i></a>
+						</div>
+          </section>
+        </div>
+    </div>
+</div>
+
+<div class="b-divider m-blue">
+    <h1></h1>
+    <h2>Si tienes información general que quieras compartir sobre los Datos Abiertos en México, únete a la conversación y twittea tus comentarios en #OD100MX.</h2>
+</div>
+
+<div class="b-page-section">
+    <div class="row">
+        <div class="column small-12">
+					<section class="m-homepage-participate center">
+						<!-- <h1>How To Participate</h1> -->
+						<div id="mx-es-twitter" class="column small-5 small-offset-1 column">
+							<a href="https://twitter.com/hashtag/od100mx" id="mx-es-twitter-button" class="b-button m-blue" target="_blank">Twittea tus comentarios <i class="fa fa-twitter fa-2x" aria-hidden="true"></i></a>
+						</div>
+            </div>
+          </section>
+        </div>
+    </div>
+</div>
+
+<div class="b-divider">
+    <h1></h1>
+    <h2>Mas Informacion</h2>
+</div>
+
+<div class="b-divider m-blue">
+    <div class="row">
+        <div class="column small-12">
+            <h1></h1>
+            <h2>OBJETIVOS DEL ESTUDIO</h2>
+        </div>
+    </div>
+</div>
+<div class="b-page-section">
+    <div class="row">
+        <div class="column small-9 small-offset-1 column">
+          <ul>
+            <li>Proveer una base para evaluar el valor económico y social de los datos gubernamentales abiertos.</li>
+            <li>Estimular el desarrollo de nuevas compañías que trabajan con Datos Abiertos.</li>
+            <li>Facilitar diálogo entre el gobierno y el sector privado sobre cómo mejorar la utilidad de los datos gubernamentales abiertos.</li>
+          </ul>
+        </div>
+
+    </div>
+</div>
+
+<div class="b-divider m-blue">
+    <div class="row">
+        <div class="column small-12">
+            <h1></h1>
+            <h2>ESTRATEGIA</h2>
+        </div>
+    </div>
+</div>
+
+<div class="b-page-section">
+    <div class="row">
+        <div class="column small-5 small-offset-1 column">
+            <p>El proceso de publicación de los datos públicos gubernamentales como Datos Abiertos es un proceso de cambio gradual.  Por eso, este estudio buscará compañías/organizaciones de diversos sectores, pequeñas, medianas y grandes, con o sin fines de lucro, que utilizan datos públicos gubernamentales como parte integral de su negocio.</p>
+          </div>
+          <div class="column small-5 small-offset-1 column">
+          <p>Esto incluye cualquier información o estadísticas provenientes de las entidades gubernamentales. Aunque la mayoría de las compañías exhibidas en la iniciativa de Datos Abiertos 100 México trabajan con datos abiertos Federales, también tenemos interés en las compañías que trabajan con datos Estatales o Municipales, en el entendido de que el manejo de sus datos puedan expandirse a nivel regional o nacional.</p>
+        </div>
+        </div>
+    </div>
+</div>
+
+<div class="b-divider m-blue">
+    <div class="row">
+        <div class="column small-12">
+            <h1></h1>
+            <h2>IDENTIFICACIÓN DE COMPAÑÍAS</h2>
+        </div>
+    </div>
+</div>
+
+<div class="b-page-section">
+    <div class="row">
+          <div class="column small-5 small-offset-1 column">
+            <p>El equipo del Datos Abiertos 100 México recopilará la lista de las 100 compañías y ONGs a través de:
+              <ol>
+               <li>(1) campañas de comunicación</li>
+               <li>(2) recomendaciones de expertos y organizaciones profesionales
+               <li> y (3) investigación adicional.</li>
+             </ol>
+               </p>
+            </div>
+            <div class="column small-5 small-offset-1 column">
+        		<p>Los resultados del estudio culminarán en una plataforma en línea vinculada a <a href="http://www.opendata500.com/mx" target="_blank">www.opendata500.com/mx</a>, donde se destacarán diversas compañías y sus trabajos con datos gubernamentales abiertos en México.</p>
+          </div>
+    </div>
+</div>
+
+<div class="b-divider m-blue">
+    <div class="row">
+        <div class="column small-12">
+            <h1></h1>
+            <h2>EL ESTUDIO NO ES</h2>
+        </div>
+    </div>
+</div>
+
+<div class="b-page-section">
+    <div class="row">
+        <div class="column small-5 small-offset-1 column">
+          <p>Datos Abiertos 100 México, no es una clasificación de las compañías en términos de calidad o desempeño. El estudio cuenta con compañías y ONGs de diferentes magnitudes y sectores que utilizan diversos tipos de datos. El estudio no significa competencia, por el contrario, es un intento para mostrar una perspectiva amplia e incluyente del ecosistema de datos abiertos en México.</p>
+        </div>
+        <div class="column small-5">
+         <p>El estudio tampoco provee una muestra aleatoria para el análisis estadístico definitivo. Por ser el primer sondeo en este ámbito, todavía no es posible definir el panorama completo de las compañías que utilizan datos gubernamentales abiertos.</p>
+       </div>
+
+      </div>
+    </div>
+</div>
+
+<div class="b-divider">
+    <h1></h1>
+    <h2>Equipo</h2>
+</div>
+
+<div class="b-divider m-blue">
+    <h1></h1>
+    <h2>Equipo de Innovación Digital <br>en la Oficina de la Presidencia de la República</h2>
+</div>
+
+<div class="b-page-section about-page">
+    <div class="row">
+        <div class="column small-10 small-offset-1 column">
+          <section id="about-people">
+            <!-- <h2>Equipo</h2> -->
+            <!-- <h3 class="adj-title">Equipo de Innovación Digital <br>en la Oficina de la Presidencia de la República</h3> -->
+            <div class="m-team">
+              <div class="e-card m-purple js-tooltip-trigger js-open-modal" data-open="#modal">
+                <div class="e-card-inner">
+                	<div class="e-card-image" style="background-image: url('{{static_url ("img/mx/ania-calderon.jpg")}}')"></div>
+                			<p class="e-card-name">Ania Calderon</p>
+                			<p class="e-card-description">Directora General de Datos Abiertos, <br>Presidencia de la República</p>
+                	</div>
+                </div>
+
+                <div class="e-card m-purple js-tooltip-trigger js-open-modal" data-open="#modal">
+                  <div class="e-card-inner">
+                  	<div class="e-card-image" style="background-image: url('{{static_url ("img/mx/enrique-zapata.jpg")}}')"></div>
+                  			<p class="e-card-name">Enrique Zapata</p>
+                  			<p class="e-card-description">Director de Innovación Pública, <br>Presidencia de la República</p>
+                  	</div>
+                  </div>
+
+                  <div class="e-card m-purple js-tooltip-trigger js-open-modal" data-open="#modal">
+                    <div class="e-card-inner">
+                      <div class="e-card-image" style="background-image: url('{{static_url ("img/mx/rodolfo-wilhelmy.jpg")}}')"></div>
+                          <p class="e-card-name">Rodolfo Wilhelmy</p>
+                          <p class="e-card-description">Director de Datos Abiertos, <br>Presidencia de la República</p>
+                      </div>
+                    </div>
+
+                    <div class="e-card m-purple js-tooltip-trigger js-open-modal" data-open="#modal">
+                      <div class="e-card-inner">
+                        <div class="e-card-image" style="background-image: url('{{static_url ("img/mx/eduardo-clark.jpg")}}')"></div>
+                            <p class="e-card-name">Eduardo Clark</p>
+                            <p class="e-card-description">Director de Datos para el Desarollo, <br>Presidencia de la República</p>
+                        </div>
+                      </div>
+
+                      <div class="e-card m-purple js-tooltip-trigger js-open-modal" data-open="#modal">
+                        <div class="e-card-inner">
+                          <div class="e-card-image" style="background-image: url('{{static_url ("img/mx/diego-beauroyre.jpg")}}')"></div>
+                              <p class="e-card-name">Diego Beauroyre</p>
+                              <p class="e-card-description">Subdirector de Comunicación Visual<br>Presidencia de la República</p>
+                          </div>
+                        </div>
+
+                          <div class="e-card m-purple js-tooltip-trigger js-open-modal" data-open="#modal">
+                            <div class="e-card-inner">
+                              <div class="e-card-image" style="background-image: url('{{static_url ("img/mx/carlos-castro.jpg")}}')"></div>
+                                  <p class="e-card-name">Carlos Castro</p>
+                                  <p class="e-card-description">Director de Análisis de Datos,<br>Presidencia de la República</p>
+                              </div>
+                            </div>
+
+                            <div class="e-card m-purple js-tooltip-trigger js-open-modal" data-open="#modal">
+                              <div class="e-card-inner">
+                                <div class="e-card-image" style="background-image: url('{{static_url ("img/mx/pablo-villarreal.jpg")}}')"></div>
+                                    <p class="e-card-name">Pablo Villarreal</p>
+                                    <p class="e-card-description">Director de Gobierno Abierto,<br>Presidencia de la República</p>
+                                </div>
+                              </div>
+
+                              <div class="e-card m-purple js-tooltip-trigger js-open-modal" data-open="#modal">
+                                <div class="e-card-inner">
+                                  <div class="e-card-image" style="background-image: url('{{static_url ("img/mx/julia-coburn.jpg")}}')"></div>
+                                      <p class="e-card-name">Julia Coburn</p>
+                                      <p class="e-card-description">Enlace de Proyecto, Datos Abiertos 100 México,<br>Presidencia de la República</p>
+                                  </div>
+                                </div>
+
+                              <div class="e-card m-purple js-tooltip-trigger js-open-modal" data-open="#modal">
+                                <div class="e-card-inner">
+                                  <div class="e-card-image" style="background-image: url('{{static_url ("img/mx/pablo-villarreal.jpg")}}')"></div>
+                                      <p class="e-card-name">Pablo Villarreal</p>
+                                      <p class="e-card-description">Director de Gobierno Abierto,<br>Presidencia de la República</p>
+                                  </div>
+                                </div>
+
+                                <div class="e-card m-purple js-tooltip-trigger js-open-modal" data-open="#modal">
+                                  <div class="e-card-inner">
+                                    <div class="e-card-image" style="background-image: url('{{static_url ("img/mx/eduardo-vargas.jpg")}}')"></div>
+                                        <p class="e-card-name">Eduardo Vargas</p>
+                                        <p class="e-card-description"></p>
+                                    </div>
+                                </div>
+
+                                <div class="e-card m-purple js-tooltip-trigger js-open-modal" data-open="#modal">
+                                  <div class="e-card-inner">
+                                    <div class="e-card-image" style="background-image: url('{{static_url ("img/mx/alejandra-ruiz-rio.jpg")}}')"></div>
+                                        <p class="e-card-name">Alejandra Ruiz del Rio</p>
+                                        <p class="e-card-description">Subdirectora de Proyectos Estratégicos<br>Presidencia de la República</p>
+                                    </div>
+                                </div>
+
+                                <div class="e-card m-purple js-tooltip-trigger js-open-modal" data-open="#modal">
+                                  <div class="e-card-inner">
+                                    <div class="e-card-image" style="background-image: url('{{static_url ("img/mx/guillermo-ruiz-de-teresa.jpg")}}')"></div>
+                                        <p class="e-card-name">Guillermo Ruiz de Teresa</p>
+                                        <p class="e-card-description">Director General de Innovación y Participación Ciudadana<br>Presidencia de la República</p>
+                                    </div>
+                                </div>
+
+                                <div class="e-card m-purple js-tooltip-trigger js-open-modal" data-open="#modal">
+                                  <div class="e-card-inner">
+                                    <div class="e-card-image" style="background-image: url('{{static_url ("img/mx/jorge-diaz.jpg")}}')"></div>
+                                        <p class="e-card-name">Jorge Diaz</p>
+                                        <p class="e-card-description">Director de Participación y Comunidades Abiertas,<br>Presidencia de la República</p>
+                                    </div>
+                                </div>
+                              </div>
+                          </section>
+                      </div>
+                  </div>
+            </div>
+
+            <div class="b-divider m-blue">
+                <h1></h1>
+                <h2>The GovLab Team</h2>
+            </div>
+
+            <div class="b-page-section about-page">
+                <div class="row">
+                    <div class="column small-10 small-offset-1 column">
+                      <section id="about-people">
+                        <!-- <h2>Equipo</h2> -->
+                        <!-- <h3 class="adj-title">Equipo de Innovación Digital <br>en la Oficina de la Presidencia de la República</h3> -->
+                        <div class="m-team">
+                          <!-- <h3>The GovLab</h3> -->
+                            <div class="m-team">
+                              <div class="e-card m-purple js-tooltip-trigger js-open-modal" data-open="#modal">
+                                <div class="e-card-inner">
+                                  <div class="e-card-image" style="background-image: url('{{static_url ("img/us/beth-noveck.jpg")}}')"></div>
+                                      <p class="e-card-name">Beth Simone Noveck</p>
+                                      <p class="e-card-description">Founder &amp; Director, <br>The GovLab</p>
+                                  </div>
+                              </div>
+
+                              <div class="e-card m-purple js-tooltip-trigger js-open-modal" data-open="#modal">
+                                <div class="e-card-inner">
+                                  <div class="e-card-image" style="background-image: url('{{static_url ("img/us/stefaan-verhulst.jpg")}}')"></div>
+                                      <p class="e-card-name">Stefaan Verhulst</p>
+                                      <p class="e-card-description">Co-Founder and Chief of Research and Development, The GovLab; Director of GovLab's Open Data Project</p>
+                                  </div>
+                              </div>
+
+                              <div class="e-card m-purple js-tooltip-trigger js-open-modal" data-open="#modal">
+                                <div class="e-card-inner">
+                                  <div class="e-card-image" style="background-image: url('{{static_url ("img/us/julia-root.jpg")}}')"></div>
+                                      <p class="e-card-name">Julia Root</p>
+                                      <p class="e-card-description">Project Lead</p>
+                                  </div>
+                              </div>
+
+                              <div class="e-card m-purple js-tooltip-trigger js-open-modal" data-open="#modal">
+                                <div class="e-card-inner">
+                                  <div class="e-card-image" style="background-image: url('{{static_url ("img/us/john-krauss.jpg")}}')"></div>
+                                      <p class="e-card-name">John Krauss</p>
+                                      <p class="e-card-description">Developer</p>
+                                  </div>
+                              </div>
+
+                              <div class="e-card m-purple js-tooltip-trigger js-open-modal" data-open="#modal">
+                                <div class="e-card-inner">
+                                  <div class="e-card-image" style="background-image: url('{{static_url ("img/us/claudio-mendonca.jpg")}}')"></div>
+                                      <p class="e-card-name">Claudio Mendonca</p>
+                                      <p class="e-card-description">Designer</p>
+                                  </div>
+                              </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+          </div>
+
+          <div class="b-divider m-blue">
+              <h1></h1>
+              <h2>Consejo Consultivo</h2>
+          </div>
+
+          <div class="b-page-section about-page">
+              <div class="row">
+                  <div class="column small-10 small-offset-1 column">
+                    <section id="about-people">
+                      <!-- <h2>Equipo</h2> -->
+                      <!-- <h3 class="adj-title">Equipo de Innovación Digital <br>en la Oficina de la Presidencia de la República</h3> -->
+                      <div class="m-team">
+                              <!-- <h3>Consejo Consultivo</h3> -->
+                              <ul class="m-half">
+                                <li><strong>Alejandro Maza</strong>, OPI</li>
+                                <li><strong>Alberto Padilla</strong>, INNKU</li>
+                                <li><strong>Eduardo Bohórquez</strong>, Transparencia Mexicana</li>
+                              </ul>
+                              <ul class="m-half">
+                                <li><strong>Ana Elena Fierro</strong>, CIDE</li>
+                                <li><strong>Erik Huesca</strong>, FUNCO</li>
+                                <li><strong>Elmer Garduño</strong>, Google</li>
+                                <li>IMCO</li>
+                              </ul>
+
+                  </div>
+                </a>
+              </div>
+          </section>
+      </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="b-page-section about-page">
+    <div class="row">
+        <div class="column small-10 small-offset-1 column">
+          <section id="about-people"> -->
+            <!-- <h2>Equipo</h2> -->
+            <!-- <h3 class="adj-title">Equipo de Innovación Digital <br>en la Oficina de la Presidencia de la República</h3>
+            <div class="m-team">
+              <div class="e-card m-blue">
+                <a href="#">
+                  <div class="e-card-inner"> -->
+                    <!-- uncomment to add a background image to the card -->
+                    <!-- <div class="e-card-image" style="background-image: url('')"></div> -->
+                      <!-- <p class="e-card-name">Ania</p>
+                      <p class="e-card-description">Project Description</p>
+                  </div>
+                </a>
+              </div>
+
+
+              <div id="team-ania-calderon" class="m-team-picture">
+                <div>
+                  <img src="/static/img/mx/ania-calderon.jpg" alt="">
+                  <p class="m-team-member-name">Ania Calderón</p>
+                  <p class="m-team-member-job">Directora General de Datos Abiertos, <br>Presidencia de la República</p>
+                </div>
+              </div>
+              <div id="team-enrique-zapata" class="m-team-picture">
+                <div>
+                  <img src="/static/img/mx/enrique-zapata.jpg" alt="">
+                  <p class="m-team-member-name">Enrique Zapata</p>
+                  <p class="m-team-member-job">Director de Innovación Pública, <br>Presidencia de la República</p>
+                </div>
+              </div>
+
+              <div id="team-rodolfo-wilhelmy" class="m-team-picture">
+                <div>
+                  <img src="/static/img/mx/rodolfo-wilhelmy.jpg" alt="">
+                  <p class="m-team-member-name">Rodolfo Wilhelmy</p>
+                  <p class="m-team-member-job">Director de Datos Abiertos, <br>Presidencia de la República</p>
+                </div>
+              </div>
+              <div id="team-eduardo-clark" class="m-team-picture">
+                <div>
+                  <img src="/static/img/mx/eduardo-clark.jpg" alt="">
+                  <p class="m-team-member-name">Eduardo Clark</p>
+                  <p class="m-team-member-job">Director de Datos para el Desarollo, <br>Presidencia de la República</p>
+                </div>
+              </div>
+              <div class="m-team-bios">
+                <div class="m-team-bio-ania-calderon">
+                  <h3>Ania Calderón</h3>
+                  <p>Ania Calderón es Directora General de Datos Abiertos de la Coordinación de Estrategia Digital en la Oficina de la Presidencia de la República. Tiene una Maestría en Administración Pública por la Universidad de Columbia con una especialización en Política Urbana en materia de Tecnologías de Información y Comunicación y obtuvo la beca Fulbright-García Robles. Fue miembro del grupo editorial del Journal of International and Public Affairs 2012-2013. Formó parte de un grupo de investigación de la delegación de Gobierno Digital del Equipo de Transición del Presidente Electo (2012-2018) de México. Previo esto fue co-fundadora de Pase Usted A.C., una organización civil enfocada en la construcción de plataformas de diálogo para promover la participación ciudadana en temas de interés público para la Ciudad de México. Impulsó el programa “Genera, tecnología para la ciudad”, una incubadora de proyectos digitales para mejorar la calidad de vida en las ciudades. </p>
+                </div>
+                <div class="m-team-bio-enrique-zapata">
+                  <h3>Enrique Zapata</h3>
+                  <p>Enrique Zapata es el Director de Innovación Pública en la Coordinación de Estrategia Digital Nacional en la Presidencia de la República. Tiene una Maestría en Política Pública por la Universidad de Oxford, con especialidad en Desarrollo Económico, y obtuvo la beca Chevening del Consejo Británico. Con anterioridad trabajó en la Secretaría de Economía donde fue responsable de coordinar la Agenda de Competitividad con América del Norte y negociaciones comerciales con Asia Pacífico. Fue parte del Consejo Editorial para la secciòn Internacional del Periódico Reforma. Internacionalista por la Universidad Iberoamericana, es asociado del Consejo Mexicano de Asuntos Internacionales (COMEXI).</p>
+                </div>
+                <div class="m-team-bio-rodolfo-wilhelmy">
+                  <h3>Rodolfo Wilhelmy</h3>
+                  <p>Hacker. Rodolfo es el que rompe cosas en @DatosGobMx. En su otra vida tocaba el banjo.</p>
+                </div>
+                <div class="m-team-bio-eduardo-clark">
+                  <h3>Eduardo Clark</h3>
+                </div>
+              </div>
+            </div>
+            <div class="m-team">
+              <div id="team-diego-beauroyre" class="m-team-picture">
+                <div>
+                  <img src="/static/img/mx/diego-beauroyre.jpg" alt="">
+                  <p class="m-team-member-name">Diego Beauroyre</p>
+                  <p class="m-team-member-job">Subdirector de Comunicación Visual<br>Presidencia de la República</p>
+                </div>
+              </div>
+              <div id="team-carlos-castro" class="m-team-picture">
+                <div>
+                  <img src="/static/img/mx/carlos-castro.jpg" alt="">
+                  <p class="m-team-member-name">Carlos Castro</p>
+                  <p class="m-team-member-job">Director de Análisis de Datos,<br>Presidencia de la República</p>
+                </div>
+              </div>
+              <div id="team-julia-coburn" class="m-team-picture">
+                <div>
+                  <img src="/static/img/mx/julia-coburn.jpg" alt="">
+                  <p class="m-team-member-name">Julia Coburn</p>
+                  <p class="m-team-member-job">Enlace de Proyecto, Datos Abiertos 100 México,<br>Presidencia de la República</p>
+                </div>
+              </div>
+              <div id="team-pablo-villarreal" class="m-team-picture">
+                <div>
+                  <img src="/static/img/mx/pablo-villarreal.jpg" alt="">
+                  <p class="m-team-member-name">Pablo Villarreal</p>
+                  <p class="m-team-member-job">Director de Gobierno Abierto,<br>Presidencia de la República</p>
+                </div>
+              </div>
+              <div class="m-team-bios">
+                <div class="m-team-bio-diego-beauroyre">
+                  <h3>Diego Beauroyre</h3>
+                  <p>Diego Beauroyre estudió Diseño y Comunicación Visual en Centro de diseño cine y televisión. Ha colaborado en diversos proyectos editoriales, de diseño digital y diseño web con instituciones culturales y privadas como Fundación Patricia Phelps de Cisneros, Museo Nacional de Arte, Museo Universitario de Arte Contemporáneo, y Cineteca Nacional. Desarrolló la imagen gráfica para las Ferias Internacionales del libro Conaculta en Ginebra, Nueva York y Costa Rica. Recibió el Premio Quórum por la participación en el diseño de identidad gráfica de Destination México para MoMA Store, Nueva York y Tokio y por el diseño de identidad para la galería Proyecto Paralelo.</p>
+                </div>
+                <div class="m-team-bio-carlos-castro">
+                  <h3>Carlos Castro</h3>
+                  <p>Carlos Castro es el Director de Análisis de Datos en la Coordinación de Estrategia Digital Nacional en la Oficina de la Presidencia de la República. Estudió Matemáticas Aplicadas en el Instituto Tecnológico Autónomo de México ITAM. Trabajó como Actuario Senior en AXA Assurance en temas de reaseguro, daños y vida del área de administración de riesgo, previamente fungió como analista estadístico en el centro de inteligencia y seguridad del gobierno de la Ciudad de México C4. Cuenta con algunas publicaciones en ciencias actuariales en el <em>International Actuarial Association</em> y en Big Data con el <em>United Nations Global Pulse</em>.</p>
+                </div>
+                <div class="m-team-bio-julia-coburn">
+                  <h3>Julia Coburn</h3>
+                  <p>Antes de integrarse al equipo de Datos Abiertos 100 México, Julia Coburn realizó una Maestría en Medios de Comunicación, Paz y Conflicto, por la Universidad para la Paz de las Naciones Unidas, en Costa Rica. Ahí, trabajó en la primera implementación de Indicadores de Seguridad para Periodistas de la UNESCO en Honduras y Guatemala. También ha trabajado para ONGs en México, EE.UU y Ecuador en las áreas de investigación, desarrollo, y comunicación. Fue becaria Fulbright en Costa Rica y realizó su B.A. en Antropología y Estudios de Latinoamérica y el Caribe por la Universidad de Chicago. </p>
+                </div>
+                <div class="m-team-bio-pablo-villarreal">
+                  <h3>Pablo Villarreal</h3>
+                  <p>Pablo Villarreal es Director de Gobierno Abierto de la Coordinación de Estrategia Digital en la Oficina de la Presidencia de la República. Tiene una Maestría en Administración Pública por la Robert F. Wagner School of Public Affairs de la Universidad de Nueva York y obtuvo la beca Fulbright-Garcia Robles. Anteriormente fue asesor del Secretario de Economía, donde era parte del equipo responsable de elaborar discursos y brindar asesoría en temas nacionales e internacionales. Previo a esto fue Asesor Político en Grupo Estrategia Política. Internacionalista por la Universidad Iberoamericana, es asociado del Consejo Mexicano de Asuntos Internacionales (COMEXI).</p>
+                </div>
+              </div>
+            </div>
+            <div class="m-team">
+              <div id="team-eduardo-vargas" class="m-team-picture">
+                <div>
+                  <img src="/static/img/mx/eduardo-vargas.jpg" alt="">
+                  <p class="m-team-member-name">Eduardo Vargas</p>
+                  <p class="m-team-member-job"><br></p>
+                </div>
+              </div>
+              <div id="team-alejandra-ruiz-rio" class="m-team-picture">
+                <div>
+                  <img src="/static/img/mx/alejandra-ruiz-rio.jpg" alt="">
+                  <p class="m-team-member-name">Alejandra Ruiz del Rio</p>
+                  <p class="m-team-member-job">Subdirectora de Proyectos Estratégicos<br>Presidencia de la República</p>
+                </div>
+              </div>
+              <div id="team-guillermo-ruiz-de-teresa" class="m-team-picture">
+                <div>
+                  <img src="/static/img/mx/guillermo-ruiz-de-teresa.jpg" alt="">
+                  <p class="m-team-member-name">Guillermo Ruiz de Teresa</p>
+                  <p class="m-team-member-job">Director General de Innovación y Participación Ciudadana<br>Presidencia de la República</p>
+                </div>
+              </div>
+              <div id="team-jorge-diaz" class="m-team-picture">
+                <div>
+                  <img src="/static/img/mx/jorge-diaz.jpg" alt="">
+                  <p class="m-team-member-name">Jorge Diaz</p>
+                  <p class="m-team-member-job">Director de Participación y Comunidades Abiertas,<br>Presidencia de la República</p>
+                </div>
+              </div>
+              <div class="m-team-bios">
+                <div class="m-team-bio-eduardo-vargas">
+                  <h3>Eduardo Vargas</h3>
+                </div>
+                <div class="m-team-bio-alejandra-ruiz-rio">
+                  <h3>Alejandra Ruiz Rio</h3>
+                  <p>Alejandra estudió Ciencia Política en el Instituto Tecnológico Autónomo de México (ITAM). Ella supervisa los proyectos y alianzas estratégicas de las Direcciones de Innovación Digital y Participación Ciudadana de la Oficina de Presidencia de la República. Antes de unirse al equipo, Alejandra fue Directora de Ashoka U en México, una iniciativa para promover e impulsar la educación para el emprendimiento social en universidades mediante diversos enfoques.</p>
+                </div>
+                <div class="m-team-bio-guillermo-ruiz-de-teresa">
+                  <h3>Guillermo Ruiz de Teresa</h3>
+                  <p>Guillermo Ruiz de Teresa es el Director General de Innovación y Participación Ciudadana en la Oficina de la Presidencia de México, además es el encargado de la Agenda de Gobierno Abierto en México y su relación con la Alianza. Tiene una maestría en Investigación en Diseño e Innovación por la Universidad de Harvard enfocada en gobernanza urbana. Anteriormente, fundó Pase Usted, una organización de la sociedad civil enfocada en impulsar la innovación cívica para transformar la agenda urbana en México. A su vez, lanzó Genera, una incubadora en la ciudad de México y Monterrey para el desarrollo de empresas de tecnología para mejorar la calidad de vida en las ciudades.</p>
+                </div>
+                <div class="m-team-bio-jorge-diaz">
+                  <h3>Jorge Diaz</h3>
+                  <p>Jorge Díaz es Director de Participación y Comunidades Abiertas en la Coordinación de Estrategia Digital Nacional en la Oficina de la Presidencia de la República. Tiene una maestría en Administración Pública y Desarrollo Internacional por la London School of Economics. Ha trabajado en proyectos de desarrollo social, participación cívica, gubernamental, y empoderamiento de comunidades indígenas en distintas zonas de México. Hizo investigación sobre innovación gubernamental para el Boston Consulting Group en Londres y llevó temas de desarrollo económico en la Representación de México ante las Naciones Unidas y otros organismos internacionales en Ginebra. Más recientemente, fue el coordinador general y estratega para el proyecto de Plataforma de Gobierno Abierto CDMX, desde PIDES, una organización sin fines de lucro local, y el gobierno de la Ciudad de México.</p>
+                </div>
+              </div>
+            </div>
+            <h3>The GovLab</h3>
+            <div class="m-team">
+              <div id="team-beth-noveck" class="m-team-picture">
+                <div>
+                  <img src="/static/img/us/beth-noveck.jpg" alt="">
+                  <p class="m-team-member-name">Beth Simone Noveck</p>
+                  <p class="m-team-member-job">Founder &amp; Director, <br>The GovLab</p>
+                </div>
+              </div>
+              <div id="team-stefaan-verhulst" class="m-team-picture">
+                <div>
+                  <img src="/static/img/us/stefaan-verhulst.jpg" alt="">
+                  <p class="m-team-member-name">Stefaan Verhulst</p>
+                  <p class="m-team-member-job">Co-Founder and Chief of Research and Development, The GovLab; Director of GovLab's Open Data Project</p>
+                </div>
+              </div>
+              <div id="team-julia-root" class="m-team-picture">
+                <div>
+                  <img src="/static/img/us/julia-root.jpg" alt="">
+                  <p class="m-team-member-name">Julia Root</p>
+                  <p class="m-team-member-job">Project Lead</p>
+                </div>
+              </div>
+              <div class="m-team-bios">
+                <div class="m-team-bio-beth-noveck">
+                  <h3>Beth Simone Noveck</h3>
+                  <p>Beth Simone Noveck directs The Governance Lab and its MacArthur Research Network on Opening Governance.  Funded by the John D. and Catherine T. MacArthur Foundation,  the John S. and James L. Knight Foundation and Google.org, the GovLab strives to improve people’s lives by changing how we govern. The GovLab designs and tests technology, policy and strategies for fostering more open and collaborative approaches to strengthen the ability of people and institutions to work together to solve problems, make decisions, resolve conflict and govern themselves more effectively and legitimately.</p>
+                  <p>The Jacob K. Javits Visiting Professor at New York University’s Robert F. Wagner Graduate School of Public Service and a visiting professor at the MIT Media Lab, Beth is a professor of law at New York Law School. She served in the White House as the first United States Deputy Chief Technology Officer and director of the White House Open Government Initiative (2009-2011). UK Prime Minister David Cameron appointed her senior advisor for Open Government, and she served on the Obama-Biden transition team. Among projects she’s designed or collaborated on are Unchat, The Do Tank, Peer To Patent, Data.gov, Challenge.gov and the Gov Lab’s Living Labs and training platform, The Academy.</p>
+                  <p>A graduate of Harvard University and Yale Law School, she serves on the Global Commission on Internet Governance and chairs the ICANN Strategy Panel on Multi-Stakeholder Innovation. She was named one of the “Foreign Policy 100″ by Foreign Policy, one of the “100 Most Creative People in Business” by Fast Company and one of the “Top Women in Technology” by Huffington Post. She has also been honored by both the National Democratic Institute and Public Knowledge for her work in civic technology.</p>
+                  <p>Beth is the author of Wiki Government: How Technology Can Make Government Better, Democracy Stronger and Citizens More Powerful, which has also appeared in Arabic, Russian, Chinese and in an audio edition, and co-editor of The State of Play: Law, Games and Virtual Worlds. Her next book The Networked State will appear with Harvard University Press. She tweets <a href="https://twitter.com/bethnoveck" target="_blank">@bethnoveck</a>.</p>
+                </div>
+                <div class="m-team-bio-stefaan-verhulst">
+                  <h3>Stefaan G. Verhulst</h3>
+                  <p>Stefaan G. Verhulst is Co-Founder and Chief Research and Development Officer of the Governance Laboratory @NYU (GovLab) where he is responsible for building a research foundation on how to transform governance using advances in science and technology.</p>
+                  <p>Verhulst’s latest scholarship centers on how technology can improve people’s lives and the creation of more effective and collaborative forms of governance. Specifically, he is interested in the perils and promise of collaborative technologies and how to harness the unprecedented volume of information to advance the public good.</p>
+                  <p>Before joining NYU full time, Verhulst spent more than a decade as Chief of Research for the Markle Foundation, where he continues to serve as Senior Advisor. At Markle, an operational foundation based in New York, he was responsible for overseeing strategic research  on all the priority areas of the Foundation including, for instance: transforming health care using information and technology, re-engineering government to respond to new national security threats, improving people’s lives in developing countries by connecting them to information networks, developing multi-stakeholder networks to tackle global governance challenges, changing education through information technology et al. Many of Markle’s reports have been translated into legislation and executive orders, and have informed the creation of new organizations and businesses.</p>
+                  <p>He is also an Adjunct Professor in the Department of Culture and Communications at New York University, Senior Research Fellow for the Center for Media and Communications Studies at Central European University in Budapest; and an Affiliated Senior Research Fellow at the Center for Global Communications Studies at the University of Pennsylvania’s Annenberg School for Communications.</p>
+                  <p>Previously at Oxford University he co-founded and was the Head of the Programme in Comparative Media Law and Policy at the Centre for Socio Legal Studies, and also served as Senior Research Fellow of Wolfson College. He is still an emeritus fellow at Oxford.  He also taught several years at the London School of Economics.</p>
+                  <p>Verhulst was the UNESCO Chairholder in Communications Law and Policy for the UK, a former lecturer on Communications Law and Policy issues in Belgium, and Founder and Co-Director of the International Media and Info-Comms Policy and Law Studies at the University of Glasgow School of Law. He has served as a consultant to numerous international and national organizations, including the Council of Europe, the European Commission, UNESCO, World Bank, UNDP, USAID, the UK Department for International Development among others. He has been a grant recipient of the Bertelsmann Foundation, the Ford Foundation, the Rockefeller Foundation, and the Markle Foundation.</p>
+                  <p>Verhulst has authored and co-authored several books, including: In Search of the Self: Conceptual Approaches to Internet Self Regulation (Routledge, 2001); Convergence in European Communications Regulation (Blackstone, 1999); EC Media Law and Policy (AWL, 1998); Legal Responses to the Changing Media (OUP, 1998); and Broadcasting Reform in India (OUP, 1998). Most recently, he co-edited The Routledge Handbook of Media Law (2013). Verhulst is also founder and editor of numerous journals including the International Journal of Communications Law and Policy, and the Communications Law in Transition Newsletter.</p>
+                </div>
+                <div class="m-team-bio-julia-root">
+                  <h3>Julia Root</h3>
+                  <p>Julia Root is the project lead for GovLab’s Open NYU and Open Data 500 Global Network. She has worked across organizational and urban themes, as well as across sectors, as an inspired strategist, idea connector and network builder. Areas of expertise include open data and urban informatics; expert networks; cross-sector network building; higher education strategy; civic innovation; and intercultural business performance. Previously she was with NYU CUSP (Center for Urban Science + Progress) as the assistant director for student services. Prior to joining NYU, she had worked as a consultant with a boutique international consulting firm focused on advising higher education, public sector and engineering clients on urban issues and cross sector network building. She has contributed research and writing for academic and policy institutes and has consulted with organizations on business development, marketing and organizational development.</p>
+                  <p>Prior to arriving to New York City she was the associate director of development for the largest health and human service provider in New Orleans and the Gulf Coast and was a field office manager for an advocacy nonprofit located in Los Angeles. Julia has lived and/or worked in Los Angeles, San Diego, Barcelona, New Orleans and New York City.  She has a B.A. from the University of California, San Diego and an M.P.A from NYU’s Robert F. Wagner Graduate School of Public Service.</p>
+                </div>
+              </div>
+              <div id="team-john-krauss" class="m-team-picture">
+                <div>
+                  <img src="/static/img/us/john-krauss.jpg" alt="">
+                  <p class="m-team-member-name">John Krauss</p>
+                  <p class="m-team-member-job">Developer</p>
+                </div>
+              </div>
+              <div id="team-claudio-mendonca" class="m-team-picture">
+                <div>
+                  <img src="/static/img/us/claudio-mendonca.jpg" alt="">
+                  <p class="m-team-member-name">Claudio Mendonca</p>
+                  <p class="m-team-member-job">Designer</p>
+                </div>
+              </div>
+              <div class="m-team-bios">
+                <div class="m-team-bio-john-krauss">
+                  <h3>John Krauss</h3>
+                  <p>John Krauss is a technical research fellow at the GovLab @ NYU. He’s active in New York City’s civic hacking scene, working to standardize and visualize transportation, safety, and housing data. John joins the GovLab after several years freelancing in the startup scene, where he experimented with scraping and continuous integration while building open data tools like <a href="http://nyc.crashmapper.com/">Crashmapper</a> on the side. His background is in architecture and housing; he received his B.A. in architecture and history from Columbia University and went on to consult on data and web design for NYU’s Furman Center for Real Estate and Urban Policy. In his spare time, John likes to bike, and once cycled from Santiago de Compostela to Berlin. He occasionally <a href="http://blog.johnkrauss.com/">blogs</a>, almost never <a href="https://twitter.com/recessionporn">tweets</a>, but often <a href="https://github.com/talos/">codes</a>.</p>
+                </div>
+                <div class="m-team-bio-claudio-mendonca">
+                  <h3>Claudio Mendonca</h3>
+                  <p>Claudio Mendonca is the graphic designer at The GovLab. Working as a graphic artist for more than 10 years, he earned his Bachelor's degree in Graphic Design in 2005. He has extensive experience in branding and interaction design.</p>
+                  <p>Claudio's previous experience includes 3 years developing graphical material for several government institutions in Brazil, publications and interface design for startups.</p>
+                  <p>He also designs webapps for the Centre of Direct Democracy and works as a design consultant at the World Bank Institute on several open gov projects such as Open Government, Open Contracting, Open Development and Technology Alliance, ICT4Gov.</p>
+                  <p>At The GovLab, Claudio is responsible for branding and interaction design for The GovLab projects. He can be found at <a href="http://www.claudiomendonca.com" target="_blank">claudiomendonca.com</a>.</p>
+                </div>
+              </div>
+            </div>
+            <h3>Consejo Consultivo</h3>
+            <ul class="m-half">
+              <li><strong>Alejandro Maza</strong>, OPI</li>
+              <li><strong>Alberto Padilla</strong>, INNKU</li>
+              <li><strong>Eduardo Bohórquez</strong>, Transparencia Mexicana</li>
+            </ul>
+            <ul class="m-half">
+              <li><strong>Ana Elena Fierro</strong>, CIDE</li>
+              <li><strong>Erik Huesca</strong>, FUNCO</li>
+              <li><strong>Elmer Garduño</strong>, Google</li>
+              <li>IMCO</li>
+            </ul>
+          </section>
+        </div>
+    </div>
+</div> -->
+
+
+
+
+<!-- <div class="m-homepage"> -->
 <!--     <div class="m-country-flag s-mx">
         <img src="{{ static_url("img/mexico-flag.png") }}" alt="">
     </div> -->
-    <h1 class="first-title">Datos Abiertos 100 México</h1>
+    <!-- <h1 class="first-title">Datos Abiertos 100 México</h1>
     <section id="od100-video">
         <iframe width="960" height="540" src="https://www.youtube.com/embed/ljuclmBfAQQ" frameborder="0" allowfullscreen></iframe>
     </section>
-    
+
     <script src="{{ static_url("js/d3.v3.min.js") }}"></script>
     <section id="chord-chart-container">
         <iframe src="http://www.opendata500.com/mx/chart/?lan=es" width="960" height="860" marginwidth="0" marginheight="50" scrolling="no" frameborder="0"></iframe>
-    </section>
+    </section> -->
 
 <!--     <section class="m-homepage-banner">
         <img src="/static/img/mx/datosgobmx_banner.jpg">
     </section> -->
 
-    <section class="m-homepage-about">
+    <!-- <section class="m-homepage-about">
         <h1>Acerca de esta iniciativa</h1>
-        <p class="intro">Como parte de la <a href="http://datos.gob.mx/">política de Datos Abiertos</a>, el Gobierno de la República colabora con The GovLab de la Universidad de Nueva York para realizar Datos Abiertos 100 México.  Esta iniciativa es el primer estudio de las compañías y ONGs mexicanas que utilizan datos gubernamentales abiertos para crecer sus negocios, desarrollar nuevos productos y servicios, o impulsar el valor social.</p>
-        <p class="more"><a href="/mx/about/" class="m-button">Más información</a> <a href="/mx/submitCompany/" class="m-button">Ir a la encuesta</a></p> 
-    </section>
+        <p class="intro">Como parte de la <a href="http://datos.gob.mx/">política de Datos Abiertos</a>, el Gobierno de la República colabora con The GovLab de la Universidad de Nueva York para realizar Datos Abiertos 100 México.  Esta iniciativa es el primer estudio de las compañías y ONGs mexicanas que utilizan datos gubernamentales abiertos para crecer sus negocios, desarrollar nuevos productos y servicios, o impulsar el valor social.</p> -->
+        <!-- <p class="more"><a href="/mx/about/" class="m-button">Más información</a> <a href="/mx/submitCompany/" class="m-button">Ir a la encuesta</a></p> -->
+    <!-- </section> -->
 
-    <section class="m-homepage-participate">
+    <!-- <section class="m-homepage-participate">
         <h1>Cómo participar</h1>
         <div class="m-homepage-box">
             <h2>1</h2>
             <h3>Si representas una compañía u ONG que trabaja con Datos Abiertos:</h3>
-            <p>Por favor responde la <a href="/mx/submitCompany/">encuesta</a>.</p>    
+            <p>Por favor responde la <a href="/mx/submitCompany/">encuesta</a>.</p>
         </div>
         <div class="m-homepage-box">
             <h2>2</h2>
@@ -45,7 +754,7 @@
             <p><a href="http://www.opendata500.com/mx/about/#disqus_thread">Únete a la conversación</a>, twittea tus comentarios en #OD100MX, o envíanos un correo a <a href="mailto:DA100MX@datos.gob.mx">DA100MX@datos.gob.mx</a>.</p>
         </div>
     </section>
-</div>
+</div> -->
 
 
 <script>

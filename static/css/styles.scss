@@ -1,67 +1,70 @@
+@import '../../node_modules/govlab-styleguide/sass/styles'; // govlab-styleguide sass
+@import 'custom';
+
 @import 'variables';
 @import 'form-styles';
-@import 'layout';
+// @import 'layout'; //to delete
 @import 'typography';
 @import 'homepage';
 @import 'international-homepage';
-@import 'about';
+// @import 'about'; //to delete
 @import 'preview';
-@import 'submitcompany';
+// @import 'submitcompany'; //to delete
 @import 'candidates';
-@import 'download';
+// @import 'download'; // to delete
 @import 'login';
-@import 'resources';
-@import 'press';
+// @import 'resources'; //to delete
+@import 'press'; //to delete
 @import 'findings';
-@import 'consortium';
-@import 'roundtables';
-@import 'country-homepage';
-
+// @import 'consortium'; //to delete
+// @import 'roundtables'; // to delete
+// @import 'country-homepage'; //to delete
+// Importing Styleguide
 // Reset
 
-body {
-	margin: 0;
-}
+// body {
+// 	margin: 0;
+// }
 
 // === Base Styles
 
-h1, h2, h3, h4 {
-	margin: 0;
-}
+// h1, h2, h3, h4 {
+// 	margin: 0;
+// }
 
-h1 {
-	margin-top: 65px;
-	margin-bottom: 65px;
-	text-align: center;
-}
+// h1 {
+// 	margin-top: 65px;
+// 	margin-bottom: 65px;
+// 	text-align: center;
+// }
 
-.first-title {
-	margin-top: 90px;
-}
+// .first-title {
+// 	margin-top: 90px;
+// }
 
 
-// Header Module
+// // Header Module
 
-header {
-	background-color: $purple;
-	border-bottom: 5px solid $light_purple;
-	padding: 10px 0;
-	height: 30px;
-    text-align: center;
-}
+// header {
+// 	background-color: $purple;
+// 	border-bottom: 5px solid $purple-20k;
+// 	padding: 10px 0;
+// 	height: 30px;
+//     text-align: center;
+// }
 
-// === Layout classes
+// // === Layout classes
 
-.l-centered {
-	width: 960px / 960px * 100%;
-	max-width: 960px;
-	margin: 0 auto;
+// .l-centered {
+// 	width: 960px / 960px * 100%;
+// 	max-width: 960px;
+// 	margin: 0 auto;
 
-}
+// }
 
-#container {
-	min-height: 460px;
-}
+// #container {
+// 	min-height: 460px;
+// }
 
 
 // Main Menu Module
@@ -93,8 +96,8 @@ header {
 
 	img {
 		height: 80px;
-		@include drop_shadow;
-		
+		// @include drop_shadow;
+
 	}
 }
 
@@ -105,7 +108,7 @@ header {
 #country-selector {
 	font-size: 12px;
 	padding: 5px 0 4px;
-	color: $light_purple;
+	color: $purple-20k;
 	text-transform: uppercase;
 	display: inline-block;
 	// position: absolute;
@@ -129,7 +132,7 @@ header {
 		text-transform: uppercase;
 		display: inline-block;
 		position: relative;
-		border-right: 2px solid $light_purple;
+		border-right: 2px solid $purple-20k;
 	}
 
 	.m-main-menu-item a {
@@ -142,7 +145,7 @@ header {
 	.m-main-menu-sub-menu {
 		display: none;
 		position: absolute;
-		background-color: $light_purple;
+		background-color: $purple-20k;
 		margin-top: 4px;
 		top: 21px;
 		left: -2px;
@@ -150,7 +153,7 @@ header {
 		padding: 0;
 		cursor: pointer;
 		border: 1px solid $purple;
-		@include drop-shadow;
+		// @include drop-shadow;
 
 		li {
 			list-style: none;
@@ -181,7 +184,7 @@ header {
 			padding-left: 4px;
 
 			&:first-child {
-				border-right: 2px solid $light_purple;
+				border-right: 2px solid $purple-20k;
 			}
 		}
 	}
@@ -207,10 +210,10 @@ header {
 	}
 
 	.m-main-menu-item a:hover {
-		background-color: $light_purple;
+		background-color: $purple-20k;
 		color: #fff;
 	}
-	
+
 	.m-main-menu-item:last-of-type {
 		border-right: 0;
 	}
@@ -256,11 +259,11 @@ header {
 }
 
 
-// Subscribe 
+// Subscribe
 #mc_embed_signup {
 	position: fixed;
-	border: 1px solid $light_purple;
-	background-color: $super_light_purple_matte;
+	border: 1px solid $purple-20k;
+	background-color: $purple-20k;
 	padding: 13px 15px 13px 20px;
 	z-index: 10;
 	right: -1px;
@@ -295,7 +298,7 @@ header {
 		border-left-color: $red;
 	}
 
-	
+
 
 	form {
 		position: relative;
@@ -307,8 +310,8 @@ header {
 			border-radius: 4px 0 0 4px;
 			border-right: 0;
 			padding: 6px 10px 5px;
-			border-color: $light_purple;
-			background-color: $white_alpha_50;
+			border-color: $purple-20k;
+			background-color: $gray-15;
 		}
 
 		input[type="email"]:focus {
@@ -320,11 +323,11 @@ header {
 			display: inline-block;
 			padding: 5px 5px 4px;
 			margin-top: 1px;
-			font-family: $regular_type;
+			// font-family: $regular_type;
 			font-size: 12px;
-			background-color: $white_alpha_50;
+			background-color: $gray-15;
 			color: $purple;
-			border-color: $light_purple;
+			border-color: $purple-20k;
 			margin-left: 0;
 			-webkit-border-radius: 0 4px 4px 0;
 			-moz-border-radius: 0 4px 4px 0;
@@ -344,12 +347,12 @@ header {
 			position: absolute;
 			width: 175px;
 			padding: 10px;
-			background-color: $light_purple;
+			background-color: $purple-20k;
 			border: 1px solid $purple;
 			top: 89px;
 			color: $purple;
-			@inlcude rounded;
-			@include drop-shadow;
+			// @inlcude rounded;
+			// @include drop-shadow;
 		}
 
 		.response:after {
@@ -362,7 +365,7 @@ header {
 			border-right: 8px solid transparent;
 			top: -8px;
 			left: 48%;
-			
+
 		}
 	}
 
@@ -375,12 +378,12 @@ header {
 		left: -31px;
 		width: 200px;
 		padding: 10px;
-		background-color: $lighter_gray !important;
+		background-color: $white-30 !important;
 		border: 1px solid $red;
 		top: 124px;
 		color: $red !important;
-		@inlcude rounded;
-		@include drop-shadow;
+		// @inlcude rounded;
+		// @include drop-shadow;
 	}
 
 	div.mce_inline_error:after {
@@ -402,14 +405,14 @@ header {
 
 	.signup-handle:before {
 		content:"Subscribe";
-		background-color: $light_purple;
+		background-color: $purple-20k;
 		position: absolute;
 		border: 1px solid $purple;
 		left: -78px;
 		top: -13px;
 		width: 88px;
 		padding: 5px;
-		font-family: $fancy_type;
+		// font-family: $fancy_type;
 		font-weight: 400;
 		text-align: center;
 		font-size: 18px;
@@ -425,80 +428,86 @@ header {
 
 
 
-// Footer 
+// Footer
 
-footer {
-	background-color: $black;
-	padding: 20px 0;
-	overflow: hidden;
-	clear: both;
-	margin-top: 30px;
-	color: $light_gray;
+// footer {
+// 	background-color: $black;
+// 	padding: 20px 0;
+// 	overflow: hidden;
+// 	clear: both;
+// 	margin-top: 30px;
+// 	color: $light_gray;
 
-	a {
-			color: $light_gray;
-		}
+// 	a {
+// 			color: $light_gray;
+// 		}
 
-	a:hover {
-		color: $white;
-	}
+// 	a:hover {
+// 		color: $white;
+// 	}
 
-	.m-footer-logos {
-		float: left;
+// 	.m-footer-logos {
+// 		float: left;
 
-		img {
-			height: 37px;
-			margin-right: 30px;
-			opacity: .4;
-		}
+// 		img {
+// 			height: 37px;
+// 			margin-right: 30px;
+// 			opacity: .4;
+// 		}
 
-		a:hover img {
-			opacity: 1;
-		}
+// 		a:hover img {
+// 			opacity: 1;
+// 		}
 
-		#govlab-logo {
-			height: 30px;
-			vertical-align: 2px;
-		}
-	}
+// 		#govlab-logo {
+// 			height: 30px;
+// 			vertical-align: 2px;
+// 		}
 
-	ul {
-		text-align: right;
-	}
-	.footer-menu-item {
-		display: inline-block;
-		padding: 2px 10px;
-		border-right: 1px solid #888;
-		margin-top: 10px;
-	}
+// 		#nyu-logo {
+// 			margin-left: 10px;
+// 		}
+// 	}
 
-	.footer-menu-item.last {
-		border-right: 0;
-	}
+// 	ul {
+// 		text-align: right;
+// 	}
+// 	.footer-menu-item {
+// 		display: inline-block;
+// 		padding: 2px 10px;
+// 		border-right: 1px solid #888;
+// 		margin-top: 10px;
+// 	}
 
-	.creative-commons-license {
-		margin-top: 30px;
-		font-size: 11px;
+// 	.footer-menu-item.last {
+// 		border-right: 0;
+// 	}
 
-		img {
-			float: left;
-			margin-right: 10px;
-		}
-	}
-}
+// 	.creative-commons-license {
+// 		margin-top: 30px;
+// 		font-size: 11px;
 
-.m-international-page {
-	font-size: 14px;
-	line-height: 20px;
+// 		img {
+// 			float: left;
+// 			margin-right: 10px;
+// 		}
+// 	}
+// }
 
-	.m-country-flag.s-international img {
-		box-shadow: 0 0 0;
-		width: 300px;
-		height: auto;
-	}
+// .m-international-page {
+// 	font-size: 14px;
+// 	line-height: 20px;
 
-	.first-title {
-		margin-top: 20px;
-	}
-}
+// 	.m-country-flag.s-international img {
+// 		box-shadow: 0 0 0;
+// 		width: 300px;
+// 		height: auto;
+// 	}
+
+
+// 	.first-title {
+// 		margin-top: 20px;
+// 	}
+// }
+
 

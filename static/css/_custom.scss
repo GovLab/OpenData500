@@ -1,0 +1,130 @@
+// HELPERS
+
+.m-centered {
+  text-align: center;
+}
+
+
+// TEMP HEADER STYLING
+// .e-logo::after {
+//     content:" Open Data 500";
+//     text-transform: uppercase;
+//     font-size: 25px;
+//     margin-top: 10px;
+//     vertical-align: -6px;
+// }
+
+
+// TEMP NAV BAR STYLING
+.b-main-menu {
+  overflow-y:auto;
+  
+  li {
+    list-style: none;
+  }
+
+  .e-submenu {
+    position: relative; 
+    text-align: left;
+  }
+
+  .e-submenu-item {
+    display: block;
+    border: 0;
+    font-size: 14px;
+    color: #6f5d8b;
+    padding: 3px 18px 0px 35px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    letter-spacing: 1px; 
+    .a:hover {
+        color: white; 
+    }
+  }
+
+}
+
+
+// TEMP TEAM CARDS
+
+.e-card {
+  .e-card-inner {
+    background-color: $purple;
+  }
+  &.m-purple {
+    // background-color: $purple;
+    font-size: 14px;
+  };
+}
+
+
+// TEMP ROUNDTABLES and SPONSORS STYLING
+
+#sponsor-aws img {
+  max-width: 150px;
+  margin-top: 48px;
+  top: 400px;
+  display: inline;
+}
+
+#sponsor-pwc img {
+  max-width: 150px;
+  display:inline;
+  vertical-align: -100px;
+}
+
+#sponsor-dtc img {
+  max-width: 150px;
+  display:inline;
+}
+
+#usda-logo {
+  max-width: 200px;
+}
+
+
+
+// PHOTO SLIDERS
+    .project-photo-slider {
+        .b-slider {
+            border: 1px solid $gray-15;
+            .m-white {
+                background-color: $white;
+            }
+            .slider-img {
+                max-height: 400px;
+                text-align: center;
+                margin: 0 auto;
+            }
+            figcaption {
+              color: black;
+              text-align: center;
+            }
+        }
+        .b-slider .slick-arrow:before, .b-slider .slick-arrow:after {
+            color: $gray-15;
+            font-size: 60px;
+            transition: all .4s ease;
+        }
+    }
+
+
+// FOOTER 
+
+footer {
+  #nyu-logo {
+    margin-left: 0;
+  }
+  #govlab-logo {
+    margin-left: 3px;
+  }
+  ul {
+    list-style: none;
+    li {
+      margin: 0;
+      padding: 0;
+      text-align: left;
+      display: block;
+    }
+  }
+
+}

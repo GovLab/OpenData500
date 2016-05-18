@@ -1,0 +1,172 @@
+{
+    "name" : "studies",
+    "children" : [
+    {
+        "title" : "case study 1",
+        "location" : "United States",
+        "sector" : "public",
+        "impact" : "government"
+    }
+    ,
+    {
+        "title" : "case study 2",
+        "location" : "Bermuda",
+        "sector" : "public",
+        "impact" : "government"
+    }
+    ,
+    {
+        "title" : "case study 3",
+        "location" : "Belgium",
+        "sector" : "public",
+        "impact" : "government"
+    }
+    ,
+    {
+        "title" : "case study 4",
+        "location" : "Japan",
+        "sector" : "public",
+        "impact" : "government"
+    }
+    ,
+    {
+        "title" : "case study 5",
+        "location" : "Japan",
+        "sector" : "public",
+        "impact" : "government"
+    }
+    ,
+    {
+        "title" : "case study 5",
+        "location" : "Canada",
+        "sector" : "public",
+        "impact" : "government"
+    }
+    ,
+    {
+        "title" : "case study 5",
+        "location" : "United States",
+        "sector" : "public",
+        "impact" : "government"
+    }
+    ,
+    {
+        "title" : "case study 5",
+        "location" : "United States",
+        "sector" : "public",
+        "impact" : "opportunity"
+    }
+    ,
+    {
+        "title" : "case study 5",
+        "location" : "United States",
+        "sector" : "public",
+        "impact" : "citizens"
+    }
+    ,
+    {
+        "title" : "case study 5",
+        "location" : "United States",
+        "sector" : "public",
+        "impact" : "citizens"
+    }
+    ,
+    {
+        "title" : "case study 5",
+        "location" : "United States",
+        "sector" : "public",
+        "impact" : "problems"
+    }
+    ,
+    {
+        "title" : "case study 5",
+        "location" : "Kenya",
+        "sector" : "public",
+        "impact" : "opportunity"
+    }
+    ,
+    {
+        "title" : "case study 5",
+        "location" : "Japan",
+        "sector" : "public",
+        "impact" : "government"
+    }
+    ,
+    {
+        "title" : "case study 5",
+        "location" : "Japan",
+        "sector" : "public",
+        "impact" : "opportunity"
+    }
+    ,
+    {
+        "title" : "case study 5",
+        "location" : "Japan",
+        "sector" : "public",
+        "impact" : "opportunity"
+    }
+    ,
+    {
+        "title" : "case study 5",
+        "location" : "Japan",
+        "sector" : "public",
+        "impact" : "opportunity"
+    }
+    ,
+    {
+        "title" : "case study 5",
+        "location" : "Canada",
+        "sector" : "public",
+        "impact" : "opportunity"
+    }
+    ,
+    {
+        "title" : "case study 5",
+        "location" : "Canada",
+        "sector" : "public",
+        "impact" : "opportunity"
+    }
+    ,
+    {
+        "title" : "case study 5",
+        "location" : "Canada",
+        "sector" : "public",
+        "impact" : "opportunity"
+    }
+    ,
+    {
+        "title" : "case study 5",
+        "location" : "Canada",
+        "sector" : "public",
+        "impact" : "opportunity"
+    }
+    ,
+    {
+        "title" : "case study 5",
+        "location" : "Canada",
+        "sector" : "public",
+        "impact" : "problems"
+    }
+    ,
+    {
+        "title" : "case study 5",
+        "location" : "Canada",
+        "sector" : "public",
+        "impact" : "problems"
+    }
+    ,
+    {
+        "title" : "case study 5",
+        "location" : "Canada",
+        "sector" : "public",
+        "impact" : "government"
+    }
+    ,
+    {
+        "title" : "case study 5",
+        "location" : "Canada",
+        "sector" : "public",
+        "impact" : "citizens"
+    }
+    ]
+}

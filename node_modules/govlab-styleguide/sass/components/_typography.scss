@@ -1,0 +1,654 @@
+/*
+Copy
+
+The following font is applied to body copy using typekit:
+<code>font-family: proxima-nova, sans-serif, 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif</code>
+using the font size of <code>16px</code>
+
+Styleguide 2.2
+*/
+
+/*
+Grouping
+
+Various elements can be used to group content effectively.
+NOTE: some of these elements inherit styling from Foundation.
+
+Styleguide 2.3
+*/
+
+/*
+Paragraphs
+
+All paragraphs are wrapped in <code>p</code> tags. Additionally, <code>p</code>
+elements can be wrapped with a <code>blockquote</code> element <em>if the <code>p</code>
+element is indeed a quote</em>. Historically, <code>blockquote</code> has been used
+purely to force indents, but this is now achieved using CSS. Reserve <code>blockquote</code>
+for quotes.
+
+Markup:
+<p>All paragraphs are wrapped in <code>p</code> tags.</p>
+
+Styleguide 2.3.1
+*/
+
+/*
+Horizontal Rule
+
+The <code>hr</code> element represents a paragraph-level thematic break, e.g. a scene change
+in a story, or a transition to another topic within a section of a reference book. The following
+extract from <cite>Pandora&#8217;s Star</cite> by Peter F. Hamilton shows two paragraphs that
+precede a scene change and the paragraph that follows it:
+
+Markup:
+<p>Dudley was ninety-two, in his second life, and fast approaching time for another rejuvenation. Despite his body having the physical age of a standard fifty-year-old, the prospect of a long degrading campaign within academia was one he regarded with dread. For a supposedly advanced civilization, the Intersolar Commonwearth could be appallingly backward at times, not to mention cruel.</p>
+<p><i>Maybe it won&#8217;t be that bad</i>, he told himself. The lie was comforting enough to get him through the rest of the night&#8217;s shift.</p>
+<hr/>
+<p>The Carlton AllLander drove Dudley home just after dawn. Like the astronomer, the vehicle was old and worn, but perfectly capable of doing its job. It had a cheap diesel engine, common enough on a semi-frontier world like Gralmond, although its drive array was a thoroughly modern photoneural processor. With its high suspension and deep-tread tyres it could plough along the dirt track to the observatory in all weather and seasons, including the metre-deep snow of Gralmond&#8217;s winters.</p>
+
+Styleguide 2.3.2
+*/
+
+
+
+/*
+Blockquotes
+
+The <code>blockquote</code> element represents a section that is being quoted from another source.
+
+Markup:
+<blockquote cite="http://hansard.millbanksystems.com/commons/1947/nov/11/parliament-bill#column_206">
+    <p>Many forms of Government have been tried, and will be tried in this world of sin and woe. No one pretends that democracy is perfect or all-wise. Indeed, it has been said that democracy is the worst form of government except all those other forms that have been tried from time to time.</p>
+</blockquote>
+
+Styleguide 2.3.4
+*/
+
+/*
+Lists
+
+Styles for both ordered and unordered lists are available.
+Include block elements within a single list item as appropriate.
+Sometimes we may want each list item to contain block elements, typically a paragraph or two.
+
+Markup:
+<!-- example of a list using multiple block level elements inside the li -->
+<ul>
+    <li>
+        <p>The British Isles is an archipelago consisting of the two large islands of Great Britain and Ireland, and many smaller surrounding islands.</p>
+        <p>Great Britain is the largest island of the archipelago. Ireland is the second largest island of the archipelago and lies directly to the west of Great Britain.</p>
+    </li>
+    <li>
+        <p>The full list of islands in the British Isles includes over 1,000 islands, of which 51 have an area larger than 20 km<sup>2</sup>.</p>
+    </li>
+</ul>
+
+Styleguide 2.4
+*/
+
+/*
+Ordered List
+
+The <code>ol</code> element denotes an ordered list, and various numbering schemes
+are available through the CSS (including 1,2,3&#8230; a,b,c&#8230; i,ii,iii&#8230; and so on).
+Each item requires a surrounding <code>&lt;li&gt;</code> and <code>&lt;/li&gt;</code> tag,
+to denote individual items within the list (as you may have guessed, <code>li</code> stands for list item).
+
+Markup:
+<ol>
+    <li>This is an ordered list.</li>
+    <li>
+        This is the second item, which contains a sub list
+        <ol>
+            <li>This is the sub list, which is also ordered.</li>
+            <li>It has two items.</li>
+        </ol>
+    </li>
+    <li>This is the final item on this list.</li>
+</ol>
+
+Styleguide 2.4.1
+*/
+
+/*
+Unordered List
+
+The <code>ul</code> element denotes an unordered list (ie. a list of loose items that
+don&#8217;t require numbering, or a bulleted list). Again, each item requires a surrounding
+<code>&lt;li&gt;</code> and <code>&lt;/li&gt;</code> tag, to denote individual items.
+Here is an example list showing the constituent parts of the British Isles:
+
+Markup:
+<ul>
+    <li>
+        United Kingdom of Great Britain and Northern Ireland:
+        <ul>
+            <li>England</li>
+            <li>Scotland</li>
+            <li>Wales</li>
+            <li>Northern Ireland</li>
+        </ul>
+    </li>
+    <li>Republic of Ireland</li>
+    <li>Isle of Man</li>
+    <li>
+        Channel Islands:
+        <ul>
+            <li>Bailiwick of Guernsey</li>
+            <li>Bailiwick of Jersey</li>
+        </ul>
+    </li>
+</ul>
+
+Styleguide 2.4.2
+*/
+
+/*
+Definition List
+
+The <code>dl</code> element is for another type of list called a definition list.
+Instead of list items, the content of a <code>dl</code> consists of <code>dt</code>
+(Definition Term) and <code>dd</code> (Definition description) pairs.
+Though it may be called a &#8220;definition list&#8221;, <code>dl</code> can apply
+to other scenarios where a parent/child relationship is applicable. For example,
+it may be used for marking up dialogues, with each <code>dt</code> naming a speaker,
+and each <code>dd</code> containing his or her words.
+
+Markup:
+<dl>
+    <dt>This is a term.</dt>
+    <dd>This is the definition of that term, which both live in a <code>dl</code>.</dd>
+    <dt>Here is another term.</dt>
+    <dd>And it gets a definition too, which is this line.</dd>
+    <dt>Here is term that shares a definition with the term below.</dt>
+    <dt>Here is a defined term.</dt>
+    <dd><code>dt</code> terms may stand on their own without an accompanying <code>dd</code>, but in that case they <em>share</em> descriptions with the next available <code>dt</code>. You may not have a <code>dd</code> without a parent <code>dt</code>.</dd>
+</dl>
+
+Styleguide 2.4.3
+*/
+
+/*
+Figures
+
+Figures are usually used to refer to images. When you  wish to cite the source of a quote,
+you should do so using a figure also.
+
+Markup:
+<!-- image example -->
+<figure>
+    <img src="http://lorempixel.com/680/400/abstract" alt="Example image"/>
+    <figcaption>
+        This is a placeholder image, with supporting caption.
+    </figcaption>
+</figure>
+<!-- text example -->
+<figure>
+    <p>&#8216;Twas brillig, and the slithy toves<br/>
+    Did gyre and gimble in the wabe;<br/>
+    All mimsy were the borogoves,<br/>
+    And the mome raths outgrabe.</p>
+    <figcaption>
+        <cite>Jabberwocky</cite> (first verse). Lewis Carroll, 1832-98
+    </figcaption>
+</figure>
+<!-- figcaption used as a citation -->
+<blockquote cite="http://hansard.millbanksystems.com/commons/1947/nov/11/parliament-bill#column_206">
+    <p>Many forms of Government have been tried, and will be tried in this world of sin and woe. No one pretends that democracy is perfect or all-wise. Indeed, it has been said that democracy is the worst form of government except all those other forms that have been tried from time to time.</p>
+</blockquote>
+<figcaption>
+    Winston Churchill, in <cite><a href="http://hansard.millbanksystems.com/commons/1947/nov/11/parliament-bill#column_206">a speech to the House of Commons</a></cite>. 11th November 1947
+</figcaption>
+
+Styleguide 2.5
+*/
+
+/*
+Text Semantics
+
+There are a number of inline <abbr title="HyperText Markup Language">HTML</abbr>
+elements you may use anywhere within other elements.
+
+Styleguide 2.6
+*/
+
+/*
+Emphasis and Italic, Strong and Bold
+
+The <code>em</code> element is used to denote text with stressed emphasis,
+i.e., something you&#8217;d pronounce differently. Where italicizing is
+required for stylistic differentiation, the <code>i</code> element may be preferable.
+
+The <code>i</code> element is used for text in an alternate voice or mood, or otherwise offset
+from the normal prose. Examples include taxonomic designations, technical terms, idiomatic
+phrases from another language, the name of a ship or other spans of text whose typographic
+presentation is typically italicised.
+
+The <code>strong</code> element is used to denote text with strong importance. Where bolding
+is used for stylistic differentiation, the <code>b</code> element may be preferable.
+
+The <code>b</code> element is used for text stylistically offset from normal prose
+without conveying extra importance, such as key words in a document abstract, product
+names in a review, or other spans of text whose typographic presentation is typically
+emboldened.
+
+Markup:
+<p>You simply <em>must</em> try the negitoro maki!</p>
+<p>There is a certain <i lang="fr">je ne sais quoi</i> in the air.</p>
+<p><strong>Don&#8217;t</strong> stick nails in the electrical outlet.</p>
+<p>You enter a small room. Your <b>sword</b> glows brighter. A <b>rat</b> scurries past the corner wall.</p>
+
+Styleguide 2.6.2
+*/
+
+/*
+Small Print
+
+The <small>small</small> element is used to represent disclaimers, caveats,
+legal restrictions, or copyrights (commonly referred to as &#8216;small print&#8217;).
+It can also be used for attributions or satisfying licensing requirements.
+
+Markup:
+<p><small>Copyright &#169; 1922-2011 Acme Corporation. All Rights Reserved.</small></p>
+
+Styleguide 2.6.3
+*/
+
+/*
+Strikethrough vs. Del
+
+The <code>s</code> element is used to represent content that is no longer accurate
+or relevant. When indicating document edits i.e., marking a span of text as having been
+removed from a document, use the <code>del</code> element instead.
+
+The <code>del</code> element is used to represent deleted or retracted text which still must
+remain on the page for some reason. Meanwhile its counterpart, the <code>ins</code> element,
+is used to represent inserted text. Both <code>del</code> and <code>ins</code> have a
+<code>datetime</code> attribute which allows you to include a timestamp directly in the element.
+
+Markup:
+<s>Recommended retail price: &#163;3.99 per bottle</s><br/><strong>Now selling for just &#163;2.99 a bottle!</strong>
+<p>She bought <del datetime="2005-05-30T13:00:00">two</del> <ins datetime="2005-05-30T13:00:00">five</ins> pairs of shoes.</p>
+
+Styleguide 2.6.4
+*/
+
+/*
+Citations
+
+The <code>cite</code> element is used to represent the title of a work
+(e.g. a book, essay, poem, song, film, TV show, sculpture, painting,
+musical, exhibition, etc). This can be a work that is being quoted
+or referenced in detail (i.e. a citation), or it can just be a work
+that is mentioned in passing.
+
+Markup:
+<p><cite>Universal Declaration of Human Rights</cite>, United Nations, December 1948. Adopted by General Assembly resolution 217 A (III).</p>
+
+Styleguide 2.6.5
+*/
+
+/*
+Inline quotes
+
+The <code>q</code> element is used for quoting text inline. Example showing nested quotations:
+
+Markup:
+<p>John said, <q>I saw Lucy at lunch, she told me <q>Mary wants you to get some ice cream on your way home</q>. I think I will get some at Ben and Jerry&#8217;s, on Gloucester Road.</q></p>
+
+Styleguide 2.6.6
+*/
+
+/*
+Definition
+
+The <code>dfn</code> element is used to highlight the first use of a term.
+The <code>title</code> attribute can be used to describe the term.
+
+Markup:
+<p>Bob&#8217;s <dfn title="Dog">canine</dfn> mother and <dfn title="Horse">equine</dfn> father sat him down and carefully explained that he was an <dfn title="A mutation that combines two or more sets of chromosomes from different species">allopolyploid</dfn> organism.</p>
+
+Styleguide 2.6.7
+*/
+
+/*
+Abbreviation
+
+The <code>abbr</code> element is used for any abbreviated text,
+whether it be acronym, initialism, or otherwise. Generally, it&#8217;s
+less work and useful (enough) to mark up only the first occurrence of
+any particular abbreviation on a page, and ignore the rest. Any text
+in the <code>title</code> attribute will appear when the user&#8217;s
+mouse hovers the abbreviation (although notably, this does not work in
+Internet Explorer for Windows).
+
+Markup:
+<p><abbr title="British Broadcasting Corportation">BBC</abbr>, <abbr title="HyperText Markup Language">HTML</abbr>, and <abbr title="Staffordshire">Staffs.</abbr></p>
+
+Styleguide 2.6.8
+*/
+
+/*
+Time
+
+The <code>time</code> element is used to represent either a time on a
+24 hour clock, or a precise date in the proleptic Gregorian calendar,
+optionally with a time and a time-zone offset.
+
+Markup:
+<p>Queen Elizabeth II was proclaimed sovereign of each of the Commonwealth realms on <time datetime="1952-02-6">6</time> and <time datetime="1952-02-7">7 February 1952</time>, after the death of her father, King George VI.</p>
+
+Styleguide 2.6.9
+*/
+
+/*
+Code
+
+The <code>code</code> element is used to represent fragments of computer code.
+Useful for technology-oriented sites, not so useful otherwise.
+
+Markup:
+<!-- used inline -->
+<p>When you call the <code>activate()</code> method on the <code>robotSnowman</code> object, the eyes glow.</p>
+<!-- used in conjunction with pre -->
+<pre><code>function getJelly() {
+&#160;&#160;&#160;&#160;echo $aDeliciousSnack;
+}</code></pre>
+
+Styleguide 2.6.10
+*/
+
+/*
+Variable
+
+The <code>var</code> element is used to denote a variable in a mathematical
+expression or programming context, but can also be used to indicate a placeholder
+where the contents should be replaced with your own value.
+
+Markup:
+<p>If there are <var>n</var> pipes leading to the ice cream factory then I expect at <em>least</em> <var>n</var> flavours of ice cream to be available for purchase!</p>
+
+Styleguide 2.6.11
+*/
+
+/*
+Sample output
+
+The <code>samp</code> element is used to represent (sample) output from a program
+or computing system. Useful for technology-oriented sites, not so useful otherwise.
+
+Markup:
+<p>The computer said <samp>Too much cheese in tray two</samp> but I didn&#8217;t know what that meant.</p>
+
+Styleguide 2.6.12
+*/
+
+/*
+Keyboard entry
+
+The <code>kbd</code> element is used to denote user input (typically via a keyboard,
+although it may also be used to represent other input methods, such as voice commands).
+
+Markup:
+<p>To take a screenshot on your Mac, press <kbd>&#8984; Cmd</kbd> + <kbd>&#8679; Shift</kbd> + <kbd>3</kbd>.</p>
+
+Styleguide 2.6.13
+*/
+
+/*
+Superscript and subscript text
+
+The <code>sup</code> element represents a superscript and the sub element represents
+a <code>sub</code>. These elements must be used only to mark up typographical conventions
+with specific meanings, not for typographical presentation. As a guide, only use
+these elements if their absence would change the meaning of the content.
+
+Markup:
+<p>The coordinate of the <var>i</var>th point is (<var>x<sub><var>i</var></sub></var>, <var>y<sub><var>i</var></sub></var>). For example, the 10th point has coordinate (<var>x<sub>10</sub></var>, <var>y<sub>10</sub></var>).</p>
+<p>f(<var>x</var>, <var>n</var>) = log<sub>4</sub><var>x</var><sup><var>n</var></sup></p>
+
+Styleguide 2.6.14
+*/
+
+/*
+Marked or highlighted text
+
+The <code>mark</code> element is used to represent a run of text marked or highlighted
+for reference purposes. When used in a quotation it indicates a highlight not originally
+present but added to bring the reader&#8217;s attention to that part of the text. When used
+in the main prose of a document, it indicates a part of the document that has been
+highlighted due to its relevance to the user&#8217;s current activity.
+
+Markup:
+<p>I also have some <mark>kitten</mark>s who are visiting me these days. They&#8217;re really cute. I think they like my garden! Maybe I should adopt a <mark>kitten</mark>.</p>
+
+Styleguide 2.6.15
+*/
+body {
+    padding: 0;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+}
+
+/*
+Links and anchors
+
+The <code>a</code> element is used to hyperlink text, be that to another page,
+a named fragment on the current page or any other location on the web. <code>a</code>s placed
+within paragraphs will get special styles to visually distinguish them from regular copy.
+
+Markup:
+<a href="/">Home</a>
+<p><a href="/">Go to the home page</a> or <a href="#banner">return to the top of this page</a>.</p>
+
+Styleguide 2.6.1
+*/
+a {
+    text-decoration: none;
+    color: currentColor;
+    &:hover {
+        text-decoration: underline;
+        background-color: transparent;
+        color: currentColor;
+    }
+    p > & {
+        text-decoration: underline;
+        &:hover {
+            text-decoration: none;
+        }
+    }
+}
+
+/*
+Headings
+
+Any header elements may include links, as depicted in the examples. The secondary header above is an
+<code>h2</code> element, which may be used for any form of important page-level header.
+More than one may be used per page. Consider using an <code>h2</code> unless you need a header level
+of less importance, or as a sub-header to an existing <code>h2</code> element.
+
+Markup:
+<h1>H1 Top-Level Header <a href="#">Link</a></h1>
+<h2>H2 Second-Level Header <a href="#">Link</a></h2>
+<h3>H3 Third-Level Header <a href="#">Link</a></h3>
+<h4>H4 Fourth-Level Header <a href="#">Link</a></h4>
+<h5>H5 Fifth-Level Header <a href="#">Link</a></h5>
+<h6>H6 Sixth-Level Header <a href="#">Link</a></h6>
+
+Styleguide 2.1
+*/
+h1 {
+    font-weight: 100;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 30px;
+
+    @include breakpoint($tablet) { font-size: 50px; }
+    @include breakpoint($desktop) { font-size: 60px; }
+}
+
+h2 {
+    font-size: 20px;
+    text-transform: uppercase;
+
+    @include breakpoint($tablet) { font-size: 28px; }
+    @include breakpoint($desktop) { font-size: 32px; }
+}
+
+
+h3 {
+    font-size: 18px;
+    text-transform: uppercase;
+    font-weight: 400;
+
+    @include breakpoint($tablet) { font-size: 22px; }
+}
+
+/*
+Pre-Formatted Text
+
+The <code>pre</code> element represents a block of pre-formatted text, in which
+structure is represented by typographic conventions rather than by elements.
+Such examples are an e-mail (with paragraphs indicated by blank lines, lists indicated
+by lines prefixed with a bullet), fragments of computer code (with structure indicated
+according to the conventions of that language) or displaying <abbr title="American
+Standard Code for Information Interchange">ASCII</abbr> art. Here&#8217;s an example
+showing the printable characters of <abbr>ASCII</abbr>:
+
+Markup:
+<pre><samp>&#32; ! " # $ % &amp; ' ( ) * + , - . /
+0 1 2 3 4 5 6 7 8 9 : ; &lt; = &gt; ?
+@ A B C D E F G H I J K L M N O
+P Q R S T U V W X Y Z [ \ ] ^ _
+` a b c d e f g h i j k l m n o
+p q r s t u v w x y z { | } ~</samp></pre>
+
+Styleguide 2.3.3
+*/
+pre {
+    background-color: $gray-10;
+    padding: 10px 20px;
+}
+
+/*
+Tables
+
+Tables should be used when displaying tabular data. The <code>thead</code>, <code>tfoot</code>
+and <code>tbody</code> elements enable you to group rows within each a table.
+
+If you use these elements, you must use every element. They should appear in this order:
+<code>thead</code>, <code>tfoot</code> and <code>tbody</code>, so that browsers can render
+the foot before receiving all the data. You must use these tags within the table element.
+
+Markup:
+<table>
+    <caption>The Very Best Eggnog</caption>
+    <colgroup>
+        <col style="width:50%" />
+        <col style="width:25%" />
+        <col style="width:25%" />
+    </colgroup>
+    <thead>
+        <tr>
+            <th scope="col">Ingredients</th>
+            <th scope="col">Serves 12</th>
+            <th scope="col">Serves 24</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Milk</td>
+            <td>1 quart</td>
+            <td>2 quart</td>
+        </tr>
+        <tr>
+            <td>Cinnamon Sticks</td>
+            <td>2</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>Vanilla Bean, Split</td>
+            <td>1</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td>Cloves</td>
+            <td>5</td>
+            <td>10</td>
+        </tr>
+        <tr>
+            <td>Mace</td>
+            <td>10 blades</td>
+            <td>20 blades</td>
+        </tr>
+        <tr>
+            <td>Egg Yolks</td>
+            <td>12</td>
+            <td>24</td>
+        </tr>
+        <tr>
+            <td>Cups Sugar</td>
+            <td>1 &frac12; cups</td>
+            <td>3 cups</td>
+        </tr>
+        <tr>
+            <td>Dark Rum</td>
+            <td>1 &frac12; cups</td>
+            <td>3 cups</td>
+        </tr>
+        <tr>
+            <td>Brandy</td>
+            <td>1 &frac12; cups</td>
+            <td>3 cups</td>
+        </tr>
+        <tr>
+            <td>Vanilla</td>
+            <td>1 tbsp</td>
+            <td>2 tbsp</td>
+        </tr>
+        <tr>
+            <td>Half-and-half or Light Cream</td>
+            <td>1 quart</td>
+            <td>2 quart</td>
+        </tr>
+        <tr>
+            <td>Freshly grated nutmeg to taste</td>
+            <td></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+
+Styleguide 2.6.16
+*/
+table {
+    margin-top: 20px;
+    width: 100%;
+
+    th {
+        background-color: $gray-10;
+        text-transform: uppercase;
+    }
+
+    tr { text-align: left; }
+    tr:nth-child(2n) { background-color: $gray-05; }
+
+    td, th {
+        padding: 8px;
+        font-size: 12px;
+        vertical-align: top;
+        @include breakpoint($tablet) {
+            font-size: 16px;
+            padding: 10px;
+        }
+        @include breakpoint($desktop) {
+            font-size: 16px;
+            padding: 15px;
+        }
+    }
+
+    td p {
+        margin: 0;
+        line-height: 1.2;
+    }
+}

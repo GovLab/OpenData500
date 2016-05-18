@@ -1,0 +1,37 @@
+{% extends "../../main.html" %}
+{% autoescape None %}
+
+{% block body %}
+
+
+
+<section class="submitDescription">
+	<h3 class="adj-title">Open Data 500</h3>
+	<h1 class="first-title">Company Survey</h1>
+
+	<p><strong>To qualify for the Open Data 500 US study, a company must:</strong></p>
+	<ul>
+		<li>Be based within the United States</li>
+		<li>Earn revenue from its products and services</li>
+		<li>Use open government data as a key resource for its business. While most Open Data 500 companies will work with federal data, we are also interested in those that use city or state data in a way that can scale regionally or nationally.</li>
+	</ul>
+	<p>If your company meets these criteria, please take a few minutes to fill out this short online form. Thank you again for your participation.</p>
+	<p><em>Fields marked with * are required</em></p>
+</section>
+<form method="post" id="submitCompany" class="m-form companyForm" data-parsley-validate>
+
+	
+	{% module Form(country, settings['default_language'], True, False) %}
+	{% raw xsrf_form_html() %}
+
+	<p class="disclaimer-text warning">Your responses will become part of a public database of information on Open Data companies. By submitting this form you are agreeing that, other than personal contact information, this information will be part of a publicly available database.</p>
+	<div class="saveCompanyForm-new">	
+		<input type="hidden" class="companyID" name="companyID" value="">
+		<input type="submit" class="m-button" id="formSave" name="formSave" value="Next">
+		<span class="company-form-error-message error-message" style="display:none"></span>
+	</div>
+</form>
+
+
+
+{% end %}

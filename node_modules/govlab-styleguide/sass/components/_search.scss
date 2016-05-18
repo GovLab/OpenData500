@@ -1,0 +1,74 @@
+/*
+Search
+
+Search component.  Has js associated with it that allow it to search a site, or WP
+for example.  Also makes use of the overlay element.
+
+Markup:
+<form class="b-search" action="">
+    <input class="js-search-value" type="text">
+    <input class="js-search-submit js-search-trigger e-search-trigger material-icons" type="submit" value="search">
+</form>
+
+.m-negative - negative color scheme for dark backgrounds
+.m-fixed - fixed position
+
+Styleguide 3.3
+*/
+.b-search {
+    width: 100%;
+    padding: 0;
+    position: relative;
+
+    input {
+        color: currentColor;
+        vertical-align: bottom;
+        background-color: transparent;
+        @include transition;
+        border: 0;
+        display: inline-block;
+        margin-bottom: 0;
+    }
+
+    input:focus {
+        outline: none;
+        background-color: $white-30;
+
+    }
+
+    input[type='text'] {
+        background-color: $gray-10;
+        padding: 8px 0;
+        max-width: 0;
+        width: calc(100% - 45px); // Need to keep both widths in base and .m-active styles for transition to work smoothly
+    }
+
+    input[type='text']:focus { max-width: 100%; }
+
+    input[type='submit'] {
+        padding: 8px;
+        background-color: transparent;
+        line-height: .95; // Alignment Fix
+    }
+
+    input[type='submit']:hover { opacity: 1; }
+}
+
+.b-search.m-fixed,
+.b-search.m-active {
+    z-index: 20;
+
+    input[type='text'] {
+        padding: 8px;
+        max-width: 100%;
+        width: calc(100% - 45px); // Need to keep both widths in base and .m-active styles for transition to work smoothly
+    }
+
+    input[type='submit'] { opacity: 1; }
+}
+
+
+.b-search.m-negative {
+    input { color: $white; }
+    input[type='text'] { background-color: $white-10; }
+}

@@ -3,10 +3,14 @@
 
 {% block body %}
 
-<h1><a href="{% if 'http' in company.url %}{{company.url}}{%else%}http://{{company.url}}{%end%}">{{ page_heading }}</a></h1>
+<div class="b-top-section m-purple">
+	<h1><a href="{% if 'http' in company.url %}{{company.url}}{%else%}http://{{company.url}}{%end%}">{{ page_heading }}</a></h1>
+</div>
 
-<div class="m-list-company-full">
-		<div class="m-half">
+<div class="b-page-section">
+	<div class="row">
+
+		<div class="medium-5 medium-offset-1 column">
 			<h3>Company Information</h3>
 			<p><strong>URL: </strong>{% if company.url %}<a href="{% if 'http' in company.url %}{{company.url}}{%else%}http://{{company.url}}{%end%}">{{company.url}}{%else%}Not Available{%end%}</a></p>
 			<p><strong>Year Founded: </strong> {% if company.yearFounded %}{{company.yearFounded}}{%else%}Not Available{%end%}</p>
@@ -22,18 +26,21 @@
 			{% elif company.sourceCount %}<p><strong>Approximate number of sources of government open data: </strong>{{company.sourceCount}} Agencies/Local Governments/Organizations
 			{% else %}<p><strong>Approximate number of sources of government open data: </strong>Not Available{%end%}</p>
 		</div>
-		<div class="m-half">
+		<div class="medium-5 medium-offset-1 column">
 			<h3>Description:</h3>
 			<p>{% if company.description %}{{company.description}}{%else%}Not Available{%end%}</p>
 		</div>
-	<div class="m-full datasets">
+	</div>
+
+	<div class="b-divider m-blue m-centered">
 		<h3>Agency and Data Information</h3>
+	</div>
 		{% if company.agencies %}
 			{%for a in company.agencies %}
 				<div class="company-view-agency-list">
 					<ul>
 						<li><h3><a href="http://data.go.kr" target="_blank">{{a.name}}</a></h3></li>
-						<div class="company-view-agency-name">
+<!-- 						<div class="company-view-agency-name"> -->
 							{% for d in a.datasets %} 
 								{% if d.usedBy == company %}
 									<ul>
@@ -69,7 +76,13 @@
 	</div>
 </div>	
 <br>
-<div id="disqus_thread"></div>
+
+	</div>
+</div>
+
+
+
+<!-- <div id="disqus_thread"></div>
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
     var disqus_shortname = 'opendata500'; // required: replace example with your forum shortname
@@ -82,6 +95,6 @@
     })();
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a> -->
 
 {% end %}

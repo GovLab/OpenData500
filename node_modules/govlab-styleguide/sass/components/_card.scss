@@ -1,0 +1,88 @@
+/*
+Cards
+
+Card component for organizing data.  Works well with articles / documents, etc.
+
+Markup:
+<div class="b-page-section">
+    <div class="row">
+        <div class="e-card m-blue">
+            <a href="#">
+                <div class="e-card-inner">
+                    <!-- uncomment to add a background image to the card -->
+                    <!-- <div class="e-card-image" style="background-image: url('')"></div> -->
+                    <p class="e-card-name">Project Name</p>
+                    <p class="e-card-description">Project Description</p>
+                </div>
+            </a>
+        </div>
+        <div class="e-card m-orange">
+            <a href="#">
+                <div class="e-card-inner">
+                    <p class="e-card-name">Project Name</p>
+                    <p class="e-card-description">Project Description</p>
+                </div>
+            </a>
+        </div>
+        <div class="e-card m-unreleased">
+            <div class="e-card-inner">
+                <p class="e-card-name">Unreleased Project</p>
+                <p class="e-card-description">Project Description</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+Styleguide 3.7
+*/
+.e-card {
+    display: inline-block;
+    .e-card-inner {
+        position: relative;
+        vertical-align: top;
+        color: $white;
+        width: 300px;
+        height: 300px;
+        margin: 15px;
+
+        p {
+            padding: 20px;
+            &.e-card-name {
+                font-size: 18px;
+                font-weight: 600;
+                text-transform: uppercase;
+            }
+
+            &.e-card-description {
+                position: absolute;
+                bottom: 0;
+            }
+        }
+
+        .e-card-image {
+            height: 150px;
+            background-position: center center;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+
+        &:hover {
+            box-shadow: 0 0 12px $gray-30;
+        }
+    }
+
+
+    &.m-orange .e-card-inner    { background-color: $orange; }
+    &.m-blue .e-card-inner      { background-color: $blue; }
+
+    &.m-unreleased .e-card-inner {
+        background-color: $gray-30;
+        &:hover {
+            box-shadow: none;
+        }
+    }
+    a:hover {
+        text-decoration: none;
+    }
+}

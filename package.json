@@ -1,0 +1,26 @@
+{
+  "name": "test-od500",
+  "version": "1.0.0",
+  "description": "The code behind the [Open Data 500][].",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "govlab-styleguide": "^1.0.13"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tekd/OpenData500.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tekd/OpenData500/issues"
+  },
+  "homepage": "https://github.com/tekd/OpenData500#readme"
+}

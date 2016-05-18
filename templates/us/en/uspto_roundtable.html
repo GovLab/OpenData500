@@ -3,13 +3,12 @@
 
 {% block body %}
 <div id="roundtables">
-	<div class="event-title">
-		<div class="host-agency-logo">
+	<div class="b-top-section m-purple">
+		<div class="m-centered">
 			<img src="{{ static_url("img/roundtables/uspto-logo.png") }}">
 		</div>
-		<h1>USPTO Roundtable</h1>
-		<h2>December 8, 2014</h2>
-
+		<h2>USPTO Roundtable</h2>
+		<h3>December 8, 2014</h3>
 	</div>
 
 	<!--
@@ -61,13 +60,17 @@
 	</div>
 -->
 
-	<section>
-		<p class="drop-cap">On December 8, 2014, The GovLab and the U.S. Patent and Trademark Office (USPTO) co-hosted an Open Data Roundtable in Washington, DC. The impetus for this event was the first Open Data Roundtable, held with the U.S.  Department of Commerce where USPTO identified a need to further engage its data users in devising its open data roadmap for the next few years. At the USPTO Roundtable, Alan Marco, USPTO’s Chief Economist, and Lynn Overmann, Deputy Chief Data Officer of the Department of Commerce (DOC), both emphasized the agency’s desire to more actively engage data users and technologists by involving the developer community and creating ongoing feedback loops and collaborations. This Roundtable was primarily focused on USPTO’s patent data, which is much more challenging than trademark data: while owners wish to promote their trademarks, and thereby provide good data to USPTO, there are many more data collection, format, and quality issues associated with patent data.</p>
+	<div class="b-page-section">
+		<div class="row">
+			<div class="large-10 large-centered columns">
+				<p>On December 8, 2014, The GovLab and the U.S. Patent and Trademark Office (USPTO) co-hosted an Open Data Roundtable in Washington, DC. The impetus for this event was the first Open Data Roundtable, held with the U.S.  Department of Commerce where USPTO identified a need to further engage its data users in devising its open data roadmap for the next few years. At the USPTO Roundtable, Alan Marco, USPTO’s Chief Economist, and Lynn Overmann, Deputy Chief Data Officer of the Department of Commerce (DOC), both emphasized the agency’s desire to more actively engage data users and technologists by involving the developer community and creating ongoing feedback loops and collaborations. This Roundtable was primarily focused on USPTO’s patent data, which is much more challenging than trademark data: while owners wish to promote their trademarks, and thereby provide good data to USPTO, there are many more data collection, format, and quality issues associated with patent data.</p>
 
 <!--
 		<p>Read blog posts about the event from <a href="https://www.data.gov/food/participants-open-data-roundtables-guide-usda-ways-provide-high-quality-data-users/" target="_blank">Joyce Hunter</a>, Deputy CIO and <a href="http://thegovlab.org/the-usda-open-data-roundtable-climate-change-and-food-resilience/" target="_blank">Joel Gurin</a>, The GovLab Senior Advisor.</p>
 -->
-	</section>
+			</div>
+		</div>
+	</div>
 <!--
 	<section>
 		<h2 class="m-page-title">Agenda</h2>
@@ -75,10 +78,13 @@
 	</section>
 -->
 
-	<section>
-		<h2 class="m-page-title">Report</h2>
-		<p>Read the full report <a href="{{ static_url("files/us/USPTO_Roundtable_Report.pdf") }}" target="_blank">here</a>.</p>
-	</section>
+<div class="b-page-section">
+	<div class="row">
+		<div class="large-10 large-centered columns">
+			<p><a class="b-button" href="{{ static_url("files/us/USPTO_Roundtable_Report.pdf") }}" target="_blank">Read the full report</a></p>
+		</div>
+	</div>
+</div>
 	 
 <!--
 	<section>
@@ -153,15 +159,31 @@
 		<p class="invitation-disclaimer"><em>To invite attendees for this event, the GovLab contacted over 35 companies in the Open Data 500 study and several nonprofit organizations that we know to be using USDA data with a focus on food resilience. USDA chose its own representatives, high-level officials and staff who direct the Department's data programs.</em></p>
 	</section>
 -->
-	<section>
-		<h2 class="m-page-title">Series Sponsors</h2>
 
-		<div class="roundtables-series-sponsors">
-			<div id="sponsor-aws" class="sponsor-container"><img src="{{ static_url("img/roundtables/roundtables-sponsor-aws.png") }}"></div>
-			<div id="sponsor-pwc" class="sponsor-container"><img src="{{ static_url("img/roundtables/roundtables-sponsor-pwc.png") }}"></div>
+<div class="b-divider m-blue m-centered">
+	<h1></h1>
+	<h2>Series Sponsors</h2>
+</div>
+
+<div class="b-page-section">
+	<div class="row">
+		<div class="medium-5 medium-offset-1 column">
+			<div id="sponsor-aws" class="m-centered"><img src="{{ static_url("img/roundtables/roundtables-sponsor-aws.png") }}"></div>
 		</div>
-		<p>The Open Data Roundtables Series is supported by Amazon Web Services and PricewaterhouseCoopers. The GovLab is currently seeking additional sponsors for the Open Data Roundtable Series and for individual Roundtable events. For more information, please contact us at <a href="mailto:opendata500@thegovlab.org">opendata500@thegovlab.org</a>.</p>
-	</section>
+		<div class="medium-5 medium-offset-1 column">
+			<div id="sponsor-pwc" class="m-centered"><img src="{{ static_url("img/roundtables/roundtables-sponsor-pwc.png") }}"></div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="large-10 large-centered columns">
+			<p>The Open Data Roundtables Series is supported by Amazon Web Services and PricewaterhouseCoopers. The GovLab is currently seeking additional sponsors for the Open Data Roundtable Series and for individual Roundtable events. For more information, please contact us at <a href="mailto:opendata500@thegovlab.org">opendata500@thegovlab.org</a>.</p>
+		</div>
+	</div>
+</div>
+
+
+
+
 <!--
 	<section>
 		<h2 class="m-page-title">Event Supporter</h2>

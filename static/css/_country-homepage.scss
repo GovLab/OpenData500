@@ -1,100 +1,100 @@
-.m-country-homepage {
+// .m-country-homepage {
 	
-	.country-flag {
-		margin: 0 auto;
-		@include circle;
-		width: 200px;
-		height: 200px;
-		border: 3px solid $purple;
-		overflow: hidden;
+// 	.country-flag {
+// 		margin: 0 auto;
+// 		@include circle;
+// 		width: 200px;
+// 		height: 200px;
+// 		border: 3px solid $purple;
+// 		overflow: hidden;
 		
-		img {
-			// height: 150px;
-			// margin-left: -51px;
-			// margin-top: 23px;
-		}
-	}
-
-	.country-flag.mexico-flag {
-		img {
-			height: 180px;
-			margin-left: -59px;
-			margin-top: 7px;
-		}
-	}
-}
-
-// .country-homepage {
-
-// 	.m-main-menu {
-// 		text-align: center;
-
-// 		.language {
-// 			float: right;
-
-// 			a {
-// 				border: 0;
-// 				border-right: 1px solid $white_alpha;
-// 				padding: 1px 5px;
-// 				margin: 4px 0;
-
-// 				&:last-of-type {
-// 					border-right: 0;
-// 				}
-// 			}
+// 		img {
+// 			// height: 150px;
+// 			// margin-left: -51px;
+// 			// margin-top: 23px;
 // 		}
 // 	}
 
-// 	#consortium-logo {
-// 		width: 600px;
-// 	}
-	
-// 	section {
-// 		padding-bottom: 23px;
-// 		margin-bottom: 35px;
-// 		border-bottom: 1px solid $light_gray;
-
-// 		&:first-of-type {
-// 			padding-top: 23px;
-// 			margin-top: 35px;
-// 			border-top: 1px solid $light_gray;			
-// 		}
-
-// 		p {
-// 			font-size: 16px;
-// 			line-height: 22px;
-// 		}
-// 	}
-
-
-// 	.country-logo {
-// 		h2 {
-// 			margin-left: 85px;
-// 			font-weight: 100;
-// 			margin-top: -5px;
-// 			font-size: 30px;
-// 		}
-
-// 		.country-flag {
-// 			width: 60px;
-// 			margin-bottom: -5px;
-// 			margin-right: 10px;
-// 		}
-// 	}	
-
-// 	.more {
-// 		text-align: right;
-// 		margin-bottom: 0;
-// 	}
-
-// 	.m-half {
-// 		width: 450px / 960px * 100%;
-// 		margin-right: 35px;
-
-// 		&:nth-of-type(even) {
-// 			margin-right: 0;
+// 	.country-flag.mexico-flag {
+// 		img {
+// 			height: 180px;
+// 			margin-left: -59px;
+// 			margin-top: 7px;
 // 		}
 // 	}
 // }
+
+// // .country-homepage {
+
+// // 	.m-main-menu {
+// // 		text-align: center;
+
+// // 		.language {
+// // 			float: right;
+
+// // 			a {
+// // 				border: 0;
+// // 				border-right: 1px solid $white_alpha;
+// // 				padding: 1px 5px;
+// // 				margin: 4px 0;
+
+// // 				&:last-of-type {
+// // 					border-right: 0;
+// // 				}
+// // 			}
+// // 		}
+// // 	}
+
+// // 	#consortium-logo {
+// // 		width: 600px;
+// // 	}
+	
+// // 	section {
+// // 		padding-bottom: 23px;
+// // 		margin-bottom: 35px;
+// // 		border-bottom: 1px solid $light_gray;
+
+// // 		&:first-of-type {
+// // 			padding-top: 23px;
+// // 			margin-top: 35px;
+// // 			border-top: 1px solid $light_gray;			
+// // 		}
+
+// // 		p {
+// // 			font-size: 16px;
+// // 			line-height: 22px;
+// // 		}
+// // 	}
+
+
+// // 	.country-logo {
+// // 		h2 {
+// // 			margin-left: 85px;
+// // 			font-weight: 100;
+// // 			margin-top: -5px;
+// // 			font-size: 30px;
+// // 		}
+
+// // 		.country-flag {
+// // 			width: 60px;
+// // 			margin-bottom: -5px;
+// // 			margin-right: 10px;
+// // 		}
+// // 	}	
+
+// // 	.more {
+// // 		text-align: right;
+// // 		margin-bottom: 0;
+// // 	}
+
+// // 	.m-half {
+// // 		width: 450px / 960px * 100%;
+// // 		margin-right: 35px;
+
+// // 		&:nth-of-type(even) {
+// // 			margin-right: 0;
+// // 		}
+// // 	}
+// // }
 
 

@@ -1,0 +1,62 @@
+/*
+Page Section
+
+The page section component is used to divide page content into well organized sections.
+Most page content should be included in a page module element such as page section.
+Foundation grid components can and should be used within these top level elements.
+
+Markup:
+<!-- #fullwidth -->
+<div class="b-page-section">
+    <div class="row">
+        <div class="column small-12">
+            <h1 class="e-title">This is a section title</h1>
+            <h2>This is a section title (h2)</h2>
+            <h3>This is a section title (h3)</h3>
+            <h4>This is a section title (h4)</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt itaque dolor ratione aspernatur nulla nemo, minima sit debitis at vel tenetur qui quod, aliquid suscipit atque, odit ipsam, commodi error!</p>
+        </div>
+    </div>
+</div>
+<!-- background color example -->
+<div class="b-page-section m-black">
+    <div class="row">
+        <div class="column small-12">
+            <p>This is a demonstration of the modifiers for background-color. You should use the <strong>.m-black</strong> class to get this effect</p>
+        </div>
+    </div>
+</div>
+
+.m-purple - $purple background
+.m-black - $black background
+.m-teal - $teal background
+.m-orange - $orange background
+.m-blue - $blue background
+
+Styleguide 5.1
+*/
+.b-page-section {
+    padding-top: 30px;
+    padding-bottom: 30px;
+
+    .e-title {
+        text-align: center;
+        font-weight: 100;
+    }
+
+    h4 { text-transform: uppercase; }
+}
+
+.b-page-section.m-purple,
+.b-page-section.m-black,
+.b-page-section.m-teal,
+.b-page-section.m-orange,
+.b-page-section.m-blue {
+    color: $white;
+}
+
+.b-page-section.m-purple { background-color: $purple; }
+.b-page-section.m-black  { background-color: $black;  }
+.b-page-section.m-teal   { background-color: $teal;   }
+.b-page-section.m-orange { background-color: $orange; }
+.b-page-section.m-blue   { background-color: $blue;   }
