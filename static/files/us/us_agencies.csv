@@ -287,15 +287,6 @@ Department of Commerce,USDC,Federal,US Census Bureau,Census,http://catalog.data.
 Department of Commerce,USDC,Federal,US Census Bureau,Census,http://catalog.data.gov/organization/census-gov,PYA Analytics,Research & Consulting,11-50,,
 Department of Commerce,USDC,Federal,General,,http://catalog.data.gov/organization/doc-gov,The Vanguard Group,Finance & Investment,"10,001+",,
 Department of Commerce,USDC,Federal,General,,http://catalog.data.gov/organization/doc-gov,Enigma.io,Data/Technology,11-50,,
-Department of Defense,DOD,Federal,General,,http://catalog.data.gov/organization/usace-army-mil,Apextech LLC,Data/Technology,11-50,Accounting and Budgeting Data,
-Department of Defense,DOD,Federal,General,,http://catalog.data.gov/organization/usace-army-mil,Apextech LLC,Data/Technology,11-50,US Department of Defense Accounting and Budgeting Data,
-Department of Defense,DOD,Federal,General,,http://catalog.data.gov/organization/usace-army-mil,Informatica,Data/Technology,"1,001-5,000",Uses data from the intelligence community from state and local governments,
-Department of Defense,DOD,Federal,Army Corps of Engineers,ACE,http://catalog.data.gov/organization/usace-army-mil,FindTheBest.com,Lifestyle & Consumer,51-200,,
-Department of Defense,DOD,Federal,Defense Logistics Agency,DLA,http://catalog.data.gov/organization/dla-mil,Vital Axiom | Niinja,Data/Technology,1-10,,
-Department of Defense,DOD,Federal,General,,http://catalog.data.gov/organization/usace-army-mil,HealthMap,Healthcare,11-50,,
-Department of Defense,DOD,Federal,General,,http://catalog.data.gov/organization/usace-army-mil,Booz Allen Hamilton,Research & Consulting,"10,001+",,
-Department of Defense,DOD,Federal,General,,http://catalog.data.gov/organization/usace-army-mil,Enigma.io,Data/Technology,11-50,,
-Department of Defense,DOD,Federal,General,,http://catalog.data.gov/organization/usace-army-mil,"VisualDoD, LLC",Aerospace and Defense,1-10,,
 Department of Education,ED / DOED,Federal,General,,http://catalog.data.gov/organization/ed-gov,YourMapper,Geospatial/Mapping,1-10,Public School Info,
 Department of Education,ED / DOED,Federal,General,,http://catalog.data.gov/organization/ed-gov,"College Abacus, an ECMC initiative",Finance & Investment,"501-1,000",IPEDS,http://nces.ed.gov/ipeds/datacenter/
 Department of Education,ED / DOED,Federal,General,,http://catalog.data.gov/organization/ed-gov,SmartAsset,Finance & Investment,1-10,Education data,http://explore.data.gov
@@ -665,13 +656,6 @@ National Aeronautics and Space Administration,NASA,Federal,General,,http://catal
 National Archives and Records Administration,NARA,Federal,Office of the Federal Register,OFR,http://catalog.data.gov/organization/gpo-gov,Energy Solutions Forum,Energy,1-10,Federal Register: The Daily Journal of the United States Government,www.federalregister.gov/learn/developers
 National Archives and Records Administration,NARA,Federal,Office of the Federal Register,OFR,http://catalog.data.gov/organization/gpo-gov,Chemical Abstracts Service,Scientific Research,"1,001-5,000",,
 National Science Foundation,NSF,Federal,General,,http://catalog.data.gov/organization/nsf-gov,Way Better Patents,Business & Legal Services,1-10,NSF R&D Data,http://www.nsf.gov/statistics/showpub.cfm?TopID=8
-New York,NY,State,New York State Data Center,SDC,http://esd.ny.gov/NYSDataCenter.html,Revaluate,"Housing/Real Estate,",1-10,Waste Management Transfer Stations,https://data.ny.gov/Energy-Environment/Transfer-Stations-Solid-Waste-Management-Facilitie/avuu-s8z3
-New York,NY,State,New York State Data Center,SDC,http://esd.ny.gov/NYSDataCenter.html,Revaluate,"Housing/Real Estate,",1-10,Active Liquor Licences,https://data.ny.gov/Economic-Development/Liquor-Authority-Quarterly-List-of-Active-Licenses/hrvs-fxs2
-New York,NY,State,New York State Data Center,SDC,http://esd.ny.gov/NYSDataCenter.html,Revaluate,"Housing/Real Estate,",1-10,Radon Test Results,https://health.data.ny.gov/Health/Radon-Test-Results-1st-Floor-by-County-Map/k2xw-i959
-New York,NY,State,New York State Data Center,SDC,http://esd.ny.gov/NYSDataCenter.html,Revaluate,"Housing/Real Estate,",1-10,Typical Utility Bill Information,https://data.ny.gov/Energy-Environment/Typical-Utility-Bill-Information-Electric-Beginnin/87qg-62za
-New York,NY,State,New York State Data Center,SDC,http://esd.ny.gov/NYSDataCenter.html,Revaluate,"Housing/Real Estate,",1-10,Manufactured Home Park Registrations,https://data.ny.gov/Economic-Development/Manufactured-Home-Park-Registrations/sxi2-m23m
-New York,NY,State,NY Department of Health,DOH,https://health.data.ny.gov/,STILLWATER SUPERCOMPUTING INC,Research & Consulting,11-50,,
-New York,NY,State,General,,https://data.ny.gov/,"Ontodia, Inc",Data/Technology,1-10,,
 New York City,NYC,City/County,General,,http://www.nyc.gov/data/,"Ontodia, Inc",Data/Technology,1-10,NYC open data,https://data.cityofnewyork.us/
 New York City,NYC,City/County,General,,http://www.nyc.gov/data/,Zoner,Housing/Real Estate,1-10,PLUTO,www.zonerapp.com
 New York City,NYC,City/County,General,,http://www.nyc.gov/data/,Zoner,Housing/Real Estate,1-10,NYC ACRIS,http://a836-acris.nyc.gov/CP/
@@ -818,7 +802,7 @@ US Consumer Product Safety Commission,CPSC,Federal,General,,http://catalog.data.
 US Equal Employment Opportunity Commission,EEOC,Federal,General,,http://catalog.data.gov/organization/eeoc-gov,Business and Legal Resources,Business & Legal Services,51-200,,
 US Equal Employment Opportunity Commission,EEOC,Federal,General,,http://catalog.data.gov/organization/eeoc-gov,FindTheBest.com,Lifestyle & Consumer,51-200,,
 US International Trade Commission,USITC,Federal,General,,http://catalog.data.gov/dataset?q=organization:((usitc-gov)),WattzOn,Energy,11-50,,
-Utah,UT,State,General,,http://www.utah.gov/data/,Construction Monitor LLC,Housing/Real Estate,11-50,Building Permit Data,
+Utah,UT,State,General,,https://opendata.utah.gov/,Construction Monitor LLC,Housing/Real Estate,11-50,Building Permit Data,
 Virginia,VA,State,General,,http://datapoint.apa.virginia.gov/,"HDScores, Inc",Lifestyle & Consumer,1-10,Virginia Health Department,http://www.healthspace.com/Clients/VDH/vdh_website.nsf
 Virginia,VA,State,General,,http://datapoint.apa.virginia.gov/,Pave,Finance & Investment,1-10,Post-Completion Wages of Graduates,http://research.schev.edu/apps/cms/Post-Completion-Wages-of-Graduates.aspx
 Virginia,VA,State,General,,http://datapoint.apa.virginia.gov/,Social Health Insights,Healthcare,1-10,Multiple transit agencies and bikeshare,http://developer.wmata.com/
@@ -943,7 +927,7 @@ Multiple government open data sources,,Other,General,,,Paxata,Data/Technology,11
 Multiple government open data sources,,Other,General,,,ClearStory Data,Data/Technology,51-200,,
 Multiple government open data sources,,Other,General,,,Business Monitor International,Business & Legal Services,201-500,,
 Multiple government open data sources,,Other,General,,,Remi,Governance,51-200,,
-Multiple government open data sources,,Other,General,,,Priceweave,Data/Technology,1-10,,
+Multiple government open data sources,,Other,General,,,DataWeave,Data/Technology,1-10,,
 Multiple government open data sources,,Other,General,,,CB Insights,Finance & Investment,11-50,,
 Multiple government open data sources,,Other,General,,,Spokeo,Lifestyle & Consumer,51-200,,
 Multiple government open data sources,,Other,General,,,Intelius,Business & Legal Services,51-200,,
@@ -1119,3 +1103,19 @@ Multiple federal data sources,,Federal,General,,,PIXIA Corp,Data/Technology,51-2
 Multiple federal data sources,,Federal,General,,,(Leg)Cyte,Governance,NA,,
 Multiple federal data sources,,Federal,General,,,SmartProcure,Governance,11-50,,
 Multiple federal data sources,,Federal,General,,,CGI,Business & Legal Services,"10,001+",,
+Department of Defense,DOD,Federal,General,,http://catalog.data.gov/organization/usace-army-mil,Apextech LLC,Data/Technology,11-50,Accounting and Budgeting Data,
+Department of Defense,DOD,Federal,General,,http://catalog.data.gov/organization/usace-army-mil,Apextech LLC,Data/Technology,11-50,US Department of Defense Accounting and Budgeting Data,
+Department of Defense,DOD,Federal,General,,http://catalog.data.gov/organization/usace-army-mil,Informatica,Data/Technology,"1,001-5,000",Uses data from the intelligence community from state and local governments,
+Department of Defense,DOD,Federal,Army Corps of Engineers,ACE,http://catalog.data.gov/organization/usace-army-mil,FindTheBest.com,Lifestyle & Consumer,51-200,,
+Department of Defense,DOD,Federal,Defense Logistics Agency,DLA,http://catalog.data.gov/organization/dla-mil,Vital Axiom | Niinja,Data/Technology,1-10,,
+Department of Defense,DOD,Federal,General,,http://catalog.data.gov/organization/usace-army-mil,HealthMap,Healthcare,11-50,,
+Department of Defense,DOD,Federal,General,,http://catalog.data.gov/organization/usace-army-mil,Booz Allen Hamilton,Research & Consulting,"10,001+",,
+Department of Defense,DOD,Federal,General,,http://catalog.data.gov/organization/usace-army-mil,Enigma.io,Data/Technology,11-50,,
+Department of Defense,DOD,Federal,General,,http://catalog.data.gov/organization/usace-army-mil,"VisualDoD, LLC",Aerospace and Defense,1-10,,
+New York,NY,State,New York State Data Center,SDC,http://esd.ny.gov/NYSDataCenter.html,Revaluate,"Housing/Real Estate,",1-10,Waste Management Transfer Stations,https://data.ny.gov/Energy-Environment/Transfer-Stations-Solid-Waste-Management-Facilitie/avuu-s8z3
+New York,NY,State,New York State Data Center,SDC,http://esd.ny.gov/NYSDataCenter.html,Revaluate,"Housing/Real Estate,",1-10,Active Liquor Licences,https://data.ny.gov/Economic-Development/Liquor-Authority-Quarterly-List-of-Active-Licenses/hrvs-fxs2
+New York,NY,State,New York State Data Center,SDC,http://esd.ny.gov/NYSDataCenter.html,Revaluate,"Housing/Real Estate,",1-10,Radon Test Results,https://health.data.ny.gov/Health/Radon-Test-Results-1st-Floor-by-County-Map/k2xw-i959
+New York,NY,State,New York State Data Center,SDC,http://esd.ny.gov/NYSDataCenter.html,Revaluate,"Housing/Real Estate,",1-10,Typical Utility Bill Information,https://data.ny.gov/Energy-Environment/Typical-Utility-Bill-Information-Electric-Beginnin/87qg-62za
+New York,NY,State,New York State Data Center,SDC,http://esd.ny.gov/NYSDataCenter.html,Revaluate,"Housing/Real Estate,",1-10,Manufactured Home Park Registrations,https://data.ny.gov/Economic-Development/Manufactured-Home-Park-Registrations/sxi2-m23m
+New York,NY,State,NY Department of Health,DOH,https://health.data.ny.gov/,STILLWATER SUPERCOMPUTING INC,Research & Consulting,11-50,,
+New York,NY,State,General,,https://data.ny.gov/,"Ontodia, Inc",Data/Technology,1-10,,
