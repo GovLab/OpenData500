@@ -10,12 +10,12 @@
 }
 
 #international-homepage {
-	
+
 	header {
 		height: 50px;
 		@include drop_shadow;
 	}
-	
+
 	.b-section {
 		margin-bottom: 40px;
 	}
@@ -38,7 +38,7 @@
 			font-family: $fancy_type;
 			font-weight: 100;
 		}
-		
+
 		&.m-disabled {
 			opacity: .3;
 			pointer-events: none;
@@ -48,17 +48,17 @@
 	.b-flag {
 		height: 110px;
 		width: 110px;
-		margin: 0 auto 20px;	
+		margin: 0 auto 20px;
 		border: 5px solid $light_gray_alpha;
 		@include circle;
-	
+
 		> div {
 			height: 110px;
 			width: 110px;
 			@include circle;
 			background-size: cover;
 			background-position: center;
-			background-repeat: no-repeat;	
+			background-repeat: no-repeat;
 		}
 
 		&.m-us > div { background-image: url("/static/img/us-flag.png"); }
@@ -67,6 +67,7 @@
 		&.m-kr > div { background-image: url("/static/img/southkorea-flag.png"); }
 		&.m-it > div { background-image: url("/static/img/italy-flag.png"); }
 		&.m-ru > div { background-image: url("/static/img/russia-flag.png"); }
+		&.m-ca > div { background-image: url("/static/img/canada-flag.png"); }
 		&.m-in-your-country > div {
 			background-image: url("/static/img/od500-in-your-country.png");
 			background-size: 80%;
@@ -254,7 +255,7 @@
 // 		&:hover {
 
 // 			.country-link {
-				
+
 
 // 				img {
 // 					opacity: 1;
@@ -264,5 +265,5 @@
 
 // 	}
 
-	
+
 // }

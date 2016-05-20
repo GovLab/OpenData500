@@ -33,7 +33,7 @@
     <section class="m-homepage-about">
         <h1>About This Project</h1>
         <p class="intro">Australia is working in partnership with The GovLab at New York University to conduct the Open Data 500 Australia. This is the first study of Australian companies and NGOs that use open government data to generate new business, develop new products and services, and create social value.</p>
-        <p class="more"><a href="/au/about/" class="m-button">Learn More</a></p> 
+        <p class="more"><a href="/au/about/" class="m-button">Learn More</a></p>
     </section>
 
     <section class="m-homepage-participate">
@@ -41,17 +41,17 @@
         <div class="m-homepage-box">
             <h2>1</h2>
             <h3>If you represent an Open Data company or NGO</h3>
-            <p>Please fill out our <a href="/au/submitCompany/">survey</a>.</p>    
+            <p>Please fill out our <a href="/au/submitCompany/">survey</a>.</p>
         </div>
         <div class="m-homepage-box">
             <h2>2</h2>
             <h3>If you would like to recommend an Open Data company</h3>
-            <p>Please email us at <a href="mailto:opendata@communications.gov.au">opendata@communications.gov.au</a>.</p>
+            <p>Please email us at <a href="mailto:data@pmc.gov.au">data@pmc.gov.au</a>.</p>
         </div>
         <div class="m-homepage-box">
             <h2>3</h2>
             <h3>If you have general information to share about open data in Australia</h3>
-            <p>Email us at <a href="mailto:opendata@communications.gov.au">opendata@communications.gov.au</a>.</p>
+            <p>Email us at <a href="mailto:data@pmc.gov.au">data@pmc.gov.au</a>.</p>
         </div>
     </section>
 
@@ -97,14 +97,14 @@ function draw_diagram() {
       .append("g")
         .attr("transform", "translate(335, 375)");
         // .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-    
+
     var circle = svg.append("circle")
         .attr("r", outerRadius);
 
     var nodes = svg.append("g").selectAll("path")
         .data(chord.groups)
         .enter().append("path")
-        .style("fill", function(d) { 
+        .style("fill", function(d) {
             if (data.num_agencies > d.index) {
                 return fill_agencies(d.index);
             } else {
@@ -140,9 +140,9 @@ function draw_diagram() {
       .enter().append("path")
         .attr("class", "chord")
         .attr("d", d3.svg.chord().radius(innerRadius))
-        .style("fill", "rgba(0,0,0,0.2)"); 
-        // .style("fill", function(d) { 
-        //     return fill_agencies(d.target.index); 
+        .style("fill", "rgba(0,0,0,0.2)");
+        // .style("fill", function(d) {
+        //     return fill_agencies(d.target.index);
         // });
 
     chord.on("mouseover", function(d) {

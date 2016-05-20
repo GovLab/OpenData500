@@ -1,5 +1,5 @@
 .m-homepage {
-	
+
 	h1 {
 		margin: 15px 0 50px 0;
 		font-size: 3.8em;
@@ -78,7 +78,7 @@
 		font-family: $fancy_type;
 		border: 1px solid $light_purple;
 		padding: 10px;
-		
+
 		h2 {
 			text-align: center;
 			font-size: 36px;
@@ -95,7 +95,7 @@
 
 		h3 {
 			margin-top: 15px;
-			font-weight: 400;		
+			font-weight: 400;
 		}
 
 		p {
@@ -104,10 +104,27 @@
 			line-height: 1.5em;
 			font-weight: 300;
 		}
+
+		&.m-big {
+			width: 400px;
+		}
 	}
 }
 .m-homepage-box:last-of-type {
 	margin-right: 0;
+}
+
+.b-homepage-box-container {
+	display: block;
+
+	.m-homepage-box {
+		float: none;
+		display: inline-block;
+	}
+
+	&.m-center {
+		text-align: center;
+	}
 }
 
 .embed-chart-info {
@@ -168,10 +185,10 @@
 		border: 1px solid $light_gray;
 		border-radius: 0;
 		overflow: hidden;
-	}	
+	}
 }
 
-// Consortium Landing Page 
+// Consortium Landing Page
 
 #consortium-landing-page {
 	header {

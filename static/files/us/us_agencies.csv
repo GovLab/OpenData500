@@ -927,7 +927,11 @@ Multiple government open data sources,,Other,General,,,Paxata,Data/Technology,11
 Multiple government open data sources,,Other,General,,,ClearStory Data,Data/Technology,51-200,,
 Multiple government open data sources,,Other,General,,,Business Monitor International,Business & Legal Services,201-500,,
 Multiple government open data sources,,Other,General,,,Remi,Governance,51-200,,
+<<<<<<< HEAD
 Multiple government open data sources,,Other,General,,,DataWeave,Data/Technology,1-10,,
+=======
+Multiple government open data sources,,Other,General,,,Dataweave,Data/Technology,1-10,,
+>>>>>>> a96012b2134df20272526e6601656aee48ff9cc7
 Multiple government open data sources,,Other,General,,,CB Insights,Finance & Investment,11-50,,
 Multiple government open data sources,,Other,General,,,Spokeo,Lifestyle & Consumer,51-200,,
 Multiple government open data sources,,Other,General,,,Intelius,Business & Legal Services,51-200,,

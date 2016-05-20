@@ -1,6 +1,3 @@
-@import url(http://fonts.googleapis.com/css?family=Quicksand|Ubuntu|Muli|Roboto);
-
-/*added by robyn to new fonts */
 @charset "UTF-8";
 input[type="text"],
 input[type="password"],
@@ -29,7 +26,7 @@ select {
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
-  color: white;
+  color: #fff;
   font-family: "Exo", sans-serif;
   text-transform: uppercase;
   font-size: 14px;
@@ -88,7 +85,7 @@ select {
   width: 52.8%;
   font-family: sans-serif;
   font-size: 1em;
-  color: #444444; }
+  color: #444; }
 
 .m-form-half textarea {
   width: 100%;
@@ -104,7 +101,7 @@ select {
 
 .m-form-footer {
   background-color: transparent;
-  border-top: 1px solid #aaaaaa;
+  border-top: 1px solid #aaa;
   padding: 5px;
   margin: 5px 5px 20px;
   overflow: hidden; }
@@ -158,25 +155,22 @@ select {
   margin-bottom: 30px; }
 
 body {
-  color: #444444; /**changed from #444444 **/
+  color: #444;
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  font-weight:lighter;
-  font-size: 16px; /**changed from 12px **/
-  line-height: 1.8em; }
+  font-size: 12px;
+  line-height: 1.4em; }
 
 h1 {
-  font-family: "Exo", sans-serif; /*changed from Exo TEST */
-  font-weight: 300; /*changed from 300 TEST */
-  font-size: 3.5em;
+  font-family: "Exo", sans-serif;
+  font-weight: 100;
+  font-size: 4.5em;
   line-height: 1.2em;
-  margin-bottom: 30px;
-  text-align: center;
-  } /*changed from 30px */
+  margin-bottom: 30px; }
 
 h2 {
-  font-family: "Exo", sans-serif; /*changed from Exo TEST*/
-  font-weight: 500; /*changed from 500 TEST */
-  font-size: 2.5em;
+  font-family: "Exo", sans-serif;
+  font-weight: 500;
+  font-size: 3em;
   line-height: 1em; }
 
 h3 {
@@ -194,8 +188,8 @@ a:hover {
 .intro {
   font-family: "Exo", sans-serif;
   font-weight: 100;
-  font-style: normal;
-  font-size: 1.5em;
+  font-style: italic;
+  font-size: 1.8em;
   line-height: 1.5em; }
 
 .warning {
@@ -218,27 +212,22 @@ a:hover {
 .m-homepage section {
   padding-bottom: 24px;
   border-bottom: 1px solid #472b74;
-  margin-bottom: 25px; 
-  }
+  margin-bottom: 25px; }
 .m-homepage #chord-chart-container {
   text-align: center;
-  position: relative;
-font-size: 12px;
-
-}
+  position: relative; }
   .m-homepage #chord-chart-container h3 {
     font-weight: 100;
     font-family: "Exo", sans-serif;
-    font-size: 2em; /**changed from 2em **/
-    margin-top: 15px; 
-    }
+    font-size: 2em;
+    margin-top: 15px; }
   .m-homepage #chord-chart-container .chord-legend {
     font-weight: 400;
     font-family: "Exo", sans-serif;
     font-size: 18px;
     position: absolute;
     color: #472b74;
-    top: 460px; }
+    top: 440px; }
   .m-homepage #chord-chart-container .chord-legend.companies {
     -webkit-transform: rotate(-90deg);
     -moz-transform: rotate(-90deg);
@@ -263,8 +252,7 @@ font-size: 12px;
     z-index: -1; }
 
 .m-homepage-about .more {
-  text-align: right; 
-}
+  text-align: right; }
 
 .m-homepage-participate {
   overflow: hidden; }
@@ -272,7 +260,7 @@ font-size: 12px;
     float: left;
     width: 280px;
     margin-right: 26px;
-    font-family: "HelveticaNeue-Light", sans-serif;
+    font-family: "Exo", sans-serif;
     border: 1px solid #8977a7;
     padding: 10px; }
     .m-homepage-participate .m-homepage-box h2 {
@@ -291,16 +279,25 @@ font-size: 12px;
       border-radius: 50%; }
     .m-homepage-participate .m-homepage-box h3 {
       margin-top: 15px;
-      font-weight: 400;
-      text-align: center; }
+      font-weight: 400; }
     .m-homepage-participate .m-homepage-box p {
       font-size: 16px;
       font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
       line-height: 1.5em;
       font-weight: 300; }
+    .m-homepage-participate .m-homepage-box.m-big {
+      width: 400px; }
 
 .m-homepage-box:last-of-type {
   margin-right: 0; }
+
+.b-homepage-box-container {
+  display: block; }
+  .b-homepage-box-container .m-homepage-box {
+    float: none;
+    display: inline-block; }
+  .b-homepage-box-container.m-center {
+    text-align: center; }
 
 .embed-chart-info {
   margin-top: 50px;
@@ -342,7 +339,7 @@ font-size: 12px;
     min-height: 20px;
     font-size: 13px;
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-    border: 1px solid #aaaaaa;
+    border: 1px solid #aaa;
     border-radius: 0;
     overflow: hidden; }
 
@@ -368,23 +365,22 @@ font-size: 12px;
 #world-map .formal-agreement {
   fill: rgba(71, 43, 116, 0.4) !important; }
 #world-map .working-agreement {
-  fill: #666666 !important; }
+  fill: #666 !important; }
 #world-map .in-discussion,
 #world-map .in-discussion > path {
-  fill: #aaaaaa !important; }
+  fill: #aaa !important; }
 #world-map .project {
   fill: #472b74 !important; }
 
 .about-page {
-  font-size: 16px;
-  line-height: 20px;
-  font-weight:100; }
+  font-size: 14px;
+  line-height: 20px; }
   .about-page section {
     padding-bottom: 23px;
     margin-bottom: 35px;
     padding-top: 23px;
     margin-bottom: 35px;
-    border-bottom: 1px solid #aaaaaa; }
+    border-bottom: 1px solid #aaa; }
     .about-page section ul li.list-title {
       list-style: none;
       margin-top: 15px;
@@ -392,8 +388,7 @@ font-size: 12px;
       .about-page section ul li.list-title h3 {
         font-size: 16px; }
   .about-page h1 {
-    margin-top: 50px; 
-  }
+    margin-top: 25px; }
   .about-page h2 {
     text-align: center;
     margin-bottom: 40px;
@@ -416,7 +411,7 @@ font-size: 12px;
     float: right;
     margin: 0 0 30px 30px;
     padding: 10px 20px;
-    border: 1px solid #aaaaaa; }
+    border: 1px solid #aaa; }
     .about-page .about-page-toc h4 {
       margin-bottom: 25px;
       margin-top: 0;
@@ -424,7 +419,7 @@ font-size: 12px;
       font-weight: 300;
       font-size: 1.7em;
       font-style: italic;
-      color: #444444; }
+      color: #444; }
     .about-page .about-page-toc li {
       list-style-type: none;
       margin: 8px 0 7px 0;
@@ -525,14 +520,14 @@ font-size: 12px;
       color: #472b74; }
     .about-page .m-team-picture .m-team-member-job {
       margin: 0;
-      color: #666666; }
+      color: #666; }
   .about-page .m-team-picture:hover img {
     border-color: rgba(0, 0, 0, 0.05); }
   .about-page .m-team-picture.s-active img {
     border-color: rgba(71, 43, 116, 0.4); }
 
 .sub-sections {
-  border-bottom: 1px solid #aaaaaa;
+  border-bottom: 1px solid #aaa;
   padding-bottom: 23px;
   margin-bottom: 0; }
   .sub-sections .m-half {
@@ -560,8 +555,7 @@ font-size: 12px;
 .m-preview h3 {
   font-family: "Exo", sans-serif;
   font-weight: 100;
-  margin-top: 15px; 
-  padding-bottom:20px;}
+  margin-top: 15px; }
 .m-preview ul {
   padding: 0;
   background-color: rgba(255, 255, 255, 0.7); }
@@ -623,7 +617,7 @@ font-size: 12px;
     text-decoration: underline; }
   .datasets > h3 {
     font-size: 16px;
-    color: #666666; }
+    color: #666; }
   .datasets .company-view-agency-list h3 {
     font-size: 14px;
     line-height: 18px; }
@@ -633,7 +627,7 @@ font-size: 12px;
   .m-list-head div {
     display: inline-block;
     padding: 10px 5px 0;
-    color: white;
+    color: #fff;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: .5px; }
@@ -650,7 +644,7 @@ font-size: 12px;
 
 .m-list-company-full {
   padding-top: 20px;
-  border-top: 1px solid #aaaaaa;
+  border-top: 1px solid #aaa;
   box-shadow: inset 0 3px 3px -3px rgba(0, 0, 0, 0.3); }
 
 .m-preview-list-name {
@@ -713,7 +707,7 @@ font-size: 12px;
 
 .m-download-data {
   padding: 10px;
-  color: #666666;
+  color: #666;
   display: block;
   border-top: 1px solid rgba(0, 0, 0, 0.05);
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
@@ -723,11 +717,11 @@ font-size: 12px;
     margin-right: 30px;
     display: inline-block; }
   .m-download-data a {
-    color: #666666;
+    color: #666;
     padding: 4px 8px; }
     .m-download-data a:hover {
       background-color: #8977a7;
-      color: white; }
+      color: #fff; }
 
 .m-candidates h1 {
   font-size: 6.79em; }
@@ -753,7 +747,7 @@ font-size: 12px;
   -moz-border-radius: 4px;
   border-radius: 4px;
   border: 0;
-  color: white;
+  color: #fff;
   cursor: pointer;
   padding: 3px 7px 5px; }
 .m-candidates-buttons button:hover {
@@ -767,7 +761,7 @@ font-size: 12px;
   height: 165px;
   float: left;
   margin: 5px;
-  color: #444444;
+  color: #444;
   overflow: hidden;
   cursor: pointer;
   border: 1px solid #ccc; }
@@ -787,10 +781,10 @@ font-size: 12px;
     width: 195px;
     height: 80px;
     overflow: hidden;
-    color: #444444;
+    color: #444;
     margin-top: 5px; }
   .m-candidates-item em {
-    color: #444444;
+    color: #444;
     display: block;
     height: 15px;
     margin-top: 5px;
@@ -806,7 +800,7 @@ font-size: 12px;
 .m-candidates-item.preview-company {
   background-color: rgba(71, 43, 116, 0.9); }
   .m-candidates-item.preview-company h3, .m-candidates-item.preview-company .m-homepage-list-desc, .m-candidates-item.preview-company em {
-    color: white; }
+    color: #fff; }
 
 .m-candidates-item:hover {
   border-color: #472b74; }
@@ -827,7 +821,7 @@ font-size: 12px;
     display: inline-block;
     margin: 0 3px;
     padding: 4px 10px;
-    color: white;
+    color: #fff;
     letter-spacing: .4px;
     border: 1px solid #ccc;
     color: rgba(0, 0, 0, 0.6); }
@@ -845,10 +839,10 @@ font-size: 12px;
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
   border-radius: 0;
-  border: 1px solid #aaaaaa;
+  border: 1px solid #aaa;
   background-color: rgba(255, 255, 255, 0.7);
   border-left: 4px solid #472b74;
-  color: #444444;
+  color: #444;
   padding: 3px 9px 3px 6px; }
 
 #clear-filters-menu {
@@ -869,7 +863,7 @@ font-size: 12px;
   -moz-border-radius: 4px;
   border-radius: 4px;
   padding: 20px 20px 10px 10px;
-  border: 1px solid #aaaaaa; }
+  border: 1px solid #aaa; }
   .login-form .m-form-line.submit {
     text-align: center;
     margin-top: 20px; }
@@ -935,7 +929,7 @@ font-size: 12px;
 .m-press-title {
   font-size: 15px;
   line-height: 19px;
-  color: #666666; }
+  color: #666; }
 
 .m-press-meta {
   font-style: italic;
@@ -1002,12 +996,12 @@ font-size: 12px;
   #international-homepage .b-country h2 {
     font-size: 20px;
     font-weight: 400; }
-  #international-homepage .b-country p { 
+  #international-homepage .b-country p {
     font-size: 1.2rem;
     line-height: 1.4;
-    font-family: 'Exo', sans-serif; /*changed from Exo TEST */
-    font-weight: 100; } /*changed from 100 TEST */
-  #international-homepage .b-country.m-disabled { 
+    font-family: "Exo", sans-serif;
+    font-weight: 100; }
+  #international-homepage .b-country.m-disabled {
     opacity: .3;
     pointer-events: none; }
 #international-homepage .b-flag {
@@ -1075,7 +1069,7 @@ font-size: 12px;
 #roundtables section {
   padding-bottom: 23px;
   margin-bottom: 35px;
-  border-bottom: 1px solid #aaaaaa; }
+  border-bottom: 1px solid #aaa; }
 #roundtables p, #roundtables li {
   font-size: 16px;
   line-height: 22px; }
@@ -1092,7 +1086,7 @@ font-size: 12px;
   text-align: center;
   margin-bottom: 50px;
   font-style: italic;
-  color: #666666; }
+  color: #666; }
 #roundtables blockquote {
   font-size: 24px;
   line-height: 30px;
@@ -1139,13 +1133,13 @@ font-size: 12px;
     font-size: 12px;
     line-height: 16px;
     font-style: italic;
-    color: #666666;
+    color: #666;
     border-top: 1px solid rgba(0, 0, 0, 0.15);
     background-color: rgba(255, 255, 255, 0.5); }
     #roundtables .roundtable-attendees li span {
       display: block;
       font-size: 16px;
-      color: #444444;
+      color: #444;
       font-style: normal;
       line-height: 20px; }
   #roundtables .roundtable-attendees li:nth-child(2n) {
@@ -1165,7 +1159,7 @@ font-size: 12px;
   font-size: 86px;
   background-color: #472b74;
   font-family: "Exo", sans-serif;
-  color: white;
+  color: #fff;
   width: 80px;
   text-align: center; }
 
@@ -1198,7 +1192,7 @@ font-size: 12px;
     left: 0;
     background-color: rgba(0, 0, 0, 0.6);
     padding: 5px 10px;
-    color: white;
+    color: #fff;
     font-family: "Exo", sans-serif;
     font-weight: 100;
     width: 300px; }
@@ -1206,7 +1200,7 @@ font-size: 12px;
       font-size: 16px;
       line-height: 22px; }
     .event-picture-container figcaption em {
-      color: white; }
+      color: #fff; }
 
 #roundtables-first-paragraph {
   letter-spacing: -0.05px; }
@@ -1265,7 +1259,7 @@ header {
 .poly-logo {
   text-align: right;
   float: right;
-  background-image: url(/static/img/nyu-tandon-logo.png);
+  background-image: url(/static/img/poly_logo.png);
   background-size: cover;
   width: 297px;
   height: 40px; }
@@ -1431,7 +1425,7 @@ header {
       border-color: #8977a7;
       background-color: rgba(255, 255, 255, 0.5); }
     #mc_embed_signup form input[type="email"]:focus {
-      background-color: white; }
+      background-color: #fff; }
     #mc_embed_signup form .m-button {
       width: 40px;
       display: inline-block;
@@ -1448,7 +1442,7 @@ header {
       border-radius: 0 4px 4px 0; }
     #mc_embed_signup form .m-button:hover {
       background-color: #472b74;
-      color: white;
+      color: #fff;
       border-color: #472b74; }
   #mc_embed_signup #mce-responses .response {
     position: absolute;
@@ -1520,16 +1514,16 @@ header {
     transform: rotate(-90deg); }
 
 footer {
-  background-color: #444444;
+  background-color: #444;
   padding: 20px 0;
   overflow: hidden;
   clear: both;
   margin-top: 30px;
-  color: #aaaaaa; }
+  color: #aaa; }
   footer a {
-    color: #aaaaaa; }
+    color: #aaa; }
   footer a:hover {
-    color: white; }
+    color: #fff; }
   footer .m-footer-logos {
     float: left; }
     footer .m-footer-logos img {
@@ -1566,3 +1560,5 @@ footer {
     height: auto; }
   .m-international-page .first-title {
     margin-top: 20px; }
+
+/*# sourceMappingURL=styles.css.map */
