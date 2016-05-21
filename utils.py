@@ -461,7 +461,7 @@ class StatsGenerator(object):
         stats.save()
 
     def refresh_stats(self, country):
-        stats = Stats.objects.get(country=country)
+        stats = Stats.objects(country=country)
         stats.totalCompanies = Company.objects(country=country).count()
         stats.totalCompaniesWeb = Company.objects(Q(submittedThroughWebsite = True) & Q(country=country)).count()
         stats.totalCompaniesSurvey = Company.objects(Q(submittedSurvey = True) & Q(country=country)).count()
@@ -478,7 +478,8 @@ class StatsGenerator(object):
                 count = stateCount.count(stateListAbbrev[country][i]))
             stats.states.append(s)
         stats.lastUpdate = datetime.now()
-        stats.save()
+        for object in stats: object.save()
+        # stats.save()
 
 
 class FileGenerator(object):
