@@ -178,7 +178,7 @@ class ListHandler(BaseHandler):
         agencies = Agency.objects(
             Q(dataType="Federal") & Q(country=country)).order_by(
             "-usedBy_count").only("name", "abbrev", "prettyName")[0:16]
-        stats = Stats.objects.get(country=country)
+        stats = Stats.objects(country=country)
         states_for_map = self.application.tools.states_for_map(country)
 
         try:
