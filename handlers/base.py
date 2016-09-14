@@ -4,7 +4,7 @@ import tornado.httpserver
 import tornado.ioloop
 import tornado.options
 import tornado.web
-from tornado.escape import json_encode 
+from tornado.escape import json_encode
 import logging
 
 #Mongo
@@ -20,7 +20,7 @@ from datetime import datetime
 from utils import *
 from geoip import geolite2
 
-class BaseHandler(tornado.web.RequestHandler): 
+class BaseHandler(tornado.web.RequestHandler):
     def get_login_url(self):
         return u"/login"
 
@@ -32,9 +32,11 @@ class BaseHandler(tornado.web.RequestHandler):
             return None
 
     def get_current_language(self):
+        logging.info('======= test get language =======')
         return self.get_secure_cookie('lan')
 
     def load_country(self, country):
+        logging.info('======= test load country =======')
         if not country:
             self.redirect("/404/")
             return
@@ -49,6 +51,7 @@ class BaseHandler(tornado.web.RequestHandler):
             return json.load(json_file)
 
     def load_language(self, country, lan, settings):
+        logging.info('======= test load language =======')
         current_language = self.get_cookie('lan')
         if lan:
             if lan != current_language and lan in settings['available_languages']:

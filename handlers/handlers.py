@@ -7,6 +7,7 @@ import constants
 class IndexHandler(BaseHandler):
     @tornado.web.addslash
     def get(self):
+        logging.info('=======got index========')
         # TODO -- don't default to US settings
         settings = self.load_settings('us')
         self.render(
@@ -23,6 +24,7 @@ class MainHandler(BaseHandler):
     @tornado.web.addslash
     #@tornado.web.authenticated
     def get(self, country=None):
+        logging.info('=======got main========')
         old_country = country
         country = self.load_country(country)
         if old_country != country:
@@ -30,6 +32,8 @@ class MainHandler(BaseHandler):
             return
         settings = self.load_settings(country)
         lan = self.load_language(country, self.get_argument("lan", None), settings)
+        logging.info('============================================')
+        logging.info(lan)
         if not lan:
             return
         self.render(
@@ -89,9 +93,12 @@ class StaticPageHandler(BaseHandler):
     @tornado.web.addslash
     #@tornado.web.authenticated
     def get(self, country=None, page=None):
+        logging.info('=======got static========')
         country = self.load_country(country)
         settings = self.load_settings(country)
         lan = self.load_language(country, self.get_argument("lan", None), settings)
+        logging.info('============================================')
+        logging.info(lan)
         if not lan:
             return
         #check if company page, get company if so
@@ -117,7 +124,7 @@ class StaticPageHandler(BaseHandler):
                 message = "I'm telling."
             )
             return
-        if company: 
+        if company:
             self.render(
                 company.country + "/" + lan + "/company.html",
                 page_title=company.companyName,
@@ -134,7 +141,7 @@ class StaticPageHandler(BaseHandler):
                 page_title=settings['page_titles'][lan][page]
             except:
                 page_title="OD500"
-            try: 
+            try:
                 company = self.request.arguments.get('company')
                 company = company[0] if company else None
                 self.render(
@@ -173,7 +180,7 @@ class ListHandler(BaseHandler):
             return
         companies = Company.objects(
             Q(display=True) & Q(country=country)).order_by('prettyName').only(
-            'companyName', 'prettyName', 'filters', 'descriptionShort', 
+            'companyName', 'prettyName', 'filters', 'descriptionShort',
             'state', 'companyCategory', 'country')
         agencies = Agency.objects(
             Q(dataType="Federal") & Q(country=country)).order_by(
@@ -209,7 +216,7 @@ class ValidateHandler(BaseHandler):
         country = self.get_argument("country", None)
         companyName = self.get_argument("companyName", None)
         prettyName = self.application.tools.prettify(companyName)
-        try: 
+        try:
             c = Company.objects.get(Q(country=country) & Q(prettyName=prettyName))
             self.set_status(404)
         except:
@@ -335,7 +342,7 @@ class SubmitDataHandler(BaseHandler):
                 self.write({"response":"error"})
         #------------------------------------ADDING AGENCY/SUBAGENCY------------------------
         if action == 'add':
-            try: 
+            try:
                 if not self.application.form.company_has_agency(company, agency):
                     self.application.form.add_agency_to_company(company, agency)
                     response["agency"] = 1
@@ -352,7 +359,7 @@ class SubmitDataHandler(BaseHandler):
                 self.write(response)
         #------------------------------------DELETING AGENCY------------------------
         if action == "delete agency":
-            try: 
+            try:
                 self.application.form.remove_agency_from_company(company, agency)
                 response['agency'] = -1
                 response['message'] = "Agency Deleted"
@@ -363,7 +370,7 @@ class SubmitDataHandler(BaseHandler):
                 self.write(response)
         #------------------------------------DELETING SUBAGENCY------------------------
         if action == 'delete subagency':
-            try: 
+            try:
                 self.application.form.remove_subagency_from_company(company, agency, subagency_name)
                 response['message'] = "Subagency Deleted"
                 response['subagency'] = -1
@@ -385,7 +392,7 @@ class SubmitDataHandler(BaseHandler):
                 self.write(response)
         #------------------------------------EDITING DATASET------------------------
         if action == "edit dataset":
-            try: 
+            try:
                 self.application.form.edit_dataset(agency, subagency_name, dataset_name, previous_dataset_name, dataset_url, rating)
                 response['message'] = "Dataset Edited"
                 response['dataset'] = 2

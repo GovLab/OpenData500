@@ -1,9 +1,14 @@
 {
     "default_language": "en",
-    "available_languages": ["en"],
+    "available_languages": ["en", "fr"],
     "logo_path":"img/od100-logo-kr.png",
     "menu": {
         "en": [{
+            "item": "OD150 CA",
+            "link": "/ca/",
+            "sub-menu": []
+        }],
+        "fr": [{
             "item": "OD150 CA",
             "link": "/ca/",
             "sub-menu": []
@@ -20,10 +25,25 @@
             "roundtables": "Open Data Roundtables",
             "submitData": "Submit Agency and Data Information",
             "thanks": "Thank You!"
+        },
+        "fr": {
+            "index": "Welcome to the OD500",
+            "about": "About the OD500",
+            "resources": "Open Data Resources - OD500",
+            "list": "Open Data 500 Companies",
+            "submit": "Submit a Company to the OD500",
+            "stats": "OD500 By The Numbers",
+            "roundtables": "Open Data Roundtables",
+            "submitData": "Submit Agency and Data Information",
+            "thanks": "Thank You!"
         }
     },
-     "footer_menu": {
+    "footer_menu": {
         "en":[{
+            "item":"Contact Us",
+            "link":"mailto:opendata500@thegovlab.org"
+        }],
+        "fr":[{
             "item":"Contact Us",
             "link":"mailto:opendata500@thegovlab.org"
         }]
