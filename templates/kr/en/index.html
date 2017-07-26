@@ -4,304 +4,287 @@
 {% block body %}
 
 <div class="m-homepage">
+  <h1 class="first-title">Open Data 500 Korea</h1>
+  <script src="{{ static_url("js/d3.v3.min.js") }}"></script>
+  <section id="chord-chart-container">
+      <h2>Open Data Compass</h2>
+      <h3>What types of companies use which agencies' data?</h3>
+      <p></p>
+      <br />
 
-    <h1 class="first-title">Open Data 500 Korea</h1>
-    <script src="{{ static_url("js/d3.v3.min.js") }}"></script>
-    <section id="chord-chart-container">
-        <h2>Open Data Compass</h2>
-        <h3>What types of companies use which agencies' data?</h3>
-        <p></p>
-        <br />
+      <div id="chord-chart">
+          <span class="chord-legend companies">Company Categories</span>
+          <span class="chord-legend agencies">Government Agencies</span>
+      </div>
 
-        <div id="chord-chart">
-            <span class="chord-legend companies">Company Categories</span>
-            <span class="chord-legend agencies">Government Agencies</span>
-        </div>
+  </section>
 
-    </section>
-
-    <section class="m-homepage-about">
-        <h1>About this Project</h1>
-        <p class="intro"> Open Data 500 Korea is a joint project between <a href="http://www.thegovlab.org"> Govlab</a> and <a href="http://www.nia.or.kr/">NIA</a> to conduct a comprehensive, internationally comparable study of private sector entities using open data in Korea.</p>
-    </section>
+  <section class="m-homepage-about">
+      <h1>About this Project</h1>
+      <p class="intro"> Open Data 500 Korea is a joint project between <a href="http://www.thegovlab.org"> Govlab</a> and <a href="http://www.nia.or.kr/">NIA</a> to conduct a comprehensive, internationally comparable study of private sector entities using open data in Korea.</p>
+  </section>
 </div>
 
 <div class="about-page">
+  <section id="about-goals">
+  	<h2>Study Objectives</h2>
+  	<ul>
+  		<li>Provide a basis for assessing the economic and social value of open data.</li>
+  		<li>Encourage the development of new open data companies.</li>
+  		<li>Foster a dialogue between government and the private sector on how open data can be made more useful.</li>
+  	</ul>
+  </section>
 
+  <section id="about-govlab-approach">
+  	<h2>Approach</h2>
+  	<p>The Open Data 500 Korea study will facilitate the identification, analyzation, and organization of private sector entities using <a href=" https://www.data.go.kr/">open data</a> into a network to enable increased communication and interaction with government to improve open data policies. This network will be supported by Open Data Korea Forum and will integrate with their existing community. The outcome of this project, the Open Data 500 Korea, will be launched during the 2015 Open Data Korea Forum event.</p>
+  	<p>This project has been reported to the <a href="http://www.odsc.go.kr/">Open Data Strategy Council</a> of Korea, the highest decision making body on open data in Korea, co-chaired by the Prime Minister and is funded by the Ministry of Government Administration and Home Affairs (MOHAGA). It is our hope that this network will collaborate actively with partners worldwide, particularly those within the Open Data 500 Global Network, to bring the benefits of open data beyond national borders to a global scale.</p>
+  </section>
 
-<section id="about-goals">
-	<h2>Study Objectives</h2>
-	<ul>
-		<li>Provide a basis for assessing the economic and social value of open data.</li>
-		<li>Encourage the development of new open data companies.</li>
-		<li>Foster a dialogue between government and the private sector on how open data can be made more useful.</li>
-	</ul>
-</section>
+  <div class="sub-sections">
+  	<section id="about-identify" class="m-half">
+  		<h2 class="m-page-title">Company Identification</h2>
+  		<p>The Open Data 500 Korea team will compile the list of companies and NGOs through (1) outreach campaigns, (2) advice from experts and professional organizations, and (3) additional research. The results of the study will culminate in an online platform at www.opendata500.com/kr, which will highlight the companies and their use of open data in Korea.</p>
+  	</section>
 
-<section id="about-govlab-approach">
-	<h2>Approach</h2>
-	<p>The Open Data 500 Korea study will facilitate the identification, analyzation, and organization of private sector entities using <a href=" https://www.data.go.kr/">open data</a> into a network to enable increased communication and interaction with government to improve open data policies. This network will be supported by Open Data Korea Forum and will integrate with their existing community. The outcome of this project, the Open Data 500 Korea, will be launched during the 2015 Open Data Korea Forum event.</p>
-	<p>This project has been reported to the <a href="http://www.odsc.go.kr/">Open Data Strategy Council</a> of Korea, the highest decision making body on open data in Korea, co-chaired by the Prime Minister and is funded by the Ministry of Government Administration and Home Affairs (MOHAGA). It is our hope that this network will collaborate actively with partners worldwide, particularly those within the Open Data 500 Global Network, to bring the benefits of open data beyond national borders to a global scale.</p>
-
-</section>
-
-<div class="sub-sections">
-	<section id="about-identify" class="m-half">
-		<h2 class="m-page-title">Company Identification</h2>
-		<p>The Open Data 500 Korea team will compile the list of companies and NGOs through (1) outreach campaigns, (2) advice from experts and professional organizations, and (3) additional research. The results of the study will culminate in an online platform at www.opendata500.com/kr, which will highlight the companies and their use of open data in Korea.</p>
-	</section>
-
-	<section id="about-what-study-is-not" class="m-half">
-		<h2 class="m-page-title">What The Study Is Not</h2>
-		<p>The Open Data 500 Korea is not a rating or ranking of companies. It covers companies and entities of different sizes and categories, using various kinds of data. The Open Data 500 Korea is not a competition, but an attempt to give a broad, inclusive view of the field. The study also does not provide a random sample for definitive statistical analysis. Since this is the first thorough scan of companies and entities in the field, it is not yet possible to determine the exact landscape of open data companies and entities.</p>
-	</section>
-</div>
-
-<section id="open-data-policy">
-	<h2>About the Open Data Policy</h2>
-	<p>Since enactment of the Open Data Law in 2013 there has been a massive increase in the number of datasets opened up by government and the public sector. There is increasingly a growing interest and policy need to improve our understanding about the use and impact of open data socially and economically. The Open Data 500 Korea will complement existing government surveys on the use of open data in Korea,
-   which are grounded in the Open Data Law of Korea.</p>
-</section>
-<section id="about-people">
-	<h2>Team</h2>
-	<h3 class="adj-title">Open Data Center (ODC) at the </h3>
-	<h3 class= "adj-title"><a href="http://www.nia.or.kr/">National Information Society Agency (NIA)</a></h3>
-	<div class="m-team">
-
-		<div id="team-person-one" class="m-team-picture">
-			<div>
-				<img src="{{static_url ("img/kr/NIA-Boo-Mann.JPG")}}" alt="NIA Team Member">
-				<p class="m-team-member-name">Boo-Mann CHOUNG</p>
-				<p class="m-team-member-job">Vice President<br></p>
-			</div>
-		</div>
-
-		<div id="team-person-two" class="m-team-picture">
-			<div>
-				<img src="{{static_url ("img/kr/Jang-Ju-Byung.jpg")}}" alt="NIA Team Member">
-				<p class="m-team-member-name">Jang Ju BYUNG</p>
-				<p class="m-team-member-job">Director, <br>Open Data Innovation Team</p>
-			</div>
-		</div>
-		<!-- <div id="team-person-three" class="m-team-picture">
-			<div>
-				<img src="{{static_url ("img/kr/NIA-ODC-YS-JANG.png")}}" alt="NIA Team Member">
-				<p class="m-team-member-name">Yongseon JANG</p>
-				<p class="m-team-member-job">Executive Principal <br></p>
-			</div>
-		</div> -->
-		<!-- <div id="team-person-zero" class="m-team-picture">
-			<div>
-				<img src="{{static_url ("img/kr/NIA-ODC-SW-UM.png")}}" alt="NIA Team Member">
-				<p class="m-team-member-name">Se-Won UM</p>
-				<p class="m-team-member-job">Researcher, <br> Project Manager for Open Data 500 Korea</p>
-			</div>
-		</div> -->
-
-
-
-		<!--<div class="m-team-bios">
-			<div class="m-team-bio-person-one">
-				<h3>FirstName Last Name</h3>
-				<p>Insert bio here.</p>
-
-				<p></p>
-
-				<p></p>
-			</div>
-			<div class="m-team-bio-person-two">
-				<h3>FirstName Last Name</h3>
-				<p>Insert bio here.</p>
-
-				<p></p>
-
-				<p></p>
-			</div>
-			<div class="m-team-bio-person-three">
-				<h3>FirstName Last Name</h3>
-				<p>Insert bio here.</p>
-
-				<p></p>
-
-				<p></p>
-			</div>
-
-		</div>	-->
-
-	<div class="m-team">
-		<div id="team-person-five" class="m-team-picture">
-			<div>
-				<img src="{{static_url ("img/kr/NIA-ODC-JH-PARK.png")}}" alt="NIA Team Member">
-				<p class="m-team-member-name">Ji Hye PARK</p>
-				<p class="m-team-member-job">Researcher<br> Project Manager for Open Data 500 Korea</p>
-			</div>
-		</div>
-		<div id="team-person-six" class="m-team-picture">
-			<div>
-				<img src="{{static_url ("img/kr/NIA-ODC-JY-YOU.png")}}" alt="NIA Team Member">
-				<p class="m-team-member-name">Jae Young YOU</p>
-				<p class="m-team-member-job">Researcher <br></p>
-			</div>
-		</div>
-		<!-- <div id="team-person-seven" class="m-team-picture">
-			<div>
-				<img src="{{static_url ("img/kr/NIA-ODC-YS-LEE.png")}}" alt="NIA Team Member">
-				<p class="m-team-member-name">YS LEE</p>
-				<p class="m-team-member-job">Executive Principal, <br>POC for Open Data 500 Korea</p>
-			</div>
-		</div> -->
-
-  <h3 class= "adj-title">WATEF (World Association For Triple Helix & Future Strategy Studies)</h3>
-
-	<div class="m-team">
-		<div id="team-person-eight" class="m-team-picture">
-			<div>
-				<img src="{{static_url ("img/kr/Han-Woo-PARK.jpg")}}" alt="NIA Team Member">
-				<p class="m-team-member-name">Han Woo PARK</p>
-				<p class="m-team-member-job">Professor, <br>YeungNam University</p>
-			</div>
-		</div>
-		<div id="team-person-nine" class="m-team-picture">
-			<div>
-				<img src="{{static_url ("img/kr/Kyujin-JUNG.jpg")}}" alt="NIA Team Member">
-				<p class="m-team-member-name">Kyujin JUNG</p>
-				<p class="m-team-member-job">Professor, <br>Tennessee State University</p>
-			</div>
-		</div>
-		<div id="team-person-ten" class="m-team-picture">
-			<div>
-				<img src="{{static_url ("img/kr/Jiyoung-PARK.jpg")}}" alt="NIA Team Member">
-				<p class="m-team-member-name">Jiyoung PARK</p>
-				<p class="m-team-member-job">Researcher, <br>YeungNam University</p>
-			</div>
-		</div>
-		<div id="team-person-eleven" class="m-team-picture">
-			<div>
-				<img src="{{static_url ("img/kr/Jiyoung-KIM.jpg")}}" alt="NIA Team Member">
-				<p class="m-team-member-name">Jiyoung KIM</p>
-				<p class="m-team-member-job">Researcher, <br>YeungNam University</p>
-			</div>
+  	<section id="about-what-study-is-not" class="m-half">
+  		<h2 class="m-page-title">What The Study Is Not</h2>
+  		<p>The Open Data 500 Korea is not a rating or ranking of companies. It covers companies and entities of different sizes and categories, using various kinds of data. The Open Data 500 Korea is not a competition, but an attempt to give a broad, inclusive view of the field. The study also does not provide a random sample for definitive statistical analysis. Since this is the first thorough scan of companies and entities in the field, it is not yet possible to determine the exact landscape of open data companies and entities.</p>
+  	</section>
   </div>
-	<!--<div class="m-team-bios">
-			<div class="m-team-bio-person-four">
-				<h3>FirstName LastName</h3>
-				<p>Insert bio. </p>
 
-				<p> </p>
+  <section id="open-data-policy">
+  	<h2>About the Open Data Policy</h2>
+  	<p>Since enactment of the Open Data Law in 2013 there has been a massive increase in the number of datasets opened up by government and the public sector. There is increasingly a growing interest and policy need to improve our understanding about the use and impact of open data socially and economically. The Open Data 500 Korea will complement existing government surveys on the use of open data in Korea,
+     which are grounded in the Open Data Law of Korea.</p>
+  </section>
 
-				<p></p>
+  <section id="about-people">
+  	<h2>Team</h2>
+  	<h3 class="adj-title">Open Data Center (ODC) at the </h3>
+  	<h3 class= "adj-title"><a href="http://www.nia.or.kr/">National Information Society Agency (NIA)</a></h3>
+  	<div class="m-team">
 
-				<p></p>
-			</div>
-			<div class="m-team-bio-person-five">
-				<h3>FirstName LastName</h3>
-				<p>Insert bio. </p>
-				<p> </p>
-				<p></p>
-			</div>
-		</div>
-	</div> -->
+  		<div id="team-person-one" class="m-team-picture">
+  			<div>
+  				<img src="{{static_url ("img/kr/NIA-Boo-Mann.JPG")}}" alt="NIA Team Member">
+  				<p class="m-team-member-name">Boo-Mann CHOUNG</p>
+  				<p class="m-team-member-job">Vice President<br></p>
+  			</div>
+  		</div>
+
+  		<div id="team-person-two" class="m-team-picture">
+  			<div>
+  				<img src="{{static_url ("img/kr/Jang-Ju-Byung.jpg")}}" alt="NIA Team Member">
+  				<p class="m-team-member-name">Jang Ju BYUNG</p>
+  				<p class="m-team-member-job">Director, <br>Open Data Innovation Team</p>
+  			</div>
+  		</div>
+  		<!-- <div id="team-person-three" class="m-team-picture">
+  			<div>
+  				<img src="{{static_url ("img/kr/NIA-ODC-YS-JANG.png")}}" alt="NIA Team Member">
+  				<p class="m-team-member-name">Yongseon JANG</p>
+  				<p class="m-team-member-job">Executive Principal <br></p>
+  			</div>
+  		</div> -->
+  		<!-- <div id="team-person-zero" class="m-team-picture">
+  			<div>
+  				<img src="{{static_url ("img/kr/NIA-ODC-SW-UM.png")}}" alt="NIA Team Member">
+  				<p class="m-team-member-name">Se-Won UM</p>
+  				<p class="m-team-member-job">Researcher, <br> Project Manager for Open Data 500 Korea</p>
+  			</div>
+  		</div> -->
+
+
+
+  		<!--<div class="m-team-bios">
+  			<div class="m-team-bio-person-one">
+  				<h3>FirstName Last Name</h3>
+  				<p>Insert bio here.</p>
+
+  				<p></p>
+
+  				<p></p>
+  			</div>
+  			<div class="m-team-bio-person-two">
+  				<h3>FirstName Last Name</h3>
+  				<p>Insert bio here.</p>
+
+  				<p></p>
+
+  				<p></p>
+  			</div>
+  			<div class="m-team-bio-person-three">
+  				<h3>FirstName Last Name</h3>
+  				<p>Insert bio here.</p>
+
+  				<p></p>
+
+  				<p></p>
+  			</div>
+
+  		</div>	-->
+
+  	<div class="m-team">
+  		<div id="team-person-five" class="m-team-picture">
+  			<div>
+  				<img src="{{static_url ("img/kr/NIA-ODC-JH-PARK.png")}}" alt="NIA Team Member">
+  				<p class="m-team-member-name">Ji Hye PARK</p>
+  				<p class="m-team-member-job">Researcher<br> Project Manager for Open Data 500 Korea</p>
+  			</div>
+  		</div>
+  		<div id="team-person-six" class="m-team-picture">
+  			<div>
+  				<img src="{{static_url ("img/kr/NIA-ODC-JY-YOU.png")}}" alt="NIA Team Member">
+  				<p class="m-team-member-name">Jae Young YOU</p>
+  				<p class="m-team-member-job">Researcher <br></p>
+  			</div>
+  		</div>
+  		<!-- <div id="team-person-seven" class="m-team-picture">
+  			<div>
+  				<img src="{{static_url ("img/kr/NIA-ODC-YS-LEE.png")}}" alt="NIA Team Member">
+  				<p class="m-team-member-name">YS LEE</p>
+  				<p class="m-team-member-job">Executive Principal, <br>POC for Open Data 500 Korea</p>
+  			</div>
+  		</div> -->
+
+    <h3 class= "adj-title">WATEF (World Association For Triple Helix & Future Strategy Studies)</h3>
+
+  	<div class="m-team">
+  		<div id="team-person-eight" class="m-team-picture">
+  			<div>
+  				<img src="{{static_url ("img/kr/Han-Woo-PARK.jpg")}}" alt="NIA Team Member">
+  				<p class="m-team-member-name">Han Woo PARK</p>
+  				<p class="m-team-member-job">Professor, <br>YeungNam University</p>
+  			</div>
+  		</div>
+  		<div id="team-person-nine" class="m-team-picture">
+  			<div>
+  				<img src="{{static_url ("img/kr/Kyujin-JUNG.jpg")}}" alt="NIA Team Member">
+  				<p class="m-team-member-name">Kyujin JUNG</p>
+  				<p class="m-team-member-job">Professor, <br>Tennessee State University</p>
+  			</div>
+  		</div>
+  		<div id="team-person-ten" class="m-team-picture">
+  			<div>
+  				<img src="{{static_url ("img/kr/Jiyoung-PARK.jpg")}}" alt="NIA Team Member">
+  				<p class="m-team-member-name">Jiyoung PARK</p>
+  				<p class="m-team-member-job">Researcher, <br>YeungNam University</p>
+  			</div>
+  		</div>
+  		<div id="team-person-eleven" class="m-team-picture">
+  			<div>
+  				<img src="{{static_url ("img/kr/Jiyoung-KIM.jpg")}}" alt="NIA Team Member">
+  				<p class="m-team-member-name">Jiyoung KIM</p>
+  				<p class="m-team-member-job">Researcher, <br>YeungNam University</p>
+  			</div>
+    </div>
+  	<!--<div class="m-team-bios">
+  			<div class="m-team-bio-person-four">
+  				<h3>FirstName LastName</h3>
+  				<p>Insert bio. </p>
+
+  				<p> </p>
+
+  				<p></p>
+
+  				<p></p>
+  			</div>
+  			<div class="m-team-bio-person-five">
+  				<h3>FirstName LastName</h3>
+  				<p>Insert bio. </p>
+  				<p> </p>
+  				<p></p>
+  			</div>
+  		</div>
+  	</div> -->
+  </section>
 
 	<section id="about-people">
+  	<h3 class="adj-title">Public Data Policy Division at the </h3>
+  	<h3 class= "adj-title"><a href="http://www.mois.go.kr/">Ministry of the Interior and Safety (MOIS)</a></h3>
+  	<div class="m-team">
+  		<div id="team-person-eight" class="m-team-picture">
+  			<div>
+  				<img src="{{static_url ("img/kr/Dong-Su-CHANG.jpg")}}" alt="NIA Team Member">
+  				<p class="m-team-member-name">Dong-Su CHANG</p>
+  				<p class="m-team-member-job">Director <br></p>
+  			</div>
+  		</div>
 
-	<h3 class="adj-title">Public Data Policy Division at the </h3>
-	<h3 class= "adj-title"><a href="http://www.moi.go.kr">Ministry of Interior (MOI)</a></h3>
-	<div class="m-team">
-		<div id="team-person-eight" class="m-team-picture">
-			<div>
-				<img src="{{static_url ("img/kr/Dong-Su-CHANG.jpg")}}" alt="NIA Team Member">
-				<p class="m-team-member-name">Dong-Su CHANG</p>
-				<p class="m-team-member-job">Director <br></p>
-			</div>
-		</div>
+  		<div id="team-person-nine" class="m-team-picture">
+  			<div>
+  				<img src="{{static_url ("img/kr/Jong-Hoon-PARK.jpg")}}" alt="NIA Team Member">
+  				<p class="m-team-member-name">Jong-Hoon PARK</p>
+  				<p class="m-team-member-job">Deputy Director <br></p>
+  			</div>
+  		</div>
+  		<!-- <div id="team-person-ten" class="m-team-picture">
+  			<div>
+  				<img src="{{static_url ("img/kr/mogaha-YS-OH.png")}}" alt="NIA Team Member">
+  				<p class="m-team-member-name">Yeon-Soon OH</p>
+  				<p class="m-team-member-job">Assistant Director <br></p>
+  			</div>
+  		</div> -->
 
-		<div id="team-person-nine" class="m-team-picture">
-			<div>
-				<img src="{{static_url ("img/kr/Jong-Hoon-PARK.jpg")}}" alt="NIA Team Member">
-				<p class="m-team-member-name">Jong-Hoon PARK</p>
-				<p class="m-team-member-job">Deputy Director <br></p>
-			</div>
-		</div>
-		<!-- <div id="team-person-ten" class="m-team-picture">
-			<div>
-				<img src="{{static_url ("img/kr/mogaha-YS-OH.png")}}" alt="NIA Team Member">
-				<p class="m-team-member-name">Yeon-Soon OH</p>
-				<p class="m-team-member-job">Assistant Director <br></p>
-			</div>
-		</div> -->
-
-	<h3>The GovLab</h3>
-	<div class="m-team">
-		<div id="team-beth-noveck" class="m-team-picture">
-			<div>
-				<img src="/static/img/us/beth-noveck.jpg" alt="">
-				<p class="m-team-member-name">Beth Simone Noveck</p>
-				<p class="m-team-member-job">Founder &amp; Director, <br>The GovLab</p>
-			</div>
-		</div>
-		<div id="team-stefaan-verhulst" class="m-team-picture">
-			<div>
-				<img src="/static/img/us/stefaan-verhulst.jpg" alt="">
-				<p class="m-team-member-name">Stefaan Verhulst</p>
-				<p class="m-team-member-job">Co-Founder and Chief of Research and Development, The GovLab; Director of GovLab's Open Data Project</p>
-			</div>
-		</div>
-		<div id="team-julia-root" class="m-team-picture">
-			<div>
-				<img src="/static/img/us/julia-root.jpg" alt="">
-				<p class="m-team-member-name">Julia Root</p>
-				<p class="m-team-member-job">Project Lead</p>
-			</div>
-		</div>
-		<div class="m-team-bios">
-			<div class="m-team-bio-beth-noveck">
-				<h3>Beth Simone Noveck</h3>
-				<p>Beth Simone Noveck directs The Governance Lab and its MacArthur Research Network on Opening Governance.  Funded by the John D. and Catherine T. MacArthur Foundation,  the John S. and James L. Knight Foundation and Google.org, the GovLab strives to improve people’s lives by changing how we govern. The GovLab designs and tests technology, policy and strategies for fostering more open and collaborative approaches to strengthen the ability of people and institutions to work together to solve problems, make decisions, resolve conflict and govern themselves more effectively and legitimately.</p>
-				<p>The Jacob K. Javits Visiting Professor at New York University’s Robert F. Wagner Graduate School of Public Service and a visiting professor at the MIT Media Lab, Beth is a professor of law at New York Law School. She served in the White House as the first United States Deputy Chief Technology Officer and director of the White House Open Government Initiative (2009-2011). UK Prime Minister David Cameron appointed her senior advisor for Open Government, and she served on the Obama-Biden transition team. Among projects she’s designed or collaborated on are Unchat, The Do Tank, Peer To Patent, Data.gov, Challenge.gov and the Gov Lab’s Living Labs and training platform, The Academy.</p>
-				<p>A graduate of Harvard University and Yale Law School, she serves on the Global Commission on Internet Governance and chairs the ICANN Strategy Panel on Multi-Stakeholder Innovation. She was named one of the “Foreign Policy 100″ by Foreign Policy, one of the “100 Most Creative People in Business” by Fast Company and one of the “Top Women in Technology” by Huffington Post. She has also been honored by both the National Democratic Institute and Public Knowledge for her work in civic technology.</p>
-				<p>Beth is the author of Wiki Government: How Technology Can Make Government Better, Democracy Stronger and Citizens More Powerful, which has also appeared in Arabic, Russian, Chinese and in an audio edition, and co-editor of The State of Play: Law, Games and Virtual Worlds. Her next book The Networked State will appear with Harvard University Press. She tweets <a href="https://twitter.com/bethnoveck" target="_blank">@bethnoveck</a>.</p>
-			</div>
-			<div class="m-team-bio-stefaan-verhulst">
-				<h3>Stefaan G. Verhulst</h3>
-				<p>Stefaan G. Verhulst is Co-Founder and Chief Research and Development Officer of the Governance Laboratory @NYU (GovLab) where he is responsible for building a research foundation on how to transform governance using advances in science and technology.</p>
-				<p>Verhulst’s latest scholarship centers on how technology can improve people’s lives and the creation of more effective and collaborative forms of governance. Specifically, he is interested in the perils and promise of collaborative technologies and how to harness the unprecedented volume of information to advance the public good.</p>
-			</div>
-			<div class="m-team-bio-julia-root">
-				<h3>Julia Root</h3>
-				<p>Julia Root is the project lead for GovLab’s Open NYU and Open Data 500 Global Network. She has worked across organizational and urban themes, as well as across sectors, as an inspired strategist, idea connector and network builder. Areas of expertise include open data and urban informatics; expert networks; cross-sector network building; higher education strategy; civic innovation; and intercultural business performance. Previously she was with NYU CUSP (Center for Urban Science + Progress) as the assistant director for student services. Prior to joining NYU, she had worked as a consultant with a boutique international consulting firm focused on advising higher education, public sector and engineering clients on urban issues and cross sector network building. She has contributed research and writing for academic and policy institutes and has consulted with organizations on business development, marketing and organizational development.</p>
-				<p>Prior to arriving to New York City she was the associate director of development for the largest health and human service provider in New Orleans and the Gulf Coast and was a field office manager for an advocacy nonprofit located in Los Angeles. Julia has lived and/or worked in Los Angeles, San Diego, Barcelona, New Orleans and New York City.  She has a B.A. from the University of California, San Diego and an M.P.A from NYU’s Robert F. Wagner Graduate School of Public Service.</p>
-			</div>
-		</div>
-		<div id="team-anupama-sharma" class="m-team-picture">
-			<div>
-				<img src="/static/img/us/anupama-sharma.jpg" alt="">
-				<p class="m-team-member-name">Anupama Sharma</p>
-				<p class="m-team-member-job">Developer</p>
-			</div>
-		</div>
-		<div id="team-claudio-mendonca" class="m-team-picture">
-			<div>
-				<img src="/static/img/us/claudio-mendonca.jpg" alt="">
-				<p class="m-team-member-name">Claudio Mendonca</p>
-				<p class="m-team-member-job">Designer</p>
-			</div>
-		</div>
-			<div class="m-team-bios">
-			<div class="m-team-bio-john-krauss">
-				<h3>John Krauss</h3>
-				<p>John Krauss is a technical research fellow at the GovLab @ NYU. He’s active in New York City’s civic hacking scene, working to standardize and visualize transportation, safety, and housing data. John joins the GovLab after several years freelancing in the startup scene, where he experimented with scraping and continuous integration while building open data tools like <a href="http://nyc.crashmapper.com/">Crashmapper</a> on the side. His background is in architecture and housing; he received his B.A. in architecture and history from Columbia University and went on to consult on data and web design for NYU’s Furman Center for Real Estate and Urban Policy. In his spare time, John likes to bike, and once cycled from Santiago de Compostela to Berlin. He occasionally <a href="http://blog.johnkrauss.com/">blogs</a>, almost never <a href="https://twitter.com/recessionporn">tweets</a>, but often <a href="https://github.com/talos/">codes</a>.</p>
-			</div>
-			<div class="m-team-bio-claudio-mendonca">
-				<h3>Claudio Mendonca</h3>
-				<p>Claudio Mendonca is the graphic designer at The GovLab. Working as a graphic artist for more than 10 years, he earned his Bachelor's degree in Graphic Design in 2005. He has extensive experience in branding and interaction design.</p>
-				<p>Claudio's previous experience includes 3 years developing graphical material for several government institutions in Brazil, publications and interface design for startups.</p>
-				<p>He also designs webapps for the Centre of Direct Democracy and works as a design consultant at the World Bank Institute on several open gov projects such as Open Government, Open Contracting, Open Development and Technology Alliance, ICT4Gov.</p>
-				<p>At The GovLab, Claudio is responsible for branding and interaction design for The GovLab projects. He can be found at <a href="http://www.claudiomendonca.com" target="_blank">claudiomendonca.com</a>.</p>
-			</div>
-
-		</div>
-	</div>
-</section>
+  	<h3>The GovLab</h3>
+  	<div class="m-team">
+  		<div id="team-beth-noveck" class="m-team-picture">
+  			<div>
+  				<img src="/static/img/us/beth-noveck.jpg" alt="">
+  				<p class="m-team-member-name">Beth Simone Noveck</p>
+  				<p class="m-team-member-job">Founder &amp; Director, <br>The GovLab</p>
+  			</div>
+  		</div>
+  		<div id="team-stefaan-verhulst" class="m-team-picture">
+  			<div>
+  				<img src="/static/img/us/stefaan-verhulst.jpg" alt="">
+  				<p class="m-team-member-name">Stefaan Verhulst</p>
+  				<p class="m-team-member-job">Co-Founder and Chief of Research and Development, The GovLab; Director of GovLab's Open Data Project</p>
+  			</div>
+  		</div>
+  		<div id="team-julia-root" class="m-team-picture">
+  			<div>
+  				<img src="/static/img/us/julia-root.jpg" alt="">
+  				<p class="m-team-member-name">Julia Root</p>
+  				<p class="m-team-member-job">Project Lead</p>
+  			</div>
+  		</div>
+  		<div class="m-team-bios">
+  			<div class="m-team-bio-beth-noveck">
+  				<h3>Beth Simone Noveck</h3>
+  				<p>Beth Simone Noveck directs The Governance Lab and its MacArthur Research Network on Opening Governance.  Funded by the John D. and Catherine T. MacArthur Foundation,  the John S. and James L. Knight Foundation and Google.org, the GovLab strives to improve people’s lives by changing how we govern. The GovLab designs and tests technology, policy and strategies for fostering more open and collaborative approaches to strengthen the ability of people and institutions to work together to solve problems, make decisions, resolve conflict and govern themselves more effectively and legitimately.</p>
+  				<p>The Jacob K. Javits Visiting Professor at New York University’s Robert F. Wagner Graduate School of Public Service and a visiting professor at the MIT Media Lab, Beth is a professor of law at New York Law School. She served in the White House as the first United States Deputy Chief Technology Officer and director of the White House Open Government Initiative (2009-2011). UK Prime Minister David Cameron appointed her senior advisor for Open Government, and she served on the Obama-Biden transition team. Among projects she’s designed or collaborated on are Unchat, The Do Tank, Peer To Patent, Data.gov, Challenge.gov and the Gov Lab’s Living Labs and training platform, The Academy.</p>
+  				<p>A graduate of Harvard University and Yale Law School, she serves on the Global Commission on Internet Governance and chairs the ICANN Strategy Panel on Multi-Stakeholder Innovation. She was named one of the “Foreign Policy 100″ by Foreign Policy, one of the “100 Most Creative People in Business” by Fast Company and one of the “Top Women in Technology” by Huffington Post. She has also been honored by both the National Democratic Institute and Public Knowledge for her work in civic technology.</p>
+  				<p>Beth is the author of Wiki Government: How Technology Can Make Government Better, Democracy Stronger and Citizens More Powerful, which has also appeared in Arabic, Russian, Chinese and in an audio edition, and co-editor of The State of Play: Law, Games and Virtual Worlds. Her next book The Networked State will appear with Harvard University Press. She tweets <a href="https://twitter.com/bethnoveck" target="_blank">@bethnoveck</a>.</p>
+  			</div>
+  			<div class="m-team-bio-stefaan-verhulst">
+  				<h3>Stefaan G. Verhulst</h3>
+  				<p>Stefaan G. Verhulst is Co-Founder and Chief Research and Development Officer of the Governance Laboratory @NYU (GovLab) where he is responsible for building a research foundation on how to transform governance using advances in science and technology.</p>
+  				<p>Verhulst’s latest scholarship centers on how technology can improve people’s lives and the creation of more effective and collaborative forms of governance. Specifically, he is interested in the perils and promise of collaborative technologies and how to harness the unprecedented volume of information to advance the public good.</p>
+  			</div>
+  			<div class="m-team-bio-julia-root">
+  				<h3>Julia Root</h3>
+  				<p>Julia Root is the project lead for GovLab’s Open NYU and Open Data 500 Global Network. She has worked across organizational and urban themes, as well as across sectors, as an inspired strategist, idea connector and network builder. Areas of expertise include open data and urban informatics; expert networks; cross-sector network building; higher education strategy; civic innovation; and intercultural business performance. Previously she was with NYU CUSP (Center for Urban Science + Progress) as the assistant director for student services. Prior to joining NYU, she had worked as a consultant with a boutique international consulting firm focused on advising higher education, public sector and engineering clients on urban issues and cross sector network building. She has contributed research and writing for academic and policy institutes and has consulted with organizations on business development, marketing and organizational development.</p>
+  				<p>Prior to arriving to New York City she was the associate director of development for the largest health and human service provider in New Orleans and the Gulf Coast and was a field office manager for an advocacy nonprofit located in Los Angeles. Julia has lived and/or worked in Los Angeles, San Diego, Barcelona, New Orleans and New York City.  She has a B.A. from the University of California, San Diego and an M.P.A from NYU’s Robert F. Wagner Graduate School of Public Service.</p>
+  			</div>
+  		</div>
+  		<div id="team-anupama-sharma" class="m-team-picture">
+  			<div>
+  				<img src="/static/img/us/anupama-sharma.jpg" alt="">
+  				<p class="m-team-member-name">Anupama Sharma</p>
+  				<p class="m-team-member-job">Developer</p>
+  			</div>
+  		</div>
+  		<div id="team-claudio-mendonca" class="m-team-picture">
+  			<div>
+  				<img src="/static/img/us/claudio-mendonca.jpg" alt="">
+  				<p class="m-team-member-name">Claudio Mendonca</p>
+  				<p class="m-team-member-job">Designer</p>
+  			</div>
+  		</div>
+  	</div>
+  </section>
 </div>
 
 
